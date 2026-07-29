@@ -1,0 +1,224 @@
+import { Link } from 'react-router-dom';
+import {
+  Bell,
+  Building2,
+  Bus,
+  CalendarCheck,
+  Camera,
+  Crown,
+  Headphones,
+  Heart,
+  Landmark,
+  Map,
+  MapPinned,
+  MessageCircleMore,
+  Play,
+  ShieldCheck,
+  Sparkles,
+  Star,
+  Users,
+  Utensils,
+  Waves,
+} from 'lucide-react';
+import {
+  ASSET,
+  REFERENCE,
+  IconFeature,
+  Photo,
+  ReferenceCrop,
+  RequestBanner,
+  SectionTitle,
+  TestimonialStrip,
+  TrustBar,
+} from '@/components/travel/Shared';
+
+const floatingServices = [
+  [Landmark, 'Hotel Contracts'],
+  [Bus, 'Transfers'],
+  [MapPinned, 'Tours & Excursions'],
+  [Users, 'MICE & Groups'],
+  [Heart, 'Weddings'],
+  [Crown, 'VIP Services'],
+  [Bell, 'Concierge Services'],
+  [Headphones, '24/7 Support'],
+] as const;
+
+const destinations = [
+  {
+    name: 'Rhodes',
+    image: `${ASSET}/lindos.jpg`,
+    copy: 'Island of knights, history and endless sunshine. Explore the Old Town, stunning beaches and vibrant local culture.',
+    cta: 'DISCOVER RHODES',
+  },
+  {
+    name: 'Kos',
+    image: `${ASSET}/kallithea.jpg`,
+    copy: 'Greek vibes, natural beauty and relaxation. Perfect for adventure, wellness and authentic island experiences.',
+    cta: 'DISCOVER KOS',
+  },
+  {
+    name: 'Symi & Island Hopping',
+    image: `${ASSET}/marina.jpg`,
+    copy: 'Discover hidden gems and crystal-clear waters across the Dodecanese. Let us plan your perfect island escape.',
+    cta: 'EXPLORE MORE',
+  },
+];
+
+const serviceMinis = [
+  [Map, 'Destination Management'],
+  [Landmark, 'Accommodation'],
+  [Bus, 'Transfers'],
+  [MapPinned, 'Excursions'],
+  [Users, 'MICE & Corporate Travel'],
+  [Heart, 'Weddings'],
+  [Crown, 'VIP & Concierge'],
+] as const;
+
+const experiences = [
+  ['Culture & History', 'acropolis.jpg'],
+  ['Sailing Adventures', 'sailing.jpg'],
+  ['Wellness & Spa', 'flower.jpg'],
+  ['Food & Wine', 'food.jpg'],
+  ['Nature & Hiking', 'monolithos.jpg'],
+  ['Private Luxury', 'haraki.jpg'],
+  ['Family Fun', 'beach.jpg'],
+  ['Sunset Experiences', 'sunset.jpg'],
+];
+
+export default function TravelHomePage() {
+  return (
+    <>
+      <section className="home-hero" style={{ backgroundImage: `url("${ASSET}/home-hero.jpg")` }}>
+        <div className="home-hero__content shell">
+          <h1><span className="text-gold">Your DMC in</span>Rhodes &amp; Kos</h1>
+          <p className="home-hero__lead">Local Expertise. Memorable Experiences.<br />Seamless Service.</p>
+          <div className="home-hero__actions">
+            <Link className="button button--gold" to="/about">DISCOVER MORE</Link>
+            <button className="video-link" type="button" aria-label="Watch video">
+              <span><Play /></span> WATCH VIDEO
+            </button>
+          </div>
+        </div>
+      </section>
+
+      <section className="floating-services shell" aria-label="Key services">
+        {floatingServices.map(([Icon, title]) => (
+          <Link className="floating-service" key={title} to="/services">
+            <Icon />
+            <strong>{title}</strong>
+          </Link>
+        ))}
+      </section>
+
+      <TrustBar />
+
+      <section className="section shell home-welcome">
+        <div>
+          <h2>Welcome to Top Euro Travel</h2>
+          <p>
+            We are a destination management company based in Rhodes &amp; Kos, offering expertly crafted
+            travel solutions across the Dodecanese. From transfers and accommodation to unique experiences
+            and events, we create seamless, authentic, and unforgettable journeys.
+          </p>
+          <Link className="button button--navy button--tiny" to="/about">LEARN MORE ABOUT US</Link>
+        </div>
+        <div className="home-welcome__visual">
+          <ReferenceCrop
+            src={`${REFERENCE}/home.png`}
+            alt="Aegean sea and white chapel"
+            sourceWidth={1024}
+            sourceHeight={1536}
+            x={492}
+            y={490}
+            width={365}
+            height={128}
+          />
+        </div>
+      </section>
+
+      <section className="section--tight shell">
+        <SectionTitle>Featured Destinations</SectionTitle>
+        <div className="grid-3">
+          {destinations.map((destination) => (
+            <article className="card photo-card destination-card" key={destination.name}>
+              <div className="photo-card__image"><Photo src={destination.image} alt={destination.name} /></div>
+              <div className="photo-card__body">
+                <h3>{destination.name}</h3>
+                <p>{destination.copy}</p>
+                <Link className="button button--navy button--tiny" to="/destinations">{destination.cta}</Link>
+              </div>
+            </article>
+          ))}
+        </div>
+      </section>
+
+      <section className="section--tight shell">
+        <SectionTitle>Our Services</SectionTitle>
+        <div className="service-mini-grid">
+          {serviceMinis.map(([Icon, title]) => (
+            <Link className="service-mini" key={title} to="/services">
+              <Icon />
+              <strong>{title}</strong>
+            </Link>
+          ))}
+        </div>
+      </section>
+
+      <section className="section--tight shell">
+        <div className="mice-feature">
+          <ReferenceCrop
+            src={`${REFERENCE}/home.png`}
+            alt="Corporate meeting venue"
+            sourceWidth={1024}
+            sourceHeight={1536}
+            x={62}
+            y={918}
+            width={352}
+            height={121}
+          />
+          <div className="mice-feature__copy">
+            <h2>MICE &amp; Groups</h2>
+            <p>We handle every detail for successful meetings, incentives, conferences and corporate events in Rhodes &amp; Kos.</p>
+            <ul className="check-list">
+              <li>Venue sourcing &amp; event management</li>
+              <li>Team building &amp; unique experiences</li>
+              <li>Logistics, accommodation &amp; transfers</li>
+              <li>DMC services with local expertise</li>
+            </ul>
+            <Link className="button button--navy button--tiny" to="/mice-groups">VIEW MICE SERVICES</Link>
+          </div>
+        </div>
+      </section>
+
+      <section className="section--tight shell">
+        <SectionTitle>Experiences</SectionTitle>
+        <div className="experience-thumbs">
+          {experiences.map(([title, image]) => (
+            <Link className="experience-thumb" key={title} to="/experiences">
+              <div className="experience-thumb__image"><Photo src={`${ASSET}/${image}`} alt={title} /></div>
+              <strong>{title}</strong>
+            </Link>
+          ))}
+        </div>
+        <div className="center" style={{ marginTop: 8 }}>
+          <Link className="button button--navy button--tiny" to="/experiences">VIEW ALL EXPERIENCES</Link>
+        </div>
+      </section>
+
+      <section className="section--tight shell">
+        <SectionTitle>Why Choose Top Euro Travel?</SectionTitle>
+        <div className="why-strip">
+          <IconFeature icon={Bus} title="Local Expertise">In-depth knowledge of Rhodes &amp; Kos.</IconFeature>
+          <IconFeature icon={CalendarCheck} title="Tailor-Made Planning">Custom itineraries just for you.</IconFeature>
+          <IconFeature icon={ShieldCheck} title="Reliable Partners">Trusted network and quality assured.</IconFeature>
+          <IconFeature icon={MessageCircleMore} title="Fast Response">Quick, efficient and proactive support.</IconFeature>
+          <IconFeature icon={Sparkles} title="Seamless Service">From planning to flawless execution.</IconFeature>
+        </div>
+      </section>
+
+      <TestimonialStrip />
+      <RequestBanner />
+    </>
+  );
+}
+

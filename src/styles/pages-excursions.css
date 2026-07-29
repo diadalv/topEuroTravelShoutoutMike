@@ -1,0 +1,918 @@
+.excursions-page,
+.excursion-detail-page {
+  color: #07345f;
+  background:
+    radial-gradient(circle at 82% 38%, rgba(229, 158, 40, 0.035), transparent 25%),
+    #fffefa;
+}
+
+.excursions-shell {
+  width: min(calc(100% - 40px), 965px);
+  margin-inline: auto;
+}
+
+.excursions-page .page-hero__content,
+.excursion-detail-page .page-hero__content {
+  width: min(calc(100% - 40px), 965px);
+}
+
+.excursions-page .request-banner,
+.excursion-detail-page .request-banner {
+  width: min(calc(100% - 40px), 965px);
+}
+
+/* Excursions listing */
+
+.excursions-hero {
+  min-height: 180px;
+  background-position: center 53%;
+}
+
+.excursions-hero::after {
+  height: 23px;
+}
+
+.excursions-hero .page-hero__content {
+  padding-bottom: 8px;
+}
+
+.excursions-hero h1 {
+  margin-bottom: 8px;
+  font-size: clamp(42px, 4.8vw, 52px);
+}
+
+.excursions-catalog {
+  padding: 18px 0 0;
+}
+
+.excursions-catalog__intro {
+  min-height: 39px;
+  display: flex;
+  align-items: center;
+}
+
+.excursions-catalog__intro p {
+  margin: 0;
+  color: #113d68;
+  font-size: 10.5px;
+  font-weight: 700;
+  line-height: 1.5;
+}
+
+.excursions-toolbar {
+  min-height: 47px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  padding: 5px 0 12px;
+}
+
+.excursions-filters {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.excursions-filters button {
+  min-height: 28px;
+  border: 1px solid #dfe4e7;
+  border-radius: 6px;
+  padding: 6px 15px;
+  color: #174369;
+  background: rgba(255, 255, 255, 0.9);
+  box-shadow: 0 2px 8px rgba(0, 45, 82, 0.035);
+  cursor: pointer;
+  font-size: 7.5px;
+  font-weight: 750;
+  line-height: 1;
+  white-space: nowrap;
+  transition: border-color 150ms ease, color 150ms ease, background 150ms ease;
+}
+
+.excursions-filters button:hover,
+.excursions-filters button:focus-visible {
+  border-color: #df9a29;
+  outline: none;
+}
+
+.excursions-filters button.is-active {
+  border-color: #d58d18;
+  color: #fff;
+  background: linear-gradient(135deg, #e5a135, #ce8211);
+  box-shadow: 0 5px 12px rgba(207, 131, 17, 0.17);
+}
+
+.excursions-sort {
+  flex: 0 0 auto;
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  font-size: 7px;
+  font-weight: 800;
+}
+
+.excursions-sort select {
+  min-width: 106px;
+  height: 29px;
+  border: 1px solid #dfe4e7;
+  border-radius: 7px;
+  padding: 0 10px;
+  color: #164267;
+  outline: none;
+  background: #fff;
+  box-shadow: 0 2px 8px rgba(0, 45, 82, 0.04);
+  font-size: 7.5px;
+  font-weight: 650;
+}
+
+.excursions-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 12px 20px;
+}
+
+.excursion-card {
+  min-width: 0;
+  overflow: hidden;
+  border: 1px solid #e5e1da;
+  border-radius: 9px;
+  background: rgba(255, 255, 255, 0.97);
+  box-shadow: 0 3px 11px rgba(0, 49, 87, 0.045);
+  transition: transform 160ms ease, box-shadow 160ms ease, border-color 160ms ease;
+}
+
+.excursion-card:hover {
+  border-color: rgba(218, 145, 27, 0.45);
+  box-shadow: 0 8px 20px rgba(0, 49, 87, 0.1);
+  transform: translateY(-2px);
+}
+
+.excursion-card__image {
+  height: 118px;
+  position: relative;
+  overflow: hidden;
+  background: #d9e8ed;
+}
+
+.excursion-card__image .travel-photo {
+  transition: transform 400ms ease;
+}
+
+.excursion-card:hover .excursion-card__image .travel-photo {
+  transform: scale(1.035);
+}
+
+.excursion-card__image > span {
+  position: absolute;
+  top: 10px;
+  left: 9px;
+  border-radius: 4px;
+  padding: 4px 8px 3px;
+  color: white;
+  background: rgba(0, 55, 98, 0.94);
+  font-size: 5.8px;
+  font-weight: 800;
+  line-height: 1;
+  letter-spacing: 0.025em;
+}
+
+.excursion-card__body {
+  min-height: 117px;
+  display: flex;
+  flex-direction: column;
+  padding: 9px 10px 8px;
+}
+
+.excursion-card__body h2 {
+  min-height: 15px;
+  margin: 0 0 5px;
+  font-size: 12px;
+  line-height: 1.16;
+}
+
+.excursion-card__meta {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  color: #536a7c;
+  font-size: 6.6px;
+  font-weight: 600;
+}
+
+.excursion-card__meta span {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  white-space: nowrap;
+}
+
+.excursion-card__meta svg {
+  width: 9px;
+  height: 9px;
+  color: #003f73;
+  stroke-width: 1.8;
+}
+
+.excursion-card__body > p {
+  min-height: 30px;
+  margin: 6px 0 7px;
+  color: #4c6275;
+  font-size: 7.2px;
+  line-height: 1.42;
+}
+
+.excursion-card__footer {
+  margin-top: auto;
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 8px;
+}
+
+.excursion-card__footer > div {
+  display: flex;
+  align-items: baseline;
+  gap: 4px;
+  color: #073b67;
+}
+
+.excursion-card__footer small {
+  font-size: 7px;
+  font-weight: 700;
+}
+
+.excursion-card__footer strong {
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 20px;
+  font-weight: 500;
+  line-height: 1;
+}
+
+.excursion-card__footer .button {
+  min-height: 20px;
+  border-radius: 6px;
+  padding: 5px 14px;
+  font-size: 6px;
+}
+
+.booking-benefits {
+  margin-top: 18px;
+  border: 1px solid #e8e1d7;
+  border-radius: 10px;
+  padding: 4px 15px 12px;
+  background: rgba(255, 255, 255, 0.7);
+  box-shadow: 0 2px 10px rgba(0, 48, 86, 0.025);
+}
+
+.booking-benefits__title {
+  height: 30px;
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  gap: 21px;
+}
+
+.booking-benefits__title h2 {
+  margin: 0;
+  font-size: 20px;
+}
+
+.booking-benefits__title .plane-path {
+  width: 72px;
+  height: 24px;
+  margin-top: -3px;
+}
+
+.booking-benefits__title .plane-path span {
+  width: 58px;
+  height: 22px;
+  top: 6px;
+}
+
+.booking-benefits__title .plane-path svg {
+  width: 19px;
+  height: 19px;
+}
+
+.booking-benefits__grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+}
+
+.booking-benefits__grid article {
+  min-width: 0;
+  display: flex;
+  align-items: center;
+  gap: 13px;
+  padding: 1px 18px;
+  border-left: 1px solid #e4ded5;
+}
+
+.booking-benefits__grid article:first-child {
+  border-left: 0;
+}
+
+.booking-benefits__grid article > svg {
+  width: 32px;
+  height: 32px;
+  flex: 0 0 auto;
+  color: #063f72;
+  stroke-width: 1.65;
+}
+
+.booking-benefits__grid h3 {
+  margin: 0 0 2px;
+  font-family: inherit;
+  font-size: 9.5px;
+}
+
+.booking-benefits__grid p {
+  margin: 0;
+  color: #4b6377;
+  font-size: 7px;
+  line-height: 1.35;
+}
+
+.excursions-page .request-banner {
+  min-height: 68px;
+  margin-top: 13px;
+  margin-bottom: 10px;
+  padding-block: 9px;
+}
+
+.excursions-page .request-banner__copy h2 {
+  font-size: 21px;
+}
+
+/* Lindos excursion detail */
+
+.excursion-detail-hero {
+  min-height: 214px;
+  background-position: center 44%;
+}
+
+.excursion-detail-hero::after {
+  height: 25px;
+}
+
+.excursion-detail-hero .page-hero__content {
+  padding-bottom: 10px;
+}
+
+.excursion-detail-hero h1 {
+  max-width: 500px;
+  margin-bottom: 10px;
+  font-size: clamp(42px, 4.8vw, 54px);
+  line-height: 0.99;
+}
+
+.excursion-detail-page main h2 {
+  font-size: 20px;
+}
+
+.excursion-summary {
+  display: grid;
+  grid-template-columns: 1.13fr 1.4fr 0.68fr;
+  gap: 23px;
+  align-items: stretch;
+  padding: 22px 0 11px;
+}
+
+.excursion-summary__intro {
+  min-height: 190px;
+  position: relative;
+  padding: 11px 0 45px;
+}
+
+.excursion-summary__intro > p {
+  margin: 0;
+  color: #113d68;
+  font-size: 10.2px;
+  font-weight: 650;
+  line-height: 1.9;
+}
+
+.excursion-summary__intro .plane-path {
+  position: absolute;
+  right: 8px;
+  bottom: 2px;
+}
+
+.excursion-specs,
+.excursion-price-card,
+.detail-info-list {
+  border: 1px solid #e5e0d8;
+  border-radius: 10px;
+  background: rgba(255, 255, 255, 0.82);
+  box-shadow: 0 3px 13px rgba(0, 48, 86, 0.035);
+}
+
+.excursion-specs {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 13px 20px;
+  padding: 16px 17px;
+}
+
+.excursion-spec {
+  min-width: 0;
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+}
+
+.excursion-spec > svg {
+  width: 20px;
+  height: 20px;
+  flex: 0 0 auto;
+  color: #063f72;
+  stroke-width: 1.7;
+}
+
+.excursion-spec div {
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+.excursion-spec strong {
+  color: #063b69;
+  font-size: 8.6px;
+}
+
+.excursion-spec span {
+  margin-top: 3px;
+  color: #50667a;
+  font-size: 7px;
+  line-height: 1.28;
+}
+
+.excursion-price-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 13px 12px;
+  text-align: center;
+}
+
+.excursion-price-card > span {
+  font-size: 8px;
+  font-weight: 700;
+}
+
+.excursion-price-card > strong {
+  margin: 1px 0 0;
+  color: #063c6b;
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 40px;
+  font-weight: 500;
+  line-height: 0.96;
+}
+
+.excursion-price-card > p {
+  margin: 3px 0 12px;
+  font-size: 8px;
+  font-weight: 700;
+}
+
+.excursion-price-card > .button {
+  width: 100%;
+  min-height: 35px;
+  padding-inline: 8px;
+  font-size: 9px;
+}
+
+.excursion-price-card > div {
+  width: 100%;
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+  margin-top: 13px;
+  text-align: left;
+}
+
+.excursion-price-card > div > svg {
+  width: 16px;
+  height: 16px;
+  flex: 0 0 auto;
+}
+
+.excursion-price-card > div p {
+  display: flex;
+  flex-direction: column;
+  margin: 0;
+}
+
+.excursion-price-card > div strong {
+  font-size: 7px;
+}
+
+.excursion-price-card > div span {
+  color: #566a7b;
+  font-size: 6.4px;
+}
+
+.excursion-highlights {
+  position: relative;
+  padding-top: 3px;
+}
+
+.excursion-highlights::after {
+  position: absolute;
+  right: -23px;
+  bottom: -2px;
+  content: "";
+}
+
+.excursion-highlights > h2,
+.excursion-itinerary > h2 {
+  margin: 0 0 9px;
+}
+
+.excursion-highlights__grid {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: 11px;
+}
+
+.excursion-highlights__grid article {
+  min-height: 65px;
+  border: 1px solid #e5e0d8;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 9px 13px;
+  background: rgba(255, 255, 255, 0.74);
+}
+
+.excursion-highlights__grid svg {
+  width: 36px;
+  height: 36px;
+  flex: 0 0 auto;
+  color: #063f72;
+  stroke-width: 1.55;
+}
+
+.excursion-highlights__grid p {
+  margin: 0;
+  font-size: 7.5px;
+  font-weight: 750;
+  line-height: 1.35;
+}
+
+.excursion-itinerary-layout {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 264px;
+  gap: 28px;
+  padding-top: 11px;
+}
+
+.excursion-itinerary ol {
+  position: relative;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.excursion-itinerary ol::before {
+  width: 1px;
+  position: absolute;
+  top: 12px;
+  bottom: 12px;
+  left: 61px;
+  border-left: 1px dashed #a8afb2;
+  content: "";
+}
+
+.excursion-itinerary li {
+  min-height: 57px;
+  position: relative;
+  display: grid;
+  grid-template-columns: 48px 10px 143px minmax(0, 1fr);
+  gap: 11px;
+  align-items: center;
+  margin-bottom: 4px;
+}
+
+.excursion-itinerary time {
+  color: #d38b18;
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 11px;
+  font-weight: 700;
+  text-align: right;
+}
+
+.excursion-itinerary li > i {
+  width: 8px;
+  height: 8px;
+  z-index: 1;
+  border-radius: 50%;
+  background: #d6901b;
+  box-shadow: 0 0 0 3px #fffefa;
+}
+
+.excursion-itinerary__photo {
+  width: 143px;
+  height: 53px;
+  overflow: hidden;
+  border-radius: 7px;
+  background: #d9e8ed;
+}
+
+.excursion-itinerary li h3 {
+  margin: 0 0 3px;
+  font-family: inherit;
+  font-size: 9px;
+  line-height: 1.2;
+}
+
+.excursion-itinerary li p {
+  margin: 0;
+  color: #4a6175;
+  font-size: 7px;
+  line-height: 1.34;
+}
+
+.excursion-inclusions {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding-top: 31px;
+}
+
+.detail-info-list {
+  padding: 12px 17px 13px;
+}
+
+.detail-info-list h2 {
+  margin: 0 0 10px;
+}
+
+.detail-info-list ul {
+  display: grid;
+  gap: 8px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.detail-info-list li {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 7.7px;
+  font-weight: 600;
+}
+
+.detail-info-list li svg {
+  width: 13px;
+  height: 13px;
+  flex: 0 0 auto;
+  color: #074272;
+  stroke-width: 2;
+}
+
+.detail-info-list--negative h2,
+.detail-info-list--negative li svg {
+  color: #cb8719;
+}
+
+.excursion-gallery {
+  padding-top: 7px;
+}
+
+.excursion-gallery__heading {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 8px;
+}
+
+.excursion-gallery__heading h2 {
+  margin: 0;
+  flex: 0 0 auto;
+}
+
+.excursion-gallery__heading > span {
+  height: 1px;
+  flex: 1;
+  background: #e2ded7;
+}
+
+.excursion-gallery__heading > div {
+  display: flex;
+  gap: 8px;
+}
+
+.excursion-gallery__heading button {
+  width: 20px;
+  height: 20px;
+  border: 1px solid #083f70;
+  border-radius: 50%;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 0 2px;
+  color: #083f70;
+  background: white;
+  cursor: pointer;
+  font-family: Georgia, serif;
+  font-size: 19px;
+  line-height: 1;
+}
+
+.excursion-gallery__heading button:last-child {
+  color: white;
+  background: #083f70;
+}
+
+.excursion-gallery__grid {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: 13px;
+}
+
+.excursion-gallery__grid > div {
+  height: 125px;
+  overflow: hidden;
+  border-radius: 8px;
+  background: #d9e8ed;
+}
+
+.excursion-detail-page .request-banner {
+  min-height: 76px;
+  margin-top: 16px;
+  margin-bottom: 10px;
+}
+
+.excursion-detail-page .request-banner__copy h2 {
+  font-size: 21px;
+}
+
+@media (max-width: 920px) {
+  .excursions-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  .excursions-toolbar {
+    align-items: flex-end;
+  }
+
+  .excursions-filters {
+    flex-wrap: wrap;
+    gap: 7px;
+  }
+
+  .excursion-summary {
+    grid-template-columns: 1fr 1.25fr;
+  }
+
+  .excursion-price-card {
+    grid-column: 1 / -1;
+    display: grid;
+    grid-template-columns: 0.4fr 0.6fr 1fr 1.2fr;
+    gap: 12px;
+    text-align: left;
+  }
+
+  .excursion-price-card > strong {
+    font-size: 32px;
+  }
+
+  .excursion-price-card > p,
+  .excursion-price-card > .button,
+  .excursion-price-card > div {
+    margin: 0;
+  }
+
+  .excursion-highlights__grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 760px) {
+  .excursions-hero,
+  .excursion-detail-hero {
+    min-height: 230px;
+  }
+
+  .excursions-toolbar {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .excursions-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .booking-benefits__grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 13px 0;
+  }
+
+  .booking-benefits__grid article:nth-child(3) {
+    border-left: 0;
+  }
+
+  .excursion-summary {
+    grid-template-columns: 1fr;
+  }
+
+  .excursion-summary__intro {
+    min-height: 0;
+    padding-bottom: 60px;
+  }
+
+  .excursion-price-card {
+    grid-column: auto;
+  }
+
+  .excursion-itinerary-layout {
+    grid-template-columns: 1fr;
+  }
+
+  .excursion-inclusions {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    padding-top: 0;
+  }
+
+  .excursion-gallery__grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 540px) {
+  .excursions-shell,
+  .excursions-page .page-hero__content,
+  .excursion-detail-page .page-hero__content,
+  .excursions-page .request-banner,
+  .excursion-detail-page .request-banner {
+    width: min(calc(100% - 28px), 965px);
+  }
+
+  .excursions-hero h1,
+  .excursion-detail-hero h1 {
+    font-size: 39px;
+  }
+
+  .excursions-catalog__intro br {
+    display: none;
+  }
+
+  .excursions-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .excursion-card__image {
+    height: 185px;
+  }
+
+  .booking-benefits__grid,
+  .excursion-specs,
+  .excursion-inclusions,
+  .excursion-gallery__grid {
+    grid-template-columns: 1fr;
+  }
+
+  .booking-benefits__grid article,
+  .booking-benefits__grid article:nth-child(3) {
+    border-top: 1px solid #e4ded5;
+    border-left: 0;
+    padding-block: 10px;
+  }
+
+  .booking-benefits__grid article:first-child {
+    border-top: 0;
+  }
+
+  .excursion-price-card {
+    display: flex;
+    text-align: center;
+  }
+
+  .excursion-highlights__grid {
+    grid-template-columns: 1fr;
+  }
+
+  .excursion-itinerary ol::before {
+    left: 47px;
+  }
+
+  .excursion-itinerary li {
+    grid-template-columns: 34px 9px 92px minmax(0, 1fr);
+    gap: 8px;
+  }
+
+  .excursion-itinerary__photo {
+    width: 92px;
+    height: 57px;
+  }
+
+  .excursion-gallery__grid > div {
+    height: 190px;
+  }
+}
