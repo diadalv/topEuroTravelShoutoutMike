@@ -103,7 +103,7 @@ const clientGroups = [
     icon: Users,
     title: 'Leisure Groups',
     copy: 'From cultural tours to island-hopping adventures, we create memorable experiences for groups of all sizes.',
-    image: 'village.jpg',
+    image: 'local-life.jpg',
   },
 ];
 

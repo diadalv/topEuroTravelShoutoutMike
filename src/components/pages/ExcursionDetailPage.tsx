@@ -68,7 +68,7 @@ const itinerary = [
   },
   {
     time: '12:30',
-    image: 'old-town-street.jpg',
+    image: 'old-town.jpg',
     title: 'Free Time in Lindos',
     text: 'Enjoy free time for lunch, shopping or relaxing in one of the village cafés.',
   },
@@ -110,7 +110,7 @@ const notIncluded = [
 
 const gallery = [
   ['lindos-aerial.jpg', 'Aerial view of Lindos'],
-  ['old-town-street.jpg', 'Whitewashed street in Lindos'],
+  ['old-town.jpg', 'Whitewashed street in Lindos'],
   ['acropolis.jpg', 'Ancient columns at the Acropolis'],
   ['beach.jpg', 'Turquoise bay in South Rhodes'],
   ['lindos.jpg', 'Lindos Acropolis at sunset'],
