@@ -1,3 +1,4 @@
+import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import {
   Bell,
@@ -19,6 +20,7 @@ import {
   Users,
   Utensils,
   Waves,
+  X,
 } from 'lucide-react';
 import {
   ASSET,
@@ -84,6 +86,22 @@ const experiences = [
 ];
 
 export default function TravelHomePage() {
+  const [highlightsOpen, setHighlightsOpen] = useState(false);
+
+  useEffect(() => {
+    if (!highlightsOpen) return;
+    const closeOnEscape = (event: KeyboardEvent) => {
+      if (event.key === 'Escape') setHighlightsOpen(false);
+    };
+    const previousOverflow = document.body.style.overflow;
+    document.body.style.overflow = 'hidden';
+    window.addEventListener('keydown', closeOnEscape);
+    return () => {
+      document.body.style.overflow = previousOverflow;
+      window.removeEventListener('keydown', closeOnEscape);
+    };
+  }, [highlightsOpen]);
+
   return (
     <>
       <section className="home-hero" style={{ backgroundImage: `url("${ASSET}/home-hero-v2.jpg")` }}>
@@ -92,12 +110,38 @@ export default function TravelHomePage() {
           <p className="home-hero__lead">Local Expertise. Memorable Experiences.<br />Seamless Service.</p>
           <div className="home-hero__actions">
             <Link className="button button--gold" to="/about">DISCOVER MORE</Link>
-            <button className="video-link" type="button" aria-label="Watch video">
-              <span><Play /></span> WATCH VIDEO
+            <button
+              className="video-link"
+              type="button"
+              aria-label="View destination highlights"
+              aria-haspopup="dialog"
+              aria-expanded={highlightsOpen}
+              onClick={() => setHighlightsOpen(true)}
+            >
+              <span><Play /></span> VIEW HIGHLIGHTS
             </button>
           </div>
         </div>
       </section>
+
+      {highlightsOpen && (
+        <div
+          className="video-modal"
+          role="presentation"
+          onMouseDown={(event) => {
+            if (event.currentTarget === event.target) setHighlightsOpen(false);
+          }}
+        >
+          <section className="video-modal__dialog" role="dialog" aria-modal="true" aria-labelledby="highlights-title">
+            <button className="video-modal__close" type="button" aria-label="Close highlights" autoFocus onClick={() => setHighlightsOpen(false)}><X /></button>
+            <div className="video-modal__visual"><span className="video-modal__play" aria-hidden="true"><Play /></span></div>
+            <div className="video-modal__copy">
+              <div><h2 id="highlights-title">Discover Rhodes &amp; Kos</h2><p>Culture, island life, sailing and tailor-made experiences selected by our local team.</p></div>
+              <Link className="button button--gold" to="/experiences" onClick={() => setHighlightsOpen(false)}>EXPLORE EXPERIENCES</Link>
+            </div>
+          </section>
+        </div>
+      )}
 
       <section className="floating-services shell" aria-label="Key services">
         {floatingServices.map(([Icon, title]) => (

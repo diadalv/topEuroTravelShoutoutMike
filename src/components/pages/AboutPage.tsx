@@ -68,7 +68,7 @@ export default function AboutPage() {
             We combine deep local knowledge, professional service, and a passion for hospitality to deliver
             extraordinary travel experiences for FITs, groups, MICE, and corporate clients from around the world.
           </p>
-          <Link className="button button--navy button--tiny" to="#team">MEET OUR TEAM</Link>
+          <a className="button button--navy button--tiny" href="#team">MEET OUR TEAM</a>
         </div>
         <div className="about-intro__image rounded-photo">
           <Photo src={`${ASSET}/about-intro-v2.jpg`} alt="Aegean harbour and island village" />

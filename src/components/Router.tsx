@@ -11,6 +11,7 @@ import ExcursionsPage from '@/components/pages/ExcursionsPage';
 import ExcursionDetailPage from '@/components/pages/ExcursionDetailPage';
 import ContactPage from '@/components/pages/ContactPage';
 import AgentsPortalPage from '@/components/pages/AgentsPortalPage';
+import { BlogPage, FaqPage, PrivacyPage, TermsPage } from '@/components/pages/InfoPages';
 import { SiteFooter, SiteHeader } from '@/components/travel/Shared';
 
 function Layout() {
@@ -47,8 +48,10 @@ const router = createBrowserRouter(
         },
         { path: 'contact', element: <ContactPage />, routeMetadata: { pageIdentifier: 'contact' } },
         { path: 'agents-portal', element: <AgentsPortalPage />, routeMetadata: { pageIdentifier: 'agents-portal' } },
-        { path: 'privacy', element: <Navigate to="/contact" replace /> },
-        { path: 'terms', element: <Navigate to="/contact" replace /> },
+        { path: 'blog', element: <BlogPage />, routeMetadata: { pageIdentifier: 'blog' } },
+        { path: 'faq', element: <FaqPage />, routeMetadata: { pageIdentifier: 'faq' } },
+        { path: 'privacy', element: <PrivacyPage />, routeMetadata: { pageIdentifier: 'privacy' } },
+        { path: 'terms', element: <TermsPage />, routeMetadata: { pageIdentifier: 'terms' } },
         { path: '*', element: <Navigate to="/" replace /> },
       ],
     },

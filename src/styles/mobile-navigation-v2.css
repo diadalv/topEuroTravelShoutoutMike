@@ -1,0 +1,5 @@
+@media (max-width: 940px) {
+  .site-header__nav-wrap.is-open .main-nav__dropdown {
+    display: grid;
+  }
+}

@@ -83,6 +83,9 @@ const trustItems = [
 
 export default function ExperiencesPage() {
   const [activeCategory, setActiveCategory] = useState('All Experiences');
+  const visibleCategories = activeCategory === 'All Experiences'
+    ? categories.slice(1)
+    : categories.filter(({ title }) => title === activeCategory);
 
   return (
     <div className="experiences-page">
@@ -107,6 +110,7 @@ export default function ExperiencesPage() {
                 type="button"
                 key={title}
                 className={activeCategory === title ? 'is-active' : ''}
+                aria-pressed={activeCategory === title}
                 onClick={() => setActiveCategory(title)}
               >
                 <Icon />
@@ -141,8 +145,8 @@ export default function ExperiencesPage() {
             </div>
           </section>
 
-          <section className="experience-card-grid" aria-label="Experience collection">
-            {categories.slice(1).map(({ title, icon: Icon, image }) => (
+          <section className="experience-card-grid" aria-label="Experience collection" aria-live="polite">
+            {visibleCategories.map(({ title, icon: Icon, image }) => (
               <article className="experience-tile card" key={title}>
                 <Photo src={`${ASSET}/${image}`} alt={title} />
                 <span className="experience-tile__icon"><Icon /></span>

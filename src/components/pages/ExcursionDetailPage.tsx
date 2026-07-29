@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import {
   Accessibility,
@@ -131,6 +132,11 @@ function InfoList({ title, items, negative = false }: { title: string; items: st
 }
 
 export default function ExcursionDetailPage() {
+  const [galleryStart, setGalleryStart] = useState(0);
+  const orderedGallery = gallery.map((_, offset) => gallery[(galleryStart + offset) % gallery.length]);
+  const showPrevious = () => setGalleryStart((current) => (current - 1 + gallery.length) % gallery.length);
+  const showNext = () => setGalleryStart((current) => (current + 1) % gallery.length);
+
   return (
     <div className="excursion-detail-page">
         <PageHero
@@ -208,12 +214,13 @@ export default function ExcursionDetailPage() {
           <div className="excursion-gallery__heading">
             <h2 id="gallery-title">Gallery</h2>
             <span aria-hidden="true" />
-            <div><button type="button" aria-label="Previous gallery image">‹</button><button type="button" aria-label="Next gallery image">›</button></div>
+            <div><button type="button" aria-label="Previous gallery image" onClick={showPrevious}>‹</button><button type="button" aria-label="Next gallery image" onClick={showNext}>›</button></div>
           </div>
-          <div className="excursion-gallery__grid">
-            {gallery.map(([image, alt]) => (
+          <div className="excursion-gallery__grid" aria-live="polite">
+            {orderedGallery.map(([image, alt]) => (
               <div key={image}><Photo src={`${ASSET}/${image}`} alt={alt} /></div>
             ))}
+            <span className="gallery-status">Showing {orderedGallery[0][1]} first</span>
           </div>
         </section>
 

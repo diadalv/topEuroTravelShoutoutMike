@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import {
   ArrowRight,
   BriefcaseBusiness,
@@ -21,9 +22,8 @@ import {
   Gold,
   MockForm,
   PageHero,
+  Photo,
   PlanePath,
-  REFERENCE,
-  ReferenceCrop,
 } from '@/components/travel/Shared';
 
 const contactDetails = [
@@ -40,6 +40,13 @@ const quickInquiries = [
   [Headphones, 'Agent & B2B Inquiries'],
 ] as const;
 
+const inquirySubjects: Record<string, string> = {
+  'Partnership Opportunities': 'Agent & B2B',
+  'Tailor-Made Trips': 'Booking & Reservation',
+  'Group & MICE Requests': 'Groups & Events',
+  'Agent & B2B Inquiries': 'Agent & B2B',
+};
+
 const helpItems = [
   [MessageCircle, 'General Inquiries', 'Questions about our services, destinations, or experiences.'],
   [Luggage, 'Bookings & Reservations', 'Need help with an existing booking or reservation?'],
@@ -48,6 +55,17 @@ const helpItems = [
 ] as const;
 
 export default function ContactPage() {
+  const [selectedInquiry, setSelectedInquiry] = useState('');
+  const [subject, setSubject] = useState('');
+  const chooseInquiry = (label: string) => {
+    setSelectedInquiry(label);
+    setSubject(inquirySubjects[label] ?? 'General Inquiry');
+    window.setTimeout(() => {
+      document.getElementById('contact-form')?.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      document.getElementById('contact-message')?.focus({ preventScroll: true });
+    }, 0);
+  };
+
   return (
     <div className="contact-page">
         <PageHero
@@ -71,7 +89,12 @@ export default function ContactPage() {
                   {contactDetails.map(([Icon, title, copy]) => (
                     <div className="contact-detail" key={title}>
                       <span><Icon /></span>
-                      <div><h3>{title}</h3><p>{copy}</p></div>
+                      <div>
+                        <h3>{title}</h3>
+                        {title === 'Email Us' ? <a href="mailto:info@topeurotravel.gr">{copy}</a>
+                          : title === 'Call Us' ? <a href="tel:+302241078200">{copy}</a>
+                            : <p>{copy}</p>}
+                      </div>
                     </div>
                   ))}
                   <div className="contact-socials">
@@ -91,7 +114,13 @@ export default function ContactPage() {
                   <p>What can we help you with?</p>
                   <div className="quick-inquiry__list">
                     {quickInquiries.map(([Icon, label]) => (
-                      <button type="button" key={label}>
+                      <button
+                        type="button"
+                        key={label}
+                        className={selectedInquiry === label ? 'is-selected' : ''}
+                        aria-pressed={selectedInquiry === label}
+                        onClick={() => chooseInquiry(label)}
+                      >
                         <Icon /><strong>{label}</strong><ArrowRight />
                       </button>
                     ))}
@@ -105,15 +134,16 @@ export default function ContactPage() {
               <h2>Send Us a Message</h2>
               <p>Fill out the form below and we’ll get back to you as soon as possible.</p>
               <MockForm
+                id="contact-form"
                 className="contact-form"
-                successMessage="Thank you. Your message has been received."
+                successMessage="Thank you. Your message has been received. Our team will reply within 24 business hours."
               >
-                <div className="form-field"><label htmlFor="contact-name">Name</label><input id="contact-name" required placeholder="Your Name" /></div>
-                <div className="form-field"><label htmlFor="contact-email">Email Address</label><input id="contact-email" type="email" required placeholder="Your Email Address" /></div>
-                <div className="form-field"><label htmlFor="contact-phone">Phone Number</label><input id="contact-phone" type="tel" placeholder="Your Phone Number" /></div>
+                <div className="form-field"><label htmlFor="contact-name">Name</label><input id="contact-name" name="name" autoComplete="name" required minLength={2} placeholder="Your Name" /></div>
+                <div className="form-field"><label htmlFor="contact-email">Email Address</label><input id="contact-email" name="email" type="email" autoComplete="email" required placeholder="Your Email Address" /></div>
+                <div className="form-field"><label htmlFor="contact-phone">Phone Number</label><input id="contact-phone" name="phone" type="tel" autoComplete="tel" placeholder="Your Phone Number" /><p className="form-field__hint">Include your country code if you would like us to call you.</p></div>
                 <div className="form-field">
                   <label htmlFor="contact-subject">Subject</label>
-                  <select id="contact-subject" defaultValue="">
+                  <select id="contact-subject" name="subject" value={subject} onChange={(event) => setSubject(event.target.value)} required>
                     <option value="" disabled>How can we help you?</option>
                     <option>General Inquiry</option>
                     <option>Booking & Reservation</option>
@@ -121,7 +151,7 @@ export default function ContactPage() {
                     <option>Agent & B2B</option>
                   </select>
                 </div>
-                <div className="form-field"><label htmlFor="contact-message">Your Message</label><textarea id="contact-message" required placeholder="Write your message here..." /></div>
+                <div className="form-field"><label htmlFor="contact-message">Your Message</label><textarea id="contact-message" name="message" required minLength={20} placeholder="Tell us about your dates, group size and travel requirements..." /><p className="form-field__hint">Please include any preferred dates and the number of travellers.</p></div>
                 <button className="button button--gold" type="submit"><Send /> SEND MESSAGE</button>
               </MockForm>
             </div>
@@ -129,18 +159,11 @@ export default function ContactPage() {
 
           <section className="contact-location-row">
             <article className="contact-location-card card">
-              <ReferenceCrop
-                src={`${REFERENCE}/contact.jpeg`}
-                alt="Map showing the Top Euro Travel office in Rhodes"
-                x={41}
-                y={875}
-                width={250}
-                height={157}
-              />
+              <Photo src={`${ASSET}/contact-map-v2.jpg`} alt="Map showing the Top Euro Travel office in Rhodes" />
               <div>
                 <h2>Our Location</h2>
                 <p>Ionos Dragoumi 45,<br />Rhodes 851 00, Greece</p>
-                <a className="button button--outline" href="https://maps.google.com" target="_blank" rel="noreferrer">
+                <a className="button button--outline" href="https://www.google.com/maps/search/?api=1&query=Ionos+Dragoumi+45%2C+Rhodes%2C+Greece" target="_blank" rel="noreferrer">
                   VIEW ON MAP <Map />
                 </a>
               </div>
@@ -156,14 +179,7 @@ export default function ContactPage() {
                 </div>
               </div>
               <div className="contact-assistance-card__photo">
-                <ReferenceCrop
-                  src={`${REFERENCE}/contact.jpeg`}
-                  alt="Top Euro Travel customer support agent"
-                  x={846}
-                  y={875}
-                  width={213}
-                  height={157}
-                />
+                <Photo src={`${ASSET}/contact-support-v2.jpg`} alt="Top Euro Travel customer support agent" />
               </div>
             </article>
           </section>
