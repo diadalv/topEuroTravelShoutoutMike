@@ -12,7 +12,8 @@ import ExcursionDetailPage from '@/components/pages/ExcursionDetailPage';
 import ContactPage from '@/components/pages/ContactPage';
 import AgentsPortalPage from '@/components/pages/AgentsPortalPage';
 import { BlogPage, FaqPage, PrivacyPage, TermsPage } from '@/components/pages/InfoPages';
-import { SiteFooter, SiteHeader } from '@/components/travel/Shared';
+import Footer from '@/components/Footer';
+import { SiteHeader } from '@/components/travel/Shared';
 
 function Layout() {
   return (
@@ -22,7 +23,7 @@ function Layout() {
       <main id="main-content">
         <Outlet />
       </main>
-      <SiteFooter />
+      <Footer />
     </div>
   );
 }
