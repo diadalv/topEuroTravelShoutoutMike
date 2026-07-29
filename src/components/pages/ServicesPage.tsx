@@ -30,7 +30,6 @@ import {
   SectionTitle,
   TestimonialStrip,
 } from '@/components/travel/Shared';
-import '@/styles/pages-services-mice.css';
 
 type Service = {
   icon: LucideIcon;
@@ -147,7 +146,7 @@ function ServiceCard({ icon: Icon, title, copy }: Service) {
 
 export default function ServicesPage() {
   return (
-    <div className="site-page services-page">
+    <div className="services-page">
         <PageHero
           className="services-page__hero"
           image={`${ASSET}/services-hero.jpg`}

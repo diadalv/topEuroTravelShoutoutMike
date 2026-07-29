@@ -27,7 +27,6 @@ import {
   SectionTitle,
   Stat,
 } from '@/components/travel/Shared';
-import '@/styles/pages-services-mice.css';
 
 type ProgramCard = {
   icon: LucideIcon;
@@ -137,7 +136,7 @@ function ProgramCard({ icon: Icon, title, copy, image, position }: ProgramCard) 
 
 export default function MiceGroupsPage() {
   return (
-    <div className="site-page mice-page">
+    <div className="mice-page">
         <PageHero
           className="mice-page__hero"
           image={`${ASSET}/mice-hero.jpg`}

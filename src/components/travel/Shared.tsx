@@ -1,4 +1,4 @@
-import { FormEvent, ReactNode, useState } from 'react';
+import { FormEvent, ReactNode, useEffect, useState } from 'react';
 import { Link, NavLink } from 'react-router-dom';
 import {
   ArrowRight,
@@ -34,8 +34,18 @@ const navigation = [
 export function SiteHeader() {
   const [open, setOpen] = useState(false);
 
+  useEffect(() => {
+    if (!open) return;
+    const closeOnEscape = (event: KeyboardEvent) => {
+      if (event.key === 'Escape') setOpen(false);
+    };
+    window.addEventListener('keydown', closeOnEscape);
+    return () => window.removeEventListener('keydown', closeOnEscape);
+  }, [open]);
+
   return (
     <header className="site-header">
+      <a className="skip-link" href="#main-content">Skip to main content</a>
       <div className="site-header__inner">
         <Link to="/" className="brand-link" aria-label="Top Euro Travel home" onClick={() => setOpen(false)}>
           <Image src={`${ASSET}/logo.png`} alt="Top Euro Travel" className="brand-logo" />
@@ -46,12 +56,13 @@ export function SiteHeader() {
           className="mobile-menu-button"
           aria-label={open ? 'Close navigation' : 'Open navigation'}
           aria-expanded={open}
+          aria-controls="primary-navigation"
           onClick={() => setOpen((value) => !value)}
         >
           {open ? <X /> : <Menu />}
         </button>
 
-        <div className={`site-header__nav-wrap ${open ? 'is-open' : ''}`}>
+        <div id="primary-navigation" className={`site-header__nav-wrap ${open ? 'is-open' : ''}`}>
           <nav className="main-nav" aria-label="Main navigation">
             {navigation.map((item) => (
               <NavLink
@@ -229,18 +240,21 @@ export function ReferenceCrop({
   height,
   className = '',
 }: ReferenceCropProps) {
-  const scale = 100 / width;
+  const horizontalScale = 100 / width;
+  const verticalScale = 100 / height;
   return (
     <div className={`reference-crop ${className}`} style={{ aspectRatio: `${width} / ${height}` }}>
       <Image
         src={src}
         alt={alt}
+        loading="lazy"
+        decoding="async"
         className="reference-crop__image"
         style={{
-          width: `${sourceWidth * scale}%`,
-          height: `${sourceHeight * scale}%`,
-          left: `${-x * scale}%`,
-          top: `${-y * scale}%`,
+          width: `${sourceWidth * horizontalScale}%`,
+          height: `${sourceHeight * verticalScale}%`,
+          left: `${-x * horizontalScale}%`,
+          top: `${-y * verticalScale}%`,
           maxWidth: 'none',
         }}
       />

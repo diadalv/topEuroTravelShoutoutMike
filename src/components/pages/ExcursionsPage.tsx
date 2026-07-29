@@ -15,8 +15,6 @@ import {
   PlanePath,
   RequestBanner,
 } from '@/components/travel/Shared';
-import '@/styles/travel.css';
-import '@/styles/pages-excursions.css';
 
 type Excursion = {
   title: string;
@@ -222,7 +220,7 @@ export default function ExcursionsPage() {
   }, [category, sort]);
 
   return (
-    <div className="site-page excursions-page">
+    <div className="excursions-page">
         <PageHero
           className="excursions-hero"
           title="Excursions"

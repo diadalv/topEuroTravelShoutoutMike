@@ -22,10 +22,8 @@ import {
 } from 'lucide-react';
 import {
   ASSET,
-  REFERENCE,
   IconFeature,
   Photo,
-  ReferenceCrop,
   RequestBanner,
   SectionTitle,
   TestimonialStrip,
@@ -88,7 +86,7 @@ const experiences = [
 export default function TravelHomePage() {
   return (
     <>
-      <section className="home-hero" style={{ backgroundImage: `url("${ASSET}/home-hero.jpg")` }}>
+      <section className="home-hero" style={{ backgroundImage: `url("${ASSET}/home-hero-v2.jpg")` }}>
         <div className="home-hero__content shell">
           <h1><span className="text-gold">Your DMC in</span>Rhodes &amp; Kos</h1>
           <p className="home-hero__lead">Local Expertise. Memorable Experiences.<br />Seamless Service.</p>
@@ -123,15 +121,9 @@ export default function TravelHomePage() {
           <Link className="button button--navy button--tiny" to="/about">LEARN MORE ABOUT US</Link>
         </div>
         <div className="home-welcome__visual">
-          <ReferenceCrop
-            src={`${REFERENCE}/home.png`}
+          <Photo
+            src={`${ASSET}/home-welcome-v2.jpg`}
             alt="Aegean sea and white chapel"
-            sourceWidth={1024}
-            sourceHeight={1536}
-            x={492}
-            y={490}
-            width={365}
-            height={128}
           />
         </div>
       </section>
@@ -166,15 +158,9 @@ export default function TravelHomePage() {
 
       <section className="section--tight shell">
         <div className="mice-feature">
-          <ReferenceCrop
-            src={`${REFERENCE}/home.png`}
+          <Photo
+            src={`${ASSET}/home-mice-v2.jpg`}
             alt="Corporate meeting venue"
-            sourceWidth={1024}
-            sourceHeight={1536}
-            x={62}
-            y={918}
-            width={352}
-            height={121}
           />
           <div className="mice-feature__copy">
             <h2>MICE &amp; Groups</h2>

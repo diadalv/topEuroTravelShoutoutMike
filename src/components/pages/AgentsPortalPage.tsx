@@ -25,7 +25,6 @@ import {
   PlanePath,
   Stat,
 } from '@/components/travel/Shared';
-import '@/styles/pages-experience-contact-agents.css';
 
 const welcomeBenefits = [
   [CalendarDays, 'Real-Time Availability', 'Instant access to up-to-date availability across our network.'],
@@ -61,7 +60,7 @@ export default function AgentsPortalPage() {
   };
 
   return (
-    <div className="site-page agents-page">
+    <div className="agents-page">
         <PageHero
           className="agents-hero"
           title={<><Gold>Agents</Gold> Portal</>}

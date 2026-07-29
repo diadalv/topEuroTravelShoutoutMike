@@ -18,7 +18,7 @@ function Layout() {
     <div className="site-page">
       <ScrollToTop />
       <SiteHeader />
-      <main>
+      <main id="main-content">
         <Outlet />
       </main>
       <SiteFooter />

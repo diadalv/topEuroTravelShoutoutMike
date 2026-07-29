@@ -25,8 +25,6 @@ import {
   PlanePath,
   RequestBanner,
 } from '@/components/travel/Shared';
-import '@/styles/travel.css';
-import '@/styles/pages-excursions.css';
 
 type Spec = {
   icon: LucideIcon;
@@ -134,7 +132,7 @@ function InfoList({ title, items, negative = false }: { title: string; items: st
 
 export default function ExcursionDetailPage() {
   return (
-    <div className="site-page excursion-detail-page">
+    <div className="excursion-detail-page">
         <PageHero
           className="excursion-detail-hero"
           title={<>Lindos &amp;<br />South Rhodes Tour</>}

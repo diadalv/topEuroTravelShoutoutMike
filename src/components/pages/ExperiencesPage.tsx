@@ -29,7 +29,6 @@ import {
   RequestBanner,
   Stat,
 } from '@/components/travel/Shared';
-import '@/styles/pages-experience-contact-agents.css';
 
 type ExperienceCategory = {
   title: string;
@@ -86,7 +85,7 @@ export default function ExperiencesPage() {
   const [activeCategory, setActiveCategory] = useState('All Experiences');
 
   return (
-    <div className="site-page experiences-page">
+    <div className="experiences-page">
         <PageHero
           className="experiences-hero"
           title={<><Gold>Unique</Gold> Experiences</>}

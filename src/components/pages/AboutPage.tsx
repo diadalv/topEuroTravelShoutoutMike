@@ -20,8 +20,6 @@ import {
   PageHero,
   Photo,
   PlanePath,
-  ReferenceCrop,
-  REFERENCE,
   SectionTitle,
   Stat,
   TrustBar,
@@ -55,7 +53,7 @@ export default function AboutPage() {
       <PageHero
         title={<><Gold>Who</Gold> We Are</>}
         breadcrumb="About"
-        image={`${ASSET}/about-hero.jpg`}
+        image={`${ASSET}/about-hero-v2.jpg`}
       />
 
       <section className="section shell about-intro">
@@ -73,7 +71,7 @@ export default function AboutPage() {
           <Link className="button button--navy button--tiny" to="#team">MEET OUR TEAM</Link>
         </div>
         <div className="about-intro__image rounded-photo">
-          <Photo src={`${ASSET}/marina.jpg`} alt="Aegean harbour and island village" />
+          <Photo src={`${ASSET}/about-intro-v2.jpg`} alt="Aegean harbour and island village" />
         </div>
         <PlanePath className="about-intro__plane" />
       </section>
@@ -124,14 +122,7 @@ export default function AboutPage() {
 
       <section id="team" className="section--tight shell about-team">
         <div className="rounded-photo">
-          <ReferenceCrop
-            src={`${REFERENCE}/about.jpeg`}
-            alt="Top Euro Travel team"
-            x={80}
-            y={1034}
-            width={225}
-            height={127}
-          />
+          <Photo src={`${ASSET}/about-team-v2.jpg`} alt="Top Euro Travel team" />
         </div>
         <div>
           <h3>Our Team</h3>
@@ -151,7 +142,7 @@ export default function AboutPage() {
           </ul>
         </div>
         <div className="rounded-photo">
-          <Photo src={`${ASSET}/sunset.jpg`} alt="Aegean island sunset" />
+          <Photo src={`${ASSET}/about-philosophy-v2.jpg`} alt="White island architecture at sunset" />
         </div>
       </section>
 

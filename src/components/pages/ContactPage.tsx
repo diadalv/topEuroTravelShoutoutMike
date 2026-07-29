@@ -25,7 +25,6 @@ import {
   REFERENCE,
   ReferenceCrop,
 } from '@/components/travel/Shared';
-import '@/styles/pages-experience-contact-agents.css';
 
 const contactDetails = [
   [Mail, 'Email Us', 'info@topeurotravel.gr'],
@@ -50,7 +49,7 @@ const helpItems = [
 
 export default function ContactPage() {
   return (
-    <div className="site-page contact-page">
+    <div className="contact-page">
         <PageHero
           className="contact-hero"
           title="Contact Us"
