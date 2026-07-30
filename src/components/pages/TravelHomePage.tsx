@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import {
+  ArrowUpRight,
   Bell,
   Building2,
   Bus,
@@ -227,7 +228,10 @@ export default function TravelHomePage() {
             <Link className="experience-thumb" key={title} to="/experiences">
               <div className="experience-thumb__image">
                 <Photo src={`${ASSET}/${image}`} alt={title} />
-                <strong className="experience-thumb__label">{title}</strong>
+                <div className="experience-thumb__content">
+                  <strong className="experience-thumb__label">{title}</strong>
+                  <span className="experience-thumb__cta">Explore <ArrowUpRight /></span>
+                </div>
               </div>
             </Link>
           ))}
