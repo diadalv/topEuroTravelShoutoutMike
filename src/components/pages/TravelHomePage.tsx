@@ -103,7 +103,7 @@ export default function TravelHomePage() {
   }, [highlightsOpen]);
 
   return (
-    <>
+    <div className="home-page">
       <section className="home-hero" style={{ backgroundImage: `url("${ASSET}/home-hero-v2.jpg")` }}>
         <div className="home-hero__content shell">
           <h1><span className="text-gold">Your DMC in</span>Rhodes &amp; Kos</h1>
@@ -248,7 +248,7 @@ export default function TravelHomePage() {
 
       <TestimonialStrip />
       <RequestBanner />
-    </>
+    </div>
   );
 }
 
