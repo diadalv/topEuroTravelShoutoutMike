@@ -175,7 +175,71 @@
 }
 
 .services-page__reviews .testimonial-strip {
+  position: relative;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
   margin-top: 0;
+  border-radius: 18px;
+  padding: 28px;
+  box-shadow: 0 12px 34px rgba(0, 48, 86, 0.07);
+}
+
+.services-page__reviews .testimonial-strip article {
+  min-width: 0;
+  min-height: 245px;
+  display: flex;
+  flex-direction: column;
+  padding: 8px 30px;
+}
+
+.services-page__reviews .testimonial-strip blockquote {
+  flex: 1;
+}
+
+.services-page__reviews .testimonial-strip p {
+  min-height: 0;
+  margin: 0;
+}
+
+.services-page__reviews .testimonial-strip .rating {
+  margin: 22px 0 10px;
+}
+
+.services-page__reviews .testimonial-strip strong,
+.services-page__reviews .testimonial-strip span {
+  margin-left: 0;
+}
+
+.services-page__reviews .testimonial-strip strong {
+  margin-top: 0;
+}
+
+.services-page__reviews .testimonial-strip span {
+  margin-top: 4px;
+}
+
+.services-page__reviews .testimonial-strip__nav {
+  width: 38px;
+  height: 38px;
+  position: absolute;
+  top: 50%;
+  z-index: 4;
+  border: 1px solid rgba(0, 58, 103, 0.16);
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  color: var(--navy);
+  background: white;
+  box-shadow: 0 6px 18px rgba(0, 48, 86, 0.13);
+  cursor: pointer;
+  transform: translateY(-50%);
+}
+
+.services-page__reviews .testimonial-strip__nav--prev {
+  left: -19px;
+}
+
+.services-page__reviews .testimonial-strip__nav--next {
+  right: -19px;
 }
 
 .services-page__request {
@@ -315,6 +379,30 @@
 
   .services-page__partners > * {
     min-height: 76px;
+  }
+
+  .services-page__reviews .testimonial-strip {
+    grid-template-columns: 1fr;
+    padding: 20px 22px 70px;
+  }
+
+  .services-page__reviews .testimonial-strip article {
+    min-height: 0;
+    padding: 24px 4px;
+  }
+
+  .services-page__reviews .testimonial-strip__nav {
+    top: auto;
+    bottom: 14px;
+    transform: none;
+  }
+
+  .services-page__reviews .testimonial-strip__nav--prev {
+    left: 18px;
+  }
+
+  .services-page__reviews .testimonial-strip__nav--next {
+    right: 18px;
   }
 
   .services-page__request {

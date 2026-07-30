@@ -274,7 +274,6 @@ export function TestimonialStrip() {
           <div className="rating" aria-label="Rated 5 out of 5 stars">★★★★★</div>
           <strong>{name}</strong>
           <span>{role}</span>
-          <small className="testimonial-verified">Verified travel partner</small>
         </article>
       ))}
       <button className="testimonial-strip__nav testimonial-strip__nav--next" type="button" aria-label="Show next testimonial" onClick={showNext}><ChevronRight /></button>

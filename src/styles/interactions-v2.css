@@ -241,12 +241,6 @@ form[aria-busy="true"] button[type="submit"] {
   align-content: start;
 }
 
-.testimonial-verified {
-  margin-top: 5px;
-  color: #486079;
-  font-size: 10px;
-  font-weight: 700;
-}
 
 .breadcrumbs ol {
   margin: 0;
