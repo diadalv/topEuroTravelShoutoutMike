@@ -3,6 +3,8 @@ import { Link, NavLink } from 'react-router-dom';
 import {
   ArrowRight,
   Building2,
+  ChevronLeft,
+  ChevronRight,
   Globe2,
   Menu,
   Plane,
@@ -277,14 +279,20 @@ export function RequestBanner({
 }
 
 export function TestimonialStrip() {
+  const [firstTestimonial, setFirstTestimonial] = useState(0);
   const testimonials = [
     { quote: 'Top Euro Travel made our corporate programme in Rhodes feel effortless. Every transfer, venue and dinner was handled with care.', name: 'Sarah L.', role: 'Event Manager, United Kingdom' },
     { quote: 'Fast communication, reliable local partners and excellent excursions. Our clients returned with wonderful feedback.', name: 'Mark T.', role: 'Travel Advisor, United States' },
     { quote: 'The itinerary balanced authentic island experiences with time to relax. Support was responsive from planning through departure.', name: 'Anna P.', role: 'Group Travel Planner, Germany' },
   ];
+  const orderedTestimonials = testimonials.map((_, offset) => testimonials[(firstTestimonial + offset) % testimonials.length]);
+  const showPrevious = () => setFirstTestimonial((current) => (current - 1 + testimonials.length) % testimonials.length);
+  const showNext = () => setFirstTestimonial((current) => (current + 1) % testimonials.length);
+
   return (
     <section className="testimonial-strip" aria-label="Client testimonials">
-      {testimonials.map(({ quote, name, role }) => (
+      <button className="testimonial-strip__nav testimonial-strip__nav--prev" type="button" aria-label="Show previous testimonial" onClick={showPrevious}><ChevronLeft /></button>
+      {orderedTestimonials.map(({ quote, name, role }) => (
         <article key={name}>
           <blockquote><p>“{quote}”</p></blockquote>
           <div className="rating" aria-label="Rated 5 out of 5 stars">★★★★★</div>
@@ -293,6 +301,7 @@ export function TestimonialStrip() {
           <small className="testimonial-verified">Verified travel partner</small>
         </article>
       ))}
+      <button className="testimonial-strip__nav testimonial-strip__nav--next" type="button" aria-label="Show next testimonial" onClick={showNext}><ChevronRight /></button>
     </section>
   );
 }

@@ -26,6 +26,7 @@ import {
   ASSET,
   IconFeature,
   Photo,
+  PlanePath,
   RequestBanner,
   SectionTitle,
   TestimonialStrip,
@@ -99,6 +100,26 @@ export default function TravelHomePage() {
     };
   }, [highlightsOpen]);
 
+  useEffect(() => {
+    const sections = Array.from(document.querySelectorAll<HTMLElement>('.home-page > section')).slice(1);
+    if (!('IntersectionObserver' in window)) {
+      sections.forEach((section) => section.classList.add('is-visible'));
+      return;
+    }
+
+    sections.forEach((section) => section.classList.add('home-reveal'));
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (!entry.isIntersecting) return;
+        entry.target.classList.add('is-visible');
+        observer.unobserve(entry.target);
+      });
+    }, { threshold: 0.12, rootMargin: '0px 0px -40px' });
+
+    sections.forEach((section) => observer.observe(section));
+    return () => observer.disconnect();
+  }, []);
+
   return (
     <div className="home-page">
       <section className="home-hero" style={{ backgroundImage: `url("${ASSET}/home-hero-v2.jpg")` }}>
@@ -166,10 +187,11 @@ export default function TravelHomePage() {
             src={`${ASSET}/home-welcome-v2.jpg`}
             alt="Aegean sea and white chapel"
           />
+          <PlanePath className="home-plane home-plane--welcome" />
         </div>
       </section>
 
-      <section className="section--tight shell">
+      <section className="section--tight shell home-destinations">
         <SectionTitle>Featured Destinations</SectionTitle>
         <div className="grid-3">
           {destinations.map((destination) => (
@@ -182,6 +204,7 @@ export default function TravelHomePage() {
             </article>
           ))}
         </div>
+        <PlanePath className="home-plane home-plane--destinations" />
       </section>
 
       <section className="section--tight shell">
@@ -213,6 +236,7 @@ export default function TravelHomePage() {
             </ul>
             <Link className="button button--navy button--tiny" to="/mice-groups">VIEW MICE SERVICES</Link>
           </div>
+          <PlanePath className="home-plane home-plane--mice" />
         </div>
       </section>
 
