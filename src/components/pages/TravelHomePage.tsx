@@ -1,7 +1,6 @@
 import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import {
-  ArrowUpRight,
   Bell,
   Building2,
   Bus,
@@ -49,19 +48,16 @@ const destinations = [
     name: 'Rhodes',
     image: `${ASSET}/lindos.jpg`,
     copy: 'Island of knights, history and endless sunshine. Explore the Old Town, stunning beaches and vibrant local culture.',
-    cta: 'DISCOVER RHODES',
   },
   {
     name: 'Kos',
     image: `${ASSET}/kallithea.jpg`,
     copy: 'Greek vibes, natural beauty and relaxation. Perfect for adventure, wellness and authentic island experiences.',
-    cta: 'DISCOVER KOS',
   },
   {
     name: 'Symi & Island Hopping',
     image: `${ASSET}/marina.jpg`,
     copy: 'Discover hidden gems and crystal-clear waters across the Dodecanese. Let us plan your perfect island escape.',
-    cta: 'EXPLORE MORE',
   },
 ];
 
@@ -182,7 +178,6 @@ export default function TravelHomePage() {
               <div className="photo-card__body">
                 <h3>{destination.name}</h3>
                 <p>{destination.copy}</p>
-                <Link className="button button--navy button--tiny" to="/destinations">{destination.cta}</Link>
               </div>
             </article>
           ))}
@@ -230,7 +225,6 @@ export default function TravelHomePage() {
                 <Photo src={`${ASSET}/${image}`} alt={title} />
                 <div className="experience-thumb__content">
                   <strong className="experience-thumb__label">{title}</strong>
-                  <span className="experience-thumb__cta">Explore <ArrowUpRight /></span>
                 </div>
               </div>
             </Link>
