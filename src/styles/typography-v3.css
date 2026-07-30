@@ -60,18 +60,19 @@
 
 /* MICE and Groups */
 .mice-page__program-heading h2 { font-size: clamp(32px, 2.7vw, 42px); }
-.mice-page__program-heading p { font-size: 15px; }
-.mice-page__program-copy h3 { font-size: 19px; }
-.mice-page__program-copy p { font-size: 14px; }
-.mice-page__program-copy a { font-size: 12px; }
-.mice-page__organizer-grid .icon-feature h3 { font-size: 15px; }
-.mice-page__organizer-grid .icon-feature p { font-size: 13px; }
+.mice-page__program-heading p { font-size: 16px; }
+.mice-page__program-copy h3 { font-size: 22px; }
+.mice-page__program-copy p { font-size: 15px; }
+.mice-page__program-copy a { font-size: 13px; }
+.mice-page__organizer-grid .icon-feature h3 { font-size: 18px; }
+.mice-page__organizer-grid .icon-feature p { font-size: 14px; }
 .mice-page__request-copy h2 { font-size: clamp(28px, 2.5vw, 36px); }
-.mice-page__request-copy p { font-size: 15px; }
-.mice-page__request-benefits { font-size: 13px; }
+.mice-page__request-copy p { font-size: 16px; }
+.mice-page__request-benefits span { font-size: 14px; }
 .mice-page__proof-stats .stat span { font-size: 12px; }
-.mice-page__proof-partners > span { font-size: 11px; }
+.mice-page__proof-partners > span { font-size: 12px; }
 .mice-page__proof-partners .partner-mark span { font-size: 8px; }
+.mice-page__proof-partners .partner-mark strong { font-size: 14px; }
 
 /* Experiences */
 .experiences-hero .page-hero__description { font-size: 16px; }

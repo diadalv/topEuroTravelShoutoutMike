@@ -944,7 +944,7 @@ textarea:focus-visible {
 }
 
 .home-page .home-hero__content {
-  max-width: 760px;
+  max-width: var(--site-width);
 }
 
 .home-page .home-hero h1 {

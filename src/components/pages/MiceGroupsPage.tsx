@@ -1,3 +1,4 @@
+import { useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import {
   ArrowRight,
@@ -135,6 +136,25 @@ function ProgramCard({ icon: Icon, title, copy, image, position }: ProgramCard) 
 }
 
 export default function MiceGroupsPage() {
+  useEffect(() => {
+    const sections = Array.from(document.querySelectorAll<HTMLElement>('[data-mice-reveal]'));
+    if (!('IntersectionObserver' in window)) {
+      sections.forEach((section) => section.classList.add('is-visible'));
+      return;
+    }
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (!entry.isIntersecting) return;
+        entry.target.classList.add('is-visible');
+        observer.unobserve(entry.target);
+      });
+    }, { threshold: 0.12, rootMargin: '0px 0px -55px' });
+
+    sections.forEach((section) => observer.observe(section));
+    return () => observer.disconnect();
+  }, []);
+
   return (
     <div className="mice-page">
         <PageHero
@@ -152,7 +172,7 @@ export default function MiceGroupsPage() {
         />
 
         <div className="mice-page__program-shell shell">
-          <section className="mice-page__program-section mice-page__program-section--mice" aria-labelledby="mice-program-title">
+          <section className="mice-page__program-section mice-page__program-section--mice mice-reveal" aria-labelledby="mice-program-title" data-mice-reveal>
             <div className="mice-page__program-heading">
               <div className="mice-page__heading-icon"><Users aria-hidden="true" /></div>
               <div>
@@ -166,7 +186,7 @@ export default function MiceGroupsPage() {
             </div>
           </section>
 
-          <section className="mice-page__program-section" aria-labelledby="groups-program-title">
+          <section className="mice-page__program-section mice-reveal" aria-labelledby="groups-program-title" data-mice-reveal>
             <div className="mice-page__program-heading">
               <div className="mice-page__heading-icon"><Users aria-hidden="true" /></div>
               <div>
@@ -180,7 +200,7 @@ export default function MiceGroupsPage() {
             </div>
           </section>
 
-          <section className="mice-page__organizers" aria-labelledby="organizers-title">
+          <section className="mice-page__organizers mice-reveal" aria-labelledby="organizers-title" data-mice-reveal>
             <SectionTitle><span id="organizers-title">Why Organizers Choose Us</span></SectionTitle>
             <div className="mice-page__organizer-grid">
               {organizerFeatures.map(({ icon, title, copy }) => (
@@ -189,7 +209,7 @@ export default function MiceGroupsPage() {
             </div>
           </section>
 
-          <section className="mice-page__moments" aria-labelledby="moments-title">
+          <section className="mice-page__moments mice-reveal" aria-labelledby="moments-title" data-mice-reveal>
             <SectionTitle><span id="moments-title">Moments that Matter</span></SectionTitle>
             <div className="mice-page__moment-grid">
               {moments.map(([image, alt]) => (
@@ -201,7 +221,7 @@ export default function MiceGroupsPage() {
           </section>
         </div>
 
-        <section className="mice-page__proof shell" aria-label="Our experience and accreditations">
+        <section className="mice-page__proof shell mice-reveal" aria-label="Our experience and accreditations" data-mice-reveal>
           <div className="mice-page__proof-stats">
             <Stat value="500+" label="Events Delivered" />
             <Stat value="10K+" label="Happy Participants" />
@@ -216,7 +236,7 @@ export default function MiceGroupsPage() {
           </div>
         </section>
 
-        <section className="mice-page__request shell">
+        <section className="mice-page__request shell mice-reveal" data-mice-reveal>
           <PlanePath />
           <div className="mice-page__request-copy">
             <h2>Have a special request?</h2>
