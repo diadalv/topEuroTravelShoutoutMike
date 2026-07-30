@@ -596,12 +596,13 @@ textarea:focus-visible {
 }
 
 .site-footer h3 {
-  font-size: 15px;
+  font-size: 17px;
 }
 
 .site-footer p,
 .site-footer a {
-  font-size: 12px;
+  font-size: 14px;
+  line-height: 1.55;
 }
 
 .footer-contact svg {
@@ -624,7 +625,11 @@ textarea:focus-visible {
   justify-content: space-between;
   gap: 24px;
   padding: 10px 34px;
-  font-size: 11px;
+  font-size: 13px;
+}
+
+.site-footer .partner-mark span {
+  font-size: 9px;
 }
 
 @media (max-width: 1180px) {
@@ -934,6 +939,8 @@ textarea:focus-visible {
 /* Home page readability and interaction refinement */
 .home-page .home-hero {
   min-height: clamp(440px, 31vw, 560px);
+  padding-top: 88px;
+  background-position: center top;
 }
 
 .home-page .home-hero__content {
@@ -1239,6 +1246,8 @@ textarea:focus-visible {
 @media (max-width: 700px) {
   .home-page .home-hero {
     min-height: 500px;
+    padding-top: 72px;
+    background-position: 66% top;
   }
 
   .home-page .home-hero h1 {
@@ -1331,5 +1340,32 @@ textarea:focus-visible {
 
   .home-page .experience-thumb__image {
     height: 230px;
+  }
+}
+/* Home page typography consistency */
+.home-page .section-title h2,
+.home-page .home-welcome h2,
+.home-page .mice-feature__copy h2,
+.home-page .request-banner__copy h2 {
+  font-size: clamp(32px, 2.7vw, 42px);
+  line-height: 1.12;
+}
+
+.home-page .home-welcome p,
+.home-page .photo-card p,
+.home-page .mice-feature__copy p,
+.home-page .why-strip .icon-feature p,
+.home-page .testimonial-strip p,
+.home-page .request-banner__copy p {
+  font-size: 16px;
+  line-height: 1.65;
+}
+
+@media (max-width: 700px) {
+  .home-page .section-title h2,
+  .home-page .home-welcome h2,
+  .home-page .mice-feature__copy h2,
+  .home-page .request-banner__copy h2 {
+    font-size: clamp(29px, 9vw, 36px);
   }
 }

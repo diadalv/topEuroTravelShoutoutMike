@@ -1,8 +1,12 @@
 .site-header {
-  position: sticky;
+  position: absolute;
   top: 0;
+  right: 0;
+  left: 0;
   z-index: 100;
-  box-shadow: 0 1px 0 rgba(0, 59, 105, 0.08);
+  border-bottom: 0;
+  background: transparent;
+  box-shadow: none;
 }
 
 .main-nav__item {
@@ -255,7 +259,7 @@ form[aria-busy="true"] button[type="submit"] {
 
 @media (max-width: 940px) {
   .site-header {
-    position: sticky;
+    position: absolute;
   }
 
   .main-nav__item {
