@@ -1,108 +1,78 @@
+import {
+  Facebook,
+  Instagram,
+  Linkedin,
+  Mail,
+  MapPin,
+  Phone,
+  Youtube,
+} from 'lucide-react';
 import { Link } from 'react-router-dom';
+import { Image } from '@/components/ui/image';
+import { ASSET, PartnerMark } from '@/components/travel/Shared';
 
 export default function Footer() {
-  const currentYear = new Date().getFullYear();
-
-  const footerSections = [
-    {
-      title: 'EXPLORE',
-      links: [
-        { label: 'Services', href: '#services' },
-        { label: 'Portfolio', href: '#portfolio' },
-        { label: 'About Us', href: '#about' },
-        { label: 'Contact', href: '#contact' },
-      ],
-    },
-    {
-      title: 'CONNECT',
-      links: [
-        { label: 'Newsletter', href: '#newsletter' },
-        { label: 'Social Media', href: '#social' },
-        { label: 'Careers', href: '#careers' },
-        { label: 'Press', href: '#press' },
-      ],
-    },
-    {
-      title: 'LEGAL',
-      links: [
-        { label: 'Privacy Policy', href: '#privacy' },
-        { label: 'Terms of Service', href: '#terms' },
-        { label: 'Cookie Policy', href: '#cookies' },
-        { label: 'Accessibility', href: '#accessibility' },
-      ],
-    },
-  ];
-
   return (
-    <footer className="w-full bg-secondary text-secondary-foreground">
-      <div className="max-w-[120rem] mx-auto px-6 lg:px-12 py-16 lg:py-24">
-        {/* Main Footer Content */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 lg:gap-16 mb-16">
-          {/* Brand Column */}
-          <div className="lg:col-span-1">
-            <Link to="/" className="font-heading text-3xl lg:text-4xl uppercase tracking-tight text-secondary-foreground hover:text-primary transition-colors inline-block mb-6">
-              LOGIN-VIBE-NEW
-            </Link>
-            <p className="font-paragraph text-base text-secondary-foreground/80 leading-relaxed">
-              Creating exceptional digital experiences with modern design and innovative solutions.
-            </p>
-          </div>
-
-          {/* Footer Links */}
-          {footerSections.map((section) => (
-            <div key={section.title}>
-              <h3 className="font-heading text-xl uppercase tracking-tight text-secondary-foreground mb-6">
-                {section.title}
-              </h3>
-              <ul className="space-y-3">
-                {section.links.map((link) => (
-                  <li key={link.label}>
-                    <a
-                      href={link.href}
-                      className="font-paragraph text-base text-secondary-foreground/80 hover:text-primary transition-colors inline-block"
-                    >
-                      {link.label}
-                    </a>
-                  </li>
-                ))}
-              </ul>
-            </div>
-          ))}
+    <footer className="site-footer">
+      <div className="site-footer__grid">
+        <div className="footer-brand">
+          <Image src={`${ASSET}/logo.png`} alt="Top Euro Travel" className="footer-logo" />
+          <p>Your trusted DMC in Rhodes &amp; Kos.</p>
+          <p>Local expertise, unforgettable experiences.</p>
         </div>
 
-        {/* Bottom Bar */}
-        <div className="pt-8 border-t border-secondary-foreground/20">
-          <div className="flex flex-col md:flex-row justify-between items-center gap-4">
-            <p className="font-paragraph text-sm text-secondary-foreground/60">
-              © {currentYear} LOGIN-VIBE-NEW. All rights reserved.
-            </p>
-            <div className="flex items-center gap-6">
-              <a
-                href="#facebook"
-                className="font-paragraph text-sm text-secondary-foreground/60 hover:text-primary transition-colors"
-              >
-                Facebook
-              </a>
-              <a
-                href="#twitter"
-                className="font-paragraph text-sm text-secondary-foreground/60 hover:text-primary transition-colors"
-              >
-                Twitter
-              </a>
-              <a
-                href="#instagram"
-                className="font-paragraph text-sm text-secondary-foreground/60 hover:text-primary transition-colors"
-              >
-                Instagram
-              </a>
-              <a
-                href="#linkedin"
-                className="font-paragraph text-sm text-secondary-foreground/60 hover:text-primary transition-colors"
-              >
-                LinkedIn
-              </a>
-            </div>
+        <div className="footer-column footer-contact">
+          <h3>Contact Us</h3>
+          <p><MapPin /> Ionos Dragoumi 45,<br />Rhodes 851 00, Greece</p>
+          <a href="tel:+302241078200"><Phone /> +30 22410 78200</a>
+          <a href="mailto:info@topeurotravel.gr"><Mail /> info@topeurotravel.gr</a>
+        </div>
+
+        <div className="footer-column">
+          <h3>Quick Links</h3>
+          <div className="footer-links footer-links--two">
+            <Link to="/about">About</Link>
+            <Link to="/experiences">Experiences</Link>
+            <Link to="/destinations">Destinations</Link>
+            <Link to="/excursions">Excursions</Link>
+            <Link to="/services">Services</Link>
+            <Link to="/blog">Blog</Link>
+            <Link to="/mice-groups">MICE &amp; Groups</Link>
+            <Link to="/faq">FAQ</Link>
           </div>
+        </div>
+
+        <div className="footer-column footer-portal">
+          <h3>Agents Portal</h3>
+          <p>Access our portal<br />for partners.</p>
+          <Link className="button button--gold button--tiny" to="/agents-portal">AGENTS PORTAL</Link>
+        </div>
+
+        <div className="footer-column">
+          <h3>Members of</h3>
+          <div className="footer-members">
+            <PartnerMark kind="hatta" compact />
+            <PartnerMark kind="dmc" compact />
+          </div>
+        </div>
+
+        <div className="footer-column footer-social">
+          <h3>Follow Us</h3>
+          <div>
+            <a href="https://www.linkedin.com" aria-label="LinkedIn"><Linkedin /></a>
+            <a href="https://www.facebook.com" aria-label="Facebook"><Facebook /></a>
+            <a href="https://www.instagram.com" aria-label="Instagram"><Instagram /></a>
+            <a href="https://www.youtube.com" aria-label="YouTube"><Youtube /></a>
+          </div>
+        </div>
+      </div>
+
+      <div className="site-footer__bottom">
+        <span>© 2024 Top Euro Travel. All Rights Reserved.</span>
+        <div>
+          <Link to="/privacy">Privacy Policy</Link>
+          <i />
+          <Link to="/terms">Terms &amp; Conditions</Link>
         </div>
       </div>
     </footer>
