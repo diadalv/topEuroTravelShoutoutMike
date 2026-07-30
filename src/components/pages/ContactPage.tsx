@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import {
   ArrowRight,
   BriefcaseBusiness,
@@ -28,8 +28,8 @@ import {
 
 const contactDetails = [
   [Mail, 'Email Us', 'info@topeurotravel.gr'],
-  [Phone, 'Call Us', '+30 22410 78200'],
-  [MapPin, 'Visit Us', <>Ionos Dragoumi 45,<br />Rhodes 851 00, Greece</>],
+  [Phone, 'Call Us', '+30 22410 45506'],
+  [MapPin, 'Visit Us', <>5th Km Rhodes-Lindos Avenue,<br />P.O. Box 348, Rhodes 851 00, Greece</>],
   [Clock3, 'Office Hours', <>Monday – Friday: 09:00 – 17:00 (EET)<br />Saturday – Sunday: By Appointment</>],
 ] as const;
 
@@ -57,6 +57,25 @@ const helpItems = [
 export default function ContactPage() {
   const [selectedInquiry, setSelectedInquiry] = useState('');
   const [subject, setSubject] = useState('');
+
+  useEffect(() => {
+    const sections = Array.from(document.querySelectorAll<HTMLElement>('[data-contact-reveal]'));
+    if (!('IntersectionObserver' in window)) {
+      sections.forEach((section) => section.classList.add('is-visible'));
+      return;
+    }
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (!entry.isIntersecting) return;
+        entry.target.classList.add('is-visible');
+        observer.unobserve(entry.target);
+      });
+    }, { threshold: 0.12, rootMargin: '0px 0px -50px' });
+
+    sections.forEach((section) => observer.observe(section));
+    return () => observer.disconnect();
+  }, []);
   const chooseInquiry = (label: string) => {
     setSelectedInquiry(label);
     setSubject(inquirySubjects[label] ?? 'General Inquiry');
@@ -76,7 +95,7 @@ export default function ContactPage() {
         />
 
         <div className="shell contact-content">
-          <section className="contact-main-card card">
+          <section className="contact-main-card card contact-reveal" data-contact-reveal>
             <div className="contact-main-card__left">
               <h2>We’d Love to Hear From You</h2>
               <p className="contact-lead">
@@ -92,8 +111,9 @@ export default function ContactPage() {
                       <div>
                         <h3>{title}</h3>
                         {title === 'Email Us' ? <a href="mailto:info@topeurotravel.gr">{copy}</a>
-                          : title === 'Call Us' ? <a href="tel:+302241078200">{copy}</a>
-                            : <p>{copy}</p>}
+                          : title === 'Call Us' ? <a href="tel:+302241045506">{copy}</a>
+                            : title === 'Visit Us' ? <a href="https://www.google.com/maps/search/?api=1&query=5th+Km+Rhodes-Lindos+Avenue%2C+Rhodes+851+00%2C+Greece" target="_blank" rel="noreferrer">{copy}</a>
+                              : <p>{copy}</p>}
                       </div>
                     </div>
                   ))}
@@ -157,13 +177,13 @@ export default function ContactPage() {
             </div>
           </section>
 
-          <section className="contact-location-row">
+          <section className="contact-location-row contact-reveal" data-contact-reveal>
             <article className="contact-location-card card">
               <Photo src={`${ASSET}/contact-map-v2.jpg`} alt="Map showing the Top Euro Travel office in Rhodes" />
               <div>
                 <h2>Our Location</h2>
-                <p>Ionos Dragoumi 45,<br />Rhodes 851 00, Greece</p>
-                <a className="button button--outline" href="https://www.google.com/maps/search/?api=1&query=Ionos+Dragoumi+45%2C+Rhodes%2C+Greece" target="_blank" rel="noreferrer">
+                <p>5th Km Rhodes-Lindos Avenue,<br />P.O. Box 348, Rhodes 851 00, Greece</p>
+                <a className="button button--outline" href="https://www.google.com/maps/search/?api=1&query=5th+Km+Rhodes-Lindos+Avenue%2C+Rhodes+851+00%2C+Greece" target="_blank" rel="noreferrer">
                   VIEW ON MAP <Map />
                 </a>
               </div>
@@ -175,16 +195,37 @@ export default function ContactPage() {
                 <div>
                   <h2>Need Immediate Assistance?</h2>
                   <p>Our team is always happy to help with urgent requests or last-minute arrangements.</p>
-                  <a className="button button--outline" href="tel:+302241078200">CALL US NOW</a>
+                  <a className="button button--outline" href="tel:+302241045506">CALL US NOW</a>
                 </div>
               </div>
               <div className="contact-assistance-card__photo">
-                <Photo src={`${ASSET}/contact-support-v2.jpg`} alt="Top Euro Travel customer support agent" />
+                <Photo src={`${ASSET}/marina.jpg`} alt="Rhodes marina and Aegean coastline" />
               </div>
             </article>
           </section>
 
-          <section className="contact-help card">
+          <section className="contact-credentials card contact-reveal" data-contact-reveal aria-labelledby="company-details-title">
+            <div className="contact-credentials__identity">
+              <BriefcaseBusiness aria-hidden="true" />
+              <div>
+                <span>REGISTERED BUSINESS DETAILS</span>
+                <h2 id="company-details-title">Top Euro Travel</h2>
+                <p>DMC Incoming Travel Agency / Incoming Tour Operator</p>
+              </div>
+            </div>
+            <dl className="contact-credentials__details">
+              <div><dt>Fax</dt><dd><a href="tel:+302241045551">+30 22410 45551</a></dd></div>
+              <div><dt>GNTO Licence</dt><dd>1476E60000156801</dd></div>
+              <div><dt>Tax Number</dt><dd>EL800892257</dd></div>
+            </dl>
+            <div className="contact-credentials__badges" aria-label="Memberships and supported programmes">
+              <span>SETE</span>
+              <span>HATTA</span>
+              <span>Live-Pay</span>
+              <span>EU / ESPA Programme</span>
+            </div>
+          </section>
+          <section className="contact-help card contact-reveal" data-contact-reveal>
             <h2>How Can We Help?</h2>
             <div className="contact-help__grid">
               {helpItems.map(([Icon, title, copy]) => (

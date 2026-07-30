@@ -15,8 +15,8 @@ export default function Footer() {
 
         <div className="footer-column footer-contact">
           <h3>Contact Us</h3>
-          <p><MapPin /> Ionos Dragoumi 45,<br />Rhodes 851 00, Greece</p>
-          <a href="tel:+302241078200"><Phone /> +30 22410 78200</a>
+          <a href="https://www.google.com/maps/search/?api=1&query=5th+Km+Rhodes-Lindos+Avenue%2C+Rhodes+851+00%2C+Greece" target="_blank" rel="noreferrer"><MapPin /> 5th Km Rhodes-Lindos Avenue,<br />Rhodes 851 00, Greece</a>
+          <a href="tel:+302241045506"><Phone /> +30 22410 45506</a>
           <a href="mailto:info@topeurotravel.gr"><Mail /> info@topeurotravel.gr</a>
         </div>
 
