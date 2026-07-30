@@ -80,7 +80,7 @@
 .experience-intro__copy p { font-size: 15px; }
 .experience-trust-item strong { font-size: 14px; }
 .experience-trust-item span { font-size: 12px; }
-.experience-tile h3 { font-size: 16px; }
+.experience-tile h3 { font-size: 20px; }
 .experience-recommendations > h2 { font-size: clamp(30px, 2.6vw, 40px); }
 .recommendation-card h3 { font-size: 20px; }
 .recommendation-card p { font-size: 14px; }

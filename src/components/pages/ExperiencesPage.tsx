@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import {
   Anchor,
@@ -87,6 +87,25 @@ export default function ExperiencesPage() {
     ? categories.slice(1)
     : categories.filter(({ title }) => title === activeCategory);
 
+  useEffect(() => {
+    const sections = Array.from(document.querySelectorAll<HTMLElement>('[data-experience-reveal]'));
+    if (!('IntersectionObserver' in window)) {
+      sections.forEach((section) => section.classList.add('is-visible'));
+      return;
+    }
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (!entry.isIntersecting) return;
+        entry.target.classList.add('is-visible');
+        observer.unobserve(entry.target);
+      });
+    }, { threshold: 0.12, rootMargin: '0px 0px -55px' });
+
+    sections.forEach((section) => observer.observe(section));
+    return () => observer.disconnect();
+  }, []);
+
   return (
     <div className="experiences-page">
         <PageHero
@@ -104,7 +123,7 @@ export default function ExperiencesPage() {
         />
 
         <div className="shell experiences-content">
-          <nav className="experience-category-bar" aria-label="Experience categories">
+          <nav className="experience-category-bar experience-reveal" aria-label="Experience categories" data-experience-reveal>
             {categories.map(({ title, icon: Icon }) => (
               <button
                 type="button"
@@ -119,7 +138,7 @@ export default function ExperiencesPage() {
             ))}
           </nav>
 
-          <section className="experience-intro">
+          <section className="experience-intro experience-reveal" data-experience-reveal>
             <div className="experience-intro__copy">
               <h2>Crafted with Passion. Shared with You.</h2>
               <p>
@@ -145,7 +164,13 @@ export default function ExperiencesPage() {
             </div>
           </section>
 
-          <section className="experience-card-grid" aria-label="Experience collection" aria-live="polite">
+          <section className="experience-collection experience-reveal" aria-labelledby="experience-collection-title" data-experience-reveal>
+            <div className="experience-collection__heading">
+              <span>EXPLORE RHODES &amp; KOS</span>
+              <h2 id="experience-collection-title">Choose Your Experience</h2>
+              <p>Browse locally curated moments, then let our team tailor every detail around your journey.</p>
+            </div>
+            <div className="experience-card-grid" aria-live="polite">
             {visibleCategories.map(({ title, icon: Icon, image }) => (
               <article className="experience-tile card" key={title}>
                 <Photo src={`${ASSET}/${image}`} alt={title} />
@@ -153,9 +178,10 @@ export default function ExperiencesPage() {
                 <h3>{title}</h3>
               </article>
             ))}
+            </div>
           </section>
 
-          <section className="experience-recommendations">
+          <section className="experience-recommendations experience-reveal" data-experience-reveal>
             <h2>Recommended For You</h2>
             <div className="experience-recommendation-grid">
               {recommendations.map(({ title, copy, image, icon: Icon }) => (
@@ -172,7 +198,7 @@ export default function ExperiencesPage() {
             </div>
           </section>
 
-          <section className="experience-proof-strip">
+          <section className="experience-proof-strip experience-reveal" data-experience-reveal>
             <div className="experience-quote">
               <span className="experience-quote__mark">“</span>
               <p>Top Euro Travel made our trip truly extraordinary. Every experience was seamless, authentic and beyond our expectations.</p>
@@ -194,7 +220,9 @@ export default function ExperiencesPage() {
           </section>
         </div>
 
-        <RequestBanner />
+        <div className="experience-request-wrap experience-reveal" data-experience-reveal>
+          <RequestBanner />
+        </div>
     </div>
   );
 }
