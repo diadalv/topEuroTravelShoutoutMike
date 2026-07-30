@@ -1,0 +1,335 @@
+/* Services page layout refinement: clearer hierarchy and calmer spacing. */
+.services-page__catalog {
+  padding-top: clamp(56px, 6vw, 88px);
+  padding-bottom: clamp(48px, 5vw, 72px);
+}
+
+.services-page__intro {
+  max-width: 820px;
+  margin: 0 auto clamp(36px, 4vw, 52px);
+}
+
+.services-page__intro h2 {
+  margin-bottom: 14px;
+  line-height: 1.15;
+}
+
+.services-page__intro p {
+  max-width: 720px;
+  margin-inline: auto;
+}
+
+.services-page__service-grid {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 24px;
+}
+
+.services-page__service-card,
+.services-page__service-card:nth-child(6) {
+  min-height: 230px;
+  border-radius: 18px;
+  grid-column: auto;
+  padding: 28px 26px 24px;
+  box-shadow: 0 10px 30px rgba(0, 48, 86, 0.07);
+}
+
+.services-page__service-card-head {
+  align-items: flex-start;
+  gap: 16px;
+}
+
+.services-page__service-card-head > svg {
+  width: 48px;
+  height: 48px;
+}
+
+.services-page__service-card h3 {
+  padding-top: 4px;
+  line-height: 1.22;
+}
+
+.services-page__service-card-bottom {
+  align-items: flex-end;
+  gap: 14px;
+}
+
+.services-page__service-card p {
+  margin-top: 24px;
+}
+
+.services-page__service-card-bottom > svg {
+  width: 21px;
+  height: 21px;
+  margin-bottom: 3px;
+}
+
+.services-page__clients {
+  border-top: 1px solid rgba(0, 63, 115, 0.1);
+  padding-top: clamp(52px, 5vw, 76px);
+  padding-bottom: clamp(52px, 5vw, 76px);
+}
+
+.services-page__clients .section-title,
+.services-page__process .section-title,
+.services-page__reviews .section-title {
+  margin-bottom: 34px;
+}
+
+.services-page__client-grid {
+  gap: 24px;
+}
+
+.services-page__client-card {
+  min-height: 390px;
+  border-radius: 18px;
+  grid-template-columns: 1fr;
+  grid-template-rows: auto 175px;
+  box-shadow: 0 12px 34px rgba(0, 48, 86, 0.09);
+}
+
+.services-page__client-copy {
+  grid-template-columns: 58px 1fr;
+  gap: 16px;
+  padding: 28px 24px 26px;
+}
+
+.services-page__round-icon {
+  width: 54px;
+  height: 54px;
+}
+
+.services-page__round-icon svg {
+  width: 30px;
+  height: 30px;
+}
+
+.services-page__client-card h3 {
+  margin: 4px 0 12px;
+}
+
+.services-page__client-copy .plane-path {
+  bottom: 10px;
+  left: 26px;
+}
+
+.services-page__client-photo {
+  min-height: 175px;
+}
+
+.services-page__process {
+  margin-top: 0;
+  border: 1px solid rgba(0, 63, 115, 0.09);
+  border-radius: 24px;
+  padding: clamp(52px, 5vw, 72px) clamp(28px, 4vw, 56px);
+  background: linear-gradient(145deg, rgba(247, 251, 255, 0.98), rgba(255, 252, 246, 0.98));
+  box-shadow: 0 16px 42px rgba(0, 48, 86, 0.055);
+}
+
+.services-page__process-row {
+  gap: 38px;
+}
+
+.services-page__process-step {
+  grid-template-columns: 1fr;
+  align-content: start;
+  justify-items: center;
+  gap: 15px;
+  text-align: center;
+}
+
+.services-page__process-icon {
+  width: 70px;
+  height: 70px;
+  background: white;
+}
+
+.services-page__process-icon svg {
+  width: 34px;
+  height: 34px;
+}
+
+.services-page__process-step h3 {
+  margin-bottom: 8px;
+}
+
+.services-page__process-line {
+  width: 38px;
+  right: -38px;
+  top: 35px;
+}
+
+.services-page__partners {
+  min-height: 140px;
+  margin-top: clamp(54px, 5vw, 76px);
+  border-radius: 18px;
+  padding-block: 16px;
+}
+
+.services-page__partners > * {
+  min-height: 84px;
+  padding-inline: 22px;
+}
+
+.services-page__reviews {
+  padding-top: clamp(58px, 6vw, 84px);
+}
+
+.services-page__reviews .testimonial-strip {
+  margin-top: 0;
+}
+
+.services-page__request {
+  min-height: 170px;
+  margin-top: clamp(58px, 6vw, 84px);
+  margin-bottom: clamp(36px, 5vw, 64px);
+  border-radius: 18px;
+  grid-template-columns: 84px minmax(300px, 1fr) auto;
+  gap: 22px 26px;
+  padding: 28px 32px;
+}
+
+.services-page__request > .plane-path {
+  width: 78px;
+  height: 48px;
+  transform: scale(0.78);
+}
+
+.services-page__request-copy h2 {
+  margin-bottom: 8px;
+  line-height: 1.18;
+}
+
+.services-page__request .button {
+  min-height: 48px;
+  padding-inline: 28px;
+}
+
+.services-page__request-features {
+  grid-column: 2 / -1;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 20px;
+  border-top: 1px solid rgba(0, 63, 115, 0.1);
+  padding-top: 18px;
+}
+
+.services-page__request-features .icon-feature {
+  justify-content: flex-start;
+  gap: 10px;
+}
+
+.services-page__request-features .icon-feature__icon {
+  width: 38px;
+  height: 38px;
+}
+
+.services-page__request-features .icon-feature__icon svg {
+  width: 28px;
+  height: 28px;
+}
+
+@media (max-width: 1050px) {
+  .services-page__service-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .services-page__client-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .services-page__client-card {
+    min-height: 250px;
+    grid-template-columns: 1.25fr 0.75fr;
+    grid-template-rows: 1fr;
+  }
+
+  .services-page__process-row {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    row-gap: 42px;
+  }
+
+  .services-page__process-line {
+    display: none;
+  }
+
+  .services-page__request {
+    grid-template-columns: 70px 1fr auto;
+  }
+}
+
+@media (max-width: 700px) {
+  .services-page__catalog,
+  .services-page__clients {
+    padding-top: 44px;
+    padding-bottom: 44px;
+  }
+
+  .services-page__intro {
+    margin-bottom: 30px;
+  }
+
+  .services-page__service-grid {
+    grid-template-columns: 1fr;
+    gap: 18px;
+  }
+
+  .services-page__service-card,
+  .services-page__service-card:nth-child(6) {
+    min-height: 200px;
+    padding: 24px 22px 22px;
+  }
+
+  .services-page__client-grid {
+    gap: 20px;
+  }
+
+  .services-page__client-card {
+    min-height: 420px;
+    grid-template-columns: 1fr;
+    grid-template-rows: auto 190px;
+  }
+
+  .services-page__client-copy {
+    min-height: 0;
+    padding: 24px 21px;
+  }
+
+  .services-page__client-photo {
+    height: auto;
+    min-height: 190px;
+  }
+
+  .services-page__process {
+    border-radius: 18px;
+    padding: 42px 22px;
+  }
+
+  .services-page__process-row {
+    grid-template-columns: 1fr;
+    gap: 34px;
+  }
+
+  .services-page__partners {
+    margin-top: 44px;
+    padding: 12px;
+  }
+
+  .services-page__partners > * {
+    min-height: 76px;
+  }
+
+  .services-page__request {
+    min-height: 0;
+    margin-top: 48px;
+    margin-bottom: 40px;
+    grid-template-columns: 1fr;
+    gap: 18px;
+    padding: 28px 22px;
+  }
+
+  .services-page__request-features {
+    grid-column: auto;
+    grid-template-columns: 1fr;
+    gap: 14px;
+    padding-top: 20px;
+  }
+}
