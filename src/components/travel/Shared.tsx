@@ -23,35 +23,17 @@ type NavigationItem = {
 };
 
 const navigation: NavigationItem[] = [
-  {
-    label: 'ABOUT', to: '/about', children: [
-      { label: 'Who We Are', to: '/about' },
-      { label: 'Travel Journal', to: '/blog' },
-      { label: 'Frequently Asked Questions', to: '/faq' },
-    ]
-  },
+  { label: 'ABOUT', to: '/about' },
   {
     label: 'DESTINATIONS', to: '/destinations', children: [
-      { label: 'Destination Overview', to: '/destinations' },
-      { label: 'Rhodes Excursions', to: '/excursions' },
-      { label: 'Lindos & South Rhodes', to: '/excursions/lindos-south-rhodes-tour' },
+      { label: 'All Destinations', to: '/destinations' },
+      { label: 'Rhodes', to: '/rhodes' },
+      { label: 'Kos', to: '/kos' },
     ]
   },
-  {
-    label: 'SERVICES', to: '/services', children: [
-      { label: 'All Services', to: '/services' },
-      { label: 'MICE & Corporate Travel', to: '/mice-groups' },
-      { label: 'Contact Our Team', to: '/contact' },
-    ]
-  },
+  { label: 'SERVICES', to: '/services' },
   { label: 'MICE & GROUPS', to: '/mice-groups' },
-  {
-    label: 'EXPERIENCES', to: '/experiences', children: [
-      { label: 'Unique Experiences', to: '/experiences' },
-      { label: 'Browse Excursions', to: '/excursions' },
-      { label: 'Featured Lindos Tour', to: '/excursions/lindos-south-rhodes-tour' },
-    ]
-  },
+  { label: 'EXPERIENCES', to: '/experiences' },
 ];
 
 export function SiteHeader() {
@@ -107,12 +89,7 @@ export function SiteHeader() {
             ))}
           </nav>
           <div className="header-actions">
-            <Link className="button button--navy button--small" to="/agents-portal" onClick={() => setOpen(false)}>
-              AGENTS PORTAL
-            </Link>
-            <Link className="button button--gold button--small" to="/contact" onClick={() => setOpen(false)}>
-              CONTACT
-            </Link>
+            <Link className="button button--gold button--small" to="/contact" onClick={() => setOpen(false)}>CONTACT</Link>
           </div>
         </div>
       </div>

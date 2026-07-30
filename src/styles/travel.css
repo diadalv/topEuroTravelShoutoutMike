@@ -789,7 +789,7 @@ main {
 
 .site-footer__grid {
   display: grid;
-  grid-template-columns: 1.3fr 1.35fr 1.25fr 0.92fr 1.48fr 0.85fr;
+  grid-template-columns: 1.3fr 1.35fr 1.6fr 1.48fr 0.85fr;
   gap: 0;
   padding: 17px 20px 14px;
 }

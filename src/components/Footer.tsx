@@ -1,12 +1,4 @@
-import {
-  Facebook,
-  Instagram,
-  Linkedin,
-  Mail,
-  MapPin,
-  Phone,
-  Youtube,
-} from 'lucide-react';
+import { Facebook, Instagram, Linkedin, Mail, MapPin, Phone, Youtube } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { Image } from '@/components/ui/image';
 import { ASSET, PartnerMark } from '@/components/travel/Shared';
@@ -32,20 +24,14 @@ export default function Footer() {
           <h3>Quick Links</h3>
           <div className="footer-links footer-links--two">
             <Link to="/about">About</Link>
-            <Link to="/experiences">Experiences</Link>
             <Link to="/destinations">Destinations</Link>
-            <Link to="/excursions">Excursions</Link>
+            <Link to="/rhodes">Rhodes</Link>
+            <Link to="/kos">Kos</Link>
             <Link to="/services">Services</Link>
-            <Link to="/blog">Blog</Link>
             <Link to="/mice-groups">MICE &amp; Groups</Link>
+            <Link to="/experiences">Experiences</Link>
             <Link to="/faq">FAQ</Link>
           </div>
-        </div>
-
-        <div className="footer-column footer-portal">
-          <h3>Agents Portal</h3>
-          <p>Access our portal<br />for partners.</p>
-          <Link className="button button--gold button--tiny" to="/agents-portal">AGENTS PORTAL</Link>
         </div>
 
         <div className="footer-column">
@@ -69,11 +55,7 @@ export default function Footer() {
 
       <div className="site-footer__bottom">
         <span>© 2024 Top Euro Travel. All Rights Reserved.</span>
-        <div>
-          <Link to="/privacy">Privacy Policy</Link>
-          <i />
-          <Link to="/terms">Terms &amp; Conditions</Link>
-        </div>
+        <div><Link to="/privacy">Privacy Policy</Link><i /><Link to="/terms">Terms &amp; Conditions</Link></div>
       </div>
     </footer>
   );

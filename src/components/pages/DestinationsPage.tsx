@@ -1,7 +1,5 @@
 import { Link } from 'react-router-dom';
 import {
-  Camera,
-  Church,
   Heart,
   Landmark,
   Map,
@@ -29,6 +27,7 @@ const destinations = [
     copy: 'A captivating island of contrasts, Rhodes blends medieval charm with scenic beauty. Wander the UNESCO-listed Old Town, relax on stunning beaches, and savor exceptional local cuisine.',
     tags: ['Old Town', 'Lindos', 'Beaches', 'Gastronomy'],
     cta: 'EXPLORE RHODES',
+    to: '/rhodes',
   },
   {
     title: 'Kos',
@@ -36,6 +35,7 @@ const destinations = [
     copy: 'Known as the island of Hippocrates, Kos is a perfect blend of culture, wellness, and nature. Charming villages, ancient ruins, and sandy beaches create a serene atmosphere.',
     tags: ['Culture', 'Wellness', 'Villages', 'Nature'],
     cta: 'EXPLORE KOS',
+    to: '/kos',
   },
   {
     title: 'Symi & Island Hopping',
@@ -43,6 +43,7 @@ const destinations = [
     copy: 'Discover the magic of nearby islands and hidden gems. From pastel-colored harbors to secret bays and idyllic islets, every stop offers a picture-perfect escape.',
     tags: ['Island Life', 'Hidden Gems', 'Boat Tours', 'Scenic Views'],
     cta: 'EXPLORE ISLAND HOPPING',
+    to: '/experiences',
   },
 ];
 
@@ -88,7 +89,7 @@ export default function DestinationsPage() {
                 <div className="destination-large__tags">
                   {item.tags.map((tag) => <span className="tag" key={tag}><Sparkles />{tag}</span>)}
                 </div>
-                <Link className="button button--navy button--tiny" to="/experiences">{item.cta}</Link>
+                <Link className="button button--navy button--tiny" to={item.to}>{item.cta}</Link>
               </div>
             </article>
           ))}

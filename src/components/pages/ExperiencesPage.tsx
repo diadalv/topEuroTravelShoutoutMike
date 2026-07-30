@@ -128,8 +128,8 @@ export default function ExperiencesPage() {
                 Rhodes &amp; Kos. Let our local experts guide you to the highlights and hidden treasures.
               </p>
               <div className="experience-intro__actions">
-                <Link className="button button--navy" to="/excursions">DISCOVER ALL EXPERIENCES</Link>
-                <Link className="experience-circle-arrow" to="/excursions" aria-label="Discover all experiences">→</Link>
+                <Link className="button button--navy" to="/destinations">DISCOVER ALL EXPERIENCES</Link>
+                <Link className="experience-circle-arrow" to="/destinations" aria-label="Discover all experiences">→</Link>
               </div>
               <PlanePath />
             </div>
@@ -165,7 +165,7 @@ export default function ExperiencesPage() {
                   <div>
                     <h3>{title}</h3>
                     <p>{copy}</p>
-                    <Link to="/excursions">EXPLORE EXPERIENCE <span>→</span></Link>
+                    <Link to="/destinations">EXPLORE EXPERIENCE <span>→</span></Link>
                   </div>
                 </article>
               ))}
