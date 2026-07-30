@@ -1,0 +1,462 @@
+/* Destinations page: separated sections, larger cards, and accessible motion. */
+.destinations-page__hero {
+  min-height: clamp(380px, 34vw, 500px);
+  align-items: center;
+  background-position: center 48%;
+}
+
+.destinations-page__hero .page-hero__content {
+  animation: destinations-hero-in 750ms cubic-bezier(0.2, 0.75, 0.25, 1) both;
+}
+
+.destinations-overview {
+  padding-top: clamp(62px, 7vw, 96px);
+  padding-bottom: clamp(58px, 7vw, 92px);
+}
+
+.destinations-intro {
+  max-width: 900px;
+  margin: 0 auto clamp(38px, 5vw, 56px);
+  font-size: 17px;
+  line-height: 1.7;
+}
+
+.destinations-intro::after {
+  width: 64px;
+  margin-top: 22px;
+}
+
+.destinations-grid {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 28px;
+}
+
+.destination-large {
+  min-height: 570px;
+  border-radius: 20px;
+  box-shadow: 0 14px 38px rgba(0, 48, 86, 0.11);
+  transition: border-color 240ms ease, box-shadow 280ms ease, transform 280ms ease;
+}
+
+.destination-large:hover {
+  border-color: rgba(227, 154, 32, 0.55);
+  box-shadow: 0 25px 52px rgba(0, 48, 86, 0.2);
+  transform: translateY(-8px);
+}
+
+.destination-large__image {
+  height: 300px;
+  overflow: hidden;
+}
+
+.destination-large__image .travel-photo {
+  transition: filter 450ms ease, transform 680ms cubic-bezier(0.2, 0.75, 0.25, 1);
+}
+
+.destination-large:hover .travel-photo {
+  filter: saturate(1.08);
+  transform: scale(1.055);
+}
+
+.destination-large__body {
+  min-height: 270px;
+  display: flex;
+  flex-direction: column;
+  padding: 30px 28px 26px;
+}
+
+.destination-large h2 {
+  gap: 11px;
+  margin-bottom: 14px;
+  line-height: 1.15;
+}
+
+.destination-large h2 svg {
+  width: 27px;
+  height: 27px;
+}
+
+.destination-large p {
+  min-height: 0;
+  margin-bottom: 20px;
+}
+
+.destination-large__tags {
+  min-height: 0;
+  gap: 8px;
+  margin-bottom: 24px;
+}
+
+.destination-large__tags .tag {
+  padding: 7px 10px;
+}
+
+.destination-large__body > .button {
+  min-height: 44px;
+  margin: auto 0 0;
+  align-self: flex-start;
+  padding-inline: 20px;
+}
+
+.destinations-reasons-section {
+  border-top: 1px solid rgba(0, 63, 115, 0.1);
+  padding-top: clamp(58px, 7vw, 88px);
+  padding-bottom: clamp(58px, 7vw, 88px);
+}
+
+.destinations-reasons-section .section-title,
+.destinations-experiences-section .section-title {
+  margin-bottom: 38px;
+}
+
+.island-reasons {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 22px;
+}
+
+.island-reasons .icon-feature {
+  min-height: 205px;
+  border: 1px solid rgba(0, 63, 115, 0.1);
+  border-radius: 17px;
+  align-items: flex-start;
+  gap: 14px;
+  padding: 28px 24px;
+  background: #f8fbfd;
+  text-align: left;
+  transition: border-color 220ms ease, box-shadow 220ms ease, transform 220ms ease;
+}
+
+.island-reasons .icon-feature + .icon-feature {
+  border-left: 1px solid rgba(0, 63, 115, 0.1);
+}
+
+.island-reasons .icon-feature:hover {
+  border-color: rgba(227, 154, 32, 0.55);
+  box-shadow: 0 14px 32px rgba(0, 48, 86, 0.1);
+  transform: translateY(-6px);
+}
+
+.island-reasons .icon-feature__icon {
+  width: 58px;
+  height: 58px;
+}
+
+.island-reasons .icon-feature__icon svg {
+  width: 42px;
+  height: 42px;
+}
+
+.destinations-experiences-section {
+  border: 1px solid rgba(0, 63, 115, 0.09);
+  border-radius: 26px;
+  padding: clamp(48px, 6vw, 72px);
+  background: linear-gradient(145deg, #f3f8fc, #fffaf1);
+  box-shadow: 0 18px 48px rgba(0, 48, 86, 0.07);
+}
+
+.destination-moments {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 26px;
+}
+
+.destination-moments a {
+  border-radius: 17px;
+  overflow: hidden;
+  background: white;
+  box-shadow: 0 12px 30px rgba(0, 48, 86, 0.11);
+  transition: box-shadow 260ms ease, transform 260ms ease;
+}
+
+.destination-moments a:hover {
+  box-shadow: 0 22px 44px rgba(0, 48, 86, 0.19);
+  transform: translateY(-7px);
+}
+
+.destination-moments__image {
+  height: 230px;
+  border-radius: 0;
+}
+
+.destination-moments__image .travel-photo {
+  transition: transform 650ms cubic-bezier(0.2, 0.75, 0.25, 1);
+}
+
+.destination-moments a:hover .travel-photo {
+  transform: scale(1.055);
+}
+
+.destination-moments strong {
+  min-height: 64px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0;
+  padding: 14px 16px;
+}
+
+.destinations-view-all {
+  margin-top: 36px;
+}
+
+.destinations-view-all .button {
+  min-height: 46px;
+  padding-inline: 22px;
+}
+
+.island-journey {
+  min-height: 360px;
+  margin-top: clamp(64px, 7vw, 96px);
+  border-radius: 24px;
+  grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr);
+  box-shadow: 0 18px 48px rgba(0, 48, 86, 0.1);
+}
+
+.island-journey__copy {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: clamp(40px, 5vw, 64px);
+}
+
+.island-journey__copy h2 {
+  margin-bottom: 16px;
+  line-height: 1.12;
+}
+
+.island-journey__copy p {
+  max-width: 560px;
+  margin-bottom: 24px;
+}
+
+.island-journey__copy .button {
+  align-self: flex-start;
+  min-height: 46px;
+  padding-inline: 22px;
+}
+
+.island-map {
+  min-height: 360px;
+}
+
+.island-map > svg:first-child {
+  width: 110px;
+  height: 110px;
+  right: 32px;
+  bottom: 24px;
+}
+
+.island-map > svg:last-child {
+  width: 38px;
+  top: 28px;
+  right: 72px;
+  animation: destination-ship-float 3.2s ease-in-out infinite;
+}
+
+.island--rhodes { top: 86px; left: 14%; }
+.island--symi { top: 65px; left: 48%; }
+.island--nisiros { top: 205px; left: 39%; }
+.island--kos { right: 14%; bottom: 72px; }
+
+.route-line {
+  width: 62%;
+  height: 170px;
+  top: 86px;
+  left: 17%;
+}
+
+.destination-cta {
+  min-height: 160px;
+  margin-top: clamp(58px, 6vw, 84px);
+  margin-bottom: clamp(38px, 6vw, 72px);
+  border-radius: 20px;
+  gap: 30px;
+  padding: 24px 34px;
+  box-shadow: 0 14px 38px rgba(0, 48, 86, 0.08);
+}
+
+.destination-cta__circle {
+  width: 110px;
+  height: 110px;
+  flex: 0 0 auto;
+}
+
+.destination-cta h2 {
+  margin-bottom: 6px;
+}
+
+.destination-cta .button {
+  min-height: 48px;
+  padding-inline: 28px;
+}
+
+/* Scroll reveals and staggered children. */
+.destinations-reveal {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity 700ms ease, transform 700ms cubic-bezier(0.2, 0.75, 0.25, 1);
+}
+
+.destinations-reveal.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.destinations-overview.is-visible .destination-large,
+.destinations-reasons-section.is-visible .icon-feature,
+.destinations-experiences-section.is-visible .destination-moments a {
+  animation: destination-card-in 650ms cubic-bezier(0.2, 0.75, 0.25, 1) both;
+}
+
+.destinations-overview.is-visible .destination-large:nth-child(2),
+.destinations-reasons-section.is-visible .icon-feature:nth-child(2),
+.destinations-experiences-section.is-visible .destination-moments a:nth-child(2) { animation-delay: 90ms; }
+.destinations-overview.is-visible .destination-large:nth-child(3),
+.destinations-reasons-section.is-visible .icon-feature:nth-child(3),
+.destinations-experiences-section.is-visible .destination-moments a:nth-child(3) { animation-delay: 180ms; }
+.destinations-reasons-section.is-visible .icon-feature:nth-child(4),
+.destinations-experiences-section.is-visible .destination-moments a:nth-child(4) { animation-delay: 270ms; }
+.destinations-reasons-section.is-visible .icon-feature:nth-child(5),
+.destinations-experiences-section.is-visible .destination-moments a:nth-child(5) { animation-delay: 360ms; }
+.destinations-experiences-section.is-visible .destination-moments a:nth-child(6) { animation-delay: 450ms; }
+
+@keyframes destinations-hero-in {
+  from { opacity: 0; transform: translateY(18px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes destination-card-in {
+  from { opacity: 0; transform: translateY(22px) scale(0.985); }
+  to { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+@keyframes destination-ship-float {
+  0%, 100% { transform: translateY(0) rotate(-2deg); }
+  50% { transform: translateY(-8px) rotate(2deg); }
+}
+
+@media (max-width: 1050px) {
+  .destinations-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .island-reasons,
+  .destination-moments {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .island-journey {
+    grid-template-columns: 1fr;
+  }
+
+  .island-map {
+    min-height: 330px;
+  }
+}
+
+@media (max-width: 700px) {
+  .destinations-page__hero {
+    min-height: 410px;
+  }
+
+  .destinations-overview {
+    padding-top: 48px;
+    padding-bottom: 52px;
+  }
+
+  .destinations-intro br {
+    display: none;
+  }
+
+  .destinations-grid,
+  .island-reasons,
+  .destination-moments {
+    grid-template-columns: 1fr;
+  }
+
+  .destination-large {
+    min-height: 0;
+  }
+
+  .destination-large__image {
+    height: 250px;
+  }
+
+  .destination-large__body {
+    min-height: 300px;
+    padding: 26px 22px 24px;
+  }
+
+  .destinations-reasons-section {
+    padding-top: 50px;
+    padding-bottom: 50px;
+  }
+
+  .island-reasons .icon-feature {
+    min-height: 175px;
+  }
+
+  .destinations-experiences-section {
+    border-radius: 20px;
+    padding: 40px 20px;
+  }
+
+  .destination-moments__image {
+    height: 220px;
+  }
+
+  .island-journey {
+    min-height: 0;
+    margin-top: 56px;
+    border-radius: 20px;
+  }
+
+  .island-journey__copy {
+    padding: 38px 24px;
+  }
+
+  .island-map {
+    min-height: 280px;
+  }
+
+  .island--rhodes { top: 65px; left: 10%; }
+  .island--symi { top: 45px; left: 48%; }
+  .island--nisiros { top: 160px; left: 34%; }
+  .island--kos { right: 10%; bottom: 52px; }
+
+  .route-line {
+    width: 65%;
+    height: 135px;
+    top: 66px;
+    left: 15%;
+  }
+
+  .destination-cta {
+    min-height: 0;
+    margin-top: 52px;
+    margin-bottom: 44px;
+    gap: 20px;
+    padding: 30px 24px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .destinations-page__hero .page-hero__content,
+  .destinations-reveal,
+  .destinations-overview.is-visible .destination-large,
+  .destinations-reasons-section.is-visible .icon-feature,
+  .destinations-experiences-section.is-visible .destination-moments a,
+  .island-map > svg:last-child {
+    opacity: 1;
+    animation: none;
+    transition: none;
+    transform: none;
+  }
+
+  .destination-large,
+  .destination-large__image .travel-photo,
+  .island-reasons .icon-feature,
+  .destination-moments a,
+  .destination-moments__image .travel-photo {
+    transition: none;
+  }
+}

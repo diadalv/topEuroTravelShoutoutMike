@@ -1,3 +1,4 @@
+import { useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import {
   Heart,
@@ -65,15 +66,35 @@ const moments = [
 ];
 
 export default function DestinationsPage() {
+  useEffect(() => {
+    const sections = Array.from(document.querySelectorAll<HTMLElement>('[data-destinations-reveal]'));
+    if (!('IntersectionObserver' in window)) {
+      sections.forEach((section) => section.classList.add('is-visible'));
+      return;
+    }
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (!entry.isIntersecting) return;
+        entry.target.classList.add('is-visible');
+        observer.unobserve(entry.target);
+      });
+    }, { threshold: 0.12, rootMargin: '0px 0px -55px' });
+
+    sections.forEach((section) => observer.observe(section));
+    return () => observer.disconnect();
+  }, []);
+
   return (
     <>
       <PageHero
+        className="destinations-page__hero"
         title={<><Gold>Our</Gold> Destinations</>}
         breadcrumb="Destinations"
         image={`${ASSET}/destinations-hero.jpg`}
       />
 
-      <section className="section shell">
+      <section className="section shell destinations-overview destinations-reveal" data-destinations-reveal>
         <p className="intro-copy destinations-intro">
           Discover the unparalleled beauty, rich culture, and authentic hospitality<br />
           of <strong>Rhodes, Kos, and the surrounding islands of the Dodecanese.</strong><br />
@@ -96,14 +117,14 @@ export default function DestinationsPage() {
         </div>
       </section>
 
-      <section className="section--tight shell">
+      <section className="section--tight shell destinations-reasons-section destinations-reveal" data-destinations-reveal>
         <SectionTitle>Why These Islands</SectionTitle>
         <div className="island-reasons">
           {islandReasons.map(([Icon, title, copy]) => <IconFeature icon={Icon} title={title} key={title}>{copy}</IconFeature>)}
         </div>
       </section>
 
-      <section className="section--tight shell">
+      <section className="section--tight shell destinations-experiences-section destinations-reveal" data-destinations-reveal>
         <SectionTitle>Experiences by Destination</SectionTitle>
         <div className="destination-moments">
           {moments.map(([title, image]) => (
@@ -118,7 +139,7 @@ export default function DestinationsPage() {
         </div>
       </section>
 
-      <section className="island-journey shell">
+      <section className="island-journey shell destinations-reveal" data-destinations-reveal>
         <div className="island-journey__copy">
           <h2>Plan Your Island Journey</h2>
           <p>Explore the Dodecanese at your pace. Combine islands, create the perfect route, and enjoy seamless travel with our local expertise.</p>
@@ -135,7 +156,7 @@ export default function DestinationsPage() {
         </div>
       </section>
 
-      <section className="destination-cta shell">
+      <section className="destination-cta shell destinations-reveal" data-destinations-reveal>
         <div className="destination-cta__circle"><Photo src={`${ASSET}/kallithea.jpg`} alt="Aegean chapel" /></div>
         <div><h2>Not sure where to start?</h2><p>Let us design the perfect itinerary.</p></div>
         <Link className="button button--gold" to="/contact">ENQUIRE NOW</Link>

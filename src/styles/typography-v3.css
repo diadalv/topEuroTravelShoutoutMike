@@ -34,14 +34,18 @@
 .milestone p { font-size: 13px !important; }
 
 /* Destinations */
-.destination-large h2 { font-size: 24px; }
+.destinations-intro { font-size: 17px; }
+.destination-large h2 { font-size: 28px; }
 .destination-large p,
-.island-journey__copy p { font-size: 15px; }
-.destination-moments strong,
+.island-journey__copy p { font-size: 16px; }
 .destination-large__tags .tag,
-.island-map .island { font-size: 12px; }
-.island-journey__copy h2,
-.destination-cta h2 { font-size: clamp(30px, 2.7vw, 40px); }
+.island-map .island { font-size: 13px; }
+.island-reasons .icon-feature h3 { font-size: 18px; }
+.island-reasons .icon-feature p { font-size: 14px; }
+.destination-moments strong { font-size: 16px; }
+.island-journey__copy h2 { font-size: clamp(34px, 3vw, 46px); }
+.destination-cta h2 { font-size: clamp(32px, 2.8vw, 42px); }
+.destination-cta p { font-size: 16px; }
 
 /* Services */
 .services-page__intro h2 { font-size: clamp(32px, 2.7vw, 42px); }
