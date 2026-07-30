@@ -225,8 +225,10 @@ export default function TravelHomePage() {
         <div className="experience-thumbs">
           {experiences.map(([title, image]) => (
             <Link className="experience-thumb" key={title} to="/experiences">
-              <div className="experience-thumb__image"><Photo src={`${ASSET}/${image}`} alt={title} /></div>
-              <strong>{title}</strong>
+              <div className="experience-thumb__image">
+                <Photo src={`${ASSET}/${image}`} alt={title} />
+                <strong className="experience-thumb__label">{title}</strong>
+              </div>
             </Link>
           ))}
         </div>
