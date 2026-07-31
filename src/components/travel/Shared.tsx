@@ -3,6 +3,7 @@ import { Link, NavLink } from 'react-router-dom';
 import {
   ArrowRight,
   Building2,
+  ChevronDown,
   ChevronLeft,
   ChevronRight,
   Globe2,
@@ -37,11 +38,20 @@ const navigation: NavigationItem[] = [
 
 export function SiteHeader() {
   const [open, setOpen] = useState(false);
+  const [destinationsOpen, setDestinationsOpen] = useState(false);
+
+  const closeNavigation = () => {
+    setOpen(false);
+    setDestinationsOpen(false);
+  };
 
   useEffect(() => {
     if (!open) return;
     const closeOnEscape = (event: KeyboardEvent) => {
-      if (event.key === 'Escape') setOpen(false);
+      if (event.key === 'Escape') {
+        setOpen(false);
+        setDestinationsOpen(false);
+      }
     };
     window.addEventListener('keydown', closeOnEscape);
     return () => window.removeEventListener('keydown', closeOnEscape);
@@ -51,7 +61,7 @@ export function SiteHeader() {
     <header className="site-header">
       <a className="skip-link" href="#main-content">Skip to main content</a>
       <div className="site-header__inner">
-        <Link to="/" className="brand-link" aria-label="Top Euro Travel home" onClick={() => setOpen(false)}>
+        <Link to="/" className="brand-link" aria-label="Top Euro Travel home" onClick={closeNavigation}>
           <Image src={`${ASSET}/logo.png`} alt="Top Euro Travel" className="brand-logo" />
         </Link>
 
@@ -61,7 +71,10 @@ export function SiteHeader() {
           aria-label={open ? 'Close navigation' : 'Open navigation'}
           aria-expanded={open}
           aria-controls="primary-navigation"
-          onClick={() => setOpen((value) => !value)}
+          onClick={() => {
+            if (open) setDestinationsOpen(false);
+            setOpen((value) => !value);
+          }}
         >
           {open ? <X /> : <Menu />}
         </button>
@@ -69,18 +82,28 @@ export function SiteHeader() {
         <div id="primary-navigation" className={`site-header__nav-wrap ${open ? 'is-open' : ''}`}>
           <nav className="main-nav" aria-label="Main navigation">
             {navigation.map((item) => (
-              <div className="main-nav__item" key={item.to}>
+              <div className={`main-nav__item ${item.children && destinationsOpen ? 'is-submenu-open' : ''}`} key={item.to}>
                 <NavLink
                   to={item.to}
-                  onClick={() => setOpen(false)}
+                  onClick={(event) => {
+                    if (item.children && window.matchMedia('(max-width: 940px)').matches) {
+                      event.preventDefault();
+                      setDestinationsOpen((value) => !value);
+                      return;
+                    }
+                    closeNavigation();
+                  }}
+                  aria-haspopup={item.children ? 'menu' : undefined}
+                  aria-expanded={item.children ? destinationsOpen : undefined}
                   className={({ isActive }) => `main-nav__link ${isActive ? 'is-active' : ''}`}
                 >
-                  {item.label}
+                  <span>{item.label}</span>
+                  {item.children && <ChevronDown className="main-nav__chevron" aria-hidden="true" />}
                 </NavLink>
                 {item.children && (
                   <div className="main-nav__dropdown" aria-label={`${item.label} submenu`}>
                     {item.children.map((child) => (
-                      <Link key={child.label} to={child.to} onClick={() => setOpen(false)}>{child.label}</Link>
+                      <Link key={child.label} to={child.to} onClick={closeNavigation}>{child.label}</Link>
                     ))}
                   </div>
                 )}
@@ -88,7 +111,7 @@ export function SiteHeader() {
             ))}
           </nav>
           <div className="header-actions">
-            <Link className="button button--gold button--small" to="/contact" onClick={() => setOpen(false)}>CONTACT</Link>
+            <Link className="button button--gold button--small" to="/contact" onClick={closeNavigation}>CONTACT</Link>
           </div>
         </div>
       </div>
