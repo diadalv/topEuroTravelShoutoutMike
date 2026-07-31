@@ -1,6 +1,6 @@
 import { useEffect, useMemo, useState } from 'react';
 import { Link } from 'react-router-dom';
-import { items } from '@wix/data';
+import { BaseCrudService } from '@/integrations';
 import { CalendarDays, Clock3, MapPin, UsersRound } from 'lucide-react';
 import type { Excursions } from '@/entities';
 import { ASSET, Gold, PageHero, PageSeo, Photo, RequestBanner } from '@/components/travel/Shared';
@@ -26,14 +26,12 @@ export default function ExcursionsPage() {
   useEffect(() => {
     let active = true;
 
-    items
-      .query(COLLECTION_ID)
-      .eq('active', true)
-      .ascending('sortOrder')
-      .limit(100)
-      .find()
+    BaseCrudService.getAll<Excursions>(COLLECTION_ID, {}, { limit: 100 })
       .then((result) => {
-        if (active) setRecords(result.items as ExcursionRecord[]);
+        if (active) {
+          const filtered = (result.items || []).filter((item) => item.active);
+          setRecords(filtered as ExcursionRecord[]);
+        }
       })
       .catch((reason) => {
         console.error('Unable to load excursions:', reason);

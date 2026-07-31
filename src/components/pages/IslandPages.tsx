@@ -74,7 +74,7 @@ function IslandPage({ island }: { island: IslandData }) {
     <div className="island-page">
       <PageSeo
         title={island.name === 'Rhodes' ? 'Rhodes DMC Services | Destination Management Company in Rhodes' : 'Kos DMC Services | Destination Management Company in Kos'}
-        description={island.name === 'Rhodes' ? 'Discover Rhodes, one of Greece's leading island destinations for leisure travel, groups, MICE and events with Top Euro Travel.' : 'Discover Kos, an authentic island destination for leisure travel, groups, incentives and events with Top Euro Travel.'}
+        description={island.name === 'Rhodes' ? "Discover Rhodes, one of Greece's leading island destinations for leisure travel, groups, MICE and events with Top Euro Travel." : "Discover Kos, an authentic island destination for leisure travel, groups, incentives and events with Top Euro Travel."}
       />
       <PageHero
         title={<><Gold>{island.heading.split(':')[0]}</Gold>{island.heading.includes(':') ? `:${island.heading.split(':').slice(1).join(':')}` : ''}</>}

@@ -1,6 +1,6 @@
 import { useEffect, useMemo, useState } from 'react';
 import { Link, useParams } from 'react-router-dom';
-import { items } from '@wix/data';
+import { BaseCrudService } from '@/integrations';
 import {
   Accessibility,
   BusFront,
@@ -119,15 +119,12 @@ export default function ExcursionDetailPage() {
     setLoading(true);
     setError('');
 
-    items
-      .query(COLLECTION_ID)
-      .eq('slug', slug)
-      .eq('active', true)
-      .limit(1)
-      .find()
+    BaseCrudService.getAll<Excursions>(COLLECTION_ID, {}, { limit: 100 })
       .then((result) => {
         if (!active) return;
-        const excursion = result.items[0] as ExcursionRecord | undefined;
+        const excursion = (result.items || []).find(
+          (item) => item.slug === slug && item.active,
+        ) as ExcursionRecord | undefined;
         setRecord(excursion || null);
         if (!excursion) setError('We could not find this excursion.');
       })
