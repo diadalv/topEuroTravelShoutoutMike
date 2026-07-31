@@ -1,3 +1,4 @@
+import { useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { Heart, Landmark, MapPin, Sparkles, Utensils, Waves, type LucideIcon } from 'lucide-react';
 import { ASSET, Gold, IconFeature, PageHero, Photo, SectionTitle } from '@/components/travel/Shared';
@@ -38,7 +39,7 @@ const kos: IslandData = {
   eyebrow: 'The island of Hippocrates',
   introduction: 'Kos blends ancient heritage, wellness traditions, sandy beaches and relaxed island living. From historic sites and cycling routes to authentic villages, it is an inviting base for a tailor-made Dodecanese escape.',
   highlights: [
-    [Landmark, 'Ancient Culture', 'Visit the Asklepion and discover the island’s connection to Hippocrates.'],
+    [Landmark, 'Ancient Culture', 'Visit the Asklepion and discover the island's connection to Hippocrates.'],
     [Sparkles, 'Wellness & Nature', 'Slow down with thermal waters, peaceful landscapes and restorative experiences.'],
     [Waves, 'Sandy Beaches', 'Enjoy long coastlines, clear water and easy-going seaside communities.'],
     [MapPin, 'Island Discovery', 'Explore traditional villages, local farms and scenic routes across Kos.'],
@@ -51,6 +52,25 @@ const kos: IslandData = {
 };
 
 function IslandPage({ island }: { island: IslandData }) {
+  useEffect(() => {
+    const sections = Array.from(document.querySelectorAll<HTMLElement>('[data-island-reveal]'));
+
+    if (!('IntersectionObserver' in window)) {
+      sections.forEach((section) => section.classList.add('is-visible'));
+      return;
+    }
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (!entry.isIntersecting) return;
+        entry.target.classList.add('is-visible');
+        observer.unobserve(entry.target);
+      });
+    }, { threshold: 0.16 });
+
+    sections.forEach((section) => observer.observe(section));
+    return () => observer.disconnect();
+  }, [island.name]);
   return (
     <div className="island-page">
       <PageHero
@@ -59,7 +79,7 @@ function IslandPage({ island }: { island: IslandData }) {
         image={`${ASSET}/${island.hero}`}
       />
 
-      <section className="section shell island-intro">
+      <section className="section shell island-intro island-reveal" data-island-reveal>
         <div className="island-intro__copy">
           <span>{island.eyebrow}</span>
           <h2>Your journey through {island.name}</h2>
@@ -69,14 +89,14 @@ function IslandPage({ island }: { island: IslandData }) {
         <div className="island-intro__image"><Photo src={`${ASSET}/${island.image}`} alt={`${island.name} landscape`} /></div>
       </section>
 
-      <section className="section--tight shell">
+      <section className="section--tight shell island-section island-reveal" data-island-reveal>
         <SectionTitle>Why Visit {island.name}?</SectionTitle>
         <div className="island-highlights">
           {island.highlights.map(([Icon, title, copy]) => <IconFeature icon={Icon} title={title} key={title}>{copy}</IconFeature>)}
         </div>
       </section>
 
-      <section className="section shell">
+      <section className="section shell island-section island-reveal" data-island-reveal>
         <SectionTitle>Experience {island.name}</SectionTitle>
         <div className="island-gallery">
           {island.gallery.map(([title, image]) => (

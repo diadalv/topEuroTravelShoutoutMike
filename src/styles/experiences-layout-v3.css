@@ -519,3 +519,7 @@
     transition: none;
   }
 }
+.experience-card-grid--single {
+  grid-template-columns: minmax(0, 420px);
+  justify-content: center;
+}

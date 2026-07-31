@@ -139,3 +139,9 @@
   .mice-page__program-copy h3,
   .recommendation-card h3 { font-size: 18px; }
 }
+/* Rhodes and Kos */
+.island-page .island-intro__copy h2 { font-size: clamp(34px, 3vw, 44px); }
+.island-page .island-intro__copy p { font-size: 16px; }
+.island-page .island-highlights .icon-feature h3 { font-size: 18px; }
+.island-page .island-highlights .icon-feature p { font-size: 15px; }
+.island-page .island-gallery h3 { font-size: 23px; }

@@ -170,7 +170,7 @@ export default function ExperiencesPage() {
               <h2 id="experience-collection-title">Choose Your Experience</h2>
               <p>Browse locally curated moments, then let our team tailor every detail around your journey.</p>
             </div>
-            <div className="experience-card-grid" aria-live="polite">
+            <div className={`experience-card-grid${visibleCategories.length === 1 ? ' experience-card-grid--single' : ''}`} aria-live="polite">
             {visibleCategories.map(({ title, icon: Icon, image }) => (
               <article className="experience-tile card" key={title}>
                 <Photo src={`${ASSET}/${image}`} alt={title} />

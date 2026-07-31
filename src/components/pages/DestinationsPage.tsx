@@ -3,8 +3,6 @@ import { Link } from 'react-router-dom';
 import {
   Heart,
   Landmark,
-  Map,
-  MapPin,
   Mountain,
   Ship,
   Sparkles,
@@ -145,14 +143,48 @@ export default function DestinationsPage() {
           <p>Explore the Dodecanese at your pace. Combine islands, create the perfect route, and enjoy seamless travel with our local expertise.</p>
           <Link className="button button--gold button--tiny" to="/contact">GET INSPIRED</Link>
         </div>
-        <div className="island-map">
-          <Map />
-          <span className="island island--rhodes"><MapPin />Rhodes</span>
-          <span className="island island--symi">Symi</span>
-          <span className="island island--nisiros">Nisyros</span>
-          <span className="island island--kos"><MapPin />Kos</span>
-          <span className="route-line" />
-          <Ship />
+        <div className="island-map" role="img" aria-label="Map showing Kos northwest of Symi and Rhodes, with Rhodes in the southeast">
+          <svg className="island-map__chart" viewBox="0 0 760 360" preserveAspectRatio="xMidYMid meet" aria-hidden="true">
+            <title>Kos, Symi and Rhodes island route</title>
+            <defs>
+              <filter id="island-shadow" x="-30%" y="-30%" width="160%" height="160%">
+                <feDropShadow dx="0" dy="5" stdDeviation="6" floodColor="#245b78" floodOpacity="0.18" />
+              </filter>
+            </defs>
+
+            <path className="island-map__route" d="M145 96 C230 103 305 144 420 177 C493 198 548 224 578 252" />
+
+            <g className="island-map__island island-map__island--kos" filter="url(#island-shadow)">
+              <path d="M72 78 C95 55 132 50 174 59 C203 65 225 80 219 93 C210 111 170 116 134 109 C99 103 65 95 72 78 Z" />
+              <circle cx="145" cy="86" r="7" />
+              <text x="145" y="43" textAnchor="middle">Kos</text>
+            </g>
+
+            <g className="island-map__island island-map__island--symi" filter="url(#island-shadow)">
+              <path d="M386 177 C391 156 409 145 425 151 C439 136 462 144 466 160 C483 168 475 188 459 194 C449 213 425 210 417 197 C398 202 382 193 386 177 Z" />
+              <circle cx="430" cy="177" r="7" />
+              <text x="430" y="127" textAnchor="middle">Symi</text>
+            </g>
+
+            <g className="island-map__island island-map__island--rhodes" filter="url(#island-shadow)">
+              <path d="M548 222 C565 204 597 202 617 219 C638 236 640 269 621 287 C605 304 578 300 560 285 C540 268 531 240 548 222 Z" />
+              <circle cx="585" cy="254" r="7" />
+              <text x="585" y="326" textAnchor="middle">Rhodes</text>
+            </g>
+
+            <g className="island-map__islets" aria-hidden="true">
+              <ellipse cx="285" cy="130" rx="16" ry="8" transform="rotate(-18 285 130)" />
+              <ellipse cx="350" cy="195" rx="12" ry="6" transform="rotate(22 350 195)" />
+              <ellipse cx="505" cy="210" rx="14" ry="7" transform="rotate(-12 505 210)" />
+            </g>
+
+            <g className="island-map__compass" transform="translate(692 42)">
+              <circle r="22" />
+              <path d="M0 -14 L5 2 L0 -1 L-5 2 Z" />
+              <text x="0" y="-29" textAnchor="middle">N</text>
+            </g>
+          </svg>
+          <Ship className="island-map__ship" aria-hidden="true" />
         </div>
       </section>
 
