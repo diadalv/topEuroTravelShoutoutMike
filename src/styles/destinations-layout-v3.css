@@ -10,30 +10,32 @@
 }
 
 .destinations-overview {
-  padding-top: clamp(62px, 7vw, 96px);
-  padding-bottom: clamp(58px, 7vw, 92px);
+  padding-top: clamp(48px, 5vw, 64px);
+  padding-bottom: clamp(48px, 5vw, 64px);
 }
 
 .destinations-intro {
-  max-width: 900px;
-  margin: 0 auto clamp(38px, 5vw, 56px);
+  max-width: 742px;
+  margin: 0 auto 34px;
   font-size: 17px;
   line-height: 1.7;
+  text-align: left;
 }
 
 .destinations-intro::after {
   width: 64px;
-  margin-top: 22px;
+  margin: 18px 0 0;
 }
 
 .destinations-grid {
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 28px;
+  grid-template-columns: repeat(2, minmax(0, 360px));
+  justify-content: center;
+  gap: 22px;
 }
 
 .destination-large {
-  min-height: 570px;
-  border-radius: 20px;
+  min-height: 0;
+  border-radius: 16px;
   box-shadow: 0 14px 38px rgba(0, 48, 86, 0.11);
   transition: border-color 240ms ease, box-shadow 280ms ease, transform 280ms ease;
 }
@@ -45,7 +47,7 @@
 }
 
 .destination-large__image {
-  height: 300px;
+  height: 200px;
   overflow: hidden;
 }
 
@@ -59,10 +61,10 @@
 }
 
 .destination-large__body {
-  min-height: 270px;
+  min-height: 0;
   display: flex;
   flex-direction: column;
-  padding: 30px 28px 26px;
+  padding: 22px 20px 20px;
 }
 
 .destination-large h2 {
@@ -76,26 +78,29 @@
   height: 27px;
 }
 
-.destination-large p {
+.destinations-page .destination-large p {
   min-height: 0;
-  margin-bottom: 20px;
+  margin-bottom: 16px;
+  font-size: 16px;
+  line-height: 1.6;
 }
 
 .destination-large__tags {
   min-height: 0;
-  gap: 8px;
-  margin-bottom: 24px;
+  gap: 7px;
+  margin-bottom: 18px;
 }
 
 .destination-large__tags .tag {
-  padding: 7px 10px;
+  padding: 5px 8px;
 }
 
 .destination-large__body > .button {
-  min-height: 44px;
+  min-height: 40px;
   margin: auto 0 0;
   align-self: flex-start;
-  padding-inline: 20px;
+  padding-inline: 16px;
+  font-size: 14px;
 }
 
 .destinations-reasons-section {
@@ -148,19 +153,23 @@
 
 .destinations-experiences-section {
   border: 1px solid rgba(0, 63, 115, 0.09);
-  border-radius: 26px;
-  padding: clamp(48px, 6vw, 72px);
+  border-radius: 22px;
+  padding: clamp(32px, 4vw, 48px);
   background: linear-gradient(145deg, #f3f8fc, #fffaf1);
   box-shadow: 0 18px 48px rgba(0, 48, 86, 0.07);
 }
 
+.destinations-experiences-section .section-title {
+  margin-bottom: 28px;
+}
+
 .destination-moments {
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 26px;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 18px;
 }
 
 .destination-moments a {
-  border-radius: 17px;
+  border-radius: 14px;
   overflow: hidden;
   background: white;
   box-shadow: 0 12px 30px rgba(0, 48, 86, 0.11);
@@ -173,7 +182,7 @@
 }
 
 .destination-moments__image {
-  height: 230px;
+  height: clamp(145px, 12vw, 180px);
   border-radius: 0;
 }
 
@@ -186,21 +195,22 @@
 }
 
 .destination-moments strong {
-  min-height: 64px;
+  min-height: 52px;
   display: flex;
   align-items: center;
   justify-content: center;
   margin: 0;
-  padding: 14px 16px;
+  padding: 10px 12px;
 }
 
 .destinations-view-all {
-  margin-top: 36px;
+  margin-top: 26px;
 }
 
-.destinations-view-all .button {
-  min-height: 46px;
-  padding-inline: 22px;
+.destinations-page .destinations-view-all .button {
+  min-height: 40px;
+  padding-inline: 18px;
+  font-size: 14px;
 }
 
 .island-journey {
