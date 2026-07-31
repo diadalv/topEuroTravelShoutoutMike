@@ -4,7 +4,7 @@ import ErrorPage from '@/integrations/errorHandlers/ErrorPage';
 import TravelHomePage from '@/components/pages/TravelHomePage';
 import AboutPage from '@/components/pages/AboutPage';
 import DestinationsPage from '@/components/pages/DestinationsPage';
-import { KosPage, RhodesPage } from '@/components/pages/IslandPages';
+import { RhodesPage, KosPage } from '@/components/pages/IslandPages';
 import ServicesPage from '@/components/pages/ServicesPage';
 import MiceGroupsPage from '@/components/pages/MiceGroupsPage';
 import ExperiencesPage from '@/components/pages/ExperiencesPage';

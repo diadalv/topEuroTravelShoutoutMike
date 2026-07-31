@@ -115,7 +115,7 @@ const moments = [
   ['nightlife.jpg', 'A memorable evening event'],
 ];
 
-function ProgramCard({ icon: Icon, title, copy, image, position }: ProgramCard) {
+function ProgramCardComponent({ icon: Icon, title, copy, image, position }: ProgramCard) {
   return (
     <article className="mice-page__program-card">
       <div className="mice-page__program-photo">
@@ -182,7 +182,7 @@ export default function MiceGroupsPage() {
               <PlanePath />
             </div>
             <div className="mice-page__program-grid mice-page__program-grid--five">
-              {micePrograms.map((program) => <ProgramCard key={program.title} {...program} />)}
+              {micePrograms.map((program) => <ProgramCardComponent key={program.title} {...program} />)}
             </div>
           </section>
 
@@ -196,7 +196,7 @@ export default function MiceGroupsPage() {
               <PlanePath />
             </div>
             <div className="mice-page__program-grid mice-page__program-grid--four">
-              {groupPrograms.map((program) => <ProgramCard key={program.title} {...program} />)}
+              {groupPrograms.map((program) => <ProgramCardComponent key={program.title} {...program} />)}
             </div>
           </section>
 

@@ -39,7 +39,7 @@ const kos: IslandData = {
   eyebrow: 'The island of Hippocrates',
   introduction: 'Kos blends ancient heritage, wellness traditions, sandy beaches and relaxed island living. From historic sites and cycling routes to authentic villages, it is an inviting base for a tailor-made Dodecanese escape.',
   highlights: [
-    [Landmark, 'Ancient Culture', 'Visit the Asklepion and discover the island's connection to Hippocrates.'],
+    [Landmark, 'Ancient Culture', 'Visit the Asklepion and discover the island\'s connection to Hippocrates.'],
     [Sparkles, 'Wellness & Nature', 'Slow down with thermal waters, peaceful landscapes and restorative experiences.'],
     [Waves, 'Sandy Beaches', 'Enjoy long coastlines, clear water and easy-going seaside communities.'],
     [MapPin, 'Island Discovery', 'Explore traditional villages, local farms and scenic routes across Kos.'],
