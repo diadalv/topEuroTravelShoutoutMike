@@ -1,20 +1,30 @@
 import { Link } from 'react-router-dom';
 import { CircleHelp } from 'lucide-react';
-import { ASSET, Gold, PageHero } from '@/components/travel/Shared';
+import { ASSET, Gold, PageHero, PageSeo } from '@/components/travel/Shared';
 
 const faqs = [
-  ['What does a Destination Management Company do?', 'A DMC coordinates local services such as accommodation, transfers, excursions, venues, group programmes and on-site support on behalf of travellers and travel professionals.'],
-  ['Which destinations do you currently cover?', 'Our core destinations are Rhodes and Kos, with island-hopping services across Symi and the wider Dodecanese.'],
-  ['Can you create a completely tailor-made itinerary?', 'Yes. We can design private or group itineraries around your dates, interests, preferred pace and accommodation requirements.'],
-  ['Do you work with travel agents and international partners?', 'Yes. Our B2B team supports travel agents, tour operators, corporate planners and event professionals.'],
-  ['Can you manage corporate events and incentive groups?', 'Yes. We provide venue sourcing, accommodation, transfers, activities, production support and on-site coordination for MICE and group travel.'],
-  ['How quickly will your team respond?', 'We aim to respond to enquiries within 24 business hours. Urgent and in-destination requests can also reach us by phone.'],
-  ['What is your cancellation policy?', 'Cancellation terms depend on the selected service and supplier. The applicable terms are always confirmed clearly before booking.'],
+  ['What services does Top Euro Travel provide in Greece?', 'Top Euro Travel offers comprehensive destination management services, including hotel contracting, transfers, ground handling, excursions, MICE, groups, weddings, VIP services and tailor-made travel programmes.'],
+  ['Do you handle FIT, groups and MICE travel?', 'Yes. We provide solutions for FIT travellers, leisure groups, incentive programmes, conferences, meetings, corporate events and special interest groups.'],
+  ['Which destinations do you operate in?', 'Our core destinations are Rhodes and Kos, while we also support selected travel programmes, events and special projects across Greece through our trusted partner network.'],
+  ['Do you provide multilingual support?', 'Yes. Our multilingual team provides professional support in several languages, ensuring smooth communication and seamless guest experiences.'],
+  ['Why choose Rhodes for incentive travel?', 'Rhodes combines excellent tourism infrastructure, direct international connectivity, unique event venues and authentic experiences, making it one of Greece\'s leading incentive destinations.'],
+  ['Is Kos suitable for family and group holidays?', 'Absolutely. Kos offers beautiful beaches, quality accommodation, excellent accessibility and a wide range of activities, making it ideal for families and groups.'],
+  ['What are the best seasons for events in Rhodes and Kos?', 'Spring and autumn are particularly popular for meetings, incentives and events, thanks to the pleasant climate, excellent flight connectivity and comfortable temperatures.'],
+  ['Do you provide airport transfers and transportation?', 'Yes. We offer reliable transportation services, including airport and port transfers, coaches, minibuses, VIP transportation and tailor-made transport solutions.'],
+  ['Can you arrange hotel contracting and accommodation management?', 'Yes. Thanks to our extensive local network and long-standing partnerships, we provide hotel contracting, accommodation sourcing and booking management services.'],
+  ['Do you offer tailor-made itineraries?', 'Yes. Every programme can be customised according to your clients\' preferences, objectives, budget and travel style.'],
+  ['How quickly can you provide a proposal or quotation?', 'Response times depend on the complexity of the request, but our team always aims to provide proposals as quickly and efficiently as possible.'],
+  ['Do you work with travel agencies and tour operators worldwide?', 'Yes. We proudly collaborate with tour operators, travel agencies and travel professionals from international markets across Europe and beyond.'],
+  ['Can you support large-scale groups and events?', 'Yes. With decades of operational experience and a strong local network, we are fully equipped to manage large groups, conferences and complex events.'],
+  ['Do you provide on-site assistance during events and stays?', 'Yes. Our experienced team provides on-site coordination, resort assistance and operational support throughout the entire guest journey.'],
+  ['Can you arrange VIP and luxury experiences in Greece?', 'Yes. We offer a wide range of premium and VIP services, including private transfers, yacht charters, exclusive experiences and bespoke travel programmes.'],
+  ['Do you organize private events and destination weddings?', 'Yes. We design and coordinate destination weddings, private celebrations and special events tailored to each client\'s vision and requirements.'],
 ] as const;
 
 export default function FaqPage() {
   return (
     <>
+      <PageSeo title="Frequently Asked Questions | Top Euro Travel" description="Answers about Top Euro Travel services, Rhodes and Kos, FIT, groups, MICE, transfers, accommodation, tailor-made itineraries and on-site support." />
       <PageHero
         title={<><Gold>Frequently Asked</Gold> Questions</>}
         breadcrumb="FAQ"

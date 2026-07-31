@@ -18,6 +18,7 @@ import {
   Gold,
   IconFeature,
   PageHero,
+  PageSeo,
   Photo,
   PlanePath,
   SectionTitle,
@@ -26,49 +27,43 @@ import {
 } from '@/components/travel/Shared';
 
 const values = [
-  [MapPin, 'Local Expertise', 'Deep knowledge of Rhodes, Kos & the Dodecanese.'],
-  [Users, 'Customer Focus', 'Personalized service built around your unique needs.'],
-  [ShieldCheck, 'Integrity', 'Honest, transparent and reliable in every partnership.'],
-  [Heart, 'Passion', 'We love what we do and it shows in every detail.'],
-  [Leaf, 'Sustainability', 'Responsible travel and support for our local community.'],
+  [Handshake, 'Partnership', 'Successful partnerships are built on trust, transparency and mutual respect.'],
+  [ShieldCheck, 'Reliability', 'Consistent service and dependable support at every stage.'],
+  [MapPin, 'Local Expertise', 'Decades of experience, strong local connections and practical solutions in Rhodes and Kos.'],
+  [Sparkles, 'Flexibility', 'An adaptable approach designed around every partner\'s individual requirements.'],
 ] as const;
 
 const why = [
-  [Sparkles, 'Local Specialists', 'We live and work here. Our insider knowledge ensures authentic experiences.'],
-  [Handshake, 'Personalized Service', 'Tailor-made itineraries and dedicated support from planning to execution.'],
-  [ShieldCheck, 'Trusted & Reliable', 'Professional standards and trusted partnerships for your peace of mind.'],
-  [Headphones, '24/7 Support', 'We are here for you anytime, anywhere during your journey.'],
+  [Handshake, 'Strong Relationships', 'Long-standing relationships with hotels, suppliers and local stakeholders.'],
+  [Globe2, 'Multilingual Teams', 'Responsive communication and hands-on destination support in Rhodes and Kos.'],
+  [ShieldCheck, 'Operational Excellence', 'Quality, efficiency and a proactive approach to problem-solving.'],
+  [Target, 'Long-Term Value', 'Reliable solutions designed to help our partners grow and succeed.'],
 ] as const;
 
-const milestones = [
-  [Building2, 'Founded in Rhodes', 'Built on local expertise and a passion for hospitality.'],
-  [MapPin, 'Expanded in Kos', 'Growing our presence across the Dodecanese.'],
-  [Globe2, 'Growing Partner Network', 'Strong collaborations with hotels, suppliers & experts.'],
-  [Headphones, 'Dedicated 24/7 Support', 'Always by your side before, during and after.'],
-] as const;
 
 export default function AboutPage() {
   return (
     <>
+      <PageSeo title="About Top Euro Travel | Leading DMC in Greece Since 1989" description="Learn more about Top Euro Travel, a trusted destination management company in Greece supporting tour operators, travel agencies, groups and event planners across Rhodes and Kos since 1989." />
       <PageHero
-        title={<><Gold>Who</Gold> We Are</>}
+        title={<><Gold>About</Gold> Top Euro Travel</>}
         breadcrumb="About"
         image={`${ASSET}/about-hero-v2.jpg`}
       />
 
       <section className="section shell about-intro">
         <div className="about-intro__copy">
-          <h2>Your Trusted DMC Partner in<br /><Gold>Rhodes &amp; Kos</Gold></h2>
+          <h2>Who We Are</h2>
+          <h3>Established in 1989. Trusted for Generations.</h3>
           <p>
-            Top Euro Travel is a destination management company based in Rhodes &amp; Kos, offering expertly
-            crafted travel solutions across the Dodecanese. From transfers and accommodation to unique
-            experiences and events, we create seamless, authentic, and unforgettable journeys.
+            Top Euro Travel is a destination management company specialising in Rhodes and Kos, delivering
+            reliable travel solutions for tour operators, travel agencies, groups and event planners since 1989.
           </p>
           <p>
-            We combine deep local knowledge, professional service, and a passion for hospitality to deliver
-            extraordinary travel experiences for FITs, groups, MICE, and corporate clients from around the world.
+            What began as a family-run business has grown into a trusted DMC with local teams across both destinations,
+            supporting more than 100,000 guests annually. Today, as the company transitions into its second generation,
+            we continue to build on professionalism, flexibility, integrity and long-term partnerships. Combining local expertise with international standards, we provide tailored destination management services designed to help our partners grow and succeed.
           </p>
-          <a className="button button--navy button--tiny" href="#team">MEET OUR TEAM</a>
         </div>
         <div className="about-intro__image rounded-photo">
           <Photo src={`${ASSET}/about-intro-v2.jpg`} alt="Aegean harbour and island village" />
@@ -86,13 +81,7 @@ export default function AboutPage() {
       <section className="section--tight shell about-strengths">
         <div className="about-strengths__list">
           <h2>Our Strengths</h2>
-          <ul className="check-list">
-            <li>24/7 Local Support</li>
-            <li>Experienced &amp; Dedicated Team</li>
-            <li>Strong Supplier Relationships</li>
-            <li>Tailor-Made Solutions</li>
-            <li>Quality &amp; Reliability</li>
-          </ul>
+          <p>Our strength lies in combining local expertise with operational excellence. Strong relationships with hotels, suppliers and local stakeholders allow us to provide reliable solutions and competitive opportunities for our partners.</p>
         </div>
         <div>
           <SectionTitle className="section-title--left">Why Travel With Us</SectionTitle>
@@ -102,55 +91,19 @@ export default function AboutPage() {
         </div>
       </section>
 
-      <section className="section--tight shell milestone-row">
-        {milestones.map(([Icon, title, copy], index) => (
-          <div className="milestone" key={title}>
-            <div className="milestone__icon"><Icon /></div>
-            <div><strong>{title}</strong><p>{copy}</p></div>
-            {index < milestones.length - 1 && <span className="milestone__line" />}
-          </div>
-        ))}
-      </section>
-
       <section className="about-stats shell">
-        <Stat value="15+" label="Years of Experience" />
-        <Stat value="10K+" label="Happy Clients" />
-        <Stat value="500+" label="Events & Groups" />
-        <Stat value="24/7" label="Online Support" />
+        <Stat value="1989" label="Established" />
+        <Stat value="100K+" label="Guests Annually" />
+        <Stat value="200+" label="Hotel Partners" />
+        <Stat value="40+" label="Team Members" />
       </section>
       <TrustBar stats={false} className="about-trust" />
-
-      <section id="team" className="section--tight shell about-team">
-        <div className="rounded-photo">
-          <Photo src={`${ASSET}/about-team-v2.jpg`} alt="Top Euro Travel team" />
-        </div>
-        <div>
-          <h3>Our Team</h3>
-          <p>
-            Our multilingual team of travel professionals is dedicated to creating exceptional experiences
-            with care, creativity, and attention to detail.
-          </p>
-          <Link className="button button--navy button--tiny" to="/contact">MEET THE TEAM</Link>
-        </div>
-        <div>
-          <h3>Our Service Philosophy</h3>
-          <p>We believe every journey should be meaningful and memorable. That is why we pay attention to every detail.</p>
-          <ul className="check-list">
-            <li>Attention to detail</li>
-            <li>Creative solutions</li>
-            <li>End-to-end service</li>
-          </ul>
-        </div>
-        <div className="rounded-photo">
-          <Photo src={`${ASSET}/about-philosophy-v2.jpg`} alt="White island architecture at sunset" />
-        </div>
-      </section>
 
       <section className="about-cta shell">
         <PlanePath />
         <div>
-          <h2>Let’s Plan Your <Gold>Next Journey</Gold></h2>
-          <p>Partner with Top Euro Travel for seamless, authentic and unforgettable experiences.</p>
+          <h2><Gold>Get</Gold> in Touch</h2>
+          <p>Whether you are looking for a trusted DMC partner, planning a group programme, organising an event or exploring new business opportunities in Greece, our team is ready to assist.</p>
         </div>
         <Link className="button button--gold" to="/contact">CONTACT US</Link>
       </section>

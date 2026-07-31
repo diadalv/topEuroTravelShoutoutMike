@@ -24,6 +24,7 @@ import {
   ASSET,
   Gold,
   PageHero,
+  PageSeo,
   Photo,
   PlanePath,
   RequestBanner,
@@ -38,47 +39,34 @@ type ExperienceCategory = {
 
 const categories: ExperienceCategory[] = [
   { title: 'All Experiences', icon: Sparkles, image: '' },
-  { title: 'Culture & History', icon: Castle, image: 'acropolis.jpg' },
-  { title: 'Food & Wine', icon: Utensils, image: 'food.jpg' },
-  { title: 'Sailing Adventures', icon: Sailboat, image: 'sailing.jpg' },
-  { title: 'Wellness & Spa', icon: Palmtree, image: 'nightlife.jpg' },
-  { title: 'Nature & Hiking', icon: Footprints, image: 'prasonisi.jpg' },
-  { title: 'Local Life', icon: Users, image: 'local-life.jpg' },
-  { title: 'Private Luxury', icon: Crown, image: 'haraki.jpg' },
-  { title: 'Beaches & Relaxation', icon: Waves, image: 'beach.jpg' },
-  { title: 'Water Sports', icon: Anchor, image: 'water-sports.jpg' },
-  { title: 'Photography Tours', icon: Camera, image: 'lindos-aerial.jpg' },
-  { title: 'Sunset Experiences', icon: Sun, image: 'sunset.jpg' },
-  { title: 'Family Fun', icon: Heart, image: 'kallithea.jpg' },
+  { title: 'Culture & Heritage', icon: Castle, image: 'old-town.jpg' },
+  { title: 'Gastronomy', icon: Utensils, image: 'food.jpg' },
+  { title: 'Island Tours', icon: MapPin, image: 'lindos-aerial.jpg' },
+  { title: 'Boat Trips & Sailing', icon: Sailboat, image: 'sailing.jpg' },
+  { title: 'Adventure & Nature', icon: Mountain, image: 'butterflies-entry.jpg' },
+  { title: 'Active Experiences', icon: Footprints, image: 'prasonisi.jpg' },
 ];
 
 const recommendations = [
-  {
-    title: 'Romantic Escape',
-    copy: 'Private moments in enchanting settings. Sunsets, fine dining & unforgettable views.',
-    image: 'sunset.jpg',
-    icon: Heart,
-  },
-  {
-    title: 'Adventure Day',
-    copy: 'Hike, explore, and feel the thrill of Rhodes & Kos landscapes.',
-    image: 'prasonisi.jpg',
-    icon: Mountain,
-  },
-  {
-    title: 'Authentic Island Life',
-    copy: 'Live like a local. Traditions, flavors and warm hospitality.',
-    image: 'local-life.jpg',
-    icon: Users,
-  },
+  { title: 'Medieval City of Rhodes', copy: "Explore one of Europe's best-preserved medieval settlements with an experienced guide, from cobbled alleys and historic monuments to vibrant squares.", image: 'old-town.jpg', icon: Castle },
+  { title: 'Cooking Lessons & Wine Tasting', copy: 'Discover authentic Greek flavours through traditional recipes, regional ingredients and a carefully selected local wine tasting.', image: 'food.jpg', icon: Utensils },
+  { title: 'Island Tour', copy: 'Discover iconic landmarks, picturesque villages and breathtaking landscapes in a carefully designed full-day experience combining culture, history and local traditions.', image: 'monolithos.jpg', icon: MapPin },
+  { title: 'Symi Island & St George Bay', copy: 'Cruise across the Aegean to colourful Symi and complete the day with a refreshing swim in spectacular St George Bay.', image: 'marina.jpg', icon: Sailboat },
+  { title: 'Chalki Island', copy: 'Experience authentic Greek island life at a slower pace, from Chalki\'s colourful harbour and picturesque alleys to its relaxed Dodecanese atmosphere.', image: 'haraki.jpg', icon: Anchor },
+  { title: 'Famous Beaches of Rhodes', copy: 'Spend a relaxing day at sea discovering beautiful beaches and secluded bays, with swimming stops in crystal-clear waters.', image: 'beach.jpg', icon: Waves },
+  { title: 'Visit to Asia', copy: 'Experience the nearby Turkish coast on a day trip to Marmaris, Fethiye or Bodrum, with local markets, authentic flavours and a different side of the Aegean.', image: 'marina.jpg', icon: Landmark },
+  { title: 'Lindos Village Exploration', copy: 'Explore whitewashed houses, narrow alleys, local shops and the impressive hilltop Acropolis overlooking the Aegean Sea.', image: 'acropolis.jpg', icon: Castle },
+  { title: 'Sailing Cruises & Private Yacht Rentals', copy: 'Explore the Aegean with private yacht charters and sailing experiences tailored for romantic escapes, celebrations or group outings.', image: 'sailing.jpg', icon: Sailboat },
+  { title: 'Jeep Safari', copy: 'Venture off the beaten track to hidden landscapes, traditional villages and viewpoints inaccessible by conventional routes.', image: 'prasonisi.jpg', icon: Mountain },
+  { title: 'E-bike Tours', copy: 'Cycle through scenic landscapes, coastal routes and villages on guided or self-guided experiences designed for enjoyable, sustainable exploration.', image: 'local-life.jpg', icon: Footprints },
+  { title: 'Hiking Activities', copy: 'Follow carefully selected trails with experienced guides and discover natural landmarks, Greek countryside and hidden corners.', image: 'butterflies-entry.jpg', icon: Footprints },
 ];
 
 const trustItems = [
-  [MapPin, 'Locally Curated', 'By experts who know every corner'],
-  [Users, 'Authentic Encounters', 'Real people, real stories'],
-  [Users, 'Small Groups', 'Personal, comfortable and flexible'],
-  [Award, 'Premium Quality', 'Carefully selected for you'],
-  [Heart, 'Responsible Travel', 'Supporting local communities'],
+  [Users, 'Leisure Travellers', 'Memorable experiences for every travel style'],
+  [Users, 'Groups', 'Activities shaped around group requirements'],
+  [Award, 'Incentive Programmes', 'Experiences aligned with programme objectives'],
+  [Sparkles, 'Tailor-Made', 'Designed for every interest and occasion'],
 ] as const;
 
 export default function ExperiencesPage() {
@@ -108,18 +96,13 @@ export default function ExperiencesPage() {
 
   return (
     <div className="experiences-page">
+      <PageSeo title="Curated Experiences in Greece | Top Euro Travel" description="Discover curated experiences in Greece, from cultural tours and gastronomy to sailing cruises, outdoor activities and tailor-made programmes." />
         <PageHero
           className="experiences-hero"
-          title={<><Gold>Unique</Gold> Experiences</>}
+          title={<><Gold>Curated</Gold> Experiences</>}
           breadcrumb="Experiences"
           image={`${ASSET}/experiences-hero.jpg`}
-          description={(
-            <>
-              Handpicked moments to make your journey unforgettable.<br />
-              From timeless traditions to hidden gems, every experience is<br />
-              crafted with care and local expertise.
-            </>
-          )}
+          description="Cultural discoveries, authentic gastronomy, sailing adventures and outdoor activities tailored to every interest."
         />
 
         <div className="shell experiences-content">
@@ -140,15 +123,11 @@ export default function ExperiencesPage() {
 
           <section className="experience-intro experience-reveal" data-experience-reveal>
             <div className="experience-intro__copy">
-              <h2>Crafted with Passion. Shared with You.</h2>
-              <p>
-                Our experiences are more than activities—they are connections. We open doors to
-                authentic encounters, breathtaking landscapes, and unforgettable stories across
-                Rhodes &amp; Kos. Let our local experts guide you to the highlights and hidden treasures.
-              </p>
+              <h2>Experiences Designed Around You</h2>
+              <p>From cultural discoveries and authentic gastronomy to sailing adventures and outdoor activities, our curated experiences showcase the unique character of each destination. Whether for leisure travellers, groups or incentive programmes, we create memorable experiences tailored to every interest, travel style and occasion.</p>
               <div className="experience-intro__actions">
-                <Link className="button button--navy" to="/destinations">DISCOVER ALL EXPERIENCES</Link>
-                <Link className="experience-circle-arrow" to="/destinations" aria-label="Discover all experiences">→</Link>
+                <Link className="button button--navy" to="/excursions">DISCOVER ALL EXPERIENCES</Link>
+                <Link className="experience-circle-arrow" to="/excursions" aria-label="Discover all experiences">→</Link>
               </div>
               <PlanePath />
             </div>
@@ -166,9 +145,9 @@ export default function ExperiencesPage() {
 
           <section className="experience-collection experience-reveal" aria-labelledby="experience-collection-title" data-experience-reveal>
             <div className="experience-collection__heading">
-              <span>EXPLORE RHODES &amp; KOS</span>
+              <span>CURATED IN RHODES &amp; KOS</span>
               <h2 id="experience-collection-title">Choose Your Experience</h2>
-              <p>Browse locally curated moments, then let our team tailor every detail around your journey.</p>
+              <p>Choose from culture, gastronomy, island tours, sailing and outdoor activities, or ask our team to create something unique.</p>
             </div>
             <div className={`experience-card-grid${visibleCategories.length === 1 ? ' experience-card-grid--single' : ''}`} aria-live="polite">
             {visibleCategories.map(({ title, icon: Icon, image }) => (
@@ -182,7 +161,7 @@ export default function ExperiencesPage() {
           </section>
 
           <section className="experience-recommendations experience-reveal" data-experience-reveal>
-            <h2>Recommended For You</h2>
+            <h2>Explore Our Experiences</h2>
             <div className="experience-recommendation-grid">
               {recommendations.map(({ title, copy, image, icon: Icon }) => (
                 <article className="recommendation-card card" key={title}>
@@ -191,7 +170,7 @@ export default function ExperiencesPage() {
                   <div>
                     <h3>{title}</h3>
                     <p>{copy}</p>
-                    <Link to="/destinations">EXPLORE EXPERIENCE <span>→</span></Link>
+                    <Link to="/excursions">EXPLORE EXPERIENCE <span>→</span></Link>
                   </div>
                 </article>
               ))}
@@ -199,19 +178,10 @@ export default function ExperiencesPage() {
           </section>
 
           <section className="experience-proof-strip experience-reveal" data-experience-reveal>
-            <div className="experience-quote">
-              <span className="experience-quote__mark">“</span>
-              <p>Top Euro Travel made our trip truly extraordinary. Every experience was seamless, authentic and beyond our expectations.</p>
-            </div>
-            <div className="experience-review">
-              <div aria-label="5 stars">★★★★★</div>
-              <strong>Sarah L.</strong>
-              <span>Event Manager, UK</span>
-            </div>
-            <Stat value="15+" label="Years of Experience" />
-            <Stat value="10K+" label="Happy Clients" />
-            <Stat value="500+" label="Events & Groups" />
-            <Stat value="24/7" label="On-line Support" />
+            <Stat value="1989" label="Established" />
+            <Stat value="100K+" label="Guests Annually" />
+            <Stat value="200+" label="Hotel Partners" />
+            <Stat value="24/7" label="Support" />
             <div className="experience-iata">
               <Award />
               <strong>IATA</strong>
@@ -221,7 +191,7 @@ export default function ExperiencesPage() {
         </div>
 
         <div className="experience-request-wrap experience-reveal" data-experience-reveal>
-          <RequestBanner />
+          <RequestBanner title="Looking for Something Different?" subtitle="Our team can design tailor-made programmes, exclusive activities and special-interest experiences around your requirements." />
         </div>
     </div>
   );

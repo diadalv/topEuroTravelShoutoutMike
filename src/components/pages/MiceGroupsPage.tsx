@@ -22,6 +22,7 @@ import {
   Gold,
   IconFeature,
   PageHero,
+  PageSeo,
   PartnerMark,
   Photo,
   PlanePath,
@@ -72,27 +73,27 @@ const micePrograms: ProgramCard[] = [
 
 const groupPrograms: ProgramCard[] = [
   {
+    icon: Luggage,
+    title: 'Tour Operator Groups',
+    copy: 'Tailor-made group programmes combining accommodation, transportation, excursions, activities and dedicated support.',
+    image: 'sailing.jpg',
+  },
+  {
     icon: GraduationCap,
-    title: 'Educational Tours',
-    copy: 'Enriching educational experiences with expert guides and tailored itineraries.',
+    title: 'Associations & Sports Teams',
+    copy: 'Reliable, efficient programmes developed around each group\'s schedule, objectives and practical requirements.',
     image: 'acropolis.jpg',
   },
   {
     icon: Binoculars,
     title: 'Special Interest Groups',
-    copy: 'Custom programs for passion-driven groups: photography, wellness, history and more.',
+    copy: 'Carefully designed programmes for groups connected by shared interests, activities or professional goals.',
     image: 'butterflies-entry.jpg',
   },
   {
-    icon: Luggage,
-    title: 'Leisure Groups',
-    copy: 'Relaxed group getaways with carefully curated itineraries and local touches.',
-    image: 'sailing.jpg',
-  },
-  {
-    icon: Landmark,
-    title: 'Cultural Programs',
-    copy: 'Immerse your group in the culture, traditions and authentic flavors of the islands.',
+    icon: BriefcaseBusiness,
+    title: 'Corporate Groups',
+    copy: 'Flexible group travel solutions backed by trusted local suppliers and dedicated operational support.',
     image: 'old-town.jpg',
   },
 ];
@@ -157,18 +158,13 @@ export default function MiceGroupsPage() {
 
   return (
     <div className="mice-page">
+      <PageSeo title="MICE &amp; Group Travel Services in Greece | Top Euro Travel" description="Professional MICE and group travel services in Greece for meetings, incentives, conferences, events and tailor-made group programmes." />
         <PageHero
           className="mice-page__hero"
           image={`${ASSET}/mice-hero.jpg`}
           breadcrumb="MICE & Groups"
-          title={<><Gold>MICE</Gold> &amp; Groups</>}
-          description={(
-            <>
-              Inspiring meetings. Unforgettable experiences.<br />
-              We create seamless events and group journeys<br />
-              in Rhodes &amp; Kos.
-            </>
-          )}
+          title={<><Gold>MICE &amp; Group</Gold> Travel Solutions</>}
+          description="Meetings, incentives, conferences, events and tailor-made group programmes across Greece."
         />
 
         <div className="mice-page__program-shell shell">
@@ -177,7 +173,7 @@ export default function MiceGroupsPage() {
               <div className="mice-page__heading-icon"><Users aria-hidden="true" /></div>
               <div>
                 <h2 id="mice-program-title">MICE</h2>
-                <p>Elevate your business events with bespoke solutions designed for<br />productivity, impact and unforgettable experiences.</p>
+                <p>From meetings and conferences to incentive programmes and corporate events, Top Euro Travel delivers comprehensive MICE solutions tailored to each client&apos;s objectives. Combining extensive destination expertise, trusted local partnerships and meticulous operational planning, we support every stage of the process, from venue sourcing and accommodation to transportation, event logistics and on-site coordination.</p><p>Whether organising an executive retreat, a large-scale conference, a product launch or an incentive programme, our team ensures seamless execution and memorable experiences across Greece, with particular expertise in Rhodes and Kos.</p>
               </div>
               <PlanePath />
             </div>
@@ -191,7 +187,7 @@ export default function MiceGroupsPage() {
               <div className="mice-page__heading-icon"><Users aria-hidden="true" /></div>
               <div>
                 <h2 id="groups-program-title">GROUPS</h2>
-                <p>From educational journeys to leisure escapes,<br />we craft meaningful group travel experiences.</p>
+                <p>We specialise in the design and management of tailor-made group programmes for tour operators, travel agencies, associations, sports teams, special interest groups and corporate clients. Every programme is carefully developed around our partners&apos; requirements, combining accommodation, transportation, excursions, activities and dedicated support services.</p><p>Backed by decades of operational experience and a strong network of local suppliers, we provide flexible, reliable and efficient group travel solutions for both organisers and participants.</p>
               </div>
               <PlanePath />
             </div>
@@ -223,11 +219,11 @@ export default function MiceGroupsPage() {
 
         <section className="mice-page__proof shell mice-reveal" aria-label="Our experience and accreditations" data-mice-reveal>
           <div className="mice-page__proof-stats">
-            <Stat value="500+" label="Events Delivered" />
-            <Stat value="10K+" label="Happy Participants" />
-            <Stat value="15+" label="Years of Experience" />
-            <Stat value="30+" label="Destination Partners" />
-            <Stat value="24/7" label="On-site Support" />
+            <Stat value="1989" label="Established" />
+            <Stat value="100K+" label="Guests Annually" />
+            <Stat value="200+" label="Hotel Partners" />
+            <Stat value="40+" label="Team Members" />
+            <Stat value="24/7" label="Support" />
           </div>
           <div className="mice-page__proof-partners">
             <span>Trusted by</span>
@@ -239,8 +235,8 @@ export default function MiceGroupsPage() {
         <section className="mice-page__request shell mice-reveal" data-mice-reveal>
           <PlanePath />
           <div className="mice-page__request-copy">
-            <h2>Have a special request?</h2>
-            <p>We create tailor-made group experiences.</p>
+            <h2>Let&apos;s Plan Your Next Project</h2>
+            <p>Tell us about your meeting, event or group requirements and our team will create a tailor-made solution designed around your objectives.</p>
           </div>
           <div className="mice-page__request-benefits">
             <span><CheckCircle2 aria-hidden="true" /> Custom Itineraries</span>

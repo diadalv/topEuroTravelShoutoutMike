@@ -25,62 +25,58 @@ import {
 import {
   ASSET,
   IconFeature,
+  PageSeo,
   Photo,
   PlanePath,
   RequestBanner,
   SectionTitle,
-  TestimonialStrip,
   TrustBar,
 } from '@/components/travel/Shared';
 
 const floatingServices = [
-  [Landmark, 'Hotel Contracts'],
-  [Bus, 'Transfers'],
-  [MapPinned, 'Tours & Excursions'],
-  [Users, 'MICE & Groups'],
-  [Heart, 'Weddings'],
-  [Crown, 'VIP Services'],
-  [Bell, 'Concierge Services'],
-  [Headphones, '24/7 Support'],
+  [Landmark, "Hotel Contracting"],
+  [Building2, "Booking Management"],
+  [Bus, "Transfers & Transportation"],
+  [Headphones, "Resort Assistance"],
+  [MapPinned, "Tours & Excursions"],
+  [Users, "MICE & Group Travel"],
+  [Heart, "Weddings & Special Events"],
+  [CalendarCheck, "XML API & Agent Portal"],
 ] as const;
 
 const destinations = [
   {
-    name: 'Rhodes',
+    name: "Rhodes",
     image: `${ASSET}/lindos.jpg`,
-    copy: 'Island of knights, history and endless sunshine. Explore the Old Town, stunning beaches and vibrant local culture.',
+    copy: "Rhodes is one of Greece's leading tourism destinations, renowned for its rich history, diverse landscapes and exceptional hospitality infrastructure.",
   },
   {
-    name: 'Kos',
+    name: "Kos",
     image: `${ASSET}/kallithea.jpg`,
-    copy: 'Greek vibes, natural beauty and relaxation. Perfect for adventure, wellness and authentic island experiences.',
-  },
-  {
-    name: 'Symi & Island Hopping',
-    image: `${ASSET}/marina.jpg`,
-    copy: 'Discover hidden gems and crystal-clear waters across the Dodecanese. Let us plan your perfect island escape.',
+    copy: "Kos combines authentic island charm with excellent tourism infrastructure, beautiful beaches, cultural landmarks and a relaxed atmosphere.",
   },
 ];
 
 const serviceMinis = [
-  [Map, 'Destination Management'],
-  [Landmark, 'Accommodation'],
-  [Bus, 'Transfers'],
-  [MapPinned, 'Excursions'],
-  [Users, 'MICE & Corporate Travel'],
-  [Heart, 'Weddings'],
-  [Crown, 'VIP & Concierge'],
+  [Landmark, "Hotel Contracting"],
+  [Building2, "Booking Management"],
+  [Bus, "Transfers & Transportation"],
+  [Headphones, "Resort Assistance"],
+  [MapPinned, "Tours & Excursions"],
+  [Users, "MICE & Group Travel"],
+  [Heart, "Weddings & Special Events"],
+  [CalendarCheck, "XML API & Agent Portal"],
 ] as const;
 
 const experiences = [
-  ['Culture & History', 'acropolis.jpg'],
-  ['Sailing Adventures', 'sailing.jpg'],
-  ['Wellness & Spa', 'flower.jpg'],
-  ['Food & Wine', 'food.jpg'],
-  ['Nature & Hiking', 'monolithos.jpg'],
-  ['Private Luxury', 'haraki.jpg'],
-  ['Family Fun', 'beach.jpg'],
-  ['Sunset Experiences', 'sunset.jpg'],
+  ['Medieval City of Rhodes', 'old-town.jpg'],
+  ['Cooking & Wine Tasting', 'food.jpg'],
+  ['Rhodes Island Tour', 'monolithos.jpg'],
+  ['Symi Island & St George Bay', 'marina.jpg'],
+  ['Lindos Village', 'acropolis.jpg'],
+  ['Sailing & Private Yachts', 'sailing.jpg'],
+  ['Jeep Safari', 'prasonisi.jpg'],
+  ['Hiking Activities', 'butterflies-entry.jpg'],
 ];
 
 export default function TravelHomePage() {
@@ -122,10 +118,11 @@ export default function TravelHomePage() {
 
   return (
     <div className="home-page">
+      <PageSeo title="Destination Management Company in Greece | Rhodes &amp; Kos DMC | Top Euro Travel" description="Top Euro Travel is a trusted destination management company in Greece, providing DMC services, hotel contracting, transfers, MICE, groups, excursions and ground handling in Rhodes and Kos since 1989." />
       <section className="home-hero" style={{ backgroundImage: `url("${ASSET}/home-hero-v2.jpg")` }}>
         <div className="home-hero__content shell">
-          <h1><span className="text-gold">Your DMC in</span>Rhodes &amp; Kos</h1>
-          <p className="home-hero__lead">Local Expertise. Memorable Experiences.<br />Seamless Service.</p>
+          <h1><span className="text-gold">Your Trusted DMC Partner in</span>Rhodes &amp; Kos</h1>
+          <p className="home-hero__lead">Delivering destination management, ground handling<br />and travel solutions since 1989.</p>
           <div className="home-hero__actions">
             <Link className="button button--gold" to="/about">DISCOVER MORE</Link>
             <button
@@ -174,11 +171,15 @@ export default function TravelHomePage() {
 
       <section className="section shell home-welcome">
         <div>
-          <h2>Welcome to Top Euro Travel</h2>
+          <h2>Destination Management Company in Greece</h2>
           <p>
-            We are a destination management company based in Rhodes &amp; Kos, offering expertly crafted
-            travel solutions across the Dodecanese. From transfers and accommodation to unique experiences
-            and events, we create seamless, authentic, and unforgettable journeys.
+            Since 1989, Top Euro Travel has been providing destination management and ground handling services
+            in Rhodes and Kos, supporting tour operators, travel agencies, groups and event planners from across the world.
+          </p>
+          <p>
+            With local teams in both destinations and a flexible, hands-on approach, we deliver reliable solutions
+            tailored to each partner&apos;s needs, from hotel contracting and transfers to MICE services, tailor-made
+            programmes and excursions. Our focus is simple: building long-term partnerships through expertise, responsiveness and consistent service delivery.
           </p>
           <Link className="button button--navy button--tiny" to="/about">LEARN MORE ABOUT US</Link>
         </div>
@@ -193,7 +194,7 @@ export default function TravelHomePage() {
 
       <section className="section--tight shell home-destinations">
         <SectionTitle>Featured Destinations</SectionTitle>
-        <div className="grid-3">
+        <div className="grid-2">
           {destinations.map((destination) => (
             <article className="card photo-card destination-card" key={destination.name}>
               <div className="photo-card__image"><Photo src={destination.image} alt={destination.name} /></div>
@@ -226,8 +227,8 @@ export default function TravelHomePage() {
             alt="Corporate meeting venue"
           />
           <div className="mice-feature__copy">
-            <h2>MICE &amp; Groups</h2>
-            <p>We handle every detail for successful meetings, incentives, conferences and corporate events in Rhodes &amp; Kos.</p>
+            <h2>MICE &amp; Group Travel Solutions</h2>
+            <p>Whether planning a corporate event, incentive programme or group itinerary, our team delivers tailored solutions and seamless execution across Rhodes and Kos.</p>
             <ul className="check-list">
               <li>Venue sourcing &amp; event management</li>
               <li>Team building &amp; unique experiences</li>
@@ -241,7 +242,7 @@ export default function TravelHomePage() {
       </section>
 
       <section className="section--tight shell">
-        <SectionTitle>Experiences</SectionTitle>
+        <SectionTitle>Authentic Local Experiences</SectionTitle>
         <div className="experience-thumbs">
           {experiences.map(([title, image]) => (
             <Link className="experience-thumb" key={title} to="/experiences">
@@ -262,15 +263,13 @@ export default function TravelHomePage() {
       <section className="section--tight shell">
         <SectionTitle>Why Choose Top Euro Travel?</SectionTitle>
         <div className="why-strip">
-          <IconFeature icon={Bus} title="Local Expertise">In-depth knowledge of Rhodes &amp; Kos.</IconFeature>
-          <IconFeature icon={CalendarCheck} title="Tailor-Made Planning">Custom itineraries just for you.</IconFeature>
-          <IconFeature icon={ShieldCheck} title="Reliable Partners">Trusted network and quality assured.</IconFeature>
-          <IconFeature icon={MessageCircleMore} title="Fast Response">Quick, efficient and proactive support.</IconFeature>
-          <IconFeature icon={Sparkles} title="Seamless Service">From planning to flawless execution.</IconFeature>
+          <IconFeature icon={Bus} title="Local Teams">Hands-on destination expertise in Rhodes &amp; Kos.</IconFeature>
+          <IconFeature icon={CalendarCheck} title="Flexible Approach">Solutions tailored to each partner&apos;s needs.</IconFeature>
+          <IconFeature icon={ShieldCheck} title="Strong Supplier Network">Long-standing relationships across both destinations.</IconFeature>
+          <IconFeature icon={MessageCircleMore} title="Responsive Support">Clear communication and proactive assistance.</IconFeature>
+          <IconFeature icon={Sparkles} title="Consistent Delivery">Reliable service from planning through operations.</IconFeature>
         </div>
       </section>
-
-      <TestimonialStrip />
       <RequestBanner />
     </div>
   );

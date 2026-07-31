@@ -3,18 +3,12 @@ import {
   ArrowRight,
   BadgeCheck,
   BedDouble,
-  BriefcaseBusiness,
   Bus,
-  CheckCircle2,
-  ClipboardList,
-  Clock3,
   Crown,
-  Handshake,
   Headphones,
   Heart,
   Hotel,
   MapPinned,
-  Ship,
   Sparkles,
   Users,
   type LucideIcon,
@@ -24,13 +18,10 @@ import {
   Gold,
   IconFeature,
   PageHero,
+  PageSeo,
   PartnerMark,
-  Photo,
   PlanePath,
-  SectionTitle,
-  TestimonialStrip,
 } from '@/components/travel/Shared';
-
 type Service = {
   icon: LucideIcon;
   title: string;
@@ -40,94 +31,47 @@ type Service = {
 const services: Service[] = [
   {
     icon: Hotel,
-    title: 'Hotel Contracts',
-    copy: 'Strong partnerships with carefully selected hotels to offer the best value and availability.',
+    title: 'Hotel Contracting',
+    copy: 'Powerful negotiations, extensive market knowledge and long-standing relationships with hoteliers enable us to secure competitive contracts and attractive opportunities for our partners. We continuously monitor market developments, hotel availability and emerging trends to provide the right product mix for every programme.',
   },
   {
     icon: BedDouble,
-    title: 'Accommodation Management',
-    copy: 'End-to-end management of hotel bookings, room blocks, allotments and contracting.',
+    title: 'Management of Bookings',
+    copy: 'Our experienced operations team ensures the efficient management of accommodations, transfers, excursions and additional travel services. Through continuous monitoring and dedicated on-site support, we guarantee smooth operations and a seamless experience for both partners and guests.',
   },
   {
     icon: Bus,
     title: 'Transfers',
-    copy: 'Reliable private, shared and group transfers with modern vehicles and professional drivers.',
+    copy: 'Reliable transportation is at the heart of successful destination management. We provide high-quality transfer services, including coaches, minibuses, minivans, VIP transportation and accessible transport solutions, ensuring comfort, safety and efficiency at every stage of the journey.',
+  },
+  {
+    icon: Headphones,
+    title: 'Resort Assistance',
+    copy: 'Our multilingual representatives provide professional meet-and-greet services, in-resort assistance and continuous support throughout the guest journey. Backed by extensive local knowledge and destination expertise, our team ensures that travellers receive prompt assistance and personalised service whenever needed.',
   },
   {
     icon: MapPinned,
     title: 'Tours & Excursions',
-    copy: 'Curated experiences showcasing the culture, history and natural beauty of Rhodes & Kos.',
+    copy: 'We offer a carefully curated portfolio of tours, excursions, cruises and authentic local experiences designed to showcase the very best of each destination. Led by experienced guides and supported by our operational expertise, our programmes cater to a wide variety of interests, from culture and gastronomy to nature, adventure and leisure.',
   },
   {
     icon: Users,
-    title: 'MICE & Corporate Travel',
-    copy: 'Incentives, meetings, conferences and events planned with precision and local expertise.',
+    title: 'MICE & Groups',
+    copy: 'We specialise in the planning and delivery of meetings, conferences, incentive programmes, special interest groups, product launches and corporate events. Combining destination expertise, trusted local partnerships and meticulous planning, we create successful programmes tailored to each client\'s objectives.',
   },
   {
     icon: Heart,
     title: 'Weddings',
-    copy: 'Dream weddings in magical settings with personalized planning and flawless execution.',
+    copy: 'From intimate ceremonies to large-scale celebrations, our dedicated team designs and manages bespoke wedding experiences in some of Greece\'s most stunning locations. Every detail is carefully coordinated to ensure a seamless and memorable occasion.',
   },
   {
     icon: Crown,
-    title: 'VIP & Concierge Services',
-    copy: 'Tailor-made itineraries and exclusive services for VIPs and discerning travelers.',
-  },
-  {
-    icon: Ship,
-    title: 'Cruise & Shore Services',
-    copy: 'Shore excursions, port assistance and logistics for cruise lines and individual guests.',
-  },
-  {
-    icon: Clock3,
-    title: '24/7 Support',
-    copy: 'Round-the-clock assistance before, during and after your travel experience.',
+    title: 'XML API Connectivity & Agent Portal',
+    copy: 'Technology plays a key role in modern destination management. Through our XML API connectivity and dedicated Agent Portal, travel professionals can access products, services and booking solutions efficiently, benefiting from streamlined processes and enhanced operational flexibility.',
   },
 ];
 
-const clientGroups = [
-  {
-    icon: Handshake,
-    title: 'B2B Travel Partners',
-    copy: 'We act as your reliable DMC in Rhodes & Kos, delivering competitive rates, real-time support and dependable on-the-ground service.',
-    image: 'local-life.jpg',
-  },
-  {
-    icon: BriefcaseBusiness,
-    title: 'Corporate Clients',
-    copy: 'Professional planning and seamless execution for meetings, conferences, incentives and team building events.',
-    image: 'mice-hero.jpg',
-  },
-  {
-    icon: Users,
-    title: 'Leisure Groups',
-    copy: 'From cultural tours to island-hopping adventures, we create memorable experiences for groups of all sizes.',
-    image: 'local-life.jpg',
-  },
-];
 
-const process = [
-  {
-    icon: ClipboardList,
-    title: 'Plan',
-    copy: 'We listen, understand your needs and design the right program for your clients.',
-  },
-  {
-    icon: Users,
-    title: 'Coordinate',
-    copy: 'We handle all logistics, bookings and details with precision and local know-how.',
-  },
-  {
-    icon: CheckCircle2,
-    title: 'Deliver',
-    copy: 'We deliver exceptional experiences that exceed expectations on the ground.',
-  },
-  {
-    icon: Headphones,
-    title: 'Support',
-    copy: 'We are with you 24/7 before, during and after your trip.',
-  },
-];
 
 function ServiceCard({ icon: Icon, title, copy }: Service) {
   return (
@@ -147,58 +91,19 @@ function ServiceCard({ icon: Icon, title, copy }: Service) {
 export default function ServicesPage() {
   return (
     <div className="services-page">
+      <PageSeo title="Destination Management Services in Greece | Top Euro Travel" description="Explore destination management services in Greece, including hotel contracting, transfers, MICE, groups, excursions, weddings and XML API connectivity by Top Euro Travel." />
         <PageHero
           className="services-page__hero"
           image={`${ASSET}/services-hero.jpg`}
           breadcrumb="Services"
-          title={<><Gold>Our</Gold> Services</>}
+          title={<><Gold>Destination Management</Gold> Services</>}
         />
 
         <section className="services-page__catalog shell" aria-labelledby="services-intro">
-          <div className="services-page__intro" id="services-intro">
-            <h2>Comprehensive destination management services in Rhodes &amp; Kos.</h2>
-            <p>We combine local expertise, trusted partnerships, and seamless operations to create exceptional travel experiences.</p>
-          </div>
+          <div className="services-page__intro" id="services-intro"><h2>Comprehensive destination management services in Greece.</h2><p>At Top Euro Travel, we support tour operators, travel agencies, groups, event planners and travel professionals with reliable, flexible and tailor-made solutions. Combining local expertise, strong supplier relationships and decades of operational experience, we work across Greece with particular expertise in Rhodes and Kos.</p><p>From hotel contracting and ground handling to MICE, excursions and technology-driven solutions, our services are designed to ensure seamless operations and exceptional experiences for both our partners and their clients.</p></div>
 
           <div className="services-page__service-grid">
             {services.map((service) => <ServiceCard key={service.title} {...service} />)}
-          </div>
-        </section>
-
-        <section className="services-page__clients shell" aria-labelledby="client-support-title">
-          <SectionTitle><span id="client-support-title">How We Support Our Clients</span></SectionTitle>
-          <div className="services-page__client-grid">
-            {clientGroups.map(({ icon: Icon, title, copy, image }) => (
-              <article className="services-page__client-card" key={title}>
-                <div className="services-page__client-copy">
-                  <div className="services-page__round-icon"><Icon aria-hidden="true" /></div>
-                  <div>
-                    <h3>{title}</h3>
-                    <p>{copy}</p>
-                  </div>
-                  <PlanePath />
-                </div>
-                <div className="services-page__client-photo">
-                  <Photo src={`${ASSET}/${image}`} alt={title} />
-                </div>
-              </article>
-            ))}
-          </div>
-        </section>
-
-        <section className="services-page__process shell" aria-labelledby="process-title">
-          <SectionTitle><span id="process-title">Our Proven Process</span></SectionTitle>
-          <div className="services-page__process-row">
-            {process.map(({ icon: Icon, title, copy }, index) => (
-              <article className="services-page__process-step" key={title}>
-                <div className="services-page__process-icon"><Icon aria-hidden="true" /></div>
-                <div>
-                  <h3>{title}</h3>
-                  <p>{copy}</p>
-                </div>
-                {index < process.length - 1 && <span className="services-page__process-line" aria-hidden="true" />}
-              </article>
-            ))}
           </div>
         </section>
 
@@ -216,16 +121,11 @@ export default function ServicesPage() {
           </div>
         </section>
 
-        <section className="services-page__reviews" aria-labelledby="reviews-title">
-          <SectionTitle><span id="reviews-title">What Our Partners Say</span></SectionTitle>
-          <TestimonialStrip />
-        </section>
-
         <section className="services-page__request shell">
           <PlanePath />
           <div className="services-page__request-copy">
-            <h2>Tell us what you need — we’ll tailor the right solution.</h2>
-            <p>Share your requirements and our team will get back to you within 24 hours.</p>
+            <h2>Get in Touch</h2>
+            <p>Tell us about your requirements and discover how Top Euro Travel can support your business, event or travel programme with reliable destination management solutions.</p>
           </div>
           <Link className="button button--gold" to="/contact">ENQUIRE NOW</Link>
           <div className="services-page__request-features">

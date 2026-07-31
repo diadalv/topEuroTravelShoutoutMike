@@ -56,6 +56,49 @@
 
 
 
+
+
+/* Header logo scale */
+.site-header .brand-logo {
+  width: clamp(120px, 7vw, 140px);
+  height: auto;
+  max-height: 76px;
+}
+
+@media (max-width: 940px) {
+  .site-header .brand-logo {
+    width: 112px;
+    max-height: 66px;
+  }
+}
+
+/* Experiences category row */
+@media (min-width: 1051px) {
+  .experiences-page .experience-category-bar {
+    display: grid;
+    grid-template-columns: repeat(6, minmax(0, 1fr));
+    overflow: visible;
+  }
+}
+
+@media (max-width: 1050px) {
+  .experiences-page .experience-category-bar {
+    display: flex;
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    scrollbar-width: none;
+  }
+
+  .experiences-page .experience-category-bar::-webkit-scrollbar {
+    display: none;
+  }
+
+  .experiences-page .experience-category-bar button {
+    min-width: 150px;
+    flex: 0 0 150px;
+  }
+}
+
 /* Homepage lower-section readability */
 .home-page .why-strip .icon-feature h3 {
   font-size: 22px;

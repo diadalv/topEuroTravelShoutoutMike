@@ -9,8 +9,8 @@ export default function Footer() {
       <div className="site-footer__grid">
         <div className="footer-brand">
           <Image src={`${ASSET}/logo.png`} alt="Top Euro Travel" className="footer-logo" />
-          <p>Your trusted DMC in Rhodes &amp; Kos.</p>
-          <p>Local expertise, unforgettable experiences.</p>
+          <p>Destination management and ground handling in Rhodes &amp; Kos.</p>
+          <p>Supporting travel partners since 1989.</p>
         </div>
 
         <div className="footer-column footer-contact">
@@ -54,7 +54,7 @@ export default function Footer() {
       </div>
 
       <div className="site-footer__bottom">
-        <span>© 2024 Top Euro Travel. All Rights Reserved.</span>
+        <span>© 2026 Top Euro Travel. All Rights Reserved.</span>
         <div><Link to="/privacy">Privacy Policy</Link><i /><Link to="/terms">Terms &amp; Conditions</Link></div>
       </div>
     </footer>

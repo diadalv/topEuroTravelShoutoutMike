@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import { items } from '@wix/data';
 import { CalendarDays, Clock3, MapPin, UsersRound } from 'lucide-react';
 import type { Excursions } from '@/entities';
-import { ASSET, Gold, PageHero, Photo, RequestBanner } from '@/components/travel/Shared';
+import { ASSET, Gold, PageHero, PageSeo, Photo, RequestBanner } from '@/components/travel/Shared';
 
 const COLLECTION_ID = 'ExcursionsCMS';
 
@@ -59,23 +59,19 @@ export default function ExcursionsPage() {
 
   return (
     <div className="excursions-list-page">
+      <PageSeo title="Best Tours &amp; Excursions in Rhodes &amp; Kos | Top Euro Travel" description="Book tours and excursions in Rhodes and Kos, including boat trips, island cruises, cultural tours and authentic local experiences." />
       <PageHero
         className="excursions-list-hero"
-        title={<><Gold>Island</Gold> Excursions</>}
+        title={<><Gold>Tours &amp; Excursions</Gold> in Rhodes &amp; Kos</>}
         breadcrumb="Excursions"
         image={ASSET + '/excursions-hero.jpg'}
-        description={(
-          <>
-            Handpicked tours across Rhodes, Kos and the Dodecanese.<br />
-            Local knowledge, seamless planning and memorable island days.
-          </>
-        )}
+        description="Carefully selected tours, cruises and authentic local experiences in Rhodes and Kos."
       />
 
       <section className="shell excursions-list-intro">
-        <span>DISCOVER THE DODECANESE</span>
-        <h2>Find Your Next Island Experience</h2>
-        <p>Choose from our current excursions. Every tour below is managed through the Wix CMS and opens its own dynamic detail page.</p>
+        <span>DISCOVER RHODES &amp; KOS</span>
+        <h2>Experience Each Destination from a Unique Perspective</h2>
+        <p>Discover the very best of Rhodes and Kos through carefully selected tours, cruises and authentic local experiences. From cultural discoveries and island cruises to adventure activities and unforgettable days at sea, our excursions offer relaxation, culture, adventure and family-friendly activities for every traveller.</p>
       </section>
 
       {languages.length > 2 && (
