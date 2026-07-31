@@ -8,6 +8,7 @@ import {
   Crown,
   Footprints,
   Heart,
+  Landmark,
   MapPin,
   Mountain,
   Palmtree,
