@@ -73,11 +73,27 @@
 }
 
 /* Experiences category row */
+.experiences-page .experience-category-bar button svg {
+  width: 22px;
+  height: 22px;
+}
+
+.experiences-page .experience-trust-item svg {
+  width: 26px;
+  height: 26px;
+  margin-bottom: 10px;
+}
 @media (min-width: 1051px) {
   .experiences-page .experience-category-bar {
     display: grid;
-    grid-template-columns: repeat(6, minmax(0, 1fr));
+    grid-template-columns: repeat(7, minmax(0, 1fr));
     overflow: visible;
+  }
+
+  .experiences-page .experience-category-bar button {
+    min-height: 78px;
+    gap: 6px;
+    padding: 10px 6px;
   }
 }
 
