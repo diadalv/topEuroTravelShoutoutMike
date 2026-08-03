@@ -15,7 +15,6 @@ import {
   Send,
   Luggage,
   Users,
-  Youtube,
 } from 'lucide-react';
 import {
   ASSET,
@@ -120,10 +119,10 @@ export default function ContactPage() {
                   <div className="contact-socials">
                     <h3>Follow Us</h3>
                     <div>
-                      <a href="https://www.linkedin.com" aria-label="LinkedIn"><Linkedin /></a>
-                      <a href="https://www.facebook.com" aria-label="Facebook"><Facebook /></a>
-                      <a href="https://www.instagram.com" aria-label="Instagram"><Instagram /></a>
-                      <a href="https://www.youtube.com" aria-label="YouTube"><Youtube /></a>
+                      <a href="https://www.linkedin.com/company/topeurotravel/" target="_blank" rel="noreferrer" aria-label="Top Euro Travel on LinkedIn"><Linkedin /></a>
+                      <a href="https://www.facebook.com/TopEuroTravel" target="_blank" rel="noreferrer" aria-label="Top Euro Travel on Facebook"><Facebook /></a>
+                      <a href="https://www.instagram.com/topeurotravel_" target="_blank" rel="noreferrer" aria-label="Top Euro Travel on Instagram"><Instagram /></a>
+                      <a href="https://share.google/ToaSglTwqTdfUG8Gf" target="_blank" rel="noreferrer" aria-label="Top Euro Travel on Google"><Map /></a>
                     </div>
                   </div>
                 </div>

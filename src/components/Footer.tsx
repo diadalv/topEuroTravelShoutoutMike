@@ -1,4 +1,4 @@
-import { Facebook, Instagram, Linkedin, Mail, MapPin, Phone, Youtube } from 'lucide-react';
+import { Facebook, Instagram, Linkedin, Mail, MapPin, Phone } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { Image } from '@/components/ui/image';
 import { ASSET, PartnerMark } from '@/components/travel/Shared';
@@ -45,10 +45,10 @@ export default function Footer() {
         <div className="footer-column footer-social">
           <h3>Follow Us</h3>
           <div>
-            <a href="https://www.linkedin.com" aria-label="LinkedIn"><Linkedin /></a>
-            <a href="https://www.facebook.com" aria-label="Facebook"><Facebook /></a>
-            <a href="https://www.instagram.com" aria-label="Instagram"><Instagram /></a>
-            <a href="https://www.youtube.com" aria-label="YouTube"><Youtube /></a>
+            <a href="https://www.linkedin.com/company/topeurotravel/" target="_blank" rel="noreferrer" aria-label="Top Euro Travel on LinkedIn"><Linkedin /></a>
+            <a href="https://www.facebook.com/TopEuroTravel" target="_blank" rel="noreferrer" aria-label="Top Euro Travel on Facebook"><Facebook /></a>
+            <a href="https://www.instagram.com/topeurotravel_" target="_blank" rel="noreferrer" aria-label="Top Euro Travel on Instagram"><Instagram /></a>
+            <a href="https://share.google/ToaSglTwqTdfUG8Gf" target="_blank" rel="noreferrer" aria-label="Top Euro Travel on Google"><MapPin /></a>
           </div>
         </div>
       </div>
