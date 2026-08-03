@@ -1,6 +1,6 @@
 import { useEffect, useMemo, useState } from 'react';
 import { Link, useParams } from 'react-router-dom';
-import { BaseCrudService } from '@/integrations';
+import { ExcursionCatalogService, type ExcursionCatalogRecord } from '@/integrations';
 import {
   Accessibility,
   BusFront,
@@ -22,12 +22,9 @@ import {
   Waves,
   type LucideIcon,
 } from 'lucide-react';
-import type { Excursions } from '@/entities';
 import { PageHero, Photo, PlanePath, RequestBanner } from '@/components/travel/Shared';
 
-const COLLECTION_ID = 'ExcursionsCMS';
-
-type ExcursionRecord = Excursions & Record<string, unknown>;
+type ExcursionRecord = ExcursionCatalogRecord & Record<string, unknown>;
 type Spec = { icon: LucideIcon; label: string; value: string };
 
 function richTextToText(value?: unknown) {
@@ -119,13 +116,10 @@ export default function ExcursionDetailPage() {
     setLoading(true);
     setError('');
 
-    BaseCrudService.getAll<Excursions>(COLLECTION_ID, {}, { limit: 100 })
-      .then((result) => {
+    ExcursionCatalogService.getBySlug(slug)
+      .then((excursion) => {
         if (!active) return;
-        const excursion = (result.items || []).find(
-          (item) => item.slug === slug && item.active,
-        ) as ExcursionRecord | undefined;
-        setRecord(excursion || null);
+        setRecord((excursion as ExcursionRecord | null) || null);
         if (!excursion) setError('We could not find this excursion.');
       })
       .catch((reason) => {
@@ -206,6 +200,7 @@ export default function ExcursionDetailPage() {
   const itineraryImages = images.length ? images : [record.mainImage || record.coverImage].filter(Boolean) as string[];
   const price = record.adultPrice ? `€${Number(record.adultPrice).toFixed(0)}` : record.priceLabel || 'On request';
   const bookingUrl = record.bookingUrl || '/contact';
+  const bookingLabel = record.bookingAvailable ? 'CHECK AVAILABILITY' : 'ENQUIRE NOW';
 
   return (
     <div className="excursion-detail-page">
@@ -235,7 +230,7 @@ export default function ExcursionDetailPage() {
           <span>from</span>
           <strong>{price}</strong>
           <p>per person</p>
-          <a className="button button--gold" href={bookingUrl}>BOOK / ENQUIRE NOW</a>
+          <a className="button button--gold" href={bookingUrl}>{bookingLabel}</a>
           <div><ShieldCheck aria-hidden="true" /><p><strong>Free Cancellation</strong><span>Up to 24h before departure</span></p></div>
         </aside>
       </section>

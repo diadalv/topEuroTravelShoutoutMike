@@ -1,13 +1,10 @@
 import { useEffect, useMemo, useState } from 'react';
 import { Link } from 'react-router-dom';
-import { BaseCrudService } from '@/integrations';
+import { ExcursionCatalogService, type ExcursionCatalogRecord } from '@/integrations';
 import { CalendarDays, Clock3, MapPin, UsersRound } from 'lucide-react';
-import type { Excursions } from '@/entities';
 import { ASSET, Gold, PageHero, PageSeo, Photo, RequestBanner } from '@/components/travel/Shared';
 
-const COLLECTION_ID = 'ExcursionsCMS';
-
-type ExcursionRecord = Excursions & Record<string, unknown>;
+type ExcursionRecord = ExcursionCatalogRecord & Record<string, unknown>;
 
 function richTextToText(value?: unknown) {
   if (!value) return '';
@@ -26,11 +23,10 @@ export default function ExcursionsPage() {
   useEffect(() => {
     let active = true;
 
-    BaseCrudService.getAll<Excursions>(COLLECTION_ID, {}, { limit: 100 })
+    ExcursionCatalogService.getAll()
       .then((result) => {
         if (active) {
-          const filtered = (result.items || []).filter((item) => item.active);
-          setRecords(filtered as ExcursionRecord[]);
+          setRecords(result as ExcursionRecord[]);
         }
       })
       .catch((reason) => {
