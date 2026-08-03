@@ -50,6 +50,7 @@ type BookingServiceRecord = {
     items?: Array<{ image?: BookingImage }>;
   };
   mainSlug?: { name?: string | null };
+  supportedSlugs?: Array<{ name?: string | null }>;
   urls?: {
     bookingPage?: string;
     calendarPage?: string;
@@ -95,6 +96,29 @@ function bookingImageUrl(image?: BookingImage) {
   return `wix:image://v1/${id}/${filename}${dimensions}`;
 }
 
+function getBookingServiceSlug(service: BookingServiceRecord) {
+  return service.mainSlug?.name?.trim()
+    || service.supportedSlugs?.find((slug) => slug.name)?.name?.trim()
+    || undefined;
+}
+
+function bookingCalendarUrl(service: BookingServiceRecord) {
+  const serviceSlug = getBookingServiceSlug(service);
+  if (serviceSlug) {
+    return `/booking-calendar/${encodeURIComponent(serviceSlug)}`;
+  }
+
+  const nativeUrl = service.urls?.calendarPage || service.urls?.bookingPage;
+  if (!nativeUrl) return undefined;
+
+  try {
+    const url = new URL(nativeUrl, 'https://wix-site.invalid');
+    return `${url.pathname}${url.search}${url.hash}`;
+  } catch {
+    return nativeUrl.startsWith('/') ? nativeUrl : undefined;
+  }
+}
+
 function priceFromService(service: BookingServiceRecord): ServicePrice {
   const payment = service.payment;
   const rateType = payment?.rateType;
@@ -135,7 +159,8 @@ function mergeWithBookingService(
   service: BookingServiceRecord,
 ): ExcursionCatalogRecord {
   const price = priceFromService(service);
-  const nativeBookingUrl = service.urls?.calendarPage || service.urls?.bookingPage || service.urls?.servicePage;
+  const serviceSlug = getBookingServiceSlug(service);
+  const nativeBookingUrl = bookingCalendarUrl(service);
   const bookingNativeVisible = service.hidden !== true;
   const bookingAvailable = bookingNativeVisible
     && service.onlineBooking?.enabled === true
@@ -157,7 +182,7 @@ function mergeWithBookingService(
     bookingAvailable,
     bookingRateType: service.payment?.rateType,
     bookingCurrency: price.currency,
-    bookingServiceSlug: service.mainSlug?.name || undefined,
+    bookingServiceSlug: serviceSlug,
     bookingRequiresApproval: service.onlineBooking?.requireManualApproval === true,
     bookingNativeVisible,
   };

@@ -200,7 +200,7 @@ export default function ExcursionDetailPage() {
   const itineraryImages = images.length ? images : [record.mainImage || record.coverImage].filter(Boolean) as string[];
   const price = record.adultPrice ? `€${Number(record.adultPrice).toFixed(0)}` : record.priceLabel || 'On request';
   const bookingUrl = record.bookingUrl || '/contact';
-  const bookingLabel = record.bookingAvailable ? 'CHECK AVAILABILITY' : 'ENQUIRE NOW';
+  const bookingLabel = record.bookingAvailable ? 'BOOK NOW' : 'ENQUIRE NOW';
 
   return (
     <div className="excursion-detail-page">
