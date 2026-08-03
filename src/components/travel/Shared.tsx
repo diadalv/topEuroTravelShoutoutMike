@@ -182,7 +182,7 @@ export function SectionTitle({
 
 export function PlanePath({ className = '' }: { className?: string }) {
   return (
-    <div className={`plane-path ${className}`} aria-hidden="true">
+    <div className={`plane-path plane-path--animated ${className}`} aria-hidden="true">
       <span />
       <Plane />
     </div>

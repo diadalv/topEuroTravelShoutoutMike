@@ -1,0 +1,74 @@
+/* Shared decorative airplane motion. The plane follows the visible dashed arc
+   without moving the surrounding layout. */
+.plane-path--animated {
+  --plane-flight-duration: 3.8s;
+  overflow: visible;
+  pointer-events: none;
+}
+
+.plane-path--animated svg,
+.home-page .plane-path--animated svg,
+.home-page .request-banner > .plane-path--animated svg {
+  animation: plane-path-flight var(--plane-flight-duration) cubic-bezier(0.45, 0, 0.2, 1) infinite;
+  filter: drop-shadow(0 4px 7px rgba(206, 132, 17, 0.2));
+  transform-origin: center;
+  will-change: transform, opacity;
+}
+
+.plane-path--animated > span,
+.home-page .plane-path--animated > span {
+  animation: plane-path-trail var(--plane-flight-duration) ease-in-out infinite;
+}
+
+@keyframes plane-path-flight {
+  0% {
+    opacity: 0;
+    transform: translate(-68px, 32px) rotate(-8deg) scale(0.72);
+  }
+  14% {
+    opacity: 0.7;
+  }
+  32% {
+    opacity: 1;
+    transform: translate(-51px, 25px) rotate(-16deg) scale(0.82);
+  }
+  62% {
+    opacity: 1;
+    transform: translate(-25px, 13px) rotate(-25deg) scale(0.94);
+  }
+  84% {
+    opacity: 1;
+    transform: translate(-5px, 2px) rotate(-20deg) scale(1);
+  }
+  100% {
+    opacity: 0;
+    transform: translate(8px, -5px) rotate(-16deg) scale(0.96);
+  }
+}
+
+@keyframes plane-path-trail {
+  0%,
+  100% {
+    opacity: 0.35;
+  }
+  38%,
+  78% {
+    opacity: 1;
+  }
+}
+
+@media (max-width: 700px) {
+  .plane-path--animated {
+    --plane-flight-duration: 4.2s;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .plane-path--animated svg,
+  .home-page .plane-path--animated svg,
+  .home-page .request-banner > .plane-path--animated svg,
+  .plane-path--animated > span,
+  .home-page .plane-path--animated > span {
+    animation: none;
+  }
+}
