@@ -18,7 +18,7 @@ import {
   type LucideIcon,
 } from 'lucide-react';
 import {
-  ASSET,
+  travelMedia,
   Gold,
   IconFeature,
   PageHero,
@@ -121,7 +121,7 @@ function ProgramCardComponent({ icon: Icon, title, copy, image, position }: Prog
     <article className="mice-page__program-card">
       <div className="mice-page__program-photo">
         <Photo
-          src={`${ASSET}/${image}`}
+          src={travelMedia(image)}
           alt={title}
           className={position ? `mice-page__photo--${position}` : ''}
         />
@@ -161,7 +161,7 @@ export default function MiceGroupsPage() {
       <PageSeo title="MICE &amp; Group Travel Services in Greece | Top Euro Travel" description="Professional MICE and group travel services in Greece for meetings, incentives, conferences, events and tailor-made group programmes." />
         <PageHero
           className="mice-page__hero"
-          image={`${ASSET}/mice-hero.jpg`}
+          image={travelMedia('mice-hero.jpg')}
           breadcrumb="MICE & Groups"
           title={<><Gold>MICE &amp; Group</Gold> Travel Solutions</>}
           description="Meetings, incentives, conferences, events and tailor-made group programmes across Greece."
@@ -210,7 +210,7 @@ export default function MiceGroupsPage() {
             <div className="mice-page__moment-grid">
               {moments.map(([image, alt]) => (
                 <div className="mice-page__moment" key={image}>
-                  <Photo src={`${ASSET}/${image}`} alt={alt} />
+                  <Photo src={travelMedia(image)} alt={alt} />
                 </div>
               ))}
             </div>

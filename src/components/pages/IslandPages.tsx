@@ -1,7 +1,7 @@
 import { useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { Heart, Landmark, MapPin, Sparkles, Utensils, Waves, type LucideIcon } from 'lucide-react';
-import { ASSET, Gold, IconFeature, PageHero, PageSeo, Photo, SectionTitle } from '@/components/travel/Shared';
+import { Gold, IconFeature, PageHero, PageSeo, Photo, SectionTitle, travelMedia } from '@/components/travel/Shared';
 
 type IslandData = {
   name: string;
@@ -79,7 +79,7 @@ function IslandPage({ island }: { island: IslandData }) {
       <PageHero
         title={<><Gold>{island.heading.split(':')[0]}</Gold>{island.heading.includes(':') ? `:${island.heading.split(':').slice(1).join(':')}` : ''}</>}
         breadcrumb={island.name}
-        image={`${ASSET}/${island.hero}`}
+        image={travelMedia(island.hero)}
       />
 
       <section className="section shell island-intro island-reveal" data-island-reveal>
@@ -89,7 +89,7 @@ function IslandPage({ island }: { island: IslandData }) {
           <p>{island.introduction}</p>
           <Link className="button button--gold" to="/contact">PLAN YOUR {island.name.toUpperCase()} JOURNEY</Link>
         </div>
-        <div className="island-intro__image"><Photo src={`${ASSET}/${island.image}`} alt={`${island.name} landscape`} /></div>
+        <div className="island-intro__image"><Photo src={travelMedia(island.image)} alt={`${island.name} landscape`} /></div>
       </section>
 
       <section className="section--tight shell island-section island-reveal" data-island-reveal>
@@ -104,7 +104,7 @@ function IslandPage({ island }: { island: IslandData }) {
         <div className="island-gallery">
           {island.gallery.map(([title, image]) => (
             <article key={title}>
-              <div><Photo src={`${ASSET}/${image}`} alt={title} /></div>
+              <div><Photo src={travelMedia(image)} alt={title} /></div>
               <h3>{title}</h3>
             </article>
           ))}

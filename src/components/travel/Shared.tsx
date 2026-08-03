@@ -13,13 +13,14 @@ import {
   type LucideIcon,
 } from 'lucide-react';
 import { Image } from '@/components/ui/image';
-
-export const ASSET = '/assets/travel';
+import { travelMedia } from '@/config/wix-media';
 type NavigationItem = {
   label: string;
   to: string;
   children?: Array<{ label: string; to: string }>;
 };
+
+export { travelMedia };
 
 const navigation: NavigationItem[] = [
   { label: 'ABOUT', to: '/about' },
@@ -61,7 +62,7 @@ export function SiteHeader() {
       <a className="skip-link" href="#main-content">Skip to main content</a>
       <div className="site-header__inner">
         <Link to="/" className="brand-link" aria-label="Top Euro Travel home" onClick={closeNavigation}>
-          <Image src={`${ASSET}/logo.png`} alt="Top Euro Travel" className="brand-logo" />
+          <Image src={travelMedia('logo.png')} alt="Top Euro Travel" className="brand-logo" />
         </Link>
 
         <button

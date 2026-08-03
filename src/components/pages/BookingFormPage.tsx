@@ -15,7 +15,7 @@ import {
   UserRound,
   UsersRound,
 } from 'lucide-react';
-import { ASSET, PageHero, Photo } from '@/components/travel/Shared';
+import { PageHero, Photo, travelMedia } from '@/components/travel/Shared';
 import '@/styles/booking-flow.css';
 
 type BookingService = { id: string; slug: string; name: string; description?: string; image?: string };
@@ -190,7 +190,7 @@ export default function BookingFormPage() {
     }
   };
 
-  const heroImage = data?.service.image || `${ASSET}/excursions-hero.jpg`;
+  const heroImage = data?.service.image || travelMedia('excursions-hero.jpg');
   const selectedDate = selectedSlot ? new Date(selectedSlot.localStartDate) : null;
 
   return (

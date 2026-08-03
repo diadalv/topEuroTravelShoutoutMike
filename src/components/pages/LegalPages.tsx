@@ -1,6 +1,6 @@
 import { type ReactNode } from 'react';
 import { CalendarDays, ShieldCheck } from 'lucide-react';
-import { ASSET, PageHero } from '@/components/travel/Shared';
+import { PageHero, travelMedia } from '@/components/travel/Shared';
 
 function LegalPage({
   title,
@@ -15,7 +15,7 @@ function LegalPage({
 }) {
   return (
     <>
-      <PageHero title={title} breadcrumb={breadcrumb} image={`${ASSET}/agents-hero.jpg`} />
+      <PageHero title={title} breadcrumb={breadcrumb} image={travelMedia('agents-hero.jpg')} />
       <section className="section shell legal-page">
         <div className="legal-page__meta"><CalendarDays /><span>Last updated: {updated}</span></div>
         <div className="legal-page__content">{children}</div>

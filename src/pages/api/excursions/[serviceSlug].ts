@@ -7,6 +7,7 @@ import {
 } from '@wix/bookings';
 import { checkout } from '@wix/ecom';
 import { forms } from '@wix/forms';
+import { normalizeWixMediaImage } from '@/config/wix-media';
 
 export const prerender = false;
 
@@ -74,17 +75,7 @@ function serviceSlug(service: BookingService) {
 }
 
 function bookingImageUrl(image?: BookingImage) {
-  if (!image) return '';
-  if (typeof image === 'string') return image;
-  if (image.url?.startsWith('http') || image.url?.startsWith('wix:image://')) return image.url;
-
-  const id = image.id || image.url;
-  if (!id) return '';
-  const filename = encodeURIComponent(image.filename || 'excursion');
-  const dimensions = image.width && image.height
-    ? `#originWidth=${image.width}&originHeight=${image.height}`
-    : '';
-  return `wix:image://v1/${id}/${filename}${dimensions}`;
+  return normalizeWixMediaImage(image) || '';
 }
 
 async function findPublicExcursionService(slug: string) {

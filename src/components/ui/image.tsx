@@ -4,7 +4,8 @@ import { useSize } from '@/hooks/use-size'
 import './image.css'
 import { cn } from '@/lib/utils';
 
-const FALLBACK_IMAGE_URL = "https://static.wixstatic.com/media/12d367_4f26ccd17f8f4e3a8958306ea08c2332~mv2.png";
+import { DEFAULT_WIX_IMAGE } from '@/config/wix-media';
+const FALLBACK_IMAGE_URL = DEFAULT_WIX_IMAGE;
 
 type ImageData = {
   id: string
@@ -158,7 +159,7 @@ export const Image = forwardRef<HTMLImageElement, ImageProps>(
       return <div data-empty-image ref={ref} {...props} />
     }
 
-    const imageProps = { ...props, onError: () => setImgSrc(FALLBACK_IMAGE_URL) }
+    const imageProps = { ...props, onError: () => setImgSrc((current) => current === FALLBACK_IMAGE_URL ? current : FALLBACK_IMAGE_URL) }
     const imageData = getImageData(imgSrc, additionalImgProps)
 
     if (!imageData) {

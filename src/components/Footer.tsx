@@ -1,14 +1,14 @@
 import { Facebook, Instagram, Linkedin, Mail, MapPin, Phone } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { Image } from '@/components/ui/image';
-import { ASSET, PartnerMark } from '@/components/travel/Shared';
+import { PartnerMark, travelMedia } from '@/components/travel/Shared';
 
 export default function Footer() {
   return (
     <footer className="site-footer">
       <div className="site-footer__grid">
         <div className="footer-brand">
-          <Image src={`${ASSET}/logo.png`} alt="Top Euro Travel" className="footer-logo" />
+          <Image src={travelMedia('logo.png')} alt="Top Euro Travel" className="footer-logo" />
           <p>Destination management and ground handling in Rhodes &amp; Kos.</p>
           <p>Supporting travel partners since 1989.</p>
         </div>

@@ -23,7 +23,7 @@ import {
   X,
 } from 'lucide-react';
 import {
-  ASSET,
+  travelMedia,
   IconFeature,
   PageSeo,
   Photo,
@@ -47,12 +47,12 @@ const floatingServices = [
 const destinations = [
   {
     name: "Rhodes",
-    image: `${ASSET}/lindos.jpg`,
+    image: travelMedia('lindos.jpg'),
     copy: "Rhodes is one of Greece's leading tourism destinations, renowned for its rich history, diverse landscapes and exceptional hospitality infrastructure.",
   },
   {
     name: "Kos",
-    image: `${ASSET}/kallithea.jpg`,
+    image: travelMedia('kallithea.jpg'),
     copy: "Kos combines authentic island charm with excellent tourism infrastructure, beautiful beaches, cultural landmarks and a relaxed atmosphere.",
   },
 ];
@@ -119,7 +119,7 @@ export default function TravelHomePage() {
   return (
     <div className="home-page">
       <PageSeo title="Destination Management Company in Greece | Rhodes &amp; Kos DMC | Top Euro Travel" description="Top Euro Travel is a trusted destination management company in Greece, providing DMC services, hotel contracting, transfers, MICE, groups, excursions and ground handling in Rhodes and Kos since 1989." />
-      <section className="home-hero" style={{ backgroundImage: `url("${ASSET}/home-hero-v2.jpg")` }}>
+      <section className="home-hero" style={{ backgroundImage: `url("${travelMedia('home-hero-v2.jpg')}")` }}>
         <div className="home-hero__content shell">
           <h1><span className="text-gold">Your Trusted DMC Partner in</span>Rhodes &amp; Kos</h1>
           <p className="home-hero__lead">Delivering destination management, ground handling<br />and travel solutions since 1989.</p>
@@ -149,7 +149,7 @@ export default function TravelHomePage() {
         >
           <section className="video-modal__dialog" role="dialog" aria-modal="true" aria-labelledby="highlights-title">
             <button className="video-modal__close" type="button" aria-label="Close highlights" autoFocus onClick={() => setHighlightsOpen(false)}><X /></button>
-            <div className="video-modal__visual"><span className="video-modal__play" aria-hidden="true"><Play /></span></div>
+            <div className="video-modal__visual" style={{ backgroundImage: `linear-gradient(rgba(0, 46, 83, 0.18), rgba(0, 46, 83, 0.42)), url("${travelMedia('home-hero-v2.jpg')}")` }}><span className="video-modal__play" aria-hidden="true"><Play /></span></div>
             <div className="video-modal__copy">
               <div><h2 id="highlights-title">Discover Rhodes &amp; Kos</h2><p>Culture, island life, sailing and tailor-made experiences selected by our local team.</p></div>
               <Link className="button button--gold" to="/experiences" onClick={() => setHighlightsOpen(false)}>EXPLORE EXPERIENCES</Link>
@@ -185,7 +185,7 @@ export default function TravelHomePage() {
         </div>
         <div className="home-welcome__visual">
           <Photo
-            src={`${ASSET}/home-welcome-v2.jpg`}
+            src={travelMedia('home-welcome-v2.jpg')}
             alt="Aegean sea and white chapel"
           />
           <PlanePath className="home-plane home-plane--welcome" />
@@ -223,7 +223,7 @@ export default function TravelHomePage() {
       <section className="section--tight shell">
         <div className="mice-feature">
           <Photo
-            src={`${ASSET}/home-mice-v2.jpg`}
+            src={travelMedia('home-mice-v2.jpg')}
             alt="Corporate meeting venue"
           />
           <div className="mice-feature__copy">
@@ -247,7 +247,7 @@ export default function TravelHomePage() {
           {experiences.map(([title, image]) => (
             <Link className="experience-thumb" key={title} to="/experiences">
               <div className="experience-thumb__image">
-                <Photo src={`${ASSET}/${image}`} alt={title} />
+                <Photo src={travelMedia(image)} alt={title} />
                 <div className="experience-thumb__content">
                   <strong className="experience-thumb__label">{title}</strong>
                 </div>

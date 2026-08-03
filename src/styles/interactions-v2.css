@@ -127,9 +127,9 @@ form[aria-busy="true"] button[type="submit"] {
   min-height: 330px;
   display: grid;
   place-items: center;
-  background:
-    linear-gradient(rgba(0, 46, 83, 0.18), rgba(0, 46, 83, 0.42)),
-    url("/assets/travel/home-hero-v2.jpg") center / cover;
+  background-color: var(--navy-dark);
+  background-position: center;
+  background-size: cover;
 }
 
 .video-modal__play {

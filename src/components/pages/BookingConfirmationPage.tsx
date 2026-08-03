@@ -7,7 +7,7 @@ import {
   Phone,
   ShieldCheck,
 } from 'lucide-react';
-import { ASSET, PageHero } from '@/components/travel/Shared';
+import { PageHero, travelMedia } from '@/components/travel/Shared';
 import '@/styles/booking-flow.css';
 
 export default function BookingConfirmationPage() {
@@ -20,7 +20,7 @@ export default function BookingConfirmationPage() {
         className="booking-flow-hero booking-confirmation-hero"
         title="Reservation Confirmed"
         breadcrumb="Reservation confirmation"
-        image={`${ASSET}/excursions-hero.jpg`}
+        image={travelMedia('excursions-hero.jpg')}
         description="Your island experience is now one step closer."
       />
 

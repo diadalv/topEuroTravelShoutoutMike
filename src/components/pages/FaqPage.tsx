@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom';
 import { CircleHelp } from 'lucide-react';
-import { ASSET, Gold, PageHero, PageSeo } from '@/components/travel/Shared';
+import { Gold, PageHero, PageSeo, travelMedia } from '@/components/travel/Shared';
 
 const faqs = [
   ['What services does Top Euro Travel provide in Greece?', 'Top Euro Travel offers comprehensive destination management services, including hotel contracting, transfers, ground handling, excursions, MICE, groups, weddings, VIP services and tailor-made travel programmes.'],
@@ -28,7 +28,7 @@ export default function FaqPage() {
       <PageHero
         title={<><Gold>Frequently Asked</Gold> Questions</>}
         breadcrumb="FAQ"
-        image={`${ASSET}/contact-hero.jpg`}
+        image={travelMedia('contact-hero.jpg')}
         description="Clear answers about our destinations, services, bookings and partner support."
       />
 

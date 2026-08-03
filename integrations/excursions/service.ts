@@ -1,5 +1,6 @@
 import { services } from '@wix/bookings';
 import type { Excursions } from '@/entities';
+import { normalizeWixMediaImage, travelMedia } from '@/config/wix-media';
 import { BaseCrudService } from '../cms';
 
 const COLLECTION_ID = 'ExcursionsCMS';
@@ -83,17 +84,22 @@ function labeledPrice(value: string | undefined, label: string) {
 }
 
 function bookingImageUrl(image?: BookingImage) {
-  if (!image) return undefined;
-  if (typeof image === 'string') return image;
+  return normalizeWixMediaImage(image);
+}
 
-  if (image.url?.startsWith('http') || image.url?.startsWith('wix:image://')) return image.url;
-  const id = image.id || image.url;
-  if (!id) return undefined;
-  const filename = encodeURIComponent(image.filename || 'booking-image');
-  const dimensions = image.width && image.height
-    ? `#originWidth=${image.width}&originHeight=${image.height}`
-    : '';
-  return `wix:image://v1/${id}/${filename}${dimensions}`;
+function withVerifiedCmsImages(cmsRecord: Excursions): Excursions {
+  const mainImage = normalizeWixMediaImage(cmsRecord.mainImage)
+    || normalizeWixMediaImage(cmsRecord.coverImage)
+    || travelMedia('excursions-hero.jpg');
+
+  return {
+    ...cmsRecord,
+    mainImage,
+    coverImage: normalizeWixMediaImage(cmsRecord.coverImage) || mainImage,
+    galleryImage1: normalizeWixMediaImage(cmsRecord.galleryImage1),
+    galleryImage2: normalizeWixMediaImage(cmsRecord.galleryImage2),
+    galleryImage3: normalizeWixMediaImage(cmsRecord.galleryImage3),
+  };
 }
 
 function getBookingServiceSlug(service: BookingServiceRecord) {
@@ -222,8 +228,8 @@ function bookingOnlyRecord(service: BookingServiceRecord): ExcursionCatalogRecor
     shortDescription: service.tagLine || service.description || 'Discover Rhodes and Kos with local experts.',
     overview: service.description || service.tagLine || '',
     tourGroup: 'Excursion',
-    mainImage: image,
-    coverImage: bookingImageUrl(service.media?.coverMedia?.image) || image,
+    mainImage: image || travelMedia('excursions-hero.jpg'),
+    coverImage: bookingImageUrl(service.media?.coverMedia?.image) || image || travelMedia('excursions-hero.jpg'),
     capacity: service.defaultCapacity ?? undefined,
     adultPrice: price.adultPrice,
     childPrice: price.childPrice,
@@ -246,7 +252,9 @@ function bookingOnlyRecord(service: BookingServiceRecord): ExcursionCatalogRecor
 export class ExcursionCatalogService {
   static async getAll(): Promise<ExcursionCatalogRecord[]> {
     const cmsResult = await BaseCrudService.getAll<Excursions>(COLLECTION_ID, {}, { limit: 100 });
-    const activeCmsRecords = (cmsResult.items || []).filter((item) => item.active);
+    const activeCmsRecords = (cmsResult.items || [])
+      .filter((item) => item.active)
+      .map(withVerifiedCmsImages);
 
     let bookingServices: BookingServiceRecord[];
     try {

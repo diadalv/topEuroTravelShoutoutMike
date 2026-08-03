@@ -14,7 +14,7 @@ import {
   type LucideIcon,
 } from 'lucide-react';
 import {
-  ASSET,
+  travelMedia,
   Gold,
   IconFeature,
   PageHero,
@@ -94,7 +94,7 @@ export default function ServicesPage() {
       <PageSeo title="Destination Management Services in Greece | Top Euro Travel" description="Explore destination management services in Greece, including hotel contracting, transfers, MICE, groups, excursions, weddings and XML API connectivity by Top Euro Travel." />
         <PageHero
           className="services-page__hero"
-          image={`${ASSET}/services-hero.jpg`}
+          image={travelMedia('services-hero.jpg')}
           breadcrumb="Services"
           title={<><Gold>Destination Management</Gold> Services</>}
         />

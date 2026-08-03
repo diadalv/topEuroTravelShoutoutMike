@@ -2,7 +2,7 @@ import { useEffect, useMemo, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { ExcursionCatalogService, type ExcursionCatalogRecord } from '@/integrations';
 import { CalendarDays, Clock3, MapPin, UsersRound } from 'lucide-react';
-import { ASSET, Gold, PageHero, PageSeo, Photo, RequestBanner } from '@/components/travel/Shared';
+import { Gold, PageHero, PageSeo, Photo, RequestBanner, travelMedia } from '@/components/travel/Shared';
 
 type ExcursionRecord = ExcursionCatalogRecord & Record<string, unknown>;
 
@@ -58,7 +58,7 @@ export default function ExcursionsPage() {
         className="excursions-list-hero"
         title={<><Gold>Tours &amp; Excursions</Gold> in Rhodes &amp; Kos</>}
         breadcrumb="Excursions"
-        image={ASSET + '/excursions-hero.jpg'}
+        image={travelMedia('excursions-hero.jpg')}
         description="Carefully selected tours, cruises and authentic local experiences in Rhodes and Kos."
       />
 

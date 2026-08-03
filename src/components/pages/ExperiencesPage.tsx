@@ -22,7 +22,7 @@ import {
   type LucideIcon,
 } from 'lucide-react';
 import {
-  ASSET,
+  travelMedia,
   Gold,
   PageHero,
   PageSeo,
@@ -102,7 +102,7 @@ export default function ExperiencesPage() {
           className="experiences-hero"
           title={<><Gold>Curated</Gold> Experiences</>}
           breadcrumb="Experiences"
-          image={`${ASSET}/experiences-hero.jpg`}
+          image={travelMedia('experiences-hero.jpg')}
           description="Cultural discoveries, authentic gastronomy, sailing adventures and outdoor activities tailored to every interest."
         />
 
@@ -153,7 +153,7 @@ export default function ExperiencesPage() {
             <div className={`experience-card-grid${visibleCategories.length === 1 ? ' experience-card-grid--single' : ''}`} aria-live="polite">
             {visibleCategories.map(({ title, icon: Icon, image }) => (
               <article className="experience-tile card" key={title}>
-                <Photo src={`${ASSET}/${image}`} alt={title} />
+                <Photo src={travelMedia(image)} alt={title} />
                 <span className="experience-tile__icon"><Icon /></span>
                 <h3>{title}</h3>
               </article>
@@ -166,7 +166,7 @@ export default function ExperiencesPage() {
             <div className="experience-recommendation-grid">
               {recommendations.map(({ title, copy, image, icon: Icon }) => (
                 <article className="recommendation-card card" key={title}>
-                  <Photo src={`${ASSET}/${image}`} alt={title} />
+                  <Photo src={travelMedia(image)} alt={title} />
                   <span className="recommendation-card__icon"><Icon /></span>
                   <div>
                     <h3>{title}</h3>

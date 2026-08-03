@@ -17,7 +17,7 @@ import {
   Users,
 } from 'lucide-react';
 import {
-  ASSET,
+  travelMedia,
   Gold,
   MockForm,
   PageHero,
@@ -90,7 +90,7 @@ export default function ContactPage() {
           className="contact-hero"
           title="Contact Us"
           breadcrumb="Contact"
-          image={`${ASSET}/contact-hero.jpg`}
+          image={travelMedia('contact-hero.jpg')}
         />
 
         <div className="shell contact-content">
@@ -178,7 +178,7 @@ export default function ContactPage() {
 
           <section className="contact-location-row contact-reveal" data-contact-reveal>
             <article className="contact-location-card card">
-              <Photo src={`${ASSET}/contact-map-v2.jpg`} alt="Map showing the Top Euro Travel office in Rhodes" />
+              <Photo src={travelMedia('contact-map-v2.jpg')} alt="Aerial view of Rhodes" />
               <div>
                 <h2>Our Location</h2>
                 <p>5th Km Rhodes-Lindos Avenue,<br />P.O. Box 348, Rhodes 851 00, Greece</p>
@@ -198,7 +198,7 @@ export default function ContactPage() {
                 </div>
               </div>
               <div className="contact-assistance-card__photo">
-                <Photo src={`${ASSET}/marina.jpg`} alt="Rhodes marina and Aegean coastline" />
+                <Photo src={travelMedia('marina.jpg')} alt="Rhodes marina and Aegean coastline" />
               </div>
             </article>
           </section>

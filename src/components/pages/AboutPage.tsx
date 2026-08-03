@@ -14,7 +14,7 @@ import {
   Users,
 } from 'lucide-react';
 import {
-  ASSET,
+  travelMedia,
   Gold,
   IconFeature,
   PageHero,
@@ -48,7 +48,7 @@ export default function AboutPage() {
       <PageHero
         title={<><Gold>About</Gold> Top Euro Travel</>}
         breadcrumb="About"
-        image={`${ASSET}/about-hero-v2.jpg`}
+        image={travelMedia('about-hero-v2.jpg')}
       />
 
       <section className="section shell about-intro">
@@ -66,7 +66,7 @@ export default function AboutPage() {
           </p>
         </div>
         <div className="about-intro__image rounded-photo">
-          <Photo src={`${ASSET}/about-intro-v2.jpg`} alt="Aegean harbour and island village" />
+          <Photo src={travelMedia('about-intro-v2.jpg')} alt="Rhodes Medieval City at night" />
         </div>
         <PlanePath className="about-intro__plane" />
       </section>

@@ -12,7 +12,7 @@ import {
   ShieldCheck,
   UsersRound,
 } from 'lucide-react';
-import { ASSET, PageHero } from '@/components/travel/Shared';
+import { PageHero, travelMedia } from '@/components/travel/Shared';
 import '@/styles/booking-flow.css';
 
 type BookingService = {
@@ -203,7 +203,7 @@ export default function BookingCalendarPage() {
     navigate(`/booking-form/${encodeURIComponent(serviceSlug)}?${search.toString()}`);
   };
 
-  const heroImage = data?.service.image || `${ASSET}/excursions-hero.jpg`;
+  const heroImage = data?.service.image || travelMedia('excursions-hero.jpg');
 
   return (
     <div className="booking-flow-page booking-calendar-page">

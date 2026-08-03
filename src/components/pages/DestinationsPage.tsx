@@ -10,7 +10,7 @@ import {
   Waves,
 } from 'lucide-react';
 import {
-  ASSET,
+  travelMedia,
   Gold,
   IconFeature,
   PageHero,
@@ -81,7 +81,7 @@ export default function DestinationsPage() {
         className="destinations-page__hero"
         title={<><Gold>Explore Our</Gold> Destinations in Greece</>}
         breadcrumb="Destinations"
-        image={`${ASSET}/destinations-hero.jpg`}
+        image={travelMedia('destinations-hero.jpg')}
       />
 
       <section className="section shell destinations-overview destinations-reveal" data-destinations-reveal>
@@ -89,7 +89,7 @@ export default function DestinationsPage() {
         <div className="destinations-grid">
           {destinations.map((item) => (
             <article className="card destination-large" key={item.title}>
-              <div className="destination-large__image"><Photo src={`${ASSET}/${item.image}`} alt={item.title} /></div>
+              <div className="destination-large__image"><Photo src={travelMedia(item.image)} alt={item.title} /></div>
               <div className="destination-large__body">
                 <h2><Landmark />{item.title}</h2>
                 <p>{item.copy}</p>
@@ -115,7 +115,7 @@ export default function DestinationsPage() {
         <div className="destination-moments">
           {moments.map(([title, image]) => (
             <Link to="/experiences" key={title}>
-              <div className="destination-moments__image"><Photo src={`${ASSET}/${image}`} alt={title} /></div>
+              <div className="destination-moments__image"><Photo src={travelMedia(image)} alt={title} /></div>
               <strong>{title}</strong>
             </Link>
           ))}
@@ -126,7 +126,7 @@ export default function DestinationsPage() {
       </section>
 
       <section className="destination-cta shell destinations-reveal" data-destinations-reveal>
-        <div className="destination-cta__circle"><Photo src={`${ASSET}/kallithea.jpg`} alt="Aegean chapel" /></div>
+        <div className="destination-cta__circle"><Photo src={travelMedia('kallithea.jpg')} alt="Aegean coastline" /></div>
         <div><h2>Not sure where to start?</h2><p>Let us design the perfect itinerary.</p></div>
         <Link className="button button--gold" to="/contact">ENQUIRE NOW</Link>
         <PlanePath />
