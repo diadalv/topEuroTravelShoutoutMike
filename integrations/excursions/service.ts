@@ -52,9 +52,9 @@ type BookingServiceRecord = {
   mainSlug?: { name?: string | null };
   supportedSlugs?: Array<{ name?: string | null }>;
   urls?: {
-    bookingPage?: string;
-    calendarPage?: string;
-    servicePage?: string;
+    bookingPage?: string | { relativePath?: string | null; url?: string | null };
+    calendarPage?: string | { relativePath?: string | null; url?: string | null };
+    servicePage?: string | { relativePath?: string | null; url?: string | null };
   };
 };
 
@@ -108,7 +108,10 @@ function bookingCalendarUrl(service: BookingServiceRecord) {
     return `/booking-calendar/${encodeURIComponent(serviceSlug)}`;
   }
 
-  const nativeUrl = service.urls?.calendarPage || service.urls?.bookingPage;
+  const urlValue = service.urls?.calendarPage || service.urls?.bookingPage;
+  const nativeUrl = typeof urlValue === 'string'
+    ? urlValue
+    : urlValue?.relativePath || urlValue?.url || undefined;
   if (!nativeUrl) return undefined;
 
   try {
@@ -117,6 +120,10 @@ function bookingCalendarUrl(service: BookingServiceRecord) {
   } catch {
     return nativeUrl.startsWith('/') ? nativeUrl : undefined;
   }
+}
+
+function isExcursionService(service: BookingServiceRecord) {
+  return service.category?.name?.trim().toLowerCase() === 'excursions';
 }
 
 function priceFromService(service: BookingServiceRecord): ServicePrice {
@@ -197,6 +204,45 @@ function disconnectedRecord(cmsRecord: Excursions): ExcursionCatalogRecord {
   };
 }
 
+function bookingOnlyRecord(service: BookingServiceRecord): ExcursionCatalogRecord | null {
+  if (!service._id || service.hidden === true || service.onlineBooking?.enabled !== true) return null;
+
+  const slug = getBookingServiceSlug(service);
+  if (!slug) return null;
+
+  const price = priceFromService(service);
+  const bookingUrl = bookingCalendarUrl(service);
+  const image = bookingImageUrl(service.media?.mainMedia?.image)
+    || bookingImageUrl(service.media?.coverMedia?.image);
+
+  return {
+    _id: service._id,
+    title: service.name || 'Excursion',
+    slug,
+    shortDescription: service.tagLine || service.description || 'Discover Rhodes and Kos with local experts.',
+    overview: service.description || service.tagLine || '',
+    tourGroup: 'Excursion',
+    mainImage: image,
+    coverImage: bookingImageUrl(service.media?.coverMedia?.image) || image,
+    capacity: service.defaultCapacity ?? undefined,
+    adultPrice: price.adultPrice,
+    childPrice: price.childPrice,
+    priceLabel: price.priceLabel,
+    sortOrder: service.sortOrder ?? undefined,
+    active: true,
+    sourceDocument: 'Wix Bookings',
+    bookingServiceId: service._id,
+    bookingUrl: bookingUrl || '/contact',
+    bookingConnected: true,
+    bookingAvailable: Boolean(bookingUrl),
+    bookingRateType: service.payment?.rateType,
+    bookingCurrency: price.currency,
+    bookingServiceSlug: slug,
+    bookingRequiresApproval: service.onlineBooking?.requireManualApproval === true,
+    bookingNativeVisible: true,
+  };
+}
+
 export class ExcursionCatalogService {
   static async getAll(): Promise<ExcursionCatalogRecord[]> {
     const cmsResult = await BaseCrudService.getAll<Excursions>(COLLECTION_ID, {}, { limit: 100 });
@@ -208,7 +254,7 @@ export class ExcursionCatalogService {
         .queryServices()
         .limit(100)
         .find();
-      bookingServices = result.items as BookingServiceRecord[];
+      bookingServices = (result.items as BookingServiceRecord[]).filter(isExcursionService);
     } catch (error) {
       console.error('Unable to load Wix Bookings excursion services:', error);
       return activeCmsRecords
@@ -222,13 +268,23 @@ export class ExcursionCatalogService {
         .map((service) => [service._id as string, service]),
     );
 
-    return activeCmsRecords
-      .map((cmsRecord) => {
-        const service = cmsRecord.bookingServiceId
-          ? servicesById.get(cmsRecord.bookingServiceId)
-          : undefined;
-        return service ? mergeWithBookingService(cmsRecord, service) : disconnectedRecord(cmsRecord);
-      })
+    const mappedBookingIds = new Set(
+      activeCmsRecords.map((record) => record.bookingServiceId).filter(Boolean),
+    );
+
+    const cmsRecords = activeCmsRecords.map((cmsRecord) => {
+      const service = cmsRecord.bookingServiceId
+        ? servicesById.get(cmsRecord.bookingServiceId)
+        : undefined;
+      return service ? mergeWithBookingService(cmsRecord, service) : disconnectedRecord(cmsRecord);
+    });
+
+    const bookingsOnlyRecords = bookingServices
+      .filter((service) => !mappedBookingIds.has(service._id || undefined))
+      .map(bookingOnlyRecord)
+      .filter((record): record is ExcursionCatalogRecord => Boolean(record));
+
+    return [...cmsRecords, ...bookingsOnlyRecords]
       .sort((a, b) => (a.sortOrder ?? Number.MAX_SAFE_INTEGER) - (b.sortOrder ?? Number.MAX_SAFE_INTEGER));
   }
 

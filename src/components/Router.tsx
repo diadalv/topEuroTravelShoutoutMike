@@ -10,6 +10,9 @@ import MiceGroupsPage from '@/components/pages/MiceGroupsPage';
 import ExperiencesPage from '@/components/pages/ExperiencesPage';
 import ExcursionsPage from '@/components/pages/ExcursionsPage';
 import ExcursionDetailPage from '@/components/pages/ExcursionDetailPage';
+import BookingCalendarPage from '@/components/pages/BookingCalendarPage';
+import BookingFormPage from '@/components/pages/BookingFormPage';
+import BookingConfirmationPage from '@/components/pages/BookingConfirmationPage';
 import FaqPage from '@/components/pages/FaqPage';
 import ContactPage from '@/components/pages/ContactPage';
 import { PrivacyPage, TermsPage } from '@/components/pages/LegalPages';
@@ -47,6 +50,21 @@ const router = createBrowserRouter(
           path: 'excursions/:slug',
           element: <ExcursionDetailPage />,
           routeMetadata: { pageIdentifier: 'excursion-detail' },
+        },
+        {
+          path: 'booking-calendar/:serviceSlug',
+          element: <BookingCalendarPage />,
+          routeMetadata: { pageIdentifier: 'booking-calendar' },
+        },
+        {
+          path: 'booking-form/:serviceSlug',
+          element: <BookingFormPage />,
+          routeMetadata: { pageIdentifier: 'booking-form' },
+        },
+        {
+          path: 'booking-confirmation',
+          element: <BookingConfirmationPage />,
+          routeMetadata: { pageIdentifier: 'booking-confirmation' },
         },
         { path: 'faq', element: <FaqPage />, routeMetadata: { pageIdentifier: 'faq' } },
         { path: 'contact', element: <ContactPage />, routeMetadata: { pageIdentifier: 'contact' } },

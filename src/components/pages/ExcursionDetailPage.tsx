@@ -230,7 +230,7 @@ export default function ExcursionDetailPage() {
           <span>from</span>
           <strong>{price}</strong>
           <p>per person</p>
-          <a className="button button--gold" href={bookingUrl}>{bookingLabel}</a>
+          <Link className="button button--gold" to={bookingUrl}>{bookingLabel}</Link>
           <div><ShieldCheck aria-hidden="true" /><p><strong>Free Cancellation</strong><span>Up to 24h before departure</span></p></div>
         </aside>
       </section>
