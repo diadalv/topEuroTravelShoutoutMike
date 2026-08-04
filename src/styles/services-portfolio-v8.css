@@ -1,0 +1,705 @@
+/* Curated Services Portfolio
+   A Services-only editorial layout based on the approved third mockup. */
+
+.services-page--portfolio {
+  background:
+    radial-gradient(circle at 12% 24%, rgba(227, 154, 32, 0.035), transparent 23%),
+    radial-gradient(circle at 86% 58%, rgba(0, 63, 115, 0.025), transparent 28%),
+    var(--paper);
+}
+
+.services-page--portfolio .services-portfolio {
+  padding-top: clamp(64px, 7vw, 104px);
+  padding-bottom: clamp(70px, 7vw, 108px);
+}
+
+.services-page--portfolio .services-portfolio__intro {
+  display: grid;
+  grid-template-columns: minmax(0, 0.92fr) minmax(0, 1.08fr);
+  gap: clamp(42px, 6vw, 88px);
+  align-items: start;
+  border-bottom: 1px solid var(--line);
+  padding-bottom: clamp(44px, 5vw, 70px);
+}
+
+.services-page--portfolio .services-portfolio__eyebrow {
+  display: block;
+  margin-bottom: 13px;
+  color: var(--gold-deep);
+  font-size: 12px;
+  font-weight: 800;
+  letter-spacing: 0.16em;
+}
+
+.services-page--portfolio .services-portfolio__intro h2 {
+  max-width: 650px;
+  margin: 0;
+  color: var(--navy-dark);
+  font-size: clamp(38px, 3.6vw, 58px);
+  line-height: 1.06;
+}
+
+.services-page--portfolio .services-portfolio__intro-copy {
+  border-left: 1px solid rgba(227, 154, 32, 0.55);
+  padding-left: clamp(28px, 4vw, 54px);
+}
+
+.services-page--portfolio .services-portfolio__intro-copy p {
+  margin: 0;
+  color: #34516e;
+  font-size: 17px;
+  line-height: 1.72;
+}
+
+.services-page--portfolio .services-portfolio__intro-copy p + p {
+  margin-top: 18px;
+}
+
+.services-page--portfolio .services-portfolio__category {
+  margin-top: clamp(52px, 6vw, 82px);
+}
+
+.services-page--portfolio .services-portfolio__category-heading {
+  display: grid;
+  grid-template-columns: auto auto 1fr;
+  align-items: center;
+  gap: 13px;
+  margin-bottom: 22px;
+}
+
+.services-page--portfolio .services-portfolio__category-heading::after {
+  height: 1px;
+  margin-left: 6px;
+  background: linear-gradient(90deg, rgba(227, 154, 32, 0.72), rgba(227, 154, 32, 0.08));
+  content: '';
+}
+
+.services-page--portfolio .services-portfolio__category-heading span {
+  color: var(--gold-deep);
+  font-size: 12px;
+  font-weight: 800;
+  letter-spacing: 0.16em;
+}
+
+.services-page--portfolio .services-portfolio__category-heading h2 {
+  margin: 0;
+  color: var(--navy-dark);
+  font-size: clamp(27px, 2.4vw, 38px);
+  line-height: 1.1;
+}
+
+.services-page--portfolio .services-portfolio__operations-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1.16fr) minmax(360px, 0.84fr);
+  gap: 24px;
+}
+
+.services-page--portfolio .services-portfolio__compact-stack {
+  display: grid;
+  grid-template-rows: repeat(3, minmax(0, 1fr));
+  gap: 16px;
+}
+
+.services-page--portfolio .services-portfolio-card {
+  min-width: 0;
+  border: 1px solid #e6ddd1;
+  border-radius: 18px;
+  color: var(--navy-dark);
+  background: rgba(255, 255, 255, 0.96);
+  box-shadow: none;
+  transition: border-color 220ms ease, background-color 220ms ease, transform 220ms ease;
+}
+
+.services-page--portfolio .services-portfolio-card:hover {
+  border-color: rgba(206, 132, 17, 0.65);
+  color: var(--navy-dark);
+  background: #fffefa;
+  transform: translateY(-3px);
+}
+
+.services-page--portfolio .services-portfolio-card:focus-visible {
+  outline: 3px solid rgba(227, 154, 32, 0.72);
+  outline-offset: 4px;
+}
+
+.services-page--portfolio .services-portfolio-card--feature {
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.services-page--portfolio .services-portfolio-card__image {
+  height: clamp(250px, 27vw, 380px);
+  position: relative;
+  overflow: hidden;
+  background: var(--navy-dark);
+}
+
+.services-page--portfolio .services-portfolio-card__image::after {
+  position: absolute;
+  inset: auto 0 0;
+  height: 38%;
+  background: linear-gradient(transparent, rgba(0, 45, 83, 0.34));
+  content: '';
+  pointer-events: none;
+}
+
+.services-page--portfolio .services-portfolio-card__image .travel-photo {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 650ms ease;
+}
+
+.services-page--portfolio .services-portfolio-card--feature:hover .travel-photo {
+  transform: scale(1.035);
+}
+
+.services-page--portfolio .services-portfolio-card__feature-body {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  padding: clamp(23px, 2.4vw, 34px);
+}
+
+.services-page--portfolio .services-portfolio-card__feature-heading {
+  display: flex;
+  align-items: center;
+  gap: 13px;
+}
+
+.services-page--portfolio .services-portfolio-card__feature-heading > svg {
+  width: 34px;
+  height: 34px;
+  flex: 0 0 auto;
+  color: var(--gold-deep);
+  stroke-width: 1.55;
+}
+
+.services-page--portfolio .services-portfolio-card h3 {
+  margin: 0;
+  color: var(--navy-dark);
+}
+
+.services-page--portfolio .services-portfolio-card--feature h3 {
+  font-size: clamp(24px, 2.1vw, 32px);
+  line-height: 1.12;
+}
+
+.services-page--portfolio .services-portfolio-card--feature p {
+  margin: 16px 0 22px;
+  color: #3b5772;
+  font-size: 16px;
+  line-height: 1.55;
+}
+
+.services-page--portfolio .services-portfolio-card__link {
+  margin-top: auto;
+  display: inline-flex;
+  align-items: center;
+  gap: 9px;
+  color: var(--navy);
+  font-size: 12px;
+  font-weight: 800;
+  letter-spacing: 0.045em;
+}
+
+.services-page--portfolio .services-portfolio-card__link svg {
+  width: 16px;
+  height: 16px;
+  color: var(--gold-deep);
+  transition: transform 180ms ease;
+}
+
+.services-page--portfolio .services-portfolio-card:hover .services-portfolio-card__link svg {
+  transform: translateX(4px);
+}
+
+.services-page--portfolio .services-portfolio-card--compact {
+  min-height: 138px;
+  display: grid;
+  grid-template-columns: 54px minmax(0, 1fr) 22px;
+  align-items: center;
+  gap: 18px;
+  padding: 24px 25px;
+}
+
+.services-page--portfolio .services-portfolio-card__icon {
+  width: 54px;
+  height: 54px;
+  border: 1px solid rgba(0, 63, 115, 0.16);
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  color: var(--navy);
+  background: #f8fbfd;
+}
+
+.services-page--portfolio .services-portfolio-card__icon svg {
+  width: 28px;
+  height: 28px;
+  stroke-width: 1.55;
+}
+
+.services-page--portfolio .services-portfolio-card--compact h3 {
+  font-size: clamp(19px, 1.55vw, 24px);
+  line-height: 1.18;
+}
+
+.services-page--portfolio .services-portfolio-card--compact p {
+  margin: 8px 0 0;
+  color: #405b74;
+  font-size: 15px;
+  line-height: 1.48;
+}
+
+.services-page--portfolio .services-portfolio-card__arrow {
+  width: 20px;
+  height: 20px;
+  color: var(--gold-deep);
+  transition: transform 180ms ease;
+}
+
+.services-page--portfolio .services-portfolio-card--compact:hover .services-portfolio-card__arrow {
+  transform: translateX(4px);
+}
+
+.services-page--portfolio .services-portfolio__experiences-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr) minmax(260px, 0.72fr);
+  gap: 20px;
+}
+
+.services-page--portfolio .services-portfolio__experiences-grid .services-portfolio-card--feature .services-portfolio-card__image {
+  height: clamp(220px, 22vw, 310px);
+}
+
+.services-page--portfolio .services-portfolio__experiences-grid .services-portfolio-card--compact {
+  grid-template-columns: 1fr;
+  align-content: center;
+  justify-items: start;
+  padding: clamp(28px, 3vw, 44px);
+}
+
+.services-page--portfolio .services-portfolio__experiences-grid .services-portfolio-card--compact .services-portfolio-card__arrow {
+  margin-top: 8px;
+}
+
+.services-page--portfolio .services-portfolio__category--technology {
+  display: grid;
+  grid-template-columns: minmax(220px, 0.38fr) minmax(0, 1fr);
+  gap: 34px;
+  align-items: stretch;
+}
+
+.services-page--portfolio .services-portfolio__category--technology .services-portfolio__category-heading {
+  margin: 0;
+  grid-template-columns: auto 1fr;
+  align-content: center;
+}
+
+.services-page--portfolio .services-portfolio__category--technology .services-portfolio__category-heading::after {
+  grid-column: 1 / -1;
+  width: 100%;
+  margin: 12px 0 0;
+}
+
+.services-page--portfolio .services-portfolio__category--technology .services-portfolio-card--compact {
+  min-height: 155px;
+  grid-template-columns: 68px minmax(0, 1fr) 24px;
+  padding: 30px 34px;
+  background: linear-gradient(115deg, #fffefa, #f8fbfd);
+}
+
+.services-page--portfolio .services-portfolio__category--technology .services-portfolio-card__icon {
+  width: 64px;
+  height: 64px;
+}
+
+.services-page--portfolio .services-page__promise {
+  margin-top: 0;
+  padding: clamp(48px, 5.5vw, 76px) 0;
+  color: white;
+  background: linear-gradient(118deg, #002d53, #004b82);
+}
+
+.services-page--portfolio .services-page__promise-inner > h2 {
+  margin: 0 0 36px;
+  color: white;
+  font-size: clamp(32px, 3vw, 48px);
+  line-height: 1.1;
+  text-align: center;
+}
+
+.services-page--portfolio .services-page__promise ul {
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  list-style: none;
+}
+
+.services-page--portfolio .services-page__promise li {
+  min-width: 0;
+  display: grid;
+  grid-template-columns: 48px 1fr;
+  gap: 16px;
+  align-items: center;
+  padding: 4px clamp(22px, 3vw, 44px);
+}
+
+.services-page--portfolio .services-page__promise li + li {
+  border-left: 1px solid rgba(255, 255, 255, 0.22);
+}
+
+.services-page--portfolio .services-page__promise li > svg {
+  width: 42px;
+  height: 42px;
+  color: var(--gold);
+  stroke-width: 1.5;
+}
+
+.services-page--portfolio .services-page__promise h3 {
+  margin: 0 0 5px;
+  color: white;
+  font-size: 20px;
+}
+
+.services-page--portfolio .services-page__promise p {
+  margin: 0;
+  color: rgba(255, 255, 255, 0.78);
+  font-size: 14px;
+  line-height: 1.45;
+}
+
+.services-page--portfolio .services-page__partners {
+  min-height: 144px;
+  margin-top: clamp(58px, 6vw, 88px);
+  border: 1px solid #e6ddd1;
+  border-radius: 18px;
+  grid-template-columns: 1.45fr repeat(4, 1fr);
+  padding-block: 16px;
+  color: var(--navy-dark);
+  background: #fffefa;
+  box-shadow: none;
+}
+
+.services-page--portfolio .services-page__partners > * {
+  min-height: 82px;
+  padding-inline: clamp(14px, 2vw, 26px);
+}
+
+.services-page--portfolio .services-page__partners > * + *,
+.services-page--portfolio .services-page__partners .partner-mark + .partner-mark {
+  border-left: 1px solid var(--line);
+}
+
+.services-page--portfolio .services-page__partners-copy h2 {
+  color: var(--navy-dark);
+  font-size: 27px;
+}
+
+.services-page--portfolio .services-page__partners-copy p {
+  color: #405b74;
+  font-size: 14px;
+  line-height: 1.45;
+}
+
+.services-page--portfolio .services-page__partners .partner-mark,
+.services-page--portfolio .services-page__accredited {
+  color: var(--navy-dark);
+}
+
+.services-page--portfolio .services-page__partners .partner-mark span {
+  color: #4d667d;
+}
+
+.services-page--portfolio .services-page__request {
+  min-height: 180px;
+  margin-top: 32px;
+  margin-bottom: clamp(42px, 5vw, 70px);
+  border-radius: 18px;
+  grid-template-columns: 84px minmax(300px, 1fr) auto;
+  gap: 22px 28px;
+  padding: 30px 34px;
+  box-shadow: none;
+}
+
+.services-page--portfolio .services-page__request-copy h2 {
+  font-size: 31px;
+}
+
+.services-page--portfolio .services-page__request-copy p {
+  max-width: 620px;
+  font-size: 15px;
+  line-height: 1.55;
+}
+
+.services-page--portfolio .services-page__request-features {
+  grid-column: 2 / -1;
+}
+
+.services-page--portfolio .services-page__request-features .icon-feature h3 {
+  font-size: 12px;
+}
+
+.services-page--portfolio .services-portfolio-reveal {
+  opacity: 0;
+  transform: translateY(22px);
+  transition: opacity 650ms ease, transform 650ms ease;
+}
+
+.services-page--portfolio .services-portfolio-reveal.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.services-page--portfolio .services-portfolio-card {
+  opacity: 0;
+  transform: translateY(18px);
+  transition: opacity 520ms ease, transform 520ms ease, border-color 220ms ease, background-color 220ms ease;
+}
+
+.services-page--portfolio .is-visible .services-portfolio-card,
+.services-page--portfolio .services-portfolio-reveal.is-visible.services-portfolio-card {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.services-page--portfolio .is-visible .services-portfolio-card:nth-child(2) { transition-delay: 70ms; }
+.services-page--portfolio .is-visible .services-portfolio-card:nth-child(3) { transition-delay: 140ms; }
+
+@media (max-width: 1100px) {
+  .services-page--portfolio .services-portfolio__operations-grid {
+    grid-template-columns: minmax(0, 1fr) minmax(320px, 0.9fr);
+  }
+
+  .services-page--portfolio .services-portfolio__experiences-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .services-page--portfolio .services-portfolio__experiences-grid .services-portfolio-card--compact {
+    grid-column: 1 / -1;
+    grid-template-columns: 54px minmax(0, 1fr) 22px;
+    justify-items: stretch;
+    padding: 25px;
+  }
+
+  .services-page--portfolio .services-page__partners {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .services-page--portfolio .services-page__partners > :nth-child(odd) {
+    border-left: 0;
+  }
+
+  .services-page--portfolio .services-page__partners > * {
+    border-top: 1px solid var(--line);
+  }
+
+  .services-page--portfolio .services-page__partners-copy {
+    grid-column: 1 / -1;
+    border-top: 0;
+    text-align: center;
+  }
+}
+
+@media (max-width: 860px) {
+  .services-page--portfolio .services-portfolio__intro {
+    grid-template-columns: 1fr;
+    gap: 28px;
+  }
+
+  .services-page--portfolio .services-portfolio__intro-copy {
+    border-left: 0;
+    border-top: 1px solid rgba(227, 154, 32, 0.55);
+    padding: 26px 0 0;
+  }
+
+  .services-page--portfolio .services-portfolio__operations-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .services-page--portfolio .services-portfolio__compact-stack {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    grid-template-rows: auto;
+  }
+
+  .services-page--portfolio .services-portfolio__compact-stack .services-portfolio-card:last-child {
+    grid-column: 1 / -1;
+  }
+
+  .services-page--portfolio .services-portfolio__category--technology {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+
+  .services-page--portfolio .services-portfolio__category--technology .services-portfolio__category-heading {
+    grid-template-columns: auto auto 1fr;
+  }
+
+  .services-page--portfolio .services-portfolio__category--technology .services-portfolio__category-heading::after {
+    grid-column: auto;
+    width: auto;
+    margin: 0 0 0 6px;
+  }
+
+  .services-page--portfolio .services-page__promise ul {
+    grid-template-columns: 1fr;
+  }
+
+  .services-page--portfolio .services-page__promise li {
+    padding-block: 20px;
+  }
+
+  .services-page--portfolio .services-page__promise li + li {
+    border-top: 1px solid rgba(255, 255, 255, 0.22);
+    border-left: 0;
+  }
+
+  .services-page--portfolio .services-page__request {
+    grid-template-columns: 72px 1fr auto;
+  }
+}
+
+@media (max-width: 700px) {
+  .services-page--portfolio .services-portfolio {
+    padding-top: 48px;
+    padding-bottom: 56px;
+  }
+
+  .services-page--portfolio .services-portfolio__intro h2 {
+    font-size: clamp(34px, 10vw, 43px);
+  }
+
+  .services-page--portfolio .services-portfolio__intro-copy p {
+    font-size: 16px;
+  }
+
+  .services-page--portfolio .services-portfolio__category-heading {
+    grid-template-columns: auto 1fr;
+  }
+
+  .services-page--portfolio .services-portfolio__category-heading::after {
+    grid-column: 1 / -1;
+    width: 100%;
+    margin: 2px 0 0;
+  }
+
+  .services-page--portfolio .services-portfolio__compact-stack,
+  .services-page--portfolio .services-portfolio__experiences-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .services-page--portfolio .services-portfolio__compact-stack .services-portfolio-card:last-child,
+  .services-page--portfolio .services-portfolio__experiences-grid .services-portfolio-card--compact {
+    grid-column: auto;
+  }
+
+  .services-page--portfolio .services-portfolio__experiences-grid .services-portfolio-card--compact,
+  .services-page--portfolio .services-portfolio-card--compact,
+  .services-page--portfolio .services-portfolio__category--technology .services-portfolio-card--compact {
+    min-height: 148px;
+    grid-template-columns: 50px minmax(0, 1fr) 18px;
+    gap: 14px;
+    padding: 22px 20px;
+  }
+
+  .services-page--portfolio .services-portfolio-card__icon,
+  .services-page--portfolio .services-portfolio__category--technology .services-portfolio-card__icon {
+    width: 50px;
+    height: 50px;
+  }
+
+  .services-page--portfolio .services-portfolio-card--compact h3 {
+    font-size: 20px;
+  }
+
+  .services-page--portfolio .services-portfolio-card--compact p {
+    font-size: 14px;
+  }
+
+  .services-page--portfolio .services-portfolio-card__image,
+  .services-page--portfolio .services-portfolio__experiences-grid .services-portfolio-card--feature .services-portfolio-card__image {
+    height: clamp(220px, 62vw, 285px);
+  }
+
+  .services-page--portfolio .services-page__partners {
+    grid-template-columns: 1fr;
+    padding: 10px 16px;
+  }
+
+  .services-page--portfolio .services-page__partners > *,
+  .services-page--portfolio .services-page__partners > * + *,
+  .services-page--portfolio .services-page__partners .partner-mark + .partner-mark {
+    min-height: 74px;
+    border-top: 1px solid var(--line);
+    border-left: 0;
+  }
+
+  .services-page--portfolio .services-page__partners-copy {
+    grid-column: auto;
+    border-top: 0;
+    text-align: left;
+  }
+
+  .services-page--portfolio .services-page__partners .partner-mark {
+    justify-content: flex-start;
+  }
+
+  .services-page--portfolio .services-page__request {
+    grid-template-columns: 1fr;
+    justify-items: center;
+    gap: 17px;
+    padding: 28px 22px;
+    text-align: center;
+  }
+
+  .services-page--portfolio .services-page__request-features {
+    grid-column: auto;
+    width: 100%;
+  }
+}
+
+@media (max-width: 430px) {
+  .services-page--portfolio .services-portfolio-card--compact,
+  .services-page--portfolio .services-portfolio__experiences-grid .services-portfolio-card--compact,
+  .services-page--portfolio .services-portfolio__category--technology .services-portfolio-card--compact {
+    min-height: 0;
+    grid-template-columns: 46px minmax(0, 1fr);
+    padding: 20px 17px;
+  }
+
+  .services-page--portfolio .services-portfolio-card__arrow {
+    display: none;
+  }
+
+  .services-page--portfolio .services-page__promise-inner > h2 {
+    text-align: left;
+  }
+
+  .services-page--portfolio .services-page__promise li {
+    grid-template-columns: 42px 1fr;
+    padding-inline: 0;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .services-page--portfolio .services-portfolio-reveal,
+  .services-page--portfolio .services-portfolio-card {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+
+  .services-page--portfolio .services-portfolio-card__image .travel-photo,
+  .services-page--portfolio .services-portfolio-card__link svg,
+  .services-page--portfolio .services-portfolio-card__arrow {
+    transition: none;
+  }
+
+  .services-page--portfolio .services-portfolio-card--feature:hover .travel-photo,
+  .services-page--portfolio .services-portfolio-card:hover {
+    transform: none;
+  }
+}
