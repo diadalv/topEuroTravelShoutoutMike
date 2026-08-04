@@ -1,5 +1,5 @@
-import { useCallback, useEffect, useMemo, useState } from 'react';
-import { useNavigate, useParams } from 'react-router-dom';
+import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
+import { useNavigate, useParams, useSearchParams } from 'react-router-dom';
 import {
   AlertCircle,
   ArrowRight,
@@ -13,7 +13,9 @@ import {
   UsersRound,
 } from 'lucide-react';
 import { PageHero, travelMedia } from '@/components/travel/Shared';
+import { Calendar } from '@/components/ui/calendar';
 import '@/styles/booking-flow.css';
+import '@/styles/booking-calendar-v2.css';
 
 type BookingService = {
   id: string;
@@ -45,6 +47,7 @@ type BookingField = {
 
 type ExcursionBookingData = {
   service: BookingService;
+  timeZone?: string;
   slots: BookingSlot[];
   variants: BookingVariant[];
   formFields: BookingField[];
@@ -71,9 +74,44 @@ function formatPrice(value: number, currency = 'EUR') {
   }).format(value);
 }
 
+function slotDateKey(value: string) {
+  return value.slice(0, 10);
+}
+
+function dateFromKey(key: string) {
+  const [year, month, day] = key.split('-').map(Number);
+  return new Date(year, month - 1, day, 12);
+}
+
+function dateKeyFromDate(date: Date) {
+  const year = date.getFullYear();
+  const month = String(date.getMonth() + 1).padStart(2, '0');
+  const day = String(date.getDate()).padStart(2, '0');
+  return `${year}-${month}-${day}`;
+}
+
 function parseLocalDate(value: string) {
-  const date = new Date(value);
+  const [datePart = '', timePart = '00:00:00'] = value.split('T');
+  const [year, month, day] = datePart.split('-').map(Number);
+  const [hour, minute, second] = timePart.split(':').map(Number);
+  const date = new Date(year, month - 1, day, hour || 0, minute || 0, second || 0);
   return Number.isNaN(date.getTime()) ? null : date;
+}
+
+function parseParticipantSearch(searchParams: URLSearchParams) {
+  const result: Record<string, number> = {};
+  searchParams.getAll('participant').forEach((entry) => {
+    const separator = entry.lastIndexOf(':');
+    if (separator <= 0) return;
+    const label = entry.slice(0, separator).trim();
+    const count = Number.parseInt(entry.slice(separator + 1), 10);
+    if (label && Number.isFinite(count) && count > 0) result[label] = count;
+  });
+  return result;
+}
+
+function formatTimeZoneLabel(timeZone?: string) {
+  return (timeZone || 'destination local time').replaceAll('_', ' ');
 }
 
 async function errorMessage(response: Response) {
@@ -104,10 +142,15 @@ function BookingSteps({ current }: { current: 1 | 2 | 3 }) {
 export default function BookingCalendarPage() {
   const { serviceSlug = '' } = useParams();
   const navigate = useNavigate();
+  const [searchParams] = useSearchParams();
+  const initialSelection = useRef({
+    eventId: searchParams.get('eventId') || '',
+    participants: parseParticipantSearch(searchParams),
+  });
   const [data, setData] = useState<ExcursionBookingData | null>(null);
   const [selectedEventId, setSelectedEventId] = useState('');
   const [participants, setParticipants] = useState<Record<string, number>>({});
-  const [visibleCount, setVisibleCount] = useState(8);
+  const [displayMonth, setDisplayMonth] = useState<Date>();
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
 
@@ -129,14 +172,20 @@ export default function BookingCalendarPage() {
         .filter((slot) => slot.eventId && Number(slot.bookableCapacity) > 0)
         .sort((a, b) => a.localStartDate.localeCompare(b.localStartDate));
       const normalizedData = { ...nextData, slots: bookableSlots };
+      const restoredSlot = bookableSlots.find((slot) => slot.eventId === initialSelection.current.eventId);
+      const initialSlot = restoredSlot || bookableSlots[0];
       setData(normalizedData);
-      setSelectedEventId((current) => (
-        bookableSlots.some((slot) => slot.eventId === current) ? current : bookableSlots[0]?.eventId || ''
-      ));
+      setSelectedEventId(initialSlot?.eventId || '');
+      if (initialSlot) setDisplayMonth(dateFromKey(slotDateKey(initialSlot.localStartDate)));
       setParticipants((current) => {
         const next: Record<string, number> = {};
         nextData.variants.forEach((variant, index) => {
-          next[variant.label] = Math.max(0, current[variant.label] ?? (index === 0 ? 1 : 0));
+          next[variant.label] = Math.max(
+            0,
+            current[variant.label]
+              ?? initialSelection.current.participants[variant.label]
+              ?? (index === 0 ? 1 : 0),
+          );
         });
         return next;
       });
@@ -158,6 +207,20 @@ export default function BookingCalendarPage() {
   const selectedSlot = useMemo(
     () => data?.slots.find((slot) => slot.eventId === selectedEventId) || null,
     [data, selectedEventId],
+  );
+  const availableDateKeys = useMemo(
+    () => new Set((data?.slots || []).map((slot) => slotDateKey(slot.localStartDate))),
+    [data],
+  );
+  const availableDates = useMemo(
+    () => [...availableDateKeys].sort().map(dateFromKey),
+    [availableDateKeys],
+  );
+  const selectedDateKey = selectedSlot ? slotDateKey(selectedSlot.localStartDate) : '';
+  const selectedDate = selectedDateKey ? dateFromKey(selectedDateKey) : undefined;
+  const selectedDaySlots = useMemo(
+    () => (data?.slots || []).filter((slot) => slotDateKey(slot.localStartDate) === selectedDateKey),
+    [data, selectedDateKey],
   );
   const totalParticipants = Object.values(participants).reduce((sum, count) => sum + count, 0);
   const selectedCapacity = selectedSlot?.bookableCapacity ?? 0;
@@ -183,6 +246,13 @@ export default function BookingCalendarPage() {
       return next;
     });
   }, [data, selectedCapacity, selectedSlot, totalParticipants]);
+
+  const selectDate = (date?: Date) => {
+    if (!date || !data) return;
+    const key = dateKeyFromDate(date);
+    const firstSlot = data.slots.find((slot) => slotDateKey(slot.localStartDate) === key);
+    if (firstSlot) setSelectedEventId(firstSlot.eventId);
+  };
 
   const adjustParticipant = (label: string, delta: number) => {
     setParticipants((current) => {
@@ -260,45 +330,75 @@ export default function BookingCalendarPage() {
                       <span>STEP 1</span>
                       <h2 id="departure-heading">Select a departure</h2>
                     </div>
-                    <strong>{data.slots.length} available {data.slots.length === 1 ? 'date' : 'dates'}</strong>
+                    <strong>{availableDateKeys.size} available {availableDateKeys.size === 1 ? 'date' : 'dates'}</strong>
                   </div>
 
-                  <div className="booking-session-list" role="radiogroup" aria-label="Available excursion departures">
-                    {data.slots.slice(0, visibleCount).map((slot) => {
-                      const start = parseLocalDate(slot.localStartDate);
-                      const end = parseLocalDate(slot.localEndDate);
-                      const selected = selectedEventId === slot.eventId;
-                      return (
-                        <label className={`booking-session${selected ? ' is-selected' : ''}`} key={slot.eventId}>
-                          <input
-                            type="radio"
-                            name="departure"
-                            value={slot.eventId}
-                            checked={selected}
-                            onChange={() => setSelectedEventId(slot.eventId)}
-                          />
-                          <span className="booking-session__check" aria-hidden="true">{selected && <Check />}</span>
-                          <span className="booking-session__date">
-                            <CalendarDays aria-hidden="true" />
-                            <strong>{start ? dateFormatter.format(start) : slot.localStartDate}</strong>
-                          </span>
-                          <span className="booking-session__time">
-                            <Clock3 aria-hidden="true" />
-                            {start ? timeFormatter.format(start) : ''}{end ? ` – ${timeFormatter.format(end)}` : ''}
-                          </span>
-                          <span className="booking-session__capacity">
-                            <UsersRound aria-hidden="true" /> {slot.bookableCapacity} places left
-                          </span>
-                        </label>
-                      );
-                    })}
-                  </div>
+                  <div className="booking-calendar-widget">
+                    <div className="booking-month-picker">
+                      <Calendar
+                        mode="single"
+                        selected={selectedDate}
+                        month={displayMonth}
+                        onMonthChange={setDisplayMonth}
+                        onSelect={selectDate}
+                        fromDate={availableDates[0]}
+                        toDate={availableDates[availableDates.length - 1]}
+                        disabled={(date) => !availableDateKeys.has(dateKeyFromDate(date))}
+                        modifiers={{ available: availableDates }}
+                        modifiersClassNames={{ available: 'booking-day--available' }}
+                        showOutsideDays={false}
+                        className="booking-date-calendar"
+                        aria-label="Available excursion dates"
+                      />
+                      <div className="booking-calendar-legend" aria-hidden="true">
+                        <span><i className="is-available" /> Available</span>
+                        <span><i className="is-selected" /> Selected</span>
+                        <span><i className="is-unavailable" /> Unavailable</span>
+                      </div>
+                    </div>
 
-                  {visibleCount < data.slots.length && (
-                    <button className="booking-text-button" type="button" onClick={() => setVisibleCount((count) => count + 8)}>
-                      SHOW MORE DATES
-                    </button>
-                  )}
+                    <div className="booking-day-departures">
+                      <div className="booking-day-departures__heading">
+                        <span>DEPARTURE TIMES</span>
+                        <h3>{selectedDate ? dateFormatter.format(selectedDate) : 'Choose an available date'}</h3>
+                        <p>
+                          {selectedDaySlots.length} {selectedDaySlots.length === 1 ? 'departure' : 'departures'}
+                          {' · '}Times shown in {formatTimeZoneLabel(data.timeZone)}
+                        </p>
+                      </div>
+                      <div className="booking-session-list" role="radiogroup" aria-label="Available excursion departure times">
+                        {selectedDaySlots.map((slot) => {
+                          const start = parseLocalDate(slot.localStartDate);
+                          const end = parseLocalDate(slot.localEndDate);
+                          const selected = selectedEventId === slot.eventId;
+                          const timeLabel = `${start ? timeFormatter.format(start) : ''}${end ? ` – ${timeFormatter.format(end)}` : ''}`;
+                          return (
+                            <label
+                              className={`booking-session booking-session--time${selected ? ' is-selected' : ''}`}
+                              key={slot.eventId}
+                              aria-label={`${dateFormatter.format(selectedDate || dateFromKey(slotDateKey(slot.localStartDate)))}, ${timeLabel}, ${slot.bookableCapacity} places left`}
+                            >
+                              <input
+                                type="radio"
+                                name="departure"
+                                value={slot.eventId}
+                                checked={selected}
+                                onChange={() => setSelectedEventId(slot.eventId)}
+                              />
+                              <span className="booking-session__check" aria-hidden="true">{selected && <Check />}</span>
+                              <span className="booking-session__time"><Clock3 aria-hidden="true" /><strong>{timeLabel}</strong></span>
+                              <span className="booking-session__capacity"><UsersRound aria-hidden="true" /> {slot.bookableCapacity} places left</span>
+                            </label>
+                          );
+                        })}
+                      </div>
+                      <p className="booking-calendar-status" role="status" aria-live="polite">
+                        {selectedDate
+                          ? `${dateFormatter.format(selectedDate)} selected. ${selectedDaySlots.length} departure ${selectedDaySlots.length === 1 ? 'time' : 'times'} available.`
+                          : 'Select an available date.'}
+                      </p>
+                    </div>
+                  </div>
                 </section>
 
                 <aside className="booking-panel booking-guest-panel" aria-labelledby="guest-heading">
