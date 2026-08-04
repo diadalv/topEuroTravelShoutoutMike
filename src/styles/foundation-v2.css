@@ -1024,22 +1024,92 @@ textarea:focus-visible {
   line-height: 1.7;
 }
 
+.home-page .home-services {
+  padding-block: clamp(52px, 5vw, 80px);
+}
+
+.home-page .home-services .section-title {
+  margin-bottom: clamp(28px, 3vw, 42px);
+}
+
+.home-page .home-services .section-title::after {
+  display: block;
+  width: 72px;
+  height: 1px;
+  margin: 16px auto 0;
+  background: var(--gold);
+  content: "";
+}
+
+.home-page .service-mini-grid {
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: clamp(16px, 1.5vw, 24px);
+}
+
 .home-page .service-mini {
-  min-height: 110px;
-  padding: 16px;
-  transition: border-color 180ms ease, box-shadow 180ms ease, transform 180ms ease;
+  min-height: 188px;
+  padding: clamp(22px, 2vw, 30px);
+  border-color: var(--line);
+  border-radius: var(--radius);
+  background: var(--paper);
+  flex-direction: column;
+  justify-content: center;
+  gap: 15px;
+  text-align: center;
+  transition: border-color 180ms ease, background-color 180ms ease, transform 180ms ease;
 }
 
 .home-page .service-mini:hover {
-  border-color: rgba(0, 56, 99, 0.35);
-  box-shadow: var(--soft-shadow);
+  border-color: var(--gold);
+  background: var(--cream);
+  transform: translateY(-3px);
+}
+
+.home-page .service-mini__icon {
+  width: 54px;
+  height: 54px;
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  display: grid;
+  place-items: center;
+  flex: 0 0 auto;
+  background: var(--cream-2);
+  color: var(--navy);
+  transition: border-color 180ms ease, background-color 180ms ease, transform 180ms ease;
+}
+
+.home-page .service-mini__icon svg {
+  width: 29px;
+  height: 29px;
+  color: currentColor;
+  stroke-width: 1.8;
+}
+
+.home-page .service-mini:hover .service-mini__icon {
+  border-color: var(--gold);
+  background: var(--paper);
   transform: translateY(-2px);
 }
 
-.home-page .service-mini strong {
-  font-size: 13px;
-  line-height: 1.35;
+.home-page .service-mini__body {
+  display: grid;
+  gap: 7px;
 }
+
+.home-page .service-mini strong {
+  color: var(--navy-dark);
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 17px;
+  font-weight: 700;
+  line-height: 1.25;
+}
+
+.home-page .service-mini__description {
+  color: var(--muted);
+  font-size: 14px;
+  line-height: 1.55;
+}
+
 
 .home-page .mice-feature {
   min-height: 340px;

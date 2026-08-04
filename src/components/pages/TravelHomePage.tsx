@@ -58,14 +58,14 @@ const destinations = [
 ];
 
 const serviceMinis = [
-  [Landmark, "Hotel Contracting"],
-  [Building2, "Booking Management"],
-  [Bus, "Transfers & Transportation"],
-  [Headphones, "Resort Assistance"],
-  [MapPinned, "Tours & Excursions"],
-  [Users, "MICE & Group Travel"],
-  [Heart, "Weddings & Special Events"],
-  [CalendarCheck, "XML API & Agent Portal"],
+  [Landmark, "Hotel Contracting", "Carefully selected hotels and competitive partner rates."],
+  [Building2, "Booking Management", "Reliable reservations and coordinated guest support."],
+  [Bus, "Transfers & Transportation", "Comfortable airport, hotel and island-wide transport."],
+  [Headphones, "Resort Assistance", "Responsive local help throughout every stay."],
+  [MapPinned, "Tours & Excursions", "Curated experiences led by trusted local partners."],
+  [Users, "MICE & Group Travel", "Tailor-made programmes for groups, meetings and incentives."],
+  [Heart, "Weddings & Special Events", "Thoughtful planning for memorable island occasions."],
+  [CalendarCheck, "XML API & Agent Portal", "Fast B2B access to availability, rates and bookings."],
 ] as const;
 
 const experiences = [
@@ -208,13 +208,16 @@ export default function TravelHomePage() {
         <PlanePath className="home-plane home-plane--destinations" />
       </section>
 
-      <section className="section--tight shell">
+      <section className="section--tight shell home-services">
         <SectionTitle>Our Services</SectionTitle>
         <div className="service-mini-grid">
-          {serviceMinis.map(([Icon, title]) => (
+          {serviceMinis.map(([Icon, title, description]) => (
             <Link className="service-mini" key={title} to="/services">
-              <Icon />
-              <strong>{title}</strong>
+              <span className="service-mini__icon" aria-hidden="true"><Icon /></span>
+              <span className="service-mini__body">
+                <strong>{title}</strong>
+                <span className="service-mini__description">{description}</span>
+              </span>
             </Link>
           ))}
         </div>
