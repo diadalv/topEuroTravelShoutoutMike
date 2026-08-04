@@ -1,7 +1,8 @@
 import { useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import { Heart, Landmark, MapPin, Sparkles, Utensils, Waves, type LucideIcon } from 'lucide-react';
+import { Landmark, Sparkles, type LucideIcon } from 'lucide-react';
 import { Gold, IconFeature, PageHero, PageSeo, Photo, SectionTitle, travelMedia } from '@/components/travel/Shared';
+import { islandReasons } from '@/data/islandReasons';
 
 type IslandData = {
   name: string;
@@ -96,6 +97,13 @@ function IslandPage({ island }: { island: IslandData }) {
         <SectionTitle>Discover {island.name}</SectionTitle>
         <div className="island-highlights">
           {island.highlights.map(([Icon, title, copy]) => <IconFeature icon={Icon} title={title} key={title}>{copy}</IconFeature>)}
+        </div>
+      </section>
+
+      <section className="section--tight shell island-section island-reasons-section island-reveal" data-island-reveal>
+        <SectionTitle>Why These Islands</SectionTitle>
+        <div className="island-reasons island-page__reasons">
+          {islandReasons.map(([Icon, title, copy]) => <IconFeature icon={Icon} title={title} key={title}>{copy}</IconFeature>)}
         </div>
       </section>
 

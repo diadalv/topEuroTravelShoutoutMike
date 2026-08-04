@@ -1,14 +1,6 @@
 import { useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import {
-  Heart,
-  Landmark,
-  Mountain,
-  Ship,
-  Sparkles,
-  Utensils,
-  Waves,
-} from 'lucide-react';
+import { Landmark, Sparkles } from 'lucide-react';
 import {
   travelMedia,
   Gold,
@@ -19,6 +11,7 @@ import {
   PlanePath,
   SectionTitle,
 } from '@/components/travel/Shared';
+import { islandReasons } from '@/data/islandReasons';
 
 const destinations = [
   {
@@ -39,13 +32,6 @@ const destinations = [
   },
 ];
 
-const islandReasons = [
-  [Mountain, 'Unique Landscapes', 'Diverse sceneries from mountains to golden beaches and crystal-clear seas.'],
-  [Landmark, 'Rich Culture', 'Step back in time with ancient history, UNESCO sites, and local traditions.'],
-  [Waves, 'Crystal-Clear Waters', 'Swim in turquoise waters and explore secluded coves and pristine beaches.'],
-  [Utensils, 'Authentic Flavors', 'Savor local gastronomy with fresh ingredients and time-honored recipes.'],
-  [Heart, 'Warm Hospitality', 'Experience genuine Greek hospitality and personalized service at every turn.'],
-] as const;
 
 const moments = [
   ['Rhodes: Medieval City', 'old-town.jpg'],
@@ -75,8 +61,8 @@ export default function DestinationsPage() {
   }, []);
 
   return (
-    <>
-      <PageSeo title="Rhodes &amp; Kos Destinations in Greece | Top Euro Travel" description="Explore Rhodes and Kos, Top Euro Travel&apos;s core destinations in Greece, and discover our support for travel programmes and events across the country." />
+    <div className="destinations-page">
+      <PageSeo title="Rhodes & Kos Destinations in Greece | Top Euro Travel" description="Explore Rhodes and Kos, Top Euro Travel's core destinations in Greece, and discover our support for travel programmes and events across the country." />
       <PageHero
         className="destinations-page__hero"
         title={<><Gold>Explore Our</Gold> Destinations in Greece</>}
@@ -85,7 +71,10 @@ export default function DestinationsPage() {
       />
 
       <section className="section shell destinations-overview destinations-reveal" data-destinations-reveal>
-        <p className="intro-copy destinations-intro">Greece offers an extraordinary diversity of destinations, experiences and travel opportunities. As a destination management company with extensive expertise in Rhodes and Kos, Top Euro Travel supports tour operators, travel agencies, groups and event planners with reliable, tailor-made solutions across Greece.<br /><br />While Rhodes and Kos remain our core destinations, our experience, trusted network and flexible approach allow us to support a wide range of travel programmes, events and special projects throughout the country.</p>
+        <div className="intro-copy destinations-intro">
+          <p>Greece offers an extraordinary diversity of destinations, experiences and travel opportunities. As a destination management company with extensive expertise in Rhodes and Kos, Top Euro Travel supports tour operators, travel agencies, groups and event planners with reliable, tailor-made solutions across Greece.</p>
+          <p>While Rhodes and Kos remain our core destinations, our experience, trusted network and flexible approach allow us to support a wide range of travel programmes, events and special projects throughout the country.</p>
+        </div>
         <div className="destinations-grid">
           {destinations.map((item) => (
             <article className="card destination-large" key={item.title}>
@@ -126,12 +115,12 @@ export default function DestinationsPage() {
       </section>
 
       <section className="destination-cta shell destinations-reveal" data-destinations-reveal>
-        <div className="destination-cta__circle"><Photo src={travelMedia('kallithea.jpg')} alt="Aegean coastline" /></div>
+        <div className="destination-cta__image"><Photo src={travelMedia('kallithea.jpg')} alt="Aegean coastline" /></div>
         <div><h2>Not sure where to start?</h2><p>Let us design the perfect itinerary.</p></div>
         <Link className="button button--gold" to="/contact">ENQUIRE NOW</Link>
         <PlanePath />
       </section>
-    </>
+    </div>
   );
 }
 
