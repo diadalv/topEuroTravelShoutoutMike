@@ -24,8 +24,8 @@
   "vision_model": "wix:gpt-5.2",
   "fast_model": "wix:gpt-5.2",
   "settings": {
-    "thinking_budget": 500,
-    "reasoning_effort": "low",
+    "thinking_budget": 1000,
+    "reasoning_effort": "high",
     "reasoning": true,
     "thinking": true,
     "inject_context_frame": false,
