@@ -159,7 +159,7 @@ export default function TravelHomePage() {
 
       <section
         className="home-cinematic-hero"
-        style={{ backgroundImage: `url("${travelMedia('home-hero-v2.jpg')}")` }}
+
       >
         <div className="home-cinematic-hero__shade" aria-hidden="true" />
         <div className="home-cinematic-hero__content shell">
