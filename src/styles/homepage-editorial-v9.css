@@ -34,6 +34,48 @@
   background-image: url('https://static.wixstatic.com/media/5a118b_3904ba3b49764d06b35840292a63bc65~mv2.jpg?originWidth=5472&originHeight=3648') !important;
 }
 
+.home-cinematic-hero {
+  position: relative;
+  overflow: hidden;
+  isolation: isolate;
+  background-color: #10234d;
+  background-image: url('https://static.wixstatic.com/media/5a118b_f3aada5a1ac547358ac6c8b35d60a2a7f000.jpg');
+  background-size: cover;
+  background-position: center;
+}
+
+.home-cinematic-hero__video {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  pointer-events: none;
+}
+
+.home-cinematic-hero__shade {
+  z-index: 1;
+}
+
+.home-cinematic-hero__content {
+  position: relative;
+  z-index: 2;
+}
+
+@media (max-width: 767px) {
+  .home-cinematic-hero {
+    background-image: url('https://static.wixstatic.com/media/5a118b_ea5a16aef9d047ddb9126c2f00737d43f000.jpg');
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .home-cinematic-hero__video {
+    display: none;
+  }
+}
+
 @media (max-width: 600px) {
   .home-cinematic {
     --home-radius: 20px;
