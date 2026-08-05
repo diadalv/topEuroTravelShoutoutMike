@@ -1,5 +1,5 @@
-import { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
+import { PageSeo, Photo, PlanePath, travelMedia } from '@/components/travel/Shared';
+import '@/styles/homepage-editorial-v9.css';
 import {
   ArrowDown,
   ArrowRight,
@@ -14,8 +14,8 @@ import {
   Users,
   type LucideIcon,
 } from 'lucide-react';
-import { PageSeo, Photo, PlanePath, travelMedia } from '@/components/travel/Shared';
-import '@/styles/homepage-editorial-v9.css';
+import { useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
 
 type IslandKey = 'rhodes' | 'kos';
 
