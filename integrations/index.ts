@@ -1,3 +1,3 @@
 export * from './cms';
-export * from './members';
 export * from './excursions';
+export * from './members';
