@@ -1,0 +1,41 @@
+@import './homepage-editorial-v9-base.css';
+
+/* Shared geometry for all contained homepage surfaces. Full-bleed chapters
+ * intentionally stay edge-to-edge; every card, photo panel and CTA uses the
+ * same corner language. */
+.home-cinematic {
+  --home-radius: 24px;
+}
+
+.home-cinematic-intro__image,
+.home-cinematic-proof,
+.home-cinematic-island-stage,
+.home-cinematic-experience,
+.home-cinematic-closing {
+  border-radius: var(--home-radius);
+}
+
+.home-cinematic-intro__image,
+.home-cinematic-proof,
+.home-cinematic-island-stage,
+.home-cinematic-experience,
+.home-cinematic-closing {
+  overflow: hidden;
+}
+
+.home-cinematic-proof {
+  border: 1px solid var(--home-line);
+}
+
+/* The previous asset named home-mice-v2 is a heritage detail, not a meeting
+ * venue. Use an authentic Rhodes destination view as the atmospheric backdrop
+ * without presenting it as corporate photography. */
+.home-cinematic-mice {
+  background-image: url('https://static.wixstatic.com/media/5a118b_3904ba3b49764d06b35840292a63bc65~mv2.jpg?originWidth=5472&originHeight=3648') !important;
+}
+
+@media (max-width: 600px) {
+  .home-cinematic {
+    --home-radius: 20px;
+  }
+}
