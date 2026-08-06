@@ -1,5 +1,5 @@
-import { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
+import { PageSeo, Photo, PlanePath, travelMedia } from '@/components/travel/Shared';
+import '@/styles/homepage-editorial-v9.css';
 import {
   ArrowDown,
   ArrowRight,
@@ -14,8 +14,8 @@ import {
   Users,
   type LucideIcon,
 } from 'lucide-react';
-import { PageSeo, Photo, PlanePath, travelMedia } from '@/components/travel/Shared';
-import '@/styles/homepage-editorial-v9.css';
+import { useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
 
 type IslandKey = 'rhodes' | 'kos';
 
@@ -157,10 +157,28 @@ export default function TravelHomePage() {
         description="Top Euro Travel is a trusted destination management company providing local expertise, ground handling, MICE, groups and authentic experiences in Rhodes and Kos since 1989."
       />
 
-      <section
-        className="home-cinematic-hero"
-        style={{ backgroundImage: `url("${travelMedia('home-hero-v2.jpg')}")` }}
-      >
+      <section className="home-cinematic-hero">
+        <video
+          className="home-cinematic-hero__video"
+          autoPlay
+          muted
+          loop
+          playsInline
+          preload="metadata"
+          poster="https://static.wixstatic.com/media/5a118b_f3aada5a1ac547358ac6c8b35d60a2a7f000.jpg"
+          tabIndex={-1}
+          aria-hidden="true"
+        >
+          <source
+            src="https://video.wixstatic.com/video/5a118b_ea5a16aef9d047ddb9126c2f00737d43/1080p/mp4/file.mp4"
+            media="(max-width: 767px)"
+            type="video/mp4"
+          />
+          <source
+            src="https://video.wixstatic.com/video/5a118b_f3aada5a1ac547358ac6c8b35d60a2a7/1080p/mp4/file.mp4"
+            type="video/mp4"
+          />
+        </video>
         <div className="home-cinematic-hero__shade" aria-hidden="true" />
         <div className="home-cinematic-hero__content shell">
           <EditorialEyebrow>Your DMC in the Dodecanese</EditorialEyebrow>
