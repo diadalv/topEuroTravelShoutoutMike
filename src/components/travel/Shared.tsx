@@ -39,11 +39,21 @@ const navigation: NavigationItem[] = [
 export function SiteHeader() {
   const [open, setOpen] = useState(false);
   const [destinationsOpen, setDestinationsOpen] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
 
   const closeNavigation = () => {
     setOpen(false);
     setDestinationsOpen(false);
   };
+
+  useEffect(() => {
+    const handleScroll = () => {
+      setScrolled(window.scrollY > 30);
+    };
+    handleScroll();
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
 
   useEffect(() => {
     if (!open) return;
@@ -58,7 +68,7 @@ export function SiteHeader() {
   }, [open]);
 
   return (
-    <header className="site-header">
+    <header className={`site-header ${scrolled ? 'is-scrolled' : ''}`}>
       <a className="skip-link" href="#main-content">Skip to main content</a>
       <div className="site-header__inner">
         <Link to="/" className="brand-link" aria-label="Top Euro Travel home" onClick={closeNavigation}>
@@ -101,9 +111,12 @@ export function SiteHeader() {
                   {item.children && <ChevronDown className="main-nav__chevron" aria-hidden="true" />}
                 </NavLink>
                 {item.children && (
-                  <div className="main-nav__dropdown" aria-label={`${item.label} submenu`}>
+                  <div className="main-nav__dropdown main-nav__dropdown--glass" aria-label={`${item.label} submenu`}>
                     {item.children.map((child) => (
-                      <Link key={child.label} to={child.to} onClick={closeNavigation}>{child.label}</Link>
+                      <Link key={child.label} to={child.to} onClick={closeNavigation} className="main-nav__dropdown-item">
+                        <span className="main-nav__dropdown-dot" />
+                        <span>{child.label}</span>
+                      </Link>
                     ))}
                   </div>
                 )}
@@ -111,7 +124,7 @@ export function SiteHeader() {
             ))}
           </nav>
           <div className="header-actions">
-            <Link className="button button--gold button--small" to="/contact" onClick={closeNavigation}>CONTACT</Link>
+            <Link className="button button--gold button--small header-contact-btn" to="/contact" onClick={closeNavigation}>CONTACT</Link>
           </div>
         </div>
       </div>
