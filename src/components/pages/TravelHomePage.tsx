@@ -200,10 +200,18 @@ export default function TravelHomePage() {
           </div>
         </div>
         <div className="home-cinematic-hero__wave-mask" aria-hidden="true">
-          <svg viewBox="0 0 1440 120" preserveAspectRatio="none">
+          <svg viewBox="0 0 1440 160" preserveAspectRatio="none">
+            <defs>
+              <linearGradient id="heroWaveGradient" x1="0%" y1="0%" x2="0%" y2="100%">
+                <stop offset="0%" stopColor="#fffefa" stopOpacity="0" />
+                <stop offset="30%" stopColor="#fffefa" stopOpacity="0.3" />
+                <stop offset="65%" stopColor="#fffefa" stopOpacity="0.75" />
+                <stop offset="100%" stopColor="#fffefa" stopOpacity="1" />
+              </linearGradient>
+            </defs>
             <path
-              fill="#fffefa"
-              d="M0,32L60,42.7C120,53,240,75,360,80C480,85,600,75,720,64C840,53,960,43,1080,58.7C1200,75,1320,105,1380,115L1440,120L1440,120L1380,120C1320,120,1200,120,1080,120C960,120,840,120,720,120C600,120,480,120,360,120C240,120,120,120,60,120L0,120Z"
+              fill="url(#heroWaveGradient)"
+              d="M0,40L60,51.7C120,63,240,85,360,90C480,95,600,85,720,74C840,63,960,53,1080,68.7C1200,85,1320,125,1380,140L1440,150L1440,160L1380,160C1320,160,1200,160,1080,160C960,160,840,160,720,160C600,160,480,160,360,160C240,160,120,160,60,160L0,160Z"
             />
           </svg>
         </div>

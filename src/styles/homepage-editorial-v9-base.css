@@ -244,11 +244,11 @@
 
 .home-cinematic-hero__wave-mask {
   position: absolute;
-  bottom: -1px;
+  bottom: -2px;
   left: 0;
   right: 0;
   width: 100%;
-  height: clamp(65px, 8vw, 130px);
+  height: clamp(90px, 11vw, 175px);
   z-index: 5;
   pointer-events: none;
 }
