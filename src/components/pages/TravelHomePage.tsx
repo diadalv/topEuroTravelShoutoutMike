@@ -199,6 +199,14 @@ export default function TravelHomePage() {
             </Link>
           </div>
         </div>
+        <div className="home-cinematic-hero__wave-mask" aria-hidden="true">
+          <svg viewBox="0 0 1440 120" preserveAspectRatio="none">
+            <path
+              fill="#fffefa"
+              d="M0,32L60,42.7C120,53,240,75,360,80C480,85,600,75,720,64C840,53,960,43,1080,58.7C1200,75,1320,105,1380,115L1440,120L1440,120L1380,120C1320,120,1200,120,1080,120C960,120,840,120,720,120C600,120,480,120,360,120C240,120,120,120,60,120L0,120Z"
+            />
+          </svg>
+        </div>
       </section>
 
       <section id="our-story" className="home-cinematic-intro shell" data-home-reveal>
