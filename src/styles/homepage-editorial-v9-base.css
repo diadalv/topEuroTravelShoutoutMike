@@ -247,7 +247,7 @@
   z-index: -1;
   background:
     linear-gradient(90deg, rgba(0, 35, 65, 0.94) 0%, rgba(0, 39, 72, 0.79) 35%, rgba(0, 45, 80, 0.25) 69%, rgba(0, 35, 63, 0.04) 100%),
-    linear-gradient(0deg, rgba(0, 32, 58, 0.5) 0%, transparent 48%);
+    linear-gradient(180deg, rgba(0, 32, 58, 0.2) 0%, transparent 55%, rgba(0, 32, 58, 0.85) 100%);
 }
 
 .home-cinematic-hero__content {
@@ -305,45 +305,50 @@
 }
 
 .home-cinematic-hero__signature {
-  max-width: 920px;
+  max-width: 960px;
   border-top: 0;
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 16px;
+  gap: 20px;
   margin-top: 56px;
-  padding-top: 0;
+  margin-bottom: -50px;
+  position: relative;
+  z-index: 10;
+  transform: translateY(45px);
 }
 
 .home-cinematic-stat-card {
-  background: rgba(10, 37, 64, 0.45);
-  border: 1px solid rgba(255, 255, 255, 0.18);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-  border-radius: 14px;
-  padding: 16px 22px;
+  background: rgba(10, 37, 64, 0.72);
+  border: 1px solid rgba(255, 255, 255, 0.22);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border-radius: 16px;
+  padding: 20px 24px;
   display: flex;
   flex-direction: column;
   justify-content: center;
-  transition: transform 220ms ease, border-color 220ms ease, background 220ms ease;
+  box-shadow: 0 20px 50px rgba(0, 32, 58, 0.25);
+  transition: transform 260ms ease, border-color 260ms ease, background 260ms ease, box-shadow 260ms ease;
 }
 
 .home-cinematic-stat-card:hover {
-  transform: translateY(-2px);
-  border-color: rgba(255, 194, 87, 0.45);
-  background: rgba(10, 37, 64, 0.6);
+  transform: translateY(-4px);
+  border-color: rgba(255, 194, 87, 0.6);
+  background: rgba(10, 37, 64, 0.85);
+  box-shadow: 0 26px 60px rgba(0, 32, 58, 0.35);
 }
 
 .home-cinematic-stat-card strong {
   display: block;
   color: #ffc257;
-  font-size: 17px;
+  font-size: 18px;
   font-weight: 800;
   margin-bottom: 3px;
   letter-spacing: 0.02em;
 }
 
 .home-cinematic-stat-card span {
-  color: rgba(255, 255, 255, 0.85);
+  color: rgba(255, 255, 255, 0.88);
   font-size: 12px;
   line-height: 1.4;
 }
@@ -354,6 +359,16 @@
   font-size: 21px;
   font-weight: 500;
   letter-spacing: -0.01em;
+}
+
+/* Editorial introduction */
+.home-cinematic-intro {
+  display: grid;
+  grid-template-columns: minmax(0, 0.92fr) minmax(420px, 1.08fr);
+  align-items: center;
+  gap: clamp(60px, 9vw, 150px);
+  padding-top: clamp(130px, 12vw, 200px);
+  padding-bottom: clamp(90px, 9vw, 150px);
 }
 
 .home-cinematic-scroll {
