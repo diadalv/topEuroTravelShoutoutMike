@@ -40,6 +40,7 @@ export function SiteHeader() {
   const [open, setOpen] = useState(false);
   const [destinationsOpen, setDestinationsOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+  const [headerTheme, setHeaderTheme] = useState<'dark' | 'light'>('dark');
 
   const closeNavigation = () => {
     setOpen(false);
@@ -48,8 +49,39 @@ export function SiteHeader() {
 
   useEffect(() => {
     const handleScroll = () => {
-      setScrolled(window.scrollY > 30);
+      const scrollY = window.scrollY;
+      setScrolled(scrollY > 20);
+
+      // Section theme detector
+      const headerCenter = scrollY + 40;
+      const sections = document.querySelectorAll<HTMLElement>('section, header, [data-header-theme]');
+      let currentTheme: 'dark' | 'light' = 'dark';
+
+      sections.forEach((sec) => {
+        if (sec.classList.contains('site-header')) return;
+        const top = sec.offsetTop;
+        const height = sec.offsetHeight;
+        if (headerCenter >= top && headerCenter < top + height) {
+          const explicitTheme = sec.getAttribute('data-header-theme');
+          if (explicitTheme === 'light') {
+            currentTheme = 'light';
+          } else if (explicitTheme === 'dark') {
+            currentTheme = 'dark';
+          } else {
+            // Auto detect from section class or background
+            const cls = sec.className || '';
+            if (cls.includes('intro') || cls.includes('services') || cls.includes('experiences') || cls.includes('light')) {
+              currentTheme = 'light';
+            } else if (cls.includes('hero') || cls.includes('dark') || cls.includes('mice')) {
+              currentTheme = 'dark';
+            }
+          }
+        }
+      });
+
+      setHeaderTheme(currentTheme);
     };
+
     handleScroll();
     window.addEventListener('scroll', handleScroll, { passive: true });
     return () => window.removeEventListener('scroll', handleScroll);
@@ -68,7 +100,7 @@ export function SiteHeader() {
   }, [open]);
 
   return (
-    <header className={`site-header ${scrolled ? 'is-scrolled' : ''}`}>
+    <header className={`site-header ${scrolled ? 'is-scrolled' : ''} theme-${headerTheme}`}>
       <a className="skip-link" href="#main-content">Skip to main content</a>
       <div className="site-header__inner">
         <Link to="/" className="brand-link" aria-label="Top Euro Travel home" onClick={closeNavigation}>
