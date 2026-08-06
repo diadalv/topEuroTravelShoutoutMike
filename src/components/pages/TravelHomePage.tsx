@@ -194,20 +194,25 @@ export default function TravelHomePage() {
             <Link className="home-cinematic-button home-cinematic-button--gold" to="/contact">
               Start planning <ArrowRight />
             </Link>
-            <Link className="home-cinematic-text-link home-cinematic-text-link--light" to="/destinations">
-              Explore the islands <ArrowRight />
+            <Link className="home-cinematic-button home-cinematic-button--glass" to="/destinations">
+              Explore the destinations <ArrowRight />
             </Link>
           </div>
           <div className="home-cinematic-hero__signature" aria-label="Top Euro Travel at a glance">
-            <span><strong>Since 1989</strong>Established expertise</span>
-            <span><strong>Rhodes &amp; Kos</strong>Local teams on both islands</span>
-            <span><strong>24/7</strong>Support around the clock</span>
+            <div className="home-cinematic-stat-card">
+              <strong>Since 1989</strong>
+              <span>Established expertise</span>
+            </div>
+            <div className="home-cinematic-stat-card">
+              <strong>Rhodes &amp; Kos</strong>
+              <span>Local teams on both islands</span>
+            </div>
+            <div className="home-cinematic-stat-card">
+              <strong>24/7</strong>
+              <span>Support around the clock</span>
+            </div>
           </div>
         </div>
-        <a className="home-cinematic-scroll" href="#our-story">
-          <span>Discover our story</span>
-          <ArrowDown />
-        </a>
       </section>
 
       <section id="our-story" className="home-cinematic-intro shell" data-home-reveal>
