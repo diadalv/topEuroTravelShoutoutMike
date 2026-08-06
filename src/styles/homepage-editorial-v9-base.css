@@ -231,7 +231,7 @@
 
 /* Hero */
 .home-cinematic-hero {
-  min-height: clamp(720px, 94svh, 980px);
+  min-height: clamp(680px, 88svh, 900px);
   position: relative;
   display: flex;
   align-items: center;
@@ -239,6 +239,19 @@
   background-position: 63% center;
   background-size: cover;
   color: #fff;
+  overflow: visible;
+}
+
+.home-cinematic-hero::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 180px;
+  background: linear-gradient(to bottom, transparent 0%, rgba(255, 254, 250, 0.45) 60%, #fffefa 100%);
+  pointer-events: none;
+  z-index: 1;
 }
 
 .home-cinematic-hero__shade {
@@ -251,8 +264,9 @@
 }
 
 .home-cinematic-hero__content {
-  padding-top: 142px;
-  padding-bottom: 120px;
+  padding-top: 130px;
+  padding-bottom: 110px;
+  width: 100%;
 }
 
 .home-cinematic-hero .home-cinematic-eyebrow {
@@ -305,21 +319,23 @@
 }
 
 .home-cinematic-hero__signature {
-  max-width: 960px;
+  width: min(calc(100% - clamp(40px, 7vw, 140px)), 980px);
   border-top: 0;
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: 20px;
-  margin-top: 56px;
-  margin-bottom: -50px;
-  position: relative;
-  z-index: 10;
-  transform: translateY(45px);
+  position: absolute;
+  bottom: -45px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 20;
+  margin: 0;
+  padding: 0;
 }
 
 .home-cinematic-stat-card {
-  background: rgba(10, 37, 64, 0.72);
-  border: 1px solid rgba(255, 255, 255, 0.22);
+  background: rgba(10, 37, 64, 0.78);
+  border: 1px solid rgba(255, 255, 255, 0.25);
   backdrop-filter: blur(16px);
   -webkit-backdrop-filter: blur(16px);
   border-radius: 16px;
@@ -334,7 +350,7 @@
 .home-cinematic-stat-card:hover {
   transform: translateY(-4px);
   border-color: rgba(255, 194, 87, 0.6);
-  background: rgba(10, 37, 64, 0.85);
+  background: rgba(10, 37, 64, 0.9);
   box-shadow: 0 26px 60px rgba(0, 32, 58, 0.35);
 }
 
@@ -367,7 +383,7 @@
   grid-template-columns: minmax(0, 0.92fr) minmax(420px, 1.08fr);
   align-items: center;
   gap: clamp(60px, 9vw, 150px);
-  padding-top: clamp(130px, 12vw, 200px);
+  padding-top: clamp(140px, 12vw, 210px);
   padding-bottom: clamp(90px, 9vw, 150px);
 }
 
