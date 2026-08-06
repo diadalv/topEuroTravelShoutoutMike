@@ -198,20 +198,6 @@ export default function TravelHomePage() {
               Explore the destinations <ArrowRight />
             </Link>
           </div>
-          <div className="home-cinematic-hero__signature" aria-label="Top Euro Travel at a glance">
-            <div className="home-cinematic-stat-card">
-              <strong>Since 1989</strong>
-              <span>Established expertise</span>
-            </div>
-            <div className="home-cinematic-stat-card">
-              <strong>Rhodes &amp; Kos</strong>
-              <span>Local teams on both islands</span>
-            </div>
-            <div className="home-cinematic-stat-card">
-              <strong>24/7</strong>
-              <span>Support around the clock</span>
-            </div>
-          </div>
         </div>
       </section>
 
