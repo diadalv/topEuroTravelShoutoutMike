@@ -242,23 +242,6 @@
   overflow: hidden;
 }
 
-.home-cinematic-hero__wave-mask {
-  position: absolute;
-  bottom: -2px;
-  left: 0;
-  right: 0;
-  width: 100%;
-  height: clamp(90px, 11vw, 175px);
-  z-index: 5;
-  pointer-events: none;
-}
-
-.home-cinematic-hero__wave-mask svg {
-  display: block;
-  width: 100%;
-  height: 100%;
-}
-
 .home-cinematic-hero__shade {
   position: absolute;
   inset: 0;
