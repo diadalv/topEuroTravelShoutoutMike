@@ -1,5 +1,10 @@
-import { useState, type LucideIcon } from 'react';
-import { Link } from 'react-router-dom';
+import {
+  PageHero,
+  Photo,
+  TrustBar,
+  travelMedia,
+} from '@/components/travel/Shared';
+import '@/styles/about-page-v1.css';
 import {
   ArrowRight,
   Globe2,
@@ -8,13 +13,8 @@ import {
   MapPin,
   Users,
 } from 'lucide-react';
-import {
-  PageHero,
-  Photo,
-  TrustBar,
-  travelMedia,
-} from '@/components/travel/Shared';
-import '@/styles/about-page-v1.css';
+import { useState, type LucideIcon } from 'react';
+import { Link } from 'react-router-dom';
 
 const images = {
   hero: travelMedia('about-hero-v2.jpg'),
@@ -166,10 +166,12 @@ export default function AboutPage() {
       </section>
 
       <section className="tet-about__values" aria-labelledby="about-values-title">
-        <div className="tet-about__values-panel">
+        <div className="tet-about__values-heading">
           <p className="tet-about__eyebrow">Our Values</p>
           <h2 id="about-values-title">The principles behind every partnership.</h2>
+        </div>
 
+        <div className="tet-about__values-body">
           <div className="tet-about__values-list" aria-label="Top Euro Travel values">
             {values.map((value, index) => {
               const isActive = activeValue === index;
@@ -201,26 +203,26 @@ export default function AboutPage() {
               );
             })}
           </div>
-        </div>
 
-        <div className="tet-about__values-media" aria-live="polite">
-          <div className="tet-about__values-frame">
-            {values.map((value, index) => {
-              const isActive = activeValue === index;
+          <div className="tet-about__values-media" aria-live="polite">
+            <div className="tet-about__values-frame">
+              {values.map((value, index) => {
+                const isActive = activeValue === index;
 
-              return (
-                <div
-                  className={`tet-about__values-slide${isActive ? ' is-active' : ''}`}
-                  aria-hidden={!isActive}
-                  key={value.title}
-                >
-                  <Photo
-                    src={value.image}
-                    alt={isActive ? value.imageAlt : ''}
-                  />
-                </div>
-              );
-            })}
+                return (
+                  <div
+                    className={`tet-about__values-slide${isActive ? ' is-active' : ''}`}
+                    aria-hidden={!isActive}
+                    key={value.title}
+                  >
+                    <Photo
+                      src={value.image}
+                      alt={isActive ? value.imageAlt : ''}
+                    />
+                  </div>
+                );
+              })}
+            </div>
           </div>
         </div>
       </section>
