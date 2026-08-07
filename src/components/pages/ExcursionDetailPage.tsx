@@ -1,6 +1,6 @@
 import { useEffect, useMemo, useState } from 'react';
 import { Link, useParams } from 'react-router-dom';
-import { ExcursionCatalogService, type ExcursionCatalogRecord } from '@/integrations';
+import { ExcursionCatalogService, type ExcursionCatalogRecord } from '@/integrations/excursions';
 import {
   Accessibility,
   BusFront,

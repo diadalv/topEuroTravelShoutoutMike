@@ -1,7 +1,6 @@
-import { PageSeo, Photo, PlanePath, travelMedia } from '@/components/travel/Shared';
+import { PageSeo, Photo, travelMedia } from '@/components/travel/Shared';
 import '@/styles/homepage-editorial-v9.css';
 import {
-  ArrowDown,
   ArrowRight,
   BedDouble,
   Bus,
@@ -123,6 +122,223 @@ function EditorialEyebrow({ children }: { children: string }) {
   return <p className="home-cinematic-eyebrow">{children}</p>;
 }
 
+const stepOneStyles = String.raw`
+  /* STEP 1: controlled Home upgrade — hero, continuity, header CTA, no template airplane */
+  .home-cinematic-hero {
+    position: relative;
+    isolation: isolate;
+    min-height: 100svh;
+  }
+
+  .home-cinematic-hero__shade {
+    z-index: 1;
+    background:
+      linear-gradient(90deg, rgba(5, 22, 43, .86) 0%, rgba(5, 22, 43, .66) 37%, rgba(5, 22, 43, .30) 67%, rgba(5, 22, 43, .10) 100%),
+      linear-gradient(180deg, rgba(4, 17, 34, .12) 0%, rgba(4, 17, 34, .06) 54%, rgba(4, 17, 34, .42) 100%) !important;
+  }
+
+  .home-cinematic-hero__content {
+    position: relative;
+    z-index: 4;
+    padding-top: clamp(148px, 18vh, 220px);
+    padding-bottom: clamp(150px, 19vh, 230px);
+  }
+
+  .home-step1-hero__title {
+    max-width: 980px;
+    margin: 18px 0 24px;
+    color: #fff;
+    font-family: Georgia, 'Times New Roman', serif;
+    font-size: clamp(3.1rem, 6.6vw, 7.1rem);
+    font-weight: 400;
+    line-height: .91;
+    letter-spacing: -.047em;
+    text-wrap: balance;
+    text-shadow: 0 5px 32px rgba(0, 0, 0, .22);
+  }
+
+  .home-step1-hero__title span {
+    display: block;
+  }
+
+  .home-step1-hero__title span:last-child {
+    color: #e0b62f;
+    font-style: italic;
+    font-size: .82em;
+    margin-top: .08em;
+  }
+
+  .home-cinematic-hero__lead {
+    max-width: 690px;
+    font-size: clamp(1.02rem, 1.4vw, 1.28rem);
+    line-height: 1.65;
+  }
+
+  .home-step1-hero__trust {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 10px 18px;
+    margin-top: 34px;
+    color: rgba(255, 255, 255, .76);
+    font-size: .72rem;
+    font-weight: 700;
+    letter-spacing: .16em;
+    text-transform: uppercase;
+  }
+
+  .home-step1-hero__trust span + span::before {
+    content: '';
+    display: inline-block;
+    width: 3px;
+    height: 3px;
+    margin-right: 18px;
+    border-radius: 50%;
+    vertical-align: middle;
+    background: #e0b62f;
+  }
+
+  .home-step1-hero__blend {
+    position: absolute;
+    z-index: 3;
+    right: 0;
+    bottom: -1px;
+    left: 0;
+    height: clamp(112px, 14vw, 210px);
+    pointer-events: none;
+    background: linear-gradient(
+      180deg,
+      rgba(247, 243, 235, 0) 0%,
+      rgba(247, 243, 235, .10) 34%,
+      rgba(247, 243, 235, .72) 78%,
+      #f7f3eb 100%
+    );
+  }
+
+  .home-cinematic-intro {
+    position: relative;
+    z-index: 2;
+    isolation: isolate;
+    padding-top: clamp(92px, 9vw, 145px) !important;
+  }
+
+  .home-cinematic-intro::before {
+    content: '';
+    position: absolute;
+    z-index: -1;
+    top: 0;
+    bottom: 0;
+    left: 50%;
+    width: 100vw;
+    transform: translateX(-50%);
+    background: #f7f3eb;
+  }
+
+  .home-cinematic-intro__copy > h1 {
+    margin: 0;
+    color: #10213a;
+    font-family: Georgia, 'Times New Roman', serif;
+    font-size: clamp(2.65rem, 5vw, 5.5rem);
+    font-weight: 400;
+    line-height: .98;
+    letter-spacing: -.042em;
+    text-wrap: balance;
+  }
+
+  /* Keep the shared Header transparent. Only refine the Contact CTA on this page. */
+  header a[href='/contact'],
+  header a[href$='/contact'] {
+    min-height: 39px !important;
+    padding: 9px 17px !important;
+    border: 1px solid rgba(224, 182, 47, .88) !important;
+    border-radius: 7px !important;
+    background: transparent !important;
+    color: inherit !important;
+    box-shadow: none !important;
+    font-size: .73rem !important;
+    font-weight: 700 !important;
+    letter-spacing: .12em !important;
+    line-height: 1 !important;
+    text-transform: uppercase !important;
+    transition: background-color .25s ease, color .25s ease, border-color .25s ease, transform .25s ease !important;
+  }
+
+  header a[href='/contact']:hover,
+  header a[href$='/contact']:hover {
+    border-color: #e0b62f !important;
+    background: #e0b62f !important;
+    color: #10213a !important;
+    transform: translateY(-1px);
+  }
+
+  @media (prefers-reduced-motion: no-preference) {
+    .home-cinematic-hero__content .home-cinematic-eyebrow,
+    .home-step1-hero__title,
+    .home-cinematic-hero__lead,
+    .home-cinematic-hero__content .home-cinematic-actions,
+    .home-step1-hero__trust {
+      opacity: 0;
+      animation: homeStep1Rise .85s cubic-bezier(.22, 1, .36, 1) forwards;
+    }
+
+    .home-step1-hero__title { animation-delay: .10s; }
+    .home-cinematic-hero__lead { animation-delay: .22s; }
+    .home-cinematic-hero__content .home-cinematic-actions { animation-delay: .34s; }
+    .home-step1-hero__trust { animation-delay: .46s; }
+  }
+
+  @keyframes homeStep1Rise {
+    from { opacity: 0; transform: translateY(24px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  @media (max-width: 767px) {
+    .home-cinematic-hero {
+      min-height: 92svh;
+    }
+
+    .home-cinematic-hero__content {
+      padding-top: 132px;
+      padding-bottom: 156px;
+    }
+
+    .home-step1-hero__title {
+      margin-top: 14px;
+      margin-bottom: 20px;
+      font-size: clamp(2.7rem, 13.2vw, 4.3rem);
+      line-height: .94;
+    }
+
+    .home-step1-hero__title span:last-child {
+      font-size: .86em;
+      margin-top: .12em;
+    }
+
+    .home-step1-hero__trust {
+      gap: 8px 12px;
+      margin-top: 26px;
+      font-size: .62rem;
+      letter-spacing: .12em;
+    }
+
+    .home-step1-hero__trust span + span::before {
+      margin-right: 12px;
+    }
+
+    .home-step1-hero__blend {
+      height: 130px;
+    }
+
+    .home-cinematic-intro {
+      padding-top: 76px !important;
+    }
+
+    .home-cinematic-intro__copy > h1 {
+      font-size: clamp(2.35rem, 11vw, 3.55rem);
+    }
+  }
+`;
+
 export default function TravelHomePage() {
   const [activeIsland, setActiveIsland] = useState<IslandKey>('rhodes');
   const island = islandScenes[activeIsland];
@@ -152,9 +368,10 @@ export default function TravelHomePage() {
 
   return (
     <div className="home-cinematic">
+      <style>{stepOneStyles}</style>
       <PageSeo
         title="Destination Management Company in Greece | Rhodes & Kos DMC | Top Euro Travel"
-        description="Top Euro Travel is a trusted destination management company providing local expertise, ground handling, MICE, groups and authentic experiences in Rhodes and Kos since 1989."
+        description="Top Euro Travel is a trusted destination management company in Greece, providing DMC services, hotel contracting, transfers, MICE, groups, excursions and ground handling in Rhodes and Kos since 1989."
       />
 
       <section className="home-cinematic-hero">
@@ -181,36 +398,41 @@ export default function TravelHomePage() {
         </video>
         <div className="home-cinematic-hero__shade" aria-hidden="true" />
         <div className="home-cinematic-hero__content shell">
-          <EditorialEyebrow>Your DMC in the Dodecanese</EditorialEyebrow>
-          <h1>
-            <span>Rhodes &amp; Kos,</span>
-            beautifully orchestrated.
-          </h1>
+          <EditorialEyebrow>Destination management in Rhodes &amp; Kos</EditorialEyebrow>
+          <p className="home-step1-hero__title">
+            <span>Your Trusted DMC Partner</span>
+            <span>in Rhodes &amp; Kos</span>
+          </p>
           <p className="home-cinematic-hero__lead">
-            From first arrival to final farewell, one local team shapes every detail for tour operators,
-            groups and travellers.
+            Delivering destination management, ground handling and travel solutions since 1989.
           </p>
           <div className="home-cinematic-actions">
-            <Link className="home-cinematic-button home-cinematic-button--gold" to="/contact">
-              Start planning <ArrowRight />
+            <Link className="home-cinematic-button home-cinematic-button--gold" to="/services">
+              Explore our services <ArrowRight />
             </Link>
             <Link className="home-cinematic-button home-cinematic-button--glass" to="/destinations">
-              Explore the destinations <ArrowRight />
+              Discover Rhodes &amp; Kos <ArrowRight />
             </Link>
           </div>
+          <div className="home-step1-hero__trust" aria-label="Top Euro Travel key facts">
+            <span>Since 1989</span>
+            <span>Local teams in both islands</span>
+            <span>24/7 support</span>
+          </div>
         </div>
+        <div className="home-step1-hero__blend" aria-hidden="true" />
       </section>
 
       <section id="our-story" className="home-cinematic-intro shell" data-home-reveal>
         <div className="home-cinematic-intro__copy">
-          <EditorialEyebrow>One team. Two islands. Decades of trust.</EditorialEyebrow>
-          <h2>The local partner that makes everything feel effortless.</h2>
+          <EditorialEyebrow>Trusted destination management in Rhodes &amp; Kos</EditorialEyebrow>
+          <h1>Destination Management Company in Greece</h1>
           <p className="home-cinematic-lead">
-            Great journeys feel spontaneous. Behind the scenes, they are carefully made.
+            Trusted destination management, ground handling and excursion services in Rhodes and Kos.
           </p>
           <p>
-            Since 1989, Top Euro Travel has worked quietly behind every arrival, stay, transfer and
-            experience—bringing local knowledge, trusted relationships and calm coordination to every programme.
+            Since 1989, Top Euro Travel has supported tour operators, travel agencies, groups and event planners
+            with reliable local expertise, responsive service and hands-on coordination across both destinations.
           </p>
           <Link className="home-cinematic-text-link" to="/about">
             Meet the people behind the journey <ArrowRight />
@@ -224,7 +446,6 @@ export default function TravelHomePage() {
           <div className="home-cinematic-intro__image home-cinematic-intro__image--detail">
             <Photo src={travelMedia('old-town.jpg')} alt="An atmospheric lane in Rhodes Medieval City" />
           </div>
-          <PlanePath className="home-cinematic-plane home-cinematic-plane--intro" />
         </div>
 
         <div className="home-cinematic-proof" aria-label="Top Euro Travel facts">
@@ -391,7 +612,6 @@ export default function TravelHomePage() {
             Browse excursions <ArrowRight />
           </Link>
         </div>
-        <PlanePath className="home-cinematic-plane home-cinematic-plane--closing" />
       </section>
     </div>
   );

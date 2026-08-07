@@ -1,6 +1,6 @@
 import { useEffect, useMemo, useState } from 'react';
 import { Link } from 'react-router-dom';
-import { ExcursionCatalogService, type ExcursionCatalogRecord } from '@/integrations';
+import { ExcursionCatalogService, type ExcursionCatalogRecord } from '@/integrations/excursions';
 import { CalendarDays, Clock3, MapPin, UsersRound } from 'lucide-react';
 import { Gold, PageHero, PageSeo, Photo, RequestBanner, travelMedia } from '@/components/travel/Shared';
 
