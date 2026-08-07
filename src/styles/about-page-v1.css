@@ -21,7 +21,7 @@
   --tet-about-shadow: 0 28px 70px rgba(31, 58, 95, 0.13);
   --tet-about-max-width: 1460px;
   --tet-about-gutter: clamp(20px, 4.2vw, 72px);
-  --tet-about-section-space: clamp(76px, 7.5vw, 124px);
+  --tet-about-section-space: clamp(60px, 5vw, 82px);
 
   /*
    * These variables first reuse the site's typography tokens, when present.
@@ -55,7 +55,7 @@
 }
 
 .tet-about__eyebrow {
-  margin: 0 0 22px;
+  margin: 0 0 18px;
   color: var(--tet-about-gold);
   font-family: var(--tet-about-font-sans);
   font-size: 0.78rem;
@@ -69,14 +69,14 @@
 
 .tet-about__story {
   position: relative;
-  border-top: 12px solid var(--tet-about-blue);
+  border-top: 10px solid var(--tet-about-blue);
   background: var(--tet-about-ivory);
 }
 
 .tet-about__story-inner {
   display: grid;
-  grid-template-columns: minmax(0, 0.96fr) minmax(500px, 1.04fr);
-  gap: clamp(54px, 6.2vw, 104px);
+  grid-template-columns: minmax(0, 1.08fr) minmax(470px, 0.92fr);
+  gap: clamp(44px, 5vw, 76px);
   align-items: center;
   padding-block: var(--tet-about-section-space);
 }
@@ -85,7 +85,7 @@
   display: flex;
   align-items: center;
   gap: 18px;
-  margin-bottom: clamp(34px, 4vw, 50px);
+  margin-bottom: clamp(26px, 2.8vw, 36px);
   color: var(--tet-about-blue);
   font-size: 0.84rem;
   font-weight: 800;
@@ -101,19 +101,19 @@
 }
 
 .tet-about__kicker-line {
-  width: clamp(52px, 5.5vw, 84px);
+  width: clamp(46px, 4vw, 68px);
   height: 2px;
   background: var(--tet-about-gold);
 }
 
 .tet-about__story-copy h2 {
   max-width: 760px;
-  margin: 0 0 clamp(30px, 3.2vw, 42px);
+  margin: 0 0 clamp(24px, 2.3vw, 32px);
   color: var(--tet-about-blue);
   font-family: var(--tet-about-font-sans);
-  font-size: clamp(3rem, 4.65vw, 5rem);
+  font-size: clamp(2.75rem, 3.65vw, 4.15rem);
   font-weight: 700;
-  line-height: 1.03;
+  line-height: 1.02;
   letter-spacing: -0.045em;
   text-wrap: balance;
 }
@@ -126,11 +126,11 @@
 
 .tet-about__story-copy > p {
   max-width: 660px;
-  margin: 0 0 22px;
+  margin: 0 0 18px;
   color: var(--tet-about-charcoal);
-  font-size: clamp(1rem, 1.15vw, 1.16rem);
+  font-size: clamp(0.98rem, 0.95vw, 1.06rem);
   font-weight: 400;
-  line-height: 1.72;
+  line-height: 1.62;
 }
 
 .tet-about__story-copy > p:last-of-type {
@@ -147,9 +147,9 @@
   align-items: center;
   justify-content: center;
   gap: 14px;
-  min-height: 58px;
-  margin-top: 34px;
-  padding: 0 30px;
+  min-height: 54px;
+  margin-top: 28px;
+  padding: 0 27px;
   border: 1px solid var(--tet-about-gold);
   border-radius: 5px;
   background: var(--tet-about-gold);
@@ -177,9 +177,9 @@
 
 .tet-about__story-media {
   position: relative;
-  height: clamp(540px, 44vw, 710px);
+  height: clamp(450px, 34vw, 570px);
   overflow: hidden;
-  border-radius: 18px;
+  border-radius: 14px;
   box-shadow: var(--tet-about-shadow);
 }
 
@@ -205,10 +205,10 @@
 
 .tet-about__values {
   display: grid;
-  grid-template-columns: minmax(380px, 37.5%) minmax(0, 62.5%);
+  grid-template-columns: minmax(460px, 45%) minmax(0, 55%);
   width: calc(100% - var(--tet-about-gutter) - var(--tet-about-gutter));
   max-width: var(--tet-about-max-width);
-  min-height: clamp(660px, 52vw, 760px);
+  min-height: clamp(520px, 42vw, 620px);
   margin-inline: auto;
   overflow: hidden;
   border-top: 1px solid var(--tet-about-line);
@@ -220,7 +220,7 @@
   display: flex;
   flex-direction: column;
   justify-content: center;
-  padding: clamp(54px, 6.2vw, 92px);
+  padding: clamp(42px, 4.2vw, 64px);
 }
 
 .tet-about__values-panel h2 {
@@ -228,7 +228,7 @@
   margin: 0;
   color: var(--tet-about-blue);
   font-family: var(--tet-about-font-display);
-  font-size: clamp(3.1rem, 4.35vw, 5rem);
+  font-size: clamp(2.7rem, 3.35vw, 4.05rem);
   font-weight: 500;
   line-height: 0.98;
   letter-spacing: -0.03em;
@@ -238,16 +238,16 @@
 .tet-about__values-list {
   display: grid;
   gap: 3px;
-  margin-top: clamp(34px, 4vw, 48px);
+  margin-top: clamp(26px, 2.8vw, 36px);
 }
 
 .tet-about__value {
   display: grid;
-  grid-template-columns: 54px minmax(0, 1fr);
-  gap: 15px;
+  grid-template-columns: 48px minmax(0, 1fr);
+  gap: 12px;
   width: 100%;
-  min-height: 54px;
-  padding: 11px 0;
+  min-height: 46px;
+  padding: 7px 0;
   border: 0;
   background: transparent;
   color: var(--tet-about-blue);
@@ -260,7 +260,7 @@
   padding-top: 2px;
   color: var(--tet-about-blue);
   font-family: var(--tet-about-font-display);
-  font-size: 1.42rem;
+  font-size: 1.25rem;
   font-weight: 500;
   line-height: 1.25;
   transition: color 180ms ease;
@@ -270,9 +270,9 @@
   position: relative;
   display: grid;
   align-content: start;
-  gap: 8px;
-  min-height: 36px;
-  padding-left: 22px;
+  gap: 5px;
+  min-height: 32px;
+  padding-left: 18px;
   border-left: 1px solid var(--tet-about-line);
   transition: border-color 180ms ease;
 }
@@ -292,7 +292,7 @@
 .tet-about__value-content strong {
   color: var(--tet-about-blue);
   font-family: var(--tet-about-font-display);
-  font-size: clamp(1.35rem, 1.6vw, 1.75rem);
+  font-size: clamp(1.2rem, 1.35vw, 1.5rem);
   font-weight: 600;
   line-height: 1.15;
 }
@@ -300,13 +300,13 @@
 .tet-about__value-copy {
   max-width: 390px;
   color: var(--tet-about-charcoal);
-  font-size: 0.98rem;
-  line-height: 1.58;
+  font-size: 0.92rem;
+  line-height: 1.5;
   animation: tet-about-value-in 220ms ease both;
 }
 
 .tet-about__value.is-active {
-  padding-block: 15px 18px;
+  padding-block: 10px 13px;
 }
 
 .tet-about__value.is-active .tet-about__value-number {
@@ -348,23 +348,23 @@
 
 .tet-about__strengths-inner {
   display: grid;
-  grid-template-columns: minmax(300px, 0.74fr) minmax(0, 1.76fr);
-  gap: clamp(44px, 5.2vw, 78px);
+  grid-template-columns: minmax(300px, 0.8fr) minmax(0, 1.7fr);
+  gap: clamp(36px, 4.2vw, 62px);
   align-items: stretch;
   padding-block: var(--tet-about-section-space);
 }
 
 .tet-about__strengths-intro {
-  padding-right: clamp(30px, 3.5vw, 58px);
+  padding-right: clamp(26px, 3vw, 46px);
   border-right: 1px solid var(--tet-about-line);
 }
 
 .tet-about__strengths-intro h2 {
   max-width: 500px;
-  margin: 0 0 30px;
+  margin: 0 0 24px;
   color: var(--tet-about-blue);
   font-family: var(--tet-about-font-display);
-  font-size: clamp(3rem, 4.05vw, 4.75rem);
+  font-size: clamp(2.65rem, 3.35vw, 3.85rem);
   font-weight: 500;
   line-height: 0.99;
   letter-spacing: -0.03em;
@@ -380,7 +380,7 @@
   margin: 0;
   color: var(--tet-about-charcoal);
   font-size: 1rem;
-  line-height: 1.7;
+  line-height: 1.62;
 }
 
 .tet-about__strengths-grid {
@@ -393,7 +393,7 @@
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  padding: 8px clamp(28px, 3vw, 48px);
+  padding: 4px clamp(24px, 2.5vw, 38px);
   border-right: 1px solid var(--tet-about-line);
 }
 
@@ -412,8 +412,8 @@
   flex: 0 0 auto;
   align-items: center;
   justify-content: center;
-  width: 76px;
-  height: 76px;
+  width: 64px;
+  height: 64px;
   border: 1px solid rgba(200, 146, 45, 0.11);
   border-radius: 999px;
   background: var(--tet-about-soft-gold);
@@ -422,10 +422,10 @@
 
 .tet-about__strength-number {
   display: block;
-  margin: 22px 0 12px;
+  margin: 18px 0 10px;
   color: var(--tet-about-gold);
   font-family: var(--tet-about-font-display);
-  font-size: clamp(2.8rem, 3.8vw, 4.15rem);
+  font-size: clamp(2.35rem, 3vw, 3.25rem);
   font-weight: 500;
   line-height: 0.9;
 }
@@ -452,7 +452,7 @@
 
 .tet-about__stats {
   position: relative;
-  padding-block: clamp(68px, 7vw, 104px);
+  padding-block: clamp(56px, 5.5vw, 80px);
   overflow: hidden;
   background: var(--tet-about-blue);
   color: var(--tet-about-white);
@@ -474,7 +474,7 @@
 }
 
 .tet-about__stats-heading {
-  margin-bottom: clamp(38px, 4.5vw, 58px);
+  margin-bottom: clamp(30px, 3.5vw, 44px);
   text-align: center;
 }
 
@@ -486,7 +486,7 @@
   margin: 0;
   color: var(--tet-about-white);
   font-family: var(--tet-about-font-display);
-  font-size: clamp(3rem, 4.3vw, 5rem);
+  font-size: clamp(2.7rem, 3.6vw, 4.2rem);
   font-weight: 500;
   line-height: 0.98;
   letter-spacing: -0.025em;
@@ -501,11 +501,11 @@
 
 .tet-about__stat {
   display: flex;
-  min-height: 174px;
+  min-height: 148px;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  padding: 28px 18px;
+  padding: 22px 16px;
   border-right: 1px solid var(--tet-about-line-gold);
   text-align: center;
 }
@@ -517,7 +517,7 @@
 .tet-about__stat strong {
   color: var(--tet-about-gold);
   font-family: var(--tet-about-font-display);
-  font-size: clamp(2.5rem, 3.45vw, 4.2rem);
+  font-size: clamp(2.25rem, 3vw, 3.55rem);
   font-weight: 500;
   line-height: 0.9;
   white-space: nowrap;
@@ -525,7 +525,7 @@
 
 .tet-about__stat span {
   max-width: 135px;
-  margin-top: 16px;
+  margin-top: 12px;
   color: var(--tet-about-white);
   font-size: 0.88rem;
   line-height: 1.35;
@@ -536,18 +536,18 @@
 .tet-about .tet-about__trust {
   width: calc(100% - var(--tet-about-gutter) - var(--tet-about-gutter));
   max-width: var(--tet-about-max-width);
-  margin: clamp(58px, 6vw, 88px) auto 0;
+  margin: clamp(48px, 5vw, 70px) auto 0;
 }
 
 .tet-about__contact {
-  padding-block: clamp(72px, 7.5vw, 120px);
+  padding-block: clamp(60px, 6vw, 88px);
   background: var(--tet-about-ivory);
 }
 
 .tet-about__contact-top {
   display: grid;
   grid-template-columns: minmax(0, 1fr) auto;
-  gap: clamp(48px, 7vw, 112px);
+  gap: clamp(40px, 5.5vw, 82px);
   align-items: center;
 }
 
@@ -557,10 +557,10 @@
 
 .tet-about__contact-copy h2 {
   max-width: 760px;
-  margin: 0 0 28px;
+  margin: 0 0 22px;
   color: var(--tet-about-blue);
   font-family: var(--tet-about-font-display);
-  font-size: clamp(3.45rem, 5.45vw, 6.5rem);
+  font-size: clamp(3rem, 4.45vw, 5.25rem);
   font-weight: 500;
   line-height: 0.92;
   letter-spacing: -0.04em;
@@ -572,12 +572,12 @@
   margin: 0;
   color: var(--tet-about-charcoal);
   font-size: clamp(1rem, 1.22vw, 1.18rem);
-  line-height: 1.72;
+  line-height: 1.62;
 }
 
 .tet-about__contact-button {
   min-width: 270px;
-  min-height: 76px;
+  min-height: 64px;
   margin-top: 0;
   padding-inline: 36px;
   font-size: 0.88rem;
@@ -586,8 +586,8 @@
 .tet-about__contact-points {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
-  margin-top: clamp(58px, 7vw, 96px);
-  padding-top: clamp(34px, 4vw, 50px);
+  margin-top: clamp(46px, 5vw, 68px);
+  padding-top: clamp(28px, 3vw, 38px);
   border-top: 1px solid var(--tet-about-line);
 }
 
@@ -644,20 +644,41 @@
   }
 }
 
+
+/* COMPACT DESKTOP PROPORTIONS */
+
+@media (min-width: 941px) {
+  .tet-about__story-copy {
+    align-self: center;
+  }
+
+  .tet-about__values-panel {
+    min-width: 0;
+  }
+
+  .tet-about__values-panel h2 {
+    max-width: 520px;
+  }
+
+  .tet-about__values-list {
+    max-width: 500px;
+  }
+}
+
 /* TABLET */
 
 @media (max-width: 1180px) {
   .tet-about__story-inner {
-    grid-template-columns: minmax(0, 1fr) minmax(420px, 0.9fr);
-    gap: 50px;
+    grid-template-columns: minmax(0, 1.08fr) minmax(420px, 0.92fr);
+    gap: 42px;
   }
 
   .tet-about__story-media {
-    height: clamp(510px, 54vw, 650px);
+    height: clamp(440px, 43vw, 540px);
   }
 
   .tet-about__values {
-    grid-template-columns: minmax(360px, 43%) minmax(0, 57%);
+    grid-template-columns: minmax(430px, 45%) minmax(0, 55%);
   }
 
   .tet-about__strengths-inner {
@@ -750,7 +771,7 @@
 @media (max-width: 720px) {
   .tet-about {
     --tet-about-gutter: 20px;
-    --tet-about-section-space: 72px;
+    --tet-about-section-space: 64px;
   }
 
   .tet-about__story {
@@ -786,7 +807,7 @@
   }
 
   .tet-about__values-panel {
-    padding: 54px 24px;
+    padding: 48px 24px;
   }
 
   .tet-about__values-panel h2,
