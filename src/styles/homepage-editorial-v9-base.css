@@ -99,7 +99,7 @@
 .home-cinematic-button {
   min-height: 54px;
   border: 1px solid transparent;
-  border-radius: 0;
+  border-radius: 12px;
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -110,7 +110,7 @@
   letter-spacing: 0.07em;
   line-height: 1;
   text-transform: uppercase;
-  transition: color 220ms ease, background-color 220ms ease, border-color 220ms ease, transform 220ms ease;
+  transition: color 220ms ease, background-color 220ms ease, border-color 220ms ease, box-shadow 220ms ease, transform 220ms ease;
 }
 
 .home-cinematic-button svg,
@@ -134,13 +134,29 @@
 }
 
 .home-cinematic-button--gold {
-  background: var(--home-gold);
+  background: var(--home-gold, #e39a20);
   color: #fff;
+  box-shadow: 0 8px 24px rgba(227, 154, 32, 0.35);
 }
 
 .home-cinematic-button--gold:hover,
 .home-cinematic-button--gold:focus-visible {
-  background: var(--home-gold-deep);
+  background: var(--home-gold-deep, #ce8411);
+  box-shadow: 0 12px 30px rgba(227, 154, 32, 0.45);
+}
+
+.home-cinematic-button--glass {
+  background: rgba(255, 255, 255, 0.12);
+  border: 1px solid rgba(255, 255, 255, 0.35);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  color: #fff;
+}
+
+.home-cinematic-button--glass:hover,
+.home-cinematic-button--glass:focus-visible {
+  background: rgba(255, 255, 255, 0.25);
+  border-color: rgba(255, 255, 255, 0.6);
 }
 
 .home-cinematic-button--navy {
@@ -215,7 +231,7 @@
 
 /* Hero */
 .home-cinematic-hero {
-  min-height: clamp(720px, 94svh, 980px);
+  min-height: clamp(680px, 90svh, 920px);
   position: relative;
   display: flex;
   align-items: center;
@@ -223,24 +239,44 @@
   background-position: 63% center;
   background-size: cover;
   color: #fff;
+  overflow: hidden;
 }
 
 .home-cinematic-hero__shade {
   position: absolute;
   inset: 0;
-  z-index: -1;
+  z-index: 1;
   background:
-    linear-gradient(90deg, rgba(0, 35, 65, 0.94) 0%, rgba(0, 39, 72, 0.79) 35%, rgba(0, 45, 80, 0.25) 69%, rgba(0, 35, 63, 0.04) 100%),
-    linear-gradient(0deg, rgba(0, 32, 58, 0.5) 0%, transparent 48%);
+    linear-gradient(90deg, rgba(0, 35, 65, 0.92) 0%, rgba(0, 39, 72, 0.75) 35%, rgba(0, 45, 80, 0.2) 69%, rgba(0, 35, 63, 0.02) 100%),
+    linear-gradient(180deg, rgba(0, 32, 58, 0.3) 0%, transparent 60%);
 }
 
 .home-cinematic-hero__content {
-  padding-top: 142px;
-  padding-bottom: 120px;
+  padding-top: 130px;
+  padding-bottom: 110px;
+  width: 100%;
 }
 
 .home-cinematic-hero .home-cinematic-eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 7px 18px;
+  border-radius: 99px;
+  background: rgba(227, 154, 32, 0.18);
+  border: 1px solid rgba(255, 194, 87, 0.4);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
   color: #ffc257;
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  width: fit-content;
+}
+
+.home-cinematic-hero .home-cinematic-eyebrow::before {
+  display: none;
 }
 
 .home-cinematic-hero h1 {
@@ -270,40 +306,14 @@
   line-height: 1.65;
 }
 
-.home-cinematic-hero__signature {
-  max-width: 880px;
-  border-top: 1px solid rgba(255, 255, 255, 0.34);
+/* Editorial introduction */
+.home-cinematic-intro {
   display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 0;
-  margin-top: 66px;
-  padding-top: 24px;
-}
-
-.home-cinematic-hero__signature span {
-  min-height: 54px;
-  border-left: 1px solid rgba(255, 255, 255, 0.26);
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  padding: 0 28px;
-  color: rgba(255, 255, 255, 0.72);
-  font-size: 12px;
-  letter-spacing: 0.025em;
-  line-height: 1.55;
-}
-
-.home-cinematic-hero__signature span:first-child {
-  border-left: 0;
-  padding-left: 0;
-}
-
-.home-cinematic-hero__signature strong {
-  color: #fff;
-  font-family: var(--home-serif);
-  font-size: 21px;
-  font-weight: 500;
-  letter-spacing: -0.01em;
+  grid-template-columns: minmax(0, 0.92fr) minmax(420px, 1.08fr);
+  align-items: center;
+  gap: clamp(60px, 9vw, 150px);
+  padding-top: clamp(80px, 7vw, 120px);
+  padding-bottom: clamp(90px, 9vw, 150px);
 }
 
 .home-cinematic-scroll {

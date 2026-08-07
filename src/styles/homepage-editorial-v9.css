@@ -38,10 +38,8 @@
   position: relative;
   overflow: hidden;
   isolation: isolate;
-  background-color: #10234d;
-  background-image: url('https://static.wixstatic.com/media/5a118b_f3aada5a1ac547358ac6c8b35d60a2a7f000.jpg');
-  background-size: cover;
-  background-position: center;
+  background-color: #0b1d3a;
+  background-image: none;
 }
 
 .home-cinematic-hero__video {
@@ -61,7 +59,7 @@
 
 .home-cinematic-hero__content {
   position: relative;
-  z-index: 2;
+  z-index: 4;
 }
 
 @media (max-width: 767px) {
