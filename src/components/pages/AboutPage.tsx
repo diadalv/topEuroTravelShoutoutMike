@@ -1,10 +1,5 @@
-import {
-  PageHero,
-  Photo,
-  TrustBar,
-  travelMedia,
-} from '@/components/travel/Shared';
-import '@/styles/about-page-v1.css';
+import { useState, type LucideIcon } from 'react';
+import { Link } from 'react-router-dom';
 import {
   ArrowRight,
   Globe2,
@@ -13,18 +8,24 @@ import {
   MapPin,
   Users,
 } from 'lucide-react';
-import { useState, type LucideIcon } from 'react';
-import { Link } from 'react-router-dom';
+import {
+  PageHero,
+  Photo,
+  TrustBar,
+  travelMedia,
+} from '@/components/travel/Shared';
+import '@/styles/about-page-v1.css';
 
 const images = {
   hero: travelMedia('about-hero-v2.jpg'),
   story: travelMedia('about-intro-v2.jpg'),
-  values: travelMedia('about-values-santorini.jpg'),
 };
 
 type ValueItem = {
   title: string;
   copy: string;
+  image: string;
+  imageAlt: string;
 };
 
 type FeatureItem = {
@@ -37,18 +38,26 @@ const values = [
   {
     title: 'Partnership',
     copy: 'We believe successful partnerships are built on trust, transparency and mutual respect. Our focus is always on creating long-term value for our partners.',
+    image: travelMedia('about-value-partnership.jpg'),
+    imageAlt: 'Top Euro Travel representatives working with destination partners',
   },
   {
     title: 'Reliability',
     copy: 'From daily operations to complex projects, we are committed to delivering consistent service and dependable support at every stage.',
+    image: travelMedia('about-value-reliability.jpg'),
+    imageAlt: 'Professional destination operations and guest support in Rhodes',
   },
   {
     title: 'Local Expertise',
     copy: 'With decades of experience in Rhodes and Kos, we provide valuable destination knowledge, strong local connections and practical solutions.',
+    image: travelMedia('about-value-local-expertise.jpg'),
+    imageAlt: 'Aerial view of Rhodes Old Town and Mandraki Harbour',
   },
   {
     title: 'Flexibility',
     copy: 'Every partner is different. We adapt our approach to meet individual requirements and respond quickly to changing needs.',
+    image: travelMedia('about-value-flexibility.jpg'),
+    imageAlt: 'A tailor-made group travel experience in the Dodecanese',
   },
 ] satisfies readonly ValueItem[];
 
@@ -174,6 +183,8 @@ export default function AboutPage() {
                   aria-expanded={isActive}
                   aria-controls={`about-value-copy-${index}`}
                   onClick={() => setActiveValue(index)}
+                  onFocus={() => setActiveValue(index)}
+                  onMouseEnter={() => setActiveValue(index)}
                 >
                   <span className="tet-about__value-number">{number}</span>
                   <span className="tet-about__value-content">
@@ -192,11 +203,25 @@ export default function AboutPage() {
           </div>
         </div>
 
-        <div className="tet-about__values-media">
-          <Photo
-            src={images.values}
-            alt="Whitewashed Greek island architecture overlooking the Aegean Sea at sunset"
-          />
+        <div className="tet-about__values-media" aria-live="polite">
+          <div className="tet-about__values-frame">
+            {values.map((value, index) => {
+              const isActive = activeValue === index;
+
+              return (
+                <div
+                  className={`tet-about__values-slide${isActive ? ' is-active' : ''}`}
+                  aria-hidden={!isActive}
+                  key={value.title}
+                >
+                  <Photo
+                    src={value.image}
+                    alt={isActive ? value.imageAlt : ''}
+                  />
+                </div>
+              );
+            })}
+          </div>
         </div>
       </section>
 
