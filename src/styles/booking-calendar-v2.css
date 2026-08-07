@@ -7,7 +7,7 @@
 
 .booking-month-picker {
   min-width: 0;
-  border-right: 1px solid var(--line, #e5ded4);
+  border-right: 1px solid #e1e9ee;
   padding-right: clamp(24px, 3vw, 36px);
 }
 
@@ -44,7 +44,7 @@
 
 .booking-date-calendar th {
   height: 30px;
-  color: var(--muted, #5d6e80);
+  color: #6d8497;
   font-size: 10px;
   font-weight: 900;
   letter-spacing: 0.08em;
@@ -93,7 +93,7 @@
   position: relative;
   display: inline-grid;
   place-items: center;
-  color: var(--muted, #5d6e80);
+  color: #9aaab7;
   font-size: 13px;
   font-weight: 700;
   background: transparent;
@@ -102,10 +102,10 @@
 }
 
 .site-page .booking-calendar-page .booking-date-calendar button[name="day"].booking-day--available {
-  border-color: rgba(0, 63, 115, 0.16);
+  border-color: rgba(0, 73, 126, 0.14);
   color: var(--navy-dark);
   font-weight: 900;
-  background: var(--cream, #fbf8f3);
+  background: #f6fafc;
   cursor: pointer;
 }
 
@@ -124,7 +124,7 @@
 .site-page .booking-calendar-page .booking-date-calendar button[name="day"].booking-day--available:hover {
   border-color: var(--gold);
   color: var(--navy);
-  background: var(--cream-2, #f7f0e6);
+  background: #fff8e9;
   transform: translateY(-1px);
 }
 
@@ -150,14 +150,14 @@
 .site-page .booking-calendar-page .booking-date-calendar button[name="next-month"] {
   width: 36px;
   height: 36px;
-  border: 1px solid var(--line, #e5ded4);
+  border: 1px solid #d7e3ea;
   border-radius: 50%;
   position: absolute;
   top: 5px;
   display: grid;
   place-items: center;
   color: var(--navy);
-  background: var(--paper, #fffefa);
+  background: white;
   cursor: pointer;
 }
 
@@ -183,7 +183,7 @@
   flex-wrap: wrap;
   gap: 10px 15px;
   margin-top: 15px;
-  color: var(--muted, #5d6e80);
+  color: #657d91;
   font-size: 10px;
   font-weight: 700;
 }
@@ -197,15 +197,15 @@
 .booking-calendar-legend i {
   width: 10px;
   height: 10px;
-  border: 1px solid var(--line, #e5ded4);
+  border: 1px solid #d5e0e7;
   border-radius: 50%;
   display: block;
-  background: var(--cream, #fbf8f3);
+  background: #f3f6f8;
 }
 
 .booking-calendar-legend i.is-available {
   border-color: var(--gold);
-  background: var(--cream-2, #f7f0e6);
+  background: #fff5dc;
 }
 
 .booking-calendar-legend i.is-selected {
