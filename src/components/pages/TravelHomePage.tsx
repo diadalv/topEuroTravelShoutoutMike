@@ -1,6 +1,7 @@
-import { PageSeo, Photo, travelMedia } from '@/components/travel/Shared';
+import { PageSeo, Photo, PlanePath, travelMedia } from '@/components/travel/Shared';
 import '@/styles/homepage-editorial-v9.css';
 import {
+  ArrowDown,
   ArrowRight,
   BedDouble,
   Bus,
@@ -13,7 +14,7 @@ import {
   Users,
   type LucideIcon,
 } from 'lucide-react';
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 
 type IslandKey = 'rhodes' | 'kos';
@@ -122,422 +123,9 @@ function EditorialEyebrow({ children }: { children: string }) {
   return <p className="home-cinematic-eyebrow">{children}</p>;
 }
 
-
-const headerHeroPassStyles = `
-/*
-  Top Euro Travel — scoped Header / Hero / Hero-to-Intro improvement.
-  No section below the intro is redesigned by this patch.
-*/
-
-/* HEADER — preserve the existing transparent header and refine only its details. */
-.tet-home-header-refined nav {
-  align-items: center !important;
-}
-
-.tet-home-header-refined .tet-home-nav-link {
-  position: relative !important;
-  display: inline-flex !important;
-  align-items: center !important;
-  transition: opacity 220ms ease, transform 220ms ease !important;
-}
-
-body.is-top-euro-home .tet-home-header-refined a.tet-home-contact-link {
-  position: relative !important;
-  display: inline-flex !important;
-  align-items: center !important;
-  gap: 9px !important;
-  width: auto !important;
-  min-width: 0 !important;
-  min-height: 44px !important;
-  padding: 10px 1px 8px 0 !important;
-  overflow: visible !important;
-  border: 0 !important;
-  border-radius: 0 !important;
-  background: transparent !important;
-  box-shadow: none !important;
-  color: inherit !important;
-  backdrop-filter: none !important;
-}
-
-body.is-top-euro-home .tet-home-header-refined a.tet-home-contact-link::before {
-  position: absolute;
-  right: 0;
-  bottom: 5px;
-  left: 0;
-  height: 1px;
-  background: #dfbd58;
-  content: "";
-  transform: scaleX(1);
-  transform-origin: left center;
-  transition: transform 260ms cubic-bezier(0.2, 0.75, 0.25, 1);
-}
-
-body.is-top-euro-home .tet-home-header-refined a.tet-home-contact-link::after {
-  content: "↗";
-  color: #dfbd58;
-  font-size: 0.84rem;
-  font-weight: 500;
-  line-height: 1;
-  transition: transform 240ms ease;
-}
-
-body.is-top-euro-home .tet-home-header-refined a.tet-home-contact-link:hover,
-body.is-top-euro-home .tet-home-header-refined a.tet-home-contact-link:focus-visible {
-  background: transparent !important;
-  color: inherit !important;
-  transform: none !important;
-}
-
-body.is-top-euro-home .tet-home-header-refined a.tet-home-contact-link:hover::before,
-body.is-top-euro-home .tet-home-header-refined a.tet-home-contact-link:focus-visible::before {
-  transform: scaleX(0.56);
-  transform-origin: right center;
-}
-
-body.is-top-euro-home .tet-home-header-refined a.tet-home-contact-link:hover::after,
-body.is-top-euro-home .tet-home-header-refined a.tet-home-contact-link:focus-visible::after {
-  transform: translate(3px, -2px);
-}
-
-@media (min-width: 901px) {
-  .tet-home-header-refined nav {
-    gap: clamp(20px, 2vw, 34px) !important;
-  }
-
-  .tet-home-header-refined .tet-home-nav-link {
-    min-height: 38px !important;
-    padding: 0 !important;
-    font-size: 0.74rem !important;
-    font-weight: 650 !important;
-    letter-spacing: 0.105em !important;
-    line-height: 1 !important;
-    text-transform: uppercase !important;
-  }
-
-  .tet-home-header-refined .tet-home-nav-link:not(.tet-home-contact-link)::after {
-    position: absolute;
-    right: 0;
-    bottom: 4px;
-    left: 0;
-    height: 1px;
-    background: currentColor;
-    content: "";
-    opacity: 0.58;
-    transform: scaleX(0);
-    transform-origin: right center;
-    transition: transform 260ms cubic-bezier(0.2, 0.75, 0.25, 1);
-  }
-
-  .tet-home-header-refined .tet-home-nav-link:not(.tet-home-contact-link):hover,
-  .tet-home-header-refined .tet-home-nav-link:not(.tet-home-contact-link):focus-visible {
-    opacity: 0.78;
-    transform: translateY(-1px);
-  }
-
-  .tet-home-header-refined .tet-home-nav-link:not(.tet-home-contact-link):hover::after,
-  .tet-home-header-refined .tet-home-nav-link:not(.tet-home-contact-link):focus-visible::after {
-    transform: scaleX(1);
-    transform-origin: left center;
-  }
-
-  body.is-top-euro-home .tet-home-header-refined a.tet-home-contact-link {
-    min-height: 38px !important;
-    padding: 0 1px 0 0 !important;
-  }
-
-  body.is-top-euro-home .tet-home-header-refined a.tet-home-contact-link::before {
-    bottom: 3px;
-  }
-}
-
-/* HERO — keep the exact Wix video and improve only hierarchy, readability and motion. */
-.home-cinematic .tet-home-hero {
-  position: relative;
-  min-height: 94svh !important;
-  align-items: center !important;
-  overflow: hidden !important;
-  padding: clamp(138px, 17vh, 188px) 0 clamp(148px, 17vh, 205px) !important;
-  isolation: isolate;
-}
-
-.home-cinematic .tet-home-hero__video {
-  transform: scale(var(--tet-hero-scale, 1.015)) !important;
-  transform-origin: center center;
-  transition: transform 120ms linear;
-  will-change: transform;
-}
-
-.home-cinematic .tet-home-hero__shade {
-  z-index: 1;
-  background:
-    linear-gradient(90deg, rgba(5, 21, 40, 0.84) 0%, rgba(5, 21, 40, 0.66) 34%, rgba(5, 21, 40, 0.25) 67%, rgba(5, 21, 40, 0.09) 100%),
-    linear-gradient(180deg, rgba(5, 21, 40, 0.34) 0%, rgba(5, 21, 40, 0.02) 45%, rgba(5, 21, 40, 0.32) 100%) !important;
-}
-
-.home-cinematic .tet-home-hero__vignette {
-  position: absolute;
-  inset: 0;
-  z-index: 1;
-  background: radial-gradient(circle at 72% 44%, transparent 0%, transparent 35%, rgba(3, 15, 30, 0.14) 100%);
-  pointer-events: none;
-}
-
-.home-cinematic .tet-home-hero__content {
-  position: relative;
-  z-index: 3;
-}
-
-.home-cinematic .tet-home-hero__copy {
-  width: min(100%, 920px);
-  opacity: var(--tet-hero-opacity, 1);
-  transform: translate3d(0, var(--tet-hero-shift, 0px), 0);
-  transition: opacity 120ms linear, transform 120ms linear;
-  will-change: opacity, transform;
-}
-
-.home-cinematic .tet-home-hero__title {
-  max-width: 920px !important;
-  margin: 0 !important;
-  color: #ffffff;
-  font-family: var(--home-display, var(--font-heading, "Cormorant Garamond", "Times New Roman", serif));
-  font-size: clamp(4rem, 6.25vw, 7.15rem) !important;
-  font-weight: 500 !important;
-  letter-spacing: -0.048em !important;
-  line-height: 0.94 !important;
-  text-wrap: balance;
-}
-
-.home-cinematic .tet-home-hero__line {
-  display: block;
-  opacity: 0;
-  clip-path: inset(0 0 105% 0);
-  transform: translateY(22px);
-  transition:
-    opacity 720ms ease,
-    clip-path 900ms cubic-bezier(0.2, 0.75, 0.25, 1),
-    transform 900ms cubic-bezier(0.2, 0.75, 0.25, 1);
-}
-
-.home-cinematic .tet-home-hero__line--accent {
-  margin-top: 0.06em;
-  color: #e6cb74;
-  transition-delay: 120ms;
-}
-
-.home-cinematic .tet-home-hero__lead {
-  max-width: 610px;
-  margin: 30px 0 0 !important;
-  color: rgba(255, 255, 255, 0.82) !important;
-  font-size: clamp(1.05rem, 1.28vw, 1.22rem) !important;
-  font-weight: 400;
-  letter-spacing: 0.005em;
-  line-height: 1.72 !important;
-  opacity: 0;
-  transform: translateY(15px);
-  transition: opacity 720ms ease 260ms, transform 720ms ease 260ms;
-}
-
-.home-cinematic.tet-hero-ready .tet-home-hero__line {
-  opacity: 1;
-  clip-path: inset(0 0 0 0);
-  transform: translateY(0);
-}
-
-.home-cinematic.tet-hero-ready .tet-home-hero__lead {
-  opacity: 1;
-  transform: translateY(0);
-}
-
-/* HERO → INTRO — short, controlled fade into the existing ivory section. */
-.home-cinematic .tet-home-hero__handoff {
-  position: absolute;
-  right: 0;
-  bottom: -1px;
-  left: 0;
-  z-index: 2;
-  height: clamp(72px, 7.5vw, 104px);
-  background: linear-gradient(
-    180deg,
-    rgba(245, 241, 232, 0) 0%,
-    rgba(245, 241, 232, 0.05) 52%,
-    rgba(245, 241, 232, 0.42) 78%,
-    #f5f1e8 100%
-  );
-  pointer-events: none;
-}
-
-.home-cinematic .tet-home-intro-bridge {
-  position: relative;
-  z-index: 3;
-  margin-top: -1px !important;
-  padding-top: clamp(96px, 8vw, 126px) !important;
-  border-radius: 0 !important;
-  background-color: #f5f1e8 !important;
-}
-
-@media (max-width: 900px) {
-  .home-cinematic .tet-home-hero {
-    min-height: 860px !important;
-    padding: 142px 0 160px !important;
-  }
-
-  .home-cinematic .tet-home-hero__video {
-    object-position: 60% center !important;
-  }
-
-  .home-cinematic .tet-home-hero__title {
-    max-width: 780px !important;
-    font-size: clamp(3.75rem, 9vw, 6rem) !important;
-  }
-}
-
-@media (max-width: 640px) {
-  .home-cinematic .tet-home-hero {
-    min-height: 790px !important;
-    align-items: end !important;
-    padding: 126px 0 145px !important;
-  }
-
-  .home-cinematic .tet-home-hero__video {
-    object-position: 64% center !important;
-  }
-
-  .home-cinematic .tet-home-hero__shade {
-    background:
-      linear-gradient(90deg, rgba(5, 21, 40, 0.78) 0%, rgba(5, 21, 40, 0.42) 100%),
-      linear-gradient(180deg, rgba(5, 21, 40, 0.24) 0%, rgba(5, 21, 40, 0.05) 30%, rgba(5, 21, 40, 0.78) 100%) !important;
-  }
-
-  .home-cinematic .tet-home-hero__title {
-    max-width: 12ch !important;
-    font-size: clamp(3.05rem, 14.4vw, 4.7rem) !important;
-    line-height: 0.96 !important;
-  }
-
-  .home-cinematic .tet-home-hero__line--accent {
-    margin-top: 0.12em;
-  }
-
-  .home-cinematic .tet-home-hero__lead {
-    max-width: 34ch;
-    margin-top: 24px !important;
-    font-size: 1rem !important;
-    line-height: 1.62 !important;
-  }
-
-  .home-cinematic .tet-home-hero__handoff {
-    height: 78px;
-  }
-
-  .home-cinematic .tet-home-intro-bridge {
-    margin-top: -1px !important;
-    padding-top: 84px !important;
-  }
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .home-cinematic .tet-home-hero__video,
-  .home-cinematic .tet-home-hero__copy,
-  .home-cinematic .tet-home-hero__line,
-  .home-cinematic .tet-home-hero__lead {
-    transition: none !important;
-    transform: none !important;
-  }
-
-  .home-cinematic .tet-home-hero__line,
-  .home-cinematic .tet-home-hero__lead {
-    opacity: 1 !important;
-    clip-path: none !important;
-  }
-}
-`;
-
 export default function TravelHomePage() {
   const [activeIsland, setActiveIsland] = useState<IslandKey>('rhodes');
-  const [heroReady, setHeroReady] = useState(false);
-  const heroRef = useRef<HTMLElement>(null);
   const island = islandScenes[activeIsland];
-
-  useEffect(() => {
-    document.body.classList.add('is-top-euro-home');
-
-    const refineHeader = () => {
-      const header =
-        document.querySelector<HTMLElement>('header') ??
-        document.querySelector<HTMLElement>('[data-site-header]');
-
-      if (!header) return;
-
-      header.classList.add('tet-home-header-refined');
-
-      header.querySelectorAll<HTMLAnchorElement>('nav a').forEach((link) => {
-        if (link.textContent?.trim()) link.classList.add('tet-home-nav-link');
-      });
-
-      const contactLink = Array.from(header.querySelectorAll<HTMLAnchorElement>('a')).find((link) => {
-        const href = link.getAttribute('href')?.replace(/\/+$/, '');
-        return href === '/contact' || href?.endsWith('/contact');
-      });
-
-      contactLink?.classList.add('tet-home-contact-link', 'tet-home-nav-link');
-    };
-
-    refineHeader();
-
-    const headerObserver = new MutationObserver(refineHeader);
-    headerObserver.observe(document.body, { childList: true, subtree: true });
-
-    return () => {
-      headerObserver.disconnect();
-      document.body.classList.remove('is-top-euro-home');
-      document.querySelectorAll('.tet-home-header-refined').forEach((element) => {
-        element.classList.remove('tet-home-header-refined');
-      });
-      document.querySelectorAll('.tet-home-nav-link').forEach((element) => {
-        element.classList.remove('tet-home-nav-link');
-      });
-      document.querySelectorAll('.tet-home-contact-link').forEach((element) => {
-        element.classList.remove('tet-home-contact-link');
-      });
-    };
-  }, []);
-
-  useEffect(() => {
-    const frame = window.requestAnimationFrame(() => setHeroReady(true));
-    return () => window.cancelAnimationFrame(frame);
-  }, []);
-
-  useEffect(() => {
-    const hero = heroRef.current;
-    if (!hero || window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
-
-    let frame = 0;
-
-    const updateHeroDepth = () => {
-      frame = 0;
-      const rect = hero.getBoundingClientRect();
-      const progress = Math.min(1, Math.max(0, -rect.top / Math.max(rect.height, 1)));
-
-      hero.style.setProperty('--tet-hero-shift', `${progress * -18}px`);
-      hero.style.setProperty('--tet-hero-opacity', `${1 - progress * 0.28}`);
-      hero.style.setProperty('--tet-hero-scale', `${1.015 + progress * 0.012}`);
-    };
-
-    const onScroll = () => {
-      if (frame) return;
-      frame = window.requestAnimationFrame(updateHeroDepth);
-    };
-
-    updateHeroDepth();
-    window.addEventListener('scroll', onScroll, { passive: true });
-    window.addEventListener('resize', onScroll);
-
-    return () => {
-      window.removeEventListener('scroll', onScroll);
-      window.removeEventListener('resize', onScroll);
-      if (frame) window.cancelAnimationFrame(frame);
-    };
-  }, []);
 
   useEffect(() => {
     const sections = Array.from(document.querySelectorAll<HTMLElement>('[data-home-reveal]'));
@@ -563,16 +151,15 @@ export default function TravelHomePage() {
   }, []);
 
   return (
-    <div className={`home-cinematic${heroReady ? ' tet-hero-ready' : ''}`}>
-      <style>{headerHeroPassStyles}</style>
+    <div className="home-cinematic">
       <PageSeo
         title="Destination Management Company in Greece | Rhodes & Kos DMC | Top Euro Travel"
         description="Top Euro Travel is a trusted destination management company providing local expertise, ground handling, MICE, groups and authentic experiences in Rhodes and Kos since 1989."
       />
 
-      <section ref={heroRef} className="home-cinematic-hero tet-home-hero" aria-labelledby="top-euro-home-hero-title">
+      <section className="home-cinematic-hero">
         <video
-          className="home-cinematic-hero__video tet-home-hero__video"
+          className="home-cinematic-hero__video"
           autoPlay
           muted
           loop
@@ -592,25 +179,29 @@ export default function TravelHomePage() {
             type="video/mp4"
           />
         </video>
-        <div className="home-cinematic-hero__shade tet-home-hero__shade" aria-hidden="true" />
-        <div className="tet-home-hero__vignette" aria-hidden="true" />
-
-        <div className="home-cinematic-hero__content tet-home-hero__content shell">
-          <div className="tet-home-hero__copy">
-            <h1 id="top-euro-home-hero-title" className="tet-home-hero__title">
-              <span className="tet-home-hero__line">Your Trusted DMC Partner</span>
-              <span className="tet-home-hero__line tet-home-hero__line--accent">in Rhodes &amp; Kos</span>
-            </h1>
-            <p className="home-cinematic-hero__lead tet-home-hero__lead">
-              Delivering destination management, ground handling and travel solutions since 1989.
-            </p>
+        <div className="home-cinematic-hero__shade" aria-hidden="true" />
+        <div className="home-cinematic-hero__content shell">
+          <EditorialEyebrow>Your DMC in the Dodecanese</EditorialEyebrow>
+          <h1>
+            <span>Rhodes &amp; Kos,</span>
+            beautifully orchestrated.
+          </h1>
+          <p className="home-cinematic-hero__lead">
+            From first arrival to final farewell, one local team shapes every detail for tour operators,
+            groups and travellers.
+          </p>
+          <div className="home-cinematic-actions">
+            <Link className="home-cinematic-button home-cinematic-button--gold" to="/contact">
+              Start planning <ArrowRight />
+            </Link>
+            <Link className="home-cinematic-button home-cinematic-button--glass" to="/destinations">
+              Explore the destinations <ArrowRight />
+            </Link>
           </div>
         </div>
-
-        <div className="tet-home-hero__handoff" aria-hidden="true" />
       </section>
 
-      <section id="our-story" className="home-cinematic-intro tet-home-intro-bridge shell" data-home-reveal>
+      <section id="our-story" className="home-cinematic-intro shell" data-home-reveal>
         <div className="home-cinematic-intro__copy">
           <EditorialEyebrow>One team. Two islands. Decades of trust.</EditorialEyebrow>
           <h2>The local partner that makes everything feel effortless.</h2>
@@ -633,6 +224,7 @@ export default function TravelHomePage() {
           <div className="home-cinematic-intro__image home-cinematic-intro__image--detail">
             <Photo src={travelMedia('old-town.jpg')} alt="An atmospheric lane in Rhodes Medieval City" />
           </div>
+          <PlanePath className="home-cinematic-plane home-cinematic-plane--intro" />
         </div>
 
         <div className="home-cinematic-proof" aria-label="Top Euro Travel facts">
@@ -799,6 +391,7 @@ export default function TravelHomePage() {
             Browse excursions <ArrowRight />
           </Link>
         </div>
+        <PlanePath className="home-cinematic-plane home-cinematic-plane--closing" />
       </section>
     </div>
   );
