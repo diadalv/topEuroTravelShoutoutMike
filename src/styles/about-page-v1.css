@@ -348,23 +348,27 @@
 
 .tet-about__strengths-inner {
   display: grid;
-  grid-template-columns: minmax(300px, 0.8fr) minmax(0, 1.7fr);
-  gap: clamp(36px, 4.2vw, 62px);
+  grid-template-columns: minmax(280px, 0.82fr) minmax(0, 1.68fr);
+  gap: clamp(30px, 3.4vw, 52px);
   align-items: stretch;
-  padding-block: var(--tet-about-section-space);
+  padding-block: clamp(46px, 3.8vw, 60px);
 }
 
 .tet-about__strengths-intro {
-  padding-right: clamp(26px, 3vw, 46px);
+  padding-right: clamp(22px, 2.6vw, 40px);
   border-right: 1px solid var(--tet-about-line);
 }
 
+.tet-about__strengths-intro .tet-about__eyebrow {
+  margin-bottom: 14px;
+}
+
 .tet-about__strengths-intro h2 {
-  max-width: 500px;
-  margin: 0 0 24px;
+  max-width: 470px;
+  margin: 0 0 18px;
   color: var(--tet-about-blue);
   font-family: var(--tet-about-font-display);
-  font-size: clamp(2.65rem, 3.35vw, 3.85rem);
+  font-size: clamp(2.35rem, 2.85vw, 3.1rem);
   font-weight: 500;
   line-height: 0.99;
   letter-spacing: -0.03em;
@@ -376,11 +380,11 @@
 }
 
 .tet-about__strengths-intro > p:last-child {
-  max-width: 470px;
+  max-width: 440px;
   margin: 0;
   color: var(--tet-about-charcoal);
-  font-size: 1rem;
-  line-height: 1.62;
+  font-size: 0.92rem;
+  line-height: 1.56;
 }
 
 .tet-about__strengths-grid {
@@ -393,7 +397,7 @@
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  padding: 4px clamp(24px, 2.5vw, 38px);
+  padding: 2px clamp(19px, 2vw, 30px);
   border-right: 1px solid var(--tet-about-line);
 }
 
@@ -412,30 +416,35 @@
   flex: 0 0 auto;
   align-items: center;
   justify-content: center;
-  width: 64px;
-  height: 64px;
+  width: 54px;
+  height: 54px;
   border: 1px solid rgba(200, 146, 45, 0.11);
   border-radius: 999px;
   background: var(--tet-about-soft-gold);
   color: var(--tet-about-blue);
 }
 
+.tet-about__strength-icon svg {
+  width: 26px;
+  height: 26px;
+}
+
 .tet-about__strength-number {
   display: block;
-  margin: 18px 0 10px;
+  margin: 14px 0 8px;
   color: var(--tet-about-gold);
   font-family: var(--tet-about-font-display);
-  font-size: clamp(2.35rem, 3vw, 3.25rem);
+  font-size: clamp(2rem, 2.25vw, 2.65rem);
   font-weight: 500;
-  line-height: 0.9;
+  line-height: 0.92;
 }
 
 .tet-about__strength h3,
 .tet-about__contact-point h3 {
-  margin: 0 0 12px;
+  margin: 0 0 9px;
   color: var(--tet-about-blue);
   font-family: var(--tet-about-font-sans);
-  font-size: 1.05rem;
+  font-size: 0.96rem;
   font-weight: 750;
   line-height: 1.28;
 }
@@ -444,15 +453,15 @@
 .tet-about__contact-point p {
   margin: 0;
   color: var(--tet-about-charcoal);
-  font-size: 0.95rem;
-  line-height: 1.6;
+  font-size: 0.88rem;
+  line-height: 1.5;
 }
 
 /* NUMBERS */
 
 .tet-about__stats {
   position: relative;
-  padding-block: clamp(56px, 5.5vw, 80px);
+  padding-block: clamp(34px, 2.8vw, 44px);
   overflow: hidden;
   background: var(--tet-about-blue);
   color: var(--tet-about-white);
@@ -464,29 +473,31 @@
   inset: 0;
   pointer-events: none;
   background:
-    radial-gradient(circle at 12% 10%, rgba(255, 255, 255, 0.06), transparent 34%),
-    radial-gradient(circle at 88% 90%, rgba(200, 146, 45, 0.08), transparent 36%);
+    radial-gradient(circle at 12% 10%, rgba(255, 255, 255, 0.045), transparent 34%),
+    radial-gradient(circle at 88% 90%, rgba(200, 146, 45, 0.06), transparent 36%);
 }
 
 .tet-about__stats > .tet-about__container {
   position: relative;
   z-index: 1;
+  max-width: 1320px;
 }
 
 .tet-about__stats-heading {
-  margin-bottom: clamp(30px, 3.5vw, 44px);
+  margin-bottom: clamp(20px, 1.8vw, 26px);
   text-align: center;
 }
 
 .tet-about__stats-heading .tet-about__eyebrow {
-  margin-bottom: 12px;
+  margin-bottom: 8px;
+  font-size: 0.72rem;
 }
 
 .tet-about__stats-heading h2 {
   margin: 0;
   color: var(--tet-about-white);
   font-family: var(--tet-about-font-display);
-  font-size: clamp(2.7rem, 3.6vw, 4.2rem);
+  font-size: clamp(2.35rem, 2.75vw, 3.25rem);
   font-weight: 500;
   line-height: 0.98;
   letter-spacing: -0.025em;
@@ -495,40 +506,50 @@
 .tet-about__stats-grid {
   display: grid;
   grid-template-columns: repeat(6, minmax(0, 1fr));
-  border-top: 1px solid var(--tet-about-line-gold);
-  border-bottom: 1px solid var(--tet-about-line-gold);
+  padding-block: 10px;
+  border-top: 1px solid rgba(200, 146, 45, 0.38);
+  border-bottom: 1px solid rgba(200, 146, 45, 0.38);
 }
 
 .tet-about__stat {
+  position: relative;
   display: flex;
-  min-height: 148px;
+  min-width: 0;
+  min-height: 104px;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  padding: 22px 16px;
-  border-right: 1px solid var(--tet-about-line-gold);
+  padding: 14px clamp(18px, 1.55vw, 26px);
   text-align: center;
 }
 
-.tet-about__stat:last-child {
-  border-right: 0;
+.tet-about__stat:not(:last-child)::after {
+  content: '';
+  position: absolute;
+  top: 16px;
+  right: 0;
+  bottom: 16px;
+  width: 1px;
+  background: rgba(200, 146, 45, 0.38);
 }
 
 .tet-about__stat strong {
   color: var(--tet-about-gold);
   font-family: var(--tet-about-font-display);
-  font-size: clamp(2.25rem, 3vw, 3.55rem);
+  font-size: clamp(1.95rem, 2.2vw, 2.7rem);
   font-weight: 500;
-  line-height: 0.9;
+  font-variant-numeric: lining-nums tabular-nums;
+  line-height: 0.96;
+  letter-spacing: -0.02em;
   white-space: nowrap;
 }
 
 .tet-about__stat span {
-  max-width: 135px;
-  margin-top: 12px;
+  max-width: 145px;
+  margin-top: 8px;
   color: var(--tet-about-white);
-  font-size: 0.88rem;
-  line-height: 1.35;
+  font-size: 0.76rem;
+  line-height: 1.25;
 }
 
 /* TRUST BAR + CONTACT */
@@ -694,12 +715,22 @@
     grid-template-columns: repeat(3, minmax(0, 1fr));
   }
 
-  .tet-about__stat:nth-child(3n) {
-    border-right: 0;
+  .tet-about__stat::after {
+    display: block;
   }
 
-  .tet-about__stat:nth-child(-n + 3) {
-    border-bottom: 1px solid var(--tet-about-line-gold);
+  .tet-about__stat:nth-child(3n)::after {
+    display: none;
+  }
+
+  .tet-about__stat:nth-child(-n + 3)::before {
+    content: '';
+    position: absolute;
+    right: 16px;
+    bottom: 0;
+    left: 16px;
+    height: 1px;
+    background: rgba(200, 146, 45, 0.38);
   }
 }
 
@@ -744,11 +775,12 @@
   }
 
   .tet-about__strengths-inner {
-    gap: 48px;
+    gap: 34px;
+    padding-block: 50px;
   }
 
   .tet-about__strengths-intro {
-    padding: 0 0 44px;
+    padding: 0 0 30px;
     border-right: 0;
     border-bottom: 1px solid var(--tet-about-line);
   }
@@ -810,9 +842,12 @@
     padding: 48px 24px;
   }
 
-  .tet-about__values-panel h2,
-  .tet-about__strengths-intro h2 {
+  .tet-about__values-panel h2 {
     font-size: clamp(2.75rem, 12vw, 4rem);
+  }
+
+  .tet-about__strengths-intro h2 {
+    font-size: clamp(2.45rem, 10vw, 3.45rem);
   }
 
   .tet-about__values-media {
@@ -835,7 +870,7 @@
   .tet-about__strength,
   .tet-about__strength:first-child,
   .tet-about__strength:last-child {
-    padding: 34px 0;
+    padding: 25px 0;
     border-right: 0;
     border-bottom: 1px solid var(--tet-about-line);
   }
@@ -849,23 +884,40 @@
     border-bottom: 0;
   }
 
+  .tet-about__stats {
+    padding-block: 32px;
+  }
+
+  .tet-about__stats > .tet-about__container {
+    width: calc(100% - 32px);
+  }
+
   .tet-about__stats-grid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
+    padding-block: 8px;
   }
 
-  .tet-about__stat,
-  .tet-about__stat:nth-child(3n) {
-    min-height: 152px;
-    border-right: 1px solid var(--tet-about-line-gold);
-    border-bottom: 1px solid var(--tet-about-line-gold);
+  .tet-about__stat {
+    min-height: 104px;
+    padding: 14px 12px;
   }
 
-  .tet-about__stat:nth-child(even) {
-    border-right: 0;
+  .tet-about__stat::after {
+    display: none;
   }
 
-  .tet-about__stat:nth-last-child(-n + 2) {
-    border-bottom: 0;
+  .tet-about__stat:nth-child(odd):not(:last-child)::after {
+    display: block;
+  }
+
+  .tet-about__stat:nth-child(-n + 4)::before {
+    content: '';
+    position: absolute;
+    right: 12px;
+    bottom: 0;
+    left: 12px;
+    height: 1px;
+    background: rgba(200, 146, 45, 0.38);
   }
 
   .tet-about .tet-about__trust {
@@ -907,11 +959,11 @@
   }
 
   .tet-about__stats-heading h2 {
-    font-size: 3.15rem;
+    font-size: 2.65rem;
   }
 
   .tet-about__stat strong {
-    font-size: clamp(2.25rem, 12vw, 3.2rem);
+    font-size: clamp(1.9rem, 10vw, 2.45rem);
   }
 
   .tet-about__contact-point {
