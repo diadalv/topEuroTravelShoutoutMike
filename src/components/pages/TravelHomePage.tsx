@@ -1,4 +1,4 @@
-// TOP EURO TRAVEL — APPROVED DESIGN 1 — FINAL WIDE GEOMETRY LOCK
+// TOP EURO TRAVEL — APPROVED DESIGN 1 — BALANCED DETAILS — FULL REPLACE
 // One self-contained file: header + homepage + flat footer + responsive styles + motion.
 import { PageSeo } from '@/components/travel/Shared';
 import {
@@ -98,8 +98,8 @@ const HOME_STYLES = String.raw`
   --tet-paper-soft: #faf7f1;
   --tet-copy: #4d6072;
   --tet-line: rgba(8, 47, 83, 0.13);
-  --tet-shell: min(90vw, 2300px);
-  --tet-bridge: min(78vw, 2000px);
+  --tet-shell: min(calc(100% - clamp(40px, 8.2vw, 122px)), 1580px);
+  --tet-bridge: min(calc(100% - clamp(112px, 20vw, 330px)), 1360px);
   --tet-shadow: 0 18px 48px rgba(6, 31, 56, 0.14);
 }
 
@@ -151,13 +151,30 @@ const HOME_STYLES = String.raw`
 }
 
 .tet-eyebrow {
-  margin-bottom: 8px !important;
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  margin-bottom: 9px !important;
   color: var(--tet-gold-deep);
-  font-size: clamp(9px, 0.58vw, 11px);
+  font-size: clamp(10px, 0.62vw, 12px);
   font-weight: 800;
   letter-spacing: 0.12em;
   line-height: 1.2;
   text-transform: uppercase;
+}
+
+.tet-eyebrow::before {
+  width: 0;
+  height: 0;
+  border-top: 4px solid transparent;
+  border-bottom: 4px solid transparent;
+  border-left: 7px solid currentColor;
+  content: '';
+  transform: translateY(-0.5px);
+}
+
+.tet-hero .tet-eyebrow::before {
+  display: none;
 }
 
 .tet-button {
@@ -165,7 +182,7 @@ const HOME_STYLES = String.raw`
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  gap: 10px;
+  gap: 12px;
   padding: 10px 20px;
   border: 1px solid transparent;
   border-radius: 8px;
@@ -216,7 +233,7 @@ const HOME_STYLES = String.raw`
   padding-bottom: 3px;
   border-bottom: 1px solid rgba(8, 47, 83, 0.32);
   color: var(--tet-navy);
-  font-size: 9px;
+  font-size: clamp(10px, 0.58vw, 11px);
   font-weight: 800;
   letter-spacing: 0.04em;
   line-height: 1.2;
@@ -388,8 +405,8 @@ const HOME_STYLES = String.raw`
 }
 
 .tet-hero__copy {
-  max-width: min(62vw, 1450px);
-  margin-left: clamp(36px, 7vw, 180px);
+  max-width: min(760px, 58vw);
+  margin-left: clamp(28px, 5.2vw, 92px);
   transform: translateY(clamp(24px, 2.4vw, 60px));
 }
 
@@ -402,7 +419,7 @@ const HOME_STYLES = String.raw`
   max-width: 880px;
   margin-bottom: 18px;
   color: #fff;
-  font-size: clamp(54px, 5.35vw, 140px);
+  font-size: clamp(54px, 4.65vw, 90px);
   line-height: 0.92;
   text-wrap: balance;
 }
@@ -415,7 +432,7 @@ const HOME_STYLES = String.raw`
   max-width: 600px;
   margin-bottom: 23px !important;
   color: rgba(255, 255, 255, 0.94);
-  font-size: clamp(13px, 0.92vw, 24px);
+  font-size: clamp(15px, 0.95vw, 19px);
   line-height: 1.52;
 }
 
@@ -501,14 +518,14 @@ const HOME_STYLES = String.raw`
 /* The floating bridge is the visual joint between hero and content. */
 .tet-bridge {
   width: var(--tet-bridge);
-  min-height: clamp(70px, 6.8vw, 170px);
+  min-height: clamp(82px, 6.5vw, 116px);
   position: relative;
   z-index: 10;
   display: grid;
   grid-template-columns: 0.78fr 1.16fr 1.15fr 1.15fr 0.86fr;
   margin: clamp(-45px, -3.2vw, -35px) auto 0;
   border: 1px solid rgba(255, 255, 255, 0.77);
-  border-radius: clamp(14px, 1.15vw, 28px);
+  border-radius: clamp(14px, 1.05vw, 20px);
   overflow: hidden;
   background: rgba(255, 255, 255, 0.97);
   box-shadow: var(--tet-shadow);
@@ -578,14 +595,14 @@ const HOME_STYLES = String.raw`
 
 .tet-bridge__copy strong {
   color: var(--tet-navy-deep);
-  font-size: clamp(9.5px, 0.64vw, 16px);
+  font-size: clamp(11px, 0.7vw, 14px);
   font-weight: 750;
   line-height: 1.25;
 }
 
 .tet-bridge__copy span {
   color: #667481;
-  font-size: clamp(7.5px, 0.5vw, 12px);
+  font-size: clamp(9px, 0.56vw, 11px);
   line-height: 1.25;
 }
 
@@ -618,28 +635,45 @@ const HOME_STYLES = String.raw`
 .tet-bridge__metric span span {
   display: block;
   color: #677481;
-  font-size: clamp(8px, 0.5vw, 12px);
+  font-size: clamp(9px, 0.56vw, 11px);
 }
 
 .tet-body {
-  padding-top: clamp(22px, 2.1vw, 54px);
+  position: relative;
+  isolation: isolate;
+  padding-top: clamp(28px, 2.25vw, 48px);
+}
+
+.tet-body__wash {
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.tet-body__wash svg {
+  width: 100%;
+  height: 100%;
+  display: block;
+  opacity: 0.23;
 }
 
 /* Copy left, facts centre, large visual right — exactly as the approved mockup. */
 .tet-intro {
   display: grid;
-  grid-template-columns: minmax(250px, 0.95fr) minmax(120px, 0.4fr) minmax(390px, 1.55fr);
+  grid-template-columns: minmax(270px, 0.88fr) minmax(125px, 0.34fr) minmax(480px, 1.68fr);
   align-items: center;
-  gap: clamp(25px, 2.9vw, 74px);
+  gap: clamp(28px, 2.35vw, 52px);
   padding-top: clamp(10px, 1.1vw, 30px);
-  padding-bottom: clamp(22px, 2.2vw, 56px);
+  padding-bottom: clamp(34px, 2.65vw, 54px);
 }
 
 .tet-intro__copy h2 {
   max-width: 510px;
   margin-bottom: 12px;
   color: var(--tet-navy-deep);
-  font-size: clamp(34px, 3vw, 78px);
+  font-size: clamp(38px, 2.75vw, 56px);
   line-height: 0.97;
 }
 
@@ -647,17 +681,35 @@ const HOME_STYLES = String.raw`
   max-width: 520px;
   margin-bottom: 7px;
   color: var(--tet-copy);
-  font-size: clamp(10px, 0.67vw, 17px);
+  font-size: clamp(14px, 0.84vw, 17px);
   line-height: 1.55;
 }
 
 .tet-intro__signature {
-  display: block;
-  margin: 12px 0 7px;
+  width: fit-content;
+  position: relative;
+  display: grid;
+  margin: 14px 0 10px;
   color: var(--tet-gold-deep);
-  font-family: Georgia, 'Times New Roman', serif;
-  font-size: clamp(19px, 1.45vw, 37px);
-  font-style: italic;
+  font-family: 'Brush Script MT', 'Segoe Script', 'Snell Roundhand', cursive;
+  font-size: clamp(26px, 1.75vw, 35px);
+  font-weight: 400;
+  line-height: 1;
+  transform: rotate(-2deg);
+}
+
+.tet-intro__signature svg {
+  width: 100%;
+  height: 16px;
+  margin-top: -2px;
+  overflow: visible;
+}
+
+.tet-intro__signature path {
+  fill: none;
+  stroke: currentColor;
+  stroke-linecap: round;
+  stroke-width: 1.5;
 }
 
 .tet-intro__facts {
@@ -696,7 +748,7 @@ const HOME_STYLES = String.raw`
   display: block;
   margin-top: 3px;
   color: #667481;
-  font-size: clamp(7.5px, 0.48vw, 12px);
+  font-size: clamp(10px, 0.58vw, 12px);
   font-weight: 650;
   letter-spacing: 0.03em;
   line-height: 1.25;
@@ -704,9 +756,9 @@ const HOME_STYLES = String.raw`
 }
 
 .tet-intro__visual {
-  aspect-ratio: 2.08 / 1;
+  aspect-ratio: 2.16 / 1;
   position: relative;
-  border-radius: 10px;
+  border-radius: 12px;
   overflow: hidden;
   background: #d9e3e9;
   box-shadow: 0 14px 34px rgba(8, 38, 64, 0.12);
@@ -767,9 +819,42 @@ const HOME_STYLES = String.raw`
   line-height: 1;
 }
 
+.tet-heading-controls {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.tet-heading-control {
+  width: 38px;
+  height: 38px;
+  border: 1px solid rgba(184, 123, 37, 0.38);
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  color: var(--tet-gold-deep);
+  background: rgba(255, 253, 249, 0.78);
+  transition: color 200ms ease, background 200ms ease, transform 200ms ease;
+}
+
+.tet-heading-control svg {
+  width: 16px;
+}
+
+.tet-heading-control--back svg {
+  transform: rotate(180deg);
+}
+
+.tet-heading-control:hover,
+.tet-heading-control:focus-visible {
+  color: #fff;
+  background: var(--tet-gold-deep);
+  transform: translateY(-2px);
+}
+
 /* Two compact destination panels, no oversized section. */
 .tet-destinations {
-  padding-bottom: clamp(20px, 1.9vw, 31px);
+  padding-bottom: clamp(30px, 2.3vw, 44px);
 }
 
 .tet-destinations__rail {
@@ -779,7 +864,7 @@ const HOME_STYLES = String.raw`
 }
 
 .tet-destination {
-  height: clamp(132px, 12.5vw, 320px);
+  height: clamp(172px, 13.4vw, 246px);
   position: relative;
   border-radius: 8px;
   overflow: hidden;
@@ -814,14 +899,14 @@ const HOME_STYLES = String.raw`
   margin-bottom: 4px;
   color: #fff;
   font-family: Arial, Helvetica, sans-serif;
-  font-size: clamp(13px, 0.9vw, 16px);
+  font-size: clamp(16px, 0.98vw, 19px);
   font-weight: 750;
 }
 
 .tet-destination p {
   margin-bottom: 9px;
   color: rgba(255, 255, 255, 0.93);
-  font-size: clamp(9px, 0.66vw, 11px);
+  font-size: clamp(12px, 0.72vw, 14px);
   line-height: 1.35;
 }
 
@@ -832,7 +917,7 @@ const HOME_STYLES = String.raw`
   padding-bottom: 2px;
   border-bottom: 1px solid rgba(255, 255, 255, 0.62);
   color: #fff;
-  font-size: 8.5px;
+  font-size: 10px;
   font-weight: 750;
 }
 
@@ -843,13 +928,13 @@ const HOME_STYLES = String.raw`
 
 /* Eight services form one connected operational line — never eight cards. */
 .tet-services {
-  padding-bottom: clamp(18px, 1.7vw, 28px);
+  padding-bottom: clamp(30px, 2.2vw, 42px);
 }
 
 .tet-services > h2 {
   margin-bottom: clamp(17px, 1.45vw, 24px);
   color: var(--tet-navy-deep);
-  font-size: clamp(27px, 2.5vw, 66px);
+  font-size: clamp(31px, 2.3vw, 47px);
   line-height: 1;
 }
 
@@ -865,7 +950,7 @@ const HOME_STYLES = String.raw`
   display: grid;
   justify-items: center;
   align-content: start;
-  padding: 13px 7px 2px;
+  padding: 17px 8px 5px;
   text-align: center;
 }
 
@@ -903,13 +988,13 @@ const HOME_STYLES = String.raw`
 }
 
 .tet-service h3 {
-  min-height: 28px;
+  min-height: 34px;
   display: grid;
   place-items: center;
   margin-bottom: 3px;
   color: var(--tet-navy-deep);
   font-family: Arial, Helvetica, sans-serif;
-  font-size: clamp(8px, 0.68vw, 15px);
+  font-size: clamp(10.5px, 0.68vw, 13.5px);
   font-weight: 750;
   line-height: 1.2;
 }
@@ -918,7 +1003,7 @@ const HOME_STYLES = String.raw`
   max-width: 138px;
   margin-bottom: 0;
   color: #6b7884;
-  font-size: clamp(6.9px, 0.52vw, 12px);
+  font-size: clamp(9.5px, 0.57vw, 11.5px);
   line-height: 1.32;
 }
 
@@ -934,10 +1019,10 @@ const HOME_STYLES = String.raw`
 
 /* Compact, three-part MICE banner, matching the approved mockup. */
 .tet-mice {
-  height: clamp(130px, 11.8vw, 300px);
+  height: clamp(180px, 12vw, 235px);
   display: grid;
-  grid-template-columns: minmax(0, 1.12fr) minmax(310px, 0.82fr) minmax(210px, 0.56fr);
-  margin-bottom: clamp(17px, 1.5vw, 25px);
+  grid-template-columns: minmax(0, 1.48fr) minmax(320px, 0.98fr) minmax(190px, 0.5fr);
+  margin-bottom: clamp(28px, 2.1vw, 40px);
   border-radius: 8px;
   overflow: hidden;
   color: #fff;
@@ -989,14 +1074,14 @@ const HOME_STYLES = String.raw`
 .tet-mice__copy h2 {
   margin-bottom: 6px;
   color: #fff;
-  font-size: clamp(23px, 1.85vw, 48px);
+  font-size: clamp(28px, 1.9vw, 39px);
   line-height: 1;
 }
 
 .tet-mice__copy p:not(.tet-eyebrow) {
   margin-bottom: 9px;
   color: rgba(255, 255, 255, 0.8);
-  font-size: clamp(8px, 0.53vw, 14px);
+  font-size: clamp(11px, 0.66vw, 14px);
   line-height: 1.45;
 }
 
@@ -1004,7 +1089,7 @@ const HOME_STYLES = String.raw`
   width: fit-content;
   min-height: 32px;
   padding: 7px 12px;
-  font-size: 8px;
+  font-size: 9.5px;
 }
 
 .tet-mice:hover img {
@@ -1014,21 +1099,22 @@ const HOME_STYLES = String.raw`
 
 /* Six short experience frames, like a cinematic contact sheet. */
 .tet-experiences {
-  padding-bottom: 8px;
+  padding-top: 2px;
+  padding-bottom: 16px;
 }
 
 .tet-experiences .tet-section-heading {
-  margin-bottom: 10px;
+  margin-bottom: 15px;
 }
 
 .tet-experiences__rail {
   display: grid;
   grid-template-columns: repeat(6, minmax(0, 1fr));
-  gap: 7px;
+  gap: 9px;
 }
 
 .tet-experience {
-  height: clamp(106px, 9.8vw, 250px);
+  height: clamp(150px, 11.1vw, 205px);
   position: relative;
   border-radius: 6px;
   overflow: hidden;
@@ -1078,7 +1164,7 @@ const HOME_STYLES = String.raw`
   left: 9px;
   z-index: 2;
   font-family: Georgia, 'Times New Roman', serif;
-  font-size: clamp(12px, 0.96vw, 25px);
+  font-size: clamp(15px, 0.96vw, 19px);
   font-weight: 500;
   line-height: 1;
   text-shadow: 0 2px 10px rgba(2, 18, 33, 0.5);
@@ -1091,7 +1177,7 @@ const HOME_STYLES = String.raw`
 
 /* The reference strip keeps the exact 3-column geometry without fake awards or testimonials. */
 .tet-partners {
-  min-height: clamp(76px, 8vw, 185px);
+  min-height: clamp(100px, 8.2vw, 150px);
   display: grid;
   grid-template-columns: minmax(0, 1.35fr) minmax(260px, 0.7fr) minmax(190px, 0.55fr);
   border: 1px solid rgba(8, 47, 83, 0.09);
@@ -1112,7 +1198,7 @@ const HOME_STYLES = String.raw`
 .tet-partners__label {
   width: 100%;
   color: #8a8f93;
-  font-size: 7.5px;
+  font-size: 9px;
   font-weight: 750;
   letter-spacing: 0.08em;
   text-transform: uppercase;
@@ -1198,7 +1284,7 @@ const HOME_STYLES = String.raw`
 .tet-footer-column a,
 .tet-footer-contact span {
   color: rgba(255, 255, 255, 0.73);
-  font-size: 8.5px;
+  font-size: 10px;
   line-height: 1.45;
 }
 
@@ -1295,36 +1381,22 @@ const HOME_STYLES = String.raw`
   will-change: transform, opacity;
 }
 
-/* Final wide-screen geometry lock: match the approved mockup instead of collapsing into a narrow max-width column. */
-@media (min-width: 1800px) {
-  .tet-topbar__inner, .tet-shell { width: min(90vw, 2300px); }
-  .tet-nav { gap: clamp(24px, 2vw, 48px); }
-  .tet-nav a { font-size: clamp(11px, 0.52vw, 15px); }
-  .tet-contact-pill { min-height: 48px; padding-inline: 22px; font-size: 13px; }
-  .tet-button { min-height: 52px; padding: 13px 26px; font-size: 14px; }
-  .tet-text-link { font-size: 12px; }
-  .tet-eyebrow { font-size: 13px; }
-  .tet-intro__fact { grid-template-columns: 30px minmax(0, 1fr); gap: 12px; padding-block: 13px; }
-  .tet-intro__fact svg { width: 26px; }
-  .tet-destination__copy { padding: 30px 34px; }
-  .tet-destination h3 { font-size: 24px; }
-  .tet-destination p { font-size: 16px; }
-  .tet-destination__link { font-size: 12px; }
-  .tet-service { padding: 20px 12px 8px; }
-  .tet-mice__copy { padding: 30px 38px; }
-  .tet-mice__copy .tet-button { min-height: 42px; padding: 10px 18px; font-size: 11px; }
-  .tet-experience__icon { width: 34px; height: 34px; top: 13px; left: 13px; }
-  .tet-experience__icon svg { width: 17px; }
-  .tet-experience strong { right: 15px; bottom: 14px; left: 15px; }
-  .tet-partners__marks { padding: 20px 28px; }
-  .tet-partners__label { font-size: 10px; }
-  .tet-partners__marks strong { font-size: 19px; }
-  .tet-partners__statement { padding: 20px 28px; }
-  .tet-partners__statement p { font-size: 13px; }
-  .tet-partners__images { gap: 8px; padding: 9px; }
-  .tet-footer-column strong, .tet-footer-contact strong, .tet-footer-social strong { font-size: 13px; }
-  .tet-social-row a { width: 38px; height: 38px; font-size: 12px; }
-  .tet-footer-cta { min-height: 48px; font-size: 12px; }
+/* Large-screen refinement without widening the approved composition. */
+@media (min-width: 1680px) {
+  .tet-nav { gap: 28px; }
+  .tet-nav a { font-size: 11px; }
+  .tet-button { min-height: 46px; padding: 11px 22px; font-size: 12px; }
+  .tet-contact-pill { min-height: 44px; padding-inline: 20px; font-size: 11px; }
+  .tet-intro__fact { grid-template-columns: 26px minmax(0, 1fr); gap: 10px; padding-block: 10px; }
+  .tet-intro__fact svg { width: 23px; }
+  .tet-destination__copy { padding: 24px 27px; }
+  .tet-service__icon svg { width: 35px; height: 35px; }
+  .tet-experience__icon { width: 29px; height: 29px; top: 11px; left: 11px; }
+  .tet-experience__icon svg { width: 15px; }
+  .tet-partners__marks { padding: 17px 25px; }
+  .tet-partners__marks strong { font-size: 16px; }
+  .tet-partners__statement { padding: 17px 24px; }
+  .tet-social-row a { width: 33px; height: 33px; }
 }
 
 @media (max-width: 1120px) {
@@ -1337,7 +1409,7 @@ const HOME_STYLES = String.raw`
   }
 
   .tet-intro {
-    grid-template-columns: minmax(0, 1fr) minmax(120px, 0.38fr) minmax(340px, 1.42fr);
+    grid-template-columns: minmax(0, 0.9fr) minmax(125px, 0.36fr) minmax(380px, 1.55fr);
     gap: 24px;
   }
 
@@ -1984,6 +2056,13 @@ export default function TravelHomePage() {
       </section>
 
       <div className="tet-body">
+        <div className="tet-body__wash" aria-hidden="true">
+          <svg viewBox="0 0 1600 1900" preserveAspectRatio="none">
+            <path d="M-120 400 C180 280 340 520 650 390 C990 248 1190 470 1710 280" fill="none" stroke="#c8d9e5" strokeWidth="88" strokeLinecap="round" opacity="0.32" />
+            <path d="M-180 1030 C140 870 410 1120 760 970 C1100 825 1350 1050 1720 890" fill="none" stroke="#e5d5bd" strokeWidth="72" strokeLinecap="round" opacity="0.24" />
+            <path d="M-80 1520 C250 1370 560 1600 920 1450 C1220 1320 1450 1490 1700 1390" fill="none" stroke="#d7e3eb" strokeWidth="96" strokeLinecap="round" opacity="0.18" />
+          </svg>
+        </div>
         <section id="our-story" className="tet-intro tet-shell">
           <div className="tet-intro__copy" data-motion="left">
             <Eyebrow>Who we are</Eyebrow>
@@ -1996,7 +2075,13 @@ export default function TravelHomePage() {
               Our local teams combine strong partnerships, responsive coordination and tailor-made delivery across
               hotels, transfers, excursions, MICE and special programmes.
             </p>
-            <span className="tet-intro__signature">Top Euro Travel · Since 1989</span>
+            <span className="tet-intro__signature" aria-label="Top Euro Team">
+              <span>Top Euro Team</span>
+              <svg viewBox="0 0 210 18" aria-hidden="true">
+                <path d="M4 10 C34 3 63 15 94 8 C124 2 148 15 180 8 C191 6 199 7 206 5" />
+                <path d="M26 14 C63 10 105 17 151 12" opacity="0.5" />
+              </svg>
+            </span>
             <Link className="tet-text-link" to="/about">
               Learn more about us <ArrowRight aria-hidden="true" />
             </Link>
@@ -2024,9 +2109,14 @@ export default function TravelHomePage() {
               <Eyebrow>Our destinations</Eyebrow>
               <h2 id="tet-destinations-title">Two Islands. Endless Possibilities.</h2>
             </div>
-            <Link className="tet-text-link" to="/destinations">
-              Explore destinations <ArrowRight aria-hidden="true" />
-            </Link>
+            <div className="tet-heading-controls" aria-label="Destination shortcuts">
+              <Link className="tet-heading-control tet-heading-control--back" to="/rhodes" aria-label="Explore Rhodes">
+                <ArrowRight aria-hidden="true" />
+              </Link>
+              <Link className="tet-heading-control" to="/kos" aria-label="Explore Kos">
+                <ArrowRight aria-hidden="true" />
+              </Link>
+            </div>
           </div>
 
           <div className="tet-destinations__rail" data-motion="scale" data-stagger="true">
