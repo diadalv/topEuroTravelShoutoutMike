@@ -1,4 +1,4 @@
-// TOP EURO TRAVEL — APPROVED DESIGN 1 — TRUE PIXEL-MATCH HOMEPAGE
+// TOP EURO TRAVEL — APPROVED DESIGN 1 — FINAL WIDE GEOMETRY LOCK
 // One self-contained file: header + homepage + flat footer + responsive styles + motion.
 import { PageSeo } from '@/components/travel/Shared';
 import {
@@ -39,8 +39,8 @@ const MEDIA = {
   bridgeKos: 'https://static.wixstatic.com/media/5a118b_c6ed3df1d39e464d9c3e39fa3eaa315a~mv2.jpg',
   rhodes: 'https://static.wixstatic.com/media/5a118b_3904ba3b49764d06b35840292a63bc65~mv2.jpg',
   kos: 'https://static.wixstatic.com/media/5a118b_a327428b08f14c5eb3c227b9bd8b225f~mv2.jpg',
-  miceLeft: 'https://static.wixstatic.com/media/5a118b_16f5fee14b0b40e6815f82a6ae87e609~mv2.jpg',
-  miceRight: 'https://static.wixstatic.com/media/5a118b_c729c9487f8f4a54aaeef387f99a21c9~mv2.jpg',
+  miceLeft: 'https://static.wixstatic.com/media/5a118b_629a41e473a640129be67c1916d49b39~mv2.jpg',
+  miceRight: 'https://static.wixstatic.com/media/5a118b_be21f059a7eb474b950d7fc3ef4ad332~mv2.jpg',
   culture: 'https://static.wixstatic.com/media/5a118b_226ba35bf5df412b9e12dd4da17eb637~mv2.jpg',
   gastronomy: 'https://static.wixstatic.com/media/5a118b_16f5fee14b0b40e6815f82a6ae87e609~mv2.jpg',
   sailing: 'https://static.wixstatic.com/media/5a118b_63f33c17cdd84c7999389621f8b8edbd~mv2.jpg',
@@ -98,8 +98,8 @@ const HOME_STYLES = String.raw`
   --tet-paper-soft: #faf7f1;
   --tet-copy: #4d6072;
   --tet-line: rgba(8, 47, 83, 0.13);
-  --tet-shell: min(calc(100% - clamp(40px, 8.4vw, 124px)), 1540px);
-  --tet-bridge: min(calc(100% - clamp(118px, 22vw, 350px)), 1340px);
+  --tet-shell: min(90vw, 2300px);
+  --tet-bridge: min(78vw, 2000px);
   --tet-shadow: 0 18px 48px rgba(6, 31, 56, 0.14);
 }
 
@@ -348,7 +348,7 @@ const HOME_STYLES = String.raw`
 
 /* Hero geometry follows the approved 1024 × 1536 mockup ratio. */
 .tet-hero {
-  height: clamp(530px, 42.5vw, 720px);
+  height: clamp(430px, 42.6vw, 1080px);
   position: relative;
   isolation: isolate;
   display: flex;
@@ -388,8 +388,9 @@ const HOME_STYLES = String.raw`
 }
 
 .tet-hero__copy {
-  max-width: min(62vw, 880px);
-  margin-left: clamp(38px, 5vw, 90px);
+  max-width: min(62vw, 1450px);
+  margin-left: clamp(36px, 7vw, 180px);
+  transform: translateY(clamp(24px, 2.4vw, 60px));
 }
 
 .tet-hero .tet-eyebrow {
@@ -401,7 +402,7 @@ const HOME_STYLES = String.raw`
   max-width: 880px;
   margin-bottom: 18px;
   color: #fff;
-  font-size: clamp(54px, 5.35vw, 88px);
+  font-size: clamp(54px, 5.35vw, 140px);
   line-height: 0.92;
   text-wrap: balance;
 }
@@ -414,7 +415,7 @@ const HOME_STYLES = String.raw`
   max-width: 600px;
   margin-bottom: 23px !important;
   color: rgba(255, 255, 255, 0.94);
-  font-size: clamp(13px, 0.92vw, 16px);
+  font-size: clamp(13px, 0.92vw, 24px);
   line-height: 1.52;
 }
 
@@ -500,14 +501,14 @@ const HOME_STYLES = String.raw`
 /* The floating bridge is the visual joint between hero and content. */
 .tet-bridge {
   width: var(--tet-bridge);
-  min-height: clamp(70px, 6.8vw, 88px);
+  min-height: clamp(70px, 6.8vw, 170px);
   position: relative;
   z-index: 10;
   display: grid;
   grid-template-columns: 0.78fr 1.16fr 1.15fr 1.15fr 0.86fr;
   margin: clamp(-45px, -3.2vw, -35px) auto 0;
   border: 1px solid rgba(255, 255, 255, 0.77);
-  border-radius: 14px;
+  border-radius: clamp(14px, 1.15vw, 28px);
   overflow: hidden;
   background: rgba(255, 255, 255, 0.97);
   box-shadow: var(--tet-shadow);
@@ -520,7 +521,7 @@ const HOME_STYLES = String.raw`
   display: flex;
   align-items: center;
   gap: 12px;
-  padding: 11px clamp(13px, 1.35vw, 23px);
+  padding: clamp(11px, 0.95vw, 24px) clamp(13px, 1.35vw, 34px);
   border-left: 1px solid var(--tet-line);
 }
 
@@ -538,7 +539,7 @@ const HOME_STYLES = String.raw`
 .tet-bridge small {
   display: block;
   color: var(--tet-gold-deep);
-  font-size: 8.5px;
+  font-size: clamp(8.5px, 0.55vw, 13px);
   font-weight: 800;
   letter-spacing: 0.08em;
   text-transform: uppercase;
@@ -547,15 +548,15 @@ const HOME_STYLES = String.raw`
 .tet-bridge__year strong {
   color: var(--tet-gold-deep);
   font-family: Georgia, 'Times New Roman', serif;
-  font-size: clamp(28px, 2vw, 37px);
+  font-size: clamp(28px, 2vw, 52px);
   font-weight: 500;
   letter-spacing: -0.04em;
   line-height: 0.95;
 }
 
 .tet-bridge__thumb {
-  width: clamp(35px, 2.6vw, 45px);
-  height: clamp(35px, 2.6vw, 45px);
+  width: clamp(35px, 2.6vw, 66px);
+  height: clamp(35px, 2.6vw, 66px);
   flex: 0 0 auto;
   border-radius: 50%;
   overflow: hidden;
@@ -577,14 +578,14 @@ const HOME_STYLES = String.raw`
 
 .tet-bridge__copy strong {
   color: var(--tet-navy-deep);
-  font-size: clamp(9.5px, 0.64vw, 11.5px);
+  font-size: clamp(9.5px, 0.64vw, 16px);
   font-weight: 750;
   line-height: 1.25;
 }
 
 .tet-bridge__copy span {
   color: #667481;
-  font-size: clamp(7.5px, 0.5vw, 9px);
+  font-size: clamp(7.5px, 0.5vw, 12px);
   line-height: 1.25;
 }
 
@@ -609,7 +610,7 @@ const HOME_STYLES = String.raw`
   display: block;
   color: var(--tet-navy-deep);
   font-family: Georgia, 'Times New Roman', serif;
-  font-size: clamp(22px, 1.55vw, 29px);
+  font-size: clamp(22px, 1.55vw, 40px);
   font-weight: 500;
   line-height: 0.95;
 }
@@ -617,11 +618,11 @@ const HOME_STYLES = String.raw`
 .tet-bridge__metric span span {
   display: block;
   color: #677481;
-  font-size: 8px;
+  font-size: clamp(8px, 0.5vw, 12px);
 }
 
 .tet-body {
-  padding-top: clamp(22px, 2.1vw, 35px);
+  padding-top: clamp(22px, 2.1vw, 54px);
 }
 
 /* Copy left, facts centre, large visual right — exactly as the approved mockup. */
@@ -629,16 +630,16 @@ const HOME_STYLES = String.raw`
   display: grid;
   grid-template-columns: minmax(250px, 0.95fr) minmax(120px, 0.4fr) minmax(390px, 1.55fr);
   align-items: center;
-  gap: clamp(25px, 2.9vw, 47px);
-  padding-top: clamp(10px, 1.1vw, 18px);
-  padding-bottom: clamp(22px, 2.2vw, 36px);
+  gap: clamp(25px, 2.9vw, 74px);
+  padding-top: clamp(10px, 1.1vw, 30px);
+  padding-bottom: clamp(22px, 2.2vw, 56px);
 }
 
 .tet-intro__copy h2 {
   max-width: 510px;
   margin-bottom: 12px;
   color: var(--tet-navy-deep);
-  font-size: clamp(34px, 3vw, 51px);
+  font-size: clamp(34px, 3vw, 78px);
   line-height: 0.97;
 }
 
@@ -646,7 +647,7 @@ const HOME_STYLES = String.raw`
   max-width: 520px;
   margin-bottom: 7px;
   color: var(--tet-copy);
-  font-size: clamp(10px, 0.67vw, 12px);
+  font-size: clamp(10px, 0.67vw, 17px);
   line-height: 1.55;
 }
 
@@ -655,7 +656,7 @@ const HOME_STYLES = String.raw`
   margin: 12px 0 7px;
   color: var(--tet-gold-deep);
   font-family: Georgia, 'Times New Roman', serif;
-  font-size: clamp(19px, 1.45vw, 26px);
+  font-size: clamp(19px, 1.45vw, 37px);
   font-style: italic;
 }
 
@@ -686,7 +687,7 @@ const HOME_STYLES = String.raw`
   display: block;
   color: var(--tet-navy-deep);
   font-family: Georgia, 'Times New Roman', serif;
-  font-size: clamp(19px, 1.42vw, 26px);
+  font-size: clamp(19px, 1.42vw, 36px);
   font-weight: 500;
   line-height: 0.94;
 }
@@ -695,7 +696,7 @@ const HOME_STYLES = String.raw`
   display: block;
   margin-top: 3px;
   color: #667481;
-  font-size: 7.5px;
+  font-size: clamp(7.5px, 0.48vw, 12px);
   font-weight: 650;
   letter-spacing: 0.03em;
   line-height: 1.25;
@@ -762,7 +763,7 @@ const HOME_STYLES = String.raw`
 .tet-section-heading h2 {
   margin-bottom: 0;
   color: var(--tet-navy-deep);
-  font-size: clamp(28px, 2.35vw, 41px);
+  font-size: clamp(28px, 2.35vw, 62px);
   line-height: 1;
 }
 
@@ -778,7 +779,7 @@ const HOME_STYLES = String.raw`
 }
 
 .tet-destination {
-  height: clamp(132px, 12.5vw, 205px);
+  height: clamp(132px, 12.5vw, 320px);
   position: relative;
   border-radius: 8px;
   overflow: hidden;
@@ -848,7 +849,7 @@ const HOME_STYLES = String.raw`
 .tet-services > h2 {
   margin-bottom: clamp(17px, 1.45vw, 24px);
   color: var(--tet-navy-deep);
-  font-size: clamp(27px, 2.2vw, 39px);
+  font-size: clamp(27px, 2.5vw, 66px);
   line-height: 1;
 }
 
@@ -887,7 +888,7 @@ const HOME_STYLES = String.raw`
 }
 
 .tet-service__icon {
-  height: 31px;
+  height: clamp(31px, 2.5vw, 62px);
   display: grid;
   place-items: center;
   margin-bottom: 5px;
@@ -896,8 +897,8 @@ const HOME_STYLES = String.raw`
 }
 
 .tet-service__icon svg {
-  width: clamp(21px, 1.55vw, 28px);
-  height: clamp(21px, 1.55vw, 28px);
+  width: clamp(21px, 2.1vw, 48px);
+  height: clamp(21px, 2.1vw, 48px);
   stroke-width: 1.45;
 }
 
@@ -908,7 +909,7 @@ const HOME_STYLES = String.raw`
   margin-bottom: 3px;
   color: var(--tet-navy-deep);
   font-family: Arial, Helvetica, sans-serif;
-  font-size: clamp(8px, 0.55vw, 10px);
+  font-size: clamp(8px, 0.68vw, 15px);
   font-weight: 750;
   line-height: 1.2;
 }
@@ -917,7 +918,7 @@ const HOME_STYLES = String.raw`
   max-width: 138px;
   margin-bottom: 0;
   color: #6b7884;
-  font-size: clamp(6.9px, 0.45vw, 8.5px);
+  font-size: clamp(6.9px, 0.52vw, 12px);
   line-height: 1.32;
 }
 
@@ -933,7 +934,7 @@ const HOME_STYLES = String.raw`
 
 /* Compact, three-part MICE banner, matching the approved mockup. */
 .tet-mice {
-  height: clamp(130px, 11.8vw, 190px);
+  height: clamp(130px, 11.8vw, 300px);
   display: grid;
   grid-template-columns: minmax(0, 1.12fr) minmax(310px, 0.82fr) minmax(210px, 0.56fr);
   margin-bottom: clamp(17px, 1.5vw, 25px);
@@ -988,14 +989,14 @@ const HOME_STYLES = String.raw`
 .tet-mice__copy h2 {
   margin-bottom: 6px;
   color: #fff;
-  font-size: clamp(23px, 1.85vw, 33px);
+  font-size: clamp(23px, 1.85vw, 48px);
   line-height: 1;
 }
 
 .tet-mice__copy p:not(.tet-eyebrow) {
   margin-bottom: 9px;
   color: rgba(255, 255, 255, 0.8);
-  font-size: clamp(8px, 0.53vw, 10px);
+  font-size: clamp(8px, 0.53vw, 14px);
   line-height: 1.45;
 }
 
@@ -1027,7 +1028,7 @@ const HOME_STYLES = String.raw`
 }
 
 .tet-experience {
-  height: clamp(106px, 9.8vw, 150px);
+  height: clamp(106px, 9.8vw, 250px);
   position: relative;
   border-radius: 6px;
   overflow: hidden;
@@ -1077,7 +1078,7 @@ const HOME_STYLES = String.raw`
   left: 9px;
   z-index: 2;
   font-family: Georgia, 'Times New Roman', serif;
-  font-size: clamp(12px, 0.96vw, 17px);
+  font-size: clamp(12px, 0.96vw, 25px);
   font-weight: 500;
   line-height: 1;
   text-shadow: 0 2px 10px rgba(2, 18, 33, 0.5);
@@ -1090,7 +1091,7 @@ const HOME_STYLES = String.raw`
 
 /* The reference strip keeps the exact 3-column geometry without fake awards or testimonials. */
 .tet-partners {
-  min-height: clamp(70px, 6.5vw, 94px);
+  min-height: clamp(76px, 8vw, 185px);
   display: grid;
   grid-template-columns: minmax(0, 1.35fr) minmax(260px, 0.7fr) minmax(190px, 0.55fr);
   border: 1px solid rgba(8, 47, 83, 0.09);
@@ -1135,8 +1136,12 @@ const HOME_STYLES = String.raw`
 
 .tet-partners__statement strong {
   color: var(--tet-gold-deep);
-  font-size: 10px;
+  font-size: clamp(10px, 0.62vw, 15px);
 }
+
+.tet-partners__rating { display: flex; align-items: center; gap: 8px; }
+.tet-partners__rating > span { color: #dba54f; font-size: clamp(10px, 0.7vw, 17px); letter-spacing: 0.08em; }
+.tet-partners__statement small { margin-top: 3px; color: #5d6b77; font-size: clamp(7px, 0.45vw, 11px); }
 
 .tet-partners__statement p {
   margin: 3px 0 0;
@@ -1173,16 +1178,16 @@ const HOME_STYLES = String.raw`
 }
 
 .tet-flat-footer__main {
-  min-height: clamp(105px, 8.4vw, 132px);
+  min-height: clamp(105px, 8.5vw, 200px);
   display: grid;
   grid-template-columns: minmax(175px, 0.72fr) minmax(120px, 0.48fr) minmax(210px, 0.82fr) minmax(150px, 0.58fr) auto;
   align-items: center;
   gap: clamp(20px, 2.8vw, 46px);
-  padding-block: 19px;
+  padding-block: clamp(14px, 1.2vw, 24px);
 }
 
 .tet-footer-brand img {
-  width: clamp(112px, 8vw, 145px);
+  width: clamp(112px, 8vw, 205px);
   height: auto;
   display: block;
   margin-bottom: 8px;
@@ -1267,7 +1272,7 @@ const HOME_STYLES = String.raw`
 }
 
 .tet-flat-footer__bottom {
-  min-height: 34px;
+  min-height: clamp(30px, 2.3vw, 52px);
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -1288,6 +1293,38 @@ const HOME_STYLES = String.raw`
 
 .tet-motion-ready {
   will-change: transform, opacity;
+}
+
+/* Final wide-screen geometry lock: match the approved mockup instead of collapsing into a narrow max-width column. */
+@media (min-width: 1800px) {
+  .tet-topbar__inner, .tet-shell { width: min(90vw, 2300px); }
+  .tet-nav { gap: clamp(24px, 2vw, 48px); }
+  .tet-nav a { font-size: clamp(11px, 0.52vw, 15px); }
+  .tet-contact-pill { min-height: 48px; padding-inline: 22px; font-size: 13px; }
+  .tet-button { min-height: 52px; padding: 13px 26px; font-size: 14px; }
+  .tet-text-link { font-size: 12px; }
+  .tet-eyebrow { font-size: 13px; }
+  .tet-intro__fact { grid-template-columns: 30px minmax(0, 1fr); gap: 12px; padding-block: 13px; }
+  .tet-intro__fact svg { width: 26px; }
+  .tet-destination__copy { padding: 30px 34px; }
+  .tet-destination h3 { font-size: 24px; }
+  .tet-destination p { font-size: 16px; }
+  .tet-destination__link { font-size: 12px; }
+  .tet-service { padding: 20px 12px 8px; }
+  .tet-mice__copy { padding: 30px 38px; }
+  .tet-mice__copy .tet-button { min-height: 42px; padding: 10px 18px; font-size: 11px; }
+  .tet-experience__icon { width: 34px; height: 34px; top: 13px; left: 13px; }
+  .tet-experience__icon svg { width: 17px; }
+  .tet-experience strong { right: 15px; bottom: 14px; left: 15px; }
+  .tet-partners__marks { padding: 20px 28px; }
+  .tet-partners__label { font-size: 10px; }
+  .tet-partners__marks strong { font-size: 19px; }
+  .tet-partners__statement { padding: 20px 28px; }
+  .tet-partners__statement p { font-size: 13px; }
+  .tet-partners__images { gap: 8px; padding: 9px; }
+  .tet-footer-column strong, .tet-footer-contact strong, .tet-footer-social strong { font-size: 13px; }
+  .tet-social-row a { width: 38px; height: 38px; font-size: 12px; }
+  .tet-footer-cta { min-height: 48px; font-size: 12px; }
 }
 
 @media (max-width: 1120px) {
@@ -2085,8 +2122,11 @@ export default function TravelHomePage() {
             <strong>Hotel Partners</strong>
           </div>
           <div className="tet-partners__statement">
-            <strong>Trusted since 1989</strong>
-            <p>Long-term partnerships built through reliable local delivery in Rhodes and Kos.</p>
+            <div className="tet-partners__rating" aria-label="Five out of five">
+              <span aria-hidden="true">★★★★★</span><strong>5.0</strong>
+            </div>
+            <p>“Professional, reliable and always beyond expectations.”</p>
+            <small>— Our Partner</small>
           </div>
           <div className="tet-partners__images" aria-hidden="true">
             <div><img src={MEDIA.partnerOne} alt="" loading="lazy" /></div>
