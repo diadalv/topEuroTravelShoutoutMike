@@ -1,5 +1,6 @@
-// TOP EURO TRAVEL — APPROVED DESIGN 1 — FULL HOMEPAGE REPLACE
-import { PageSeo, Photo, travelMedia } from '@/components/travel/Shared';
+// TOP EURO TRAVEL — APPROVED DESIGN 1 — ONE FILE FULL REPLACE
+// Replace the full content of src/pages/TravelHomePage.tsx with this file.
+import { PageSeo } from '@/components/travel/Shared';
 import {
   ArrowDown,
   ArrowRight,
@@ -7,8 +8,7 @@ import {
   Building2,
   Bus,
   CalendarCheck,
-  ChevronLeft,
-  ChevronRight,
+  Clock3,
   Globe2,
   Headphones,
   Landmark,
@@ -18,2249 +18,324 @@ import {
   Users,
   type LucideIcon,
 } from 'lucide-react';
-import { useEffect, useRef } from 'react';
+import { useEffect } from 'react';
 import { Link } from 'react-router-dom';
 
-const services: Array<{
-  icon: LucideIcon;
-  title: string;
-  description: string;
-}> = [
-  {
-    icon: BedDouble,
-    title: 'Hotel Contracting',
-    description: 'Carefully selected stays and competitive agreements.',
-  },
-  {
-    icon: CalendarCheck,
-    title: 'Booking Management',
-    description: 'Reservations and programme details handled end to end.',
-  },
-  {
-    icon: Bus,
-    title: 'Transfers & Transportation',
-    description: 'Reliable airport, hotel and island-wide movement.',
-  },
-  {
-    icon: Headphones,
-    title: 'Resort Assistance',
-    description: 'Responsive local support throughout every stay.',
-  },
-  {
-    icon: MapPinned,
-    title: 'Tours & Excursions',
-    description: 'Authentic experiences shaped with local knowledge.',
-  },
-  {
-    icon: Landmark,
-    title: 'MICE & Group Travel',
-    description: 'Meetings, incentives, conferences and group programmes.',
-  },
-  {
-    icon: Sparkles,
-    title: 'Weddings & Special Events',
-    description: 'Distinctive occasions delivered with calm precision.',
-  },
-  {
-    icon: Globe2,
-    title: 'XML API & Agent Portal',
-    description: 'Connected technology for faster partner operations.',
-  },
+const MEDIA = {
+  heroPoster: 'https://static.wixstatic.com/media/5a118b_f3aada5a1ac547358ac6c8b35d60a2a7f002.jpg',
+  heroDesktop: 'https://video.wixstatic.com/video/5a118b_f3aada5a1ac547358ac6c8b35d60a2a7/1080p/mp4/file.mp4',
+  heroMobile: 'https://video.wixstatic.com/video/5a118b_ea5a16aef9d047ddb9126c2f00737d43/1080p/mp4/file.mp4',
+  intro: 'https://static.wixstatic.com/media/5a118b_ecb7cf129ee940edbcc8d28e06e94ea3~mv2.jpg',
+  rhodes: 'https://static.wixstatic.com/media/5a118b_1e1e28691dab433b8075e66efd56ef2a~mv2.jpg',
+  kos: 'https://static.wixstatic.com/media/5a118b_ea5a16aef9d047ddb9126c2f00737d43f002.jpg',
+  miceLeft: 'https://static.wixstatic.com/media/5a118b_0eef7a8136df41b2b08bc707b4c1ec80~mv2.jpg',
+  miceRight: 'https://static.wixstatic.com/media/5a118b_be21f059a7eb474b950d7fc3ef4ad332~mv2.jpg',
+  culture: 'https://static.wixstatic.com/media/5a118b_226ba35bf5df412b9e12dd4da17eb637~mv2.jpg',
+  gastronomy: 'https://static.wixstatic.com/media/5a118b_be21f059a7eb474b950d7fc3ef4ad332~mv2.jpg',
+  yachting: 'https://static.wixstatic.com/media/5a118b_63f33c17cdd84c7999389621f8b8edbd~mv2.jpg',
+  nature: 'https://static.wixstatic.com/media/5a118b_ab2ae908eff3464cad53f27ae679ae6a~mv2.jpg',
+  wellness: 'https://static.wixstatic.com/media/5a118b_1a02c2f9444641568e84784a2de3bb06~mv2.jpg',
+  shopping: 'https://static.wixstatic.com/media/5a118b_10edb838f69a4be9b6c35f098d867310~mv2.jpg',
+  partner: 'https://static.wixstatic.com/media/5a118b_278f147701794e22ac15e40aa8627d7e~mv2.jpg',
+} as const;
+
+type Service = { icon: LucideIcon; title: string; copy: string };
+
+const services: Service[] = [
+  { icon: BedDouble, title: 'Hotel Contracting', copy: 'Selected stays & agreements' },
+  { icon: CalendarCheck, title: 'Booking Management', copy: 'Reservations managed end to end' },
+  { icon: Bus, title: 'Transfers & Transportation', copy: 'Reliable island-wide movement' },
+  { icon: Headphones, title: 'Resort Assistance', copy: 'Responsive local support' },
+  { icon: MapPinned, title: 'Tours & Excursions', copy: 'Curated authentic experiences' },
+  { icon: Landmark, title: 'MICE & Group Travel', copy: 'Meetings, incentives & groups' },
+  { icon: Sparkles, title: 'Weddings & Special Events', copy: 'Distinctive occasions' },
+  { icon: Globe2, title: 'XML API & Agent Portal', copy: 'Connected partner technology' },
 ];
 
 const experiences = [
-  {
-    title: 'Culture & Heritage',
-    image: 'old-town.jpg',
-  },
-  {
-    title: 'Gastronomy & Wine',
-    image: 'food.jpg',
-  },
-  {
-    title: 'Yachting & Sailing',
-    image: 'sailing.jpg',
-  },
-  {
-    title: 'Nature & Adventure',
-    image: 'prasonisi.jpg',
-  },
-  {
-    title: 'Wellness & Local Life',
-    image: 'local-life.jpg',
-  },
-  {
-    title: 'Island Discovery',
-    image: 'home-welcome-v2.jpg',
-  },
+  { title: 'Culture & Heritage', image: MEDIA.culture },
+  { title: 'Gastronomy & Wine', image: MEDIA.gastronomy },
+  { title: 'Yachting & Sailing', image: MEDIA.yachting },
+  { title: 'Nature & Adventure', image: MEDIA.nature },
+  { title: 'Wellness & Local Life', image: MEDIA.wellness },
+  { title: 'Shopping & Nightlife', image: MEDIA.shopping },
 ] as const;
 
-const HOME_STYLES = String.raw`
-@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=DM+Sans:wght@400;500;600;700&display=swap');
+const CSS = String.raw`
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600&family=DM+Sans:wght@400;500;600;700&display=swap');
 
 :root {
-  --tet-ink: #102c49;
-  --tet-ink-deep: #071f37;
-  --tet-blue: #0d446f;
-  --tet-gold: #d9a14a;
-  --tet-gold-deep: #bb7f27;
-  --tet-paper: #fffdf9;
-  --tet-paper-soft: #f7f4ef;
-  --tet-line: rgba(16, 44, 73, 0.14);
-  --tet-shadow: 0 22px 58px rgba(9, 35, 61, 0.13);
-  --tet-radius: 14px;
+  --d1-navy:#092d4d;
+  --d1-navy-deep:#06233d;
+  --d1-ink:#102943;
+  --d1-gold:#d99d45;
+  --d1-gold-deep:#b97923;
+  --d1-paper:#fffdf9;
+  --d1-line:rgba(16,41,67,.13);
+  --d1-shadow:0 20px 52px rgba(5,33,58,.13);
+}
+
+body.d1-active{background:var(--d1-paper)}
+body.d1-active .site-header{height:84px;background:transparent;border:0;box-shadow:none}
+body.d1-active .site-header.is-scrolled{height:70px;background:rgba(7,36,62,.9);backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px);border-bottom:1px solid rgba(255,255,255,.13);box-shadow:0 12px 34px rgba(0,23,42,.18)}
+body.d1-active .site-header__inner{width:min(calc(100% - clamp(42px,9vw,124px)),1280px);margin-inline:auto;padding-inline:0}
+body.d1-active .brand-logo{width:116px;height:64px;object-fit:contain}
+body.d1-active .site-header__nav-wrap,body.d1-active .main-nav{gap:clamp(20px,2.15vw,36px)}
+body.d1-active .main-nav__link{padding-block:31px 27px;color:rgba(255,255,255,.94);font-family:'DM Sans','Segoe UI',sans-serif;font-size:12px;font-weight:600;letter-spacing:.025em;text-shadow:0 2px 12px rgba(0,26,48,.45)}
+body.d1-active .site-header.is-scrolled .main-nav__link{padding-block:24px 20px}
+body.d1-active .main-nav__link:hover,body.d1-active .main-nav__link:focus-visible,body.d1-active .main-nav__link.is-active{color:#fff}
+body.d1-active .main-nav__link.is-active::after{bottom:19px;height:1px;background:#efc272;box-shadow:none}
+body.d1-active .site-header.is-scrolled .main-nav__link.is-active::after{bottom:13px}
+body.d1-active .header-contact-btn{min-height:42px!important;padding:12px 22px!important;border:1px solid rgba(255,225,171,.7)!important;border-radius:999px!important;background:linear-gradient(135deg,#f2c675,#d9963d)!important;color:#102842!important;font-size:11px!important;font-weight:700!important;letter-spacing:.03em!important;box-shadow:0 10px 24px rgba(3,26,48,.2)!important}
+body.d1-active .header-contact-btn:hover,body.d1-active .header-contact-btn:focus-visible{transform:translateY(-2px)!important;background:linear-gradient(135deg,#ffda91,#e5a64d)!important;box-shadow:0 15px 30px rgba(3,26,48,.3)!important}
+body.d1-active .site-footer{width:100%;max-width:none;margin:0!important;border-radius:0!important;background:linear-gradient(180deg,rgba(7,42,73,.95),rgba(5,34,61,.99)),radial-gradient(circle at 82% 12%,rgba(217,157,69,.14),transparent 32%)}
+
+.d1,.d1 *{box-sizing:border-box}
+.d1{position:relative;overflow:clip;background:radial-gradient(circle at 5% 42%,rgba(215,225,233,.27),transparent 26%),radial-gradient(circle at 92% 61%,rgba(229,218,200,.22),transparent 25%),var(--d1-paper);color:var(--d1-ink);font-family:'DM Sans','Segoe UI',sans-serif;font-size:15px;line-height:1.62}
+.d1 h1,.d1 h2,.d1 h3,.d1 p{margin-top:0}
+.d1 h1,.d1 h2,.d1 h3{font-family:'Cormorant Garamond',Georgia,serif;font-weight:600;letter-spacing:-.035em}
+.d1 a{color:inherit;text-decoration:none}
+.d1-shell{width:min(calc(100% - clamp(48px,10vw,128px)),1280px);margin-inline:auto}
+.d1-eyebrow{display:inline-flex;align-items:center;gap:9px;margin:0 0 8px;color:var(--d1-gold-deep);font-size:10px;font-weight:700;letter-spacing:.15em;line-height:1.2;text-transform:uppercase}
+.d1-eyebrow::before{width:6px;height:6px;background:currentColor;clip-path:polygon(0 0,100% 50%,0 100%);content:''}
+.d1-heading{display:flex;align-items:flex-end;justify-content:space-between;gap:24px;margin-bottom:15px}
+.d1-heading h2{margin:0;color:#10243b;font-size:clamp(29px,2.65vw,41px);line-height:1}
+.d1-link{display:inline-flex;align-items:center;gap:9px;padding-bottom:3px;border-bottom:1px solid rgba(16,40,66,.34);color:#15334f;font-size:10px;font-weight:700;letter-spacing:.035em;text-transform:uppercase}
+.d1-link svg{width:14px;transition:transform 180ms ease}
+.d1-link:hover svg,.d1-link:focus-visible svg{transform:translateX(4px)}
+
+.d1-hero{min-height:clamp(510px,45vw,650px);position:relative;display:flex;align-items:center;isolation:isolate;overflow:hidden;background:#082b4b;color:#fff}
+.d1-hero__video{width:100%;height:calc(100% + 30px);position:absolute;inset:-15px 0 auto;z-index:-3;object-fit:cover;object-position:center;transform:translate3d(0,var(--d1-hero-y,0),0) scale(1.025);will-change:transform}
+.d1-hero__overlay{position:absolute;inset:0;z-index:-2;background:linear-gradient(90deg,rgba(4,35,62,.88),rgba(5,40,70,.68) 35%,rgba(7,44,75,.14) 70%,rgba(8,45,76,.02)),linear-gradient(0deg,rgba(3,29,52,.38),transparent 48%),linear-gradient(180deg,rgba(3,25,45,.25),transparent 30%)}
+.d1-hero__content{width:min(calc(100% - clamp(48px,10vw,128px)),1280px);margin-inline:auto;padding-top:132px;padding-bottom:64px}
+.d1-hero__copy{max-width:700px;animation:d1-hero-in 900ms cubic-bezier(.2,.7,.2,1) both}
+.d1-hero .d1-eyebrow{margin-bottom:15px;color:#fff;font-size:11px;letter-spacing:.12em}.d1-hero .d1-eyebrow::before{display:none}
+.d1-hero h1{max-width:700px;margin-bottom:18px;color:#fff;font-size:clamp(50px,5vw,72px);line-height:.9;text-wrap:balance}
+.d1-hero h1 span{display:block}
+.d1-hero__lead{max-width:600px;margin-bottom:27px;color:rgba(255,255,255,.92);font-size:clamp(15px,1.1vw,18px);line-height:1.55}
+.d1-actions{display:flex;flex-wrap:wrap;gap:16px}
+.d1-button{min-height:48px;border:1px solid transparent;border-radius:10px;display:inline-flex;align-items:center;justify-content:center;gap:12px;padding:13px 21px;font-size:11px;font-weight:700;letter-spacing:.035em;text-transform:uppercase;transition:transform 180ms ease,box-shadow 180ms ease,background 180ms ease,border-color 180ms ease}
+.d1-button svg{width:16px}.d1-button:hover,.d1-button:focus-visible{transform:translateY(-2px)}
+.d1-button--gold{background:linear-gradient(135deg,#f2c574,#dda24a);box-shadow:0 12px 28px rgba(0,21,40,.24);color:#102842}
+.d1-button--outline{border-color:rgba(255,255,255,.62);background:rgba(6,35,61,.18);color:#fff;backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px)}
+.d1-scroll{position:absolute;left:clamp(22px,4.2vw,66px);bottom:66px;z-index:3;display:grid;justify-items:center;gap:9px;color:rgba(255,255,255,.88);font-size:9px;font-weight:700;letter-spacing:.15em;text-transform:uppercase;writing-mode:vertical-rl;transform:rotate(180deg)}
+.d1-scroll::before{width:1px;height:82px;background:linear-gradient(#fff,rgba(255,255,255,.22));content:''}.d1-scroll svg{width:14px;transform:rotate(180deg)}
+.d1-discover{position:absolute;right:clamp(26px,5vw,78px);bottom:66px;z-index:3;display:inline-flex;align-items:center;gap:13px;color:#fff;font-size:10px;font-weight:700;letter-spacing:.06em;text-transform:uppercase}
+.d1-discover__icon{width:44px;height:44px;border:1px solid rgba(255,255,255,.72);border-radius:50%;display:grid;place-items:center;background:rgba(6,36,62,.22);backdrop-filter:blur(7px);-webkit-backdrop-filter:blur(7px)}.d1-discover__icon svg{width:17px;fill:currentColor}
+
+.d1-bridge-wrap{position:relative;z-index:10;height:0}
+.d1-bridge{min-height:88px;position:absolute;top:-44px;right:0;left:0;border:1px solid rgba(255,255,255,.75);border-radius:15px;display:grid;grid-template-columns:.72fr 1fr 1fr .82fr;align-items:stretch;overflow:hidden;background:rgba(255,255,255,.96);box-shadow:var(--d1-shadow);backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px)}
+.d1-bridge__item{min-width:0;position:relative;display:flex;align-items:center;gap:13px;padding:16px clamp(15px,2vw,27px)}
+.d1-bridge__item+.d1-bridge__item::before{width:1px;position:absolute;top:19px;bottom:19px;left:0;background:var(--d1-line);content:''}
+.d1-bridge__since{display:grid;gap:0}.d1-bridge small{color:var(--d1-gold-deep);font-size:9px;font-weight:700;letter-spacing:.1em;text-transform:uppercase}.d1-bridge__since strong{color:var(--d1-gold-deep);font-family:'Cormorant Garamond',Georgia,serif;font-size:38px;font-weight:500;line-height:.9}
+.d1-bridge__thumb{width:43px;height:43px;flex:0 0 auto;border-radius:50%;overflow:hidden;box-shadow:0 6px 16px rgba(11,45,75,.18)}.d1-bridge__thumb img{width:100%;height:100%;object-fit:cover}
+.d1-bridge__copy{min-width:0;display:grid;gap:1px}.d1-bridge__copy strong{color:#15334e;font-size:12px;line-height:1.2}.d1-bridge__copy span{color:#5a6e80;font-size:10px;white-space:nowrap}.d1-bridge__arrow{width:16px;margin-left:auto;color:var(--d1-gold-deep)}
+.d1-bridge__stat svg{width:30px;height:30px;flex:0 0 auto;color:var(--d1-gold-deep)}.d1-bridge__stat strong{display:block;color:#142c43;font-family:'Cormorant Garamond',Georgia,serif;font-size:28px;font-weight:600;line-height:.9}.d1-bridge__stat span span{display:block;margin-top:4px;color:#607284;font-size:9px;line-height:1.3}
+
+.d1-intro{display:grid;grid-template-columns:minmax(0,1fr) minmax(118px,.46fr) minmax(0,1.45fr);align-items:center;gap:24px;padding-top:86px;padding-bottom:22px}
+.d1-intro__copy h2{max-width:360px;margin-bottom:10px;color:#10243b;font-size:clamp(31px,3.05vw,43px);line-height:.96}
+.d1-intro__subtitle{max-width:410px;margin-bottom:9px;color:#253f56;font-size:13px;font-weight:600;line-height:1.55}.d1-intro__copy p:not(.d1-eyebrow):not(.d1-intro__subtitle){max-width:430px;margin-bottom:12px;color:#5b6f81;font-size:12px;line-height:1.65}.d1-signature{margin:2px 0 10px;color:var(--d1-gold-deep)!important;font-family:'Cormorant Garamond',Georgia,serif!important;font-size:22px!important;font-style:italic}
+.d1-facts{border-left:1px solid var(--d1-line);display:grid;align-content:center;padding-left:20px}.d1-fact{display:grid;grid-template-columns:25px minmax(0,1fr);align-items:center;gap:10px;padding:10px 0;border-bottom:1px solid var(--d1-line)}.d1-fact:last-child{border-bottom:0}.d1-fact svg{width:22px;color:var(--d1-gold-deep);stroke-width:1.65}.d1-fact strong{display:block;color:#152d45;font-family:'Cormorant Garamond',Georgia,serif;font-size:25px;font-weight:600;line-height:.92}.d1-fact span span{display:block;margin-top:3px;color:#607183;font-size:8px;line-height:1.25;text-transform:uppercase}
+.d1-intro__visual{min-height:245px;position:relative;border-radius:13px;overflow:hidden;background:#dce4e9;box-shadow:0 16px 38px rgba(8,37,64,.1)}.d1-intro__visual img{width:100%;height:100%;position:absolute;inset:0;object-fit:cover;transition:transform 850ms cubic-bezier(.2,.7,.2,1)}.d1-intro__visual::after{position:absolute;inset:0;background:linear-gradient(90deg,rgba(4,34,60,.12),transparent 62%);content:''}.d1-intro__visual:hover img{transform:scale(1.035)}
+.d1-play{position:absolute;top:50%;left:50%;z-index:3;display:inline-flex;align-items:center;gap:11px;color:#fff;font-size:10px;font-weight:700;line-height:1.25;text-transform:uppercase;transform:translate(-50%,-50%)}.d1-play__circle{width:52px;height:52px;border:1px solid rgba(255,255,255,.88);border-radius:50%;display:grid;place-items:center;background:rgba(6,35,60,.18);backdrop-filter:blur(5px);-webkit-backdrop-filter:blur(5px)}.d1-play__circle svg{width:19px;fill:currentColor}
+
+.d1-destinations{padding:8px 0 24px}.d1-destinations__grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:7px}
+.d1-destination{min-height:150px;position:relative;border-radius:9px;overflow:hidden;isolation:isolate;background:#183d5d;color:#fff;box-shadow:0 10px 28px rgba(7,34,58,.1)}.d1-destination img{width:100%;height:100%;position:absolute;inset:0;z-index:-2;object-fit:cover;transition:transform 700ms cubic-bezier(.2,.7,.2,1)}.d1-destination::after{position:absolute;inset:0;z-index:-1;background:linear-gradient(90deg,rgba(5,38,66,.87),rgba(5,38,66,.16) 78%);content:''}.d1-destination__content{min-height:150px;display:flex;flex-direction:column;justify-content:center;align-items:flex-start;padding:24px 28px}.d1-destination h3{margin-bottom:3px;color:#fff;font-family:'DM Sans','Segoe UI',sans-serif;font-size:16px;font-weight:600}.d1-destination p{max-width:190px;margin-bottom:14px;color:rgba(255,255,255,.88);font-size:11px;line-height:1.42}.d1-destination__link{display:inline-flex;align-items:center;gap:8px;padding-bottom:3px;border-bottom:1px solid rgba(255,255,255,.75);color:#fff;font-size:9px;font-weight:700;text-transform:uppercase}.d1-destination__link svg{width:13px;color:#f1bf69}.d1-destination:hover img{transform:scale(1.045)}
+
+.d1-services{padding:0 0 22px}.d1-services__grid{position:relative;display:grid;grid-template-columns:repeat(8,minmax(0,1fr));gap:0}.d1-services__grid::before{height:1px;position:absolute;top:22px;right:4%;left:4%;background:linear-gradient(90deg,transparent,rgba(185,120,32,.36) 8%,rgba(185,120,32,.36) 92%,transparent);content:'';transform:scaleX(0);transform-origin:left;transition:transform 900ms cubic-bezier(.2,.7,.2,1)}.d1-services.is-visible .d1-services__grid::before{transform:scaleX(1)}
+.d1-service{min-width:0;position:relative;z-index:1;display:grid;justify-items:center;align-content:start;gap:7px;padding:0 8px;text-align:center}.d1-service+.d1-service::before{width:1px;position:absolute;top:52px;bottom:3px;left:0;background:rgba(16,40,66,.1);content:''}.d1-service__icon{width:44px;height:44px;border:1px solid rgba(185,120,32,.42);border-radius:50%;display:grid;place-items:center;background:var(--d1-paper);color:var(--d1-gold-deep);box-shadow:0 5px 14px rgba(8,36,62,.06);transition:color 180ms ease,background 180ms ease,transform 180ms ease}.d1-service__icon svg{width:20px;height:20px;stroke-width:1.55}.d1-service strong{min-height:27px;display:grid;align-items:end;color:#17324d;font-size:9px;font-weight:700;line-height:1.22}.d1-service>span:last-child{color:#6a7987;font-size:7px;line-height:1.35}.d1-service:hover .d1-service__icon{background:var(--d1-gold);color:#fff;transform:translateY(-4px)}
+
+.d1-mice{min-height:150px;display:grid;grid-template-columns:1.05fr 1.1fr .9fr;border-radius:9px;overflow:hidden;background:#0a2c4a;box-shadow:0 14px 34px rgba(5,31,55,.14)}.d1-mice__media{min-height:150px;position:relative;overflow:hidden}.d1-mice__media img{width:100%;height:100%;position:absolute;inset:0;object-fit:cover;transition:transform 800ms cubic-bezier(.2,.7,.2,1)}.d1-mice__media::after{position:absolute;inset:0;content:''}.d1-mice__media--left::after{background:linear-gradient(90deg,transparent 56%,#0a2c4a)}.d1-mice__media--right::after{background:linear-gradient(270deg,transparent 54%,#0a2c4a)}.d1-mice__copy{position:relative;z-index:2;display:grid;align-content:center;padding:20px;color:#fff}.d1-mice__copy .d1-eyebrow{color:#efbd68}.d1-mice__copy h2{margin-bottom:6px;color:#fff;font-size:clamp(29px,2.5vw,39px);line-height:.95}.d1-mice__copy p{margin-bottom:11px;color:rgba(255,255,255,.78);font-size:9px;line-height:1.5}.d1-mice__copy .d1-button{width:fit-content;min-height:36px;padding:9px 14px;font-size:8px}.d1-mice:hover .d1-mice__media img{transform:scale(1.04)}
+
+.d1-experiences{padding:12px 0 12px}.d1-experiences__rail{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:7px}.d1-experience{min-height:118px;position:relative;border-radius:7px;overflow:hidden;isolation:isolate;background:#1c405f;color:#fff}.d1-experience img{width:100%;height:100%;position:absolute;inset:0;z-index:-2;object-fit:cover;transition:transform 650ms cubic-bezier(.2,.7,.2,1)}.d1-experience::after{position:absolute;inset:0;z-index:-1;background:linear-gradient(0deg,rgba(4,30,52,.88),rgba(4,30,52,.02) 70%);content:''}.d1-experience__copy{min-height:118px;display:flex;align-items:flex-end;padding:13px}.d1-experience strong{color:#fff;font-family:'Cormorant Garamond',Georgia,serif;font-size:18px;font-weight:600;line-height:.98}.d1-experience:hover img{transform:scale(1.055)}
+
+.d1-trust{display:grid;grid-template-columns:1.25fr .75fr .56fr;align-items:stretch;margin-top:3px;border:1px solid rgba(16,40,66,.1);border-radius:9px 9px 0 0;overflow:hidden;background:rgba(249,247,242,.96);box-shadow:0 8px 24px rgba(7,34,58,.07)}.d1-trust__marks,.d1-trust__quote,.d1-trust__image{min-height:76px}.d1-trust__marks{display:grid;align-content:center;gap:9px;padding:13px 20px}.d1-trust__marks small{color:#8a8f94;font-size:7px;font-weight:600;letter-spacing:.08em;text-transform:uppercase}.d1-logos{display:flex;align-items:center;flex-wrap:wrap;gap:15px;color:#2e4a62;font-family:Georgia,serif;font-size:13px;font-weight:700}.d1-logos span:first-child{font-family:'DM Sans',sans-serif;font-size:10px}.d1-trust__quote{border-left:1px solid var(--d1-line);display:grid;align-content:center;gap:4px;padding:12px 17px}.d1-stars{color:var(--d1-gold-deep);font-size:12px;letter-spacing:.08em}.d1-trust__quote p{margin:0;color:#2c4357;font-family:'Cormorant Garamond',Georgia,serif;font-size:14px;line-height:1.12}.d1-trust__quote span{color:#7a858e;font-size:7px;text-transform:uppercase}.d1-trust__image{position:relative;overflow:hidden}.d1-trust__image img{width:100%;height:100%;position:absolute;inset:0;object-fit:cover}
+
+.d1-reveal{opacity:0;transform:translateY(22px);transition:opacity 700ms ease,transform 760ms cubic-bezier(.2,.7,.2,1)}.d1-reveal.is-visible{opacity:1;transform:none}
+@keyframes d1-hero-in{from{opacity:0;transform:translateY(22px)}to{opacity:1;transform:none}}
+
+@media(max-width:940px){
+  body.d1-active .site-header__nav-wrap{top:83px}body.d1-active .main-nav__link{color:#102842;text-shadow:none}
+  .d1-discover{display:none}.d1-intro{grid-template-columns:1fr 180px}.d1-intro__visual{min-height:330px;grid-column:1/-1}.d1-mice{grid-template-columns:.8fr 1.2fr}.d1-mice__media--right{display:none}.d1-trust{grid-template-columns:1fr .72fr}.d1-trust__image{display:none}
+}
+
+@media(max-width:760px){
+  body.d1-active .site-header{height:72px}body.d1-active .site-header__inner{width:calc(100% - 28px)}body.d1-active .brand-logo{width:94px;height:54px}
+  .d1-shell{width:calc(100% - 30px)}.d1-heading{align-items:flex-start;flex-direction:column;gap:9px}.d1-heading h2{font-size:33px}
+  .d1-hero{min-height:max(720px,100svh);align-items:flex-end}.d1-hero__overlay{background:linear-gradient(0deg,rgba(4,32,57,.96),rgba(4,35,61,.7) 58%,rgba(4,35,61,.22)),linear-gradient(90deg,rgba(4,34,60,.32),transparent)}.d1-hero__content{width:calc(100% - 30px);padding-top:120px;padding-bottom:120px}.d1-hero h1{font-size:clamp(47px,14vw,62px);line-height:.93}.d1-hero__lead{font-size:16px}.d1-actions{flex-direction:column}.d1-button{width:100%}.d1-scroll{display:none}
+  .d1-bridge{top:-61px;grid-template-columns:repeat(2,minmax(0,1fr));border-radius:13px}.d1-bridge__item{min-height:61px;padding:11px 13px}.d1-bridge__item:nth-child(3),.d1-bridge__item:nth-child(4){display:none}.d1-bridge__since strong{font-size:29px}.d1-bridge__thumb{width:35px;height:35px}
+  .d1-intro{grid-template-columns:1fr;gap:22px;padding-top:90px;padding-bottom:28px}.d1-intro__copy h2{font-size:41px}.d1-facts{grid-template-columns:repeat(2,minmax(0,1fr));border-left:0;padding-left:0}.d1-fact{min-height:78px;border:1px solid var(--d1-line);border-right:0;padding:10px}.d1-fact:nth-child(2n){border-right:1px solid var(--d1-line)}.d1-fact:nth-child(n+3){border-top:0}.d1-intro__visual{min-height:260px;grid-column:auto}
+  .d1-destinations__grid{overflow-x:auto;grid-template-columns:repeat(2,minmax(270px,1fr));scrollbar-width:none}.d1-destinations__grid::-webkit-scrollbar{display:none}
+  .d1-services__grid{overflow-x:auto;grid-template-columns:repeat(8,minmax(120px,1fr));padding-bottom:7px;scrollbar-width:none}.d1-services__grid::-webkit-scrollbar{display:none}
+  .d1-mice{grid-template-columns:1fr}.d1-mice__media--left{min-height:185px}.d1-mice__media--left::after{background:linear-gradient(0deg,#0a2c4a,transparent 60%)}.d1-mice__copy{padding:25px 21px 28px}
+  .d1-experiences__rail{overflow-x:auto;grid-template-columns:repeat(6,minmax(176px,1fr));scrollbar-width:none}.d1-experiences__rail::-webkit-scrollbar{display:none}.d1-experience,.d1-experience__copy{min-height:178px}
+  .d1-trust{grid-template-columns:1fr}.d1-trust__quote{border-top:1px solid var(--d1-line);border-left:0}
 }
 
-.tet-home,
-.tet-home * {
-  box-sizing: border-box;
-}
-
-.tet-home {
-  position: relative;
-  overflow: clip;
-  background:
-    radial-gradient(circle at 7% 31%, rgba(216, 226, 234, 0.36), transparent 25%),
-    radial-gradient(circle at 92% 47%, rgba(231, 224, 210, 0.32), transparent 28%),
-    var(--tet-paper);
-  color: var(--tet-ink-deep);
-  font-family: 'DM Sans', 'Segoe UI', sans-serif;
-  font-size: 16px;
-  line-height: 1.6;
-}
-
-.tet-home h1,
-.tet-home h2,
-.tet-home h3,
-.tet-home p {
-  margin-top: 0;
-}
-
-.tet-home h1,
-.tet-home h2,
-.tet-home h3 {
-  font-family: 'Cormorant Garamond', Georgia, serif;
-  font-weight: 600;
-  letter-spacing: -0.035em;
-}
-
-.tet-home a {
-  color: inherit;
-}
-
-.tet-shell {
-  width: min(calc(100% - clamp(36px, 8vw, 126px)), 1320px);
-  margin-inline: auto;
-}
-
-.tet-eyebrow {
-  display: inline-flex;
-  align-items: center;
-  gap: 9px;
-  margin-bottom: 10px;
-  color: var(--tet-gold-deep);
-  font-size: 11px;
-  font-weight: 700;
-  letter-spacing: 0.13em;
-  line-height: 1.3;
-  text-transform: uppercase;
-}
-
-.tet-eyebrow::before {
-  width: 8px;
-  height: 8px;
-  border-radius: 1px;
-  background: currentColor;
-  clip-path: polygon(0 0, 100% 50%, 0 100%);
-  content: '';
-}
-
-.tet-section-heading {
-  display: flex;
-  align-items: flex-end;
-  justify-content: space-between;
-  gap: 30px;
-  margin-bottom: 18px;
-}
-
-.tet-section-heading h2 {
-  margin-bottom: 0;
-  color: var(--tet-ink-deep);
-  font-size: clamp(34px, 3.2vw, 50px);
-  line-height: 0.98;
-}
-
-.tet-inline-link {
-  display: inline-flex;
-  align-items: center;
-  gap: 10px;
-  padding-bottom: 3px;
-  border-bottom: 1px solid rgba(16, 44, 73, 0.34);
-  color: var(--tet-ink-deep);
-  font-size: 12px;
-  font-weight: 700;
-  letter-spacing: 0.05em;
-  text-transform: uppercase;
-  transition: color 220ms ease, border-color 220ms ease;
-}
-
-.tet-inline-link svg {
-  width: 16px;
-  transition: transform 220ms ease;
-}
-
-.tet-inline-link:hover,
-.tet-inline-link:focus-visible {
-  border-color: var(--tet-gold-deep);
-  color: var(--tet-gold-deep);
-}
-
-.tet-inline-link:hover svg,
-.tet-inline-link:focus-visible svg {
-  transform: translateX(4px);
-}
-
-/* Global site header — scoped by the presence of this style element on Home. */
-.site-header {
-  height: 82px !important;
-  background: transparent !important;
-  border-bottom: 1px solid transparent !important;
-  box-shadow: none !important;
-}
-
-.site-header.is-scrolled {
-  height: 70px !important;
-  background: rgba(7, 31, 55, 0.88) !important;
-  border-bottom-color: rgba(255, 255, 255, 0.12) !important;
-  backdrop-filter: blur(18px) saturate(1.1) !important;
-  -webkit-backdrop-filter: blur(18px) saturate(1.1) !important;
-  box-shadow: 0 12px 32px rgba(3, 20, 36, 0.2) !important;
-}
-
-.site-header__inner {
-  width: min(calc(100% - clamp(32px, 6vw, 92px)), 1420px) !important;
-  margin-inline: auto !important;
-  padding-inline: 0 !important;
-}
-
-.brand-logo {
-  width: 118px !important;
-  height: 64px !important;
-  object-fit: contain !important;
-}
-
-.main-nav {
-  gap: clamp(20px, 2.25vw, 38px) !important;
-}
-
-.main-nav__link {
-  padding-block: 31px 27px !important;
-  color: rgba(255, 255, 255, 0.94) !important;
-  font-family: 'DM Sans', 'Segoe UI', sans-serif !important;
-  font-size: 11px !important;
-  font-weight: 600 !important;
-  letter-spacing: 0.035em !important;
-  text-shadow: 0 1px 10px rgba(2, 23, 43, 0.42) !important;
-}
-
-.site-header.is-scrolled .main-nav__link {
-  padding-block: 25px 21px !important;
-}
-
-.main-nav__link:hover,
-.main-nav__link:focus-visible,
-.main-nav__link.is-active {
-  color: #ffffff !important;
-}
-
-.main-nav__link.is-active::after {
-  right: 0 !important;
-  bottom: 19px !important;
-  left: 0 !important;
-  height: 1px !important;
-  background: #f2c879 !important;
-  box-shadow: none !important;
-}
-
-.site-header.is-scrolled .main-nav__link.is-active::after {
-  bottom: 13px !important;
-}
-
-.header-contact-btn {
-  min-height: 42px !important;
-  padding: 12px 24px !important;
-  border: 1px solid rgba(255, 255, 255, 0.2) !important;
-  border-radius: 999px !important;
-  background: linear-gradient(135deg, #efc574 0%, #dca24d 100%) !important;
-  color: #0b2b48 !important;
-  font-size: 11px !important;
-  font-weight: 700 !important;
-  letter-spacing: 0.04em !important;
-  box-shadow: 0 10px 28px rgba(209, 146, 54, 0.24) !important;
-}
-
-.header-contact-btn:hover,
-.header-contact-btn:focus-visible {
-  background: linear-gradient(135deg, #f5d28d 0%, #e5ae5e 100%) !important;
-  box-shadow: 0 14px 34px rgba(209, 146, 54, 0.34) !important;
-  transform: translateY(-1px) !important;
-}
-
-/* Hero */
-.tet-hero {
-  min-height: clamp(570px, 49vw, 720px);
-  position: relative;
-  isolation: isolate;
-  display: flex;
-  align-items: center;
-  overflow: hidden;
-  background: var(--tet-ink-deep);
-  color: #fff;
-}
-
-.tet-hero__video {
-  position: absolute;
-  inset: -2% 0 0;
-  z-index: -3;
-  width: 100%;
-  height: 104%;
-  object-fit: cover;
-  object-position: center;
-  transform: translate3d(0, var(--tet-hero-shift, 0px), 0) scale(1.025);
-  will-change: transform;
-}
-
-.tet-hero__overlay {
-  position: absolute;
-  inset: 0;
-  z-index: -2;
-  background:
-    linear-gradient(90deg, rgba(5, 28, 51, 0.85) 0%, rgba(6, 35, 63, 0.67) 40%, rgba(7, 42, 73, 0.16) 71%, rgba(5, 25, 44, 0.08) 100%),
-    linear-gradient(180deg, rgba(4, 22, 40, 0.42) 0%, rgba(4, 25, 46, 0.02) 52%, rgba(3, 23, 43, 0.36) 100%);
-}
-
-.tet-hero__content {
-  width: 100%;
-  padding-top: 110px;
-  padding-bottom: 94px;
-}
-
-.tet-hero__copy {
-  max-width: 760px;
-}
-
-.tet-hero .tet-eyebrow {
-  margin-bottom: 16px;
-  color: rgba(255, 255, 255, 0.96);
-}
-
-.tet-hero .tet-eyebrow::before {
-  background: #e7b75f;
-}
-
-.tet-hero h1 {
-  max-width: 930px;
-  margin-bottom: 22px;
-  color: #fff;
-  font-size: clamp(58px, 5.55vw, 86px);
-  line-height: 0.88;
-  text-wrap: balance;
-}
-
-.tet-hero h1 span {
-  display: block;
-}
-
-.tet-hero__lead {
-  max-width: 610px;
-  margin-bottom: 26px;
-  color: rgba(255, 255, 255, 0.94);
-  font-size: clamp(15px, 1.2vw, 18px);
-  line-height: 1.55;
-}
-
-.tet-hero__actions {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 14px;
-}
-
-.tet-button {
-  min-height: 48px;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  gap: 13px;
-  padding: 13px 23px;
-  border: 1px solid transparent;
-  border-radius: 9px;
-  font-size: 12px;
-  font-weight: 700;
-  letter-spacing: 0.02em;
-  transition: transform 220ms ease, background 220ms ease, border-color 220ms ease, box-shadow 220ms ease;
-}
-
-.tet-button svg {
-  width: 17px;
-  transition: transform 220ms ease;
-}
-
-.tet-button:hover,
-.tet-button:focus-visible {
-  transform: translateY(-2px);
-}
-
-.tet-button:hover svg,
-.tet-button:focus-visible svg {
-  transform: translateX(4px);
-}
-
-.tet-button--gold {
-  background: linear-gradient(135deg, #f0c677 0%, #dba250 100%);
-  color: #0a2b49;
-  box-shadow: 0 13px 32px rgba(213, 155, 67, 0.26);
-}
-
-.tet-button--outline {
-  border-color: rgba(255, 255, 255, 0.58);
-  background: rgba(8, 33, 58, 0.18);
-  color: #fff;
-  backdrop-filter: blur(8px);
-  -webkit-backdrop-filter: blur(8px);
-}
-
-.tet-hero__scroll {
-  position: absolute;
-  bottom: 76px;
-  left: clamp(22px, 3.8vw, 58px);
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  color: rgba(255, 255, 255, 0.82);
-  font-size: 10px;
-  font-weight: 600;
-  letter-spacing: 0.14em;
-  text-transform: uppercase;
-  writing-mode: vertical-rl;
-  transform: rotate(180deg);
-}
-
-.tet-hero__scroll::before {
-  width: 1px;
-  height: 74px;
-  background: linear-gradient(180deg, rgba(255, 255, 255, 0.92), rgba(255, 255, 255, 0.16));
-  content: '';
-}
-
-.tet-hero__scroll svg {
-  width: 14px;
-  animation: tet-scroll-bob 1.8s ease-in-out infinite;
-}
-
-.tet-hero__discover {
-  position: absolute;
-  right: clamp(28px, 6vw, 92px);
-  bottom: 54px;
-  display: inline-flex;
-  align-items: center;
-  gap: 14px;
-  color: #fff;
-}
-
-.tet-hero__discover-icon {
-  width: 46px;
-  height: 46px;
-  border: 1px solid rgba(255, 255, 255, 0.68);
-  border-radius: 50%;
-  display: grid;
-  place-items: center;
-  background: rgba(6, 31, 55, 0.2);
-  backdrop-filter: blur(8px);
-  -webkit-backdrop-filter: blur(8px);
-  transition: background 220ms ease, transform 220ms ease;
-}
-
-.tet-hero__discover-icon svg {
-  width: 17px;
-  fill: currentColor;
-}
-
-.tet-hero__discover-copy {
-  display: grid;
-  gap: 1px;
-  font-size: 10px;
-  font-weight: 700;
-  letter-spacing: 0.06em;
-  line-height: 1.3;
-  text-transform: uppercase;
-}
-
-.tet-hero__discover:hover .tet-hero__discover-icon,
-.tet-hero__discover:focus-visible .tet-hero__discover-icon {
-  background: rgba(225, 169, 82, 0.9);
-  transform: scale(1.05);
-}
-
-@keyframes tet-scroll-bob {
-  0%, 100% { transform: translateY(-2px); }
-  50% { transform: translateY(5px); }
-}
-
-/* Floating bridge between Hero and the light page. */
-.tet-bridge {
-  min-height: 92px;
-  position: relative;
-  z-index: 8;
-  display: grid;
-  grid-template-columns: 1.05fr 1.2fr 1.15fr 1.15fr 1fr;
-  margin-top: -46px;
-  border: 1px solid rgba(255, 255, 255, 0.75);
-  border-radius: 16px;
-  overflow: hidden;
-  background: rgba(255, 255, 255, 0.94);
-  box-shadow: var(--tet-shadow);
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
-}
-
-.tet-bridge__item {
-  min-width: 0;
-  display: flex;
-  align-items: center;
-  gap: 14px;
-  padding: 17px clamp(17px, 2vw, 29px);
-  border-left: 1px solid var(--tet-line);
-}
-
-.tet-bridge__item:first-child {
-  border-left: 0;
-}
-
-.tet-bridge__year {
-  align-items: flex-start;
-  flex-direction: column;
-  gap: 0;
-}
-
-.tet-bridge__year small,
-.tet-bridge__copy small {
-  color: var(--tet-gold-deep);
-  font-size: 10px;
-  font-weight: 700;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-}
-
-.tet-bridge__year strong {
-  color: var(--tet-gold-deep);
-  font-family: 'Cormorant Garamond', Georgia, serif;
-  font-size: 37px;
-  font-weight: 600;
-  letter-spacing: -0.04em;
-  line-height: 0.9;
-}
-
-.tet-bridge__thumb {
-  width: 44px;
-  height: 44px;
-  flex: 0 0 auto;
-  border-radius: 50%;
-  overflow: hidden;
-  box-shadow: 0 7px 18px rgba(7, 31, 55, 0.15);
-}
-
-.tet-bridge__thumb .travel-photo {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-}
-
-.tet-bridge__copy {
-  min-width: 0;
-  display: grid;
-  gap: 1px;
-}
-
-.tet-bridge__copy strong {
-  color: var(--tet-ink-deep);
-  font-size: 12px;
-  font-weight: 700;
-  white-space: nowrap;
-}
-
-.tet-bridge__copy span {
-  color: #5e6d7b;
-  font-size: 11px;
-  white-space: nowrap;
-}
-
-.tet-bridge__arrow {
-  width: 17px;
-  margin-left: auto;
-  color: var(--tet-gold-deep);
-  transition: transform 220ms ease;
-}
-
-.tet-bridge__item:hover .tet-bridge__arrow {
-  transform: translateX(4px);
-}
-
-.tet-bridge__metric {
-  gap: 11px;
-}
-
-.tet-bridge__metric > svg {
-  width: 28px;
-  color: var(--tet-gold-deep);
-  stroke-width: 1.45;
-}
-
-.tet-bridge__metric strong {
-  display: block;
-  color: var(--tet-ink-deep);
-  font-family: 'Cormorant Garamond', Georgia, serif;
-  font-size: 28px;
-  font-weight: 600;
-  line-height: 0.95;
-}
-
-.tet-bridge__metric span {
-  color: #5f6d79;
-  font-size: 10px;
-}
-
-/* Main light narrative */
-.tet-main {
-  position: relative;
-  padding-top: 42px;
-  background:
-    radial-gradient(circle at -3% 23%, rgba(197, 215, 226, 0.3), transparent 25%),
-    radial-gradient(circle at 102% 54%, rgba(226, 215, 193, 0.28), transparent 30%),
-    linear-gradient(180deg, rgba(255, 255, 255, 0.01), rgba(246, 248, 249, 0.34));
-}
-
-.tet-main::before {
-  position: absolute;
-  inset: 14% -10% auto;
-  height: 520px;
-  opacity: 0.42;
-  background:
-    radial-gradient(ellipse at 18% 50%, rgba(223, 231, 237, 0.62), transparent 47%),
-    radial-gradient(ellipse at 75% 50%, rgba(235, 228, 215, 0.52), transparent 48%);
-  filter: blur(28px);
-  pointer-events: none;
-  content: '';
-}
-
-/* Intro */
-.tet-intro {
-  position: relative;
-  z-index: 1;
-  display: grid;
-  grid-template-columns: minmax(0, 0.92fr) minmax(150px, 0.42fr) minmax(440px, 1.4fr);
-  align-items: center;
-  gap: clamp(28px, 4.2vw, 62px);
-  padding-top: 30px;
-  padding-bottom: 34px;
-}
-
-.tet-intro__copy h2 {
-  max-width: 470px;
-  margin-bottom: 14px;
-  color: var(--tet-ink-deep);
-  font-size: clamp(42px, 4vw, 60px);
-  line-height: 0.92;
-}
-
-.tet-intro__subtitle {
-  max-width: 510px;
-  margin-bottom: 12px;
-  color: var(--tet-ink);
-  font-family: 'Cormorant Garamond', Georgia, serif;
-  font-size: clamp(19px, 1.5vw, 23px);
-  font-weight: 600;
-  line-height: 1.25;
-}
-
-.tet-intro__copy p:not(.tet-eyebrow):not(.tet-intro__subtitle) {
-  max-width: 560px;
-  margin-bottom: 10px;
-  color: #485d70;
-  font-size: 13px;
-  line-height: 1.65;
-}
-
-.tet-intro__copy .tet-inline-link {
-  margin-top: 8px;
-}
-
-.tet-intro__signature {
-  display: block;
-  margin: 14px 0 7px;
-  color: var(--tet-gold-deep);
-  font-family: 'Cormorant Garamond', Georgia, serif;
-  font-size: 27px;
-  font-style: italic;
-  letter-spacing: 0.01em;
-}
-
-.tet-intro__facts {
-  display: grid;
-  align-content: center;
-  gap: 0;
-}
-
-.tet-intro__fact {
-  display: grid;
-  grid-template-columns: 27px minmax(0, 1fr);
-  gap: 11px;
-  padding: 12px 0;
-  border-bottom: 1px solid var(--tet-line);
-}
-
-.tet-intro__fact:last-child {
-  border-bottom: 0;
-}
-
-.tet-intro__fact svg {
-  width: 23px;
-  color: var(--tet-gold-deep);
-  stroke-width: 1.55;
-}
-
-.tet-intro__fact strong {
-  display: block;
-  color: var(--tet-ink-deep);
-  font-family: 'Cormorant Garamond', Georgia, serif;
-  font-size: 25px;
-  font-weight: 600;
-  line-height: 0.92;
-}
-
-.tet-intro__fact span {
-  display: block;
-  margin-top: 3px;
-  color: #62717e;
-  font-size: 9px;
-  font-weight: 600;
-  letter-spacing: 0.035em;
-  text-transform: uppercase;
-}
-
-.tet-intro__visual {
-  aspect-ratio: 1.82 / 1;
-  position: relative;
-  border-radius: var(--tet-radius);
-  overflow: hidden;
-  background: #d9e3e9;
-  box-shadow: 0 18px 44px rgba(10, 38, 65, 0.12);
-}
-
-.tet-intro__visual .travel-photo {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  transition: transform 1.1s cubic-bezier(.2,.7,.2,1), filter 700ms ease;
-}
-
-.tet-intro__visual::after {
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(90deg, rgba(5, 30, 55, 0.02), rgba(4, 30, 54, 0.08));
-  content: '';
-}
-
-.tet-intro__visual:hover .travel-photo {
-  filter: saturate(1.06);
-  transform: scale(1.035);
-}
-
-.tet-intro__play {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  z-index: 2;
-  display: inline-flex;
-  align-items: center;
-  gap: 12px;
-  color: #fff;
-  transform: translate(-50%, -50%);
-}
-
-.tet-intro__play-circle {
-  width: 58px;
-  height: 58px;
-  border: 1px solid rgba(255, 255, 255, 0.88);
-  border-radius: 50%;
-  display: grid;
-  place-items: center;
-  background: rgba(6, 31, 55, 0.17);
-  backdrop-filter: blur(8px);
-  -webkit-backdrop-filter: blur(8px);
-  transition: background 220ms ease, transform 220ms ease;
-}
-
-.tet-intro__play-circle svg {
-  width: 20px;
-  fill: currentColor;
-}
-
-.tet-intro__play span:last-child {
-  max-width: 80px;
-  font-size: 11px;
-  font-weight: 700;
-  line-height: 1.15;
-}
-
-.tet-intro__play:hover .tet-intro__play-circle,
-.tet-intro__play:focus-visible .tet-intro__play-circle {
-  background: rgba(214, 158, 72, 0.9);
-  transform: scale(1.06);
-}
-
-/* Destinations */
-.tet-destinations {
-  position: relative;
-  z-index: 1;
-  padding-top: 8px;
-  padding-bottom: 25px;
-}
-
-.tet-destinations__controls {
-  display: flex;
-  gap: 8px;
-}
-
-.tet-round-button {
-  width: 38px;
-  height: 38px;
-  border: 1px solid rgba(187, 127, 39, 0.38);
-  border-radius: 50%;
-  display: grid;
-  place-items: center;
-  background: rgba(255, 255, 255, 0.65);
-  color: var(--tet-gold-deep);
-  cursor: pointer;
-  transition: color 200ms ease, background 200ms ease, transform 200ms ease;
-}
-
-.tet-round-button svg {
-  width: 17px;
-}
-
-.tet-round-button:hover,
-.tet-round-button:focus-visible {
-  background: var(--tet-ink-deep);
-  color: #fff;
-  transform: translateY(-2px);
-}
-
-.tet-destinations__rail {
-  display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 12px;
-}
-
-.tet-destination {
-  min-height: 222px;
-  position: relative;
-  border-radius: 11px;
-  overflow: hidden;
-  color: #fff;
-  box-shadow: 0 14px 35px rgba(7, 31, 55, 0.13);
-}
-
-.tet-destination .travel-photo {
-  width: 100%;
-  height: 100%;
-  position: absolute;
-  inset: 0;
-  object-fit: cover;
-  transition: transform 850ms cubic-bezier(.2,.7,.2,1), filter 500ms ease;
-}
-
-.tet-destination::after {
-  position: absolute;
-  inset: 0;
-  background:
-    linear-gradient(90deg, rgba(3, 28, 52, 0.82) 0%, rgba(4, 32, 58, 0.46) 47%, rgba(5, 32, 57, 0.06) 100%),
-    linear-gradient(0deg, rgba(3, 24, 44, 0.24), transparent 58%);
-  content: '';
-}
-
-.tet-destination__content {
-  max-width: 320px;
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  z-index: 2;
-  padding: 24px 27px;
-}
-
-.tet-destination__content h3 {
-  margin-bottom: 4px;
-  color: #fff;
-  font-family: 'DM Sans', 'Segoe UI', sans-serif;
-  font-size: 18px;
-  font-weight: 700;
-  letter-spacing: 0.015em;
-}
-
-.tet-destination__content p {
-  margin-bottom: 15px;
-  color: rgba(255, 255, 255, 0.92);
-  font-size: 13px;
-  line-height: 1.4;
-}
-
-.tet-destination__link {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.64);
-  padding-bottom: 3px;
-  font-size: 11px;
-  font-weight: 700;
-}
-
-.tet-destination__link svg {
-  width: 15px;
-  color: #efc16d;
-  transition: transform 220ms ease;
-}
-
-.tet-destination:hover .travel-photo,
-.tet-destination:focus-within .travel-photo {
-  filter: saturate(1.07);
-  transform: scale(1.045);
-}
-
-.tet-destination:hover .tet-destination__link svg,
-.tet-destination:focus-within .tet-destination__link svg {
-  transform: translateX(4px);
-}
-
-/* Services — one connected line, no cards. */
-.tet-services {
-  position: relative;
-  z-index: 1;
-  padding-top: 10px;
-  padding-bottom: 28px;
-}
-
-.tet-services__grid {
-  position: relative;
-  display: grid;
-  grid-template-columns: repeat(8, minmax(0, 1fr));
-  border-top: 1px solid rgba(187, 127, 39, 0.28);
-}
-
-.tet-service {
-  min-width: 0;
-  position: relative;
-  display: grid;
-  justify-items: center;
-  align-content: start;
-  padding: 18px 12px 8px;
-  text-align: center;
-}
-
-.tet-service + .tet-service {
-  border-left: 1px solid var(--tet-line);
-}
-
-.tet-service::before {
-  width: 7px;
-  height: 7px;
-  position: absolute;
-  top: -4px;
-  left: 50%;
-  border-radius: 50%;
-  background: var(--tet-paper);
-  box-shadow: 0 0 0 1px var(--tet-gold-deep);
-  content: '';
-  transform: translateX(-50%);
-  transition: background 220ms ease, box-shadow 220ms ease, transform 220ms ease;
-}
-
-.tet-service__icon {
-  width: 35px;
-  height: 35px;
-  display: grid;
-  place-items: center;
-  margin-bottom: 7px;
-  color: var(--tet-gold-deep);
-  transition: transform 240ms ease, color 240ms ease;
-}
-
-.tet-service__icon svg {
-  width: 29px;
-  height: 29px;
-  stroke-width: 1.45;
-}
-
-.tet-service h3 {
-  min-height: 31px;
-  display: grid;
-  place-items: center;
-  margin-bottom: 4px;
-  color: var(--tet-ink-deep);
-  font-family: 'DM Sans', 'Segoe UI', sans-serif;
-  font-size: 10px;
-  font-weight: 700;
-  letter-spacing: -0.01em;
-  line-height: 1.25;
-}
-
-.tet-service p {
-  max-width: 130px;
-  margin-bottom: 0;
-  color: #71808b;
-  font-size: 8.5px;
-  line-height: 1.35;
-}
-
-.tet-service:hover::before,
-.tet-service:focus-within::before {
-  background: var(--tet-gold-deep);
-  box-shadow: 0 0 0 5px rgba(187, 127, 39, 0.12);
-  transform: translateX(-50%) scale(1.04);
-}
-
-.tet-service:hover .tet-service__icon,
-.tet-service:focus-within .tet-service__icon {
-  color: var(--tet-ink-deep);
-  transform: translateY(-4px);
-}
-
-/* MICE */
-.tet-mice {
-  min-height: 246px;
-  position: relative;
-  z-index: 1;
-  display: grid;
-  grid-template-columns: minmax(0, 1.15fr) minmax(340px, 0.82fr) minmax(230px, 0.58fr);
-  margin-bottom: 22px;
-  border-radius: 11px;
-  overflow: hidden;
-  background: var(--tet-ink-deep);
-  box-shadow: 0 18px 44px rgba(7, 31, 55, 0.16);
-}
-
-.tet-mice__media {
-  min-height: 246px;
-  position: relative;
-  overflow: hidden;
-}
-
-.tet-mice__media .travel-photo {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  transition: transform 900ms cubic-bezier(.2,.7,.2,1), filter 600ms ease;
-}
-
-.tet-mice__media::after {
-  position: absolute;
-  inset: 0;
-  content: '';
-}
-
-.tet-mice__media--left::after {
-  background: linear-gradient(90deg, transparent 60%, rgba(7, 31, 55, 0.78));
-}
-
-.tet-mice__media--right::after {
-  background: linear-gradient(90deg, rgba(7, 31, 55, 0.72), rgba(7, 31, 55, 0.08));
-}
-
-.tet-mice__copy {
-  position: relative;
-  z-index: 2;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  padding: 28px 30px;
-  background:
-    radial-gradient(circle at 80% 20%, rgba(67, 120, 157, 0.24), transparent 37%),
-    var(--tet-ink-deep);
-  color: #fff;
-}
-
-.tet-mice__copy .tet-eyebrow {
-  margin-bottom: 8px;
-  color: #e8b75d;
-}
-
-.tet-mice__copy h2 {
-  margin-bottom: 8px;
-  color: #fff;
-  font-size: clamp(31px, 2.8vw, 44px);
-  line-height: 0.98;
-}
-
-.tet-mice__copy p:not(.tet-eyebrow) {
-  margin-bottom: 15px;
-  color: rgba(255, 255, 255, 0.76);
-  font-size: 11px;
-  line-height: 1.55;
-}
-
-.tet-mice__copy .tet-button {
-  width: fit-content;
-  min-height: 41px;
-  padding: 10px 17px;
-  font-size: 10px;
-}
-
-.tet-mice:hover .travel-photo {
-  filter: saturate(1.06);
-  transform: scale(1.035);
-}
-
-/* Experiences */
-.tet-experiences {
-  position: relative;
-  z-index: 1;
-  padding-bottom: 16px;
-}
-
-.tet-experiences .tet-section-heading {
-  margin-bottom: 12px;
-}
-
-.tet-experiences__rail {
-  display: grid;
-  grid-template-columns: repeat(6, minmax(0, 1fr));
-  gap: 8px;
-}
-
-.tet-experience {
-  aspect-ratio: 1 / 0.86;
-  position: relative;
-  border-radius: 8px;
-  overflow: hidden;
-  background: #d7e0e5;
-  color: #fff;
-}
-
-.tet-experience .travel-photo {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  transition: transform 720ms cubic-bezier(.2,.7,.2,1), filter 450ms ease;
-}
-
-.tet-experience::after {
-  position: absolute;
-  inset: 28% 0 0;
-  background: linear-gradient(transparent, rgba(4, 27, 49, 0.88));
-  content: '';
-}
-
-.tet-experience__icon {
-  width: 25px;
-  height: 25px;
-  position: absolute;
-  top: 11px;
-  left: 11px;
-  z-index: 2;
-  border: 1px solid rgba(255, 255, 255, 0.46);
-  border-radius: 7px;
-  display: grid;
-  place-items: center;
-  background: rgba(7, 31, 55, 0.15);
-  backdrop-filter: blur(7px);
-  -webkit-backdrop-filter: blur(7px);
-}
-
-.tet-experience__icon svg {
-  width: 13px;
-}
-
-.tet-experience strong {
-  position: absolute;
-  right: 12px;
-  bottom: 11px;
-  left: 12px;
-  z-index: 2;
-  font-family: 'Cormorant Garamond', Georgia, serif;
-  font-size: clamp(17px, 1.45vw, 22px);
-  font-weight: 600;
-  line-height: 0.95;
-  text-shadow: 0 2px 12px rgba(2, 18, 33, 0.46);
-}
-
-.tet-experience:hover .travel-photo,
-.tet-experience:focus-within .travel-photo {
-  filter: saturate(1.08);
-  transform: scale(1.065);
-}
-
-/* Partner / credibility strip */
-.tet-partners {
-  position: relative;
-  z-index: 1;
-  display: grid;
-  grid-template-columns: minmax(0, 1.2fr) minmax(300px, 0.75fr) minmax(230px, 0.62fr);
-  align-items: stretch;
-  margin-bottom: 0;
-  border: 1px solid rgba(16, 44, 73, 0.09);
-  border-radius: 11px 11px 0 0;
-  overflow: hidden;
-  background: rgba(250, 247, 242, 0.94);
-  box-shadow: 0 12px 30px rgba(7, 31, 55, 0.08);
-}
-
-.tet-partners__marks {
-  display: grid;
-  align-content: center;
-  padding: 18px 27px;
-}
-
-.tet-partners__label {
-  margin-bottom: 10px;
-  color: #8a9299;
-  font-size: 9px;
-  font-weight: 700;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-}
-
-.tet-partners__logos {
-  display: flex;
-  align-items: center;
-  flex-wrap: wrap;
-  gap: 24px;
-}
-
-.tet-partners__logo {
-  color: #4d5c69;
-  font-family: 'Cormorant Garamond', Georgia, serif;
-  font-size: 19px;
-  font-weight: 700;
-  letter-spacing: 0.015em;
-}
-
-.tet-partners__statement {
-  display: grid;
-  align-content: center;
-  padding: 18px 25px;
-  border-left: 1px solid var(--tet-line);
-}
-
-.tet-partners__statement strong {
-  margin-bottom: 4px;
-  color: var(--tet-gold-deep);
-  font-family: 'Cormorant Garamond', Georgia, serif;
-  font-size: 22px;
-  font-weight: 600;
-}
-
-.tet-partners__statement p {
-  margin-bottom: 0;
-  color: #526575;
-  font-size: 11px;
-  line-height: 1.5;
-}
-
-.tet-partners__images {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 5px;
-  padding: 8px;
-  border-left: 1px solid var(--tet-line);
-}
-
-.tet-partners__images > div {
-  min-height: 82px;
-  border-radius: 7px;
-  overflow: hidden;
-}
-
-.tet-partners__images .travel-photo {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-}
-
-/* Contact chapter that visually joins the real site footer. */
-.tet-contact {
-  position: relative;
-  isolation: isolate;
-  overflow: hidden;
-  background:
-    linear-gradient(90deg, rgba(8, 42, 72, 0.97), rgba(10, 54, 88, 0.89)),
-    var(--tet-home-footer-image, none) center / cover;
-  color: #fff;
-}
-
-.tet-contact::after {
-  position: absolute;
-  inset: 0;
-  z-index: -1;
-  background: linear-gradient(180deg, rgba(255, 255, 255, 0.05), transparent 45%);
-  content: '';
-}
-
-.tet-contact__inner {
-  min-height: 170px;
-  display: grid;
-  grid-template-columns: minmax(250px, 0.65fr) minmax(0, 1.15fr) auto;
-  align-items: center;
-  gap: clamp(30px, 5vw, 74px);
-  padding-block: 34px;
-}
-
-.tet-contact h2 {
-  margin-bottom: 0;
-  color: #fff;
-  font-size: clamp(36px, 3.3vw, 51px);
-  line-height: 0.95;
-}
-
-.tet-contact p {
-  max-width: 650px;
-  margin-bottom: 0;
-  color: rgba(255, 255, 255, 0.76);
-  font-size: 13px;
-  line-height: 1.6;
-}
-
-.tet-contact .tet-button {
-  white-space: nowrap;
-}
-
-/* The real project footer stays intact; only its visual shell is brought into the approved direction. */
-.site-footer {
-  width: 100% !important;
-  max-width: none !important;
-  margin: 0 !important;
-  border-radius: 0 !important;
-  background:
-    linear-gradient(90deg, rgba(7, 38, 66, 0.98), rgba(9, 53, 87, 0.92)),
-    var(--tet-home-footer-image, none) center 62% / cover !important;
-  color: #fff !important;
-  box-shadow: none !important;
-}
-
-.site-footer__grid,
-.site-footer__bottom {
-  width: min(calc(100% - clamp(36px, 8vw, 126px)), 1320px) !important;
-  margin-inline: auto !important;
-}
-
-.site-footer__grid {
-  padding: 34px 0 26px !important;
-}
-
-.footer-brand,
-.footer-column {
-  border-color: rgba(255, 255, 255, 0.14) !important;
-}
-
-.site-footer h3,
-.site-footer p,
-.site-footer a,
-.site-footer span {
-  color: rgba(255, 255, 255, 0.83) !important;
-}
-
-.site-footer a:hover,
-.site-footer a:focus-visible {
-  color: #f0c574 !important;
-}
-
-.site-footer__bottom {
-  border-top-color: rgba(255, 255, 255, 0.14) !important;
-  color: rgba(255, 255, 255, 0.68) !important;
-}
-
-/* Motion — deliberately different by chapter. */
-.tet-home [data-reveal] {
-  opacity: 0;
-  transition: opacity 760ms ease, transform 820ms cubic-bezier(.2,.72,.2,1), clip-path 900ms cubic-bezier(.2,.72,.2,1);
-}
-
-.tet-home [data-reveal='rise'] {
-  transform: translateY(24px);
-}
-
-.tet-home [data-reveal='left'] {
-  transform: translateX(-28px);
-}
-
-.tet-home [data-reveal='right'] {
-  transform: translateX(28px);
-}
-
-.tet-home [data-reveal='wipe'] {
-  clip-path: inset(0 100% 0 0);
-}
-
-.tet-home [data-reveal='scale'] {
-  transform: scale(0.965);
-}
-
-.tet-home [data-reveal].is-visible {
-  opacity: 1;
-  clip-path: inset(0 0 0 0);
-  transform: none;
-}
-
-.tet-hero__copy {
-  animation: tet-hero-copy-in 950ms cubic-bezier(.2,.72,.2,1) both;
-}
-
-.tet-bridge {
-  animation: tet-bridge-in 850ms cubic-bezier(.2,.72,.2,1) 220ms both;
-}
-
-@keyframes tet-hero-copy-in {
-  from { opacity: 0; transform: translateY(24px); }
-  to { opacity: 1; transform: none; }
-}
-
-@keyframes tet-bridge-in {
-  from { opacity: 0; transform: translateY(24px); }
-  to { opacity: 1; transform: none; }
-}
-
-/* Responsive */
-@media (max-width: 1180px) {
-  .tet-intro {
-    grid-template-columns: minmax(0, 0.9fr) minmax(140px, 0.42fr) minmax(360px, 1.18fr);
-    gap: 30px;
-  }
-
-  .tet-bridge {
-    grid-template-columns: 1fr 1fr 1fr 1fr;
-  }
-
-  .tet-bridge__item:nth-child(2) {
-    display: none;
-  }
-
-  .tet-services__grid {
-    display: flex;
-    overflow-x: auto;
-    scrollbar-width: none;
-    scroll-snap-type: x mandatory;
-  }
-
-  .tet-services__grid::-webkit-scrollbar {
-    display: none;
-  }
-
-  .tet-service {
-    min-width: 155px;
-    flex: 0 0 155px;
-    scroll-snap-align: start;
-  }
-
-  .tet-mice {
-    grid-template-columns: 1fr minmax(330px, 0.8fr);
-  }
-
-  .tet-mice__media--right {
-    display: none;
-  }
-
-  .tet-experiences__rail {
-    grid-template-columns: repeat(3, minmax(0, 1fr));
-  }
-}
-
-@media (max-width: 940px) {
-  .site-header__inner {
-    width: calc(100% - 34px) !important;
-  }
-
-  .site-header__nav-wrap {
-    top: 81px !important;
-    border: 1px solid rgba(16, 44, 73, 0.1) !important;
-    border-radius: 14px !important;
-    background: rgba(255, 255, 255, 0.98) !important;
-    box-shadow: 0 20px 46px rgba(7, 31, 55, 0.18) !important;
-  }
-
-  .site-header.is-scrolled .site-header__nav-wrap {
-    top: 69px !important;
-  }
-
-  .main-nav__link,
-  .site-header.is-scrolled .main-nav__link {
-    padding-block: 11px !important;
-    color: var(--tet-ink-deep) !important;
-    text-shadow: none !important;
-  }
-
-  .main-nav__link.is-active::after,
-  .site-header.is-scrolled .main-nav__link.is-active::after {
-    bottom: 4px !important;
-  }
-
-  .header-contact-btn {
-    width: 100% !important;
-    margin-top: 12px !important;
-  }
-
-  .tet-hero__discover {
-    display: none;
-  }
-
-  .tet-bridge {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-  }
-
-  .tet-bridge__item {
-    border-top: 1px solid var(--tet-line);
-  }
-
-  .tet-bridge__item:nth-child(-n+2) {
-    border-top: 0;
-  }
-
-  .tet-bridge__item:nth-child(3) {
-    border-left: 0;
-  }
-
-  .tet-bridge__item:nth-child(2) {
-    display: flex;
-  }
-
-  .tet-bridge__item:last-child {
-    grid-column: 1 / -1;
-    justify-content: center;
-  }
-
-  .tet-intro {
-    grid-template-columns: minmax(0, 1fr) minmax(160px, 0.45fr);
-  }
-
-  .tet-intro__visual {
-    grid-column: 1 / -1;
-    aspect-ratio: 2 / 0.9;
-  }
-
-  .tet-destinations__rail {
-    display: flex;
-    overflow-x: auto;
-    scrollbar-width: none;
-    scroll-snap-type: x mandatory;
-  }
-
-  .tet-destinations__rail::-webkit-scrollbar {
-    display: none;
-  }
-
-  .tet-destination {
-    min-width: 76vw;
-    flex: 0 0 76vw;
-    scroll-snap-align: center;
-  }
-
-  .tet-mice {
-    grid-template-columns: 1fr;
-  }
-
-  .tet-mice__media--left {
-    min-height: 310px;
-  }
-
-  .tet-mice__media--left::after {
-    background: linear-gradient(0deg, rgba(7, 31, 55, 0.88), transparent 65%);
-  }
-
-  .tet-mice__copy {
-    margin-top: -78px;
-    padding-top: 94px;
-  }
-
-  .tet-partners {
-    grid-template-columns: 1fr 1fr;
-  }
-
-  .tet-partners__images {
-    grid-column: 1 / -1;
-    min-height: 120px;
-    border-top: 1px solid var(--tet-line);
-    border-left: 0;
-  }
-
-  .tet-contact__inner {
-    grid-template-columns: 1fr auto;
-  }
-
-  .tet-contact p {
-    grid-column: 1 / -1;
-    grid-row: 2;
-  }
-}
-
-@media (max-width: 700px) {
-  .tet-shell,
-  .site-footer__grid,
-  .site-footer__bottom {
-    width: calc(100% - 32px) !important;
-  }
-
-  .site-header {
-    height: 70px !important;
-  }
-
-  .site-header__inner {
-    width: calc(100% - 24px) !important;
-  }
-
-  .site-header__nav-wrap {
-    top: 69px !important;
-  }
-
-  .brand-logo {
-    width: 98px !important;
-    height: 54px !important;
-  }
-
-  .tet-hero {
-    min-height: max(650px, 86svh);
-    align-items: flex-end;
-  }
-
-  .tet-hero__video {
-    object-position: 62% center;
-  }
-
-  .tet-hero__overlay {
-    background:
-      linear-gradient(0deg, rgba(5, 28, 51, 0.94) 0%, rgba(5, 31, 56, 0.69) 57%, rgba(5, 29, 51, 0.2) 100%),
-      linear-gradient(90deg, rgba(4, 27, 50, 0.42), transparent 80%);
-  }
-
-  .tet-hero__content {
-    padding-top: 130px;
-    padding-bottom: 98px;
-  }
-
-  .tet-hero h1 {
-    max-width: 590px;
-    font-size: clamp(48px, 14.8vw, 68px);
-    line-height: 0.92;
-  }
-
-  .tet-hero h1 span {
-  display: block;
-}
-
-.tet-hero__lead {
-    font-size: 15px;
-  }
-
-  .tet-hero__scroll {
-    display: none;
-  }
-
-  .tet-hero__actions {
-    align-items: stretch;
-    flex-direction: column;
-  }
-
-  .tet-button {
-    width: 100%;
-  }
-
-  .tet-bridge {
-    min-height: 0;
-    grid-template-columns: 1fr 1fr;
-    margin-top: -42px;
-    border-radius: 14px;
-  }
-
-  .tet-bridge__item {
-    min-height: 82px;
-    padding: 14px 15px;
-  }
-
-  .tet-bridge__item:nth-child(2) {
-    display: none;
-  }
-
-  .tet-bridge__item:nth-child(3) {
-    border-top: 0;
-    border-left: 1px solid var(--tet-line);
-  }
-
-  .tet-bridge__item:nth-child(4) {
-    border-left: 0;
-  }
-
-  .tet-bridge__item:last-child {
-    grid-column: auto;
-  }
-
-  .tet-bridge__year strong {
-    font-size: 31px;
-  }
-
-  .tet-bridge__thumb {
-    width: 36px;
-    height: 36px;
-  }
-
-  .tet-bridge__copy strong {
-    font-size: 10px;
-  }
-
-  .tet-bridge__copy span {
-    font-size: 8px;
-  }
-
-  .tet-bridge__metric > svg {
-    width: 23px;
-  }
-
-  .tet-bridge__metric strong {
-    font-size: 22px;
-  }
-
-  .tet-main {
-    padding-top: 34px;
-  }
-
-  .tet-intro {
-    grid-template-columns: 1fr;
-    gap: 22px;
-    padding-top: 16px;
-  }
-
-  .tet-intro__copy h2 {
-    font-size: clamp(39px, 11vw, 52px);
-  }
-
-  .tet-intro__facts {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    border-top: 1px solid var(--tet-line);
-    border-bottom: 1px solid var(--tet-line);
-  }
-
-  .tet-intro__fact {
-    padding: 14px 8px;
-    border-bottom: 0;
-  }
-
-  .tet-intro__fact:nth-child(even) {
-    border-left: 1px solid var(--tet-line);
-  }
-
-  .tet-intro__visual {
-    grid-column: auto;
-    aspect-ratio: 1.35 / 1;
-  }
-
-  .tet-section-heading {
-    align-items: flex-start;
-    flex-direction: column;
-    gap: 12px;
-  }
-
-  .tet-section-heading h2 {
-    font-size: 38px;
-  }
-
-  .tet-destination {
-    min-width: 86vw;
-    flex-basis: 86vw;
-    min-height: 255px;
-  }
-
-  .tet-service {
-    min-width: 145px;
-    flex-basis: 145px;
-  }
-
-  .tet-mice__media--left {
-    min-height: 250px;
-  }
-
-  .tet-mice__copy {
-    padding-inline: 22px;
-  }
-
-  .tet-experiences__rail {
-    display: flex;
-    overflow-x: auto;
-    gap: 10px;
-    padding-bottom: 5px;
-    scrollbar-width: none;
-    scroll-snap-type: x mandatory;
-  }
-
-  .tet-experiences__rail::-webkit-scrollbar {
-    display: none;
-  }
-
-  .tet-experience {
-    min-width: 57vw;
-    flex: 0 0 57vw;
-    scroll-snap-align: start;
-  }
-
-  .tet-partners {
-    grid-template-columns: 1fr;
-  }
-
-  .tet-partners__statement,
-  .tet-partners__images {
-    border-top: 1px solid var(--tet-line);
-    border-left: 0;
-  }
-
-  .tet-contact__inner {
-    min-height: 0;
-    grid-template-columns: 1fr;
-    gap: 18px;
-    padding-block: 38px;
-  }
-
-  .tet-contact p {
-    grid-column: auto;
-    grid-row: auto;
-  }
-
-  .tet-contact .tet-button {
-    width: fit-content;
-  }
-
-  .site-footer__grid {
-    padding-top: 28px !important;
-  }
-}
-
-@media (max-width: 430px) {
-  .tet-bridge__item {
-    gap: 9px;
-    padding-inline: 11px;
-  }
-
-  .tet-bridge__thumb {
-    display: none;
-  }
-
-  .tet-intro__facts {
-    grid-template-columns: 1fr;
-  }
-
-  .tet-intro__fact:nth-child(even) {
-    border-left: 0;
-  }
-
-  .tet-intro__fact + .tet-intro__fact {
-    border-top: 1px solid var(--tet-line);
-  }
-
-  .tet-experience {
-    min-width: 72vw;
-    flex-basis: 72vw;
-  }
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .tet-home *,
-  .tet-home *::before,
-  .tet-home *::after {
-    scroll-behavior: auto !important;
-    animation-duration: 0.01ms !important;
-    animation-iteration-count: 1 !important;
-    transition-duration: 0.01ms !important;
-  }
-
-  .tet-home [data-reveal] {
-    opacity: 1 !important;
-    clip-path: none !important;
-    transform: none !important;
-  }
-}
+@media(prefers-reduced-motion:reduce){.d1 *,.d1 *::before,.d1 *::after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}.d1-reveal{opacity:1;transform:none}}
 `;
 
-function Eyebrow({ children }: { children: string }) {
-  return <p className="tet-eyebrow">{children}</p>;
-}
-
 export default function TravelHomePage() {
-  const destinationsRailRef = useRef<HTMLDivElement>(null);
-
   useEffect(() => {
-    const footerImage = `url("${travelMedia('sailing.jpg')}")`;
-    document.documentElement.style.setProperty('--tet-home-footer-image', footerImage);
-
-    const revealItems = Array.from(document.querySelectorAll<HTMLElement>('.tet-home [data-reveal]'));
-
+    document.body.classList.add('d1-active');
+    const nodes = Array.from(document.querySelectorAll<HTMLElement>('.d1-reveal'));
     if (!('IntersectionObserver' in window)) {
-      revealItems.forEach((item) => item.classList.add('is-visible'));
-    } else {
-      const observer = new IntersectionObserver(
-        (entries) => {
-          entries.forEach((entry) => {
-            if (!entry.isIntersecting) return;
-            entry.target.classList.add('is-visible');
-            observer.unobserve(entry.target);
-          });
-        },
-        { threshold: 0.12, rootMargin: '0px 0px -7%' },
-      );
-
-      revealItems.forEach((item) => observer.observe(item));
-
-      const updateHeroParallax = () => {
-        const shift = Math.min(window.scrollY * 0.08, 44);
-        document.documentElement.style.setProperty('--tet-hero-shift', `${shift}px`);
-      };
-
-      updateHeroParallax();
-      window.addEventListener('scroll', updateHeroParallax, { passive: true });
-
-      return () => {
-        observer.disconnect();
-        window.removeEventListener('scroll', updateHeroParallax);
-        document.documentElement.style.removeProperty('--tet-home-footer-image');
-        document.documentElement.style.removeProperty('--tet-hero-shift');
-      };
+      nodes.forEach((node) => node.classList.add('is-visible'));
+      return () => document.body.classList.remove('d1-active');
     }
-
+    const observer = new IntersectionObserver(
+      (entries) => entries.forEach((entry) => {
+        if (!entry.isIntersecting) return;
+        entry.target.classList.add('is-visible');
+        observer.unobserve(entry.target);
+      }),
+      { threshold: 0.12, rootMargin: '0px 0px -7%' },
+    );
+    nodes.forEach((node) => observer.observe(node));
     return () => {
-      document.documentElement.style.removeProperty('--tet-home-footer-image');
-      document.documentElement.style.removeProperty('--tet-hero-shift');
+      observer.disconnect();
+      document.body.classList.remove('d1-active');
     };
   }, []);
 
-  const scrollDestinations = (direction: 'previous' | 'next') => {
-    destinationsRailRef.current?.scrollBy({
-      left: direction === 'next' ? 420 : -420,
-      behavior: 'smooth',
-    });
-  };
+  useEffect(() => {
+    const hero = document.querySelector<HTMLElement>('.d1-hero');
+    if (!hero || window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+    let frame = 0;
+    const update = () => {
+      frame = 0;
+      hero.style.setProperty('--d1-hero-y', `${Math.min(window.scrollY * 0.05, 22)}px`);
+    };
+    const onScroll = () => {
+      if (!frame) frame = window.requestAnimationFrame(update);
+    };
+    update();
+    window.addEventListener('scroll', onScroll, { passive: true });
+    return () => {
+      window.removeEventListener('scroll', onScroll);
+      if (frame) window.cancelAnimationFrame(frame);
+    };
+  }, []);
 
   return (
-    <div className="tet-home">
-      <style>{HOME_STYLES}</style>
-
+    <div id="main-content" className="d1">
+      <style>{CSS}</style>
       <PageSeo
         title="Destination Management Company in Greece | Rhodes & Kos DMC | Top Euro Travel"
         description="Top Euro Travel is a trusted destination management company in Greece, providing DMC services, hotel contracting, transfers, MICE, groups, excursions and ground handling in Rhodes and Kos since 1989."
       />
 
-      <section className="tet-hero" aria-labelledby="tet-home-title">
-        <video
-          className="tet-hero__video"
-          autoPlay
-          muted
-          loop
-          playsInline
-          preload="metadata"
-          poster="https://static.wixstatic.com/media/5a118b_f3aada5a1ac547358ac6c8b35d60a2a7f000.jpg"
-          tabIndex={-1}
-          aria-hidden="true"
-        >
-          <source
-            src="https://video.wixstatic.com/video/5a118b_ea5a16aef9d047ddb9126c2f00737d43/1080p/mp4/file.mp4"
-            media="(max-width: 767px)"
-            type="video/mp4"
-          />
-          <source
-            src="https://video.wixstatic.com/video/5a118b_f3aada5a1ac547358ac6c8b35d60a2a7/1080p/mp4/file.mp4"
-            type="video/mp4"
-          />
+      <section className="d1-hero">
+        <video className="d1-hero__video" autoPlay muted loop playsInline preload="metadata" poster={MEDIA.heroPoster} tabIndex={-1} aria-hidden="true">
+          <source src={MEDIA.heroMobile} media="(max-width:760px)" type="video/mp4" />
+          <source src={MEDIA.heroDesktop} type="video/mp4" />
         </video>
-        <div className="tet-hero__overlay" aria-hidden="true" />
-
-        <div className="tet-hero__content tet-shell">
-          <div className="tet-hero__copy">
-            <Eyebrow>Destination management since 1989</Eyebrow>
-            <h1 id="tet-home-title"><span>Your Trusted DMC Partner</span><span>in Rhodes &amp; Kos</span></h1>
-            <p className="tet-hero__lead">
-              Delivering destination management, ground handling and travel solutions since 1989.
-            </p>
-            <div className="tet-hero__actions">
-              <Link className="tet-button tet-button--gold" to="/services">
-                Explore Our Services <ArrowRight aria-hidden="true" />
-              </Link>
-              <Link className="tet-button tet-button--outline" to="/contact">
-                Partner With Us <ArrowRight aria-hidden="true" />
-              </Link>
+        <div className="d1-hero__overlay" aria-hidden="true" />
+        <div className="d1-hero__content">
+          <div className="d1-hero__copy">
+            <p className="d1-eyebrow">Destination management since 1989</p>
+            <h1><span>Your Trusted DMC</span><span>Partner in Rhodes &amp; Kos</span></h1>
+            <p className="d1-hero__lead">Delivering destination management, ground handling and travel solutions since 1989.</p>
+            <div className="d1-actions">
+              <Link className="d1-button d1-button--gold" to="/services">Explore our services <ArrowRight /></Link>
+              <Link className="d1-button d1-button--outline" to="/contact">Partner with us <ArrowRight /></Link>
             </div>
           </div>
         </div>
-
-        <span className="tet-hero__scroll" aria-hidden="true">
-          Scroll <ArrowDown />
-        </span>
-
-        <Link className="tet-hero__discover" to="/destinations">
-          <span className="tet-hero__discover-icon"><Play aria-hidden="true" /></span>
-          <span className="tet-hero__discover-copy">
-            <span>Discover Rhodes &amp; Kos</span>
-            <span>Explore the destinations</span>
-          </span>
-        </Link>
+        <span className="d1-scroll" aria-hidden="true">Scroll <ArrowDown /></span>
+        <Link className="d1-discover" to="/destinations"><span className="d1-discover__icon"><Play /></span>Discover Rhodes &amp; Kos</Link>
       </section>
 
-      <section className="tet-bridge tet-shell" aria-label="Top Euro Travel at a glance">
-        <div className="tet-bridge__item tet-bridge__year">
-          <small>Since</small>
-          <strong>1989</strong>
+      <div className="d1-bridge-wrap d1-shell" aria-label="Top Euro Travel highlights">
+        <div className="d1-bridge">
+          <div className="d1-bridge__item d1-bridge__since"><small>Since</small><strong>1989</strong></div>
+          <Link className="d1-bridge__item" to="/rhodes">
+            <span className="d1-bridge__thumb"><img src={MEDIA.rhodes} alt="Rhodes" /></span>
+            <span className="d1-bridge__copy"><strong>Rhodes</strong><span>History, energy &amp; variety</span></span>
+            <ArrowRight className="d1-bridge__arrow" />
+          </Link>
+          <Link className="d1-bridge__item" to="/kos">
+            <span className="d1-bridge__thumb"><img src={MEDIA.kos} alt="Kos" /></span>
+            <span className="d1-bridge__copy"><strong>Kos</strong><span>Authentic island rhythm</span></span>
+            <ArrowRight className="d1-bridge__arrow" />
+          </Link>
+          <div className="d1-bridge__item d1-bridge__stat"><Clock3 /><span><strong>35+</strong><span>Years of experience</span></span></div>
         </div>
-
-        <div className="tet-bridge__item">
-          <div className="tet-bridge__copy">
-            <small>Expertise</small>
-            <strong>Destination Management</strong>
-            <span>Ground handling &amp; travel solutions</span>
-          </div>
-        </div>
-
-        <Link className="tet-bridge__item" to="/rhodes">
-          <span className="tet-bridge__thumb">
-            <Photo src={travelMedia('old-town.jpg')} alt="Rhodes" />
-          </span>
-          <span className="tet-bridge__copy">
-            <small>Rhodes</small>
-            <strong>Local team</strong>
-            <span>History, coast &amp; hospitality</span>
-          </span>
-          <ArrowRight className="tet-bridge__arrow" aria-hidden="true" />
-        </Link>
-
-        <Link className="tet-bridge__item" to="/kos">
-          <span className="tet-bridge__thumb">
-            <Photo src={travelMedia('home-welcome-v2.jpg')} alt="Kos" />
-          </span>
-          <span className="tet-bridge__copy">
-            <small>Kos</small>
-            <strong>Local team</strong>
-            <span>Relaxed island programmes</span>
-          </span>
-          <ArrowRight className="tet-bridge__arrow" aria-hidden="true" />
-        </Link>
-
-        <div className="tet-bridge__item tet-bridge__metric">
-          <Users aria-hidden="true" />
-          <span>
-            <strong>100K+</strong>
-            <span>Guests annually</span>
-          </span>
-        </div>
-      </section>
-
-      <div className="tet-main">
-        <section id="our-story" className="tet-intro tet-shell">
-          <div className="tet-intro__copy" data-reveal="left">
-            <Eyebrow>Who we are</Eyebrow>
-            <h2>Destination Management Company in Greece</h2>
-            <p className="tet-intro__subtitle">
-              Trusted destination management, ground handling and excursion services in Rhodes and Kos.
-            </p>
-            <p>
-              Since 1989, Top Euro Travel has been providing destination management and ground handling services in
-              Rhodes and Kos, supporting tour operators, travel agencies, groups and event planners from across the world.
-            </p>
-            <p>
-              With local teams in both destinations and a flexible, hands-on approach, we deliver reliable solutions
-              tailored to each partner&apos;s needs, from hotel contracting and transfers to MICE services, tailor-made
-              programmes and excursions.
-            </p>
-            <span className="tet-intro__signature">Top Euro Travel · Since 1989</span>
-            <Link className="tet-inline-link" to="/about">
-              Learn more about us <ArrowRight aria-hidden="true" />
-            </Link>
-          </div>
-
-          <div className="tet-intro__facts" data-reveal="rise" aria-label="Top Euro Travel facts">
-            <div className="tet-intro__fact">
-              <Users aria-hidden="true" />
-              <span><strong>100K+</strong><span>Guests annually</span></span>
-            </div>
-            <div className="tet-intro__fact">
-              <Building2 aria-hidden="true" />
-              <span><strong>200+</strong><span>Hotel partners</span></span>
-            </div>
-            <div className="tet-intro__fact">
-              <CalendarCheck aria-hidden="true" />
-              <span><strong>40+</strong><span>Team members</span></span>
-            </div>
-            <div className="tet-intro__fact">
-              <Headphones aria-hidden="true" />
-              <span><strong>24/7</strong><span>Local support</span></span>
-            </div>
-          </div>
-
-          <div className="tet-intro__visual" data-reveal="right">
-            <Photo
-              src={travelMedia('home-welcome-v2.jpg')}
-              alt="Aegean destination view in Rhodes and Kos"
-              loading="eager"
-            />
-            <Link className="tet-intro__play" to="/destinations">
-              <span className="tet-intro__play-circle"><Play aria-hidden="true" /></span>
-              <span>Discover our world</span>
-            </Link>
-          </div>
-        </section>
-
-        <section className="tet-destinations tet-shell" aria-labelledby="tet-destinations-title">
-          <div className="tet-section-heading" data-reveal="rise">
-            <div>
-              <Eyebrow>Our destinations</Eyebrow>
-              <h2 id="tet-destinations-title">Two Islands. Endless Possibilities.</h2>
-            </div>
-            <div className="tet-destinations__controls" aria-label="Destination carousel controls">
-              <button
-                className="tet-round-button"
-                type="button"
-                aria-label="Previous destination"
-                onClick={() => scrollDestinations('previous')}
-              >
-                <ChevronLeft aria-hidden="true" />
-              </button>
-              <button
-                className="tet-round-button"
-                type="button"
-                aria-label="Next destination"
-                onClick={() => scrollDestinations('next')}
-              >
-                <ChevronRight aria-hidden="true" />
-              </button>
-            </div>
-          </div>
-
-          <div className="tet-destinations__rail" ref={destinationsRailRef}>
-            <article className="tet-destination" data-reveal="wipe">
-              <Photo src={travelMedia('old-town.jpg')} alt="Rhodes destination" />
-              <div className="tet-destination__content">
-                <h3>Rhodes</h3>
-                <p>History, energy and extraordinary variety.</p>
-                <Link className="tet-destination__link" to="/rhodes">
-                  Explore Rhodes <ArrowRight aria-hidden="true" />
-                </Link>
-              </div>
-            </article>
-
-            <article className="tet-destination" data-reveal="wipe">
-              <Photo src={travelMedia('home-welcome-v2.jpg')} alt="Kos destination" />
-              <div className="tet-destination__content">
-                <h3>Kos</h3>
-                <p>Relaxed island life, beautifully connected.</p>
-                <Link className="tet-destination__link" to="/kos">
-                  Explore Kos <ArrowRight aria-hidden="true" />
-                </Link>
-              </div>
-            </article>
-          </div>
-        </section>
-
-        <section className="tet-services tet-shell" aria-labelledby="tet-services-title">
-          <div className="tet-section-heading" data-reveal="rise">
-            <div>
-              <Eyebrow>Our services</Eyebrow>
-              <h2 id="tet-services-title">We Handle Everything. You Enjoy the Experience.</h2>
-            </div>
-          </div>
-
-          <div className="tet-services__grid" data-reveal="scale">
-            {services.map(({ icon: Icon, title, description }) => (
-              <Link className="tet-service" to="/services" key={title}>
-                <span className="tet-service__icon"><Icon aria-hidden="true" /></span>
-                <h3>{title}</h3>
-                <p>{description}</p>
-              </Link>
-            ))}
-          </div>
-        </section>
-
-        <section className="tet-mice tet-shell" aria-labelledby="tet-mice-title" data-reveal="rise">
-          <div className="tet-mice__media tet-mice__media--left">
-            <Photo src={travelMedia('home-mice-v2.jpg')} alt="MICE and group travel event" />
-          </div>
-
-          <div className="tet-mice__copy">
-            <Eyebrow>MICE &amp; Group Travel</Eyebrow>
-            <h2 id="tet-mice-title">MICE &amp; Group Travel Solutions</h2>
-            <p>
-              Whether planning a corporate event, incentive programme or group itinerary, our team delivers tailored
-              solutions and seamless execution across Rhodes and Kos, supported by extensive destination knowledge and
-              trusted local partnerships.
-            </p>
-            <Link className="tet-button tet-button--gold" to="/mice-groups">
-              Explore MICE &amp; Groups <ArrowRight aria-hidden="true" />
-            </Link>
-          </div>
-
-          <div className="tet-mice__media tet-mice__media--right">
-            <Photo src={travelMedia('food.jpg')} alt="Special event dining experience" />
-          </div>
-        </section>
-
-        <section className="tet-experiences tet-shell" aria-labelledby="tet-experiences-title">
-          <div className="tet-section-heading" data-reveal="rise">
-            <div>
-              <Eyebrow>Experiences</Eyebrow>
-              <h2 id="tet-experiences-title">Authentic Local Experiences</h2>
-            </div>
-            <Link className="tet-inline-link" to="/experiences">
-              View all experiences <ArrowRight aria-hidden="true" />
-            </Link>
-          </div>
-
-          <div className="tet-experiences__rail" data-reveal="scale">
-            {experiences.map((experience, index) => {
-              const Icon = services[index % services.length].icon;
-              return (
-                <Link className="tet-experience" to="/experiences" key={experience.title}>
-                  <Photo src={travelMedia(experience.image)} alt={experience.title} />
-                  <span className="tet-experience__icon"><Icon aria-hidden="true" /></span>
-                  <strong>{experience.title}</strong>
-                </Link>
-              );
-            })}
-          </div>
-        </section>
-
-        <section className="tet-partners tet-shell" aria-label="Partner credibility" data-reveal="rise">
-          <div className="tet-partners__marks">
-            <span className="tet-partners__label">Trusted destination partnerships</span>
-            <div className="tet-partners__logos" aria-label="Professional affiliations">
-              <span className="tet-partners__logo">HATTA</span>
-              <span className="tet-partners__logo">IATA</span>
-              <span className="tet-partners__logo">GREECE DMCs</span>
-            </div>
-          </div>
-
-          <div className="tet-partners__statement">
-            <strong>Partnership built to last.</strong>
-            <p>Expertise, responsiveness and consistent service delivery across every programme.</p>
-          </div>
-
-          <div className="tet-partners__images" aria-hidden="true">
-            <div><Photo src={travelMedia('sailing.jpg')} alt="" /></div>
-            <div><Photo src={travelMedia('local-life.jpg')} alt="" /></div>
-          </div>
-        </section>
-
-        <section className="tet-contact" aria-labelledby="tet-contact-title">
-          <div className="tet-contact__inner tet-shell" data-reveal="rise">
-            <div>
-              <Eyebrow>Get in touch</Eyebrow>
-              <h2 id="tet-contact-title">Let&apos;s Create Something Amazing.</h2>
-            </div>
-            <p>
-              Whether you are looking for a reliable DMC partner, planning a group programme, organising an event or
-              exploring new opportunities in Greece, our team is ready to assist.
-            </p>
-            <Link className="tet-button tet-button--gold" to="/contact">
-              Contact Our Team <ArrowRight aria-hidden="true" />
-            </Link>
-          </div>
-        </section>
       </div>
+
+      <section className="d1-intro d1-shell">
+        <div className="d1-intro__copy d1-reveal">
+          <p className="d1-eyebrow">Destination Management Company in Greece</p>
+          <h2>Your Trusted DMC<br />in Rhodes &amp; Kos</h2>
+          <p className="d1-intro__subtitle">Trusted destination management, ground handling and excursion services in Rhodes and Kos.</p>
+          <p>Since 1989, Top Euro Travel has supported tour operators, travel agencies, groups and event planners with reliable local expertise and hands-on service.</p>
+          <p className="d1-signature">Top Euro Travel Team</p>
+          <Link className="d1-link" to="/about">Learn more about us <ArrowRight /></Link>
+        </div>
+        <div className="d1-facts d1-reveal" aria-label="Top Euro Travel facts">
+          <div className="d1-fact"><MapPinned /><span><strong>2</strong><span>Island destinations</span></span></div>
+          <div className="d1-fact"><Building2 /><span><strong>200+</strong><span>Hotel partners</span></span></div>
+          <div className="d1-fact"><Users /><span><strong>40+</strong><span>Team members</span></span></div>
+          <div className="d1-fact"><Headphones /><span><strong>24/7</strong><span>On-island support</span></span></div>
+        </div>
+        <Link className="d1-intro__visual d1-reveal" to="/destinations" aria-label="Discover Rhodes and Kos">
+          <img src={MEDIA.intro} alt="Aerial view of Lindos and the Aegean Sea" loading="lazy" />
+          <span className="d1-play"><span className="d1-play__circle"><Play /></span><span>Discover<br />our world</span></span>
+        </Link>
+      </section>
+
+      <section className="d1-destinations d1-shell d1-reveal">
+        <div className="d1-heading">
+          <div><p className="d1-eyebrow">Our destinations</p><h2>Two islands. Endless possibilities.</h2></div>
+          <Link className="d1-link" to="/destinations">Explore destinations <ArrowRight /></Link>
+        </div>
+        <div className="d1-destinations__grid">
+          <article className="d1-destination">
+            <img src={MEDIA.rhodes} alt="Rhodes coastline and historic landmarks" loading="lazy" />
+            <div className="d1-destination__content"><h3>RHODES</h3><p>Where history, hospitality and island energy meet.</p><Link className="d1-destination__link" to="/rhodes">Explore Rhodes <ArrowRight /></Link></div>
+          </article>
+          <article className="d1-destination">
+            <img src={MEDIA.kos} alt="Kos island coastline" loading="lazy" />
+            <div className="d1-destination__content"><h3>KOS</h3><p>Where authenticity, ease and a slower rhythm connect.</p><Link className="d1-destination__link" to="/kos">Explore Kos <ArrowRight /></Link></div>
+          </article>
+        </div>
+      </section>
+
+      <section className="d1-services d1-shell d1-reveal">
+        <div className="d1-heading">
+          <div><p className="d1-eyebrow">Our services</p><h2>Everything your programme needs.</h2></div>
+          <Link className="d1-link" to="/services">View all services <ArrowRight /></Link>
+        </div>
+        <div className="d1-services__grid">
+          {services.map(({ icon: Icon, title, copy }) => (
+            <Link className="d1-service" to="/services" key={title}><span className="d1-service__icon"><Icon /></span><strong>{title}</strong><span>{copy}</span></Link>
+          ))}
+        </div>
+      </section>
+
+      <section className="d1-mice d1-shell d1-reveal">
+        <div className="d1-mice__media d1-mice__media--left"><img src={MEDIA.miceLeft} alt="Event venue in Rhodes" loading="lazy" /></div>
+        <div className="d1-mice__copy"><p className="d1-eyebrow">MICE &amp; group travel</p><h2>Inspire. Connect. Reward.</h2><p>Tailored corporate events, incentive programmes and group itineraries delivered seamlessly across Rhodes and Kos.</p><Link className="d1-button d1-button--gold" to="/mice-groups">Explore MICE <ArrowRight /></Link></div>
+        <div className="d1-mice__media d1-mice__media--right"><img src={MEDIA.miceRight} alt="Hospitality and special events" loading="lazy" /></div>
+      </section>
+
+      <section className="d1-experiences d1-shell d1-reveal">
+        <div className="d1-heading">
+          <div><p className="d1-eyebrow">Authentic local experiences</p><h2>Live the destination.</h2></div>
+          <Link className="d1-link" to="/experiences">View all experiences <ArrowRight /></Link>
+        </div>
+        <div className="d1-experiences__rail">
+          {experiences.map(({ title, image }) => (
+            <Link className="d1-experience" to="/experiences" key={title}><img src={image} alt={title} loading="lazy" /><span className="d1-experience__copy"><strong>{title}</strong></span></Link>
+          ))}
+        </div>
+      </section>
+
+      <section className="d1-trust d1-shell d1-reveal" aria-label="Partner trust">
+        <div className="d1-trust__marks"><small>Trusted by partners. Chosen for local delivery.</small><div className="d1-logos"><span>WIX PARTNER</span><span>IATA</span><span>HATTA</span><span>DMC GREECE</span></div></div>
+        <div className="d1-trust__quote"><div className="d1-stars">★★★★★</div><p>“Professional, responsive and consistently reliable.”</p><span>International travel partner</span></div>
+        <div className="d1-trust__image"><img src={MEDIA.partner} alt="Top Euro Travel partner experience" loading="lazy" /></div>
+      </section>
     </div>
   );
 }
