@@ -160,6 +160,35 @@ const experiences = [
 ] satisfies readonly DestinationExperience[];
 
 
+function RhodesOutline() {
+  return (
+    <svg
+      className="tet-dest-core__island tet-dest-core__island--rhodes"
+      viewBox="0 0 64 112"
+      aria-hidden="true"
+      focusable="false"
+    >
+      <path d="M38 3C45 7 49 14 50 22C51 30 47 36 50 44C53 52 51 60 47 68C43 76 42 84 37 91C33 98 28 108 19 109C15 104 17 96 14 90C11 83 14 75 13 67C12 59 16 52 18 45C21 36 20 28 25 20C29 13 32 6 38 3Z" />
+      <circle cx="53" cy="18" r="1.8" />
+      <circle cx="14" cy="102" r="1.5" />
+    </svg>
+  );
+}
+
+function KosOutline() {
+  return (
+    <svg
+      className="tet-dest-core__island tet-dest-core__island--kos"
+      viewBox="0 0 126 58"
+      aria-hidden="true"
+      focusable="false"
+    >
+      <path d="M6 29C16 21 28 18 41 18C54 17 65 20 76 24C87 28 95 31 106 31C113 31 118 35 117 40C116 47 108 50 98 48C87 47 78 49 67 51C56 53 44 51 34 48C23 45 15 42 8 37C4 34 3 32 6 29Z" />
+      <circle cx="120" cy="39" r="1.8" />
+    </svg>
+  );
+}
+
 export default function DestinationsPage() {
   const pageRef = useRef<HTMLElement>(null);
 
@@ -255,10 +284,7 @@ export default function DestinationsPage() {
               aria-label="Top Euro Travel connects Rhodes and Kos"
             >
               <span className="tet-dest-core__route-stop">
-                <span
-                  className="tet-dest-core__route-dot"
-                  aria-hidden="true"
-                />
+                <RhodesOutline />
                 <strong>Rhodes</strong>
               </span>
 
@@ -272,11 +298,8 @@ export default function DestinationsPage() {
               </span>
 
               <span className="tet-dest-core__route-stop tet-dest-core__route-stop--end">
-                <span
-                  className="tet-dest-core__route-dot"
-                  aria-hidden="true"
-                />
                 <strong>Kos</strong>
+                <KosOutline />
               </span>
             </div>
           </div>
