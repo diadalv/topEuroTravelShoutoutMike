@@ -1136,3 +1136,482 @@
     transition-duration: 0.01ms !important;
   }
 }
+
+/* =========================================================
+   ABOUT PAGE V3 — CLIENT PRESENTATION POLISH
+   ========================================================= */
+
+/*
+ * The global header changes only while the About route is mounted.
+ * The hero state remains transparent; the scrolled state becomes an
+ * ivory glass surface with readable brand-colour navigation.
+ */
+body.tet-about-page-active .site-header.is-scrolled {
+  background: rgba(248, 246, 242, 0.96) !important;
+  border-bottom: 1px solid rgba(31, 58, 95, 0.13) !important;
+  box-shadow: 0 12px 34px rgba(31, 58, 95, 0.12) !important;
+  backdrop-filter: blur(16px) saturate(1.08) !important;
+  -webkit-backdrop-filter: blur(16px) saturate(1.08) !important;
+}
+
+body.tet-about-page-active .site-header.is-scrolled .main-nav__link {
+  color: #1f3a5f !important;
+  text-shadow: none !important;
+}
+
+body.tet-about-page-active .site-header.is-scrolled .main-nav__link:hover,
+body.tet-about-page-active .site-header.is-scrolled .main-nav__link:focus-visible,
+body.tet-about-page-active .site-header.is-scrolled .main-nav__link.is-active {
+  color: #c8922d !important;
+}
+
+body.tet-about-page-active .site-header.is-scrolled .main-nav__link.is-active::after {
+  background: #c8922d !important;
+  box-shadow: none !important;
+}
+
+body.tet-about-page-active .site-header.is-scrolled .header-contact-btn {
+  border-color: #c8922d !important;
+  background: #c8922d !important;
+  color: #ffffff !important;
+  box-shadow: 0 10px 24px rgba(200, 146, 45, 0.2) !important;
+}
+
+body.tet-about-page-active .site-header.is-scrolled .header-contact-btn:hover,
+body.tet-about-page-active .site-header.is-scrolled .header-contact-btn:focus-visible {
+  border-color: #1f3a5f !important;
+  background: #1f3a5f !important;
+  box-shadow: 0 13px 28px rgba(31, 58, 95, 0.2) !important;
+}
+
+/* Hero positioning layer and restrained motion. */
+.tet-about__hero {
+  position: relative;
+  isolation: isolate;
+}
+
+.tet-about__hero .page-hero {
+  animation: tet-about-hero-drift 16s ease-out both;
+}
+
+.tet-about__hero .page-hero__content {
+  animation: tet-about-hero-copy-in 820ms cubic-bezier(0.2, 0.72, 0.2, 1) both;
+}
+
+.tet-about__hero-positioning {
+  position: absolute;
+  z-index: 5;
+  right: var(--tet-about-gutter);
+  bottom: clamp(24px, 3vw, 44px);
+  display: grid;
+  gap: 7px;
+  max-width: 430px;
+  padding: 16px 20px;
+  border: 1px solid rgba(255, 255, 255, 0.28);
+  border-radius: 8px;
+  background: rgba(31, 58, 95, 0.62);
+  color: #ffffff;
+  text-align: right;
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  box-shadow: 0 14px 36px rgba(20, 35, 55, 0.18);
+}
+
+.tet-about__hero-positioning span {
+  color: var(--tet-about-gold);
+  font-size: 0.7rem;
+  font-weight: 800;
+  letter-spacing: 0.17em;
+  text-transform: uppercase;
+}
+
+.tet-about__hero-positioning strong {
+  font-size: clamp(0.9rem, 1vw, 1.05rem);
+  font-weight: 600;
+  line-height: 1.35;
+}
+
+/* One typography system across the editorial page. */
+.tet-about__story-copy h2 {
+  max-width: 720px;
+  font-family: var(--tet-about-font-display);
+  font-size: clamp(2.85rem, 3.75vw, 4.35rem);
+  font-weight: 500;
+  line-height: 0.98;
+  letter-spacing: -0.035em;
+}
+
+.tet-about__story-copy h2 span {
+  margin-top: 8px;
+}
+
+/*
+ * Temporary visual treatment until a genuine company/team photograph
+ * becomes available. The asset itself remains unchanged.
+ */
+.tet-about__story-media::after {
+  content: 'RHODES · LOCAL DESTINATION EXPERIENCE';
+  position: absolute;
+  right: 18px;
+  bottom: 16px;
+  max-width: calc(100% - 36px);
+  padding: 8px 10px;
+  border-radius: 4px;
+  background: rgba(31, 58, 95, 0.76);
+  color: #ffffff;
+  font-size: 0.62rem;
+  font-weight: 800;
+  letter-spacing: 0.13em;
+  text-transform: uppercase;
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+}
+
+/* Values: editorial captions, progress and synced pause state. */
+.tet-about__values-media {
+  display: grid;
+  gap: 12px;
+}
+
+.tet-about__values-meta {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  max-width: 580px;
+  color: var(--tet-about-blue);
+  font-size: 0.68rem;
+  font-weight: 800;
+  letter-spacing: 0.13em;
+  text-transform: uppercase;
+}
+
+.tet-about__values-meta span:last-child {
+  color: var(--tet-about-gold);
+}
+
+.tet-about__values-progress {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 7px;
+  width: 100%;
+  max-width: 580px;
+}
+
+.tet-about__values-progress span {
+  height: 2px;
+  overflow: hidden;
+  background: rgba(31, 58, 95, 0.15);
+}
+
+.tet-about__values-progress span::after {
+  content: '';
+  display: block;
+  width: 100%;
+  height: 100%;
+  transform: scaleX(0);
+  transform-origin: left;
+  background: var(--tet-about-gold);
+}
+
+.tet-about__values-progress span.is-active::after {
+  animation: tet-about-value-progress 5.6s linear both;
+}
+
+.tet-about__values.is-paused .tet-about__values-progress span.is-active::after {
+  animation-play-state: paused;
+}
+
+/* Strengths stay compact, but gain depth and responsive micro-motion. */
+.tet-about__strengths {
+  position: relative;
+  overflow: hidden;
+}
+
+.tet-about__strengths::before {
+  content: '';
+  position: absolute;
+  inset: auto -8% -50% 38%;
+  height: 110%;
+  pointer-events: none;
+  opacity: 0.035;
+  background:
+    repeating-radial-gradient(
+      ellipse at center,
+      var(--tet-about-blue) 0 1px,
+      transparent 1px 16px
+    );
+  transform: rotate(-5deg);
+}
+
+.tet-about__strengths-inner {
+  position: relative;
+  z-index: 1;
+}
+
+.tet-about__strength {
+  transition: transform 260ms ease;
+}
+
+.tet-about__strength-icon {
+  transition:
+    transform 260ms ease,
+    border-color 260ms ease,
+    background-color 260ms ease;
+}
+
+.tet-about__strength p {
+  font-size: 0.9rem;
+  line-height: 1.54;
+}
+
+/* Numbers: proof-led animation and an almost invisible contour texture. */
+.tet-about__stats::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  opacity: 0.035;
+  background-image:
+    repeating-radial-gradient(
+      ellipse at 50% 120%,
+      #ffffff 0 1px,
+      transparent 1px 18px
+    );
+}
+
+.tet-about__stats > .tet-about__container {
+  position: relative;
+  z-index: 2;
+}
+
+.tet-about__stat strong {
+  font-size: clamp(2.1rem, 2.42vw, 2.95rem);
+}
+
+.tet-about__stat span {
+  font-size: 0.78rem;
+}
+
+/*
+ * Accreditation strip deliberately changes from another blue banner to a
+ * light trust surface, so it does not visually repeat the metrics or footer.
+ */
+.tet-about .tet-about__trust {
+  border: 1px solid rgba(31, 58, 95, 0.12);
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.38) !important;
+  box-shadow: 0 12px 34px rgba(31, 58, 95, 0.08);
+}
+
+.tet-about .tet-about__trust .trust-bar__partners {
+  background: transparent !important;
+}
+
+.tet-about .tet-about__trust .partner-mark,
+.tet-about .tet-about__trust .partner-mark strong,
+.tet-about .tet-about__trust .partner-mark span,
+.tet-about .tet-about__trust .partner-mark svg {
+  color: var(--tet-about-blue) !important;
+  stroke: currentColor;
+}
+
+.tet-about .tet-about__trust .partner-mark span {
+  color: var(--tet-about-charcoal) !important;
+}
+
+.tet-about .tet-about__trust .partner-mark + .partner-mark {
+  border-left-color: rgba(200, 146, 45, 0.42);
+}
+
+/* A tighter, clearly B2B closing action. */
+.tet-about__contact-top {
+  grid-template-columns: minmax(0, 1fr) minmax(210px, 245px);
+  align-items: end;
+}
+
+.tet-about__contact-button {
+  min-width: 230px;
+}
+
+.tet-about__contact-signals {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 12px 28px;
+  margin-top: clamp(20px, 2vw, 28px);
+  padding-top: clamp(14px, 1.6vw, 20px);
+  border-top: 1px solid var(--tet-about-line);
+  color: var(--tet-about-blue);
+  font-size: 0.76rem;
+  font-weight: 750;
+  letter-spacing: 0.035em;
+}
+
+.tet-about__contact-signals span {
+  position: relative;
+  padding-left: 16px;
+}
+
+.tet-about__contact-signals span::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 0;
+  width: 6px;
+  height: 6px;
+  transform: translateY(-50%) rotate(45deg);
+  background: var(--tet-about-gold);
+}
+
+/* Motion never hides content when JS is unavailable. */
+body.tet-about-page-active [data-about-reveal] {
+  opacity: 0;
+  transform: translateY(14px);
+  transition:
+    opacity 650ms cubic-bezier(0.2, 0.7, 0.2, 1),
+    transform 650ms cubic-bezier(0.2, 0.7, 0.2, 1);
+}
+
+body.tet-about-page-active [data-about-reveal].is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.tet-about__strength:nth-child(2)[data-about-reveal],
+.tet-about__stat:nth-child(2)[data-about-reveal] {
+  transition-delay: 70ms;
+}
+
+.tet-about__strength:nth-child(3)[data-about-reveal],
+.tet-about__stat:nth-child(3)[data-about-reveal] {
+  transition-delay: 140ms;
+}
+
+.tet-about__stat:nth-child(4)[data-about-reveal] {
+  transition-delay: 210ms;
+}
+
+.tet-about__stat:nth-child(5)[data-about-reveal] {
+  transition-delay: 280ms;
+}
+
+.tet-about__stat:nth-child(6)[data-about-reveal] {
+  transition-delay: 350ms;
+}
+
+@keyframes tet-about-value-progress {
+  from {
+    transform: scaleX(0);
+  }
+
+  to {
+    transform: scaleX(1);
+  }
+}
+
+@keyframes tet-about-hero-drift {
+  from {
+    background-position: center 53%;
+  }
+
+  to {
+    background-position: center 48%;
+  }
+}
+
+@keyframes tet-about-hero-copy-in {
+  from {
+    opacity: 0;
+    transform: translateY(18px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@media (hover: hover) {
+  .tet-about__strength:hover {
+    transform: translateY(-4px);
+  }
+
+  .tet-about__strength:hover .tet-about__strength-icon {
+    transform: translateY(-2px);
+    border-color: rgba(200, 146, 45, 0.34);
+    background: rgba(200, 146, 45, 0.14);
+  }
+}
+
+@media (max-width: 940px) {
+  .tet-about__hero-positioning {
+    right: 28px;
+    bottom: 22px;
+    max-width: 360px;
+  }
+
+  .tet-about__values-meta,
+  .tet-about__values-progress {
+    max-width: 760px;
+  }
+
+  .tet-about__contact-top {
+    grid-template-columns: 1fr;
+    align-items: start;
+  }
+
+  body.tet-about-page-active .site-header.is-scrolled .main-nav__link {
+    color: #1f3a5f !important;
+  }
+}
+
+@media (max-width: 720px) {
+  .tet-about__hero-positioning {
+    right: 20px;
+    bottom: 16px;
+    left: 20px;
+    max-width: none;
+    padding: 12px 14px;
+    text-align: left;
+  }
+
+  .tet-about__hero-positioning strong {
+    font-size: 0.84rem;
+  }
+
+  .tet-about__story-media::after {
+    right: 12px;
+    bottom: 12px;
+    max-width: calc(100% - 24px);
+    font-size: 0.55rem;
+  }
+
+  .tet-about__values-meta {
+    align-items: flex-start;
+    gap: 14px;
+  }
+
+  .tet-about__contact-signals {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 10px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .tet-about__hero .page-hero,
+  .tet-about__hero .page-hero__content {
+    animation: none !important;
+  }
+
+  body.tet-about-page-active [data-about-reveal] {
+    opacity: 1;
+    transform: none;
+  }
+
+  .tet-about__values-progress span.is-active::after {
+    animation: none;
+    transform: scaleX(1);
+  }
+}
