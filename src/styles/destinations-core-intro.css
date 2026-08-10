@@ -1,8 +1,206 @@
+/* =========================================================
+   TOP EURO TRAVEL — DESTINATIONS PAGE
 
+   Deep Aegean Blue:   #1F3A5F
+   Mediterranean Gold: #C8922D
+   Warm Ivory:         #F8F6F2
+   Charcoal Navy:      #202833
+   ========================================================= */
+
+.tet-destinations-page {
+  --dest-blue: #1f3a5f;
+  --dest-gold: #c8922d;
+  --dest-ivory: #f8f6f2;
+  --dest-charcoal: #202833;
+  --dest-copy: #202833;
+  --dest-white: #ffffff;
+  --dest-line: rgba(31, 58, 95, 0.14);
+  --dest-gold-line: rgba(200, 146, 45, 0.42);
+  --dest-soft-gold: rgba(200, 146, 45, 0.09);
+  --dest-shadow: 0 24px 62px rgba(31, 58, 95, 0.13);
+  --dest-max-width: 1460px;
+  --dest-gutter: clamp(20px, 4.2vw, 72px);
+
+  --dest-font-sans: var(
+    --font-sans,
+    var(
+      --font-body,
+      var(
+        --font-primary,
+        "Manrope",
+        "Inter",
+        "Segoe UI",
+        Arial,
+        sans-serif
+      )
+    )
+  );
+
+  --dest-font-display: var(
+    --font-serif,
+    var(
+      --font-display,
+      var(
+        --font-secondary,
+        "Cormorant Garamond",
+        Georgia,
+        "Times New Roman",
+        serif
+      )
+    )
+  );
+
+  overflow-x: clip;
+  background: var(--dest-ivory);
+  color: var(--dest-charcoal);
+  font-family: var(--dest-font-sans);
+}
+
+.tet-destinations-page *,
+.tet-destinations-page *::before,
+.tet-destinations-page *::after {
+  box-sizing: border-box;
+}
+
+/* =========================================================
+   PAGE-SPECIFIC SCROLLED HEADER
+   ========================================================= */
+
+body.tet-destinations-page-active .site-header.is-scrolled {
+  background: rgba(248, 246, 242, 0.96) !important;
+  border-bottom: 1px solid rgba(31, 58, 95, 0.13) !important;
+  box-shadow: 0 12px 34px rgba(31, 58, 95, 0.12) !important;
+  backdrop-filter: blur(16px) saturate(1.08) !important;
+  -webkit-backdrop-filter: blur(16px) saturate(1.08) !important;
+}
+
+body.tet-destinations-page-active
+  .site-header.is-scrolled
+  .main-nav__link {
+  color: var(--dest-blue, #1f3a5f) !important;
+  text-shadow: none !important;
+}
+
+body.tet-destinations-page-active
+  .site-header.is-scrolled
+  .main-nav__link:hover,
+body.tet-destinations-page-active
+  .site-header.is-scrolled
+  .main-nav__link:focus-visible,
+body.tet-destinations-page-active
+  .site-header.is-scrolled
+  .main-nav__link.is-active {
+  color: var(--dest-gold, #c8922d) !important;
+}
+
+body.tet-destinations-page-active
+  .site-header.is-scrolled
+  .main-nav__link.is-active::after {
+  background: var(--dest-gold, #c8922d) !important;
+}
+
+body.tet-destinations-page-active
+  .site-header.is-scrolled
+  .header-contact-btn {
+  border-color: var(--dest-gold, #c8922d) !important;
+  background: var(--dest-gold, #c8922d) !important;
+  color: #ffffff !important;
+}
+
+/* =========================================================
+   CORE DESTINATIONS INTRO
+   Matched to the About page typography and spacing
+   ========================================================= */
+
+.tet-dest-core {
+  padding-block: clamp(52px, 5vw, 72px);
+  overflow: hidden;
+  background: var(--dest-ivory);
+}
+
+.tet-dest-core__inner {
+  display: grid;
+  grid-template-columns: minmax(0, 0.94fr) minmax(0, 1.06fr);
+  width: min(
+    var(--dest-max-width),
+    calc(100% - (var(--dest-gutter) * 2))
+  );
+  margin-inline: auto;
+  align-items: center;
+  gap: clamp(44px, 5vw, 76px);
+}
+
+.tet-dest-core__headline {
+  position: relative;
+  min-width: 0;
+  padding-left: clamp(27px, 2.8vw, 38px);
+}
+
+.tet-dest-core__headline::before {
+  content: "";
+  position: absolute;
+  top: 2px;
+  left: 0;
+  width: 2px;
+  height: clamp(180px, 16vw, 220px);
+  background: var(--dest-gold);
+}
+
+.tet-dest-core__eyebrow {
+  margin: 0 0 18px;
+  color: var(--dest-gold);
+  font-family: var(--dest-font-sans);
+  font-size: 0.78rem;
+  font-weight: 800;
+  line-height: 1.2;
+  letter-spacing: 0.19em;
+  text-transform: uppercase;
+}
+
+.tet-dest-core__title {
+  display: grid;
+  max-width: 650px;
+  margin: 0;
+  color: var(--dest-blue);
+  font-family: var(--dest-font-display);
+  font-size: clamp(2.75rem, 3.65vw, 4.15rem);
+  font-weight: 500;
+  line-height: 0.98;
+  letter-spacing: -0.035em;
+  text-wrap: balance;
+}
+
+.tet-dest-core__title span {
+  display: block;
+}
+
+/* RHODES → KOS ROUTE */
+
+.tet-dest-core__route {
+  display: grid;
+  grid-template-columns: auto minmax(120px, 1fr) auto;
+  width: 100%;
+  max-width: 590px;
+  align-items: center;
+  gap: 18px;
+  margin-top: clamp(28px, 3vw, 36px);
+}
+
+.tet-dest-core__route-stop {
+  display: inline-flex;
+  align-items: center;
+  gap: 9px;
+  color: var(--dest-blue);
+  font-family: var(--dest-font-sans);
+  font-size: 0.7rem;
+  font-weight: 800;
+  line-height: 1;
+  letter-spacing: 0.13em;
+  text-transform: uppercase;
+  white-space: nowrap;
 }
 
 .tet-dest-core__route-stop--end {
-  flex-direction: row-reverse;
   justify-content: flex-end;
 }
 
@@ -10,14 +208,8 @@
   font: inherit;
 }
 
-.tet-dest-core__route-dot {
 .tet-dest-core__island {
   display: block;
-  width: 9px;
-  height: 9px;
-  border: 2px solid var(--dest-gold);
-  border-radius: 50%;
-  background: var(--dest-ivory);
   flex: 0 0 auto;
   overflow: visible;
   color: var(--dest-gold);
@@ -55,13 +247,923 @@
 .tet-dest-core__route-track {
   position: relative;
   display: block;
+  min-width: 0;
+  height: 30px;
+}
+
+.tet-dest-core__route-track::before {
+  content: "";
+  position: absolute;
+  top: 50%;
+  right: 0;
+  left: 0;
+  height: 1px;
+  transform: translateY(-50%);
+  background-image: linear-gradient(
+    to right,
+    var(--dest-gold) 0 38%,
+    transparent 38% 64%
+  );
+  background-position: center;
+  background-repeat: repeat-x;
+  background-size: 12px 1px;
+}
+
+.tet-dest-core__route-compass {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  display: inline-flex;
+  width: 30px;
+  height: 30px;
+  align-items: center;
+  justify-content: center;
+  transform: translate(-50%, -50%);
+  background: var(--dest-ivory);
+  color: var(--dest-gold);
+  font-size: 1.05rem;
+  line-height: 1;
+}
+
+.tet-dest-core__copy {
+  max-width: 690px;
+  padding-top: 4px;
+}
+
+.tet-dest-core__copy p {
+  margin: 0 0 18px;
+  color: var(--dest-charcoal);
+  font-family: var(--dest-font-sans);
+  font-size: clamp(0.98rem, 0.95vw, 1.06rem);
+  font-weight: 400;
+  line-height: 1.62;
+  letter-spacing: 0;
+}
+
+.tet-dest-core__copy p:last-child {
+  margin-bottom: 0;
+}
+
+/* =========================================================
+   DESTINATION CHAPTERS
+   ========================================================= */
+
+.tet-dest-chapters {
+  padding-block: clamp(14px, 1.6vw, 24px)
+    clamp(54px, 5vw, 76px);
+  overflow: hidden;
+  background: var(--dest-ivory);
+}
+
+.tet-dest-chapters__container {
+  width: min(
+    var(--dest-max-width),
+    calc(100% - (var(--dest-gutter) * 2))
+  );
+  margin-inline: auto;
+}
+
+.tet-dest-chapter {
+  position: relative;
+  display: grid;
+  grid-template-columns: minmax(0, 1.16fr) minmax(390px, 0.84fr);
+  min-height: clamp(420px, 34vw, 520px);
+  align-items: stretch;
+  border-top: 1px solid var(--dest-line);
+  border-bottom: 1px solid var(--dest-line);
+}
+
+.tet-dest-chapter--reverse {
+  grid-template-columns: minmax(390px, 0.84fr) minmax(0, 1.16fr);
+}
+
+.tet-dest-chapter__media {
+  position: relative;
+  min-width: 0;
+  min-height: 100%;
+  overflow: hidden;
+  border-radius: 14px;
+  background: rgba(31, 58, 95, 0.07);
+  box-shadow: var(--dest-shadow);
+}
+
+.tet-dest-chapter--reverse .tet-dest-chapter__media {
+  grid-column: 2;
+  grid-row: 1;
+}
+
+.tet-dest-chapter__media picture,
+.tet-dest-chapter__media img {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+.tet-dest-chapter__media img {
+  object-fit: cover;
+  object-position: center;
+  transform: scale(1.001);
+  transition: transform 900ms cubic-bezier(0.2, 0.72, 0.2, 1);
+}
+
+.tet-dest-chapter__media-shade {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: linear-gradient(
+    180deg,
+    transparent 56%,
+    rgba(31, 58, 95, 0.44) 100%
+  );
+}
+
+.tet-dest-chapter__caption {
+  position: absolute;
+  right: 18px;
+  bottom: 16px;
+  z-index: 2;
+  margin: 0;
+  padding: 8px 11px;
+  border: 1px solid rgba(255, 255, 255, 0.22);
+  border-radius: 4px;
+  background: rgba(31, 58, 95, 0.76);
+  color: #ffffff;
+  font-size: 0.62rem;
+  font-weight: 800;
+  line-height: 1;
+  letter-spacing: 0.13em;
+  text-transform: uppercase;
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+}
+
+.tet-dest-chapter__content {
+  position: relative;
+  display: flex;
+  min-width: 0;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  padding: clamp(36px, 4vw, 60px) clamp(36px, 4.6vw, 68px);
+}
+
+.tet-dest-chapter--reverse .tet-dest-chapter__content {
+  grid-column: 1;
+  grid-row: 1;
+}
+
+.tet-dest-chapter__meta {
+  display: flex;
+  align-items: center;
+  gap: 13px;
+  margin-bottom: 16px;
+}
+
+.tet-dest-chapter__number {
+  color: var(--dest-gold);
+  font-family: var(--dest-font-display);
+  font-size: 1.45rem;
+  font-weight: 500;
+  line-height: 1;
+}
+
+.tet-dest-chapter__label {
+  color: var(--dest-gold);
+  font-size: 0.68rem;
+  font-weight: 800;
+  line-height: 1;
+  letter-spacing: 0.13em;
+  text-transform: uppercase;
+}
+
+.tet-dest-chapter__content h2 {
+  margin: 0 0 11px;
+  color: var(--dest-blue);
+  font-family: var(--dest-font-display);
+  font-size: clamp(2.75rem, 3.65vw, 4.15rem);
+  font-weight: 500;
+  line-height: 1;
+  letter-spacing: -0.035em;
+}
+
+.tet-dest-chapter__statement {
+  margin: 0 0 19px;
+  color: var(--dest-gold);
+  font-family: var(--dest-font-display);
+  font-size: clamp(1.12rem, 1.3vw, 1.42rem);
+  font-weight: 500;
+  line-height: 1.3;
+}
+
+.tet-dest-chapter__description {
+  max-width: 620px;
+  margin: 0;
+  color: var(--dest-charcoal);
+  font-family: var(--dest-font-sans);
+  font-size: clamp(0.98rem, 0.95vw, 1.06rem);
+  font-weight: 400;
+  line-height: 1.62;
+}
+
+.tet-dest-chapter__highlights {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px 0;
+  margin: 22px 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.tet-dest-chapter__highlights li {
+  display: inline-flex;
+  align-items: center;
+  color: var(--dest-blue);
+  font-size: 0.7rem;
+  font-weight: 800;
+  line-height: 1;
+  letter-spacing: 0.085em;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+.tet-dest-chapter__highlights li:not(:last-child)::after {
+  content: "·";
+  margin-inline: 12px;
+  color: var(--dest-gold);
+  font-size: 1rem;
+}
+
+.tet-dest-chapter__link {
+  display: inline-flex;
+  align-items: center;
+  gap: 11px;
+  margin-top: 25px;
+  padding-bottom: 5px;
+  border-bottom: 1px solid var(--dest-gold);
+  color: var(--dest-blue);
+  font-size: 0.72rem;
+  font-weight: 800;
+  line-height: 1;
+  letter-spacing: 0.08em;
+  text-decoration: none;
+  text-transform: uppercase;
+  transition:
+    color 180ms ease,
+    gap 180ms ease,
+    border-color 180ms ease;
+}
+
+.tet-dest-chapter__link:focus-visible,
+.tet-dest-experiences__all:focus-visible,
+.tet-dest-cta__button:focus-visible {
+  outline: 3px solid rgba(200, 146, 45, 0.38);
+  outline-offset: 6px;
+}
+
+.tet-dest-chapters__bridge {
+  display: grid;
+  grid-template-columns: minmax(40px, 1fr) auto minmax(40px, 1fr);
+  align-items: center;
+  gap: clamp(18px, 3vw, 38px);
+  padding-block: 22px;
+}
+
+.tet-dest-chapters__bridge-line {
+  height: 1px;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    var(--dest-gold),
+    transparent
+  );
+}
+
+.tet-dest-chapters__bridge-copy {
+  display: grid;
+  gap: 5px;
+  text-align: center;
+}
+
+.tet-dest-chapters__bridge-copy strong {
+  color: var(--dest-gold);
+  font-size: 0.68rem;
+  font-weight: 800;
+  line-height: 1;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+.tet-dest-chapters__bridge-copy span {
+  color: var(--dest-blue);
+  font-size: 0.64rem;
+  font-weight: 750;
+  line-height: 1.25;
+  letter-spacing: 0.075em;
+  text-transform: uppercase;
+}
+
+/* =========================================================
+   WHY RHODES & KOS
+   ========================================================= */
+
+.tet-dest-benefits {
+  position: relative;
+  padding-block: clamp(42px, 4vw, 60px);
+  overflow: hidden;
+  background: var(--dest-blue);
+  color: var(--dest-white);
+}
+
+.tet-dest-benefits::before,
+.tet-dest-benefits::after {
+  content: "";
+  position: absolute;
+  width: 250px;
+  height: 380px;
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  border-radius: 48% 52% 44% 56%;
+  pointer-events: none;
+}
+
+.tet-dest-benefits::before {
+  top: -90px;
+  left: -130px;
+  transform: rotate(17deg);
+}
+
+.tet-dest-benefits::after {
+  right: -130px;
+  bottom: -100px;
+  transform: rotate(-24deg);
+}
+
+.tet-dest-benefits__inner {
+  position: relative;
+  z-index: 1;
+  width: min(
+    1360px,
+    calc(100% - (var(--dest-gutter) * 2))
+  );
+  margin-inline: auto;
+}
+
+.tet-dest-benefits__heading {
+  max-width: 760px;
+  margin: 0 auto clamp(28px, 3vw, 40px);
+  text-align: center;
+}
+
+.tet-dest-benefits__heading > p {
+  margin: 0 0 10px;
+  color: var(--dest-gold);
+  font-size: 0.72rem;
+  font-weight: 800;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+}
+
+.tet-dest-benefits__heading h2 {
+  margin: 0;
+  color: var(--dest-white);
+  font-family: var(--dest-font-display);
+  font-size: clamp(2.15rem, 2.75vw, 3.2rem);
+  font-weight: 500;
+  line-height: 1;
+  letter-spacing: -0.03em;
+  text-wrap: balance;
+}
+
+.tet-dest-benefits__grid {
+  position: relative;
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+}
+
+.tet-dest-benefits__grid::before {
+  content: "";
+  position: absolute;
+  top: 35px;
+  right: 8%;
+  left: 8%;
+  height: 1px;
+  background: var(--dest-gold-line);
+}
+
+.tet-dest-benefit {
+  position: relative;
+  z-index: 1;
+  padding: 0 clamp(16px, 2vw, 28px);
+  text-align: center;
+}
+
+.tet-dest-benefit__icon {
+  display: inline-flex;
+  width: 64px;
+  height: 64px;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid var(--dest-gold);
+  border-radius: 50%;
+  background: var(--dest-blue);
+  color: var(--dest-gold);
+}
+
+.tet-dest-benefit h3 {
+  margin: 17px 0 8px;
+  color: var(--dest-white);
+  font-family: var(--dest-font-display);
+  font-size: 1.16rem;
+  font-weight: 500;
+  line-height: 1.1;
+}
+
+.tet-dest-benefit p {
+  max-width: 190px;
+  margin: 0 auto;
+  color: rgba(255, 255, 255, 0.78);
+  font-size: 0.8rem;
+  line-height: 1.48;
+}
+
+/* =========================================================
+   EXPERIENCES
+   ========================================================= */
+
+.tet-dest-experiences {
+  padding-block: clamp(54px, 5vw, 80px);
+  background: var(--dest-ivory);
+}
+
+.tet-dest-experiences__inner {
+  width: min(
+    var(--dest-max-width),
+    calc(100% - (var(--dest-gutter) * 2))
+  );
+  margin-inline: auto;
+}
+
+.tet-dest-experiences__heading {
+  display: flex;
+  align-items: end;
+  justify-content: space-between;
+  gap: 36px;
+  margin-bottom: clamp(30px, 3vw, 42px);
+}
+
+.tet-dest-experiences__heading p {
+  margin: 0 0 10px;
+  color: var(--dest-gold);
+  font-size: 0.72rem;
+  font-weight: 800;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+}
+
+.tet-dest-experiences__heading h2 {
+  max-width: 720px;
+  margin: 0;
+  color: var(--dest-blue);
+  font-family: var(--dest-font-display);
+  font-size: clamp(2.45rem, 3.15vw, 3.75rem);
+  font-weight: 500;
+  line-height: 1;
+  letter-spacing: -0.035em;
+  text-wrap: balance;
+}
+
+.tet-dest-experiences__all {
+  display: inline-flex;
+  flex: 0 0 auto;
+  align-items: center;
+  gap: 10px;
+  padding-bottom: 5px;
+  border-bottom: 1px solid var(--dest-gold);
+  color: var(--dest-blue);
+  font-size: 0.72rem;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  text-decoration: none;
+  text-transform: uppercase;
+}
+
+.tet-dest-experiences__grid {
+  display: grid;
+  grid-template-columns: 1.12fr 1fr 1fr;
+  grid-template-rows: repeat(2, minmax(190px, 1fr));
+  gap: 10px;
+}
+
+.tet-dest-experience {
+  position: relative;
+  min-height: 190px;
+  overflow: hidden;
+  border-radius: 10px;
+  color: var(--dest-white);
+  text-decoration: none;
+  isolation: isolate;
+}
+
+.tet-dest-experience--large {
+  grid-row: 1 / 3;
+  min-height: 390px;
+}
+
+.tet-dest-experience--wide {
+  grid-column: 2 / 4;
+}
+
+.tet-dest-experience picture,
+.tet-dest-experience img {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+.tet-dest-experience img {
+  position: absolute;
+  inset: 0;
+  z-index: -2;
+  object-fit: cover;
+  transition: transform 800ms cubic-bezier(0.2, 0.72, 0.2, 1);
+}
+
+.tet-dest-experience__shade {
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background: linear-gradient(
+    180deg,
+    rgba(31, 58, 95, 0.05) 10%,
+    rgba(31, 58, 95, 0.84) 100%
+  );
+}
+
+.tet-dest-experience__content {
+  position: absolute;
+  right: 24px;
+  bottom: 22px;
+  left: 24px;
+  display: grid;
+  gap: 5px;
+}
+
+.tet-dest-experience__content small {
+  color: var(--dest-gold);
+  font-size: 0.66rem;
+  font-weight: 800;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+.tet-dest-experience__content strong {
+  font-family: var(--dest-font-display);
+  font-size: clamp(1.55rem, 2vw, 2.3rem);
+  font-weight: 500;
+  line-height: 0.98;
+}
+
+.tet-dest-experience__content > span {
+  max-width: 420px;
+  color: rgba(255, 255, 255, 0.8);
+  font-size: 0.78rem;
+  line-height: 1.42;
+}
+
+.tet-dest-experience__arrow {
+  position: absolute;
+  top: 18px;
+  right: 18px;
+  display: inline-flex;
+  width: 40px;
+  height: 40px;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid rgba(255, 255, 255, 0.5);
+  border-radius: 50%;
+  color: var(--dest-white);
+  transition:
+    transform 180ms ease,
+    background-color 180ms ease,
+    border-color 180ms ease;
+}
+
+/* =========================================================
+   CTA
+   ========================================================= */
+
+.tet-dest-cta {
+  padding: 0 var(--dest-gutter) clamp(48px, 4.5vw, 66px);
+  background: var(--dest-ivory);
+}
+
+.tet-dest-cta__inner {
+  display: grid;
+  grid-template-columns: minmax(300px, 0.95fr) minmax(260px, 0.8fr) auto;
+  width: min(1320px, 100%);
+  margin-inline: auto;
+  align-items: center;
+  gap: clamp(30px, 4vw, 58px);
+  padding: clamp(26px, 2.7vw, 36px);
+  border: 1px solid var(--dest-line);
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.3);
+}
+
+.tet-dest-cta__inner > div > p {
+  margin: 0 0 8px;
+  color: var(--dest-gold);
+  font-size: 0.7rem;
+  font-weight: 800;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+}
+
+.tet-dest-cta h2 {
+  max-width: 540px;
+  margin: 0;
+  color: var(--dest-blue);
+  font-family: var(--dest-font-display);
+  font-size: clamp(1.95rem, 2.45vw, 2.85rem);
+  font-weight: 500;
+  line-height: 1;
+  letter-spacing: -0.03em;
+  text-wrap: balance;
+}
+
+.tet-dest-cta__copy {
+  max-width: 430px;
+  margin: 0;
+  color: var(--dest-charcoal);
+  font-size: 0.92rem;
+  line-height: 1.55;
+}
+
+.tet-dest-cta__button {
+  display: inline-flex;
+  min-width: 220px;
+  min-height: 54px;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  padding-inline: 26px;
+  border: 1px solid var(--dest-gold);
+  border-radius: 5px;
+  background: var(--dest-gold);
+  box-shadow: 0 12px 28px rgba(200, 146, 45, 0.18);
+  color: var(--dest-white);
+  font-size: 0.74rem;
+  font-weight: 800;
+  letter-spacing: 0.075em;
+  text-decoration: none;
+  text-transform: uppercase;
+  transition:
+    transform 180ms ease,
+    background-color 180ms ease,
+    border-color 180ms ease;
+}
+
+/* =========================================================
+   REVEAL & HOVER
+   ========================================================= */
+
+body.tet-destinations-page-active [data-dest-reveal] {
+  opacity: 0;
+  transform: translateY(14px);
+  transition:
+    opacity 650ms cubic-bezier(0.2, 0.7, 0.2, 1),
+    transform 650ms cubic-bezier(0.2, 0.7, 0.2, 1);
+}
+
+body.tet-destinations-page-active
+  [data-dest-reveal].is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.tet-dest-benefit[data-dest-reveal] {
+  transition-delay: calc(var(--benefit-index) * 65ms);
+}
+
+@media (hover: hover) {
+  .tet-dest-chapter:hover .tet-dest-chapter__media img,
+  .tet-dest-experience:hover img {
+    transform: scale(1.022);
+  }
+
+  .tet-dest-chapter__link:hover,
+  .tet-dest-experiences__all:hover {
+    color: var(--dest-gold);
+  }
+
+  .tet-dest-chapter__link:hover {
+    gap: 16px;
+    border-color: var(--dest-blue);
+  }
+
+  .tet-dest-experience:hover .tet-dest-experience__arrow {
+    transform: translateX(3px);
+    border-color: var(--dest-gold);
+    background: var(--dest-gold);
+  }
+
+  .tet-dest-cta__button:hover {
+    transform: translateY(-2px);
+    border-color: var(--dest-blue);
+    background: var(--dest-blue);
+  }
+}
+
+/* =========================================================
+   LAPTOP
+   ========================================================= */
+
+@media (max-width: 1200px) {
+  .tet-dest-core__inner {
+    grid-template-columns: minmax(0, 0.93fr) minmax(0, 1.07fr);
+    gap: clamp(40px, 4vw, 58px);
+  }
+
+  .tet-dest-core__title {
+    font-size: clamp(2.7rem, 3.8vw, 3.85rem);
+  }
+
+  .tet-dest-core__copy {
+    max-width: 660px;
+  }
+
+  .tet-dest-chapter {
+    grid-template-columns: minmax(0, 1.05fr) minmax(370px, 0.95fr);
+    min-height: 430px;
+  }
+
+  .tet-dest-chapter--reverse {
+    grid-template-columns: minmax(370px, 0.95fr) minmax(0, 1.05fr);
+  }
+
+  .tet-dest-chapter__content {
+    padding: 38px clamp(32px, 3.8vw, 50px);
+  }
+
+  .tet-dest-benefit {
+    padding-inline: 14px;
+  }
+
+  .tet-dest-benefit h3 {
+    font-size: 1.16rem;
+  }
+
+  .tet-dest-cta__inner {
+    grid-template-columns: minmax(300px, 1fr) minmax(240px, 0.8fr);
+  }
+
+  .tet-dest-cta__button {
+    grid-column: 1 / 3;
+    justify-self: start;
+  }
+}
+
+/* =========================================================
+   TABLET
+   ========================================================= */
+
+@media (max-width: 920px) {
+  .tet-dest-core {
+    padding-block: 52px;
+  }
+
+  .tet-dest-core__inner {
+    grid-template-columns: 1fr;
+    gap: 38px;
+  }
+
+  .tet-dest-core__headline {
+    padding-left: 28px;
+  }
+
+  .tet-dest-core__headline::before {
+    height: 168px;
+  }
+
+  .tet-dest-core__title {
+    max-width: 680px;
+    font-size: clamp(2.8rem, 7vw, 4rem);
+  }
+
+  .tet-dest-core__route {
+    max-width: 620px;
+  }
+
+  .tet-dest-core__copy {
+    max-width: 760px;
+  }
+
+  .tet-dest-chapter,
+  .tet-dest-chapter--reverse {
+    grid-template-columns: 1fr;
+    min-height: 0;
+  }
+
+  .tet-dest-chapter__media,
+  .tet-dest-chapter--reverse .tet-dest-chapter__media {
+    grid-column: 1;
+    grid-row: 1;
+    min-height: 0;
+    aspect-ratio: 16 / 10;
+  }
+
+  .tet-dest-chapter__content,
+  .tet-dest-chapter--reverse .tet-dest-chapter__content {
+    grid-column: 1;
+    grid-row: 2;
+    padding: 42px 14px 50px;
+  }
+
+  .tet-dest-benefits__grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 34px 0;
+  }
+
+  .tet-dest-benefits__grid::before {
+    display: none;
+  }
+
+  .tet-dest-benefit:last-child {
+    grid-column: 1 / 3;
+    max-width: 320px;
+    justify-self: center;
+  }
+
+  .tet-dest-experiences__grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    grid-template-rows: repeat(3, minmax(190px, auto));
+  }
+
+  .tet-dest-experience--large {
+    grid-column: 1 / 2;
+    grid-row: 1 / 3;
+  }
+
+  .tet-dest-experience--wide {
+    grid-column: 2 / 3;
+  }
+
+  .tet-dest-cta__inner {
+    grid-template-columns: 1fr;
+  }
+
+  .tet-dest-cta__button {
+    grid-column: auto;
+  }
+}
+
+/* =========================================================
+   MOBILE
+   ========================================================= */
+
+@media (max-width: 640px) {
+  .tet-destinations-page {
+    --dest-gutter: 20px;
+  }
+
+  .tet-dest-core {
+    padding-block: 44px;
+  }
+
+  .tet-dest-core__inner {
+    gap: 31px;
+  }
+
+  .tet-dest-core__headline {
+    padding-left: 20px;
+  }
+
+  .tet-dest-core__headline::before {
+    height: 142px;
+  }
+
+  .tet-dest-core__eyebrow {
+    margin-bottom: 15px;
+    font-size: 0.69rem;
+  }
+
+  .tet-dest-core__title {
+    font-size: clamp(2.45rem, 11vw, 3.4rem);
+    line-height: 0.98;
+  }
+
+  .tet-dest-core__route {
+    grid-template-columns: auto minmax(70px, 1fr) auto;
+    gap: 11px;
+    margin-top: 25px;
+  }
+
+  .tet-dest-core__route-stop {
+    gap: 6px;
+    font-size: 0.58rem;
     letter-spacing: 0.08em;
   }
 
-  .tet-dest-core__route-dot {
-    width: 7px;
-    height: 7px;
-    border-width: 1.5px;
   .tet-dest-core__island--rhodes {
     width: 17px;
     height: 30px;
@@ -73,3 +1175,115 @@
   }
 
   .tet-dest-core__route-track {
+    height: 24px;
+  }
+
+  .tet-dest-core__route-compass {
+    width: 24px;
+    height: 24px;
+    font-size: 0.84rem;
+  }
+
+  .tet-dest-core__copy p {
+    margin-bottom: 17px;
+    font-size: 0.96rem;
+    line-height: 1.6;
+  }
+
+  .tet-dest-chapters {
+    padding-bottom: 56px;
+  }
+
+  .tet-dest-chapter__media,
+  .tet-dest-chapter--reverse .tet-dest-chapter__media {
+    aspect-ratio: 4 / 3;
+    border-radius: 10px;
+  }
+
+  .tet-dest-chapter__content,
+  .tet-dest-chapter--reverse .tet-dest-chapter__content {
+    padding: 34px 2px 42px;
+  }
+
+  .tet-dest-chapter__content h2 {
+    font-size: clamp(2.7rem, 12vw, 3.65rem);
+  }
+
+  .tet-dest-chapter__statement {
+    margin-bottom: 18px;
+    font-size: 1.28rem;
+  }
+
+  .tet-dest-chapter__description {
+    font-size: 0.95rem;
+    line-height: 1.62;
+  }
+
+  .tet-dest-chapters__bridge {
+    grid-template-columns: minmax(18px, 1fr) auto minmax(18px, 1fr);
+    gap: 12px;
+    padding-block: 21px;
+  }
+
+  .tet-dest-chapters__bridge-copy {
+    max-width: 210px;
+  }
+
+  .tet-dest-benefits__grid {
+    grid-template-columns: 1fr;
+  }
+
+  .tet-dest-benefit:last-child {
+    grid-column: auto;
+  }
+
+  .tet-dest-experiences__heading {
+    display: grid;
+    align-items: start;
+  }
+
+  .tet-dest-experiences__grid {
+    grid-template-columns: 1fr;
+    grid-template-rows: none;
+  }
+
+  .tet-dest-experience,
+  .tet-dest-experience--large,
+  .tet-dest-experience--wide {
+    grid-column: auto;
+    grid-row: auto;
+    min-height: 245px;
+  }
+
+  .tet-dest-experience--large {
+    min-height: 320px;
+  }
+
+  .tet-dest-cta__inner {
+    padding: 28px 24px;
+  }
+
+  .tet-dest-cta__button {
+    width: 100%;
+    min-width: 0;
+  }
+}
+
+/* =========================================================
+   REDUCED MOTION
+   ========================================================= */
+
+@media (prefers-reduced-motion: reduce) {
+  .tet-destinations-page *,
+  .tet-destinations-page *::before,
+  .tet-destinations-page *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+
+  body.tet-destinations-page-active [data-dest-reveal] {
+    opacity: 1;
+    transform: none;
+  }
+}
