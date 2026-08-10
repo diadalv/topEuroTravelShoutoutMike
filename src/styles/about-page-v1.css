@@ -593,9 +593,70 @@
 /* TRUST BAR + CONTACT */
 
 .tet-about .tet-about__trust {
+  display: block;
   width: calc(100% - var(--tet-about-gutter) - var(--tet-about-gutter));
   max-width: var(--tet-about-max-width);
   margin: clamp(24px, 2.2vw, 34px) auto 0;
+  overflow: hidden;
+}
+
+.tet-about .tet-about__trust .trust-bar__partners {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  width: 100%;
+  min-height: 82px;
+  align-items: stretch;
+  padding: 10px clamp(18px, 2.2vw, 34px);
+}
+
+.tet-about .tet-about__trust .partner-mark {
+  display: flex;
+  width: 100%;
+  min-width: 0;
+  min-height: 62px;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  padding-inline: clamp(18px, 2.2vw, 34px);
+  text-align: left;
+}
+
+.tet-about .tet-about__trust .partner-mark + .partner-mark {
+  border-left: 1px solid rgba(255, 255, 255, 0.22);
+}
+
+.tet-about .tet-about__trust .partner-mark > div {
+  min-width: 0;
+}
+
+.tet-about .tet-about__trust .partner-mark strong,
+.tet-about .tet-about__trust .partner-mark span {
+  display: block;
+}
+
+.tet-about .tet-about__trust .partner-mark strong {
+  white-space: nowrap;
+}
+
+
+@media (max-width: 820px) {
+  .tet-about .tet-about__trust .trust-bar__partners {
+    grid-template-columns: 1fr;
+    min-height: 0;
+    gap: 0;
+    padding: 8px 18px;
+  }
+
+  .tet-about .tet-about__trust .partner-mark {
+    min-height: 56px;
+    justify-content: flex-start;
+    padding-inline: 12px;
+  }
+
+  .tet-about .tet-about__trust .partner-mark + .partner-mark {
+    border-top: 1px solid rgba(255, 255, 255, 0.2);
+    border-left: 0;
+  }
 }
 
 .tet-about__contact {
