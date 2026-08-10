@@ -28,6 +28,7 @@ import {
 } from 'lucide-react';
 import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
+import { Image } from '@/components/ui/image';
 
 const MEDIA = {
   logo: 'https://static.wixstatic.com/media/c3c625_668b8529b08249c48f9a8667135d56b1~mv2.png',
@@ -1939,7 +1940,7 @@ export default function TravelHomePage() {
       <header className={`tet-topbar ${scrolled ? 'is-scrolled' : ''}`}>
         <div className="tet-topbar__inner tet-shell">
           <Link className="tet-brand" to="/" aria-label="Top Euro Travel home" onClick={closeMenu}>
-            <img src={MEDIA.logo} alt="Top Euro Travel" />
+            <Image src={MEDIA.logo} alt="Top Euro Travel" />
           </Link>
 
           <button
@@ -2030,7 +2031,7 @@ export default function TravelHomePage() {
         </div>
 
         <Link className="tet-bridge__item" to="/rhodes">
-          <span className="tet-bridge__thumb"><img src={MEDIA.bridgeRhodes} alt="Rhodes" /></span>
+          <span className="tet-bridge__thumb"><Image src={MEDIA.bridgeRhodes} alt="Rhodes" /></span>
           <span className="tet-bridge__copy">
             <small>Rhodes</small>
             <strong>Timeless Island</strong>
@@ -2040,7 +2041,7 @@ export default function TravelHomePage() {
         </Link>
 
         <Link className="tet-bridge__item" to="/kos">
-          <span className="tet-bridge__thumb"><img src={MEDIA.bridgeKos} alt="Kos" /></span>
+          <span className="tet-bridge__thumb"><Image src={MEDIA.bridgeKos} alt="Kos" /></span>
           <span className="tet-bridge__copy">
             <small>Kos</small>
             <strong>Authentic Escape</strong>
@@ -2095,7 +2096,7 @@ export default function TravelHomePage() {
           </div>
 
           <div className="tet-intro__visual" data-motion="right">
-            <img src={MEDIA.intro} alt="Lindos and the Aegean Sea" loading="eager" />
+            <Image src={MEDIA.intro} alt="Lindos and the Aegean Sea" loading="eager" />
             <Link className="tet-intro__play" to="/destinations">
               <span className="tet-play-circle"><Play aria-hidden="true" /></span>
               <span>Discover<br />Our World</span>
@@ -2121,7 +2122,7 @@ export default function TravelHomePage() {
 
           <div className="tet-destinations__rail" data-motion="scale" data-stagger="true">
             <article className="tet-destination">
-              <img src={MEDIA.rhodes} alt="Rhodes destination" loading="lazy" />
+              <Image src={MEDIA.rhodes} alt="Rhodes destination" loading="lazy" />
               <div className="tet-destination__copy">
                 <h3>Rhodes</h3>
                 <p>Where history, energy and hospitality meet.</p>
@@ -2132,7 +2133,7 @@ export default function TravelHomePage() {
             </article>
 
             <article className="tet-destination">
-              <img src={MEDIA.kos} alt="Kos destination" loading="lazy" />
+              <Image src={MEDIA.kos} alt="Kos destination" loading="lazy" />
               <div className="tet-destination__copy">
                 <h3>Kos</h3>
                 <p>Where authenticity meets a relaxed island rhythm.</p>
@@ -2160,7 +2161,7 @@ export default function TravelHomePage() {
 
         <section className="tet-mice tet-shell" aria-labelledby="tet-mice-title" data-motion="scale">
           <div className="tet-mice__media tet-mice__media--left">
-            <img src={MEDIA.miceLeft} alt="Group and event setting in Rhodes" loading="lazy" />
+            <Image src={MEDIA.miceLeft} alt="Group and event setting in Rhodes" loading="lazy" />
           </div>
 
           <div className="tet-mice__copy">
@@ -2176,7 +2177,7 @@ export default function TravelHomePage() {
           </div>
 
           <div className="tet-mice__media tet-mice__media--right">
-            <img src={MEDIA.miceRight} alt="Evening event atmosphere" loading="lazy" />
+            <Image src={MEDIA.miceRight} alt="Evening event atmosphere" loading="lazy" />
           </div>
         </section>
 
@@ -2194,7 +2195,7 @@ export default function TravelHomePage() {
           <div className="tet-experiences__rail" data-motion="up" data-stagger="true">
             {experiences.map(({ icon: Icon, title, image }) => (
               <Link className="tet-experience" to="/experiences" key={title}>
-                <img src={image} alt={title} loading="lazy" />
+                <Image src={image} alt={title} loading="lazy" />
                 <span className="tet-experience__icon"><Icon aria-hidden="true" /></span>
                 <strong>{title}</strong>
               </Link>
@@ -2219,8 +2220,8 @@ export default function TravelHomePage() {
             <small>— Our Partner</small>
           </div>
           <div className="tet-partners__images" aria-hidden="true">
-            <div><img src={MEDIA.partnerOne} alt="" loading="lazy" /></div>
-            <div><img src={MEDIA.partnerTwo} alt="" loading="lazy" /></div>
+            <div><Image src={MEDIA.partnerOne} alt="" loading="lazy" /></div>
+            <div><Image src={MEDIA.partnerTwo} alt="" loading="lazy" /></div>
           </div>
         </section>
       </div>
@@ -2228,7 +2229,7 @@ export default function TravelHomePage() {
       <footer className="tet-flat-footer">
         <div className="tet-flat-footer__main tet-shell">
           <div className="tet-footer-brand">
-            <img src={MEDIA.logo} alt="Top Euro Travel" />
+            <Image src={MEDIA.logo} alt="Top Euro Travel" />
             <p>Destination management and ground handling in Rhodes &amp; Kos since 1989.</p>
           </div>
 
