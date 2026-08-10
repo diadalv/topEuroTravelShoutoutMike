@@ -150,7 +150,7 @@ body.tet-destinations-page-active
   margin: 0 0 18px;
   color: var(--dest-gold);
   font-family: var(--dest-font-sans);
-  font-size: 0.78rem;
+  font-size: 0.76rem;
   font-weight: 800;
   line-height: 1.2;
   letter-spacing: 0.19em;
@@ -163,7 +163,7 @@ body.tet-destinations-page-active
   margin: 0;
   color: var(--dest-blue);
   font-family: var(--dest-font-display);
-  font-size: clamp(2.75rem, 3.65vw, 4.15rem);
+  font-size: clamp(2.85rem, 3.75vw, 4.35rem);
   font-weight: 500;
   line-height: 0.98;
   letter-spacing: -0.035em;
@@ -221,9 +221,6 @@ body.tet-destinations-page-active
   stroke-width: 1.7;
   stroke-linecap: round;
   stroke-linejoin: round;
-}
-
-.tet-dest-core__island path {
   fill: rgba(200, 146, 45, 0.07);
 }
 
@@ -287,7 +284,7 @@ body.tet-destinations-page-active
   margin: 0 0 18px;
   color: var(--dest-charcoal);
   font-family: var(--dest-font-sans);
-  font-size: clamp(0.98rem, 0.95vw, 1.06rem);
+  font-size: clamp(0.97rem, 0.95vw, 1.05rem);
   font-weight: 400;
   line-height: 1.62;
   letter-spacing: 0;
@@ -413,9 +410,9 @@ body.tet-destinations-page-active
   margin: 0 0 11px;
   color: var(--dest-blue);
   font-family: var(--dest-font-display);
-  font-size: clamp(2.75rem, 3.65vw, 4.15rem);
+  font-size: clamp(2.85rem, 3.75vw, 4.35rem);
   font-weight: 500;
-  line-height: 1;
+  line-height: 0.98;
   letter-spacing: -0.035em;
 }
 
@@ -433,7 +430,7 @@ body.tet-destinations-page-active
   margin: 0;
   color: var(--dest-charcoal);
   font-family: var(--dest-font-sans);
-  font-size: clamp(0.98rem, 0.95vw, 1.06rem);
+  font-size: clamp(0.97rem, 0.95vw, 1.05rem);
   font-weight: 400;
   line-height: 1.62;
 }
@@ -600,9 +597,9 @@ body.tet-destinations-page-active
   margin: 0;
   color: var(--dest-white);
   font-family: var(--dest-font-display);
-  font-size: clamp(2.15rem, 2.75vw, 3.2rem);
+  font-size: clamp(2.35rem, 2.75vw, 3.25rem);
   font-weight: 500;
-  line-height: 1;
+  line-height: 0.98;
   letter-spacing: -0.03em;
   text-wrap: balance;
 }
@@ -698,9 +695,9 @@ body.tet-destinations-page-active
   margin: 0;
   color: var(--dest-blue);
   font-family: var(--dest-font-display);
-  font-size: clamp(2.45rem, 3.15vw, 3.75rem);
+  font-size: clamp(2.35rem, 2.85vw, 3.1rem);
   font-weight: 500;
-  line-height: 1;
+  line-height: 0.98;
   letter-spacing: -0.035em;
   text-wrap: balance;
 }
@@ -875,9 +872,9 @@ body.tet-destinations-page-active
   margin: 0;
   color: var(--dest-white);
   font-family: var(--dest-font-display);
-  font-size: clamp(1.9rem, 2.25vw, 2.65rem);
+  font-size: clamp(2.35rem, 3vw, 3.55rem);
   font-weight: 500;
-  line-height: 1.02;
+  line-height: 0.98;
   letter-spacing: -0.03em;
   text-wrap: balance;
 }
@@ -886,8 +883,8 @@ body.tet-destinations-page-active
   max-width: 430px;
   margin: 0;
   color: rgba(255, 255, 255, 0.78);
-  font-size: 0.92rem;
-  line-height: 1.55;
+  font-size: clamp(0.9rem, 0.9vw, 0.98rem);
+  line-height: 1.48;
 }
 
 .tet-dest-cta__button {
@@ -903,7 +900,7 @@ body.tet-destinations-page-active
   background: var(--dest-gold);
   box-shadow: 0 12px 28px rgba(200, 146, 45, 0.18);
   color: var(--dest-white);
-  font-size: 0.74rem;
+  font-size: 0.75rem;
   font-weight: 800;
   letter-spacing: 0.075em;
   text-decoration: none;
@@ -931,7 +928,7 @@ body.tet-destinations-page-active [data-dest-reveal] {
 body.tet-destinations-page-active
   [data-dest-reveal].is-visible {
   opacity: 1;
-  transform: translateY(0);
+  transform: none;
 }
 
 .tet-dest-benefit[data-dest-reveal] {
@@ -980,7 +977,7 @@ body.tet-destinations-page-active
   }
 
   .tet-dest-core__title {
-    font-size: clamp(2.7rem, 3.8vw, 3.85rem);
+    font-size: clamp(2.85rem, 3.75vw, 4.35rem);
   }
 
   .tet-dest-core__copy {
@@ -1042,7 +1039,7 @@ body.tet-destinations-page-active
 
   .tet-dest-core__title {
     max-width: 680px;
-    font-size: clamp(2.8rem, 7vw, 4rem);
+    font-size: clamp(2.85rem, 3.75vw, 4.35rem);
   }
 
   .tet-dest-core__route {
@@ -1143,7 +1140,7 @@ body.tet-destinations-page-active
   }
 
   .tet-dest-core__title {
-    font-size: clamp(2.45rem, 11vw, 3.4rem);
+    font-size: clamp(2.55rem, 12vw, 3.75rem);
     line-height: 0.98;
   }
 
@@ -1201,7 +1198,7 @@ body.tet-destinations-page-active
   }
 
   .tet-dest-chapter__content h2 {
-    font-size: clamp(2.7rem, 12vw, 3.65rem);
+    font-size: clamp(2.55rem, 12vw, 3.75rem);
   }
 
   .tet-dest-chapter__statement {
@@ -1299,7 +1296,7 @@ body.tet-destinations-page-active
 
   .tet-dest-chapter__content h2 {
     margin-bottom: 7px;
-    font-size: clamp(2.8rem, 3.25vw, 3.75rem);
+    font-size: clamp(2.85rem, 3.75vw, 4.35rem);
   }
 
   .tet-dest-chapter__statement {
@@ -1309,8 +1306,8 @@ body.tet-destinations-page-active
 
   .tet-dest-chapter__description {
     max-width: none;
-    font-size: clamp(0.92rem, 0.88vw, 0.98rem);
-    line-height: 1.52;
+    font-size: clamp(0.97rem, 0.95vw, 1.05rem);
+    line-height: 1.62;
   }
 
   .tet-dest-chapter__highlights {
@@ -1342,7 +1339,7 @@ body.tet-destinations-page-active
 
   .tet-dest-experiences__heading h2 {
     max-width: 630px;
-    font-size: clamp(2.25rem, 2.7vw, 3.1rem);
+    font-size: clamp(2.35rem, 2.85vw, 3.1rem);
   }
 
   .tet-dest-experiences__grid {
