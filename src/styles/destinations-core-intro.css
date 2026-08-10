@@ -831,21 +831,34 @@ body.tet-destinations-page-active
    ========================================================= */
 
 .tet-dest-cta {
-  padding: 0 var(--dest-gutter) clamp(48px, 4.5vw, 66px);
+  padding: 0 var(--dest-gutter) clamp(50px, 4.5vw, 68px);
   background: var(--dest-ivory);
 }
 
 .tet-dest-cta__inner {
+  position: relative;
   display: grid;
-  grid-template-columns: minmax(300px, 0.95fr) minmax(260px, 0.8fr) auto;
+  grid-template-columns: minmax(310px, 1fr) minmax(270px, 0.85fr) auto;
   width: min(1320px, 100%);
   margin-inline: auto;
   align-items: center;
-  gap: clamp(30px, 4vw, 58px);
-  padding: clamp(26px, 2.7vw, 36px);
-  border: 1px solid var(--dest-line);
-  border-radius: 12px;
-  background: rgba(255, 255, 255, 0.3);
+  gap: clamp(30px, 3.6vw, 52px);
+  padding: clamp(32px, 3.2vw, 46px) clamp(30px, 3.6vw, 52px);
+  overflow: hidden;
+  border: 1px solid rgba(200, 146, 45, 0.38);
+  border-radius: 9px;
+  background: var(--dest-blue);
+  box-shadow: 0 18px 42px rgba(31, 58, 95, 0.14);
+}
+
+.tet-dest-cta__inner::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  width: 5px;
+  background: var(--dest-gold);
 }
 
 .tet-dest-cta__inner > div > p {
@@ -860,11 +873,11 @@ body.tet-destinations-page-active
 .tet-dest-cta h2 {
   max-width: 540px;
   margin: 0;
-  color: var(--dest-blue);
+  color: var(--dest-white);
   font-family: var(--dest-font-display);
-  font-size: clamp(1.95rem, 2.45vw, 2.85rem);
+  font-size: clamp(1.9rem, 2.25vw, 2.65rem);
   font-weight: 500;
-  line-height: 1;
+  line-height: 1.02;
   letter-spacing: -0.03em;
   text-wrap: balance;
 }
@@ -872,7 +885,7 @@ body.tet-destinations-page-active
 .tet-dest-cta__copy {
   max-width: 430px;
   margin: 0;
-  color: var(--dest-charcoal);
+  color: rgba(255, 255, 255, 0.78);
   font-size: 0.92rem;
   line-height: 1.55;
 }
@@ -880,13 +893,13 @@ body.tet-destinations-page-active
 .tet-dest-cta__button {
   display: inline-flex;
   min-width: 220px;
-  min-height: 54px;
+  min-height: 52px;
   align-items: center;
   justify-content: center;
   gap: 12px;
   padding-inline: 26px;
   border: 1px solid var(--dest-gold);
-  border-radius: 5px;
+  border-radius: 4px;
   background: var(--dest-gold);
   box-shadow: 0 12px 28px rgba(200, 146, 45, 0.18);
   color: var(--dest-white);
@@ -898,7 +911,9 @@ body.tet-destinations-page-active
   transition:
     transform 180ms ease,
     background-color 180ms ease,
-    border-color 180ms ease;
+    border-color 180ms ease,
+    color 180ms ease,
+    box-shadow 180ms ease;
 }
 
 /* =========================================================
@@ -947,8 +962,10 @@ body.tet-destinations-page-active
 
   .tet-dest-cta__button:hover {
     transform: translateY(-2px);
-    border-color: var(--dest-blue);
-    background: var(--dest-blue);
+    border-color: var(--dest-ivory);
+    background: var(--dest-ivory);
+    box-shadow: none;
+    color: var(--dest-blue);
   }
 }
 
