@@ -1,20 +1,24 @@
 import {
-  PageHero,
-  Photo,
-  TrustBar,
-  travelMedia,
-} from '@/components/travel/Shared';
-import '@/styles/about-page-v1.css';
+  useEffect,
+  useRef,
+  useState,
+  type LucideIcon,
+} from 'react';
+import { Link } from 'react-router-dom';
 import {
   ArrowRight,
   Globe2,
   Handshake,
   Headphones,
-  MapPin,
-  Users,
 } from 'lucide-react';
-import { useState, type LucideIcon } from 'react';
-import { Link } from 'react-router-dom';
+import {
+  PageHero,
+  PageSeo,
+  Photo,
+  TrustBar,
+  travelMedia,
+} from '@/components/travel/Shared';
+import '@/styles/about-page-v3.css';
 
 const images = {
   hero: travelMedia('about-hero-v2.jpg'),
@@ -26,12 +30,20 @@ type ValueItem = {
   copy: string;
   image: string;
   imageAlt: string;
+  location: string;
 };
 
 type FeatureItem = {
   icon: LucideIcon;
   title: string;
   copy: string;
+};
+
+type StatItem = {
+  label: string;
+  value: string;
+  animateTo?: number;
+  suffix?: string;
 };
 
 const values = [
@@ -41,6 +53,7 @@ const values = [
     image:
       'https://static.wixstatic.com/media/5a118b_14bffdb769a04766b5d5dd5033d9bf1e~mv2.jpg',
     imageAlt: 'St. Nicholas Fort and Mandraki Harbour in Rhodes',
+    location: 'Rhodes · Mandraki',
   },
   {
     title: 'Reliability',
@@ -48,6 +61,7 @@ const values = [
     image:
       'https://static.wixstatic.com/media/5a118b_ab6b77b093504e47b692ca6b17818686~mv2.jpg',
     imageAlt: 'View over Psaropoula Beach in Rhodes',
+    location: 'Rhodes · Psaropoula',
   },
   {
     title: 'Local Expertise',
@@ -55,6 +69,7 @@ const values = [
     image:
       'https://static.wixstatic.com/media/5a118b_63857e11015843abbef567fe402f611a~mv2.jpg',
     imageAlt: 'Elli Beach in Rhodes',
+    location: 'Rhodes · Elli Beach',
   },
   {
     title: 'Flexibility',
@@ -62,6 +77,7 @@ const values = [
     image:
       'https://static.wixstatic.com/media/5a118b_3c5424838f9a4a9daec89f400d71f719~mv2.jpg',
     imageAlt: 'Ladiko and Anthony Quinn Bay in Rhodes',
+    location: 'Rhodes · Ladiko & Anthony Quinn Bay',
   },
 ] satisfies readonly ValueItem[];
 
@@ -84,45 +100,222 @@ const strengths = [
 ] satisfies readonly FeatureItem[];
 
 const stats = [
-  ['1989', 'Established'],
-  ['100,000+', 'Guests Annually'],
-  ['200+', 'Hotel Partners'],
-  ['40+', 'Team Members'],
-  ['24/7', 'Support'],
-  ['2', 'Offices in Rhodes & Kos'],
+  { value: '1989', label: 'Established' },
+  { value: '100,000+', label: 'Guests Annually', animateTo: 100000, suffix: '+' },
+  { value: '200+', label: 'Hotel Partners', animateTo: 200, suffix: '+' },
+  { value: '40+', label: 'Team Members', animateTo: 40, suffix: '+' },
+  { value: '24/7', label: 'Support' },
+  { value: '2', label: 'Offices in Rhodes & Kos', animateTo: 2 },
+] satisfies readonly StatItem[];
+
+const contactSignals = [
+  'Rhodes & Kos',
+  '24/7 Support',
+  'Tailored DMC Solutions',
 ] as const;
 
-const contactPoints = [
-  {
-    icon: MapPin,
-    title: 'Rhodes & Kos',
-    copy: 'Our home, your local advantage.',
-  },
-  {
-    icon: Headphones,
-    title: '24/7 Support',
-    copy: "We're here whenever you need us.",
-  },
-  {
-    icon: Users,
-    title: 'For tour operators, agencies & groups',
-    copy: 'Tailored solutions for every partner.',
-  },
-] satisfies readonly FeatureItem[];
+function AnimatedStat({ stat }: { stat: StatItem }) {
+  const numberRef = useRef<HTMLElement | null>(null);
+  const [displayValue, setDisplayValue] = useState(
+    stat.animateTo === undefined ? stat.value : `0${stat.suffix ?? ''}`,
+  );
 
-export default function AboutPage() {
-  const [activeValue, setActiveValue] = useState(0);
+  useEffect(() => {
+    if (stat.animateTo === undefined || !numberRef.current) {
+      return undefined;
+    }
+
+    const prefersReducedMotion = window.matchMedia(
+      '(prefers-reduced-motion: reduce)',
+    ).matches;
+
+    if (prefersReducedMotion) {
+      setDisplayValue(
+        `${new Intl.NumberFormat('en-US').format(stat.animateTo)}${stat.suffix ?? ''}`,
+      );
+      return undefined;
+    }
+
+    const element = numberRef.current;
+    let animationFrame = 0;
+    let hasAnimated = false;
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (!entry.isIntersecting || hasAnimated) {
+          return;
+        }
+
+        hasAnimated = true;
+        observer.disconnect();
+
+        const startedAt = performance.now();
+        const duration = 1150;
+
+        const tick = (now: number) => {
+          const progress = Math.min((now - startedAt) / duration, 1);
+          const eased = 1 - Math.pow(1 - progress, 3);
+          const nextValue = Math.round(stat.animateTo! * eased);
+
+          setDisplayValue(
+            `${new Intl.NumberFormat('en-US').format(nextValue)}${stat.suffix ?? ''}`,
+          );
+
+          if (progress < 1) {
+            animationFrame = window.requestAnimationFrame(tick);
+          }
+        };
+
+        animationFrame = window.requestAnimationFrame(tick);
+      },
+      { threshold: 0.55 },
+    );
+
+    observer.observe(element);
+
+    return () => {
+      observer.disconnect();
+      window.cancelAnimationFrame(animationFrame);
+    };
+  }, [stat.animateTo, stat.suffix]);
 
   return (
-    <main className="tet-about">
-      <PageHero
-        title={<>About Top Euro Travel</>}
-        breadcrumb="About"
-        image={images.hero}
+    <strong ref={numberRef} aria-label={stat.value}>
+      {displayValue}
+    </strong>
+  );
+}
+
+export default function AboutPage() {
+  const pageRef = useRef<HTMLElement | null>(null);
+  const manualPauseTimer = useRef<number | null>(null);
+  const [activeValue, setActiveValue] = useState(0);
+  const [isValuesHovered, setIsValuesHovered] = useState(false);
+  const [isValuesFocused, setIsValuesFocused] = useState(false);
+  const [isValuesManuallyPaused, setIsValuesManuallyPaused] = useState(false);
+
+  const valuesPaused =
+    isValuesHovered || isValuesFocused || isValuesManuallyPaused;
+
+  useEffect(() => {
+    document.body.classList.add('tet-about-page-active');
+
+    return () => {
+      document.body.classList.remove('tet-about-page-active');
+    };
+  }, []);
+
+  useEffect(() => {
+    if (valuesPaused) {
+      return undefined;
+    }
+
+    const interval = window.setInterval(() => {
+      setActiveValue((current) => (current + 1) % values.length);
+    }, 5600);
+
+    return () => window.clearInterval(interval);
+  }, [valuesPaused]);
+
+  useEffect(() => {
+    const root = pageRef.current;
+
+    if (!root) {
+      return undefined;
+    }
+
+    const elements = Array.from(
+      root.querySelectorAll<HTMLElement>('[data-about-reveal]'),
+    );
+    const prefersReducedMotion = window.matchMedia(
+      '(prefers-reduced-motion: reduce)',
+    ).matches;
+
+    if (prefersReducedMotion) {
+      elements.forEach((element) => element.classList.add('is-visible'));
+      return undefined;
+    }
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (!entry.isIntersecting) {
+            return;
+          }
+
+          entry.target.classList.add('is-visible');
+          observer.unobserve(entry.target);
+        });
+      },
+      {
+        threshold: 0.14,
+        rootMargin: '0px 0px -7% 0px',
+      },
+    );
+
+    elements.forEach((element) => observer.observe(element));
+
+    return () => observer.disconnect();
+  }, []);
+
+  useEffect(
+    () => () => {
+      if (manualPauseTimer.current !== null) {
+        window.clearTimeout(manualPauseTimer.current);
+      }
+    },
+    [],
+  );
+
+  const pauseValuesTemporarily = () => {
+    setIsValuesManuallyPaused(true);
+
+    if (manualPauseTimer.current !== null) {
+      window.clearTimeout(manualPauseTimer.current);
+    }
+
+    manualPauseTimer.current = window.setTimeout(() => {
+      setIsValuesManuallyPaused(false);
+      manualPauseTimer.current = null;
+    }, 9000);
+  };
+
+  const selectValue = (index: number, manual = false) => {
+    setActiveValue(index);
+
+    if (manual) {
+      pauseValuesTemporarily();
+    }
+  };
+
+  return (
+    <main className="tet-about" id="main-content" ref={pageRef}>
+      <PageSeo
+        title="About Top Euro Travel | Leading DMC in Greece Since 1989"
+        description="Learn more about Top Euro Travel, a trusted destination management company in Greece. Since 1989, we have supported tour operators, travel agencies, groups and event planners across Rhodes and Kos."
       />
 
+      <section className="tet-about__hero">
+        <PageHero
+          title={<>About Top Euro Travel</>}
+          breadcrumb="About"
+          image={images.hero}
+        />
+
+        <div
+          className="tet-about__hero-positioning"
+          aria-label="Top Euro Travel positioning"
+        >
+          <span>Rhodes · Kos · Est. 1989</span>
+          <strong>Local expertise. International standards.</strong>
+        </div>
+      </section>
+
       <section className="tet-about__story" aria-labelledby="about-story-title">
-        <div className="tet-about__container tet-about__story-inner">
+        <div
+          className="tet-about__container tet-about__story-inner"
+          data-about-reveal
+        >
           <div className="tet-about__story-copy">
             <div className="tet-about__kicker" aria-label="Section 1, Who We Are">
               <span className="tet-about__kicker-number">01</span>
@@ -163,19 +356,30 @@ export default function AboutPage() {
           <div className="tet-about__story-media">
             <Photo
               src={images.story}
-              alt="Mandraki Harbour and the Palace of the Grand Master in Rhodes"
+              alt="Evening atmosphere in the Medieval City of Rhodes"
             />
           </div>
         </div>
       </section>
 
-      <section className="tet-about__values" aria-labelledby="about-values-title">
-        <div className="tet-about__values-heading">
+      <section
+        className={`tet-about__values${valuesPaused ? ' is-paused' : ''}`}
+        aria-labelledby="about-values-title"
+        onMouseEnter={() => setIsValuesHovered(true)}
+        onMouseLeave={() => setIsValuesHovered(false)}
+        onFocusCapture={() => setIsValuesFocused(true)}
+        onBlurCapture={(event) => {
+          if (!event.currentTarget.contains(event.relatedTarget as Node | null)) {
+            setIsValuesFocused(false);
+          }
+        }}
+      >
+        <div className="tet-about__values-heading" data-about-reveal>
           <p className="tet-about__eyebrow">Our Values</p>
           <h2 id="about-values-title">The principles behind every partnership.</h2>
         </div>
 
-        <div className="tet-about__values-body">
+        <div className="tet-about__values-body" data-about-reveal>
           <div className="tet-about__values-list" aria-label="Top Euro Travel values">
             {values.map((value, index) => {
               const isActive = activeValue === index;
@@ -188,9 +392,9 @@ export default function AboutPage() {
                   type="button"
                   aria-expanded={isActive}
                   aria-controls={`about-value-copy-${index}`}
-                  onClick={() => setActiveValue(index)}
-                  onFocus={() => setActiveValue(index)}
-                  onMouseEnter={() => setActiveValue(index)}
+                  onClick={() => selectValue(index, true)}
+                  onFocus={() => selectValue(index)}
+                  onMouseEnter={() => selectValue(index)}
                 >
                   <span className="tet-about__value-number">{number}</span>
                   <span className="tet-about__value-content">
@@ -227,13 +431,30 @@ export default function AboutPage() {
                 );
               })}
             </div>
+
+            <div className="tet-about__values-meta">
+              <span>{values[activeValue].location}</span>
+              <span>
+                {String(activeValue + 1).padStart(2, '0')} /{' '}
+                {String(values.length).padStart(2, '0')}
+              </span>
+            </div>
+
+            <div className="tet-about__values-progress" aria-hidden="true">
+              {values.map((value, index) => (
+                <span
+                  className={activeValue === index ? 'is-active' : ''}
+                  key={value.title}
+                />
+              ))}
+            </div>
           </div>
         </div>
       </section>
 
       <section className="tet-about__strengths" aria-labelledby="about-strengths-title">
         <div className="tet-about__container tet-about__strengths-inner">
-          <div className="tet-about__strengths-intro">
+          <div className="tet-about__strengths-intro" data-about-reveal>
             <p className="tet-about__eyebrow">Our Strengths</p>
             <h2 id="about-strengths-title">
               Local expertise.
@@ -248,7 +469,11 @@ export default function AboutPage() {
 
           <div className="tet-about__strengths-grid">
             {strengths.map(({ icon: Icon, title, copy }, index) => (
-              <article className="tet-about__strength" key={title}>
+              <article
+                className="tet-about__strength"
+                data-about-reveal
+                key={title}
+              >
                 <span className="tet-about__strength-icon" aria-hidden="true">
                   <Icon size={32} strokeWidth={1.7} />
                 </span>
@@ -265,16 +490,16 @@ export default function AboutPage() {
 
       <section className="tet-about__stats" aria-labelledby="about-stats-title">
         <div className="tet-about__container">
-          <div className="tet-about__stats-heading">
+          <div className="tet-about__stats-heading" data-about-reveal>
             <p className="tet-about__eyebrow">Top Euro Travel</p>
             <h2 id="about-stats-title">By the Numbers</h2>
           </div>
 
           <div className="tet-about__stats-grid">
-            {stats.map(([value, label]) => (
-              <article className="tet-about__stat" key={label}>
-                <strong>{value}</strong>
-                <span>{label}</span>
+            {stats.map((stat) => (
+              <article className="tet-about__stat" data-about-reveal key={stat.label}>
+                <AnimatedStat stat={stat} />
+                <span>{stat.label}</span>
               </article>
             ))}
           </div>
@@ -285,7 +510,7 @@ export default function AboutPage() {
 
       <section className="tet-about__contact" aria-labelledby="about-contact-title">
         <div className="tet-about__container">
-          <div className="tet-about__contact-top">
+          <div className="tet-about__contact-top" data-about-reveal>
             <div className="tet-about__contact-copy">
               <p className="tet-about__eyebrow">Get in Touch</p>
               <h2 id="about-contact-title">Let&apos;s start a conversation.</h2>
@@ -297,22 +522,14 @@ export default function AboutPage() {
             </div>
 
             <Link className="tet-about__button tet-about__contact-button" to="/contact">
-              Contact Us
+              Start a Partnership
               <ArrowRight size={20} aria-hidden="true" />
             </Link>
           </div>
 
-          <div className="tet-about__contact-points">
-            {contactPoints.map(({ icon: Icon, title, copy }) => (
-              <article className="tet-about__contact-point" key={title}>
-                <span className="tet-about__contact-icon" aria-hidden="true">
-                  <Icon size={28} strokeWidth={1.7} />
-                </span>
-                <div>
-                  <h3>{title}</h3>
-                  <p>{copy}</p>
-                </div>
-              </article>
+          <div className="tet-about__contact-signals" data-about-reveal>
+            {contactSignals.map((signal) => (
+              <span key={signal}>{signal}</span>
             ))}
           </div>
         </div>
