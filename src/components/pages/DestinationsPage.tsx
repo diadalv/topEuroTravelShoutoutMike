@@ -13,7 +13,12 @@ import {
   UtensilsCrossed,
   Waves,
 } from 'lucide-react';
-import { useEffect, useRef, type LucideIcon } from 'react';
+import {
+  useEffect,
+  useRef,
+  type CSSProperties,
+  type LucideIcon,
+} from 'react';
 import { Link } from 'react-router-dom';
 
 const media = {
@@ -154,34 +159,6 @@ const experiences = [
   },
 ] satisfies readonly DestinationExperience[];
 
-function RhodesOutline() {
-  return (
-    <svg
-      className="tet-dest-core__island tet-dest-core__island--rhodes"
-      viewBox="0 0 72 122"
-      role="presentation"
-      aria-hidden="true"
-    >
-      <path d="M40 4C49 10 54 21 53 33C52 43 59 50 57 60C55 70 48 77 46 87C44 96 38 105 29 109C22 113 18 119 12 117C10 109 14 101 12 92C10 83 14 74 15 66C16 56 14 49 18 40C22 30 24 22 29 14C33 8 36 5 40 4Z" />
-      <circle cx="52" cy="24" r="3.2" />
-      <circle cx="16" cy="108" r="3.2" />
-    </svg>
-  );
-}
-
-function KosOutline() {
-  return (
-    <svg
-      className="tet-dest-core__island tet-dest-core__island--kos"
-      viewBox="0 0 124 58"
-      role="presentation"
-      aria-hidden="true"
-    >
-      <path d="M6 29C16 21 28 18 41 18C54 17 65 20 76 24C87 28 95 31 106 31C113 31 118 35 117 40C116 47 108 50 98 48C87 47 78 49 67 51C56 53 44 51 34 48C23 45 15 42 8 37C4 34 3 32 6 29Z" />
-      <circle cx="113" cy="39" r="3.2" />
-    </svg>
-  );
-}
 
 export default function DestinationsPage() {
   const pageRef = useRef<HTMLElement>(null);
@@ -277,43 +254,29 @@ export default function DestinationsPage() {
               className="tet-dest-core__route"
               aria-label="Top Euro Travel connects Rhodes and Kos"
             >
-              <span className="tet-dest-core__route-label">
-                Rhodes
+              <span className="tet-dest-core__route-stop">
+                <span
+                  className="tet-dest-core__route-dot"
+                  aria-hidden="true"
+                />
+                <strong>Rhodes</strong>
               </span>
 
               <span
-                className="tet-dest-core__connector"
-                aria-hidden="true"
-              />
-
-              <RhodesOutline />
-
-              <span
-                className="tet-dest-core__connector"
-                aria-hidden="true"
-              />
-
-              <span
-                className="tet-dest-core__compass"
+                className="tet-dest-core__route-track"
                 aria-hidden="true"
               >
-                ✦
+                <span className="tet-dest-core__route-compass">
+                  ✦
+                </span>
               </span>
 
-              <span
-                className="tet-dest-core__connector"
-                aria-hidden="true"
-              />
-
-              <KosOutline />
-
-              <span
-                className="tet-dest-core__connector"
-                aria-hidden="true"
-              />
-
-              <span className="tet-dest-core__route-label">
-                Kos
+              <span className="tet-dest-core__route-stop tet-dest-core__route-stop--end">
+                <span
+                  className="tet-dest-core__route-dot"
+                  aria-hidden="true"
+                />
+                <strong>Kos</strong>
               </span>
             </div>
           </div>
@@ -457,7 +420,7 @@ export default function DestinationsPage() {
               <article
                 className="tet-dest-benefit"
                 data-dest-reveal
-                style={{ '--benefit-index': index } as React.CSSProperties}
+                style={{ '--benefit-index': index } as CSSProperties}
                 key={title}
               >
                 <span className="tet-dest-benefit__icon" aria-hidden="true">
