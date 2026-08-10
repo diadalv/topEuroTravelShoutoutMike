@@ -370,26 +370,6 @@ body.tet-destinations-page-active
   );
 }
 
-.tet-dest-chapter__caption {
-  position: absolute;
-  right: 18px;
-  bottom: 16px;
-  z-index: 2;
-  margin: 0;
-  padding: 8px 11px;
-  border: 1px solid rgba(255, 255, 255, 0.22);
-  border-radius: 4px;
-  background: rgba(31, 58, 95, 0.76);
-  color: #ffffff;
-  font-size: 0.62rem;
-  font-weight: 800;
-  line-height: 1;
-  letter-spacing: 0.13em;
-  text-transform: uppercase;
-  backdrop-filter: blur(8px);
-  -webkit-backdrop-filter: blur(8px);
-}
-
 .tet-dest-chapter__content {
   position: relative;
   display: flex;
@@ -771,6 +751,11 @@ body.tet-destinations-page-active
   display: block;
   width: 100%;
   height: 100%;
+}
+
+.tet-dest-experience picture {
+  position: absolute;
+  inset: 0;
 }
 
 .tet-dest-experience img {
@@ -1317,6 +1302,66 @@ body.tet-destinations-page-active
 
   .tet-dest-chapter__link {
     margin-top: 18px;
+  }
+
+  .tet-dest-experiences {
+    padding-block: 46px 58px;
+  }
+
+  .tet-dest-experiences__inner {
+    width: min(
+      1320px,
+      calc(100% - (var(--dest-gutter) * 2))
+    );
+  }
+
+  .tet-dest-experiences__heading {
+    margin-bottom: 24px;
+  }
+
+  .tet-dest-experiences__heading p {
+    margin-bottom: 7px;
+  }
+
+  .tet-dest-experiences__heading h2 {
+    max-width: 630px;
+    font-size: clamp(2.25rem, 2.7vw, 3.1rem);
+  }
+
+  .tet-dest-experiences__grid {
+    grid-template-columns: 0.92fr 1.04fr 1.04fr;
+    grid-template-rows: repeat(2, 180px);
+    gap: 9px;
+  }
+
+  .tet-dest-experience {
+    min-height: 180px;
+  }
+
+  .tet-dest-experience--large {
+    min-height: 369px;
+  }
+
+  .tet-dest-experience__content {
+    right: 18px;
+    bottom: 17px;
+    left: 18px;
+    gap: 3px;
+  }
+
+  .tet-dest-experience__content strong {
+    font-size: clamp(1.35rem, 1.65vw, 1.9rem);
+  }
+
+  .tet-dest-experience__content > span {
+    font-size: 0.73rem;
+  }
+
+  .tet-dest-experience__arrow {
+    top: 14px;
+    right: 14px;
+    width: 36px;
+    height: 36px;
   }
 }
 
