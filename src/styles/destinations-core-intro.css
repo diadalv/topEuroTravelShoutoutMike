@@ -215,8 +215,7 @@ body.tet-destinations-page-active
   color: var(--dest-gold);
 }
 
-.tet-dest-core__island path,
-.tet-dest-core__island circle {
+.tet-dest-core__island path {
   vector-effect: non-scaling-stroke;
   stroke: currentColor;
   stroke-width: 1.7;
@@ -228,20 +227,14 @@ body.tet-destinations-page-active
   fill: rgba(200, 146, 45, 0.07);
 }
 
-.tet-dest-core__island circle {
-  fill: var(--dest-ivory);
-}
-
 .tet-dest-core__island--rhodes {
-  width: 22px;
-  height: 39px;
-  transform: rotate(5deg);
+  width: 27px;
+  height: 34px;
 }
 
 .tet-dest-core__island--kos {
-  width: 43px;
-  height: 22px;
-  transform: rotate(-2deg);
+  width: 42px;
+  height: 30px;
 }
 
 .tet-dest-core__route-track {
@@ -1165,13 +1158,13 @@ body.tet-destinations-page-active
   }
 
   .tet-dest-core__island--rhodes {
-    width: 17px;
-    height: 30px;
+    width: 22px;
+    height: 28px;
   }
 
   .tet-dest-core__island--kos {
-    width: 33px;
-    height: 18px;
+    width: 34px;
+    height: 24px;
   }
 
   .tet-dest-core__route-track {
@@ -1266,6 +1259,64 @@ body.tet-destinations-page-active
   .tet-dest-cta__button {
     width: 100%;
     min-width: 0;
+  }
+}
+
+/* =========================================================
+   COMPACT DESTINATION CHAPTERS — LARGE DESKTOP
+   ========================================================= */
+
+@media (min-width: 1201px) {
+  .tet-dest-chapters__container {
+    width: min(
+      1320px,
+      calc(100% - (var(--dest-gutter) * 2))
+    );
+  }
+
+  .tet-dest-chapter {
+    grid-template-columns: minmax(0, 1.05fr) minmax(0, 0.95fr);
+    min-height: clamp(410px, 29vw, 470px);
+  }
+
+  .tet-dest-chapter--reverse {
+    grid-template-columns: minmax(0, 0.95fr) minmax(0, 1.05fr);
+  }
+
+  .tet-dest-chapter__content {
+    padding: 32px clamp(38px, 3.4vw, 52px);
+  }
+
+  .tet-dest-chapter__meta {
+    margin-bottom: 11px;
+  }
+
+  .tet-dest-chapter__number {
+    font-size: 1.25rem;
+  }
+
+  .tet-dest-chapter__content h2 {
+    margin-bottom: 7px;
+    font-size: clamp(2.8rem, 3.25vw, 3.75rem);
+  }
+
+  .tet-dest-chapter__statement {
+    margin-bottom: 13px;
+    font-size: clamp(1.05rem, 1.15vw, 1.28rem);
+  }
+
+  .tet-dest-chapter__description {
+    max-width: none;
+    font-size: clamp(0.92rem, 0.88vw, 0.98rem);
+    line-height: 1.52;
+  }
+
+  .tet-dest-chapter__highlights {
+    margin-top: 16px;
+  }
+
+  .tet-dest-chapter__link {
+    margin-top: 18px;
   }
 }
 
