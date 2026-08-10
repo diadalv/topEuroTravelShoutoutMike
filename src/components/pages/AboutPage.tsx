@@ -38,26 +38,30 @@ const values = [
   {
     title: 'Partnership',
     copy: 'We believe successful partnerships are built on trust, transparency and mutual respect. Our focus is always on creating long-term value for our partners.',
-    image: travelMedia('about-value-partnership.jpg'),
-    imageAlt: 'Top Euro Travel representatives working with destination partners',
+    image:
+      'https://static.wixstatic.com/media/5a118b_14bffdb769a04766b5d5dd5033d9bf1e~mv2.jpg',
+    imageAlt: 'St. Nicholas Fort and Mandraki Harbour in Rhodes',
   },
   {
     title: 'Reliability',
     copy: 'From daily operations to complex projects, we are committed to delivering consistent service and dependable support at every stage.',
-    image: travelMedia('about-value-reliability.jpg'),
-    imageAlt: 'Professional destination operations and guest support in Rhodes',
+    image:
+      'https://static.wixstatic.com/media/5a118b_ab6b77b093504e47b692ca6b17818686~mv2.jpg',
+    imageAlt: 'View over Psaropoula Beach in Rhodes',
   },
   {
     title: 'Local Expertise',
     copy: 'With decades of experience in Rhodes and Kos, we provide valuable destination knowledge, strong local connections and practical solutions.',
-    image: travelMedia('about-value-local-expertise.jpg'),
-    imageAlt: 'Aerial view of Rhodes Old Town and Mandraki Harbour',
+    image:
+      'https://static.wixstatic.com/media/5a118b_63857e11015843abbef567fe402f611a~mv2.jpg',
+    imageAlt: 'Elli Beach in Rhodes',
   },
   {
     title: 'Flexibility',
     copy: 'Every partner is different. We adapt our approach to meet individual requirements and respond quickly to changing needs.',
-    image: travelMedia('about-value-flexibility.jpg'),
-    imageAlt: 'A tailor-made group travel experience in the Dodecanese',
+    image:
+      'https://static.wixstatic.com/media/5a118b_3c5424838f9a4a9daec89f400d71f719~mv2.jpg',
+    imageAlt: 'Ladiko and Anthony Quinn Bay in Rhodes',
   },
 ] satisfies readonly ValueItem[];
 
