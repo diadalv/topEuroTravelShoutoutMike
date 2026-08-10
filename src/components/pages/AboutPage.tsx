@@ -1,10 +1,11 @@
 import {
-  useEffect,
-  useRef,
-  useState,
-  type LucideIcon,
-} from 'react';
-import { Link } from 'react-router-dom';
+  PageHero,
+  PageSeo,
+  Photo,
+  TrustBar,
+  travelMedia,
+} from '@/components/travel/Shared';
+import '@/styles/about-page-v1.css';
 import {
   ArrowRight,
   Globe2,
@@ -12,13 +13,12 @@ import {
   Headphones,
 } from 'lucide-react';
 import {
-  PageHero,
-  PageSeo,
-  Photo,
-  TrustBar,
-  travelMedia,
-} from '@/components/travel/Shared';
-import '@/styles/about-page-v3.css';
+  useEffect,
+  useRef,
+  useState,
+  type LucideIcon,
+} from 'react';
+import { Link } from 'react-router-dom';
 
 const images = {
   hero: travelMedia('about-hero-v2.jpg'),
