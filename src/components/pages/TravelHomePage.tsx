@@ -1,6 +1,7 @@
 // TOP EURO TRAVEL — APPROVED DESIGN 1 — BALANCED DETAILS — FULL REPLACE
 // One self-contained file: header + homepage + flat footer + responsive styles + motion.
 import { PageSeo } from '@/components/travel/Shared';
+import { Image } from '@/components/ui/image';
 import {
   ArrowDown,
   ArrowRight,
@@ -20,15 +21,14 @@ import {
   Play,
   ShoppingBag,
   Sparkles,
-  Utensils,
   Users,
+  Utensils,
   Waves,
   X,
   type LucideIcon,
 } from 'lucide-react';
 import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
-import { Image } from '@/components/ui/image';
 
 const MEDIA = {
   logo: 'https://static.wixstatic.com/media/c3c625_668b8529b08249c48f9a8667135d56b1~mv2.png',
@@ -104,7 +104,7 @@ const HOME_STYLES = String.raw`
   --tet-shadow: 0 18px 48px rgba(6, 31, 56, 0.14);
 }
 
-.site-header,
+
 .site-footer {
   display: none !important;
 }
