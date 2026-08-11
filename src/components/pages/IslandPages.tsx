@@ -1,118 +1,278 @@
+import {
+  Gold,
+  IconFeature,
+  PageHero,
+  PageSeo,
+  Photo,
+  SectionTitle,
+  travelMedia,
+} from '@/components/travel/Shared';
+import {
+  Bike,
+  BriefcaseBusiness,
+  CalendarDays,
+  HeartPulse,
+  Hotel,
+  Landmark,
+  Plane,
+  Route,
+  Ship,
+  Waves,
+  type LucideIcon,
+} from 'lucide-react';
 import { useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import { Landmark, Sparkles, type LucideIcon } from 'lucide-react';
-import { Gold, IconFeature, PageHero, PageSeo, Photo, SectionTitle, travelMedia } from '@/components/travel/Shared';
-import { islandReasons } from '@/data/islandReasons';
+
+type IslandFeature = [LucideIcon, string, string];
 
 type IslandData = {
   name: string;
-  heading: string;
+  heroLine: string;
+  introHeading: string;
   hero: string;
   image: string;
   eyebrow: string;
   introduction: string;
-  highlights: Array<[LucideIcon, string, string]>;
+  highlights: IslandFeature[];
+  reasons: IslandFeature[];
   gallery: Array<[string, string]>;
 };
 
 const rhodes: IslandData = {
   name: 'Rhodes',
-  heading: "Rhodes: One of Greece's Leading Island Destinations",
-  hero: 'destinations-hero.jpg',
+  heroLine: 'Where Heritage Meets the Aegean',
+  introHeading: 'A Complete Destination for Leisure, Groups and Events',
+  hero: 'destinations-rhodes-v2.jpg',
   image: 'lindos-aerial.jpg',
   eyebrow: 'About Rhodes',
-  introduction: "Located in the southeastern Aegean Sea, Rhodes is one of Greece's most renowned island destinations, welcoming millions of visitors each year. Rich in history, culture and natural beauty, the island seamlessly combines centuries-old heritage with modern tourism infrastructure, creating a destination that appeals to a wide variety of travellers. From the UNESCO World Heritage-listed Medieval City and the iconic Acropolis of Lindos to picturesque villages, golden beaches and vibrant coastal resorts, Rhodes offers an exceptional blend of authenticity, relaxation and discovery. Its strategic location, excellent accessibility and long tourism season have established the island as a key destination in the Mediterranean.",
+  introduction:
+    'Set in the southeastern Aegean, Rhodes combines UNESCO-listed heritage, renowned coastal resorts and well-developed tourism infrastructure. The Medieval City, Lindos, traditional villages and a varied coastline create exceptional possibilities for leisure programmes, groups and incentives. Excellent air connectivity, a long operating season and dependable local services make Rhodes one of the Mediterranean’s most versatile destinations.',
   highlights: [
-    [Landmark, 'Tourism in Rhodes', 'Rhodes offers a diverse tourism product capable of meeting the needs of every market segment. Its accommodation portfolio ranges from internationally recognised luxury resorts and family hotels to boutique properties and exclusive villas, complemented by cultural attractions, outdoor activities, gastronomy, cruises, excursions and authentic local experiences.'],
-    [Sparkles, 'Rhodes as a MICE Destination', 'With excellent air connectivity, high-quality hospitality infrastructure and extensive experience hosting international events, Rhodes offers modern conference facilities, exceptional venues, luxury accommodation and incentive experiences for meetings, conferences and corporate events.'],
+    [
+      Landmark,
+      'Leisure & Group Programmes',
+      'Accommodation, transfers, guided visits, excursions and tailored island experiences coordinated through one experienced local team.',
+    ],
+    [
+      BriefcaseBusiness,
+      'Meetings, Incentives & Events',
+      'Conference hotels, distinctive venues and incentive activities supported by dependable planning and on-island operations.',
+    ],
+  ],
+  reasons: [
+    [
+      Landmark,
+      'UNESCO Heritage',
+      'The Medieval City and Lindos add cultural depth to every programme.',
+    ],
+    [
+      Plane,
+      'Strong Air Connectivity',
+      'Direct seasonal links connect Rhodes with major European markets.',
+    ],
+    [
+      CalendarDays,
+      'Long Tourism Season',
+      'Reliable destination conditions from spring through late autumn.',
+    ],
+    [
+      BriefcaseBusiness,
+      'Groups & MICE Infrastructure',
+      'Experienced hotels, venues and destination suppliers support complex programmes.',
+    ],
+    [
+      Waves,
+      'Diverse Coastline',
+      'Beaches, cruises and contrasting east- and west-coast experiences.',
+    ],
   ],
   gallery: [
     ['Lindos & the Acropolis', 'acropolis.jpg'],
-    ['Rhodes Medieval City', 'old-town.jpg'],
-    ['Beaches & Island Life', 'beach.jpg'],
+    ['Medieval City & Heritage', 'old-town.jpg'],
+    ['Beaches & Coastal Experiences', 'beach.jpg'],
   ],
 };
 
 const kos: IslandData = {
   name: 'Kos',
-  heading: 'Kos: A Destination of Authentic Island Experiences',
-  hero: 'kallithea.jpg',
+  heroLine: 'Where Heritage Meets Island Life',
+  introHeading: 'A Versatile Destination for Leisure, Groups and Incentives',
+  hero: 'destinations-kos-v2.jpg',
   image: 'flower.jpg',
   eyebrow: 'About Kos',
-  introduction: "Located in the southeastern Aegean Sea, Kos is one of Greece's most attractive island destinations, renowned for its beautiful coastline, rich cultural heritage and relaxed atmosphere. As the birthplace of Hippocrates, the father of medicine, the island combines centuries of history with a modern tourism offering, creating a destination that appeals to travellers of all ages and interests. From charming harbour towns and traditional villages to golden beaches and picturesque landscapes, Kos offers an authentic Greek island experience. Its excellent accessibility, extensive cycling network and welcoming atmosphere have established the island as a popular destination for leisure travel, groups and incentive programmes.",
+  introduction:
+    'Kos brings together Hippocratic heritage, an inviting coastline and a relaxed island character. Its compact scale, excellent accessibility and developed hospitality infrastructure make programme logistics especially efficient. From Kos Town and the Asklepieion to traditional villages, cycling routes and nearby-island cruises, Kos is well suited to leisure travel, groups and incentive programmes.',
   highlights: [
-    [Landmark, 'Tourism in Kos', 'Kos offers a diverse tourism product supported by quality accommodation, modern hospitality infrastructure and cultural landmarks, gastronomy, outdoor activities, cycling, sailing, excursions and authentic local traditions. Its natural beauty, accessibility and high service standards suit leisure travel, tailor-made itineraries and group programmes.'],
-    [Sparkles, 'Kos as a MICE Destination', 'Kos offers an ideal balance between business and leisure, with modern hotels and conference facilities, high-quality hospitality, excellent accessibility and a wide range of team-building and incentive experiences for successful events.'],
+    [
+      Landmark,
+      'Leisure & Group Programmes',
+      'Resort stays, transfers, cultural visits, cycling, sailing and tailor-made excursions arranged around each group’s pace and needs.',
+    ],
+    [
+      BriefcaseBusiness,
+      'Meetings, Incentives & Events',
+      'Modern hospitality, compact logistics and engaging team experiences create an effective balance of business and leisure.',
+    ],
+  ],
+  reasons: [
+    [
+      Route,
+      'Compact Island Logistics',
+      'Short distances support smooth, well-paced itineraries and transfers.',
+    ],
+    [
+      HeartPulse,
+      'Hippocratic Heritage',
+      'A distinctive cultural story centred on medicine, history and wellbeing.',
+    ],
+    [
+      Bike,
+      'Cycling & Outdoor Experiences',
+      'Accessible routes, beaches and active experiences suit varied groups.',
+    ],
+    [
+      Hotel,
+      'Quality Resort Infrastructure',
+      'A strong range of hotels and dependable hospitality services.',
+    ],
+    [
+      Ship,
+      'Nearby Island Programmes',
+      'Easy access to sailing and day trips across the Dodecanese.',
+    ],
   ],
   gallery: [
-    ['Heritage & Culture', 'kallithea.jpg'],
-    ['Wellness & Nature', 'flower.jpg'],
-    ['Sailing Experiences', 'sailing.jpg'],
+    ['Kos Town & Heritage', 'destinations-culture-v2.jpg'],
+    ['Villages, Nature & Gastronomy', 'flower.jpg'],
+    ['Sailing & Nearby Islands', 'sailing.jpg'],
   ],
 };
 
 function IslandPage({ island }: { island: IslandData }) {
   useEffect(() => {
-    const sections = Array.from(document.querySelectorAll<HTMLElement>('[data-island-reveal]'));
+    const sections = Array.from(
+      document.querySelectorAll<HTMLElement>('[data-island-reveal]'),
+    );
+    const prefersReducedMotion = window.matchMedia(
+      '(prefers-reduced-motion: reduce)',
+    ).matches;
 
-    if (!('IntersectionObserver' in window)) {
+    if (prefersReducedMotion || !('IntersectionObserver' in window)) {
       sections.forEach((section) => section.classList.add('is-visible'));
       return;
     }
 
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach((entry) => {
-        if (!entry.isIntersecting) return;
-        entry.target.classList.add('is-visible');
-        observer.unobserve(entry.target);
-      });
-    }, { threshold: 0.16 });
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (!entry.isIntersecting) return;
+
+          entry.target.classList.add('is-visible');
+          observer.unobserve(entry.target);
+        });
+      },
+      {
+        threshold: 0.15,
+        rootMargin: '0px 0px -7% 0px',
+      },
+    );
 
     sections.forEach((section) => observer.observe(section));
+
     return () => observer.disconnect();
   }, [island.name]);
+
   return (
     <div className="island-page">
       <PageSeo
-        title={island.name === 'Rhodes' ? 'Rhodes DMC Services | Destination Management Company in Rhodes' : 'Kos DMC Services | Destination Management Company in Kos'}
-        description={island.name === 'Rhodes' ? "Discover Rhodes, one of Greece's leading island destinations for leisure travel, groups, MICE and events with Top Euro Travel." : "Discover Kos, an authentic island destination for leisure travel, groups, incentives and events with Top Euro Travel."}
+        title={
+          island.name === 'Rhodes'
+            ? 'Rhodes DMC Services | Destination Management Company in Rhodes'
+            : 'Kos DMC Services | Destination Management Company in Kos'
+        }
+        description={
+          island.name === 'Rhodes'
+            ? "Discover Rhodes, one of Greece's leading island destinations for leisure travel, groups, MICE and events with Top Euro Travel."
+            : 'Discover Kos, an authentic island destination for leisure travel, groups, incentives and events with Top Euro Travel.'
+        }
       />
+
       <PageHero
-        title={<><Gold>{island.heading.split(':')[0]}</Gold>{island.heading.includes(':') ? `:${island.heading.split(':').slice(1).join(':')}` : ''}</>}
+        title={
+          <>
+            <Gold>{island.name}</Gold>
+            <br />
+            {island.heroLine}
+          </>
+        }
         breadcrumb={island.name}
         image={travelMedia(island.hero)}
       />
 
-      <section className="section shell island-intro island-reveal" data-island-reveal>
+      <section
+        className="section shell island-intro island-reveal"
+        data-island-reveal
+      >
         <div className="island-intro__copy">
           <span>{island.eyebrow}</span>
-          <h2>{island.heading}</h2>
+          <h2>{island.introHeading}</h2>
           <p>{island.introduction}</p>
-          <Link className="button button--gold" to="/contact">PLAN YOUR {island.name.toUpperCase()} JOURNEY</Link>
+
+          <Link className="button button--gold" to="/contact">
+            DISCUSS YOUR {island.name.toUpperCase()} PROGRAMME
+          </Link>
         </div>
-        <div className="island-intro__image"><Photo src={travelMedia(island.image)} alt={`${island.name} landscape`} /></div>
+
+        <div className="island-intro__image">
+          <Photo
+            src={travelMedia(island.image)}
+            alt={`${island.name} landscape`}
+          />
+        </div>
       </section>
 
-      <section className="section--tight shell island-section island-reveal" data-island-reveal>
+      <section
+        className="section--tight shell island-section island-reveal"
+        data-island-reveal
+      >
         <SectionTitle>Discover {island.name}</SectionTitle>
+
         <div className="island-highlights">
-          {island.highlights.map(([Icon, title, copy]) => <IconFeature icon={Icon} title={title} key={title}>{copy}</IconFeature>)}
+          {island.highlights.map(([Icon, title, copy]) => (
+            <IconFeature icon={Icon} title={title} key={title}>
+              {copy}
+            </IconFeature>
+          ))}
         </div>
       </section>
 
-      <section className="section--tight shell island-section island-reasons-section island-reveal" data-island-reveal>
-        <SectionTitle>Why These Islands</SectionTitle>
+      <section
+        className="section--tight shell island-section island-reasons-section island-reveal"
+        data-island-reveal
+      >
+        <SectionTitle>Why {island.name} Works</SectionTitle>
+
         <div className="island-reasons island-page__reasons">
-          {islandReasons.map(([Icon, title, copy]) => <IconFeature icon={Icon} title={title} key={title}>{copy}</IconFeature>)}
+          {island.reasons.map(([Icon, title, copy]) => (
+            <IconFeature icon={Icon} title={title} key={title}>
+              {copy}
+            </IconFeature>
+          ))}
         </div>
       </section>
 
-      <section className="section shell island-section island-reveal" data-island-reveal>
+      <section
+        className="section shell island-section island-reveal"
+        data-island-reveal
+      >
         <SectionTitle>Experience {island.name}</SectionTitle>
+
         <div className="island-gallery">
           {island.gallery.map(([title, image]) => (
             <article key={title}>
-              <div><Photo src={travelMedia(image)} alt={title} /></div>
+              <div>
+                <Photo src={travelMedia(image)} alt={title} />
+              </div>
               <h3>{title}</h3>
             </article>
           ))}
