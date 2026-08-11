@@ -2330,7 +2330,7 @@ const HOME_STYLES = String.raw`
 
 /* MICE: keep the three-part composition, use the common media/panel treatment. */
 .tet-mice {
-  height: clamp(300px, 24vw, 340px);
+  height: clamp(360px, 29vw, 410px);
   grid-template-columns: minmax(0, 1.2fr) minmax(360px, 0.95fr) minmax(220px, 0.62fr);
   margin-bottom: 0;
   border: 1px solid rgba(31, 58, 95, 0.14);
@@ -2395,7 +2395,12 @@ const HOME_STYLES = String.raw`
 .tet-experience {
   height: clamp(235px, 20vw, 278px);
   border-radius: 10px;
+  color: #fff;
   background: #dce4e8;
+}
+
+.tet-d1 .tet-experience {
+  color: #fff;
 }
 
 .tet-experience::after {
@@ -2425,6 +2430,8 @@ const HOME_STYLES = String.raw`
   font-family: "Cormorant Garamond", Georgia, "Times New Roman", serif;
   font-size: clamp(25px, 2.4vw, 32px);
   font-weight: 500;
+  color: #fff;
+  text-shadow: 0 2px 14px rgba(17, 34, 57, 0.5);
 }
 
 .tet-experience:hover img {
