@@ -74,12 +74,9 @@
   border-radius: 18px;
   background: white;
   box-shadow: var(--soft-shadow);
-  transition: box-shadow 280ms ease, transform 280ms ease;
-}
-
-.island-gallery article:hover {
-  box-shadow: var(--shadow);
-  transform: translateY(-6px);
+  transition:
+    box-shadow 280ms ease,
+    transform 280ms ease;
 }
 
 .island-gallery article > div {
@@ -88,12 +85,21 @@
 }
 
 .island-gallery .travel-photo {
-  transition: filter 500ms ease, transform 650ms cubic-bezier(0.2, 0.75, 0.25, 1);
+  transition:
+    filter 500ms ease,
+    transform 650ms cubic-bezier(0.2, 0.75, 0.25, 1);
 }
 
-.island-gallery article:hover .travel-photo {
-  filter: saturate(1.08);
-  transform: scale(1.045);
+@media (hover: hover) and (pointer: fine) {
+  .island-gallery article:hover {
+    box-shadow: var(--shadow);
+    transform: translateY(-6px);
+  }
+
+  .island-gallery article:hover .travel-photo {
+    filter: saturate(1.08);
+    transform: scale(1.045);
+  }
 }
 
 .island-gallery h3 {
@@ -106,7 +112,9 @@
 .island-reveal {
   opacity: 0;
   transform: translateY(28px);
-  transition: opacity 700ms ease, transform 700ms cubic-bezier(0.2, 0.75, 0.25, 1);
+  transition:
+    opacity 700ms ease,
+    transform 700ms cubic-bezier(0.2, 0.75, 0.25, 1);
 }
 
 .island-reveal.is-visible {
@@ -119,7 +127,8 @@
 }
 
 .island-intro.is-visible .island-intro__image {
-  animation: island-image-arrive 820ms 90ms cubic-bezier(0.2, 0.75, 0.25, 1) both;
+  animation: island-image-arrive 820ms 90ms cubic-bezier(0.2, 0.75, 0.25, 1)
+    both;
 }
 
 .island-section.is-visible .icon-feature,
@@ -128,24 +137,48 @@
 }
 
 .island-section.is-visible .icon-feature:nth-child(2),
-.island-section.is-visible .island-gallery article:nth-child(2) { animation-delay: 90ms; }
+.island-section.is-visible .island-gallery article:nth-child(2) {
+  animation-delay: 90ms;
+}
 .island-section.is-visible .icon-feature:nth-child(3),
-.island-section.is-visible .island-gallery article:nth-child(3) { animation-delay: 180ms; }
-.island-section.is-visible .icon-feature:nth-child(4) { animation-delay: 270ms; }
+.island-section.is-visible .island-gallery article:nth-child(3) {
+  animation-delay: 180ms;
+}
+.island-section.is-visible .icon-feature:nth-child(4) {
+  animation-delay: 270ms;
+}
 
 @keyframes island-copy-arrive {
-  from { opacity: 0; transform: translateX(-24px); }
-  to { opacity: 1; transform: translateX(0); }
+  from {
+    opacity: 0;
+    transform: translateX(-24px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
 }
 
 @keyframes island-image-arrive {
-  from { opacity: 0; transform: translateX(28px) scale(0.985); }
-  to { opacity: 1; transform: translateX(0) scale(1); }
+  from {
+    opacity: 0;
+    transform: translateX(28px) scale(0.985);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0) scale(1);
+  }
 }
 
 @keyframes island-card-arrive {
-  from { opacity: 0; transform: translateY(18px); }
-  to { opacity: 1; transform: translateY(0); }
+  from {
+    opacity: 0;
+    transform: translateY(18px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 @media (max-width: 940px) {
@@ -206,43 +239,37 @@
 }
 
 /* =========================================================
-   ISLAND PAGES — TARGETED UI UPDATES
+   ISLAND PAGES â€” TARGETED UI UPDATES
 
-   Add this block at the end of pages-islands.css.
-   1. Open two-column Discover layout.
-   2. Descriptive hover overlay on Experience images.
+   Only these areas change:
+   1. Discover Rhodes / Kos becomes an open two-column layout.
+   2. Experience images receive a descriptive hover overlay.
 
-   The lower .island-reasons cards are not targeted and remain untouched.
+   The lower Why Rhodes / Kos Works cards are intentionally untouched.
    ========================================================= */
 
-.island-highlights--open {
+.island-page .island-highlights.island-highlights--open {
   position: relative;
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: clamp(72px, 8vw, 132px);
   align-items: start;
-  margin-top: clamp(36px, 4vw, 54px);
+  gap: clamp(72px, 8vw, 132px);
+  margin-top: clamp(34px, 4vw, 52px);
   padding: clamp(10px, 1vw, 16px) 0;
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+  box-shadow: none;
 }
 
-.island-highlights--open::before {
-  content: "";
-  position: absolute;
-  top: 0;
-  bottom: 0;
-  left: 50%;
-  width: 1px;
-  transform: translateX(-50%);
-  background: var(--color-gold, #c8922d);
-  opacity: 0.85;
-}
-
-.island-highlight {
+.island-highlights--open .island-highlight {
+  position: relative;
+  z-index: 1;
   display: grid;
   grid-template-columns: auto minmax(0, 1fr);
+  align-items: start;
   gap: clamp(22px, 2.2vw, 34px);
   min-width: 0;
-  align-items: start;
   padding: 0;
   border: 0;
   border-radius: 0;
@@ -255,10 +282,18 @@
   width: clamp(64px, 5vw, 76px);
   aspect-ratio: 1;
   place-items: center;
-  border: 1px solid rgba(31, 58, 95, 0.08);
+  border: 1px solid rgba(31, 58, 95, 0.09);
   border-radius: 12px;
-  background: rgba(200, 146, 45, 0.08);
-  color: var(--color-navy, #1f3a5f);
+  background: rgba(200, 146, 45, 0.09);
+  color: #1f3a5f;
+  transition:
+    transform 280ms ease,
+    background-color 280ms ease;
+}
+
+.island-highlight:hover .island-highlight__icon {
+  background: rgba(200, 146, 45, 0.14);
+  transform: translateY(-2px);
 }
 
 .island-highlight__icon svg {
@@ -273,8 +308,7 @@
 
 .island-highlight__content h3 {
   margin: 2px 0 12px;
-  color: var(--color-navy, #1f3a5f);
-  font-family: var(--font-sans, var(--font-body, "Manrope", sans-serif));
+  color: #1f3a5f;
   font-size: clamp(1rem, 1.15vw, 1.22rem);
   font-weight: 700;
   line-height: 1.3;
@@ -283,20 +317,47 @@
 .island-highlight__content p {
   max-width: 620px;
   margin: 0;
-  color: var(--color-text, #202833);
-  font-family: var(--font-sans, var(--font-body, "Manrope", sans-serif));
+  color: #405a74;
   font-size: clamp(0.94rem, 0.95vw, 1.04rem);
   line-height: 1.72;
 }
 
-/* EXPERIENCE RHODES / KOS — IMAGE HOVER OVERLAY */
-
-.island-gallery article {
-  outline: none;
+.island-highlights__divider {
+  position: absolute;
+  z-index: 0;
+  top: 4px;
+  bottom: 4px;
+  left: 50%;
+  width: 1px;
+  background: linear-gradient(
+    180deg,
+    rgba(200, 146, 45, 0.18),
+    var(--gold-deep, #c8922d) 18%,
+    var(--gold-deep, #c8922d) 82%,
+    rgba(200, 146, 45, 0.18)
+  );
+  opacity: 0.9;
+  transform: translateX(-50%) scaleY(0);
+  transform-origin: center top;
+  transition: transform 720ms 180ms cubic-bezier(0.2, 0.75, 0.25, 1);
 }
 
-.island-gallery article:focus-visible {
-  outline: 2px solid var(--color-gold, #c8922d);
+.island-section.is-visible .island-highlights__divider {
+  transform: translateX(-50%) scaleY(1);
+}
+
+.island-section.is-visible .island-highlight {
+  animation: island-card-arrive 580ms ease both;
+}
+
+.island-section.is-visible .island-highlight:nth-child(2) {
+  animation-delay: 90ms;
+}
+
+/* EXPERIENCE RHODES / KOS â€” IMAGE HOVER OVERLAY */
+
+.island-gallery .island-experience-card:focus-visible {
+  outline: 2px solid var(--gold-deep, #c8922d);
   outline-offset: 5px;
 }
 
@@ -306,30 +367,29 @@
   isolation: isolate;
 }
 
-.island-gallery__media picture,
-.island-gallery__media img {
+.island-gallery__media > :first-child {
   display: block;
   width: 100%;
   height: 100%;
-}
-
-.island-gallery__media img {
-  transition: transform 700ms cubic-bezier(0.2, 0.72, 0.2, 1);
+  transition:
+    filter 520ms ease,
+    transform 700ms cubic-bezier(0.2, 0.72, 0.2, 1);
 }
 
 .island-gallery__overlay {
   position: absolute;
-  z-index: 1;
+  z-index: 2;
   inset: 0;
   display: flex;
   align-items: flex-end;
   padding: clamp(22px, 2.2vw, 34px);
   background: linear-gradient(
     180deg,
-    rgba(13, 35, 58, 0.18) 0%,
-    rgba(13, 35, 58, 0.54) 52%,
-    rgba(13, 35, 58, 0.9) 100%
+    rgba(13, 35, 58, 0.02) 0%,
+    rgba(13, 35, 58, 0.2) 44%,
+    rgba(13, 35, 58, 0.78) 100%
   );
+  pointer-events: none;
   opacity: 0;
   transition: opacity 420ms cubic-bezier(0.2, 0.72, 0.2, 1);
 }
@@ -338,44 +398,60 @@
   max-width: 36ch;
   margin: 0;
   color: #ffffff;
-  font-family: var(--font-sans, var(--font-body, "Manrope", sans-serif));
   font-size: clamp(0.9rem, 0.9vw, 1rem);
   font-weight: 500;
   line-height: 1.55;
-  text-shadow: 0 2px 18px rgba(0, 0, 0, 0.28);
-  transform: translateY(14px);
+  text-shadow: 0 2px 18px rgba(0, 0, 0, 0.3);
   opacity: 0;
+  transform: translateY(14px);
   transition:
-    transform 460ms cubic-bezier(0.2, 0.72, 0.2, 1),
-    opacity 360ms ease;
+    opacity 360ms ease,
+    transform 460ms cubic-bezier(0.2, 0.72, 0.2, 1);
+}
+
+.island-experience-card:focus-visible .island-gallery__overlay {
+  opacity: 1;
+}
+
+.island-experience-card:focus-visible .island-gallery__overlay p {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.island-gallery
+  .island-experience-card:focus-visible
+  .island-gallery__media
+  > :first-child {
+  filter: brightness(0.64) saturate(0.92);
+  transform: scale(1.045);
 }
 
 @media (hover: hover) and (pointer: fine) {
-  .island-gallery article:hover .island-gallery__overlay,
-  .island-gallery article:focus-visible .island-gallery__overlay {
+  .island-experience-card:hover .island-gallery__overlay {
     opacity: 1;
   }
 
-  .island-gallery article:hover .island-gallery__overlay p,
-  .island-gallery article:focus-visible .island-gallery__overlay p {
+  .island-experience-card:hover .island-gallery__overlay p {
+    opacity: 1;
     transform: translateY(0);
-    opacity: 1;
   }
 
-  .island-gallery article:hover .island-gallery__media img,
-  .island-gallery article:focus-visible .island-gallery__media img {
-    transform: scale(1.035);
+  .island-gallery
+    .island-experience-card:hover
+    .island-gallery__media
+    > :first-child {
+    filter: brightness(0.64) saturate(0.92);
+    transform: scale(1.045);
   }
 }
 
-@media (hover: none), (pointer: coarse) {
+@media (hover: none), (pointer: coarse), (any-pointer: coarse) {
   .island-gallery__overlay {
-    align-items: flex-end;
     padding: 20px;
     background: linear-gradient(
       180deg,
-      transparent 30%,
-      rgba(13, 35, 58, 0.86) 100%
+      transparent 28%,
+      rgba(13, 35, 58, 0.88) 100%
     );
     opacity: 1;
   }
@@ -383,34 +459,42 @@
   .island-gallery__overlay p {
     font-size: 0.88rem;
     line-height: 1.48;
-    transform: none;
     opacity: 1;
+    transform: none;
+  }
+
+  .island-gallery
+    .island-experience-card
+    .island-gallery__media
+    > :first-child {
+    filter: brightness(0.78) saturate(0.96);
   }
 }
 
 @media (max-width: 900px) {
-  .island-highlights--open {
+  .island-page .island-highlights.island-highlights--open {
     grid-template-columns: 1fr;
     gap: 0;
     margin-top: 30px;
     padding: 0;
   }
 
-  .island-highlights--open::before {
+  .island-highlights__divider {
     display: none;
   }
 
-  .island-highlight {
-    padding-block: 26px;
+  .island-highlights--open .island-highlight:first-child {
+    padding-bottom: 26px;
   }
 
-  .island-highlight + .island-highlight {
+  .island-highlights--open .island-highlight + .island-highlight {
+    padding-top: 26px;
     border-top: 1px solid rgba(200, 146, 45, 0.55);
   }
 }
 
 @media (max-width: 560px) {
-  .island-highlight {
+  .island-highlights--open .island-highlight {
     grid-template-columns: 56px minmax(0, 1fr);
     gap: 18px;
   }
@@ -431,11 +515,19 @@
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .island-highlight,
+  .island-section.is-visible .island-highlight {
+    animation: none;
+  }
+
+  .island-highlights__divider {
+    transform: translateX(-50%) scaleY(1);
+    transition: none;
+  }
+
   .island-highlight__icon,
-  .island-gallery__media img,
+  .island-gallery__media > :first-child,
   .island-gallery__overlay,
   .island-gallery__overlay p {
-    transition: none !important;
+    transition: none;
   }
 }
