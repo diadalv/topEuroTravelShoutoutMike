@@ -243,6 +243,7 @@ const HOME_STYLES = String.raw`
 
 /* Exact approved transparent header, using the real Top Euro Travel logo. */
 .tet-topbar {
+  display: none !important;
   width: 100%;
   height: clamp(68px, 5vw, 82px);
   position: absolute;
