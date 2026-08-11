@@ -7,6 +7,7 @@ import {
   SectionTitle,
   travelMedia,
 } from '@/components/travel/Shared';
+import '@/styles/pages-islands.css';
 import {
   Bike,
   BriefcaseBusiness,
@@ -35,7 +36,7 @@ type IslandData = {
   introduction: string;
   highlights: IslandFeature[];
   reasons: IslandFeature[];
-  gallery: Array<[string, string]>;
+  gallery: Array<[string, string, string]>;
 };
 
 const rhodes: IslandData = {
@@ -87,9 +88,21 @@ const rhodes: IslandData = {
     ],
   ],
   gallery: [
-    ['Lindos & the Acropolis', 'acropolis.jpg'],
-    ['Medieval City & Heritage', 'old-town.jpg'],
-    ['Beaches & Coastal Experiences', 'beach.jpg'],
+    [
+      'Lindos & the Acropolis',
+      'acropolis.jpg',
+      'Whitewashed lanes lead to the ancient Acropolis, with panoramic Aegean views and layers of Rhodian history.',
+    ],
+    [
+      'Medieval City & Heritage',
+      'old-town.jpg',
+      'Walk through fortified gates into a living medieval city, where Gothic architecture, Ottoman traces and local life share the same streets.',
+    ],
+    [
+      'Beaches & Coastal Experiences',
+      'beach.jpg',
+      'Discover sheltered bays and open-water beaches, with time for swimming, waterside dining and relaxed journeys along Rhodes’ varied coastline.',
+    ],
   ],
 };
 
@@ -142,9 +155,21 @@ const kos: IslandData = {
     ],
   ],
   gallery: [
-    ['Kos Town & Heritage', 'destinations-culture-v2.jpg'],
-    ['Villages, Nature & Gastronomy', 'flower.jpg'],
-    ['Sailing & Nearby Islands', 'sailing.jpg'],
+    [
+      'Kos Town & Heritage',
+      'destinations-culture-v2.jpg',
+      'Explore ancient ruins, Italian-era architecture and lively harbour streets, all woven into the easy rhythm of modern Kos Town.',
+    ],
+    [
+      'Villages, Nature & Gastronomy',
+      'flower.jpg',
+      'Travel inland for mountain villages, fertile landscapes and traditional flavours shaped by Kos’s farming heritage and unhurried island life.',
+    ],
+    [
+      'Sailing & Nearby Islands',
+      'sailing.jpg',
+      'Set out across clear Aegean waters for quiet coves, swimming stops and easy visits to neighbouring islands.',
+    ],
   ],
 };
 
@@ -237,12 +262,21 @@ function IslandPage({ island }: { island: IslandData }) {
       >
         <SectionTitle>Discover {island.name}</SectionTitle>
 
-        <div className="island-highlights">
+        <div className="island-highlights island-highlights--open">
           {island.highlights.map(([Icon, title, copy]) => (
-            <IconFeature icon={Icon} title={title} key={title}>
-              {copy}
-            </IconFeature>
+            <article className="island-highlight" key={title}>
+              <span className="island-highlight__icon" aria-hidden="true">
+                <Icon />
+              </span>
+
+              <div className="island-highlight__content">
+                <h3>{title}</h3>
+                <p>{copy}</p>
+              </div>
+            </article>
           ))}
+
+          <span className="island-highlights__divider" aria-hidden="true" />
         </div>
       </section>
 
@@ -268,14 +302,30 @@ function IslandPage({ island }: { island: IslandData }) {
         <SectionTitle>Experience {island.name}</SectionTitle>
 
         <div className="island-gallery">
-          {island.gallery.map(([title, image]) => (
-            <article key={title}>
-              <div>
-                <Photo src={travelMedia(image)} alt={title} />
-              </div>
-              <h3>{title}</h3>
-            </article>
-          ))}
+          {island.gallery.map(([title, image, copy], index) => {
+            const experienceId = `island-experience-${island.name.toLowerCase()}-${index}`;
+            const titleId = `${experienceId}-title`;
+            const descriptionId = `${experienceId}-description`;
+
+            return (
+              <article
+                className="island-experience-card"
+                key={title}
+                tabIndex={0}
+                aria-labelledby={titleId}
+                aria-describedby={descriptionId}
+              >
+                <div className="island-gallery__media">
+                  <Photo src={travelMedia(image)} alt={title} />
+
+                  <div className="island-gallery__overlay">
+                    <p id={descriptionId}>{copy}</p>
+                  </div>
+                </div>
+                <h3 id={titleId}>{title}</h3>
+              </article>
+            );
+          })}
         </div>
       </section>
     </div>
