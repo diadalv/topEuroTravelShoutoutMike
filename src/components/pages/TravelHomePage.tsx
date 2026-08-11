@@ -517,6 +517,56 @@ const HOME_STYLES = String.raw`
   50% { transform: translateY(5px); }
 }
 
+/* Home hero palette and typography — matched to About / Destinations / Island pages. */
+.tet-hero {
+  color: #F8F6F2;
+  background: #1F3A5F;
+  font-family: "Manrope", Arial, Helvetica, sans-serif;
+}
+
+.tet-hero__overlay {
+  background:
+    linear-gradient(90deg, rgba(31, 58, 95, 0.92) 0%, rgba(31, 58, 95, 0.72) 42%, rgba(32, 40, 51, 0.20) 75%, rgba(32, 40, 51, 0.04) 100%),
+    linear-gradient(180deg, rgba(32, 40, 51, 0.32) 0%, transparent 54%, rgba(31, 58, 95, 0.28) 100%);
+}
+
+.tet-hero h1 {
+  color: #F8F6F2;
+  font-family: "Cormorant Garamond", Georgia, "Times New Roman", serif;
+  font-weight: 500;
+  letter-spacing: -0.038em;
+}
+
+.tet-hero h1 span:last-child {
+  color: #C8922D;
+}
+
+.tet-hero .tet-eyebrow,
+.tet-hero__lead,
+.tet-hero__scroll,
+.tet-hero__discover,
+.tet-hero .tet-button {
+  color: #F8F6F2;
+  font-family: "Manrope", Arial, Helvetica, sans-serif;
+}
+
+.tet-hero .tet-button--gold {
+  color: #FFFFFF;
+  background: #C8922D;
+  box-shadow: 0 11px 26px rgba(200, 146, 45, 0.24);
+}
+
+.tet-hero .tet-button--outline {
+  border-color: rgba(248, 246, 242, 0.72);
+  color: #F8F6F2;
+  background: rgba(31, 58, 95, 0.18);
+}
+
+.tet-hero__discover:hover .tet-play-circle,
+.tet-hero__discover:focus-visible .tet-play-circle {
+  background: #C8922D;
+}
+
 /* The floating bridge is the visual joint between hero and content. */
 .tet-bridge {
   width: var(--tet-bridge);
