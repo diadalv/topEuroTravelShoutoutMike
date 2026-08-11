@@ -3,8 +3,8 @@ import {
   PageSeo,
   Photo,
   travelMedia,
-} from '@/components/travel/Shared';
-import '@/styles/destinations-core-intro.css';
+} from "@/components/travel/Shared";
+import "@/styles/destinations-core-intro.css";
 import {
   ArrowRight,
   HeartHandshake,
@@ -12,27 +12,22 @@ import {
   Mountain,
   UtensilsCrossed,
   Waves,
-} from 'lucide-react';
-import {
-  useEffect,
-  useRef,
-  type CSSProperties,
-  type LucideIcon,
-} from 'react';
-import { Link } from 'react-router-dom';
+} from "lucide-react";
+import { useEffect, useRef, type CSSProperties, type LucideIcon } from "react";
+import { Link } from "react-router-dom";
 
 const media = {
-  hero: travelMedia('destinations-hero-v2.jpg'),
-  rhodes: travelMedia('destinations-rhodes-v2.jpg'),
-  kos: travelMedia('destinations-kos-v2.jpg'),
-  medievalCity: travelMedia('old-town.jpg'),
-  lindos: travelMedia('home-welcome-v2.jpg'),
-  culture: travelMedia('destinations-culture-v2.jpg'),
-  islandExperiences: travelMedia('sailing.jpg'),
+  hero: travelMedia("destinations-hero-v2.jpg"),
+  rhodes: travelMedia("destinations-rhodes-v2.jpg"),
+  kos: travelMedia("destinations-kos-v2.jpg"),
+  medievalCity: travelMedia("old-town.jpg"),
+  lindos: travelMedia("home-welcome-v2.jpg"),
+  culture: travelMedia("destinations-culture-v2.jpg"),
+  islandExperiences: travelMedia("sailing.jpg"),
 };
 
 type DestinationChapter = {
-  id: 'rhodes' | 'kos';
+  id: "rhodes" | "kos";
   number: string;
   label: string;
   name: string;
@@ -52,166 +47,136 @@ type DestinationBenefit = {
 };
 
 type DestinationExperience = {
-  destination: 'Rhodes' | 'Kos';
+  destination: "Rhodes" | "Kos";
   title: string;
   copy: string;
   image: string;
   imageAlt: string;
   href: string;
-  layout: 'large' | 'wide' | 'standard';
+  layout: "large" | "wide" | "standard";
 };
 
 const destinations = [
   {
-    id: 'rhodes',
-    number: '01',
-    label: 'Core Destination',
-    name: 'Rhodes',
-    statement: 'History. Coastline. Timeless experiences.',
+    id: "rhodes",
+    number: "01",
+    label: "Core Destination",
+    name: "Rhodes",
+    statement: "History. Coastline. Timeless experiences.",
     description:
       "Rhodes is one of Greece's leading tourism destinations, renowned for its rich history, diverse landscapes and exceptional hospitality infrastructure. From the UNESCO-listed Medieval City and picturesque villages to luxury resorts and a spectacular coastline, the island offers outstanding opportunities for leisure travel, groups, events and tailor-made programmes.",
-    highlights: ['Medieval City', 'Lindos', 'Coastline', 'Events'],
+    highlights: ["Medieval City", "Lindos", "Coastline", "Events"],
     image: media.rhodes,
-    imageAlt: 'Aerial destination view of Rhodes and its coastline',
-    imageCaption: 'Rhodes · Dodecanese',
-    href: '/rhodes',
+    imageAlt: "Aerial destination view of Rhodes and its coastline",
+    imageCaption: "Rhodes · Dodecanese",
+    href: "/rhodes",
   },
   {
-    id: 'kos',
-    number: '02',
-    label: 'Core Destination',
-    name: 'Kos',
-    statement: 'Beaches. Culture. Effortless island living.',
+    id: "kos",
+    number: "02",
+    label: "Core Destination",
+    name: "Kos",
+    statement: "Beaches. Culture. Effortless island living.",
     description:
-      'Kos combines beautiful beaches, rich cultural heritage and a relaxed island character. Its accessible landscape, strong hospitality infrastructure and authentic local experiences make it an ideal destination for leisure groups, incentives, events and carefully designed programmes.',
-    highlights: ['Beaches', 'Heritage', 'Groups', 'Incentives'],
+      "Kos combines beautiful beaches, rich cultural heritage and a relaxed island character. Its accessible landscape, strong hospitality infrastructure and authentic local experiences make it an ideal destination for leisure groups, incentives, events and carefully designed programmes.",
+    highlights: ["Beaches", "Heritage", "Groups", "Incentives"],
     image: media.kos,
-    imageAlt: 'Destination view of Kos harbour and coastline',
-    imageCaption: 'Kos · Dodecanese',
-    href: '/kos',
+    imageAlt: "Destination view of Kos harbour and coastline",
+    imageCaption: "Kos · Dodecanese",
+    href: "/kos",
   },
 ] satisfies readonly DestinationChapter[];
 
 const benefits = [
   {
     icon: Mountain,
-    title: 'Unique Landscapes',
-    copy: 'Diverse scenery and striking island character.',
+    title: "Unique Landscapes",
+    copy: "Diverse scenery and striking island character.",
   },
   {
     icon: Landmark,
-    title: 'Rich Culture',
-    copy: 'Heritage, history and living local traditions.',
+    title: "Rich Culture",
+    copy: "Heritage, history and living local traditions.",
   },
   {
     icon: Waves,
-    title: 'Clear Waters',
-    copy: 'Ideal settings for relaxation and exploration.',
+    title: "Clear Waters",
+    copy: "Ideal settings for relaxation and exploration.",
   },
   {
     icon: UtensilsCrossed,
-    title: 'Authentic Flavours',
-    copy: 'Local gastronomy, traditions and wine.',
+    title: "Authentic Flavours",
+    copy: "Local gastronomy, traditions and wine.",
   },
   {
     icon: HeartHandshake,
-    title: 'Warm Hospitality',
-    copy: 'Genuine welcome, care and trusted support.',
+    title: "Warm Hospitality",
+    copy: "Genuine welcome, care and trusted support.",
   },
 ] satisfies readonly DestinationBenefit[];
 
 const experiences = [
   {
-    destination: 'Rhodes',
-    title: 'Medieval City',
-    copy: 'Step into living history inside one of Europe’s best-preserved medieval cities.',
+    destination: "Rhodes",
+    title: "Medieval City",
+    copy: "Step into living history inside one of Europe’s best-preserved medieval cities.",
     image: media.medievalCity,
-    imageAlt: 'Atmospheric street in the Medieval City of Rhodes',
-    href: '/experiences',
-    layout: 'large',
+    imageAlt: "Atmospheric street in the Medieval City of Rhodes",
+    href: "/experiences",
+    layout: "large",
   },
   {
-    destination: 'Rhodes',
-    title: 'Lindos & the Acropolis',
-    copy: 'Iconic views, ancient heritage and unforgettable island character.',
+    destination: "Rhodes",
+    title: "Lindos & the Acropolis",
+    copy: "Iconic views, ancient heritage and unforgettable island character.",
     image: media.lindos,
-    imageAlt: 'Lindos and its Acropolis overlooking the Aegean Sea',
-    href: '/experiences',
-    layout: 'wide',
+    imageAlt: "Lindos and its Acropolis overlooking the Aegean Sea",
+    href: "/experiences",
+    layout: "wide",
   },
   {
-    destination: 'Kos',
-    title: 'Culture & Heritage',
-    copy: 'Ancient stories, local traditions and a destination shaped by history.',
+    destination: "Kos",
+    title: "Culture & Heritage",
+    copy: "Ancient stories, local traditions and a destination shaped by history.",
     image: media.culture,
-    imageAlt: 'Cultural and historic destination experience in Kos',
-    href: '/experiences',
-    layout: 'standard',
+    imageAlt: "Cultural and historic destination experience in Kos",
+    href: "/experiences",
+    layout: "standard",
   },
   {
-    destination: 'Kos',
-    title: 'Island Experiences',
-    copy: 'Sea, landscape and carefully curated moments across the island.',
+    destination: "Kos",
+    title: "Island Experiences",
+    copy: "Sea, landscape and carefully curated moments across the island.",
     image: media.islandExperiences,
-    imageAlt: 'Sailing experience near Kos in the Aegean Sea',
-    href: '/experiences',
-    layout: 'standard',
+    imageAlt: "Sailing experience near Kos in the Aegean Sea",
+    href: "/experiences",
+    layout: "standard",
   },
 ] satisfies readonly DestinationExperience[];
-
-
-function RhodesOutline() {
-  return (
-    <svg
-      className="tet-dest-core__island tet-dest-core__island--rhodes"
-      viewBox="0 0 64 112"
-      aria-hidden="true"
-      focusable="false"
-    >
-      <path d="M38 3C45 7 49 14 50 22C51 30 47 36 50 44C53 52 51 60 47 68C43 76 42 84 37 91C33 98 28 108 19 109C15 104 17 96 14 90C11 83 14 75 13 67C12 59 16 52 18 45C21 36 20 28 25 20C29 13 32 6 38 3Z" />
-      <circle cx="53" cy="18" r="1.8" />
-      <circle cx="14" cy="102" r="1.5" />
-    </svg>
-  );
-}
-
-function KosOutline() {
-  return (
-    <svg
-      className="tet-dest-core__island tet-dest-core__island--kos"
-      viewBox="0 0 126 58"
-      aria-hidden="true"
-      focusable="false"
-    >
-      <path d="M6 29C16 21 28 18 41 18C54 17 65 20 76 24C87 28 95 31 106 31C113 31 118 35 117 40C116 47 108 50 98 48C87 47 78 49 67 51C56 53 44 51 34 48C23 45 15 42 8 37C4 34 3 32 6 29Z" />
-      <circle cx="120" cy="39" r="1.8" />
-    </svg>
-  );
-}
 
 export default function DestinationsPage() {
   const pageRef = useRef<HTMLElement>(null);
 
   useEffect(() => {
-    document.body.classList.add('tet-destinations-page-active');
+    document.body.classList.add("tet-destinations-page-active");
 
     const root = pageRef.current;
     if (!root) {
       return () => {
-        document.body.classList.remove('tet-destinations-page-active');
+        document.body.classList.remove("tet-destinations-page-active");
       };
     }
 
-    const items = root.querySelectorAll<HTMLElement>('[data-dest-reveal]');
+    const items = root.querySelectorAll<HTMLElement>("[data-dest-reveal]");
     const prefersReducedMotion = window.matchMedia(
-      '(prefers-reduced-motion: reduce)',
+      "(prefers-reduced-motion: reduce)",
     ).matches;
 
-    if (prefersReducedMotion || !('IntersectionObserver' in window)) {
-      items.forEach((item) => item.classList.add('is-visible'));
+    if (prefersReducedMotion || !("IntersectionObserver" in window)) {
+      items.forEach((item) => item.classList.add("is-visible"));
 
       return () => {
-        document.body.classList.remove('tet-destinations-page-active');
+        document.body.classList.remove("tet-destinations-page-active");
       };
     }
 
@@ -220,13 +185,13 @@ export default function DestinationsPage() {
         entries.forEach((entry) => {
           if (!entry.isIntersecting) return;
 
-          entry.target.classList.add('is-visible');
+          entry.target.classList.add("is-visible");
           observer.unobserve(entry.target);
         });
       },
       {
         threshold: 0.15,
-        rootMargin: '0px 0px -7% 0px',
+        rootMargin: "0px 0px -7% 0px",
       },
     );
 
@@ -234,16 +199,12 @@ export default function DestinationsPage() {
 
     return () => {
       observer.disconnect();
-      document.body.classList.remove('tet-destinations-page-active');
+      document.body.classList.remove("tet-destinations-page-active");
     };
   }, []);
 
   return (
-    <main
-      className="tet-destinations-page"
-      id="main-content"
-      ref={pageRef}
-    >
+    <main className="tet-destinations-page" id="main-content" ref={pageRef}>
       <PageSeo
         title="Rhodes & Kos Destinations | Top Euro Travel DMC Greece"
         description="Discover Rhodes and Kos with Top Euro Travel, a trusted destination management company providing local expertise, group travel, events and tailor-made programmes across both islands."
@@ -254,52 +215,32 @@ export default function DestinationsPage() {
         breadcrumb="Destinations"
         image={media.hero}
         description={
-          <>
-            Two island destinations. One trusted local DMC partner.
-          </>
+          <>Two island destinations. One trusted local DMC partner.</>
         }
       />
 
-      <section
-        className="tet-dest-core"
-        aria-labelledby="tet-dest-core-title"
-      >
+      <section className="tet-dest-core" aria-labelledby="tet-dest-core-title">
         <div className="tet-dest-core__inner">
           <div className="tet-dest-core__headline" data-dest-reveal>
-            <p className="tet-dest-core__eyebrow">
-              Our Core Destinations
-            </p>
+            <p className="tet-dest-core__eyebrow">Our Core Destinations</p>
 
-            <h2
-              className="tet-dest-core__title"
-              id="tet-dest-core-title"
-            >
+            <h2 className="tet-dest-core__title" id="tet-dest-core-title">
               <span>Two Islands.</span>
               <span>One Trusted</span>
               <span>Local Partner.</span>
             </h2>
 
-            <div
-              className="tet-dest-core__route"
-              aria-label="Top Euro Travel connects Rhodes and Kos"
-            >
+            <div className="tet-dest-core__route">
               <span className="tet-dest-core__route-stop">
-                <RhodesOutline />
                 <strong>Rhodes</strong>
               </span>
 
-              <span
-                className="tet-dest-core__route-track"
-                aria-hidden="true"
-              >
-                <span className="tet-dest-core__route-compass">
-                  ✦
-                </span>
+              <span className="tet-dest-core__route-track" aria-hidden="true">
+                <span className="tet-dest-core__route-compass">✦</span>
               </span>
 
               <span className="tet-dest-core__route-stop tet-dest-core__route-stop--end">
                 <strong>Kos</strong>
-                <KosOutline />
               </span>
             </div>
           </div>
@@ -307,18 +248,17 @@ export default function DestinationsPage() {
           <div className="tet-dest-core__copy" data-dest-reveal>
             <p>
               Greece offers an extraordinary diversity of destinations,
-              experiences and travel opportunities. As a destination
-              management company with extensive expertise in Rhodes and
-              Kos, Top Euro Travel supports tour operators, travel
-              agencies, groups and event planners with reliable,
-              tailor-made solutions across Greece.
+              experiences and travel opportunities. As a destination management
+              company with extensive expertise in Rhodes and Kos, Top Euro
+              Travel supports tour operators, travel agencies, groups and event
+              planners with reliable, tailor-made solutions across Greece.
             </p>
 
             <p>
-              While Rhodes and Kos remain our core destinations, our
-              experience, trusted network and flexible approach allow us
-              to support a wide range of travel programmes, events and
-              special projects throughout the country.
+              While Rhodes and Kos remain our core destinations, our experience,
+              trusted network and flexible approach allow us to support a wide
+              range of travel programmes, events and special projects throughout
+              the country.
             </p>
           </div>
         </div>
@@ -333,16 +273,13 @@ export default function DestinationsPage() {
             <div key={destination.id}>
               <article
                 className={`tet-dest-chapter${
-                  index === 1 ? ' tet-dest-chapter--reverse' : ''
+                  index === 1 ? " tet-dest-chapter--reverse" : ""
                 }`}
                 id={destination.id}
                 data-dest-reveal
               >
                 <div className="tet-dest-chapter__media">
-                  <Photo
-                    src={destination.image}
-                    alt={destination.imageAlt}
-                  />
+                  <Photo src={destination.image} alt={destination.imageAlt} />
 
                   <div
                     className="tet-dest-chapter__media-shade"
@@ -399,10 +336,7 @@ export default function DestinationsPage() {
               </article>
 
               {index === 0 && (
-                <div
-                  className="tet-dest-chapters__bridge"
-                  aria-label="From Rhodes to Kos"
-                >
+                <div className="tet-dest-chapters__bridge">
                   <span
                     className="tet-dest-chapters__bridge-line"
                     aria-hidden="true"
@@ -410,9 +344,7 @@ export default function DestinationsPage() {
 
                   <div className="tet-dest-chapters__bridge-copy">
                     <strong>From Rhodes to Kos</strong>
-                    <span>
-                      Two local teams · One operational standard
-                    </span>
+                    <span>Two local teams · One operational standard</span>
                   </div>
 
                   <span
@@ -443,11 +375,11 @@ export default function DestinationsPage() {
               <article
                 className="tet-dest-benefit"
                 data-dest-reveal
-                style={{ '--benefit-index': index } as CSSProperties}
+                style={{ "--benefit-index": index } as CSSProperties}
                 key={title}
               >
                 <span className="tet-dest-benefit__icon" aria-hidden="true">
-                  <Icon size={27} strokeWidth={1.65} />
+                  <Icon size={23} strokeWidth={1.65} />
                 </span>
                 <h3>{title}</h3>
                 <p>{copy}</p>
@@ -470,10 +402,7 @@ export default function DestinationsPage() {
               </h2>
             </div>
 
-            <Link
-              className="tet-dest-experiences__all"
-              to="/experiences"
-            >
+            <Link className="tet-dest-experiences__all" to="/experiences">
               View all experiences
               <ArrowRight size={17} aria-hidden="true" />
             </Link>
@@ -487,10 +416,7 @@ export default function DestinationsPage() {
                 to={experience.href}
                 key={`${experience.destination}-${experience.title}`}
               >
-                <Photo
-                  src={experience.image}
-                  alt={experience.imageAlt}
-                />
+                <Photo src={experience.image} alt={experience.imageAlt} />
 
                 <span
                   className="tet-dest-experience__shade"
@@ -503,10 +429,7 @@ export default function DestinationsPage() {
                   <span>{experience.copy}</span>
                 </span>
 
-                <span
-                  className="tet-dest-experience__arrow"
-                  aria-hidden="true"
-                >
+                <span className="tet-dest-experience__arrow" aria-hidden="true">
                   <ArrowRight size={19} />
                 </span>
               </Link>
@@ -515,10 +438,7 @@ export default function DestinationsPage() {
         </div>
       </section>
 
-      <section
-        className="tet-dest-cta"
-        aria-labelledby="tet-dest-cta-title"
-      >
+      <section className="tet-dest-cta" aria-labelledby="tet-dest-cta-title">
         <div className="tet-dest-cta__inner" data-dest-reveal>
           <div>
             <p>Planning a programme?</p>
@@ -528,8 +448,8 @@ export default function DestinationsPage() {
           </div>
 
           <p className="tet-dest-cta__copy">
-            Our local teams can help you design, coordinate and deliver
-            every detail with consistency and care.
+            Our local teams can help you design, coordinate and deliver every
+            detail with consistency and care.
           </p>
 
           <Link className="tet-dest-cta__button" to="/contact">
