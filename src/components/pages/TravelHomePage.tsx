@@ -408,7 +408,7 @@ const HOME_STYLES = String.raw`
 
 .tet-hero__copy {
   max-width: min(760px, 58vw);
-  margin-left: clamp(28px, 5.2vw, 92px);
+  margin-left: 0;
   transform: translateY(clamp(24px, 2.4vw, 60px));
 }
 
