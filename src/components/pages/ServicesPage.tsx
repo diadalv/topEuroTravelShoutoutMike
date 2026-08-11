@@ -1,136 +1,101 @@
-import { useEffect } from 'react';
-import { Link } from 'react-router-dom';
 import {
-  ArrowRight,
-  BadgeCheck,
-  BedDouble,
-  Bus,
-  Crown,
-  Headphones,
-  Heart,
-  Hotel,
-  MapPinned,
-  Sparkles,
-  Users,
-  type LucideIcon,
-} from 'lucide-react';
-import {
-  travelMedia,
   Gold,
   IconFeature,
   PageHero,
   PageSeo,
   PartnerMark,
-  Photo,
   PlanePath,
+  travelMedia,
 } from '@/components/travel/Shared';
+import { Image } from '@/components/ui/image';
+import '@/styles/services-register.css';
+import {
+  BadgeCheck,
+  Crown,
+  Sparkles,
+  Users,
+} from 'lucide-react';
+import { useEffect, useState, type KeyboardEvent } from 'react';
+import { Link } from 'react-router-dom';
 
-type PortfolioService = {
-  icon: LucideIcon;
+
+type RegisterService = {
+  number: string;
   title: string;
-  copy: string;
-  to: string;
-  image?: string;
+  description: string;
+  image: string;
+  imageAlt: string;
 };
 
-const hotelContracting: PortfolioService = {
-  icon: Hotel,
-  title: 'Hotel Contracting',
-  copy: 'Strategic negotiations, strong hotel relationships and market insight secure the right product mix for every programme.',
-  to: '/contact',
-  image: 'services-hero.jpg',
-};
 
-const operationsServices: PortfolioService[] = [
+const registerServices: RegisterService[] = [
   {
-    icon: BedDouble,
+    number: '01',
+    title: 'Hotel Contracting',
+    description: 'Strategic negotiations, strong hotel relationships and market insight secure the right product mix for every programme.',
+    image: 'https://static.wixstatic.com/media/5a118b_3904ba3b49764d06b35840292a63bc65~mv2.jpg',
+    imageAlt: 'Rhodes coastline and resort landscape',
+  },
+  {
+    number: '02',
     title: 'Management of Bookings',
-    copy: 'Coordinated management of accommodation, transfers, excursions and additional travel services.',
-    to: '/contact',
+    description: 'Coordinated management of accommodation, transfers, excursions and additional travel services.',
+    image: 'https://static.wixstatic.com/media/5a118b_de187b0b55984726b005d3b9069de3a2~mv2.jpg',
+    imageAlt: 'Rhodes destination seen from above',
   },
   {
-    icon: Bus,
+    number: '03',
     title: 'Transfers',
-    copy: 'Comfortable, reliable transport for individual guests, groups, VIPs and accessible travel needs.',
-    to: '/contact',
+    description: 'Comfortable, reliable transport for individual guests, groups, VIPs and accessible travel needs.',
+    image: 'https://static.wixstatic.com/media/5a118b_c6ed3df1d39e464d9c3e39fa3eaa315a~mv2.jpg',
+    imageAlt: 'Kos coastline and destination transport setting',
   },
   {
-    icon: Headphones,
+    number: '04',
     title: 'Resort Assistance',
-    copy: 'Multilingual meet-and-greet and on-site support throughout every guest journey.',
-    to: '/contact',
+    description: 'Multilingual meet-and-greet and on-site support throughout every guest journey.',
+    image: 'https://static.wixstatic.com/media/5a118b_a327428b08f14c5eb3c227b9bd8b225f~mv2.jpg',
+    imageAlt: 'Coastal resort in Kos',
   },
 ];
 
-const experienceServices: PortfolioService[] = [
-  {
-    icon: MapPinned,
-    title: 'Tours & Excursions',
-    copy: 'Curated tours, cruises and authentic local experiences across culture, gastronomy, nature and leisure.',
-    to: '/excursions',
-    image: 'lindos-aerial.jpg',
-  },
-  {
-    icon: Users,
-    title: 'MICE & Groups',
-    copy: 'Meetings, incentives, conferences and group programmes planned around each client\'s objectives.',
-    to: '/mice-groups',
-    image: 'home-mice-v2.jpg',
-  },
-];
 
-const weddings: PortfolioService = {
-  icon: Heart,
-  title: 'Weddings',
-  copy: 'Bespoke ceremonies and celebrations coordinated in exceptional Greek locations.',
-  to: '/contact',
-};
+function getNextServiceIndex(event: KeyboardEvent<HTMLButtonElement>, currentIndex: number) {
+  if (event.key === 'ArrowDown' || event.key === 'ArrowRight') {
+    event.preventDefault();
+    return (currentIndex + 1) % registerServices.length;
+  }
 
-const technology: PortfolioService = {
-  icon: Crown,
-  title: 'XML API Connectivity & Agent Portal',
-  copy: 'Streamlined access to products, services and booking solutions for travel professionals.',
-  to: '/contact',
-};
+  if (event.key === 'ArrowUp' || event.key === 'ArrowLeft') {
+    event.preventDefault();
+    return (currentIndex - 1 + registerServices.length) % registerServices.length;
+  }
 
-function FeatureServiceCard({ icon: Icon, title, copy, to, image }: PortfolioService) {
-  return (
-    <Link className="services-portfolio-card services-portfolio-card--feature" to={to}>
-      <div className="services-portfolio-card__image">
-        <Photo src={travelMedia(image ?? 'services-hero.jpg')} alt="" />
-      </div>
-      <div className="services-portfolio-card__feature-body">
-        <div className="services-portfolio-card__feature-heading">
-          <Icon aria-hidden="true" />
-          <h3>{title}</h3>
-        </div>
-        <p>{copy}</p>
-        <span className="services-portfolio-card__link">DISCOVER THE SERVICE <ArrowRight aria-hidden="true" /></span>
-      </div>
-    </Link>
-  );
+  if (event.key === 'Home') {
+    event.preventDefault();
+    return 0;
+  }
+
+  if (event.key === 'End') {
+    event.preventDefault();
+    return registerServices.length - 1;
+  }
+
+  return currentIndex;
 }
 
-function CompactServiceCard({ icon: Icon, title, copy, to }: PortfolioService) {
-  return (
-    <Link className="services-portfolio-card services-portfolio-card--compact" to={to}>
-      <span className="services-portfolio-card__icon"><Icon aria-hidden="true" /></span>
-      <div>
-        <h3>{title}</h3>
-        <p>{copy}</p>
-      </div>
-      <ArrowRight className="services-portfolio-card__arrow" aria-hidden="true" />
-    </Link>
-  );
-}
 
 export default function ServicesPage() {
+  const [activeServiceIndex, setActiveServiceIndex] = useState(0);
+  const activeService = registerServices[activeServiceIndex];
+
   useEffect(() => {
     const sections = Array.from(document.querySelectorAll<HTMLElement>('[data-services-reveal]'));
     if (!('IntersectionObserver' in window)) {
       sections.forEach((section) => section.classList.add('is-visible'));
       return;
     }
+
 
     const observer = new IntersectionObserver((entries) => {
       entries.forEach((entry) => {
@@ -140,9 +105,11 @@ export default function ServicesPage() {
       });
     }, { threshold: 0.1, rootMargin: '0px 0px -45px' });
 
+
     sections.forEach((section) => observer.observe(section));
     return () => observer.disconnect();
   }, []);
+
 
   return (
     <div className="services-page services-page--portfolio">
@@ -153,6 +120,7 @@ export default function ServicesPage() {
         breadcrumb="Services"
         title={<><Gold>Destination Management</Gold> Services</>}
       />
+
 
       <section className="services-portfolio shell services-portfolio-reveal" aria-labelledby="services-portfolio-title" data-services-reveal>
         <div className="services-portfolio__intro">
@@ -166,38 +134,81 @@ export default function ServicesPage() {
           </div>
         </div>
 
-        <section className="services-portfolio__category" aria-labelledby="services-operations-title">
-          <div className="services-portfolio__category-heading">
-            <span>01</span>
-            <h2 id="services-operations-title">Operations</h2>
-          </div>
-          <div className="services-portfolio__operations-grid">
-            <FeatureServiceCard {...hotelContracting} />
-            <div className="services-portfolio__compact-stack">
-              {operationsServices.map((service) => <CompactServiceCard key={service.title} {...service} />)}
+
+        <div className="tet-services-register">
+          <div className="tet-services-divider" aria-hidden="true" />
+
+          <div className="tet-services-stage">
+            <div className="tet-services-stage__navigation">
+              <div className="tet-services-stage__heading">
+                <p className="tet-services-eyebrow">01 · Operations</p>
+                <h2 id="services-operations-title">One connected operation, from planning to delivery.</h2>
+              </div>
+
+              <div className="tet-services-list" role="tablist" aria-label="Top Euro Travel services">
+                {registerServices.map((service, index) => {
+                  const isActive = activeServiceIndex === index;
+
+                  return (
+                    <button
+                      className={`tet-service-row${isActive ? ' is-active' : ''}`}
+                      id={`tet-service-tab-${index}`}
+                      key={service.title}
+                      type="button"
+                      role="tab"
+                      aria-selected={isActive}
+                      aria-controls="tet-active-service-panel"
+                      tabIndex={isActive ? 0 : -1}
+                      onClick={() => setActiveServiceIndex(index)}
+                      onFocus={() => setActiveServiceIndex(index)}
+                      onMouseEnter={() => setActiveServiceIndex(index)}
+                      onKeyDown={(event) => {
+                        const nextIndex = getNextServiceIndex(event, index);
+                        setActiveServiceIndex(nextIndex);
+
+                        if (nextIndex !== index) {
+                          document.getElementById(`tet-service-tab-${nextIndex}`)?.focus();
+                        }
+                      }}
+                    >
+                      <span className="tet-service-row__accent" aria-hidden="true" />
+                      <span className="tet-service-row__number">{service.number}</span>
+                      <span className="tet-service-row__content">
+                        <strong>{service.title}</strong>
+                        <span className="tet-service-row__description">{service.description}</span>
+                      </span>
+                      <span className="tet-service-row__chevron" aria-hidden="true" />
+                    </button>
+                  );
+                })}
+              </div>
             </div>
-          </div>
-        </section>
 
-        <section className="services-portfolio__category" aria-labelledby="services-experiences-title">
-          <div className="services-portfolio__category-heading">
-            <span>02</span>
-            <h2 id="services-experiences-title">Experiences &amp; Events</h2>
-          </div>
-          <div className="services-portfolio__experiences-grid">
-            {experienceServices.map((service) => <FeatureServiceCard key={service.title} {...service} />)}
-            <CompactServiceCard {...weddings} />
-          </div>
-        </section>
+            <article
+              className="tet-service-visual"
+              id="tet-active-service-panel"
+              role="tabpanel"
+              aria-labelledby={`tet-service-tab-${activeServiceIndex}`}
+              aria-live="polite"
+            >
+              <div className="tet-service-visual__frame">
+                <Image key={activeService.image} src={activeService.image} alt={activeService.imageAlt} />
+                <span className="tet-service-visual__wash" aria-hidden="true" />
+                <span className="tet-service-visual__index" aria-hidden="true">{activeService.number}</span>
+              </div>
 
-        <section className="services-portfolio__category services-portfolio__category--technology" aria-labelledby="services-technology-title">
-          <div className="services-portfolio__category-heading">
-            <span>03</span>
-            <h2 id="services-technology-title">Technology</h2>
+              <div className="tet-service-visual__label">
+                <div key={activeService.title}>
+                  <span>Selected capability</span>
+                  <h3>{activeService.title}</h3>
+                </div>
+                <span className="tet-service-visual__arrow" aria-hidden="true"><i /></span>
+              </div>
+            </article>
           </div>
-          <CompactServiceCard {...technology} />
-        </section>
+        </div>
       </section>
+
 
       <section className="services-page__promise services-portfolio-reveal" aria-labelledby="services-promise-title" data-services-reveal>
         <div className="shell services-page__promise-inner">
@@ -209,6 +220,7 @@ export default function ServicesPage() {
           </ul>
         </div>
       </section>
+
 
       <section className="services-page__partners shell services-portfolio-reveal" aria-label="Proud members and partners" data-services-reveal>
         <div className="services-page__partners-copy">
@@ -223,6 +235,7 @@ export default function ServicesPage() {
           <strong>ACCREDITED<br />AGENT</strong>
         </div>
       </section>
+
 
       <section className="services-page__request shell services-portfolio-reveal" data-services-reveal>
         <PlanePath />
