@@ -411,8 +411,7 @@
   color: var(--navy-dark);
 }
 
-.services-page--portfolio .services-page__partners .partner-mark span,
-.services-page--portfolio .tet-partner-contact__trust .partner-mark span.services-page--portfolio .services-page__partners .partner-mark span {
+.services-page--portfolio .services-page__partners .partner-mark span {
   color: #4d667d;
   font-size: 10px;
   line-height: 1.2;
