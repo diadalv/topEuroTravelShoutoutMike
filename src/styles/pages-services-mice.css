@@ -519,6 +519,8 @@
   background: transparent;
   box-shadow: none;
   transition: transform 160ms ease;
+  display: flex;
+  flex-direction: column;
 }
 
 .mice-page__program-card:hover {
@@ -841,18 +843,18 @@
   /* ... keep existing code (services-page styles) ... */
 
   .mice-page__program-grid--five {
-    grid-template-columns: repeat(12, minmax(0, 1fr));
+    grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 
   .mice-page__program-grid--five .mice-page__program-card:nth-child(1),
   .mice-page__program-grid--five .mice-page__program-card:nth-child(2),
   .mice-page__program-grid--five .mice-page__program-card:nth-child(3),
   .mice-page__program-grid--five .mice-page__program-card:nth-child(4) {
-    grid-column: span 6;
+    grid-column: span 1;
   }
 
   .mice-page__program-grid--five .mice-page__program-card:nth-child(5) {
-    grid-column: span 12;
+    grid-column: span 2;
   }
 
   .mice-page__program-photo,
