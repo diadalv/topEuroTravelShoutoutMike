@@ -72,7 +72,11 @@
 
   .tet-service-visual {
     width: 100%;
-    align-self: center;
+    align-self: stretch;
+  }
+
+  .tet-service-visual__frame {
+    height: 100%;
   }
 }
 
