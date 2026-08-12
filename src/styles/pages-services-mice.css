@@ -557,10 +557,10 @@
 }
 
 .mice-page__program-icon {
-  width: 36px;
-  height: 36px;
+  width: 42px;
+  height: 42px;
   position: absolute;
-  top: 172px;
+  top: 152px;
   left: 9px;
   border: 2px solid white;
   border-radius: 50%;
@@ -568,15 +568,16 @@
   place-items: center;
   color: white;
   background: var(--navy);
+  z-index: 2;
 }
 
 .mice-page__program-grid--five .mice-page__program-card:nth-child(2) .mice-page__program-icon,
 .mice-page__program-grid--five .mice-page__program-card:nth-child(3) .mice-page__program-icon {
-  top: 127px;
+  top: 104px;
 }
 
 .mice-page__program-grid--five .mice-page__program-card:nth-child(5) .mice-page__program-icon {
-  top: 142px;
+  top: 119px;
 }
 
 .mice-page__program-grid--four .mice-page__program-icon {
