@@ -1,95 +1,305 @@
 import { useEffect, useMemo, useState } from 'react';
 import { Link, useParams } from 'react-router-dom';
-import { ExcursionCatalogService, type ExcursionCatalogRecord } from '@/integrations/excursions';
-import { parseExcursionDescription, type ParsedExcursionDescription } from '@/integrations/excursions/parser';
+import { services } from '@wix/bookings';
+import { normalizeWixMediaImage } from '@/config/wix-media';
 import {
-  Accessibility,
   BusFront,
   CalendarDays,
   Camera,
-  ChevronLeft,
-  ChevronRight,
   CircleCheck,
   CircleX,
   Clock3,
-  House,
-  Landmark,
+  Info,
   Languages,
   MapPin,
-  MessageCircle,
   ShieldCheck,
-  UsersRound,
+  Sparkles,
   Utensils,
   Waves,
   type LucideIcon,
 } from 'lucide-react';
-import { PageHero, Photo, PlanePath, RequestBanner } from '@/components/travel/Shared';
+import { PageHero, Photo, PlanePath, RequestBanner, travelMedia } from '@/components/travel/Shared';
 
-type ExcursionRecord = ExcursionCatalogRecord & Record<string, unknown>;
-type Spec = { icon: LucideIcon; label: string; value: string };
+type Money = {
+  value?: string;
+  formattedValue?: string | null;
+};
 
-function richTextToText(value?: unknown) {
-  if (!value) return '';
-  const html = typeof value === 'string' ? value : JSON.stringify(value);
-  if (typeof window === 'undefined') return html.replace(/<[^>]+>/g, ' ').replace(/\s+/g, ' ').trim();
-  const document = new DOMParser().parseFromString(html, 'text/html');
-  return (document.body.textContent || '').replace(/\s+/g, ' ').trim();
+type BookingImage = string | {
+  id?: string;
+  url?: string;
+  filename?: string;
+  width?: number;
+  height?: number;
+};
+
+type BookingServiceRecord = {
+  _id?: string | null;
+  name?: string | null;
+  description?: string | null;
+  tagLine?: string | null;
+  hidden?: boolean | null;
+  category?: { name?: string | null };
+  defaultCapacity?: number | null;
+  onlineBooking?: { enabled?: boolean | null };
+  payment?: {
+    rateType?: string;
+    fixed?: { price?: Money };
+    varied?: { defaultPrice?: Money; minPrice?: Money };
+    custom?: { description?: string | null };
+  };
+  media?: {
+    mainMedia?: { image?: BookingImage };
+    coverMedia?: { image?: BookingImage };
+    items?: Array<{ image?: BookingImage }>;
+  };
+  mainSlug?: { name?: string | null };
+  supportedSlugs?: Array<{ name?: string | null }>;
+};
+
+type QuickFact = { label: string; value: string; icon: LucideIcon };
+
+type ParsedDescription = {
+  quickFacts: QuickFact[];
+  intro: string[];
+  tourDescription: string[];
+  highlights: string[];
+  included: string[];
+  notIncluded: string[];
+  goodToKnow: string[];
+};
+
+const SECTION_HEADINGS = [
+  'QUICK FACTS',
+  'TOUR DESCRIPTION',
+  'HIGHLIGHTS',
+  "WHAT'S INCLUDED",
+  "WHAT'S NOT INCLUDED",
+  'GOOD TO KNOW',
+] as const;
+
+const DETAIL_STYLES = String.raw`
+.excursion-master-subtitle {
+  max-width: 850px;
+  margin: -8px auto 0;
+  color: #4d6072;
+  font-size: clamp(17px, 1.25vw, 21px);
+  line-height: 1.6;
+  text-align: center;
 }
 
-function richTextList(value?: unknown) {
-  if (!value) return [];
-  const html = typeof value === 'string' ? value : JSON.stringify(value);
-  if (typeof window === 'undefined') return [richTextToText(html)].filter(Boolean);
-  const document = new DOMParser().parseFromString(html, 'text/html');
-  const listItems = Array.from(document.querySelectorAll('li'))
-    .map((item) => (item.textContent || '').replace(/\s+/g, ' ').trim())
+.excursion-master-lead {
+  padding-left: clamp(22px, 2.2vw, 36px);
+  border-left: 3px solid #c8922d;
+  color: #1f3a5f;
+  font-family: "Cormorant Garamond", Georgia, serif;
+  font-size: clamp(25px, 2vw, 36px);
+  line-height: 1.24;
+}
+
+.excursion-master-lead p { margin: 0 0 16px; }
+.excursion-master-lead p:last-child { margin-bottom: 0; }
+
+.excursion-master-story {
+  display: grid;
+  grid-template-columns: minmax(190px, .34fr) minmax(0, .66fr);
+  gap: clamp(38px, 6vw, 100px);
+  padding-top: clamp(68px, 7vw, 112px);
+  padding-bottom: clamp(58px, 6vw, 96px);
+}
+
+.excursion-master-story h2,
+.excursion-master-good h2 {
+  margin: 0;
+  color: #1f3a5f;
+  font-family: "Cormorant Garamond", Georgia, serif;
+  font-size: clamp(42px, 4vw, 68px);
+  font-weight: 500;
+  letter-spacing: -.035em;
+  line-height: .98;
+}
+
+.excursion-master-story__copy p {
+  margin: 0 0 20px;
+  color: #4d6072;
+  font-size: clamp(16px, 1.05vw, 18px);
+  line-height: 1.82;
+}
+
+.excursion-master-story__copy p:last-child { margin-bottom: 0; }
+
+.excursion-master-lists {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: clamp(24px, 3vw, 46px);
+  padding-bottom: clamp(64px, 7vw, 108px);
+}
+
+.excursion-master-lists .detail-info-list {
+  height: 100%;
+  margin: 0;
+}
+
+.excursion-master-good {
+  display: grid;
+  grid-template-columns: minmax(190px, .34fr) minmax(0, .66fr);
+  gap: clamp(38px, 6vw, 100px);
+  margin-bottom: clamp(72px, 8vw, 126px);
+  padding: clamp(34px, 4vw, 64px);
+  border: 1px solid rgba(31, 58, 95, .12);
+  border-radius: 18px;
+  background: #faf7f1;
+}
+
+.excursion-master-good ul {
+  display: grid;
+  gap: 14px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.excursion-master-good li {
+  display: grid;
+  grid-template-columns: 22px minmax(0, 1fr);
+  gap: 12px;
+  color: #4d6072;
+  line-height: 1.65;
+}
+
+.excursion-master-good svg { width: 20px; color: #c8922d; }
+
+.excursion-coming-soon {
+  display: flex;
+  align-items: flex-start;
+  gap: 11px;
+  margin-top: 18px;
+  padding: 16px;
+  border: 1px solid rgba(200, 146, 45, .28);
+  border-radius: 10px;
+  color: #1f3a5f;
+  background: rgba(200, 146, 45, .08);
+}
+
+.excursion-coming-soon svg { width: 20px; flex: 0 0 auto; color: #c8922d; }
+.excursion-coming-soon strong { display: block; }
+.excursion-coming-soon span { display: block; margin-top: 2px; color: #627282; font-size: 13px; }
+
+@media (max-width: 820px) {
+  .excursion-master-story,
+  .excursion-master-good { grid-template-columns: 1fr; gap: 26px; }
+  .excursion-master-lists { grid-template-columns: 1fr; }
+  .excursion-master-subtitle { text-align: left; }
+}
+`;
+
+function serviceSlug(service: BookingServiceRecord) {
+  return service.mainSlug?.name?.trim()
+    || service.supportedSlugs?.find((item) => item.name)?.name?.trim()
+    || '';
+}
+
+function paragraphList(value: string) {
+  return value
+    .split(/\n\s*\n/)
+    .map((item) => item.replace(/\s*\n\s*/g, ' ').trim())
     .filter(Boolean);
-  return listItems.length ? listItems : [richTextToText(html)].filter(Boolean);
 }
 
-function iconForHighlight(text: string): LucideIcon {
-  const value = text.toLowerCase();
-  if (/acropolis|castle|historic|monument|temple/.test(value)) return Landmark;
-  if (/village|town|city|street/.test(value)) return House;
-  if (/boat|sea|beach|swim|bay|coast/.test(value)) return Waves;
-  if (/food|lunch|wine|restaurant|shopping/.test(value)) return Utensils;
-  if (/view|photo|panoram/.test(value)) return Camera;
-  return MapPin;
+function bulletList(value: string) {
+  return value
+    .split(/\n+/)
+    .map((item) => item.replace(/^[•\-]\s*/, '').trim())
+    .filter(Boolean);
 }
 
-function timeToMinutes(time?: string) {
-  const match = time?.match(/^(\d{1,2}):(\d{2})/);
-  return match ? Number(match[1]) * 60 + Number(match[2]) : null;
+function iconForFact(label: string): LucideIcon {
+  const value = label.toLowerCase();
+  if (/duration|time|return/.test(value)) return Clock3;
+  if (/departure|pickup|meeting|destination/.test(value)) return MapPin;
+  if (/transport|transfer/.test(value)) return BusFront;
+  if (/stop|swim|bay/.test(value)) return Waves;
+  if (/lunch|meal|wine/.test(value)) return Utensils;
+  if (/guide|escort|language|assistance/.test(value)) return Languages;
+  if (/passport/.test(value)) return ShieldCheck;
+  if (/free time|availability/.test(value)) return CalendarDays;
+  return Sparkles;
 }
 
-function minutesToTime(total: number) {
-  const normalized = ((Math.round(total / 5) * 5) + 1440) % 1440;
-  return `${String(Math.floor(normalized / 60)).padStart(2, '0')}:${String(normalized % 60).padStart(2, '0')}`;
+function parseDescription(description?: string | null): ParsedDescription {
+  const normalized = (description || '').replace(/\r/g, '').trim();
+  const positions = new Map<string, number>();
+
+  SECTION_HEADINGS.forEach((heading) => {
+    const match = new RegExp(`(?:^|\\n)${heading.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')}\\s*(?:\\n|$)`, 'i').exec(normalized);
+    if (match) positions.set(heading, match.index + (match[0].startsWith('\n') ? 1 : 0));
+  });
+
+  function block(heading: typeof SECTION_HEADINGS[number], next?: typeof SECTION_HEADINGS[number]) {
+    const start = positions.get(heading);
+    if (start === undefined) return '';
+    const contentStart = normalized.indexOf('\n', start);
+    if (contentStart < 0) return '';
+    const end = next && positions.get(next) !== undefined ? positions.get(next)! : normalized.length;
+    return normalized.slice(contentStart + 1, end).trim();
+  }
+
+  const quickAndIntro = paragraphList(block('QUICK FACTS', 'TOUR DESCRIPTION'));
+  const quickText = quickAndIntro.shift() || '';
+  const quickFacts = quickText
+    .split(/\s*·\s*/)
+    .map((item) => {
+      const separator = item.indexOf(':');
+      const label = separator >= 0 ? item.slice(0, separator).trim() : 'Detail';
+      const value = separator >= 0 ? item.slice(separator + 1).trim() : item.trim();
+      return value ? { label, value, icon: iconForFact(label) } : null;
+    })
+    .filter((item): item is QuickFact => Boolean(item));
+
+  return {
+    quickFacts,
+    intro: quickAndIntro,
+    tourDescription: paragraphList(block('TOUR DESCRIPTION', 'HIGHLIGHTS')),
+    highlights: bulletList(block('HIGHLIGHTS', "WHAT'S INCLUDED")),
+    included: bulletList(block("WHAT'S INCLUDED", "WHAT'S NOT INCLUDED")),
+    notIncluded: bulletList(block("WHAT'S NOT INCLUDED", 'GOOD TO KNOW')),
+    goodToKnow: bulletList(block('GOOD TO KNOW')),
+  };
 }
 
-function itineraryTimes(start: string | undefined, end: string | undefined, count: number) {
-  const startMinutes = timeToMinutes(start) ?? 8 * 60 + 30;
-  let endMinutes = timeToMinutes(end) ?? startMinutes + Math.max(count - 1, 1) * 90;
-  if (endMinutes <= startMinutes) endMinutes += 1440;
-  if (count <= 1) return [minutesToTime(startMinutes)];
-  return Array.from({ length: count }, (_, index) =>
-    minutesToTime(startMinutes + ((endMinutes - startMinutes) * index) / (count - 1)),
-  );
+function displayPrice(service: BookingServiceRecord) {
+  const payment = service.payment;
+  if (payment?.rateType === 'NO_FEE') return 'Free';
+  const price = payment?.rateType === 'FIXED'
+    ? payment.fixed?.price
+    : payment?.varied?.minPrice || payment?.varied?.defaultPrice;
+  if (price?.formattedValue) return payment?.rateType === 'VARIED' ? `from ${price.formattedValue}` : price.formattedValue;
+  const numeric = Number(String(price?.value || '').replace(',', '.'));
+  if (Number.isFinite(numeric) && numeric > 0) return `${payment?.rateType === 'VARIED' ? 'from ' : ''}€${numeric.toFixed(0)}`;
+  return payment?.custom?.description?.trim() || 'Price on request';
 }
 
-function uniqueImages(record: ExcursionRecord) {
+function serviceImages(service: BookingServiceRecord) {
   return [
-    record.mainImage,
-    record.galleryImage1,
-    record.galleryImage2,
-    record.galleryImage3,
-    record.coverImage,
-  ].filter((image, index, array): image is string =>
-    typeof image === 'string' && Boolean(image) && array.indexOf(image) === index,
-  );
+    service.media?.coverMedia?.image,
+    service.media?.mainMedia?.image,
+    ...(service.media?.items || []).map((item) => item.image),
+  ]
+    .map((image) => normalizeWixMediaImage(image))
+    .filter((image, index, values): image is string => Boolean(image) && values.indexOf(image) === index);
+}
+
+async function loadExcursion(slug: string) {
+  const result = await services.queryServices().limit(100).find();
+  return ((result.items || []) as unknown as BookingServiceRecord[]).find((service) =>
+    service.hidden !== true
+    && service.category?.name?.trim().toLowerCase() === 'excursions'
+    && serviceSlug(service) === slug,
+  ) || null;
 }
 
 function InfoList({ title, entries, negative = false }: { title: string; entries: string[]; negative?: boolean }) {
+  if (!entries.length) return null;
   return (
     <section className={`detail-info-list${negative ? ' detail-info-list--negative' : ''}`}>
       <h2>{title}</h2>
@@ -107,21 +317,20 @@ function InfoList({ title, entries, negative = false }: { title: string; entries
 
 export default function ExcursionDetailPage() {
   const { slug = '' } = useParams();
-  const [record, setRecord] = useState<ExcursionRecord | null>(null);
+  const [service, setService] = useState<BookingServiceRecord | null>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
-  const [galleryStart, setGalleryStart] = useState(0);
 
   useEffect(() => {
     let active = true;
     setLoading(true);
     setError('');
 
-    ExcursionCatalogService.getBySlug(slug)
-      .then((excursion) => {
+    loadExcursion(slug)
+      .then((result) => {
         if (!active) return;
-        setRecord((excursion as ExcursionRecord | null) || null);
-        if (!excursion) setError('We could not find this excursion.');
+        setService(result);
+        if (!result) setError('We could not find this excursion.');
       })
       .catch((reason) => {
         if (!active) return;
@@ -137,10 +346,14 @@ export default function ExcursionDetailPage() {
     };
   }, [slug]);
 
+  const parsed = useMemo(() => parseDescription(service?.description), [service?.description]);
+  const images = useMemo(() => service ? serviceImages(service) : [], [service]);
+
   useEffect(() => {
-    if (!record) return;
+    if (!service) return;
     const previousTitle = document.title;
-    document.title = record.seoTitle || `${record.title} | Top Euro Travel`;
+    const title = service.name?.trim() || 'Excursion';
+    document.title = `${title} | Top Euro Travel`;
     let description = document.querySelector<HTMLMetaElement>('meta[name="description"]');
     const previousDescription = description?.content;
     if (!description) {
@@ -148,50 +361,12 @@ export default function ExcursionDetailPage() {
       description.name = 'description';
       document.head.appendChild(description);
     }
-    description.content = record.seoDescription || record.shortDescription || '';
+    description.content = service.tagLine?.trim() || parsed.intro[0] || '';
     return () => {
       document.title = previousTitle;
       if (description && previousDescription !== undefined) description.content = previousDescription;
     };
-  }, [record]);
-
-  // Parse description from Wix Bookings service
-  const parsedDescription = useMemo<ParsedExcursionDescription>(() => {
-    if (!record?.overview) return {
-      quickFacts: [],
-      introHook: [],
-      tourDescription: [],
-      highlights: [],
-      included: [],
-      notIncluded: [],
-      goodToKnow: [],
-    };
-    const overviewText = typeof record.overview === 'string' ? record.overview : richTextToText(record.overview);
-    return parseExcursionDescription(overviewText);
-  }, [record?.overview]);
-
-  // Use parsed data if available, fall back to legacy fields
-  const highlights = useMemo(() => {
-    if (parsedDescription.highlights.length > 0) return parsedDescription.highlights;
-    return richTextList(record?.highlights);
-  }, [parsedDescription, record?.highlights]);
-
-  const included = useMemo(() => {
-    if (parsedDescription.included.length > 0) return parsedDescription.included;
-    return richTextList(record?.included);
-  }, [parsedDescription, record?.included]);
-
-  const notIncluded = useMemo(() => {
-    if (parsedDescription.notIncluded.length > 0) return parsedDescription.notIncluded;
-    return richTextList(record?.notIncluded);
-  }, [parsedDescription, record?.notIncluded]);
-
-  const goodToKnow = useMemo(() => parsedDescription.goodToKnow, [parsedDescription]);
-
-  const itinerary = useMemo(() => richTextList(record?.itinerary), [record]);
-  const importantInfo = useMemo(() => richTextList(record?.importantInfo), [record]);
-  const images = useMemo(() => (record ? uniqueImages(record) : []), [record]);
-  const times = useMemo(() => itineraryTimes(record?.startTime, record?.endTime, itinerary.length), [record, itinerary.length]);
+  }, [service, parsed.intro]);
 
   if (loading) {
     return (
@@ -201,163 +376,116 @@ export default function ExcursionDetailPage() {
     );
   }
 
-  if (!record || error) {
+  if (!service || error) {
     return (
       <div className="excursion-detail-page excursion-detail-state">
         <section className="excursion-not-found shell">
           <MapPin aria-hidden="true" />
           <h1>Excursion not found</h1>
           <p>{error || 'This excursion is not currently available.'}</p>
-          <Link className="button button--navy" to="/experiences">EXPLORE EXPERIENCES</Link>
+          <Link className="button button--navy" to="/excursions">EXPLORE EXCURSIONS</Link>
         </section>
       </div>
     );
   }
 
-  const specs: Spec[] = [
-    { icon: Clock3, label: 'Duration', value: record.duration || 'Full-day experience' },
-    { icon: Camera, label: 'Excursion Type', value: record.tourGroup || 'Cultural & Scenic' },
-    { icon: Clock3, label: 'Departure Time', value: record.startTime || 'Confirmed after booking' },
-    { icon: Languages, label: 'Language', value: record.language || 'English' },
-    { icon: CalendarDays, label: 'Availability', value: record.operatingDays || 'Selected days' },
-    { icon: UsersRound, label: 'Group Size', value: record.capacity ? `Up to ${record.capacity} guests` : 'Subject to availability' },
-    { icon: BusFront, label: 'Pick-Up', value: record.meetingPoint || richTextToText(record.pickupInfo) || 'Selected hotels' },
-    { icon: Accessibility, label: 'Accessibility', value: 'Contact us for accessibility advice' },
-  ];
-
-  const gallerySlots = images.length
-    ? Array.from({ length: Math.min(5, Math.max(3, images.length)) }, (_, offset) => images[(galleryStart + offset) % images.length])
-    : [];
-  const itineraryImages = images.length ? images : [record.mainImage || record.coverImage].filter(Boolean) as string[];
-  const price = record.adultPrice ? `€${Number(record.adultPrice).toFixed(0)}` : record.priceLabel || 'On request';
-  const bookingUrl = record.bookingUrl || '/contact';
-  const bookingLabel = record.bookingAvailable ? 'BOOK NOW' : 'ENQUIRE NOW';
-  const isBookingDisabled = !record.bookingAvailable;
-
-  // Determine intro paragraph: use parsed intro hook or fall back to overview
-  const introParagraph = parsedDescription.introHook.length > 0
-    ? parsedDescription.introHook[0]
-    : richTextToText(record.overview) || record.shortDescription;
+  const title = service.name?.trim() || 'Excursion';
+  const subtitle = service.tagLine?.trim() || parsed.intro[0] || '';
+  const image = images[0] || travelMedia('excursions-hero.jpg');
+  const currentSlug = serviceSlug(service);
+  const bookingAvailable = service.onlineBooking?.enabled === true;
+  const bookingUrl = `/booking-calendar/${encodeURIComponent(currentSlug)}`;
+  const price = displayPrice(service);
 
   return (
     <div className="excursion-detail-page">
+      <style>{DETAIL_STYLES}</style>
       <PageHero
         className="excursion-detail-hero"
-        title={record.title || 'Excursion'}
-        breadcrumb={`Excursions  •  ${record.title || 'Excursion'}`}
-        image={record.coverImage || record.mainImage || ''}
+        title={title}
+        breadcrumb={`Excursions  •  ${title}`}
+        image={image}
       />
 
-      <section className="excursion-summary excursions-shell">
-        <article className="excursion-summary__intro">
-          <p>{introParagraph}</p>
-          <PlanePath />
-        </article>
+      {subtitle && <p className="excursion-master-subtitle excursions-shell">{subtitle}</p>}
 
-        {/* Quick Facts from parsed description */}
-        {parsedDescription.quickFacts.length > 0 && (
-          <section className="excursion-quick-facts" aria-label="Quick facts">
-            <div className="excursion-quick-facts__grid">
-              {parsedDescription.quickFacts.map(({ label, value }) => (
-                <div key={label} className="excursion-quick-fact">
-                  <strong>{label}</strong>
-                  <span>{value}</span>
-                </div>
-              ))}
-            </div>
+      <section className="excursion-summary excursions-shell">
+        {parsed.intro.length > 0 && (
+          <article className="excursion-summary__intro excursion-master-lead">
+            {parsed.intro.map((paragraph) => <p key={paragraph}>{paragraph}</p>)}
+            <PlanePath />
+          </article>
+        )}
+
+        {parsed.quickFacts.length > 0 && (
+          <section className="excursion-specs" aria-label="Excursion information">
+            {parsed.quickFacts.map(({ icon: Icon, label, value }) => (
+              <div className="excursion-spec" key={`${label}-${value}`}>
+                <Icon aria-hidden="true" />
+                <div><strong>{label}</strong><span>{value}</span></div>
+              </div>
+            ))}
           </section>
         )}
 
-        <section className="excursion-specs" aria-label="Excursion information">
-          {specs.map(({ icon: Icon, label, value }) => (
-            <div className="excursion-spec" key={label}>
-              <Icon aria-hidden="true" />
-              <div><strong>{label}</strong><span>{value}</span></div>
-            </div>
-          ))}
-        </section>
-
         <aside className="excursion-price-card">
-          <span>from</span>
+          <span>{bookingAvailable ? 'from' : 'information'}</span>
           <strong>{price}</strong>
-          <p>per person</p>
-          {isBookingDisabled ? (
-            <div className="booking-coming-soon">
-              <p>Booking details coming soon</p>
-            </div>
-          ) : (
+          {bookingAvailable ? (
             <>
-              <Link className="button button--gold" to={bookingUrl}>{bookingLabel}</Link>
-              <div><ShieldCheck aria-hidden="true" /><p><strong>Free Cancellation</strong><span>Up to 24h before departure</span></p></div>
+              <p>per person</p>
+              <Link className="button button--gold" to={bookingUrl}>BOOK NOW</Link>
             </>
+          ) : (
+            <div className="excursion-coming-soon">
+              <Info aria-hidden="true" />
+              <p><strong>Booking details coming soon</strong><span>The full experience information is available below.</span></p>
+            </div>
           )}
         </aside>
       </section>
 
-      <section className="excursion-highlights excursions-shell" aria-labelledby="excursion-highlights-title">
-        <h2 id="excursion-highlights-title">Highlights</h2>
-        <div className="excursion-highlights__grid">
-          {highlights.map((text) => {
-            const Icon = iconForHighlight(text);
-            return <article key={text}><Icon aria-hidden="true" /><p>{text}</p></article>;
-          })}
-        </div>
-        <PlanePath />
-      </section>
-
-      {/* Tour Description section from parsed data */}
-      {parsedDescription.tourDescription.length > 0 && (
-        <section className="excursion-tour-description excursions-shell" aria-labelledby="tour-description-title">
-          <h2 id="tour-description-title">Tour Description</h2>
-          <div className="excursion-tour-description__content">
-            {parsedDescription.tourDescription.map((paragraph, index) => (
-              <p key={index}>{paragraph}</p>
-            ))}
+      {parsed.tourDescription.length > 0 && (
+        <section className="excursion-master-story excursions-shell">
+          <h2>Tour Description</h2>
+          <div className="excursion-master-story__copy">
+            {parsed.tourDescription.map((paragraph) => <p key={paragraph}>{paragraph}</p>)}
           </div>
         </section>
       )}
 
-      <section className="excursion-itinerary-layout excursions-shell">
-        <div className="excursion-itinerary">
-          <h2>Itinerary</h2>
-          <ol>
-            {itinerary.map((title, index) => (
-              <li key={`${title}-${index}`}>
-                <time>{times[index]}</time>
-                <i aria-hidden="true" />
-                <div className="excursion-itinerary__photo">
-                  {itineraryImages.length > 0 && <Photo src={itineraryImages[index % itineraryImages.length]} alt="" />}
-                </div>
-                <div>
-                  <h3>{title}</h3>
-                  <p>{index === 0 ? richTextToText(record.pickupInfo) : index === itinerary.length - 1 ? 'Return with wonderful island memories.' : record.shortDescription}</p>
-                </div>
-              </li>
-            ))}
-          </ol>
-        </div>
-
-        <aside className="excursion-inclusions">
-          <InfoList title="What’s Included" entries={included} />
-          <InfoList title="Not Included" entries={notIncluded} negative />
-          {goodToKnow.length > 0 && <InfoList title="Good to Know" entries={goodToKnow} />}
-          {importantInfo.length > 0 && <InfoList title="Important Information" entries={importantInfo} />}
-        </aside>
-      </section>
-
-      {gallerySlots.length > 0 && (
-        <section className="excursion-gallery excursions-shell" aria-labelledby="excursion-gallery-title">
-          <div className="excursion-gallery__heading">
-            <h2 id="excursion-gallery-title">Gallery</h2>
-            <span aria-hidden="true" />
-            <div>
-              <button type="button" aria-label="Previous gallery image" onClick={() => setGalleryStart((value) => (value - 1 + images.length) % images.length)}><ChevronLeft /></button>
-              <button type="button" aria-label="Next gallery image" onClick={() => setGalleryStart((value) => (value + 1) % images.length)}><ChevronRight /></button>
-            </div>
+      {parsed.highlights.length > 0 && (
+        <section className="excursion-highlights excursions-shell" aria-labelledby="excursion-highlights-title">
+          <h2 id="excursion-highlights-title">Highlights</h2>
+          <div className="excursion-highlights__grid">
+            {parsed.highlights.map((text) => <article key={text}><Camera aria-hidden="true" /><p>{text}</p></article>)}
           </div>
-          <div className="excursion-gallery__grid" aria-live="polite">
-            {gallerySlots.map((image, index) => (
-              <div key={`${image}-${index}`}><Photo src={image} alt={`${record.title} gallery view ${index + 1}`} /></div>
+          <PlanePath />
+        </section>
+      )}
+
+      {(parsed.included.length > 0 || parsed.notIncluded.length > 0) && (
+        <section className="excursion-master-lists excursions-shell">
+          <InfoList title="What’s Included" entries={parsed.included} />
+          <InfoList title="What’s Not Included" entries={parsed.notIncluded} negative />
+        </section>
+      )}
+
+      {parsed.goodToKnow.length > 0 && (
+        <section className="excursion-master-good excursions-shell">
+          <h2>Good to Know</h2>
+          <ul>
+            {parsed.goodToKnow.map((entry) => <li key={entry}><ShieldCheck aria-hidden="true" /><span>{entry}</span></li>)}
+          </ul>
+        </section>
+      )}
+
+      {images.length > 1 && (
+        <section className="excursion-gallery excursions-shell" aria-labelledby="excursion-gallery-title">
+          <div className="excursion-gallery__heading"><h2 id="excursion-gallery-title">Gallery</h2><span aria-hidden="true" /></div>
+          <div className="excursion-gallery__grid">
+            {images.slice(0, 5).map((galleryImage, index) => (
+              <div key={galleryImage}><Photo src={galleryImage} alt={`${title} gallery view ${index + 1}`} /></div>
             ))}
           </div>
         </section>
