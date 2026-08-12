@@ -57,6 +57,34 @@ const registerServices: RegisterService[] = [
     image: 'https://static.wixstatic.com/media/5a118b_a327428b08f14c5eb3c227b9bd8b225f~mv2.jpg',
     imageAlt: 'Coastal resort in Kos',
   },
+  {
+    number: '05',
+    title: 'Tours & Excursions',
+    description: 'We offer a carefully curated portfolio of tours, excursions, cruises and authentic local experiences designed to showcase the very best of each destination. Led by experienced guides and supported by our operational expertise, our programmes cater to a wide variety of interests, from culture and gastronomy to nature, adventure and leisure.',
+    image: travelMedia('lindos-aerial.jpg'),
+    imageAlt: 'Tours and excursions around Lindos in Rhodes',
+  },
+  {
+    number: '06',
+    title: 'MICE & Groups',
+    description: "We specialise in the planning and delivery of meetings, conferences, incentive programmes, special interest groups, product launches and corporate events. Combining destination expertise, trusted local partnerships and meticulous planning, we create successful programmes tailored to each client's objectives.",
+    image: travelMedia('home-mice-v2.jpg'),
+    imageAlt: 'MICE and group travel programme in Greece',
+  },
+  {
+    number: '07',
+    title: 'Weddings',
+    description: 'From intimate ceremonies to large-scale celebrations, our dedicated team designs and manages bespoke wedding experiences in some of Greece\'s most stunning locations. Every detail is carefully coordinated to ensure a seamless and memorable occasion.',
+    image: 'https://static.wixstatic.com/media/5a118b_3904ba3b49764d06b35840292a63bc65~mv2.jpg',
+    imageAlt: 'A destination wedding setting in Greece',
+  },
+  {
+    number: '08',
+    title: 'XML API Connectivity & Agent Portal',
+    description: 'Technology plays a key role in modern destination management. Through our XML API connectivity and dedicated Agent Portal, travel professionals can access products, services and booking solutions efficiently, benefiting from streamlined processes and enhanced operational flexibility.',
+    image: travelMedia('services-hero.jpg'),
+    imageAlt: 'Top Euro Travel connectivity and agent solutions',
+  },
 ];
 
 
@@ -141,7 +169,7 @@ export default function ServicesPage() {
           <div className="tet-services-stage">
             <div className="tet-services-stage__navigation">
               <div className="tet-services-stage__heading">
-                <p className="tet-services-eyebrow">01 · Operations</p>
+                <p className="tet-services-eyebrow">01 · Destination Services</p>
                 <h2 id="services-operations-title">One connected operation, from planning to delivery.</h2>
               </div>
 
