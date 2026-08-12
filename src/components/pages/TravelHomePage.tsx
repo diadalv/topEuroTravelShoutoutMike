@@ -3045,7 +3045,7 @@ export default function TravelHomePage() {
           Scroll <ArrowDown />
         </span>
 
-        <Link className="tet-hero__discover" to="/destinations">
+        <Link hidden to="/destinations">
           <span className="tet-play-circle"><Play aria-hidden="true" /></span>
           <span>Discover Rhodes &amp; Kos<br />Play video</span>
         </Link>
