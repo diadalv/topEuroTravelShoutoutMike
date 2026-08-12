@@ -19,7 +19,7 @@
   --dest-soft-gold: rgba(200, 146, 45, 0.09);
   --dest-shadow: 0 14px 34px rgba(31, 58, 95, 0.1);
   --dest-max-width: 1460px;
-  --dest-gutter: clamp(20px, 4vw, 64px);
+  --dest-gutter: clamp(20px, 4.2vw, 72px);
 
   --dest-font-sans: var(
     --font-sans,
