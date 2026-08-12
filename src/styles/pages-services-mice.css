@@ -831,6 +831,7 @@
   }
 
   .services-page__partners > :nth-child(4) {
+    margin-top: 0;
     border-left: 0;
   }
 
@@ -867,6 +868,7 @@
   }
 
   .mice-page__organizer-grid .icon-feature:nth-child(4) {
+    margin-top: 0;
     border-left: 0;
   }
 
@@ -885,6 +887,7 @@
   .mice-page__proof-partners {
     min-height: 72px;
     border-top: 1px solid rgba(255, 255, 255, 0.22);
+    margin-top: 0;
     border-left: 0;
   }
 
@@ -941,6 +944,7 @@
   .services-page__partners > :nth-child(4),
   .services-page__partners > :nth-child(5) {
     border-top: 1px solid rgba(255, 255, 255, 0.2);
+    margin-top: 0;
     border-left: 0;
   }
 
@@ -1021,6 +1025,7 @@
   .mice-page__organizer-grid .icon-feature + .icon-feature,
   .mice-page__organizer-grid .icon-feature:nth-child(4) {
     border-top: 1px solid var(--line);
+    margin-top: 0;
     border-left: 0;
   }
 
@@ -1038,6 +1043,7 @@
 
   .mice-page__proof-stats .stat:nth-child(3),
   .mice-page__proof-stats .stat:nth-child(5) {
+    margin-top: 0;
     border-left: 0;
   }
 

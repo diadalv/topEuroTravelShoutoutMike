@@ -427,6 +427,7 @@
 
   .experience-trust-item + .experience-trust-item {
     border-top: 0;
+    margin-top: 0;
     border-left: 0;
   }
 
@@ -500,6 +501,7 @@
   .experience-trust-item:nth-child(even),
   .experience-trust-item:nth-child(n + 3) {
     border-top: 1px solid rgba(255, 255, 255, 0.21);
+    margin-top: 0;
     border-left: 0;
   }
 }

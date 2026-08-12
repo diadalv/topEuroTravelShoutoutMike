@@ -1113,6 +1113,7 @@
 
   .booking-confirmation-help > div + div {
     border-top: 1px solid #dde6ec;
+    margin-top: 0;
     border-left: 0;
   }
 }

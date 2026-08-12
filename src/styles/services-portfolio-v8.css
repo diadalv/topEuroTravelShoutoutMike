@@ -491,6 +491,7 @@
   }
 
   .services-page--portfolio .services-page__partners > :nth-child(odd) {
+    margin-top: 0;
     border-left: 0;
   }
 
@@ -512,6 +513,7 @@
   }
 
   .services-page--portfolio .services-portfolio__intro-copy {
+    margin-top: 0;
     border-left: 0;
     border-top: 1px solid rgba(227, 154, 32, 0.55);
     padding: 26px 0 0;
@@ -555,6 +557,7 @@
 
   .services-page--portfolio .services-page__promise li + li {
     border-top: 1px solid rgba(255, 255, 255, 0.22);
+    margin-top: 0;
     border-left: 0;
   }
 
@@ -635,6 +638,7 @@
   .services-page--portfolio .services-page__partners .partner-mark + .partner-mark {
     min-height: 74px;
     border-top: 1px solid var(--line);
+    margin-top: 0;
     border-left: 0;
   }
 

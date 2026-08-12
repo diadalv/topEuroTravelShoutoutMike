@@ -1639,6 +1639,7 @@ body.tet-about-page-active
     .partner-mark
     + .partner-mark {
     border-top: 1px solid rgba(200, 146, 45, 0.3);
+    margin-top: 0;
     border-left: 0;
   }
 

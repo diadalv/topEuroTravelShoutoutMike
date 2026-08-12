@@ -613,7 +613,8 @@ main {
 }
 
 .partner-mark--compact + .partner-mark--compact {
-  border-left: 0;
+  margin-top: 0;
+    border-left: 0;
 }
 
 .partner-mark--compact svg {
@@ -1387,6 +1388,7 @@ main {
   }
 
   .floating-service:nth-child(5) {
+    margin-top: 0;
     border-left: 0;
   }
 
@@ -1396,6 +1398,7 @@ main {
 
   .trust-bar__stats {
     border-top: 1px solid rgba(255, 255, 255, 0.2);
+    margin-top: 0;
     border-left: 0;
   }
 
@@ -1421,6 +1424,7 @@ main {
   }
 
   .footer-column:nth-child(4) {
+    margin-top: 0;
     border-left: 0;
   }
 
@@ -1463,6 +1467,7 @@ main {
   }
 
   .floating-service:nth-child(odd) {
+    margin-top: 0;
     border-left: 0;
   }
 
@@ -1505,6 +1510,7 @@ main {
 
   .why-strip .icon-feature + .icon-feature {
     border-top: 1px solid var(--line);
+    margin-top: 0;
     border-left: 0;
   }
 
@@ -1515,6 +1521,7 @@ main {
 
   .partner-mark + .partner-mark {
     border-top: 1px solid rgba(255, 255, 255, 0.2);
+    margin-top: 0;
     border-left: 0;
     padding-top: 12px;
   }
@@ -1525,6 +1532,7 @@ main {
 
   .stat:nth-child(3) {
     border-top: 1px solid rgba(255, 255, 255, 0.2);
+    margin-top: 0;
     border-left: 0;
   }
 
@@ -1555,6 +1563,7 @@ main {
 
   .testimonial-strip article + article {
     border-top: 1px solid var(--line);
+    margin-top: 0;
     border-left: 0;
   }
 
@@ -1570,6 +1579,7 @@ main {
   .footer-brand,
   .footer-column {
     border-top: 1px solid rgba(255, 255, 255, 0.18);
+    margin-top: 0;
     border-left: 0;
     padding: 15px 5px 0;
   }

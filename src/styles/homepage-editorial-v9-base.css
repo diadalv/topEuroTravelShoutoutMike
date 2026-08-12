@@ -442,7 +442,8 @@
 }
 
 .home-cinematic-proof > div:first-child {
-  border-left: 0;
+  margin-top: 0;
+    border-left: 0;
   padding-left: 0;
 }
 
@@ -666,7 +667,8 @@
 }
 
 .home-cinematic-journey__step:first-child {
-  border-left: 0;
+  margin-top: 0;
+    border-left: 0;
   padding-left: 0;
 }
 
@@ -806,7 +808,8 @@
 }
 
 .home-cinematic-mice__details span:first-child {
-  border-left: 0;
+  margin-top: 0;
+    border-left: 0;
   padding-left: 0;
 }
 
@@ -1097,6 +1100,7 @@
   }
 
   .home-cinematic-journey__step:nth-child(4) {
+    margin-top: 0;
     border-left: 0;
     padding-left: 0;
   }
@@ -1191,6 +1195,7 @@
 
   .home-cinematic-proof > div:nth-child(3) {
     border-top: 1px solid var(--home-line);
+    margin-top: 0;
     border-left: 0;
     padding-left: 0;
   }
@@ -1222,6 +1227,7 @@
 
   .home-cinematic-journey__step:nth-child(3),
   .home-cinematic-journey__step:nth-child(5) {
+    margin-top: 0;
     border-left: 0;
     padding-left: 0;
   }
@@ -1334,6 +1340,7 @@
   .home-cinematic-hero__signature span:first-child {
     min-height: auto;
     border-top: 1px solid rgba(255, 255, 255, 0.2);
+    margin-top: 0;
     border-left: 0;
     padding: 10px 0;
   }
@@ -1444,6 +1451,7 @@
   .home-cinematic-journey__step:nth-child(5) {
     min-height: 0;
     border-top: 1px solid var(--home-line);
+    margin-top: 0;
     border-left: 0;
     display: grid;
     grid-template-columns: 54px minmax(0, 1fr) auto;
@@ -1505,6 +1513,7 @@
   .home-cinematic-mice__details span:first-child {
     min-height: 50px;
     border-top: 1px solid rgba(255, 255, 255, 0.18);
+    margin-top: 0;
     border-left: 0;
     padding: 11px 0;
   }

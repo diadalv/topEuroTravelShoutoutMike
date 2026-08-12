@@ -351,6 +351,7 @@
   .mice-page__proof-partners {
     min-height: 110px;
     border-top: 1px solid rgba(255, 255, 255, 0.22);
+    margin-top: 0;
     border-left: 0;
   }
 

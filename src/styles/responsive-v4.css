@@ -105,6 +105,7 @@ body {
   }
 
   .site-footer__grid > :nth-child(odd) {
+    margin-top: 0;
     border-left: 0;
   }
 
@@ -200,6 +201,7 @@ body {
   }
 
   .services-page__partners > :nth-child(odd) {
+    margin-top: 0;
     border-left: 0;
   }
 
@@ -546,6 +548,7 @@ body {
   .services-page__partners > *,
   .mice-page__proof-partners > * {
     border-top: 1px solid rgba(255, 255, 255, 0.2);
+    margin-top: 0;
     border-left: 0;
   }
 
@@ -625,6 +628,7 @@ body {
 
   .site-footer__grid > * {
     border-top: 1px solid rgba(255, 255, 255, 0.2);
+    margin-top: 0;
     border-left: 0;
     padding: 24px 4px;
   }
@@ -1699,6 +1703,7 @@ html::-webkit-scrollbar-thumb:hover {
 
   .experience-proof-strip > *,
   .experience-proof-strip > * + * {
+    margin-top: 0;
     border-left: 0;
   }
 

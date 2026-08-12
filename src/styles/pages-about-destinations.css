@@ -488,6 +488,7 @@
   }
 
   .island-reasons .icon-feature + .icon-feature {
+    margin-top: 0;
     border-left: 0;
   }
 
@@ -518,6 +519,7 @@
 
   .about-values__grid .icon-feature + .icon-feature {
     border-top: 1px solid var(--line);
+    margin-top: 0;
     border-left: 0;
     padding-top: 10px;
   }

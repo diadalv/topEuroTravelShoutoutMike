@@ -764,6 +764,7 @@ textarea:focus-visible {
   }
 
   .floating-service:nth-child(5) {
+    margin-top: 0;
     border-left: 0;
   }
 
@@ -798,6 +799,7 @@ textarea:focus-visible {
   }
 
   .about-values__grid .icon-feature + .icon-feature {
+    margin-top: 0;
     border-left: 0;
   }
 
@@ -815,6 +817,7 @@ textarea:focus-visible {
   }
 
   .footer-column:nth-child(4) {
+    margin-top: 0;
     border-left: 0;
   }
 }
@@ -842,6 +845,7 @@ textarea:focus-visible {
 
   .trust-bar__stats {
     border-top: 1px solid rgba(255, 255, 255, 0.2);
+    margin-top: 0;
     border-left: 0;
   }
 
@@ -937,6 +941,7 @@ textarea:focus-visible {
   }
 
   .floating-service:nth-child(odd) {
+    margin-top: 0;
     border-left: 0;
   }
 
@@ -946,6 +951,7 @@ textarea:focus-visible {
   }
 
   .partner-mark + .partner-mark {
+    margin-top: 0;
     border-left: 0;
   }
 
@@ -954,6 +960,7 @@ textarea:focus-visible {
   }
 
   .stat:nth-child(3) {
+    margin-top: 0;
     border-left: 0;
   }
 
@@ -999,6 +1006,7 @@ textarea:focus-visible {
 
   .testimonial-strip article + article {
     border-top: 1px solid var(--line);
+    margin-top: 0;
     border-left: 0;
   }
 
@@ -1028,6 +1036,7 @@ textarea:focus-visible {
 
   .about-stats .stat + .stat {
     border-top: 1px solid rgba(255, 255, 255, 0.2);
+    margin-top: 0;
     border-left: 0;
   }
 
@@ -1037,6 +1046,7 @@ textarea:focus-visible {
 
   .footer-column {
     border-top: 1px solid rgba(255, 255, 255, 0.2);
+    margin-top: 0;
     border-left: 0;
     padding-block: 20px 0;
   }
