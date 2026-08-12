@@ -1086,6 +1086,7 @@ const HOME_STYLES = String.raw`
 .tet-mice__media {
   position: relative;
   overflow: hidden;
+  height: 540px;
 }
 
 .tet-mice__media img {
@@ -2354,8 +2355,13 @@ const HOME_STYLES = String.raw`
 }
 
 .tet-mice__copy {
-  padding: clamp(34px, 3vw, 48px);
+  padding: 48px;
   background: var(--tet-navy);
+  min-height: 425px;
+  margin-top: 50px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }
 
 .tet-mice__copy .tet-eyebrow {
@@ -2365,20 +2371,20 @@ const HOME_STYLES = String.raw`
 .tet-mice__copy h2 {
   margin-bottom: 16px;
   color: #fff;
-  font-size: clamp(38px, 3.4vw, 48px);
+  font-size: 56px;
   line-height: 0.98;
 }
 
 .tet-mice__copy p:not(.tet-eyebrow) {
   margin-bottom: 24px;
   color: rgba(255, 255, 255, 0.82);
-  font-size: 15px;
+  font-size: 16px;
   line-height: 1.65;
 }
 
 .tet-mice__copy .tet-button {
-  min-height: 46px;
-  padding: 0 20px;
+  min-height: 48px;
+  padding: 0 24px;
   font-size: 11px;
 }
 

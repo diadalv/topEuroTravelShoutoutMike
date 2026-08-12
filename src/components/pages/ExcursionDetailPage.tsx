@@ -1,6 +1,7 @@
 import { useEffect, useMemo, useState } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import { ExcursionCatalogService, type ExcursionCatalogRecord } from '@/integrations/excursions';
+import { parseExcursionDescription, type ParsedExcursionDescription } from '@/integrations/excursions/parser';
 import {
   Accessibility,
   BusFront,
@@ -154,10 +155,40 @@ export default function ExcursionDetailPage() {
     };
   }, [record]);
 
-  const highlights = useMemo(() => richTextList(record?.highlights), [record]);
+  // Parse description from Wix Bookings service
+  const parsedDescription = useMemo<ParsedExcursionDescription>(() => {
+    if (!record?.overview) return {
+      quickFacts: [],
+      introHook: [],
+      tourDescription: [],
+      highlights: [],
+      included: [],
+      notIncluded: [],
+      goodToKnow: [],
+    };
+    const overviewText = typeof record.overview === 'string' ? record.overview : richTextToText(record.overview);
+    return parseExcursionDescription(overviewText);
+  }, [record?.overview]);
+
+  // Use parsed data if available, fall back to legacy fields
+  const highlights = useMemo(() => {
+    if (parsedDescription.highlights.length > 0) return parsedDescription.highlights;
+    return richTextList(record?.highlights);
+  }, [parsedDescription, record?.highlights]);
+
+  const included = useMemo(() => {
+    if (parsedDescription.included.length > 0) return parsedDescription.included;
+    return richTextList(record?.included);
+  }, [parsedDescription, record?.included]);
+
+  const notIncluded = useMemo(() => {
+    if (parsedDescription.notIncluded.length > 0) return parsedDescription.notIncluded;
+    return richTextList(record?.notIncluded);
+  }, [parsedDescription, record?.notIncluded]);
+
+  const goodToKnow = useMemo(() => parsedDescription.goodToKnow, [parsedDescription]);
+
   const itinerary = useMemo(() => richTextList(record?.itinerary), [record]);
-  const included = useMemo(() => richTextList(record?.included), [record]);
-  const notIncluded = useMemo(() => richTextList(record?.notIncluded), [record]);
   const importantInfo = useMemo(() => richTextList(record?.importantInfo), [record]);
   const images = useMemo(() => (record ? uniqueImages(record) : []), [record]);
   const times = useMemo(() => itineraryTimes(record?.startTime, record?.endTime, itinerary.length), [record, itinerary.length]);
@@ -201,6 +232,12 @@ export default function ExcursionDetailPage() {
   const price = record.adultPrice ? `€${Number(record.adultPrice).toFixed(0)}` : record.priceLabel || 'On request';
   const bookingUrl = record.bookingUrl || '/contact';
   const bookingLabel = record.bookingAvailable ? 'BOOK NOW' : 'ENQUIRE NOW';
+  const isBookingDisabled = !record.bookingAvailable;
+
+  // Determine intro paragraph: use parsed intro hook or fall back to overview
+  const introParagraph = parsedDescription.introHook.length > 0
+    ? parsedDescription.introHook[0]
+    : richTextToText(record.overview) || record.shortDescription;
 
   return (
     <div className="excursion-detail-page">
@@ -213,9 +250,23 @@ export default function ExcursionDetailPage() {
 
       <section className="excursion-summary excursions-shell">
         <article className="excursion-summary__intro">
-          <p>{richTextToText(record.overview) || record.shortDescription}</p>
+          <p>{introParagraph}</p>
           <PlanePath />
         </article>
+
+        {/* Quick Facts from parsed description */}
+        {parsedDescription.quickFacts.length > 0 && (
+          <section className="excursion-quick-facts" aria-label="Quick facts">
+            <div className="excursion-quick-facts__grid">
+              {parsedDescription.quickFacts.map(({ label, value }) => (
+                <div key={label} className="excursion-quick-fact">
+                  <strong>{label}</strong>
+                  <span>{value}</span>
+                </div>
+              ))}
+            </div>
+          </section>
+        )}
 
         <section className="excursion-specs" aria-label="Excursion information">
           {specs.map(({ icon: Icon, label, value }) => (
@@ -230,8 +281,16 @@ export default function ExcursionDetailPage() {
           <span>from</span>
           <strong>{price}</strong>
           <p>per person</p>
-          <Link className="button button--gold" to={bookingUrl}>{bookingLabel}</Link>
-          <div><ShieldCheck aria-hidden="true" /><p><strong>Free Cancellation</strong><span>Up to 24h before departure</span></p></div>
+          {isBookingDisabled ? (
+            <div className="booking-coming-soon">
+              <p>Booking details coming soon</p>
+            </div>
+          ) : (
+            <>
+              <Link className="button button--gold" to={bookingUrl}>{bookingLabel}</Link>
+              <div><ShieldCheck aria-hidden="true" /><p><strong>Free Cancellation</strong><span>Up to 24h before departure</span></p></div>
+            </>
+          )}
         </aside>
       </section>
 
@@ -245,6 +304,18 @@ export default function ExcursionDetailPage() {
         </div>
         <PlanePath />
       </section>
+
+      {/* Tour Description section from parsed data */}
+      {parsedDescription.tourDescription.length > 0 && (
+        <section className="excursion-tour-description excursions-shell" aria-labelledby="tour-description-title">
+          <h2 id="tour-description-title">Tour Description</h2>
+          <div className="excursion-tour-description__content">
+            {parsedDescription.tourDescription.map((paragraph, index) => (
+              <p key={index}>{paragraph}</p>
+            ))}
+          </div>
+        </section>
+      )}
 
       <section className="excursion-itinerary-layout excursions-shell">
         <div className="excursion-itinerary">
@@ -269,6 +340,7 @@ export default function ExcursionDetailPage() {
         <aside className="excursion-inclusions">
           <InfoList title="What’s Included" entries={included} />
           <InfoList title="Not Included" entries={notIncluded} negative />
+          {goodToKnow.length > 0 && <InfoList title="Good to Know" entries={goodToKnow} />}
           {importantInfo.length > 0 && <InfoList title="Important Information" entries={importantInfo} />}
         </aside>
       </section>
