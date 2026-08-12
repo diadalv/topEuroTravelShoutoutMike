@@ -663,10 +663,6 @@
     font-size: 9px;
   }
 
-  .services-page--portfolio .tet-partner-contact__trust .partner-mark span {
-    font-size: 9px;
-  }
-
   .services-page--portfolio .services-page__request {
     grid-template-columns: 1fr;
     justify-items: center;
