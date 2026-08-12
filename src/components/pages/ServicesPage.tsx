@@ -1,17 +1,14 @@
 import {
   Gold,
-  IconFeature,
   PageHero,
   PageSeo,
   PartnerMark,
-  PlanePath,
   travelMedia,
 } from '@/components/travel/Shared';
 import { Image } from '@/components/ui/image';
 import '@/styles/services-register.css';
 import {
   BadgeCheck,
-  Crown,
   Sparkles,
   Users,
 } from 'lucide-react';
@@ -257,32 +254,32 @@ export default function ServicesPage() {
       </section>
 
 
-      <section className="services-page__partners shell services-portfolio-reveal" aria-label="Proud members and partners" data-services-reveal>
-        <div className="services-page__partners-copy">
-          <h2>Proud Members &amp; Partners</h2>
-          <p>Trusted by global organizations<br />and travel professionals.</p>
-        </div>
-        <PartnerMark kind="iata" />
-        <PartnerMark kind="hatta" />
-        <PartnerMark kind="dmc" />
-        <div className="services-page__accredited">
-          <BadgeCheck aria-hidden="true" />
-          <strong>ACCREDITED<br />AGENT</strong>
-        </div>
-      </section>
+      <section className="tet-partner-contact services-portfolio-reveal" aria-label="Partners and contact" data-services-reveal>
+        <div className="tet-partner-contact__inner shell">
+          <div className="tet-partner-contact__trust" aria-label="Proud members and partners">
+            <div className="tet-partner-contact__mark"><PartnerMark kind="hatta" /></div>
+            <div className="tet-partner-contact__mark"><PartnerMark kind="dmc" /></div>
+            <div className="tet-partner-contact__mark"><PartnerMark kind="iata" /></div>
+          </div>
 
-
-      <section className="services-page__request shell services-portfolio-reveal" data-services-reveal>
-        <PlanePath />
-        <div className="services-page__request-copy">
-          <h2>Get in Touch</h2>
-          <p>Tell us about your requirements and discover how Top Euro Travel can support your business, event or travel programme with reliable destination management solutions.</p>
-        </div>
-        <Link className="button button--gold" to="/contact">ENQUIRE NOW</Link>
-        <div className="services-page__request-features">
-          <IconFeature icon={Crown} title="Tailor-made Solutions" />
-          <IconFeature icon={Sparkles} title="Local Expertise You Can Trust" />
-          <IconFeature icon={BadgeCheck} title="Seamless & Reliable" />
+          <div className="tet-partner-contact__cta">
+            <div className="tet-partner-contact__copy">
+              <p className="tet-partner-contact__eyebrow">Get in touch</p>
+              <h2>Let&apos;s start<br />a conversation.</h2>
+              <p className="tet-partner-contact__description">
+                Whether you are looking for a trusted DMC partner, planning a group programme, organising an event or exploring new business opportunities in Greece, our team is ready to assist.
+              </p>
+            </div>
+            <Link className="tet-partner-contact__button" to="/contact">
+              <span>Start a partnership</span>
+              <span aria-hidden="true">→</span>
+            </Link>
+            <div className="tet-partner-contact__features" aria-label="Partnership benefits">
+              <span>Rhodes &amp; Kos</span>
+              <span>24/7 Support</span>
+              <span>Tailored DMC Solutions</span>
+            </div>
+          </div>
         </div>
       </section>
     </div>
