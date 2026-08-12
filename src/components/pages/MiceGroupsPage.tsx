@@ -1,4 +1,14 @@
-import { useEffect } from 'react';
+import {
+  Gold,
+  IconFeature,
+  PageHero,
+  PageSeo,
+  PartnerMark,
+  Photo,
+  SectionTitle,
+  travelMedia,
+} from '@/components/travel/Shared';
+import '@/styles/services-register.css';
 import {
   BedDouble,
   Binoculars,
@@ -14,17 +24,8 @@ import {
   Users,
   type LucideIcon,
 } from 'lucide-react';
-import {
-  travelMedia,
-  Gold,
-  IconFeature,
-  PageHero,
-  PageSeo,
-  PartnerMark,
-  Photo,
-  SectionTitle,
-  Stat,
-} from '@/components/travel/Shared';
+import { useEffect } from 'react';
+import { Link } from 'react-router-dom';
 
 type ProgramCard = {
   icon: LucideIcon;
@@ -210,18 +211,32 @@ export default function MiceGroupsPage() {
           </section>
         </div>
 
-        <section className="mice-page__proof shell mice-reveal" aria-label="Our experience and accreditations" data-mice-reveal>
-          <div className="mice-page__proof-stats">
-            <Stat value="1989" label="Established" />
-            <Stat value="100K+" label="Guests Annually" />
-            <Stat value="200+" label="Hotel Partners" />
-            <Stat value="40+" label="Team Members" />
-            <Stat value="24/7" label="Support" />
-          </div>
-          <div className="mice-page__proof-partners">
-            <span>Trusted by</span>
-            <PartnerMark kind="iata" compact />
-            <PartnerMark kind="dmc" compact />
+        <section className="tet-partner-contact mice-reveal" aria-label="Partners and contact" data-mice-reveal>
+          <div className="tet-partner-contact__inner shell">
+            <div className="tet-partner-contact__trust" aria-label="Proud members and partners">
+              <div className="tet-partner-contact__mark"><PartnerMark kind="hatta" /></div>
+              <div className="tet-partner-contact__mark"><PartnerMark kind="dmc" /></div>
+              <div className="tet-partner-contact__mark"><PartnerMark kind="iata" /></div>
+            </div>
+
+            <div className="tet-partner-contact__cta">
+              <div className="tet-partner-contact__copy">
+                <p className="tet-partner-contact__eyebrow">Get in touch</p>
+                <h2>Let&apos;s start<br />a conversation.</h2>
+                <p className="tet-partner-contact__description">
+                  Whether you are looking for a trusted DMC partner, planning a group programme, organising an event or exploring new business opportunities in Greece, our team is ready to assist.
+                </p>
+              </div>
+              <Link className="tet-partner-contact__button" to="/contact">
+                <span>Start a partnership</span>
+                <span aria-hidden="true">→</span>
+              </Link>
+              <div className="tet-partner-contact__features" aria-label="Partnership benefits">
+                <span>Rhodes &amp; Kos</span>
+                <span>24/7 Support</span>
+                <span>Tailored DMC Solutions</span>
+              </div>
+            </div>
           </div>
         </section>
 
