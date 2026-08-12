@@ -3041,7 +3041,7 @@ export default function TravelHomePage() {
           </div>
         </div>
 
-        <span className="tet-hero__scroll" aria-hidden="true">
+        <span hidden aria-hidden="true">
           Scroll <ArrowDown />
         </span>
 
