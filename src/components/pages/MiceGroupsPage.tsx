@@ -1,13 +1,10 @@
 import { useEffect } from 'react';
-import { Link } from 'react-router-dom';
 import {
-  ArrowRight,
   BedDouble,
   Binoculars,
   BriefcaseBusiness,
   Building2,
   Bus,
-  CheckCircle2,
   GraduationCap,
   Landmark,
   Luggage,
@@ -25,7 +22,6 @@ import {
   PageSeo,
   PartnerMark,
   Photo,
-  PlanePath,
   SectionTitle,
   Stat,
 } from '@/components/travel/Shared';
@@ -130,7 +126,6 @@ function ProgramCardComponent({ icon: Icon, title, copy, image, position }: Prog
       <div className="mice-page__program-copy">
         <h3>{title}</h3>
         <p>{copy}</p>
-        <Link to="/contact">LEARN MORE <ArrowRight aria-hidden="true" /></Link>
       </div>
     </article>
   );
@@ -175,7 +170,6 @@ export default function MiceGroupsPage() {
                 <h2 id="mice-program-title">MICE</h2>
                 <p>From meetings and conferences to incentive programmes and corporate events, Top Euro Travel delivers comprehensive MICE solutions tailored to each client&apos;s objectives. Combining extensive destination expertise, trusted local partnerships and meticulous operational planning, we support every stage of the process, from venue sourcing and accommodation to transportation, event logistics and on-site coordination.</p><p>Whether organising an executive retreat, a large-scale conference, a product launch or an incentive programme, our team ensures seamless execution and memorable experiences across Greece, with particular expertise in Rhodes and Kos.</p>
               </div>
-              <PlanePath />
             </div>
             <div className="mice-page__program-grid mice-page__program-grid--five">
               {micePrograms.map((program) => <ProgramCardComponent key={program.title} {...program} />)}
@@ -189,7 +183,6 @@ export default function MiceGroupsPage() {
                 <h2 id="groups-program-title">GROUPS</h2>
                 <p>We specialise in the design and management of tailor-made group programmes for tour operators, travel agencies, associations, sports teams, special interest groups and corporate clients. Every programme is carefully developed around our partners&apos; requirements, combining accommodation, transportation, excursions, activities and dedicated support services.</p><p>Backed by decades of operational experience and a strong network of local suppliers, we provide flexible, reliable and efficient group travel solutions for both organisers and participants.</p>
               </div>
-              <PlanePath />
             </div>
             <div className="mice-page__program-grid mice-page__program-grid--four">
               {groupPrograms.map((program) => <ProgramCardComponent key={program.title} {...program} />)}
@@ -232,19 +225,6 @@ export default function MiceGroupsPage() {
           </div>
         </section>
 
-        <section className="mice-page__request shell mice-reveal" data-mice-reveal>
-          <PlanePath />
-          <div className="mice-page__request-copy">
-            <h2>Let&apos;s Plan Your Next Project</h2>
-            <p>Tell us about your meeting, event or group requirements and our team will create a tailor-made solution designed around your objectives.</p>
-          </div>
-          <div className="mice-page__request-benefits">
-            <span><CheckCircle2 aria-hidden="true" /> Custom Itineraries</span>
-            <span><CheckCircle2 aria-hidden="true" /> Flexible Solutions</span>
-            <span><CheckCircle2 aria-hidden="true" /> Dedicated Support</span>
-          </div>
-          <Link className="button button--gold" to="/contact">ENQUIRE NOW</Link>
-        </section>
     </div>
   );
 }

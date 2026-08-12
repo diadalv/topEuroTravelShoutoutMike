@@ -38,7 +38,7 @@
   min-height: 0;
   gap: 18px;
   margin-bottom: clamp(32px, 4vw, 46px);
-  padding-right: 120px;
+  padding-right: 0;
 }
 
 .mice-page__heading-icon {
@@ -59,11 +59,6 @@
 .mice-page__program-heading p {
   margin-top: 8px;
   line-height: 1.6;
-}
-
-.mice-page__program-heading > .plane-path {
-  right: 10px;
-  opacity: 0.72;
 }
 
 .mice-page__program-grid {
@@ -132,15 +127,6 @@
 .mice-page__program-copy p {
   margin-bottom: 18px;
   line-height: 1.6;
-}
-
-.mice-page__program-copy a {
-  gap: 8px;
-}
-
-.mice-page__program-copy a svg {
-  width: 16px;
-  height: 16px;
 }
 
 .mice-page__organizers {
@@ -255,41 +241,6 @@
   height: 38px;
 }
 
-.mice-page__request {
-  min-height: 170px;
-  margin-top: clamp(58px, 6vw, 84px);
-  margin-bottom: clamp(40px, 6vw, 72px);
-  border-radius: 20px;
-  grid-template-columns: 90px minmax(280px, 1.1fr) minmax(390px, 1.4fr) auto;
-  gap: 24px;
-  padding: 28px 32px;
-  box-shadow: 0 14px 38px rgba(0, 48, 86, 0.08);
-}
-
-.mice-page__request-copy h2 {
-  margin-bottom: 8px;
-  line-height: 1.15;
-}
-
-.mice-page__request-benefits {
-  gap: 20px;
-}
-
-.mice-page__request-benefits span {
-  gap: 9px;
-  white-space: normal;
-}
-
-.mice-page__request-benefits svg {
-  width: 26px;
-  height: 26px;
-}
-
-.mice-page__request .button {
-  min-height: 48px;
-  padding-inline: 28px;
-}
-
 /* Scroll reveals and staggered child motion. */
 .mice-reveal {
   opacity: 0;
@@ -354,14 +305,6 @@
     margin-top: 0;
     border-left: 0;
   }
-
-  .mice-page__request {
-    grid-template-columns: 80px 1fr auto;
-  }
-
-  .mice-page__request-benefits {
-    grid-column: 2 / -1;
-  }
 }
 
 @media (max-width: 700px) {
@@ -390,10 +333,6 @@
   .mice-page__program-heading {
     align-items: flex-start;
     padding-right: 0;
-  }
-
-  .mice-page__program-heading > .plane-path {
-    display: none;
   }
 
   .mice-page__program-grid--five,
@@ -436,20 +375,6 @@
 
   .mice-page__proof-stats .stat {
     min-height: 125px;
-  }
-
-  .mice-page__request {
-    min-height: 0;
-    margin-top: 52px;
-    margin-bottom: 44px;
-    grid-template-columns: 1fr;
-    gap: 20px;
-    padding: 32px 24px;
-  }
-
-  .mice-page__request-benefits {
-    grid-column: auto;
-    grid-template-columns: 1fr;
   }
 }
 
