@@ -203,7 +203,12 @@ export default function ServicesPage() {
                       <span className="tet-service-row__number">{service.number}</span>
                       <span className="tet-service-row__content">
                         <strong>{service.title}</strong>
-                        <span className="tet-service-row__description">{service.description}</span>
+                        <span
+                          className="tet-service-row__description"
+                          style={{ maxWidth: '470px', maxHeight: isActive ? '340px' : undefined }}
+                        >
+                          {service.description}
+                        </span>
                       </span>
                       <span className="tet-service-row__chevron" aria-hidden="true" />
                     </button>
@@ -228,7 +233,9 @@ export default function ServicesPage() {
               <div className="tet-service-visual__label">
                 <div key={activeService.title}>
                   <span>Selected capability</span>
-                  <h3>{activeService.title}</h3>
+                  <h3 style={{ overflow: 'visible', textOverflow: 'clip', whiteSpace: 'normal' }}>
+                    {activeService.title}
+                  </h3>
                 </div>
                 <span className="tet-service-visual__arrow" aria-hidden="true"><i /></span>
               </div>
