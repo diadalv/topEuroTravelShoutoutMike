@@ -734,7 +734,8 @@
 }
 
 .mice-page__proof-partners .partner-mark span {
-  font-size: 4px;
+  font-size: 10px;
+  line-height: 1.2;
 }
 
 .mice-page__request {
@@ -1065,6 +1066,10 @@
   .mice-page__proof-partners .partner-mark {
     justify-content: flex-start;
     padding: 8px 0;
+  }
+
+  .mice-page__proof-partners .partner-mark span {
+    font-size: 9px;
   }
 
   .mice-page__request {
