@@ -738,6 +738,11 @@
   line-height: 1.2;
 }
 
+.mice-page .tet-partner-contact__trust .partner-mark span {
+  font-size: 10px;
+  line-height: 1.2;
+}
+
 .mice-page__request {
   min-height: 69px;
   margin-top: 13px;
@@ -1069,6 +1074,10 @@
   }
 
   .mice-page__proof-partners .partner-mark span {
+    font-size: 9px;
+  }
+
+  .mice-page .tet-partner-contact__trust .partner-mark span {
     font-size: 9px;
   }
 
