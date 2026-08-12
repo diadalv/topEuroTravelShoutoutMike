@@ -1086,7 +1086,7 @@ const HOME_STYLES = String.raw`
 .tet-mice__media {
   position: relative;
   overflow: hidden;
-  height: 540px;
+  height: clamp(320px, 44vw, 460px);
 }
 
 .tet-mice__media img {
