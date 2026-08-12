@@ -1868,7 +1868,7 @@ const HOME_STYLES = String.raw`
   --tet-paper-soft: #f8f6f2;
   --tet-copy: #202833;
   --tet-line: rgba(31, 58, 95, 0.14);
-  --tet-shell: min(calc(100% - clamp(40px, 8.4vw, 114px)), 1240px);
+  --tet-shell: min(calc(100% - clamp(40px, 8.4vw, 144px)), 1460px);
   --tet-bridge: var(--tet-shell);
   --tet-shadow: 0 18px 42px rgba(31, 58, 95, 0.1);
 }
@@ -2594,7 +2594,7 @@ const HOME_STYLES = String.raw`
 
 @media (max-width: 1100px) {
   :root {
-    --tet-shell: calc(100% - 64px);
+    --tet-shell: calc(100% - clamp(40px, 8.4vw, 144px));
     --tet-bridge: var(--tet-shell);
   }
 
@@ -2665,8 +2665,8 @@ const HOME_STYLES = String.raw`
 
 @media (max-width: 760px) {
   :root {
-    --tet-shell: calc(100% - 36px);
-    --tet-bridge: calc(100% - 36px);
+    --tet-shell: calc(100% - clamp(40px, 8.4vw, 144px));
+    --tet-bridge: var(--tet-shell);
   }
 
   .site-header.is-scrolled .main-nav {
