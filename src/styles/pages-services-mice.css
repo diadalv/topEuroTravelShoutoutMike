@@ -479,11 +479,12 @@
 
 .mice-page__program-grid {
   display: grid;
-  gap: 16px;
+  gap: 18px;
 }
 
 .mice-page__program-grid--five {
   grid-template-columns: repeat(12, minmax(0, 1fr));
+  align-items: start;
 }
 
 .mice-page__program-grid--five .mice-page__program-card:nth-child(1) {
@@ -513,33 +514,34 @@
 .mice-page__program-card {
   min-width: 0;
   position: relative;
-  border: none;
-  border-radius: 0;
+  border: 1px solid #e8e1d8;
+  border-radius: 14px;
   overflow: hidden;
-  background: transparent;
-  box-shadow: none;
-  transition: transform 160ms ease;
+  background: rgba(255, 255, 255, 0.96);
+  box-shadow: 0 2px 8px rgba(0, 48, 86, 0.04);
+  transition: transform 160ms ease, box-shadow 160ms ease, border-color 160ms ease;
   display: flex;
   flex-direction: column;
 }
 
 .mice-page__program-card:hover {
-  border-color: transparent;
+  border-color: rgba(227, 154, 32, 0.55);
+  box-shadow: 0 4px 12px rgba(0, 48, 86, 0.08);
   transform: translateY(-2px);
 }
 
 .mice-page__program-photo {
-  height: 190px;
+  height: 170px;
   overflow: hidden;
 }
 
 .mice-page__program-grid--five .mice-page__program-card:nth-child(2) .mice-page__program-photo,
 .mice-page__program-grid--five .mice-page__program-card:nth-child(3) .mice-page__program-photo {
-  height: 145px;
+  height: 120px;
 }
 
 .mice-page__program-grid--five .mice-page__program-card:nth-child(5) .mice-page__program-photo {
-  height: 160px;
+  height: 135px;
 }
 
 .mice-page__program-grid--four .mice-page__program-photo {
