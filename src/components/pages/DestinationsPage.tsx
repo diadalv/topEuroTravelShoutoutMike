@@ -122,7 +122,7 @@ const experiences = [
     copy: "Step into living history inside one of Europe’s best-preserved medieval cities.",
     image: media.medievalCity,
     imageAlt: "Atmospheric street in the Medieval City of Rhodes",
-    href: "/experiences",
+    href: "/rhodes",
     layout: "large",
   },
   {
@@ -131,7 +131,7 @@ const experiences = [
     copy: "Iconic views, ancient heritage and unforgettable island character.",
     image: media.lindos,
     imageAlt: "Lindos and its Acropolis overlooking the Aegean Sea",
-    href: "/experiences",
+    href: "/rhodes",
     layout: "wide",
   },
   {
@@ -140,7 +140,7 @@ const experiences = [
     copy: "Ancient stories, local traditions and a destination shaped by history.",
     image: media.culture,
     imageAlt: "Cultural and historic destination experience in Kos",
-    href: "/experiences",
+    href: "/kos",
     layout: "standard",
   },
   {
@@ -149,7 +149,7 @@ const experiences = [
     copy: "Sea, landscape and carefully curated moments across the island.",
     image: media.islandExperiences,
     imageAlt: "Sailing experience near Kos in the Aegean Sea",
-    href: "/experiences",
+    href: "/kos",
     layout: "standard",
   },
 ] satisfies readonly DestinationExperience[];
