@@ -2358,7 +2358,7 @@ const HOME_STYLES = String.raw`
   padding: 48px;
   background: var(--tet-navy);
   min-height: 360px;
-  margin-top: 50px;
+  margin-top: 40px;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -2371,7 +2371,7 @@ const HOME_STYLES = String.raw`
 .tet-mice__copy h2 {
   margin-bottom: 16px;
   color: #fff;
-  font-size: 56px;
+  font-size: 48px;
   line-height: 0.98;
 }
 
