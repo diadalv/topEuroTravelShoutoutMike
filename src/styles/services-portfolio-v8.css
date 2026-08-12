@@ -654,7 +654,7 @@
     justify-content: flex-start;
   }
 
-  .services-page--portfolio .services-page__partners .partner-mark span, .services-page--portfolio .tet-partner-contact__trust .partner-mark span {
+  .services-page--portfolio .services-page__partners .partner-mark span, .services-page--portfolio .tet-partner-contact__trust .partner-mark span.services-page--portfolio .services-page__partners .partner-mark span, .services-page--portfolio .tet-partner-contact__trust .partner-mark span {
     font-size: 9px;
   }
 
