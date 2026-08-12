@@ -1,94 +1,7 @@
 /* Services and MICE & Groups
 
 
-/* Delicate MICE service mosaic */
-.mice-page__program-grid--five {
-  gap: 18px;
-  align-items: start;
-}
 
-.mice-page__program-grid--five .mice-page__program-card {
-  align-self: start;
-  height: auto;
-  min-height: 0;
-  border-radius: 14px;
-  box-shadow: 0 7px 18px rgba(0, 48, 86, 0.08);
-}
-
-.mice-page__program-grid--five .mice-page__program-card:nth-child(1) .mice-page__program-photo,
-.mice-page__program-grid--five .mice-page__program-card:nth-child(4) .mice-page__program-photo {
-  height: 170px;
-}
-
-.mice-page__program-grid--five .mice-page__program-card:nth-child(2) .mice-page__program-photo,
-.mice-page__program-grid--five .mice-page__program-card:nth-child(3) .mice-page__program-photo {
-  height: 120px;
-}
-
-.mice-page__program-grid--five .mice-page__program-card:nth-child(5) .mice-page__program-photo {
-  height: 135px;
-}
-
-.mice-page__program-grid--five .mice-page__program-copy {
-  flex: 0 0 auto;
-  height: auto;
-  min-height: 0;
-  padding: 28px 20px 18px;
-}
-
-.mice-page__program-grid--five .mice-page__program-icon {
-  width: 42px;
-  height: 42px;
-}
-
-.mice-page__program-grid--five .mice-page__program-card:nth-child(1) .mice-page__program-icon,
-.mice-page__program-grid--five .mice-page__program-card:nth-child(4) .mice-page__program-icon {
-  top: 152px;
-}
-
-.mice-page__program-grid--five .mice-page__program-card:nth-child(2) .mice-page__program-icon,
-.mice-page__program-grid--five .mice-page__program-card:nth-child(3) .mice-page__program-icon {
-  top: 102px;
-}
-
-.mice-page__program-grid--five .mice-page__program-card:nth-child(5) .mice-page__program-icon {
-  top: 117px;
-}
-
-@media (max-width: 850px) {
-  .mice-page__program-grid--five {
-    gap: 16px;
-    align-items: start;
-  }
-
-  .mice-page__program-grid--five .mice-page__program-card {
-    align-self: start;
-    height: auto;
-    min-height: 0;
-  }
-
-  .mice-page__program-grid--five .mice-page__program-card .mice-page__program-photo {
-    height: 150px;
-  }
-
-  .mice-page__program-grid--five .mice-page__program-card .mice-page__program-icon {
-    top: 132px;
-  }
-
-  .mice-page__program-grid--five .mice-page__program-copy {
-    padding: 28px 18px 18px;
-  }
-}
-
-@media (max-width: 560px) {
-  .mice-page__program-grid--five .mice-page__program-card .mice-page__program-photo {
-    height: 145px;
-  }
-
-  .mice-page__program-grid--five .mice-page__program-card .mice-page__program-icon {
-    top: 127px;
-  }
-}
 
    The two pages share the compact editorial rhythm used by the supplied
    desktop references, while keeping every content block fluid. */
@@ -1187,5 +1100,94 @@
   .mice-page__request-benefits {
     grid-column: auto;
     grid-template-columns: 1fr;
+  }
+}
+
+/* Delicate MICE service mosaic */
+.mice-page__program-grid--five {
+  gap: 18px;
+  align-items: start;
+}
+
+.mice-page__program-grid--five .mice-page__program-card {
+  align-self: start;
+  height: auto;
+  min-height: 0;
+  border-radius: 14px;
+  box-shadow: 0 7px 18px rgba(0, 48, 86, 0.08);
+}
+
+.mice-page__program-grid--five .mice-page__program-card:nth-child(1) .mice-page__program-photo,
+.mice-page__program-grid--five .mice-page__program-card:nth-child(4) .mice-page__program-photo {
+  height: 170px;
+}
+
+.mice-page__program-grid--five .mice-page__program-card:nth-child(2) .mice-page__program-photo,
+.mice-page__program-grid--five .mice-page__program-card:nth-child(3) .mice-page__program-photo {
+  height: 120px;
+}
+
+.mice-page__program-grid--five .mice-page__program-card:nth-child(5) .mice-page__program-photo {
+  height: 135px;
+}
+
+.mice-page__program-grid--five .mice-page__program-copy {
+  flex: 0 0 auto;
+  height: auto;
+  min-height: 0;
+  padding: 28px 20px 18px;
+}
+
+.mice-page__program-grid--five .mice-page__program-icon {
+  width: 42px;
+  height: 42px;
+}
+
+.mice-page__program-grid--five .mice-page__program-card:nth-child(1) .mice-page__program-icon,
+.mice-page__program-grid--five .mice-page__program-card:nth-child(4) .mice-page__program-icon {
+  top: 152px;
+}
+
+.mice-page__program-grid--five .mice-page__program-card:nth-child(2) .mice-page__program-icon,
+.mice-page__program-grid--five .mice-page__program-card:nth-child(3) .mice-page__program-icon {
+  top: 102px;
+}
+
+.mice-page__program-grid--five .mice-page__program-card:nth-child(5) .mice-page__program-icon {
+  top: 117px;
+}
+
+@media (max-width: 850px) {
+  .mice-page__program-grid--five {
+    gap: 16px;
+    align-items: start;
+  }
+
+  .mice-page__program-grid--five .mice-page__program-card {
+    align-self: start;
+    height: auto;
+    min-height: 0;
+  }
+
+  .mice-page__program-grid--five .mice-page__program-card .mice-page__program-photo {
+    height: 150px;
+  }
+
+  .mice-page__program-grid--five .mice-page__program-card .mice-page__program-icon {
+    top: 132px;
+  }
+
+  .mice-page__program-grid--five .mice-page__program-copy {
+    padding: 28px 18px 18px;
+  }
+}
+
+@media (max-width: 560px) {
+  .mice-page__program-grid--five .mice-page__program-card .mice-page__program-photo {
+    height: 145px;
+  }
+
+  .mice-page__program-grid--five .mice-page__program-card .mice-page__program-icon {
+    top: 127px;
   }
 }
