@@ -2829,8 +2829,24 @@ const HOME_STYLES = String.raw`
 .tet-mice__media--left {
   grid-column: 2;
   z-index: 1;
-  -webkit-mask-image: linear-gradient(90deg, transparent 0%, #000 18%, #000 100%);
-  mask-image: linear-gradient(90deg, transparent 0%, #000 18%, #000 100%);
+  -webkit-mask-image: linear-gradient(
+    90deg,
+    transparent 0%,
+    rgba(0, 0, 0, 0.16) 8%,
+    rgba(0, 0, 0, 0.48) 18%,
+    rgba(0, 0, 0, 0.78) 30%,
+    #000 42%,
+    #000 100%
+  );
+  mask-image: linear-gradient(
+    90deg,
+    transparent 0%,
+    rgba(0, 0, 0, 0.16) 8%,
+    rgba(0, 0, 0, 0.48) 18%,
+    rgba(0, 0, 0, 0.78) 30%,
+    #000 42%,
+    #000 100%
+  );
 }
 
 .tet-mice__media--left::after {
@@ -2840,10 +2856,12 @@ const HOME_STYLES = String.raw`
   right: auto;
   bottom: 0;
   left: 0;
-  width: 20%;
-  -webkit-backdrop-filter: blur(8px);
-  backdrop-filter: blur(8px);
-  background: linear-gradient(90deg, rgba(31, 58, 95, 0.42), transparent);
+  width: 44%;
+  -webkit-backdrop-filter: blur(12px);
+  backdrop-filter: blur(12px);
+  background: linear-gradient(90deg, rgba(31, 58, 95, 0.58) 0%, rgba(31, 58, 95, 0.28) 42%, rgba(31, 58, 95, 0.08) 74%, transparent 100%);
+  -webkit-mask-image: linear-gradient(90deg, #000 0%, #000 46%, rgba(0, 0, 0, 0.58) 72%, transparent 100%);
+  mask-image: linear-gradient(90deg, #000 0%, #000 46%, rgba(0, 0, 0, 0.58) 72%, transparent 100%);
 }
 
 .tet-mice__copy {
@@ -2921,8 +2939,22 @@ const HOME_STYLES = String.raw`
 
   .tet-mice__media--left {
     grid-column: 1;
-    -webkit-mask-image: linear-gradient(180deg, transparent 0%, #000 20%, #000 100%);
-    mask-image: linear-gradient(180deg, transparent 0%, #000 20%, #000 100%);
+    -webkit-mask-image: linear-gradient(
+      180deg,
+      transparent 0%,
+      rgba(0, 0, 0, 0.22) 9%,
+      rgba(0, 0, 0, 0.62) 20%,
+      #000 34%,
+      #000 100%
+    );
+    mask-image: linear-gradient(
+      180deg,
+      transparent 0%,
+      rgba(0, 0, 0, 0.22) 9%,
+      rgba(0, 0, 0, 0.62) 20%,
+      #000 34%,
+      #000 100%
+    );
   }
 
   .tet-mice__media--left::after {
@@ -2931,10 +2963,12 @@ const HOME_STYLES = String.raw`
     bottom: auto;
     left: 0;
     width: 100%;
-    height: 24%;
-    -webkit-backdrop-filter: blur(6px);
-    backdrop-filter: blur(6px);
-    background: linear-gradient(180deg, rgba(31, 58, 95, 0.42), transparent);
+    height: 38%;
+    -webkit-backdrop-filter: blur(9px);
+    backdrop-filter: blur(9px);
+    background: linear-gradient(180deg, rgba(31, 58, 95, 0.55) 0%, rgba(31, 58, 95, 0.22) 48%, transparent 100%);
+    -webkit-mask-image: linear-gradient(180deg, #000 0%, rgba(0, 0, 0, 0.62) 68%, transparent 100%);
+    mask-image: linear-gradient(180deg, #000 0%, rgba(0, 0, 0, 0.62) 68%, transparent 100%);
   }
 }
 
