@@ -413,3 +413,21 @@
     gap: 12px;
   }
 }
+
+
+/* Excursion CTA — single-line site-gold button */
+.excursions-list-page .excursion-list-card__footer .button {
+  flex: 0 0 auto;
+  min-width: 104px;
+  white-space: nowrap;
+  background: var(--gold);
+  border-color: var(--gold);
+  color: #fff;
+}
+
+.excursions-list-page .excursion-list-card__footer .button:hover,
+.excursions-list-page .excursion-list-card__footer .button:focus-visible {
+  background: var(--gold-deep);
+  border-color: var(--gold-deep);
+  color: #fff;
+}
