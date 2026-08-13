@@ -186,7 +186,7 @@ export default function ExcursionsPage() {
                 <article className="excursion-list-card" key={record.id}>
                   <Link className="excursion-list-card__image" to={detailUrl} aria-label={`View ${record.title}`}>
                     <Photo src={record.image} alt={record.title} />
-                    <span>{record.bookingAvailable ? 'BOOKABLE' : 'DETAILS AVAILABLE'}</span>
+                    {!record.bookingAvailable && <span>DETAILS AVAILABLE</span>}
                   </Link>
                   <div className="excursion-list-card__body">
                     <div className="excursion-list-card__eyebrow">
