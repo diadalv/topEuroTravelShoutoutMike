@@ -347,7 +347,7 @@
 .excursions-list-page .excursion-list-card__image,
 .excursions-list-page .excursion-list-card__image > img,
 .excursions-list-page .excursion-list-card__image .travel-photo {
-  border-radius: 13px 13px 0 0;
+  border-radius: 14px;
 }
 
 .excursions-list-page .excursion-list-card__image {
