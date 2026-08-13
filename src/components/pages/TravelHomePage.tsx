@@ -48,9 +48,7 @@ const MEDIA = {
   nature: 'https://static.wixstatic.com/media/5a118b_0dc45143f69a46c889756885c764e488~mv2.jpg',
   wellness: 'https://static.wixstatic.com/media/5a118b_ab2ae908eff3464cad53f27ae679ae6a~mv2.jpg',
   shopping: 'https://static.wixstatic.com/media/5a118b_80919dff73954ed2af466817395f8406~mv2.jpg',
-  partnerOne: 'https://static.wixstatic.com/media/5a118b_63f33c17cdd84c7999389621f8b8edbd~mv2.jpg',
-  partnerTwo: 'https://static.wixstatic.com/media/5a118b_32e4b1a00c744f8e91837977aebc1b1e~mv2.jpg',
-} as const;
+/* Partner strip: exactly 15% taller, image-free and divided in brand gold. */} as const;
 
 type Service = {
   icon: LucideIcon;
@@ -591,7 +589,7 @@ const HOME_STYLES = String.raw`
   align-items: center;
   gap: 12px;
   padding: clamp(11px, 0.95vw, 24px) clamp(13px, 1.35vw, 34px);
-  border-left: 1px solid var(--tet-line);
+  border-left: 1px solid var(--tet-gold);
 }
 
 .tet-bridge__item:first-child {
@@ -1008,7 +1006,7 @@ const HOME_STYLES = String.raw`
 }
 
 .tet-service + .tet-service {
-  border-left: 1px solid var(--tet-line);
+  border-left: 1px solid var(--tet-gold);
 }
 
 .tet-service::before {
@@ -1229,11 +1227,11 @@ const HOME_STYLES = String.raw`
   transform: scale(1.055);
 }
 
-/* The reference strip keeps the exact 3-column geometry without fake awards or testimonials. */
+/* Partner proof stays compact, image-free and split by the brand-gold hairline. */
 .tet-partners {
-  min-height: clamp(100px, 8.2vw, 150px);
+  min-height: clamp(115px, 9.43vw, 172.5px);
   display: grid;
-  grid-template-columns: minmax(0, 1.35fr) minmax(260px, 0.7fr) minmax(190px, 0.55fr);
+  grid-template-columns: minmax(0, 1.25fr) minmax(260px, 0.75fr);
   border: 1px solid rgba(8, 47, 83, 0.09);
   border-radius: 8px 8px 0 0;
   overflow: hidden;
@@ -1271,7 +1269,7 @@ const HOME_STYLES = String.raw`
   flex-direction: column;
   justify-content: center;
   padding: 12px 18px;
-  border-left: 1px solid var(--tet-line);
+  border-left: 1px solid var(--tet-gold);
 }
 
 .tet-partners__statement strong {
@@ -1295,7 +1293,7 @@ const HOME_STYLES = String.raw`
   grid-template-columns: 1fr 1fr;
   gap: 5px;
   padding: 6px;
-  border-left: 1px solid var(--tet-line);
+  border-left: 1px solid var(--tet-gold);
 }
 
 .tet-partners__images div {
@@ -1500,15 +1498,7 @@ const HOME_STYLES = String.raw`
     grid-template-columns: 1.2fr 0.8fr;
   }
 
-  .tet-partners__images {
-    grid-column: 1 / -1;
-    min-height: 84px;
-    border-top: 1px solid var(--tet-line);
-    margin-top: 0;
-    border-left: 0;
-  }
-
-  .tet-flat-footer__main {
+  border-left: 1px solid var(--tet-gold);  .tet-flat-footer__main {
     grid-template-columns: 1fr 0.55fr 1fr 0.65fr;
   }
 
@@ -1727,7 +1717,7 @@ const HOME_STYLES = String.raw`
 
   .tet-bridge__item:nth-child(3) {
     border-top: 0;
-    border-left: 1px solid var(--tet-line);
+    border-left: 1px solid var(--tet-gold);
   }
 
   .tet-bridge__item:nth-child(4) {
@@ -1769,7 +1759,7 @@ const HOME_STYLES = String.raw`
   }
 
   .tet-intro__fact:nth-child(even) {
-    border-left: 1px solid var(--tet-line);
+    border-left: 1px solid var(--tet-gold);
   }
 
   .tet-intro__visual {
@@ -1824,9 +1814,8 @@ const HOME_STYLES = String.raw`
     grid-template-columns: 1fr;
   }
 
-  .tet-partners__statement,
-  .tet-partners__images {
-    border-top: 1px solid var(--tet-line);
+  .tet-partners__statement {
+    border-top: 1px solid var(--tet-gold);
     margin-top: 0;
     border-left: 0;
   }
@@ -2054,7 +2043,7 @@ const HOME_STYLES = String.raw`
 
 .tet-bridge__item {
   padding: 18px clamp(16px, 1.55vw, 26px);
-  border-left-color: var(--tet-line);
+  border-left-color: var(--tet-gold);
 }
 
 .tet-bridge small,
@@ -2285,7 +2274,7 @@ const HOME_STYLES = String.raw`
 }
 
 .tet-service:not(:nth-child(4n + 1)) {
-  border-left: 1px solid var(--tet-line);
+  border-left: 1px solid var(--tet-gold);
 }
 
 .tet-service:nth-child(n + 5) {
@@ -2453,8 +2442,8 @@ const HOME_STYLES = String.raw`
 
 /* Partner strip: exactly 15% taller, image-free and divided in brand gold. */
 .tet-partners {
-  min-height: 182px;
-  grid-template-columns: minmax(0, 1.25fr) minmax(310px, 0.75fr) minmax(230px, 0.55fr);
+  min-height: 209.3px;
+  grid-template-columns: minmax(0, 1.25fr) minmax(310px, 0.75fr);
   border-top: 1px solid var(--tet-line);
   border-right: 0;
   border-bottom: 1px solid var(--tet-line);
@@ -2485,7 +2474,7 @@ const HOME_STYLES = String.raw`
 
 .tet-partners__statement {
   padding: 30px;
-  border-left-color: var(--tet-line);
+  border-left-color: var(--tet-gold);
 }
 
 .tet-partners__rating > span,
@@ -2510,7 +2499,7 @@ const HOME_STYLES = String.raw`
 .tet-partners__images {
   gap: 8px;
   padding: 12px;
-  border-left-color: var(--tet-line);
+  border-left-color: var(--tet-gold);
 }
 
 .tet-partners__images div {
@@ -2623,7 +2612,7 @@ const HOME_STYLES = String.raw`
   }
 
   .tet-service:nth-child(even) {
-    border-left: 1px solid var(--tet-line);
+    border-left: 1px solid var(--tet-gold);
   }
 
   .tet-service:nth-child(n + 3) {
@@ -2651,15 +2640,7 @@ const HOME_STYLES = String.raw`
     grid-template-columns: 1.15fr 0.85fr;
   }
 
-  .tet-partners__images {
-    grid-column: 1 / -1;
-    min-height: 130px;
-    border-top: 1px solid var(--tet-line);
-    margin-top: 0;
-    border-left: 0;
-  }
-
-  .tet-flat-footer__main {
+  border-left-color: var(--tet-gold);  .tet-flat-footer__main {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 
@@ -2714,7 +2695,7 @@ const HOME_STYLES = String.raw`
   }
 
   .tet-intro__fact:nth-child(even) {
-    border-left: 1px solid var(--tet-line);
+    border-left: 1px solid var(--tet-gold);
     padding-left: 16px;
   }
 
@@ -2797,9 +2778,8 @@ const HOME_STYLES = String.raw`
     padding: 28px 0;
   }
 
-  .tet-partners__statement,
-  .tet-partners__images {
-    border-top: 1px solid var(--tet-line);
+  .tet-partners__statement {
+    border-top: 1px solid var(--tet-gold);
     margin-top: 0;
     border-left: 0;
   }
@@ -3410,11 +3390,7 @@ export default function TravelHomePage() {
             <p>“Professional, reliable and always beyond expectations.”</p>
             <small>— Our Partner</small>
           </div>
-          <div className="tet-partners__images" aria-hidden="true">
-            <div><Image src={MEDIA.partnerOne} alt="" loading="lazy" /></div>
-            <div><Image src={MEDIA.partnerTwo} alt="" loading="lazy" /></div>
-          </div>
-        </section>
+  border-left-color: var(--tet-gold);        </section>
       </div>
 
       <footer className="tet-flat-footer">
