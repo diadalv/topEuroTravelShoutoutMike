@@ -191,9 +191,8 @@ export default function ExcursionsPage() {
                       <span><MapPin aria-hidden="true" />Rhodes</span>
                       <span><Clock3 aria-hidden="true" />{record.duration}</span>
                     </div>
-                    <h3> `Up to ${record.capacity} guests` : 'Flexible group size'}</span>
-                    </div>
-                    <div className="excursion-list-card__footer">
+                    <h3><Link to={detailUrl}>{record.title}</Link></h3>
+                    <p>{record.subtitle}</p>
                       <strong>{record.price}</strong>
                       <Link className="button button--gold button--tiny" to={detailUrl}>VIEW DETAILS</Link>
                     </div>
