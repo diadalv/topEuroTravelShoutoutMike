@@ -23,7 +23,7 @@ import {
   Users,
   type LucideIcon,
 } from 'lucide-react';
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { Link } from 'react-router-dom';
 
 type ProgramCard = {
@@ -126,6 +126,7 @@ function ProgramCardComponent({ icon: Icon, title, copy, image, position, eyebro
 
 function OrganizerServiceIndex() {
   const [activeIndex, setActiveIndex] = useState(0);
+  const containerRef = useRef<HTMLDivElement>(null);
 
   const handleKeyDown = (e: React.KeyboardEvent<HTMLButtonElement>, index: number) => {
     let newIndex = index;
@@ -176,7 +177,7 @@ function OrganizerServiceIndex() {
   };
 
   return (
-    <div className="mice-page__organizer-editorial">
+    <div className="mice-page__organizer-editorial" ref={containerRef}>
       <div className="mice-page__organizer-editorial-tabs" role="tablist" aria-label="Why organizers choose us">
         <div className="mice-page__organizer-editorial-light">
           <div className="mice-page__organizer-editorial-header">

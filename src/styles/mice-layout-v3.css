@@ -150,6 +150,8 @@
   min-height: 520px;
   position: relative;
   overflow: hidden;
+  border-radius: 0;
+  box-shadow: none;
 }
 
 .mice-page__organizer-editorial-light {
