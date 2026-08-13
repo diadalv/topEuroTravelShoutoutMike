@@ -200,7 +200,7 @@ export default function ExcursionsPage() {
                     </div>
                     <div className="excursion-list-card__footer">
                       <strong>{record.price}</strong>
-                      <Link className="button button--navy button--tiny" to={detailUrl}>VIEW DETAILS</Link>
+                      <Link className="button button--gold button--tiny" to={detailUrl}>VIEW DETAILS</Link>
                     </div>
                   </div>
                 </article>
