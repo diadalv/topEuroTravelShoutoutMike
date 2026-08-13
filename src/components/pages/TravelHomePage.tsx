@@ -3632,14 +3632,14 @@ export default function TravelHomePage() {
               <Eyebrow>Experiences</Eyebrow>
               <h2 id="tet-experiences-title">Live the Destination</h2>
             </div>
-            <Link className="tet-text-link" to=./excursions.>
+            <Link className="tet-text-link" to="/excursions">
               View all experiences <ArrowRight aria-hidden="true" />
             </Link>
           </div>
 
           <div className="tet-experiences__rail" data-motion="up" data-stagger="true">
             {experiences.map(({ icon: Icon, title, image }) => (
-              <Link className="tet-experience" to=./excursions. key={title}>
+              <Link className="tet-experience" to="/excursions" key={title}>
                 <Image src={image} alt={title} loading="lazy" />
                 <span className="tet-experience__icon"><Icon aria-hidden="true" /></span>
                 <strong>{title}</strong>
