@@ -1,6 +1,5 @@
 import {
   Gold,
-  IconFeature,
   PageHero,
   PageSeo,
   PartnerMark,
@@ -8,6 +7,7 @@ import {
   SectionTitle,
   travelMedia,
 } from '@/components/travel/Shared';
+import '@/styles/mice-layout-v3.css';
 import '@/styles/services-register.css';
 import {
   BedDouble,
@@ -15,6 +15,7 @@ import {
   BriefcaseBusiness,
   Building2,
   Bus,
+  ChevronRight,
   GraduationCap,
   Landmark,
   Luggage,
@@ -24,7 +25,7 @@ import {
   Users,
   type LucideIcon,
 } from 'lucide-react';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 
 type ProgramCard = {
@@ -104,15 +105,6 @@ const organizerFeatures = [
   { icon: MapPin, title: 'Local Expertise', copy: 'Deep destination knowledge and trusted local partnerships.' },
 ];
 
-const moments = [
-  ['services-hero.jpg', 'A fully prepared conference room'],
-  ['about-hero.jpg', 'Business guests connecting in Rhodes'],
-  ['mice-hero.jpg', 'An outdoor sunset dinner'],
-  ['marina.jpg', 'Island-hopping boats in the harbour'],
-  ['acropolis.jpg', 'Ancient sites at sunset'],
-  ['nightlife.jpg', 'A memorable evening event'],
-];
-
 function ProgramCardComponent({ icon: Icon, title, copy, image, position }: ProgramCard) {
   return (
     <article className="mice-page__program-card">
@@ -129,6 +121,82 @@ function ProgramCardComponent({ icon: Icon, title, copy, image, position }: Prog
         <p>{copy}</p>
       </div>
     </article>
+  );
+}
+
+function OrganizerServiceIndex() {
+  const [activeIndex, setActiveIndex] = useState(0);
+
+  const handleKeyDown = (e: React.KeyboardEvent<HTMLButtonElement>, index: number) => {
+    let newIndex = index;
+    if (e.key === 'ArrowUp' || e.key === 'ArrowLeft') {
+      e.preventDefault();
+      newIndex = index === 0 ? organizerFeatures.length - 1 : index - 1;
+    } else if (e.key === 'ArrowDown' || e.key === 'ArrowRight') {
+      e.preventDefault();
+      newIndex = index === organizerFeatures.length - 1 ? 0 : index + 1;
+    } else if (e.key === 'Home') {
+      e.preventDefault();
+      newIndex = 0;
+    } else if (e.key === 'End') {
+      e.preventDefault();
+      newIndex = organizerFeatures.length - 1;
+    }
+    setActiveIndex(newIndex);
+  };
+
+  return (
+    <div className="mice-page__organizer-index">
+      <div className="mice-page__organizer-list" role="tablist">
+        {organizerFeatures.map(({ icon: Icon, title }, index) => (
+          <button
+            key={index}
+            role="tab"
+            className="mice-page__organizer-item"
+            aria-selected={activeIndex === index}
+            aria-controls={`organizer-detail-${index}`}
+            type="button"
+            onClick={() => setActiveIndex(index)}
+            onMouseEnter={() => setActiveIndex(index)}
+            onFocus={() => setActiveIndex(index)}
+            onKeyDown={(e) => handleKeyDown(e, index)}
+          >
+            <span className="mice-page__organizer-number">{String(index + 1).padStart(2, '0')}</span>
+            <Icon className="mice-page__organizer-icon" aria-hidden="true" />
+            <span className="mice-page__organizer-title">{title}</span>
+            <ChevronRight className="mice-page__organizer-chevron" aria-hidden="true" />
+            <div
+              className="mice-page__organizer-mobile-copy"
+              id={`organizer-mobile-${index}`}
+              aria-hidden={activeIndex !== index}
+            >
+              {organizerFeatures[index].copy}
+            </div>
+          </button>
+        ))}
+      </div>
+
+      <div
+        className="mice-page__organizer-detail"
+        role="tabpanel"
+        id={`organizer-detail-${activeIndex}`}
+        key={activeIndex}
+      >
+        <span className="mice-page__organizer-detail-number">
+          {String(activeIndex + 1).padStart(2, '0')}
+        </span>
+        {organizerFeatures[activeIndex] && (() => {
+          const Icon = organizerFeatures[activeIndex].icon;
+          return (
+            <>
+              <Icon className="mice-page__organizer-detail-icon" aria-hidden="true" />
+              <h3>{organizerFeatures[activeIndex].title}</h3>
+              <p>{organizerFeatures[activeIndex].copy}</p>
+            </>
+          );
+        })()}
+      </div>
+    </div>
   );
 }
 
@@ -192,22 +260,7 @@ export default function MiceGroupsPage() {
 
           <section className="mice-page__organizers mice-reveal" aria-labelledby="organizers-title" data-mice-reveal>
             <SectionTitle><span id="organizers-title">Why Organizers Choose Us</span></SectionTitle>
-            <div className="mice-page__organizer-grid">
-              {organizerFeatures.map(({ icon, title, copy }) => (
-                <IconFeature key={title} icon={icon} title={title}>{copy}</IconFeature>
-              ))}
-            </div>
-          </section>
-
-          <section className="mice-page__moments mice-reveal" aria-labelledby="moments-title" data-mice-reveal>
-            <SectionTitle><span id="moments-title">Moments that Matter</span></SectionTitle>
-            <div className="mice-page__moment-grid">
-              {moments.map(([image, alt]) => (
-                <div className="mice-page__moment" key={image}>
-                  <Photo src={travelMedia(image)} alt={alt} />
-                </div>
-              ))}
-            </div>
+            <OrganizerServiceIndex />
           </section>
         </div>
 
