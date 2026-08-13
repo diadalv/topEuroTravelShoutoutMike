@@ -2,7 +2,6 @@ import {
   Gold,
   PageHero,
   PageSeo,
-  PartnerMark,
   Photo,
   travelMedia,
 } from '@/components/travel/Shared';
@@ -272,11 +271,7 @@ export default function MiceGroupsPage() {
 
         <section className="tet-partner-contact mice-reveal" aria-label="Partners and contact" data-mice-reveal>
           <div className="tet-partner-contact__inner shell">
-            <div className="tet-partner-contact__trust" aria-label="Proud members and partners">
-              <div className="tet-partner-contact__mark"><PartnerMark kind="hatta" /></div>
-              <div className="tet-partner-contact__mark"><PartnerMark kind="dmc" /></div>
-              <div className="tet-partner-contact__mark"><PartnerMark kind="iata" /></div>
-            </div>
+
 
             <div className="tet-partner-contact__cta">
               <div className="tet-partner-contact__copy">
