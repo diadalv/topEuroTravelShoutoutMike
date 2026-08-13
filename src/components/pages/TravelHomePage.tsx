@@ -2838,6 +2838,61 @@ const HOME_STYLES = String.raw`
   }
 }
 
+/* Single-image MICE layout: exact 40/60 copy-to-image split. */
+.tet-mice {
+  grid-template-columns: minmax(0, 2fr) minmax(0, 3fr);
+}
+
+.tet-mice__copy {
+  grid-column: 1;
+  background: var(--tet-navy);
+}
+
+.tet-mice__media--left {
+  grid-column: 2;
+  -webkit-mask-image: linear-gradient(90deg, transparent 0%, #000 18%, #000 100%);
+  mask-image: linear-gradient(90deg, transparent 0%, #000 18%, #000 100%);
+}
+
+.tet-mice__media--left::after {
+  top: 0;
+  right: auto;
+  bottom: 0;
+  left: 0;
+  width: 20%;
+  -webkit-backdrop-filter: blur(8px);
+  backdrop-filter: blur(8px);
+  background: linear-gradient(90deg, rgba(31, 58, 95, 0.42), transparent);
+}
+
+@media (max-width: 760px) {
+  .tet-mice {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .tet-mice__copy {
+    grid-column: 1;
+  }
+
+  .tet-mice__media--left {
+    grid-column: 1;
+    -webkit-mask-image: linear-gradient(180deg, transparent 0%, #000 20%, #000 100%);
+    mask-image: linear-gradient(180deg, transparent 0%, #000 20%, #000 100%);
+  }
+
+  .tet-mice__media--left::after {
+    top: 0;
+    right: 0;
+    bottom: auto;
+    left: 0;
+    width: 100%;
+    height: 24%;
+    -webkit-backdrop-filter: blur(6px);
+    backdrop-filter: blur(6px);
+    background: linear-gradient(180deg, rgba(31, 58, 95, 0.42), transparent);
+  }
+}
+
 `;
 
 function Eyebrow({ children }: { children: string }) {
