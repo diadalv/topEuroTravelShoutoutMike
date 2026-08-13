@@ -2838,14 +2838,15 @@ const HOME_STYLES = String.raw`
   }
 }
 
-/* Single-image MICE layout: text left 40%, aerial image right 60%. */
+/* Single-image MICE layout sized to the approved compact red-frame reference. */
 .tet-mice {
   position: relative;
   isolation: isolate;
-  height: auto;
-  min-height: 330px;
+  width: calc(var(--tet-shell) - clamp(18px, 1.3vw, 24px));
+  height: 235px;
+  min-height: 235px;
   grid-template-columns: minmax(0, 2fr) minmax(0, 3fr);
-  grid-template-rows: minmax(330px, 1fr);
+  grid-template-rows: minmax(235px, 1fr);
   margin-bottom: clamp(36px, 3vw, 52px);
   border: 1px solid rgba(31, 58, 95, 0.14);
   border-radius: 14px;
@@ -2857,7 +2858,7 @@ const HOME_STYLES = String.raw`
 .tet-mice__media {
   grid-row: 1;
   height: 100%;
-  min-height: 330px;
+  min-height: 235px;
   margin: 0;
   border-radius: 0;
 }
@@ -2885,9 +2886,9 @@ const HOME_STYLES = String.raw`
 .tet-mice__copy {
   grid-column: 1;
   grid-row: 1;
-  min-height: 330px;
+  min-height: 235px;
   margin: 0;
-  padding: clamp(36px, 3.2vw, 48px) clamp(38px, 3.6vw, 54px);
+  padding: clamp(15px, 1.45vw, 25px);
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -2897,36 +2898,39 @@ const HOME_STYLES = String.raw`
 
 .tet-mice__copy h2 {
   max-width: 430px;
-  margin-bottom: 14px;
-  font-size: clamp(40px, 3.4vw, 48px);
-  line-height: 0.98;
+  margin-bottom: 6px;
+  font-size: clamp(28px, 1.9vw, 39px);
+  line-height: 1;
 }
 
 .tet-mice__copy p:not(.tet-eyebrow) {
   max-width: 420px;
-  margin-bottom: 22px;
-  font-size: 15px;
-  line-height: 1.6;
+  margin-bottom: 9px;
+  font-size: clamp(11px, 0.66vw, 14px);
+  line-height: 1.45;
 }
 
 @media (max-width: 1100px) {
   .tet-mice {
-    min-height: 310px;
-    grid-template-rows: minmax(310px, 1fr);
+    height: 220px;
+    min-height: 220px;
+    grid-template-rows: minmax(220px, 1fr);
   }
 
   .tet-mice__media,
   .tet-mice__copy {
-    min-height: 310px;
+    min-height: 220px;
   }
 
   .tet-mice__copy {
-    padding-inline: clamp(32px, 4vw, 44px);
+    padding: clamp(14px, 2vw, 20px);
   }
 }
 
 @media (max-width: 760px) {
   .tet-mice {
+    width: var(--tet-shell);
+    height: auto;
     min-height: 0;
     grid-template-columns: minmax(0, 1fr);
     grid-template-rows: auto clamp(220px, 42vw, 280px);
