@@ -4,7 +4,6 @@ import {
   PageSeo,
   PartnerMark,
   Photo,
-  SectionTitle,
   travelMedia,
 } from '@/components/travel/Shared';
 import '@/styles/mice-layout-v3.css';
@@ -15,7 +14,6 @@ import {
   BriefcaseBusiness,
   Building2,
   Bus,
-  ChevronRight,
   GraduationCap,
   Landmark,
   Luggage,
@@ -143,55 +141,72 @@ function OrganizerServiceIndex() {
     } else if (e.key === 'End') {
       e.preventDefault();
       newIndex = organizerFeatures.length - 1;
+    } else {
+      return;
     }
+
     setActiveIndex(newIndex);
+    requestAnimationFrame(() => document.getElementById('organizer-tab-' + newIndex)?.focus());
+  };
+
+  const renderOrganizerTab = (index: number) => {
+    const { icon: Icon, title } = organizerFeatures[index];
+
+    return (
+      <button
+        key={title}
+        id={'organizer-tab-' + index}
+        role="tab"
+        className="mice-page__organizer-editorial-row"
+        aria-selected={activeIndex === index}
+        aria-controls={'organizer-detail-' + index}
+        type="button"
+        onClick={() => setActiveIndex(index)}
+        onMouseEnter={() => setActiveIndex(index)}
+        onFocus={() => setActiveIndex(index)}
+        onKeyDown={(e) => handleKeyDown(e, index)}
+        tabIndex={activeIndex === index ? 0 : -1}
+      >
+        <span className="mice-page__organizer-editorial-number">{String(index + 1).padStart(2, '0')}</span>
+        <Icon className="mice-page__organizer-editorial-icon" aria-hidden="true" />
+        <span className="mice-page__organizer-editorial-row-title">{title}</span>
+        <span className="mice-page__organizer-editorial-divider" aria-hidden="true" />
+      </button>
+    );
   };
 
   return (
-    <div className="mice-page__organizer-index">
-      <div className="mice-page__organizer-list" role="tablist">
-        {organizerFeatures.map(({ icon: Icon, title }, index) => (
-          <button
-            key={index}
-            role="tab"
-            className="mice-page__organizer-item"
-            aria-selected={activeIndex === index}
-            aria-controls={`organizer-detail-${index}`}
-            type="button"
-            onClick={() => setActiveIndex(index)}
-            onMouseEnter={() => setActiveIndex(index)}
-            onFocus={() => setActiveIndex(index)}
-            onKeyDown={(e) => handleKeyDown(e, index)}
-          >
-            <span className="mice-page__organizer-number">{String(index + 1).padStart(2, '0')}</span>
-            <Icon className="mice-page__organizer-icon" aria-hidden="true" />
-            <span className="mice-page__organizer-title">{title}</span>
-            <ChevronRight className="mice-page__organizer-chevron" aria-hidden="true" />
-            <div
-              className="mice-page__organizer-mobile-copy"
-              id={`organizer-mobile-${index}`}
-              aria-hidden={activeIndex !== index}
-            >
-              {organizerFeatures[index].copy}
-            </div>
-          </button>
-        ))}
+    <div className="mice-page__organizer-editorial">
+      <div className="mice-page__organizer-editorial-tabs" role="tablist" aria-label="Why organizers choose us">
+        <div className="mice-page__organizer-editorial-light">
+          <div className="mice-page__organizer-editorial-header">
+            <p className="mice-page__organizer-editorial-eyebrow">LOCAL KNOWLEDGE. SEAMLESS DELIVERY.</p>
+            <h2 id="organizers-title" className="mice-page__organizer-editorial-title">Why Organizers Choose Us</h2>
+          </div>
+          <div className="mice-page__organizer-editorial-list">
+            {[0, 1, 2].map(renderOrganizerTab)}
+          </div>
+        </div>
+
+        <div className="mice-page__organizer-editorial-navy">
+          <div className="mice-page__organizer-editorial-list">
+            {[3, 4, 5].map(renderOrganizerTab)}
+          </div>
+        </div>
       </div>
 
       <div
-        className="mice-page__organizer-detail"
+        className="mice-page__organizer-editorial-detail"
         role="tabpanel"
-        id={`organizer-detail-${activeIndex}`}
+        id={'organizer-detail-' + activeIndex}
+        aria-labelledby={'organizer-tab-' + activeIndex}
         key={activeIndex}
       >
-        <span className="mice-page__organizer-detail-number">
-          {String(activeIndex + 1).padStart(2, '0')}
-        </span>
         {organizerFeatures[activeIndex] && (() => {
           const Icon = organizerFeatures[activeIndex].icon;
           return (
             <>
-              <Icon className="mice-page__organizer-detail-icon" aria-hidden="true" />
+              <Icon className="mice-page__organizer-editorial-detail-icon" aria-hidden="true" />
               <h3>{organizerFeatures[activeIndex].title}</h3>
               <p>{organizerFeatures[activeIndex].copy}</p>
             </>
@@ -261,7 +276,6 @@ export default function MiceGroupsPage() {
           </section>
 
           <section className="mice-page__organizers mice-reveal" aria-labelledby="organizers-title" data-mice-reveal>
-            <SectionTitle><span id="organizers-title">Why Organizers Choose Us</span></SectionTitle>
             <OrganizerServiceIndex />
           </section>
         </div>
