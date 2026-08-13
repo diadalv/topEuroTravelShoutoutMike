@@ -209,3 +209,4 @@ export default function ExcursionsPage() {
   );
 }
 View: Toggle Problems
+Terminal: Create New Terminal
