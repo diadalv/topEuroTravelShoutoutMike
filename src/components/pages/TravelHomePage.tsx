@@ -3406,11 +3406,7 @@ export default function TravelHomePage() {
             <p>“Professional, reliable and always beyond expectations.”</p>
             <small>— Our Partner</small>
           </div>
-          <div className="tet-partners__images" aria-hidden="true">
-            <div><Image src={MEDIA.partnerOne} alt="" loading="lazy" /></div>
-            <div><Image src={MEDIA.partnerTwo} alt="" loading="lazy" /></div>
-          </div>
-        </section>
+         </section>
       </div>
 
       <footer className="tet-flat-footer">
