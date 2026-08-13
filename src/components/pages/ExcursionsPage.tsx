@@ -193,6 +193,7 @@ export default function ExcursionsPage() {
                     </div>
                     <h3><Link to={detailUrl}>{record.title}</Link></h3>
                     <p>{record.subtitle}</p>
+                    <div className="excursion-list-card__footer">
                       <strong>{record.price}</strong>
                       <Link className="button button--gold button--tiny" to={detailUrl}>VIEW DETAILS</Link>
                     </div>
