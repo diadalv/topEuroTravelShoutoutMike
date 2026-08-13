@@ -3290,10 +3290,6 @@ export default function TravelHomePage() {
 
           <div className="tet-intro__visual" data-motion="right">
             <Image src={MEDIA.intro} alt="Lindos and the Aegean Sea" loading="eager" />
-            <Link className="tet-intro__play" to="/destinations">
-              <span className="tet-play-circle"><Play aria-hidden="true" /></span>
-              <span>Discover<br />Our World</span>
-            </Link>
           </div>
         </section>
 
