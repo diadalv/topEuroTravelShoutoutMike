@@ -1647,7 +1647,7 @@
 
 .mice-page__organizer-split-active-heading {
   display: grid;
-  grid-template-columns: 25px 23px minmax(0, 1fr);
+  grid-template-columns: 25px minmax(0, 1fr);
   align-items: center;
   gap: 10px;
 }
@@ -1679,7 +1679,7 @@
 
 .mice-page__organizer-split-active p {
   max-width: 430px;
-  margin: 11px 0 0 68px;
+  margin: 11px 0 0 35px;
   color: rgba(255, 255, 255, 0.84);
   font-family: "Manrope", Inter, "Segoe UI", Arial, sans-serif;
   font-size: 13.5px;
