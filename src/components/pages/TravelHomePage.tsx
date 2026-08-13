@@ -76,6 +76,33 @@ const experiences = [
   { icon: ShoppingBag, title: 'Shopping & Lifestyle', image: MEDIA.shopping },
 ] as const;
 
+const testimonials = [
+  {
+    quote: 'Everything was well organized and the crew was friendly and welcoming. Highly recommended!',
+    name: 'Amy',
+    location: 'United Kingdom',
+    experience: 'Lindos boat trip',
+    source: 'Verified booking · GetYourGuide',
+    sourceUrl: 'https://www.getyourguide.com/afandou-l160512/rhodes-lindos-boat-tour-with-swim-stop-and-hotel-pickup-t927010/',
+  },
+  {
+    quote: 'Everything was great. The driver was punctual and very nice.',
+    name: 'Sandra',
+    location: 'Greece',
+    experience: 'Private airport transfer',
+    source: 'Verified booking · GetYourGuide',
+    sourceUrl: 'https://www.getyourguide.com/rhodes-l409/diagoras-airport-private-one-way-transfer-tofrom-rhodes-t55732/',
+  },
+  {
+    quote: 'Well organised, beautiful trip — would definitely book again.',
+    name: 'Aisling',
+    location: 'United Kingdom',
+    experience: 'Symi & St. George\'s Bay',
+    source: 'Verified booking · GetYourGuide',
+    sourceUrl: 'https://www.getyourguide.com/rhodes-l409/rhodes-symi-island-st-george-bay-dutch-guided-boat-tour-t1243190/',
+  },
+] as const;
+
 const navItems = [
   { label: 'Home', to: '/' },
   { label: 'About Us', to: '/about' },
@@ -2419,67 +2446,272 @@ const HOME_STYLES = String.raw`
   transform: scale(1.035);
 }
 
-/* Partner strip: exactly 15% taller, image-free and divided in brand gold. */
-.tet-partners {
-  min-height: 209.3px;
-  grid-template-columns: minmax(0, 1.25fr) minmax(310px, 0.75fr);
-  border-top: 1px solid var(--tet-line);
-  border-right: 0;
+/* Open editorial testimonial composition: no cards, imagery or rating badges. */
+.tet-testimonials {
+  min-height: 242px;
+  display: grid;
+  grid-template-columns: minmax(0, 0.92fr) minmax(420px, 1.08fr);
+  margin-top: clamp(38px, 4vw, 64px);
+  border-top: 1px solid var(--tet-gold);
   border-bottom: 1px solid var(--tet-line);
-  margin-top: 0;
-    border-left: 0;
-  border-radius: 0;
-  background: var(--tet-paper);
-  box-shadow: none;
 }
 
-.tet-partners__marks {
-  gap: 22px;
-  padding: 30px 28px 30px 0;
-  display: flex;
-  align-items: center;
-  flex-wrap: wrap;
-  border-right: 1px solid var(--tet-gold);
-}
-
-.tet-partners__label {
-  color: rgba(32, 40, 51, 0.58);
-  font-size: 10px;
-  letter-spacing: 0.12em;
-}
-
-.tet-partners__marks strong {
-  color: var(--tet-navy);
-  font-family: "Cormorant Garamond", Georgia, "Times New Roman", serif;
-  font-size: 17px;
-  font-weight: 600;
-}
-
-.tet-partners__statement {
-  padding: 30px;
-  border-left-color: var(--tet-gold);
+.tet-testimonials__intro {
   display: flex;
   flex-direction: column;
   justify-content: center;
+  padding: 38px clamp(34px, 4.2vw, 68px) 38px 0;
 }
 
-.tet-partners__rating > span,
-.tet-partners__statement strong {
+.tet-testimonials__eyebrow {
+  margin-bottom: 12px;
+  color: var(--tet-gold-deep);
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+}
+
+.tet-testimonials__intro h2 {
+  max-width: 480px;
+  margin-bottom: 18px;
+  color: var(--tet-navy);
+  font-size: clamp(34px, 3.15vw, 52px);
+  line-height: 0.96;
+}
+
+.tet-testimonials__rule {
+  width: min(250px, 64%);
+  height: 1px;
+  margin-bottom: 18px;
+  background: var(--tet-gold);
+}
+
+.tet-testimonials__network {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 7px 0;
+  max-width: 540px;
+  color: rgba(8, 47, 83, 0.66);
+  font-size: 9px;
+  font-weight: 800;
+  letter-spacing: 0.105em;
+  line-height: 1.6;
+  text-transform: uppercase;
+}
+
+.tet-testimonials__network span + span::before {
+  margin-inline: 9px;
   color: var(--tet-gold);
+  content: '·';
 }
 
-.tet-partners__statement p {
-  margin-top: 10px;
+.tet-testimonials__stage {
+  position: relative;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 34px 0 30px clamp(38px, 4vw, 66px);
+  border-left: 1px solid rgba(8, 47, 83, 0.12);
+}
+
+.tet-testimonials__mark {
+  position: absolute;
+  top: 22px;
+  left: clamp(20px, 2vw, 32px);
+  color: rgba(217, 163, 84, 0.38);
+  font-family: Georgia, 'Times New Roman', serif;
+  font-size: clamp(58px, 5.2vw, 88px);
+  line-height: 1;
+  pointer-events: none;
+}
+
+.tet-testimonials__quote {
+  position: relative;
+  min-height: 92px;
+  margin: 0 0 17px;
   color: var(--tet-navy);
   font-family: "Cormorant Garamond", Georgia, "Times New Roman", serif;
-  font-size: 20px;
-  line-height: 1.3;
+  font-size: clamp(24px, 2vw, 34px);
+  font-weight: 500;
+  line-height: 1.18;
+  animation: tet-testimonial-in 520ms cubic-bezier(.2,.72,.2,1) both;
 }
 
-.tet-partners__statement small {
-  margin-top: 8px;
-  color: rgba(32, 40, 51, 0.64);
-  font-size: 10px;
+.tet-testimonials__credit {
+  display: flex;
+  align-items: baseline;
+  flex-wrap: wrap;
+  gap: 4px 8px;
+  margin-bottom: 22px;
+}
+
+.tet-testimonials__credit strong {
+  color: var(--tet-navy);
+  font-size: 11px;
+  letter-spacing: 0.04em;
+}
+
+.tet-testimonials__credit span,
+.tet-testimonials__source {
+  color: rgba(8, 47, 83, 0.58);
+  font-size: 9px;
+  letter-spacing: 0.04em;
+}
+
+.tet-testimonials__source {
+  width: 100%;
+  transition: color 180ms ease;
+}
+
+.tet-testimonials__source:hover {
+  color: var(--tet-gold-deep);
+}
+
+.tet-testimonials__controls {
+  display: grid;
+  grid-template-columns: minmax(110px, 1fr) auto auto;
+  align-items: center;
+  gap: 18px;
+}
+
+.tet-testimonials__progress {
+  height: 1px;
+  overflow: hidden;
+  background: rgba(8, 47, 83, 0.16);
+}
+
+.tet-testimonials__progress span {
+  display: block;
+  width: 100%;
+  height: 100%;
+  background: var(--tet-gold);
+  transform-origin: left center;
+  animation: tet-testimonial-progress 6s linear both;
+}
+
+.tet-testimonials.is-paused .tet-testimonials__progress span {
+  animation-play-state: paused;
+}
+
+.tet-testimonials__dots,
+.tet-testimonials__arrows {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.tet-testimonials__dot {
+  width: 6px;
+  height: 6px;
+  padding: 0;
+  border: 0;
+  border-radius: 50%;
+  background: rgba(8, 47, 83, 0.24);
+  cursor: pointer;
+  transition: background 180ms ease, transform 180ms ease;
+}
+
+.tet-testimonials__dot.is-active {
+  background: var(--tet-gold);
+  transform: scale(1.35);
+}
+
+.tet-testimonials__arrow {
+  width: 32px;
+  height: 32px;
+  padding: 0;
+  display: grid;
+  place-items: center;
+  border: 1px solid rgba(8, 47, 83, 0.2);
+  border-radius: 50%;
+  color: var(--tet-navy);
+  background: transparent;
+  cursor: pointer;
+  transition: border-color 180ms ease, color 180ms ease, transform 180ms ease;
+}
+
+.tet-testimonials__arrow:hover {
+  border-color: var(--tet-gold);
+  color: var(--tet-gold-deep);
+  transform: translateX(2px);
+}
+
+.tet-testimonials__arrow--previous:hover {
+  transform: translateX(-2px);
+}
+
+.tet-testimonials__arrow svg {
+  width: 14px;
+  height: 14px;
+}
+
+.tet-testimonials__arrow--previous svg {
+  transform: rotate(180deg);
+}
+
+@keyframes tet-testimonial-in {
+  from { opacity: 0; transform: translateY(8px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes tet-testimonial-progress {
+  from { transform: scaleX(0); }
+  to { transform: scaleX(1); }
+}
+
+@media (max-width: 900px) {
+  .tet-testimonials {
+    grid-template-columns: 1fr;
+  }
+
+  .tet-testimonials__intro {
+    padding: 34px 0 28px;
+  }
+
+  .tet-testimonials__stage {
+    padding: 34px 0 34px clamp(28px, 7vw, 54px);
+    border-top: 1px solid var(--tet-gold);
+    border-left: 0;
+  }
+
+  .tet-testimonials__mark {
+    top: 26px;
+    left: 0;
+  }
+}
+
+@media (max-width: 520px) {
+  .tet-testimonials {
+    min-height: 0;
+    margin-top: 32px;
+  }
+
+  .tet-testimonials__intro h2 {
+    font-size: 38px;
+  }
+
+  .tet-testimonials__quote {
+    min-height: 118px;
+    font-size: 27px;
+  }
+
+  .tet-testimonials__controls {
+    grid-template-columns: 1fr auto;
+    gap: 14px;
+  }
+
+  .tet-testimonials__dots {
+    display: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .tet-testimonials__quote,
+  .tet-testimonials__progress span {
+    animation: none;
+  }
 }
 
  /* Footer: same colour, typography and breathing room as the global system. */
@@ -3013,6 +3245,17 @@ function Fact({ icon: Icon, value, label }: { icon: LucideIcon; value: string; l
 export default function TravelHomePage() {
   const [menuOpen, setMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+  const [activeTestimonial, setActiveTestimonial] = useState(0);
+  const [testimonialPaused, setTestimonialPaused] = useState(false);
+  const [testimonialTouchStart, setTestimonialTouchStart] = useState<number | null>(null);
+
+  const showTestimonial = (index: number) => {
+    setActiveTestimonial((index + testimonials.length) % testimonials.length);
+  };
+
+  const moveTestimonial = (direction: -1 | 1) => {
+    setActiveTestimonial((current) => (current + direction + testimonials.length) % testimonials.length);
+  };
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 26);
@@ -3029,6 +3272,14 @@ export default function TravelHomePage() {
     window.addEventListener('keydown', onKeyDown);
     return () => window.removeEventListener('keydown', onKeyDown);
   }, [menuOpen]);
+
+  useEffect(() => {
+    if (testimonialPaused || window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+    const timer = window.setInterval(() => {
+      setActiveTestimonial((current) => (current + 1) % testimonials.length);
+    }, 6000);
+    return () => window.clearInterval(timer);
+  }, [testimonialPaused]);
 
   useEffect(() => {
     const root = document.querySelector<HTMLElement>('.tet-d1');
@@ -3383,23 +3634,93 @@ export default function TravelHomePage() {
           </div>
         </section>
 
-        <section className="tet-partners tet-shell" aria-label="Top Euro Travel partner network" data-motion="up">
-          <div className="tet-partners__marks">
-            <span className="tet-partners__label">Trusted by partners across the travel industry</span>
-            <strong>HATTA</strong>
-            <strong>GREECE DMCs</strong>
-            <strong>Tour Operators</strong>
-            <strong>Travel Agencies</strong>
-            <strong>Hotel Partners</strong>
-          </div>
-          <div className="tet-partners__statement">
-            <div className="tet-partners__rating" aria-label="Five out of five">
-              <span aria-hidden="true">★★★★★</span><strong>5.0</strong>
+        <section
+          className={`tet-testimonials tet-shell${testimonialPaused ? ' is-paused' : ''}`}
+          aria-label="Traveller testimonials"
+          data-motion="up"
+          onMouseEnter={() => setTestimonialPaused(true)}
+          onMouseLeave={() => setTestimonialPaused(false)}
+          onFocusCapture={() => setTestimonialPaused(true)}
+          onBlurCapture={(event) => {
+            if (!event.currentTarget.contains(event.relatedTarget as Node | null)) setTestimonialPaused(false);
+          }}
+          onTouchStart={(event) => setTestimonialTouchStart(event.touches[0]?.clientX ?? null)}
+          onTouchEnd={(event) => {
+            if (testimonialTouchStart === null) return;
+            const distance = (event.changedTouches[0]?.clientX ?? testimonialTouchStart) - testimonialTouchStart;
+            if (Math.abs(distance) > 42) moveTestimonial(distance < 0 ? 1 : -1);
+            setTestimonialTouchStart(null);
+          }}
+        >
+          <div className="tet-testimonials__intro">
+            <span className="tet-testimonials__eyebrow">
+              Testimonials · {String(activeTestimonial + 1).padStart(2, '0')} / {String(testimonials.length).padStart(2, '0')}
+            </span>
+            <h2>Local knowledge.<br />Global confidence.</h2>
+            <span className="tet-testimonials__rule" aria-hidden="true" />
+            <div className="tet-testimonials__network" aria-label="Travel industry network">
+              <span>HATTA</span>
+              <span>Greece DMCs</span>
+              <span>Tour operators</span>
+              <span>Travel agencies</span>
+              <span>Hotel partners</span>
             </div>
-            <p>“Professional, reliable and always beyond expectations.”</p>
-            <small>— Our Partner</small>
           </div>
-         </section>
+
+          <div className="tet-testimonials__stage" aria-live="polite">
+            <span className="tet-testimonials__mark" aria-hidden="true">“</span>
+            <blockquote className="tet-testimonials__quote" key={`quote-${activeTestimonial}`}>
+              {testimonials[activeTestimonial].quote}
+            </blockquote>
+            <div className="tet-testimonials__credit">
+              <strong>{testimonials[activeTestimonial].name}</strong>
+              <span>· {testimonials[activeTestimonial].location} · {testimonials[activeTestimonial].experience}</span>
+              <a
+                className="tet-testimonials__source"
+                href={testimonials[activeTestimonial].sourceUrl}
+                target="_blank"
+                rel="noreferrer"
+              >
+                {testimonials[activeTestimonial].source}
+              </a>
+            </div>
+            <div className="tet-testimonials__controls">
+              <div className="tet-testimonials__progress" aria-hidden="true">
+                <span key={`progress-${activeTestimonial}`} />
+              </div>
+              <div className="tet-testimonials__dots" aria-label="Choose testimonial">
+                {testimonials.map((testimonial, index) => (
+                  <button
+                    className={`tet-testimonials__dot${index === activeTestimonial ? ' is-active' : ''}`}
+                    key={testimonial.name}
+                    type="button"
+                    aria-label={`Show testimonial ${index + 1}`}
+                    aria-current={index === activeTestimonial ? 'true' : undefined}
+                    onClick={() => showTestimonial(index)}
+                  />
+                ))}
+              </div>
+              <div className="tet-testimonials__arrows">
+                <button
+                  className="tet-testimonials__arrow tet-testimonials__arrow--previous"
+                  type="button"
+                  aria-label="Previous testimonial"
+                  onClick={() => moveTestimonial(-1)}
+                >
+                  <ArrowRight aria-hidden="true" />
+                </button>
+                <button
+                  className="tet-testimonials__arrow"
+                  type="button"
+                  aria-label="Next testimonial"
+                  onClick={() => moveTestimonial(1)}
+                >
+                  <ArrowRight aria-hidden="true" />
+                </button>
+              </div>
+            </div>
+          </div>
+        </section>
       </div>
 
       <footer className="tet-flat-footer">
