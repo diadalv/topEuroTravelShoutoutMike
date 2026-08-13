@@ -34,6 +34,7 @@ type ProgramCard = {
   copy: string;
   image: string;
   position?: string;
+  eyebrow?: string;
 };
 
 const micePrograms: ProgramCard[] = [
@@ -105,7 +106,7 @@ const organizerFeatures = [
   { icon: MapPin, title: 'Local Expertise', copy: 'Deep destination knowledge and trusted local partnerships.' },
 ];
 
-function ProgramCardComponent({ icon: Icon, title, copy, image, position }: ProgramCard) {
+function ProgramCardComponent({ icon: Icon, title, copy, image, position, eyebrow }: ProgramCard) {
   return (
     <article className="mice-page__program-card">
       <div className="mice-page__program-photo">
@@ -117,6 +118,7 @@ function ProgramCardComponent({ icon: Icon, title, copy, image, position }: Prog
       </div>
       <div className="mice-page__program-icon"><Icon aria-hidden="true" /></div>
       <div className="mice-page__program-copy">
+        {eyebrow ? <span className="mice-page__program-eyebrow">{eyebrow}</span> : null}
         <h3>{title}</h3>
         <p>{copy}</p>
       </div>
@@ -241,7 +243,7 @@ export default function MiceGroupsPage() {
               </div>
             </div>
             <div className="mice-page__program-grid mice-page__program-grid--five">
-              {micePrograms.map((program) => <ProgramCardComponent key={program.title} {...program} />)}
+              {micePrograms.map((program) => <ProgramCardComponent key={program.title} {...program} eyebrow="MICE SERVICE" />)}
             </div>
           </section>
 
