@@ -3216,9 +3216,7 @@ export default function TravelHomePage() {
             </Link>
           </div>
 
-          <div className="tet-mice__media tet-mice__media--right">
-            <Image src={MEDIA.miceRight} alt="Evening event atmosphere" loading="lazy" />
-          </div>
+
         </section>
 
         <section className="tet-experiences tet-shell" aria-labelledby="tet-experiences-title">
