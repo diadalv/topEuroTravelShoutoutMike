@@ -23,7 +23,7 @@ import {
   Users,
   type LucideIcon,
 } from 'lucide-react';
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 
 type ProgramCard = {
@@ -126,7 +126,6 @@ function ProgramCardComponent({ icon: Icon, title, copy, image, position, eyebro
 
 function OrganizerServiceIndex() {
   const [activeIndex, setActiveIndex] = useState(0);
-  const containerRef = useRef<HTMLDivElement>(null);
 
   const handleKeyDown = (e: React.KeyboardEvent<HTMLButtonElement>, index: number) => {
     let newIndex = index;
@@ -150,69 +149,62 @@ function OrganizerServiceIndex() {
     requestAnimationFrame(() => document.getElementById('organizer-tab-' + newIndex)?.focus());
   };
 
-  const renderOrganizerTab = (index: number) => {
-    const { icon: Icon, title } = organizerFeatures[index];
-
-    return (
-      <button
-        key={title}
-        id={'organizer-tab-' + index}
-        role="tab"
-        className="mice-page__organizer-editorial-row"
-        aria-selected={activeIndex === index}
-        aria-controls={'organizer-detail-' + index}
-        type="button"
-        onClick={() => setActiveIndex(index)}
-        onMouseEnter={() => setActiveIndex(index)}
-        onFocus={() => setActiveIndex(index)}
-        onKeyDown={(e) => handleKeyDown(e, index)}
-        tabIndex={activeIndex === index ? 0 : -1}
-      >
-        <span className="mice-page__organizer-editorial-number">{String(index + 1).padStart(2, '0')}</span>
-        <Icon className="mice-page__organizer-editorial-icon" aria-hidden="true" />
-        <span className="mice-page__organizer-editorial-row-title">{title}</span>
-        <span className="mice-page__organizer-editorial-divider" aria-hidden="true" />
-      </button>
-    );
-  };
-
   return (
-    <div className="mice-page__organizer-editorial" ref={containerRef}>
-      <div className="mice-page__organizer-editorial-tabs" role="tablist" aria-label="Why organizers choose us">
-        <div className="mice-page__organizer-editorial-light">
-          <div className="mice-page__organizer-editorial-header">
-            <p className="mice-page__organizer-editorial-eyebrow">LOCAL KNOWLEDGE. SEAMLESS DELIVERY.</p>
-            <h2 id="organizers-title" className="mice-page__organizer-editorial-title">Why Organizers Choose Us</h2>
-          </div>
-          <div className="mice-page__organizer-editorial-list">
-            {[0, 1, 2].map(renderOrganizerTab)}
-          </div>
+    <div className="mice-page__organizer-split">
+      <div className="mice-page__organizer-split-panel">
+        <div>
+          <p className="mice-page__organizer-split-eyebrow">FOR ORGANIZERS</p>
+          <h2 id="organizers-title" className="mice-page__organizer-split-title">
+            Why Organizers<br />Choose Us
+          </h2>
         </div>
 
-        <div className="mice-page__organizer-editorial-navy">
-          <div className="mice-page__organizer-editorial-list">
-            {[3, 4, 5].map(renderOrganizerTab)}
-          </div>
+        <div
+          className="mice-page__organizer-split-active"
+          role="tabpanel"
+          id={'organizer-detail-' + activeIndex}
+          aria-labelledby={'organizer-tab-' + activeIndex}
+        >
+          {organizerFeatures[activeIndex] && (() => {
+            const Icon = organizerFeatures[activeIndex].icon;
+            return (
+              <div className="mice-page__organizer-split-active-content" key={activeIndex}>
+                <div className="mice-page__organizer-split-active-heading">
+                  <span>{String(activeIndex + 1).padStart(2, '0')}</span>
+                  <Icon aria-hidden="true" />
+                  <h3>{organizerFeatures[activeIndex].title}</h3>
+                </div>
+                <p>{organizerFeatures[activeIndex].copy}</p>
+              </div>
+            );
+          })()}
         </div>
       </div>
 
-      <div
-        className="mice-page__organizer-editorial-detail"
-        role="tabpanel"
-        id={'organizer-detail-' + activeIndex}
-        aria-labelledby={'organizer-tab-' + activeIndex}
-        key={activeIndex}
-      >
-        {organizerFeatures[activeIndex] && (() => {
-          const Icon = organizerFeatures[activeIndex].icon;
-          return (
-            <>
-              <Icon className="mice-page__organizer-editorial-detail-icon" aria-hidden="true" />
-              <h3>{organizerFeatures[activeIndex].title}</h3>
-              <p>{organizerFeatures[activeIndex].copy}</p>
-            </>
-          );
-        })()}
+      <div className="mice-page__organizer-split-list" role="tablist" aria-label="Why organizers choose us">
+        {organizerFeatures.map(({ icon: Icon, title }, index) => (
+          <button
+            key={title}
+            id={'organizer-tab-' + index}
+            role="tab"
+            className="mice-page__organizer-split-row"
+            aria-selected={activeIndex === index}
+            aria-controls={'organizer-detail-' + index}
+            type="button"
+            onClick={() => setActiveIndex(index)}
+            onMouseEnter={() => setActiveIndex(index)}
+            onFocus={() => setActiveIndex(index)}
+            onKeyDown={(e) => handleKeyDown(e, index)}
+            tabIndex={activeIndex === index ? 0 : -1}
+          >
+            <Icon className="mice-page__organizer-split-row-icon" aria-hidden="true" />
+            <span className="mice-page__organizer-split-row-number">
+              {String(index + 1).padStart(2, '0')}
+            </span>
+            <span className="mice-page__organizer-split-row-title">{title}</span>
+            <span className="mice-page__organizer-split-row-line" aria-hidden="true" />
+          </button>
+        ))}
       </div>
     </div>
   );
