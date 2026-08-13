@@ -398,3 +398,248 @@
     transition: none;
   }
 }
+
+
+/* Approved compact horizontal MICE services: open page background, centered seam icons. */
+.mice-page__program-section--mice {
+  padding: 0;
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+  box-shadow: none;
+}
+
+.mice-page__program-section--mice .mice-page__program-heading {
+  margin-bottom: clamp(30px, 3.4vw, 44px);
+}
+
+.mice-page__program-section--mice .mice-page__program-grid--five {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 22px 24px;
+  align-items: stretch;
+}
+
+.mice-page__program-section--mice .mice-page__program-grid--five .mice-page__program-card:nth-child(1),
+.mice-page__program-section--mice .mice-page__program-grid--five .mice-page__program-card:nth-child(2),
+.mice-page__program-section--mice .mice-page__program-grid--five .mice-page__program-card:nth-child(3),
+.mice-page__program-section--mice .mice-page__program-grid--five .mice-page__program-card:nth-child(4) {
+  grid-column: auto;
+}
+
+.mice-page__program-section--mice .mice-page__program-grid--five .mice-page__program-card:nth-child(5) {
+  grid-column: 1 / -1;
+}
+
+.mice-page__program-section--mice .mice-page__program-card {
+  min-height: 168px;
+  display: grid;
+  grid-template-columns: 44% minmax(0, 56%);
+  grid-template-rows: minmax(168px, auto);
+  border: 1px solid rgba(217, 207, 194, 0.9);
+  border-radius: 10px;
+  overflow: hidden;
+  background: rgba(255, 255, 255, 0.96);
+  box-shadow: 0 6px 18px rgba(0, 48, 86, 0.055);
+  transition: border-color 220ms ease, box-shadow 260ms ease, transform 260ms ease;
+}
+
+.mice-page__program-section--mice .mice-page__program-card:nth-child(5) {
+  grid-template-columns: 47% minmax(0, 53%);
+  min-height: 174px;
+  grid-template-rows: minmax(174px, auto);
+}
+
+.mice-page__program-section--mice .mice-page__program-card:hover {
+  border-color: rgba(227, 154, 32, 0.72);
+  box-shadow: 0 14px 30px rgba(0, 48, 86, 0.095);
+  transform: translateY(-3px);
+}
+
+.mice-page__program-section--mice .mice-page__program-photo {
+  width: 100%;
+  height: 100%;
+  min-height: 168px;
+  grid-column: 1;
+  grid-row: 1;
+  overflow: hidden;
+  border-right: 2px solid var(--gold, #e39a20);
+}
+
+.mice-page__program-section--mice .mice-page__program-card:nth-child(5) .mice-page__program-photo {
+  min-height: 174px;
+}
+
+.mice-page__program-section--mice .mice-page__program-photo .travel-photo,
+.mice-page__program-section--mice .mice-page__program-photo img {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+.mice-page__program-section--mice .mice-page__program-photo img {
+  object-fit: cover;
+}
+
+.mice-page__program-section--mice .mice-page__program-icon,
+.mice-page__program-section--mice .mice-page__program-grid--five .mice-page__program-card:nth-child(2) .mice-page__program-icon,
+.mice-page__program-section--mice .mice-page__program-grid--five .mice-page__program-card:nth-child(3) .mice-page__program-icon,
+.mice-page__program-section--mice .mice-page__program-grid--five .mice-page__program-card:nth-child(5) .mice-page__program-icon {
+  width: 44px;
+  height: 44px;
+  top: 50%;
+  left: 44%;
+  border: 3px solid #fff;
+  box-shadow: 0 5px 14px rgba(0, 48, 86, 0.16);
+  transform: translate(-50%, -50%);
+}
+
+.mice-page__program-section--mice .mice-page__program-card:nth-child(5) .mice-page__program-icon {
+  left: 47%;
+}
+
+.mice-page__program-section--mice .mice-page__program-icon svg {
+  width: 21px;
+  height: 21px;
+  stroke-width: 1.7;
+}
+
+.mice-page__program-section--mice .mice-page__program-copy {
+  min-width: 0;
+  min-height: 0;
+  grid-column: 2;
+  grid-row: 1;
+  justify-content: center;
+  align-items: flex-start;
+  padding: 25px 28px 23px 34px;
+}
+
+.mice-page__program-section--mice .mice-page__program-eyebrow {
+  display: block;
+  margin-bottom: 7px;
+  color: var(--gold, #e39a20);
+  font-family: "Manrope", Inter, "Segoe UI", Arial, sans-serif;
+  font-size: 10px;
+  font-weight: 800;
+  line-height: 1.35;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.mice-page__program-section--mice .mice-page__program-copy h3 {
+  margin: 0 0 8px;
+  color: var(--navy, #003f73);
+  font-family: "Cormorant Garamond", Georgia, "Times New Roman", serif;
+  font-size: clamp(21px, 1.55vw, 25px);
+  font-weight: 600;
+  line-height: 1.12;
+}
+
+.mice-page__program-section--mice .mice-page__program-copy p {
+  max-width: 34ch;
+  margin: 0;
+  color: rgba(32, 57, 82, 0.82);
+  font-family: "Manrope", Inter, "Segoe UI", Arial, sans-serif;
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 1.5;
+}
+
+.mice-page__program-section--mice .mice-page__program-card:nth-child(5) .mice-page__program-copy p {
+  max-width: 52ch;
+}
+
+@media (max-width: 900px) {
+  .mice-page__program-section--mice .mice-page__program-grid--five {
+    grid-template-columns: 1fr;
+    gap: 18px;
+  }
+
+  .mice-page__program-section--mice .mice-page__program-grid--five .mice-page__program-card:nth-child(1),
+  .mice-page__program-section--mice .mice-page__program-grid--five .mice-page__program-card:nth-child(2),
+  .mice-page__program-section--mice .mice-page__program-grid--five .mice-page__program-card:nth-child(3),
+  .mice-page__program-section--mice .mice-page__program-grid--five .mice-page__program-card:nth-child(4),
+  .mice-page__program-section--mice .mice-page__program-grid--five .mice-page__program-card:nth-child(5) {
+    grid-column: 1;
+    grid-template-columns: 42% minmax(0, 58%);
+    min-height: 164px;
+    grid-template-rows: minmax(164px, auto);
+  }
+
+  .mice-page__program-section--mice .mice-page__program-photo,
+  .mice-page__program-section--mice .mice-page__program-card:nth-child(5) .mice-page__program-photo {
+    min-height: 164px;
+  }
+
+  .mice-page__program-section--mice .mice-page__program-icon,
+  .mice-page__program-section--mice .mice-page__program-grid--five .mice-page__program-card:nth-child(2) .mice-page__program-icon,
+  .mice-page__program-section--mice .mice-page__program-grid--five .mice-page__program-card:nth-child(3) .mice-page__program-icon,
+  .mice-page__program-section--mice .mice-page__program-grid--five .mice-page__program-card:nth-child(5) .mice-page__program-icon {
+    left: 42%;
+  }
+
+  .mice-page__program-section--mice .mice-page__program-card:nth-child(5) .mice-page__program-copy p {
+    max-width: 34ch;
+  }
+}
+
+@media (max-width: 700px) {
+  .mice-page__program-section--mice {
+    padding: 0;
+    border-radius: 0;
+  }
+
+  .mice-page__program-section--mice .mice-page__program-heading {
+    margin-bottom: 28px;
+  }
+}
+
+@media (max-width: 480px) {
+  .mice-page__program-section--mice .mice-page__program-grid--five {
+    gap: 15px;
+  }
+
+  .mice-page__program-section--mice .mice-page__program-grid--five .mice-page__program-card:nth-child(1),
+  .mice-page__program-section--mice .mice-page__program-grid--five .mice-page__program-card:nth-child(2),
+  .mice-page__program-section--mice .mice-page__program-grid--five .mice-page__program-card:nth-child(3),
+  .mice-page__program-section--mice .mice-page__program-grid--five .mice-page__program-card:nth-child(4),
+  .mice-page__program-section--mice .mice-page__program-grid--five .mice-page__program-card:nth-child(5) {
+    grid-template-columns: 38% minmax(0, 62%);
+    min-height: 196px;
+    grid-template-rows: minmax(196px, auto);
+  }
+
+  .mice-page__program-section--mice .mice-page__program-photo,
+  .mice-page__program-section--mice .mice-page__program-card:nth-child(5) .mice-page__program-photo {
+    height: 100%;
+    min-height: 196px;
+  }
+
+  .mice-page__program-section--mice .mice-page__program-icon,
+  .mice-page__program-section--mice .mice-page__program-grid--five .mice-page__program-card:nth-child(2) .mice-page__program-icon,
+  .mice-page__program-section--mice .mice-page__program-grid--five .mice-page__program-card:nth-child(3) .mice-page__program-icon,
+  .mice-page__program-section--mice .mice-page__program-grid--five .mice-page__program-card:nth-child(5) .mice-page__program-icon {
+    width: 40px;
+    height: 40px;
+    top: 50%;
+    left: 38%;
+  }
+
+  .mice-page__program-section--mice .mice-page__program-copy {
+    padding: 21px 14px 20px 25px;
+  }
+
+  .mice-page__program-section--mice .mice-page__program-eyebrow {
+    margin-bottom: 6px;
+    font-size: 8.5px;
+  }
+
+  .mice-page__program-section--mice .mice-page__program-copy h3 {
+    margin-bottom: 7px;
+    font-size: 20px;
+  }
+
+  .mice-page__program-section--mice .mice-page__program-copy p {
+    font-size: 13px;
+    line-height: 1.45;
+  }
+}
