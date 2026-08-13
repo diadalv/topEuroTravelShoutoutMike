@@ -2451,7 +2451,7 @@ const HOME_STYLES = String.raw`
   transform: scale(1.035);
 }
 
-/* Partner strip: flat, spacious and separated by hairlines. */
+/* Partner strip: exactly 15% taller, image-free and divided in brand gold. */
 .tet-partners {
   min-height: 182px;
   grid-template-columns: minmax(0, 1.25fr) minmax(310px, 0.75fr) minmax(230px, 0.55fr);
