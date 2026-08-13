@@ -2478,7 +2478,7 @@ const HOME_STYLES = String.raw`
 
 .tet-partners__statement {
   padding: 30px;
-  border-left-color: transparent;
+  border-left-color: var(--tet-gold);
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -2785,11 +2785,10 @@ const HOME_STYLES = String.raw`
   .tet-partners__marks {
     padding: 28px 0;
     border-right: 0;
-    border-bottom: 1px solid var(--tet-gold);
+    border-bottom: 0;
   }
 
-  .tet-partners__statement,
-  .tet-partners__images {
+  .tet-partners__statement {
     border-top: 0;
     border-bottom: 0;
     margin-top: 0;
