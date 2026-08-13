@@ -182,7 +182,7 @@ function OrganizerServiceIndex() {
       </div>
 
       <div className="mice-page__organizer-split-list" role="tablist" aria-label="Why organizers choose us">
-        {organizerFeatures.map(({ icon: Icon, title }, index) => (
+        {organizerFeatures.map(({ title }, index) => (
           <button
             key={title}
             id={'organizer-tab-' + index}
@@ -197,7 +197,6 @@ function OrganizerServiceIndex() {
             onKeyDown={(e) => handleKeyDown(e, index)}
             tabIndex={activeIndex === index ? 0 : -1}
           >
-            <Icon className="mice-page__organizer-split-row-icon" aria-hidden="true" />
             <span className="mice-page__organizer-split-row-number">
               {String(index + 1).padStart(2, '0')}
             </span>
