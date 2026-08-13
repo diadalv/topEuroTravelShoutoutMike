@@ -208,5 +208,3 @@ export default function ExcursionsPage() {
     </div>
   );
 }
-View: Toggle Problems
-Terminal: Create New Terminal
