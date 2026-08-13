@@ -48,7 +48,6 @@ type ExcursionCardRecord = {
   slug: string;
   subtitle: string;
   duration: string;
-  capacity?: number;
   image: string;
   price: string;
   bookingAvailable: boolean;
@@ -101,7 +100,6 @@ function toCard(service: BookingServiceRecord): ExcursionCardRecord | null {
     slug,
     subtitle: service.tagLine?.trim() || 'Discover Rhodes with local experts.',
     duration: durationFromDescription(service.description),
-    capacity: service.defaultCapacity ?? undefined,
     image,
     price: displayPrice(service),
     bookingAvailable: service.onlineBooking?.enabled === true,
