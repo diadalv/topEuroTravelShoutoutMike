@@ -2061,7 +2061,8 @@ const HOME_STYLES = String.raw`
 
 .tet-bridge small {
   color: var(--tet-gold);
-  font-size: 10px;
+  font-size: 11px;
+  line-height: 1.4;
   letter-spacing: 0.11em;
 }
 
@@ -2070,17 +2071,28 @@ const HOME_STYLES = String.raw`
   color: var(--tet-gold);
   font-family: "Cormorant Garamond", Georgia, "Times New Roman", serif;
   font-weight: 500;
+  line-height: 0.95;
+}
+
+.tet-bridge__year strong {
+  font-size: clamp(34px, 2.4vw, 40px);
+}
+
+.tet-bridge__metric strong {
+  font-size: clamp(30px, 2.05vw, 36px);
 }
 
 .tet-bridge__copy strong {
   color: var(--tet-navy);
-  font-size: 13px;
+  font-size: 15px;
+  line-height: 1.35;
 }
 
 .tet-bridge__copy span,
 .tet-bridge__metric span span {
   color: rgba(32, 40, 51, 0.68);
-  font-size: 10.5px;
+  font-size: 12px;
+  line-height: 1.45;
 }
 
 .tet-bridge__thumb {
@@ -2466,8 +2478,9 @@ const HOME_STYLES = String.raw`
 .tet-testimonials__eyebrow {
   margin-bottom: 12px;
   color: var(--tet-gold-deep);
-  font-size: 10px;
+  font-size: 12px;
   font-weight: 800;
+  line-height: 1.5;
   letter-spacing: 0.15em;
   text-transform: uppercase;
 }
@@ -2493,7 +2506,7 @@ const HOME_STYLES = String.raw`
   gap: 7px 0;
   max-width: 540px;
   color: rgba(8, 47, 83, 0.66);
-  font-size: 9px;
+  font-size: 11px;
   font-weight: 800;
   letter-spacing: 0.105em;
   line-height: 1.6;
@@ -2533,9 +2546,9 @@ const HOME_STYLES = String.raw`
   margin: 0 0 17px;
   color: var(--tet-navy);
   font-family: "Cormorant Garamond", Georgia, "Times New Roman", serif;
-  font-size: clamp(24px, 2vw, 34px);
+  font-size: clamp(30px, 2.35vw, 40px);
   font-weight: 500;
-  line-height: 1.18;
+  line-height: 1.2;
   animation: tet-testimonial-in 520ms cubic-bezier(.2,.72,.2,1) both;
 }
 
@@ -2549,14 +2562,16 @@ const HOME_STYLES = String.raw`
 
 .tet-testimonials__credit strong {
   color: var(--tet-navy);
-  font-size: 11px;
+  font-size: 13px;
+  line-height: 1.55;
   letter-spacing: 0.04em;
 }
 
 .tet-testimonials__credit span,
 .tet-testimonials__source {
-  color: rgba(8, 47, 83, 0.58);
-  font-size: 9px;
+  color: rgba(8, 47, 83, 0.64);
+  font-size: 11.5px;
+  line-height: 1.55;
   letter-spacing: 0.04em;
 }
 
@@ -2694,7 +2709,7 @@ const HOME_STYLES = String.raw`
 
   .tet-testimonials__quote {
     min-height: 118px;
-    font-size: 27px;
+    font-size: 30px;
   }
 
   .tet-testimonials__controls {
