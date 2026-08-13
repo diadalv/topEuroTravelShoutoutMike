@@ -2335,82 +2335,33 @@ const HOME_STYLES = String.raw`
   transform: translateY(-3px);
 }
 
-/* MICE: copy first, followed by two softly blended images. */
+/* MICE: keep the three-part composition, use the common media/panel treatment. */
 .tet-mice {
-  position: relative;
-  isolation: isolate;
-  height: auto;
-  min-height: 330px;
-  grid-template-columns: repeat(12, minmax(0, 1fr));
-  grid-template-rows: minmax(330px, 1fr);
-  margin-bottom: clamp(36px, 3vw, 52px);
+  height: clamp(360px, 29vw, 410px);
+  grid-template-columns: minmax(0, 1.2fr) minmax(360px, 0.95fr) minmax(220px, 0.62fr);
+  margin-bottom: 0;
   border: 1px solid rgba(31, 58, 95, 0.14);
   border-radius: 14px;
   background: var(--tet-navy);
   box-shadow: none;
 }
 
-.tet-mice__media {
-  grid-row: 1;
-  height: 100%;
-  min-height: 330px;
-  margin: 0;
-  border-radius: 0;
-}
-
-.tet-mice__media--left {
-  grid-column: 4 / 10;
-  z-index: 1;
-  -webkit-mask-image: linear-gradient(90deg, transparent 0%, #000 20%, #000 82%, transparent 100%);
-  mask-image: linear-gradient(90deg, transparent 0%, #000 20%, #000 82%, transparent 100%);
-}
-
-.tet-mice__media--right {
-  display: block;
-  grid-column: 8 / 13;
-  z-index: 2;
-  -webkit-mask-image: linear-gradient(90deg, transparent 0%, #000 26%, #000 100%);
-  mask-image: linear-gradient(90deg, transparent 0%, #000 26%, #000 100%);
-}
-
-.tet-mice__media--left::after,
-.tet-mice__media--right::after {
-  top: 0;
-  bottom: 0;
-  width: 24%;
-  -webkit-backdrop-filter: blur(8px);
-  backdrop-filter: blur(8px);
-}
-
 .tet-mice__media--left::after {
-  right: 0;
-  left: auto;
-  background: linear-gradient(90deg, transparent, rgba(31, 58, 95, 0.16));
+  background: linear-gradient(90deg, transparent 55%, rgba(31, 58, 95, 0.8));
 }
 
 .tet-mice__media--right::after {
-  right: auto;
-  left: 0;
-  background: linear-gradient(90deg, rgba(31, 58, 95, 0.14), transparent);
+  background: linear-gradient(90deg, rgba(31, 58, 95, 0.82), rgba(31, 58, 95, 0.08));
 }
 
 .tet-mice__copy {
-  grid-column: 1 / 6;
-  grid-row: 1;
-  min-height: 330px;
-  margin: 0;
-  padding: clamp(36px, 3.2vw, 48px) clamp(38px, 3.6vw, 54px);
+  padding: 48px;
+  background: var(--tet-navy);
+  min-height: 360px;
+  margin-top: 40px;
   display: flex;
   flex-direction: column;
   justify-content: center;
-  background: linear-gradient(
-    90deg,
-    var(--tet-navy) 0%,
-    var(--tet-navy) 78%,
-    rgba(31, 58, 95, 0.96) 88%,
-    rgba(31, 58, 95, 0) 100%
-  );
-  z-index: 3;
 }
 
 .tet-mice__copy .tet-eyebrow {
@@ -2418,19 +2369,17 @@ const HOME_STYLES = String.raw`
 }
 
 .tet-mice__copy h2 {
-  max-width: 430px;
-  margin-bottom: 14px;
+  margin-bottom: 16px;
   color: #fff;
-  font-size: clamp(40px, 3.4vw, 48px);
+  font-size: 48px;
   line-height: 0.98;
 }
 
 .tet-mice__copy p:not(.tet-eyebrow) {
-  max-width: 420px;
-  margin-bottom: 22px;
+  margin-bottom: 24px;
   color: rgba(255, 255, 255, 0.82);
-  font-size: 15px;
-  line-height: 1.6;
+  font-size: 16px;
+  line-height: 1.65;
 }
 
 .tet-mice__copy .tet-button {
@@ -2682,18 +2631,16 @@ const HOME_STYLES = String.raw`
   }
 
   .tet-mice {
-    min-height: 310px;
-    grid-template-columns: repeat(12, minmax(0, 1fr));
-    grid-template-rows: minmax(310px, 1fr);
+    height: auto;
+    grid-template-columns: minmax(0, 1.1fr) minmax(340px, 0.9fr);
   }
 
-  .tet-mice__media {
-    min-height: 310px;
+  .tet-mice__media--left {
+    min-height: 330px;
   }
 
-  .tet-mice__copy {
-    min-height: 310px;
-    padding-inline: clamp(32px, 4vw, 44px);
+  .tet-mice__media--right {
+    display: none;
   }
 
   .tet-experiences__rail {
@@ -2814,50 +2761,17 @@ const HOME_STYLES = String.raw`
   }
 
   .tet-mice {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    grid-template-rows: auto clamp(220px, 42vw, 280px);
-    min-height: 0;
-    border-radius: 12px;
-  }
-
-  .tet-mice__copy {
-    grid-column: 1 / 3;
-    grid-row: 1;
-    min-height: 0;
-    margin: 0;
-    padding: 34px clamp(24px, 6vw, 44px) 36px;
-    background: var(--tet-navy);
-  }
-
-  .tet-mice__copy h2,
-  .tet-mice__copy p:not(.tet-eyebrow) {
-    max-width: 620px;
-  }
-
-  .tet-mice__media {
-    grid-row: 2;
-    height: 100%;
-    min-height: 0;
+    grid-template-columns: 1fr;
+    border-radius: 10px;
   }
 
   .tet-mice__media--left {
-    grid-column: 1 / 2;
-    -webkit-mask-image: linear-gradient(90deg, #000 0%, #000 78%, transparent 100%);
-    mask-image: linear-gradient(90deg, #000 0%, #000 78%, transparent 100%);
+    min-height: 250px;
   }
 
-  .tet-mice__media--right {
-    display: block;
-    grid-column: 2 / 3;
-    -webkit-mask-image: linear-gradient(90deg, transparent 0%, #000 22%, #000 100%);
-    mask-image: linear-gradient(90deg, transparent 0%, #000 22%, #000 100%);
-  }
-
-  .tet-mice__media--left::after,
-  .tet-mice__media--right::after {
-    width: 28%;
-    -webkit-backdrop-filter: blur(6px);
-    backdrop-filter: blur(6px);
+  .tet-mice__copy {
+    margin-top: -62px;
+    padding: 92px 24px 32px;
   }
 
   .tet-experiences {
@@ -2921,24 +2835,6 @@ const HOME_STYLES = String.raw`
 
   .tet-experience {
     height: 235px;
-  }
-
-  .tet-mice {
-    grid-template-rows: auto 190px;
-    margin-bottom: 34px;
-    border-radius: 10px;
-  }
-
-  .tet-mice__copy {
-    padding: 28px 22px 30px;
-  }
-
-  .tet-mice__copy h2 {
-    font-size: clamp(36px, 11vw, 42px);
-  }
-
-  .tet-mice__copy p:not(.tet-eyebrow) {
-    font-size: 15px;
   }
 }
 
