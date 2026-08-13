@@ -643,3 +643,31 @@
     line-height: 1.45;
   }
 }
+
+
+/* Final seam icon specificity fix against legacy nth-child positioning. */
+.mice-page__program-section--mice .mice-page__program-grid--five .mice-page__program-card .mice-page__program-icon {
+  top: 50%;
+  left: 44%;
+}
+
+.mice-page__program-section--mice .mice-page__program-grid--five .mice-page__program-card:nth-child(5) .mice-page__program-icon {
+  top: 50%;
+  left: 47%;
+}
+
+@media (max-width: 900px) {
+  .mice-page__program-section--mice .mice-page__program-grid--five .mice-page__program-card .mice-page__program-icon,
+  .mice-page__program-section--mice .mice-page__program-grid--five .mice-page__program-card:nth-child(5) .mice-page__program-icon {
+    top: 50%;
+    left: 42%;
+  }
+}
+
+@media (max-width: 480px) {
+  .mice-page__program-section--mice .mice-page__program-grid--five .mice-page__program-card .mice-page__program-icon,
+  .mice-page__program-section--mice .mice-page__program-grid--five .mice-page__program-card:nth-child(5) .mice-page__program-icon {
+    top: 50%;
+    left: 38%;
+  }
+}
