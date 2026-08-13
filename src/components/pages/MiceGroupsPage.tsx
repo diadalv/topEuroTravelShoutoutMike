@@ -166,12 +166,10 @@ function OrganizerServiceIndex() {
           aria-labelledby={'organizer-tab-' + activeIndex}
         >
           {organizerFeatures[activeIndex] && (() => {
-            const Icon = organizerFeatures[activeIndex].icon;
             return (
               <div className="mice-page__organizer-split-active-content" key={activeIndex}>
                 <div className="mice-page__organizer-split-active-heading">
                   <span>{String(activeIndex + 1).padStart(2, '0')}</span>
-                  <Icon aria-hidden="true" />
                   <h3>{organizerFeatures[activeIndex].title}</h3>
                 </div>
                 <p>{organizerFeatures[activeIndex].copy}</p>
