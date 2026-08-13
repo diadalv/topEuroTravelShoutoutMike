@@ -1,9 +1,9 @@
+import { Gold, PageHero, PageSeo, Photo, travelMedia } from '@/components/travel/Shared';
+import { normalizeWixMediaImage } from '@/config/wix-media';
+import { services } from '@wix/bookings';
+import { CalendarDays, Clock3, MapPin, UsersRound } from 'lucide-react';
 import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
-import { services } from '@wix/bookings';
-import { normalizeWixMediaImage } from '@/config/wix-media';
-import { CalendarDays, Clock3, MapPin, UsersRound } from 'lucide-react';
-import { Gold, PageHero, PageSeo, Photo, RequestBanner, travelMedia } from '@/components/travel/Shared';
 
 type Money = {
   value?: string;
@@ -211,7 +211,6 @@ export default function ExcursionsPage() {
         )}
       </section>
 
-      <RequestBanner />
     </div>
   );
 }
