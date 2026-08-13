@@ -1,7 +1,7 @@
 import { Gold, PageHero, PageSeo, Photo, travelMedia } from '@/components/travel/Shared';
 import { normalizeWixMediaImage } from '@/config/wix-media';
 import { services } from '@wix/bookings';
-import { CalendarDays, Clock3, MapPin, UsersRound } from 'lucide-react';
+import { Clock3, Languages, MapPin } from 'lucide-react';
 import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 
@@ -189,14 +189,11 @@ export default function ExcursionsPage() {
                   </Link>
                   <div className="excursion-list-card__body">
                     <div className="excursion-list-card__eyebrow">
-                      <span>English</span>
-                      <span><CalendarDays aria-hidden="true" />Rhodes</span>
-                    </div>
-                    <h3><Link to={detailUrl}>{record.title}</Link></h3>
-                    <p>{record.subtitle}</p>
-                    <div className="excursion-list-card__meta">
+                      <span><Languages aria-hidden="true" />English</span>
+                      <span><MapPin aria-hidden="true" />Rhodes</span>
                       <span><Clock3 aria-hidden="true" />{record.duration}</span>
-                      <span><UsersRound aria-hidden="true" />{record.capacity ? `Up to ${record.capacity} guests` : 'Flexible group size'}</span>
+                    </div>
+                    <h3> `Up to ${record.capacity} guests` : 'Flexible group size'}</span>
                     </div>
                     <div className="excursion-list-card__footer">
                       <strong>{record.price}</strong>
