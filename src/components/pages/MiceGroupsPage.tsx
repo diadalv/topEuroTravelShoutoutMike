@@ -247,7 +247,7 @@ export default function MiceGroupsPage() {
             </div>
           </section>
 
-          <section className="mice-page__program-section mice-reveal" aria-labelledby="groups-program-title" data-mice-reveal>
+          <section className="mice-page__program-section mice-page__program-section--groups mice-reveal" aria-labelledby="groups-program-title" data-mice-reveal>
             <div className="mice-page__program-heading">
               <div className="mice-page__heading-icon"><Users aria-hidden="true" /></div>
               <div>
@@ -256,7 +256,7 @@ export default function MiceGroupsPage() {
               </div>
             </div>
             <div className="mice-page__program-grid mice-page__program-grid--four">
-              {groupPrograms.map((program) => <ProgramCardComponent key={program.title} {...program} />)}
+              {groupPrograms.map((program) => <ProgramCardComponent key={program.title} {...program} eyebrow="GROUP PROGRAM" />)}
             </div>
           </section>
 
