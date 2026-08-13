@@ -41,7 +41,7 @@ const MEDIA = {
   rhodes: 'https://static.wixstatic.com/media/5a118b_3904ba3b49764d06b35840292a63bc65~mv2.jpg',
   kos: 'https://static.wixstatic.com/media/5a118b_a327428b08f14c5eb3c227b9bd8b225f~mv2.jpg',
   miceLeft: 'https://static.wixstatic.com/media/5a118b_629a41e473a640129be67c1916d49b39~mv2.jpg',
-  miceRight: 'https://static.wixstatic.com/media/5a118b_be21f059a7eb474b950d7fc3ef4ad332~mv2.jpg',
+
   culture: 'https://static.wixstatic.com/media/5a118b_226ba35bf5df412b9e12dd4da17eb637~mv2.jpg',
   gastronomy: 'https://static.wixstatic.com/media/5a118b_16f5fee14b0b40e6815f82a6ae87e609~mv2.jpg',
   sailing: 'https://static.wixstatic.com/media/5a118b_63f33c17cdd84c7999389621f8b8edbd~mv2.jpg',
