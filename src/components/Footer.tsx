@@ -29,7 +29,6 @@ export default function Footer() {
             <Link to="/kos">Kos</Link>
             <Link to="/services">Services</Link>
             <Link to="/mice-groups">MICE &amp; Groups</Link>
-            <Link to="/experiences">Experiences</Link>
             <Link to="/faq">FAQ</Link>
           </div>
         </div>

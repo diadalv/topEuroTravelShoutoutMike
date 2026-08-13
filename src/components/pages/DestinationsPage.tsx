@@ -402,7 +402,7 @@ export default function DestinationsPage() {
               </h2>
             </div>
 
-            <Link className="tet-dest-experiences__all" to="/experiences">
+            <Link className="tet-dest-experiences__all" to=./excursions.>
               View all experiences
               <ArrowRight size={17} aria-hidden="true" />
             </Link>

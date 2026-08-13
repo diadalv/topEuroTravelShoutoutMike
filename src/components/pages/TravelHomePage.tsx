@@ -110,7 +110,6 @@ const navItems = [
   { label: 'Services', to: '/services' },
   { label: 'MICE', to: '/mice-groups' },
   { label: 'Excursions', to: '/excursions' },
-  { label: 'Experiences', to: '/experiences' },
 ] as const;
 
 const HOME_STYLES = String.raw`
@@ -3633,14 +3632,14 @@ export default function TravelHomePage() {
               <Eyebrow>Experiences</Eyebrow>
               <h2 id="tet-experiences-title">Live the Destination</h2>
             </div>
-            <Link className="tet-text-link" to="/experiences">
+            <Link className="tet-text-link" to=./excursions.>
               View all experiences <ArrowRight aria-hidden="true" />
             </Link>
           </div>
 
           <div className="tet-experiences__rail" data-motion="up" data-stagger="true">
             {experiences.map(({ icon: Icon, title, image }) => (
-              <Link className="tet-experience" to="/experiences" key={title}>
+              <Link className="tet-experience" to=./excursions. key={title}>
                 <Image src={image} alt={title} loading="lazy" />
                 <span className="tet-experience__icon"><Icon aria-hidden="true" /></span>
                 <strong>{title}</strong>
@@ -3750,7 +3749,6 @@ export default function TravelHomePage() {
             <Link to="/about">About Us</Link>
             <Link to="/services">Services</Link>
             <Link to="/mice-groups">MICE &amp; Groups</Link>
-            <Link to="/experiences">Experiences</Link>
           </div>
 
           <div className="tet-footer-contact">

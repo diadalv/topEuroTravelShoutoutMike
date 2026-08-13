@@ -7,7 +7,6 @@ import DestinationsPage from '@/components/pages/DestinationsPage';
 import { RhodesPage, KosPage } from '@/components/pages/IslandPages';
 import ServicesPage from '@/components/pages/ServicesPage';
 import MiceGroupsPage from '@/components/pages/MiceGroupsPage';
-import ExperiencesPage from '@/components/pages/ExperiencesPage';
 import ExcursionsPage from '@/components/pages/ExcursionsPage';
 import ExcursionDetailPage from '@/components/pages/ExcursionDetailPage';
 import BookingCalendarPage from '@/components/pages/BookingCalendarPage';
@@ -44,7 +43,6 @@ const router = createBrowserRouter(
         { path: 'kos', element: <KosPage />, routeMetadata: { pageIdentifier: 'kos' } },
         { path: 'services', element: <ServicesPage />, routeMetadata: { pageIdentifier: 'services' } },
         { path: 'mice-groups', element: <MiceGroupsPage />, routeMetadata: { pageIdentifier: 'mice-groups' } },
-        { path: 'experiences', element: <ExperiencesPage />, routeMetadata: { pageIdentifier: 'experiences' } },
         { path: 'excursions', element: <ExcursionsPage />, routeMetadata: { pageIdentifier: 'excursions' } },
         {
           path: 'excursions/:slug',
