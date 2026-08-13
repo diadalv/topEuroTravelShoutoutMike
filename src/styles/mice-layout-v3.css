@@ -1580,7 +1580,7 @@
 .mice-page__organizer-split {
   display: grid;
   grid-template-columns: minmax(0, 42%) minmax(0, 58%);
-  height: 360px;
+  height: 320px;
   overflow: hidden;
   background: #f8f5ef;
   border: 1px solid rgba(211, 151, 28, 0.22);
@@ -1588,7 +1588,7 @@
 
 .mice-page__organizer-split-panel,
 .mice-page__organizer-split-list {
-  height: 360px;
+  height: 320px;
   min-width: 0;
   box-sizing: border-box;
 }
@@ -1826,14 +1826,14 @@
   }
 
   .mice-page__organizer-split-panel {
-    height: 270px;
+    height: 240px;
     padding: 30px 26px 28px;
     border-right: 0;
     border-bottom: 1px solid rgba(226, 158, 22, 0.72);
   }
 
   .mice-page__organizer-split-list {
-    height: 336px;
+    height: 300px;
     padding: 8px 18px;
   }
 

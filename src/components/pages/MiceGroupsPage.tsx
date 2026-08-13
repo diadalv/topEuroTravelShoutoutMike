@@ -145,7 +145,12 @@ function OrganizerServiceIndex() {
     }
 
     setActiveIndex(newIndex);
-    requestAnimationFrame(() => document.getElementById('organizer-tab-' + newIndex)?.focus());
+    requestAnimationFrame(() => {
+      const button = document.getElementById('organizer-tab-' + newIndex);
+      if (button) {
+        button.focus();
+      }
+    });
   };
 
   return (
@@ -153,7 +158,7 @@ function OrganizerServiceIndex() {
       <div className="mice-page__organizer-split-panel">
         <div>
           <p className="mice-page__organizer-split-eyebrow">FOR ORGANIZERS</p>
-          <h2 id="organizers-title" className="mice-page__organizer-split-title">
+          <h2 id="organizers-why-title" className="mice-page__organizer-split-title">
             Why Organizers<br />Choose Us
           </h2>
         </div>
@@ -161,12 +166,12 @@ function OrganizerServiceIndex() {
         <div
           className="mice-page__organizer-split-active"
           role="tabpanel"
-          id={'organizer-detail-' + activeIndex}
-          aria-labelledby={'organizer-tab-' + activeIndex}
+          id="organizer-detail-panel"
+          aria-labelledby="organizers-why-title"
         >
           {organizerFeatures[activeIndex] && (() => {
             return (
-              <div className="mice-page__organizer-split-active-content" key={activeIndex}>
+              <div className="mice-page__organizer-split-active-content" key={`detail-${activeIndex}`}>
                 <div className="mice-page__organizer-split-active-heading">
                   <span>{String(activeIndex + 1).padStart(2, '0')}</span>
                   <h3>{organizerFeatures[activeIndex].title}</h3>
@@ -181,12 +186,12 @@ function OrganizerServiceIndex() {
       <div className="mice-page__organizer-split-list" role="tablist" aria-label="Why organizers choose us">
         {organizerFeatures.map(({ title }, index) => (
           <button
-            key={title}
-            id={'organizer-tab-' + index}
+            key={`tab-${index}`}
+            id={`organizer-tab-${index}`}
             role="tab"
             className="mice-page__organizer-split-row"
             aria-selected={activeIndex === index}
-            aria-controls={'organizer-detail-' + index}
+            aria-controls="organizer-detail-panel"
             type="button"
             onClick={() => setActiveIndex(index)}
             onMouseEnter={() => setActiveIndex(index)}
