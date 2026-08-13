@@ -3266,14 +3266,6 @@ export default function TravelHomePage() {
               <Eyebrow>Our destinations</Eyebrow>
               <h2 id="tet-destinations-title">Two Islands. Endless Possibilities.</h2>
             </div>
-            <div className="tet-heading-controls" aria-label="Destination shortcuts">
-              <Link className="tet-heading-control tet-heading-control--back" to="/rhodes" aria-label="Explore Rhodes">
-                <ArrowRight aria-hidden="true" />
-              </Link>
-              <Link className="tet-heading-control" to="/kos" aria-label="Explore Kos">
-                <ArrowRight aria-hidden="true" />
-              </Link>
-            </div>
           </div>
 
           <div className="tet-destinations__rail" data-motion="scale" data-stagger="true">
