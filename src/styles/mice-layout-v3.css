@@ -1699,7 +1699,7 @@
 .mice-page__organizer-split-row {
   position: relative;
   display: grid;
-  grid-template-columns: 28px 37px minmax(160px, max-content) minmax(30px, 1fr);
+  grid-template-columns: 37px minmax(160px, max-content) minmax(30px, 1fr);
   align-items: center;
   width: 100%;
   min-width: 0;
@@ -1811,7 +1811,7 @@
   }
 
   .mice-page__organizer-split-row {
-    grid-template-columns: 26px 34px minmax(125px, max-content) minmax(18px, 1fr);
+    grid-template-columns: 34px minmax(125px, max-content) minmax(18px, 1fr);
     padding-right: 4px;
     padding-left: 4px;
   }
@@ -1845,7 +1845,7 @@
   }
 
   .mice-page__organizer-split-row {
-    grid-template-columns: 27px 35px minmax(142px, max-content) minmax(20px, 1fr);
+    grid-template-columns: 35px minmax(142px, max-content) minmax(20px, 1fr);
   }
 
   .mice-page__organizer-split-row-title {
@@ -1871,7 +1871,7 @@
   }
 
   .mice-page__organizer-split-row {
-    grid-template-columns: 25px 32px minmax(128px, max-content) minmax(14px, 1fr);
+    grid-template-columns: 32px minmax(128px, max-content) minmax(14px, 1fr);
   }
 
   .mice-page__organizer-split-row-line {
