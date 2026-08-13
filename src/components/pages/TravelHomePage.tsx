@@ -1288,28 +1288,7 @@ const HOME_STYLES = String.raw`
   line-height: 1.4;
 }
 
-.tet-partners__images {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 5px;
-  padding: 6px;
-  border-left: 1px solid var(--tet-gold);
-}
-
-.tet-partners__images div {
-  min-height: 58px;
-  border-radius: 5px;
-  overflow: hidden;
-}
-
-.tet-partners__images img {
-  width: 100%;
-  height: 100%;
-  display: block;
-  object-fit: cover;
-}
-
-/* Straight, flat footer: same compact content density, no scenic background. */
+ /* Straight, flat footer: same compact content density, no scenic background. */
 .tet-flat-footer {
   color: #fff;
   background: linear-gradient(90deg, #072640 0%, #0a3a61 100%);
@@ -2503,18 +2482,7 @@ const HOME_STYLES = String.raw`
   font-size: 10px;
 }
 
-.tet-partners__images {
-  gap: 8px;
-  padding: 12px;
-  border-left-color: var(--tet-gold);
-  display: none;
-}
-
-.tet-partners__images div {
-  border-radius: 7px;
-}
-
-/* Footer: same colour, typography and breathing room as the global system. */
+ /* Footer: same colour, typography and breathing room as the global system. */
 .tet-flat-footer {
   color: #fff;
   background: var(--tet-navy);
