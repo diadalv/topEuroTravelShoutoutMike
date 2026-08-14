@@ -168,6 +168,7 @@ export default function ContactPage() {
           --contact-ivory: #fbf9f5;
           background: var(--contact-ivory);
           color: var(--contact-ink);
+          font-family: Manrope, Inter, 'Segoe UI', Arial, sans-serif;
           overflow-x: clip;
         }
 
@@ -178,7 +179,7 @@ export default function ContactPage() {
         }
 
         .contact-editorial .contact-editorial__content.shell {
-          width: min(1244px, calc(100% - 48px)) !important;
+          width: min(1244px, calc(100% - 80px)) !important;
           max-width: 1244px;
           margin-inline: auto !important;
           padding-top: clamp(62px, 7vw, 104px);
@@ -209,8 +210,8 @@ export default function ContactPage() {
         .contact-editorial h2 {
           margin: 0;
           color: var(--contact-navy-deep);
-          font-family: 'Cormorant Garamond', Georgia, serif;
-          font-size: clamp(31px, 2.45vw, 43px);
+          font-family: 'Cormorant Garamond', Georgia, 'Times New Roman', serif;
+          font-size: clamp(38px, 4.8vw, 56px);
           font-weight: 500;
           line-height: 1.08;
           letter-spacing: -.02em;
