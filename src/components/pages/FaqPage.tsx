@@ -1,4 +1,6 @@
 import { Gold, PageHero, PageSeo, travelMedia } from '@/components/travel/Shared';
+import '@/styles/services-register.css';
+import { Link } from 'react-router-dom';
 
 const faqs = [
   ['What services does Top Euro Travel provide in Greece?', 'Top Euro Travel offers comprehensive destination management services, including hotel contracting, transfers, ground handling, excursions, MICE, groups, weddings, VIP services and tailor-made travel programmes.'],
@@ -26,7 +28,7 @@ const faqStyles = `
     --faq-cream: #fbf8f2;
     --faq-line: rgba(7, 59, 103, 0.18);
     background: var(--faq-cream);
-    padding: clamp(70px, 8vw, 124px) 0 clamp(86px, 9vw, 144px);
+    padding: clamp(70px, 8vw, 124px) 0 clamp(62px, 6vw, 94px);
   }
 
   .tet-faq__inner {
@@ -57,7 +59,7 @@ const faqStyles = `
     margin: 0;
     color: var(--faq-navy);
     font-family: 'Cormorant Garamond', Georgia, serif;
-    font-size: clamp(2.35rem, 4vw, 4.65rem);
+    font-size: clamp(2.1rem, 3.4vw, 3.8rem);
     font-weight: 600;
     letter-spacing: -0.035em;
     line-height: 0.98;
@@ -76,7 +78,7 @@ const faqStyles = `
     grid-template-columns: 52px minmax(0, 1fr) 44px;
     gap: clamp(14px, 2vw, 30px);
     align-items: center;
-    min-height: clamp(86px, 7vw, 112px);
+    min-height: clamp(76px, 6vw, 94px);
     padding: 12px 0;
     cursor: pointer;
     list-style: none;
@@ -96,7 +98,7 @@ const faqStyles = `
   .tet-faq__question {
     color: var(--faq-navy);
     font-family: 'Cormorant Garamond', Georgia, serif;
-    font-size: clamp(1.35rem, 1.75vw, 2rem);
+    font-size: clamp(1.08rem, 1.35vw, 1.45rem);
     font-weight: 600;
     line-height: 1.17;
     transition: color 180ms ease;
@@ -104,8 +106,8 @@ const faqStyles = `
 
   .tet-faq__toggle {
     position: relative;
-    width: 40px;
-    height: 40px;
+    width: 36px;
+    height: 36px;
     border: 1px solid rgba(223, 151, 20, 0.62);
     border-radius: 50%;
     transition: background-color 220ms ease, transform 220ms ease;
@@ -212,6 +214,10 @@ const faqStyles = `
     .tet-faq__toggle,
     .tet-faq__question { transition: none; }
   }
+
+  .tet-faq-contact .tet-partner-contact__inner {
+    display: block;
+  }
 `;
 
 export default function FaqPage() {
@@ -251,6 +257,28 @@ export default function FaqPage() {
           </div>
         </div>
       </main>
+      <section className="tet-partner-contact tet-faq-contact" aria-label="Contact">
+        <div className="tet-partner-contact__inner shell">
+          <div className="tet-partner-contact__cta">
+            <div className="tet-partner-contact__copy">
+              <p className="tet-partner-contact__eyebrow">Get in touch</p>
+              <h2>Let&apos;s start<br />a conversation.</h2>
+              <p className="tet-partner-contact__description">
+                Whether you are looking for a trusted DMC partner, planning a group programme, organising an event or exploring new business opportunities in Greece, our team is ready to assist.
+              </p>
+            </div>
+            <Link className="tet-partner-contact__button" to="/contact">
+              <span>Start a partnership</span>
+              <span aria-hidden="true">→</span>
+            </Link>
+            <div className="tet-partner-contact__features" aria-label="Partnership benefits">
+              <span>Rhodes &amp; Kos</span>
+              <span>24/7 Support</span>
+              <span>Tailored DMC Solutions</span>
+            </div>
+          </div>
+        </div>
+      </section>
     </>
   );
 }
