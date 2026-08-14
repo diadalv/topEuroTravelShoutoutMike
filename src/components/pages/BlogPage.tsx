@@ -20,7 +20,14 @@ type BlogPostRecord = {
   heroImage?: string | null;
   richContent?: unknown;
   media?: {
-    wixMedia?: { image?: string | null } | null;
+    wixMedia?: {
+      image?: string | {
+        id?: string | null;
+        url?: string | null;
+        width?: number | null;
+        height?: number | null;
+      } | null;
+    } | null;
     altText?: string | null;
   } | null;
 };
@@ -30,7 +37,13 @@ const fallbackImage = travelMedia('destinations-rhodes-v2.jpg');
 
 function postCover(post?: BlogPostRecord | null) {
   const source = post?.media?.wixMedia?.image || post?.heroImage;
-  return source ? normalizeWixMediaImage(source) || fallbackImage : fallbackImage;
+  if (!source) return fallbackImage;
+  if (typeof source === 'object') {
+    if (source.url) return source.url;
+    if (source.id) return normalizeWixMediaImage(source.id) || fallbackImage;
+    return fallbackImage;
+  }
+  return normalizeWixMediaImage(source) || fallbackImage;
 }
 
 function formatDate(value?: Date | string | null) {
