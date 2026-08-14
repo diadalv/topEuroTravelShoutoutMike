@@ -33,7 +33,7 @@ type BlogPostRecord = {
 };
 
 const viewerPlugins = quickStartViewerPlugins();
-const fallbackImage = travelMedia('destinations-rhodes-v2.jpg');
+const fallbackImage = 'https://static.wixstatic.com/media/5a118b_9aa0b1dd453d46d8a50c76e5b6ea233f~mv2.jpg';
 
 function postCover(post?: BlogPostRecord | null) {
   const source = post?.media?.wixMedia?.image || post?.heroImage;
