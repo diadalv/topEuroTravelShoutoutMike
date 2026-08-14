@@ -611,7 +611,7 @@ const HOME_STYLES = String.raw`
 
 .tet-bridge__item {
   justify-content: center;
-  text-align: center; ; /^.tet-bridge__copy {$/a  text-align: center;
+  text-align: center;
   min-width: 0;
   display: flex;
   align-items: center;
@@ -2050,7 +2050,7 @@ const HOME_STYLES = String.raw`
 
 .tet-bridge__item {
   justify-content: center;
-  text-align: center; ; /^.tet-bridge__copy {$/a  text-align: center;
+  text-align: center;
   padding: 18px clamp(16px, 1.55vw, 26px);
   border-left-color: var(--tet-gold);
 }
