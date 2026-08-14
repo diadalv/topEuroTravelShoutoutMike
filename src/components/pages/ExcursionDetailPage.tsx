@@ -145,23 +145,23 @@ const DETAIL_STYLES = String.raw`
 .tet-detail__crumbs a { color: inherit; text-decoration: none; }
 .tet-detail__crumbs span { color: var(--tet-gold); }
 
-.tet-detail__hero-copy { max-width: 520px; }
+.tet-detail__hero-copy { max-width: min(720px, 52vw); }
 
 .tet-detail__hero h1 {
-  max-width: 700px;
+  max-width: 720px;
   margin: 0;
   color: #fff;
   font-family: "Cormorant Garamond", Georgia, serif;
   font-size: clamp(48px, 6vw, 82px);
   font-weight: 500;
-  letter-spacing: -.045em;
-  line-height: .94;
+  letter-spacing: -.035em;
+  line-height: 1;
   text-wrap: balance;
 }
 
 .tet-detail__hero-description {
-  max-width: 470px;
-  margin: 24px 0 0;
+  max-width: 600px;
+  margin: 30px 0 0;
   color: rgba(255, 255, 255, .91);
   font-size: clamp(15px, 1.15vw, 18px);
   line-height: 1.65;
@@ -208,6 +208,10 @@ const DETAIL_STYLES = String.raw`
   font-weight: 800;
   letter-spacing: .13em;
   text-transform: uppercase;
+}
+
+.tet-detail__overview-copy > .tet-detail__eyebrow {
+  color: var(--tet-gold);
 }
 
 .tet-detail__overview-copy p {
@@ -370,11 +374,11 @@ const DETAIL_STYLES = String.raw`
 }
 
 .tet-detail__lists-wrap {
-  width: min(780px, calc(100% - 48px));
+  width: min(1120px, calc(100% - (var(--tet-content-gutter) * 2)));
   margin: 0 auto clamp(82px, 9vw, 126px);
-  padding: 28px 34px;
-  border: 1px solid rgba(221, 151, 24, .25);
-  background: rgba(255, 255, 255, .52);
+  padding: 0;
+  border: 0;
+  background: transparent;
 }
 
 .tet-detail__lists {
@@ -384,23 +388,23 @@ const DETAIL_STYLES = String.raw`
 
 .tet-detail__list {
   min-width: 0;
-  padding: 0 34px;
+  padding: 8px clamp(40px, 4vw, 72px) 12px;
 }
 
 .tet-detail__list:first-child { border-right: 1px solid var(--tet-line); }
 
 .tet-detail__list h2 {
-  margin: 0 0 17px;
+  margin: 0 0 24px;
   color: var(--tet-gold);
   font-family: "Cormorant Garamond", Georgia, serif;
-  font-size: 27px;
+  font-size: 29px;
   font-weight: 600;
   line-height: 1.1;
 }
 
 .tet-detail__list ul {
   display: grid;
-  gap: 10px;
+  gap: 16px;
   margin: 0;
   padding: 0;
   list-style: none;
@@ -409,11 +413,11 @@ const DETAIL_STYLES = String.raw`
 .tet-detail__list li {
   display: grid;
   grid-template-columns: 18px minmax(0, 1fr);
-  gap: 9px;
+  gap: 12px;
   align-items: start;
   color: var(--tet-muted);
-  font-size: 14px;
-  line-height: 1.45;
+  font-size: 15px;
+  line-height: 1.6;
 }
 
 .tet-detail__list svg {
@@ -521,6 +525,7 @@ const DETAIL_STYLES = String.raw`
   .tet-detail__hero { min-height: 560px; align-items: end; }
   .tet-detail__hero::before { background: linear-gradient(0deg, rgba(2, 39, 73, .97) 0%, rgba(2, 39, 73, .78) 46%, rgba(2, 39, 73, .12) 100%); }
   .tet-detail__hero-content { padding: 160px 0 56px; }
+  .tet-detail__hero-copy { max-width: 100%; }
   .tet-detail__hero h1 { font-size: clamp(45px, 14vw, 64px); }
   .tet-detail__hero-description { font-size: 15px; }
   .tet-detail__overview { padding-block: 64px; }
@@ -529,7 +534,7 @@ const DETAIL_STYLES = String.raw`
   .tet-detail__step-number { left: -42px; width: 28px; }
   .tet-detail__step-number::after { right: -3px; }
   .tet-detail__step-media { aspect-ratio: 16 / 9; }
-  .tet-detail__lists-wrap { width: min(100% - 34px, 780px); padding: 26px 22px; }
+  .tet-detail__lists-wrap { width: calc(100% - (var(--tet-content-gutter) * 2)); padding: 0; }
   .tet-detail__lists { grid-template-columns: 1fr; gap: 30px; }
   .tet-detail__list { padding: 0; }
   .tet-detail__list:first-child { padding-bottom: 30px; border-right: 0; border-bottom: 1px solid var(--tet-line); }
