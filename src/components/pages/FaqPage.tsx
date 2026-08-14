@@ -37,22 +37,11 @@ const faqStyles = `
   }
 
   .tet-faq__heading {
-    display: grid;
-    grid-template-columns: minmax(220px, 0.34fr) minmax(0, 0.66fr);
-    gap: clamp(42px, 6vw, 100px);
-    align-items: end;
+    display: block;
     padding-bottom: clamp(28px, 3.2vw, 48px);
     border-bottom: 1px solid rgba(223, 151, 20, 0.72);
   }
 
-  .tet-faq__eyebrow {
-    margin: 0;
-    color: var(--faq-gold);
-    font-size: 0.78rem;
-    font-weight: 800;
-    letter-spacing: 0.2em;
-    text-transform: uppercase;
-  }
 
   .tet-faq__heading h2 {
     max-width: 760px;
@@ -66,7 +55,7 @@ const faqStyles = `
   }
 
   .tet-faq__list {
-    margin-left: calc(34% + clamp(42px, 6vw, 100px));
+    margin-left: 0;
   }
 
   .tet-faq__item {
@@ -237,7 +226,6 @@ export default function FaqPage() {
       <main id="main-content" className="tet-faq">
         <div className="tet-faq__inner">
           <header className="tet-faq__heading">
-            <p className="tet-faq__eyebrow">Top Euro Travel FAQ</p>
             <h2>Frequently asked questions</h2>
           </header>
 
