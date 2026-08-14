@@ -1,7 +1,7 @@
-import { useEffect, useMemo, useState } from 'react';
-import { Link, useParams } from 'react-router-dom';
-import { services } from '@wix/bookings';
+import { travelMedia } from '@/components/travel/Shared';
+import { Image } from '@/components/ui/image';
 import { normalizeWixMediaImage } from '@/config/wix-media';
+import { services } from '@wix/bookings';
 import {
   ArrowRight,
   CalendarDays,
@@ -10,8 +10,8 @@ import {
   MapPin,
   ShieldCheck,
 } from 'lucide-react';
-import { travelMedia } from '@/components/travel/Shared';
-import { Image } from '@/components/ui/image';
+import { useEffect, useMemo, useState } from 'react';
+import { Link, useParams } from 'react-router-dom';
 
 type Money = {
   value?: string;
@@ -83,7 +83,7 @@ const DETAIL_STYLES = String.raw`
 .tet-detail * { box-sizing: border-box; }
 
 .tet-detail__shell {
-  width: min(1180px, calc(100% - 48px));
+  width: min(1240px, calc(100% - 48px));
   margin-inline: auto;
 }
 
@@ -125,7 +125,7 @@ const DETAIL_STYLES = String.raw`
 }
 
 .tet-detail__hero-content {
-  width: min(1180px, calc(100% - 48px));
+  width: min(1240px, calc(100% - 48px));
   margin-inline: auto;
   padding-block: 72px;
 }
