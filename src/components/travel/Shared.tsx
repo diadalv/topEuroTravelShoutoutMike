@@ -23,6 +23,7 @@ type NavigationItem = {
 export { travelMedia };
 
 const navigation: NavigationItem[] = [
+  { label: 'HOME', to: '/' },
   { label: 'ABOUT', to: '/about' },
   {
     label: 'DESTINATIONS', to: '/destinations', children: [
@@ -97,6 +98,7 @@ export function SiteHeader() {
               <div className={`main-nav__item ${item.children && destinationsOpen ? 'is-submenu-open' : ''}`} key={item.to}>
                 <NavLink
                   to={item.to}
+                  end={item.to === '/'}
                   onClick={(event) => {
                     if (item.children && window.matchMedia('(max-width: 940px)').matches) {
                       event.preventDefault();
