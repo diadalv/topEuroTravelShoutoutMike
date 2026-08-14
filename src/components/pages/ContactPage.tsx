@@ -177,10 +177,10 @@ export default function ContactPage() {
           box-sizing: border-box;
         }
 
-        .contact-editorial__content {
-          width: min(1244px, calc(100% - 48px));
+        .contact-editorial .contact-editorial__content.shell {
+          width: min(1244px, calc(100% - 48px)) !important;
           max-width: 1244px;
-          margin-inline: auto;
+          margin-inline: auto !important;
           padding-top: clamp(62px, 7vw, 104px);
           padding-bottom: clamp(56px, 7vw, 96px);
         }
@@ -510,8 +510,8 @@ export default function ContactPage() {
         }
 
         @media (max-width: 560px) {
-          .contact-editorial__content {
-            width: calc(100% - 30px);
+          .contact-editorial .contact-editorial__content.shell {
+            width: calc(100% - 30px) !important;
             padding-top: 48px;
           }
           .contact-editorial__detail-list > div { grid-template-columns: 92px 1fr; }
