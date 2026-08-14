@@ -206,8 +206,8 @@ textarea:focus-visible {
 
 .main-nav__dropdown--glass {
   width: 220px;
-  background: rgba(6, 30, 56, 0.95);
-  border: 1px solid rgba(255, 255, 255, 0.18);
+  background: rgba(6, 30, 56, 0.95) !important;
+  border: 1px solid rgba(255, 255, 255, 0.18) !important;
   backdrop-filter: blur(16px);
   -webkit-backdrop-filter: blur(16px);
   border-radius: 14px !important;
