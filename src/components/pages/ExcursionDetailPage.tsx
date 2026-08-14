@@ -1,6 +1,7 @@
-import { travelMedia } from '@/components/travel/Shared';
-import { normalizeWixMediaImage } from '@/config/wix-media';
+import { useEffect, useMemo, useState } from 'react';
+import { Link, useParams } from 'react-router-dom';
 import { services } from '@wix/bookings';
+import { normalizeWixMediaImage } from '@/config/wix-media';
 import {
   ArrowRight,
   CalendarDays,
@@ -9,8 +10,8 @@ import {
   MapPin,
   ShieldCheck,
 } from 'lucide-react';
-import { useEffect, useMemo, useState } from 'react';
-import { Link, useParams } from 'react-router-dom';
+import { travelMedia } from '@/components/travel/Shared';
+import { Image } from '@/components/ui/image';
 
 type Money = {
   value?: string;
@@ -753,7 +754,7 @@ export default function ExcursionDetailPage() {
       <style>{DETAIL_STYLES}</style>
 
       <section className="tet-detail__hero" aria-labelledby="tet-excursion-title">
-        <img className="tet-detail__hero-image" src={image} alt="" />
+        <Image className="tet-detail__hero-image" src={image} alt="" />
         <div className="tet-detail__hero-content">
           <nav className="tet-detail__crumbs" aria-label="Breadcrumb">
             <Link to="/">Home</Link><span>•</span><Link to="/excursions">Excursions</Link><span>•</span><span>{title}</span>
@@ -786,7 +787,7 @@ export default function ExcursionDetailPage() {
               return (
                 <article className={`tet-detail__step${index % 2 ? ' tet-detail__step--reverse' : ''}`} key={`${paragraph}-${index}`}>
                   <span className="tet-detail__step-number">{String(index + 1).padStart(2, '0')}</span>
-                  <div className="tet-detail__step-media"><img src={stepImage} alt={`${title} itinerary ${index + 1}`} loading="lazy" /></div>
+                  <div className="tet-detail__step-media"><Image src={stepImage} alt={`${title} itinerary ${index + 1}`} loading="lazy" /></div>
                   <div className="tet-detail__step-copy">
                     <h3>{itineraryTitle(paragraph, parsed.highlights[index], index)}</h3>
                     <p>{paragraph}</p>
@@ -812,7 +813,7 @@ export default function ExcursionDetailPage() {
         <div className="tet-detail__gallery-grid">
           {galleryImages.map((galleryImage, index) => (
             <div className="tet-detail__gallery-item" key={`${galleryImage}-${index}`}>
-              <img src={galleryImage} alt={`${title} gallery view ${index + 1}`} loading="lazy" />
+              <Image src={galleryImage} alt={`${title} gallery view ${index + 1}`} loading="lazy" />
             </div>
           ))}
         </div>
