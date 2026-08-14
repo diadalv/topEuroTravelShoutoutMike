@@ -13,7 +13,7 @@ import {
   type LucideIcon,
 } from 'lucide-react';
 import { FormEvent, ReactNode, useEffect, useState } from 'react';
-import { Link, NavLink } from 'react-router-dom';
+import { Link, NavLink, useLocation } from 'react-router-dom';
 type NavigationItem = {
   label: string;
   to: string;
@@ -41,6 +41,7 @@ export function SiteHeader() {
   const [open, setOpen] = useState(false);
   const [destinationsOpen, setDestinationsOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+  const { pathname } = useLocation();
 
   const closeNavigation = () => {
     setOpen(false);
@@ -106,7 +107,13 @@ export function SiteHeader() {
                   }}
                   aria-haspopup={item.children ? 'menu' : undefined}
                   aria-expanded={item.children ? destinationsOpen : undefined}
-                  className={({ isActive }) => `main-nav__link ${isActive ? 'is-active' : ''}`}
+                  className={({ isActive }) => {
+                    const childIsActive = item.children?.some(
+                      (child) => pathname === child.to || pathname.startsWith(`${child.to}/`),
+                    );
+
+                    return `main-nav__link ${isActive || childIsActive ? 'is-active' : ''}`;
+                  }}
                 >
                   <span>{item.label}</span>
                   {item.children && <ChevronDown className="main-nav__chevron" aria-hidden="true" />}
