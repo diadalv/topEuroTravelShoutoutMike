@@ -3089,19 +3089,19 @@ const HOME_STYLES = String.raw`
   -webkit-mask-image: linear-gradient(
     90deg,
     transparent 0%,
-    rgba(0, 0, 0, 0.16) 8%,
-    rgba(0, 0, 0, 0.48) 18%,
-    rgba(0, 0, 0, 0.78) 30%,
-    #000 42%,
+    rgba(0, 0, 0, 0.16) 6%,
+    rgba(0, 0, 0, 0.48) 14%,
+    rgba(0, 0, 0, 0.78) 24%,
+    #000 34%,
     #000 100%
   );
   mask-image: linear-gradient(
     90deg,
     transparent 0%,
-    rgba(0, 0, 0, 0.16) 8%,
-    rgba(0, 0, 0, 0.48) 18%,
-    rgba(0, 0, 0, 0.78) 30%,
-    #000 42%,
+    rgba(0, 0, 0, 0.16) 6%,
+    rgba(0, 0, 0, 0.48) 14%,
+    rgba(0, 0, 0, 0.78) 24%,
+    #000 34%,
     #000 100%
   );
 }
@@ -3113,7 +3113,7 @@ const HOME_STYLES = String.raw`
   right: auto;
   bottom: 0;
   left: 0;
-  width: 44%;
+  width: 34%;
   -webkit-backdrop-filter: blur(12px);
   backdrop-filter: blur(12px);
   background: linear-gradient(90deg, rgba(31, 58, 95, 0.58) 0%, rgba(31, 58, 95, 0.28) 42%, rgba(31, 58, 95, 0.08) 74%, transparent 100%);
