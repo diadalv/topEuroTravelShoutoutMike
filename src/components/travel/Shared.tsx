@@ -1,5 +1,5 @@
-import { FormEvent, ReactNode, useEffect, useState } from 'react';
-import { Link, NavLink } from 'react-router-dom';
+import { Image } from '@/components/ui/image';
+import { travelMedia } from '@/config/wix-media';
 import {
   ArrowRight,
   Building2,
@@ -12,8 +12,8 @@ import {
   X,
   type LucideIcon,
 } from 'lucide-react';
-import { Image } from '@/components/ui/image';
-import { travelMedia } from '@/config/wix-media';
+import { FormEvent, ReactNode, useEffect, useState } from 'react';
+import { Link, NavLink } from 'react-router-dom';
 type NavigationItem = {
   label: string;
   to: string;
@@ -33,6 +33,7 @@ const navigation: NavigationItem[] = [
   { label: 'SERVICES', to: '/services' },
   { label: 'MICE & GROUPS', to: '/mice-groups' },
   { label: 'EXCURSIONS', to: '/excursions' },
+  { label: 'FAQ', to: '/faq' },
 ];
 
 export function SiteHeader() {
@@ -338,4 +339,3 @@ export function MockForm({
 export function ArrowLink({ to, children }: { to: string; children: ReactNode }) {
   return <Link className="arrow-link" to={to}>{children}<ArrowRight /></Link>;
 }
-
