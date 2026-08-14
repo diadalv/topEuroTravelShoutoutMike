@@ -3065,7 +3065,7 @@ const HOME_STYLES = String.raw`
   width: calc(var(--tet-shell) - clamp(18px, 1.3vw, 24px));
   height: 235px;
   min-height: 235px;
-  grid-template-columns: minmax(0, 2fr) minmax(0, 3fr);
+  grid-template-columns: minmax(0, 1.8fr) minmax(0, 3.2fr);
   grid-template-rows: minmax(235px, 1fr);
   margin-bottom: clamp(36px, 3vw, 52px);
   border: 1px solid rgba(31, 58, 95, 0.14);
