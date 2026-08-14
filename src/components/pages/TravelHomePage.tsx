@@ -3498,7 +3498,6 @@ export default function TravelHomePage() {
           <span className="tet-bridge__copy">
             <small>Rhodes</small>
             <strong>Timeless Island</strong>
-            <span>Local team &amp; destination expertise</span>
           </span>
           <ArrowRight className="tet-bridge__arrow" aria-hidden="true" />
         </Link>
