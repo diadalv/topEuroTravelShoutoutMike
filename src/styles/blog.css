@@ -143,8 +143,8 @@
   -webkit-box-orient: vertical;
 }
 
-.blog-featured__content > p { -webkit-line-clamp: 4; }
-.blog-card__content > p { -webkit-line-clamp: 3; }
+.blog-featured__content > p { line-clamp: 4; -webkit-line-clamp: 4; }
+.blog-card__content > p { line-clamp: 3; -webkit-line-clamp: 3; }
 
 .blog-read-link,
 .blog-back-link {
