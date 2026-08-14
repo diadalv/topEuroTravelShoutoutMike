@@ -626,6 +626,9 @@ const HOME_STYLES = String.raw`
 }
 
 .tet-bridge__year {
+  width: 100%;
+  align-items: center;
+  text-align: center;
   align-items: flex-start;
   flex-direction: column;
   justify-content: center;
