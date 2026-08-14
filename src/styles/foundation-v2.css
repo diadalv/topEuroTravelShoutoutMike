@@ -180,10 +180,16 @@ textarea:focus-visible {
   background: #e39a20;
   border-radius: 2px;
   box-shadow: 0 0 10px rgba(227, 154, 32, 0.7);
+  opacity: 1 !important;
+  visibility: visible !important;
+  transform: scaleX(1) !important;
 }
 
 .site-header.is-scrolled .main-nav__link.is-active::after {
   bottom: 14px;
+  opacity: 1 !important;
+  visibility: visible !important;
+  transform: scaleX(1) !important;
 }
 
 .header-contact-btn {
