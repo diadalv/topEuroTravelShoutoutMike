@@ -1149,6 +1149,7 @@ const HOME_STYLES = String.raw`
   flex-direction: column;
   justify-content: center;
   padding: clamp(15px, 1.45vw, 25px);
+  padding-left: calc(clamp(15px, 1.45vw, 25px) + 12px);
   background: var(--tet-navy-deep);
 }
 
@@ -3126,6 +3127,7 @@ const HOME_STYLES = String.raw`
   min-height: 235px;
   margin: 0;
   padding: clamp(15px, 1.45vw, 25px);
+  padding-left: calc(clamp(15px, 1.45vw, 25px) + 12px);
   display: flex;
   flex-direction: column;
   justify-content: center;
