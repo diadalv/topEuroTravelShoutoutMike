@@ -168,9 +168,19 @@ export default function ContactPage() {
           --contact-ivory: #fbf9f5;
           background: var(--contact-ivory);
           color: var(--contact-ink);
+          overflow-x: clip;
+        }
+
+        .contact-editorial *,
+        .contact-editorial *::before,
+        .contact-editorial *::after {
+          box-sizing: border-box;
         }
 
         .contact-editorial__content {
+          width: min(1244px, calc(100% - 48px));
+          max-width: 1244px;
+          margin-inline: auto;
           padding-top: clamp(62px, 7vw, 104px);
           padding-bottom: clamp(56px, 7vw, 96px);
         }
@@ -180,6 +190,11 @@ export default function ContactPage() {
           grid-template-columns: minmax(0, .78fr) minmax(0, 1.22fr);
           gap: clamp(64px, 8vw, 132px);
           align-items: start;
+        }
+
+        .contact-editorial__details,
+        .contact-editorial__form-wrap {
+          min-width: 0;
         }
 
         .contact-editorial__eyebrow {
@@ -194,7 +209,7 @@ export default function ContactPage() {
         .contact-editorial h2 {
           margin: 0;
           color: var(--contact-navy-deep);
-          font-family: inherit;
+          font-family: 'Cormorant Garamond', Georgia, serif;
           font-size: clamp(31px, 2.45vw, 43px);
           font-weight: 500;
           line-height: 1.08;
@@ -495,7 +510,10 @@ export default function ContactPage() {
         }
 
         @media (max-width: 560px) {
-          .contact-editorial__content { padding-top: 48px; }
+          .contact-editorial__content {
+            width: calc(100% - 30px);
+            padding-top: 48px;
+          }
           .contact-editorial__detail-list > div { grid-template-columns: 92px 1fr; }
           .contact-editorial__location,
           .contact-editorial__location-photo,
