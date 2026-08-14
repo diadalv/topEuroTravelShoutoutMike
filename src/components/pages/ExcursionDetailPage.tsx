@@ -464,22 +464,30 @@ const DETAIL_STYLES = String.raw`
   min-height: 84px;
   display: flex;
   align-items: center;
+  justify-content: center;
   gap: 12px;
   padding: 18px 26px;
   border-right: 1px solid rgba(221, 151, 24, .18);
+  text-align: center;
 }
 
-.tet-detail__price { display: grid; gap: 0; }
+.tet-detail__price { display: grid; justify-items: center; gap: 0; }
 .tet-detail__price small { color: var(--tet-muted); font-size: 12px; }
 .tet-detail__price strong { color: var(--tet-navy); font-family: "Cormorant Garamond", Georgia, serif; font-size: 38px; line-height: .9; }
 .tet-detail__price span { color: var(--tet-muted); font-size: 11px; }
 
 .tet-detail__booking-cell svg { width: 22px; color: var(--tet-navy); }
-.tet-detail__booking-cell div { display: grid; gap: 2px; }
+.tet-detail__booking-cell div { display: grid; justify-items: center; gap: 2px; }
 .tet-detail__booking-cell b { color: var(--tet-navy); font-size: 13px; }
 .tet-detail__booking-cell small { color: var(--tet-muted); font-size: 11px; }
 
-.tet-detail__booking-action { padding: 0 24px; }
+.tet-detail__booking-action {
+  min-height: 84px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 24px;
+}
 .tet-detail__booking-action .tet-detail__button { margin: 0; white-space: nowrap; }
 
 .tet-detail__state {
