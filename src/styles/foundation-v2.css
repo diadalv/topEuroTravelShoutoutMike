@@ -1770,3 +1770,13 @@ textarea:focus-visible {
     right: 12px;
   }
 }
+
+
+/* Keep the current page marker visible across hover states. */
+.main-nav__link.is-active::after {
+  content: "" !important;
+  opacity: 1 !important;
+  visibility: visible !important;
+  transform: scaleX(1) !important;
+  pointer-events: none;
+}
