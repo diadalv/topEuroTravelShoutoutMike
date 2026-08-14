@@ -1,5 +1,6 @@
 // TOP EURO TRAVEL — APPROVED DESIGN 1 — BALANCED DETAILS — FULL REPLACE
 // One self-contained file: header + homepage + flat footer + responsive styles + motion.
+import Footer from '@/components/Footer';
 import { PageSeo } from '@/components/travel/Shared';
 import { Image } from '@/components/ui/image';
 import {
@@ -14,8 +15,6 @@ import {
   Headphones,
   Landmark,
   Leaf,
-  Mail,
-  MapPin,
   MapPinned,
   Menu,
   Play,
@@ -3747,50 +3746,7 @@ export default function TravelHomePage() {
         </section>
       </div>
 
-      <footer className="tet-flat-footer">
-        <div className="tet-flat-footer__main tet-shell">
-          <div className="tet-footer-brand">
-            <Image src={MEDIA.logo} alt="Top Euro Travel" />
-            <p>Destination management and ground handling in Rhodes &amp; Kos since 1989.</p>
-          </div>
-
-          <div className="tet-footer-column">
-            <strong>Quick Links</strong>
-            <Link to="/about">About Us</Link>
-            <Link to="/services">Services</Link>
-            <Link to="/mice-groups">MICE &amp; Groups</Link>
-          </div>
-
-          <div className="tet-footer-contact">
-            <strong>Contact</strong>
-            <span><MapPin aria-hidden="true" /> Rhodes &amp; Kos, Greece</span>
-            <span><Globe2 aria-hidden="true" /> +30 22410 45506</span>
-            <span><Mail aria-hidden="true" /> info@topeurotravel.gr</span>
-          </div>
-
-          <div className="tet-footer-social">
-            <strong>Follow Us</strong>
-            <div className="tet-social-row" aria-label="Social media">
-              <a href="#" aria-label="Facebook">f</a>
-              <a href="#" aria-label="Instagram">◎</a>
-              <a href="#" aria-label="LinkedIn">in</a>
-              <a href="#" aria-label="YouTube">▶</a>
-            </div>
-          </div>
-
-          <Link className="tet-button tet-button--gold tet-footer-cta" to="/contact">
-            Contact Us Today <ArrowRight aria-hidden="true" />
-          </Link>
-        </div>
-
-        <div className="tet-flat-footer__bottom tet-shell">
-          <span>© 2026 Top Euro Travel. All Rights Reserved.</span>
-          <div className="tet-flat-footer__legal">
-            <Link to="/privacy-policy">Privacy Policy</Link>
-            <Link to="/terms-conditions">Terms &amp; Conditions</Link>
-          </div>
-        </div>
-      </footer>
+      <Footer />
     </div>
   );
 }
