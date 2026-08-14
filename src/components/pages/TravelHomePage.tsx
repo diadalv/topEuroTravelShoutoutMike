@@ -613,6 +613,7 @@ const HOME_STYLES = String.raw`
   justify-content: center;
   text-align: center;
   min-width: 0;
+  position: relative;
   display: flex;
   align-items: center;
   gap: 12px;
@@ -629,7 +630,7 @@ const HOME_STYLES = String.raw`
   width: 100%;
   align-items: center;
   text-align: center;
-  align-items: flex-start;
+  align-items: center;
   flex-direction: column;
   justify-content: center;
   gap: 0;
@@ -690,7 +691,9 @@ const HOME_STYLES = String.raw`
 
 .tet-bridge__arrow {
   width: 15px;
-  margin-left: auto;
+  position: absolute;
+  right: clamp(12px, 1vw, 22px);
+  margin-left: 0;
   color: var(--tet-gold-deep);
   transition: transform 220ms ease;
 }
