@@ -75,6 +75,8 @@ const DETAIL_STYLES = String.raw`
   --tet-ink: #123f68;
   --tet-muted: #526b80;
   --tet-line: rgba(221, 151, 24, .28);
+  --tet-content-gutter: clamp(20px, 4.2vw, 72px);
+  --tet-content-max-width: 1460px;
   color: var(--tet-ink);
   background: var(--tet-cream);
   overflow: hidden;
@@ -83,7 +85,8 @@ const DETAIL_STYLES = String.raw`
 .tet-detail * { box-sizing: border-box; }
 
 .tet-detail__shell {
-  width: min(1240px, calc(100% - 48px));
+  width: calc(100% - (var(--tet-content-gutter) * 2));
+  max-width: var(--tet-content-max-width);
   margin-inline: auto;
 }
 
@@ -125,7 +128,6 @@ const DETAIL_STYLES = String.raw`
 }
 
 .tet-detail__hero-content {
-  width: min(1240px, calc(100% - 48px));
   margin-inline: auto;
   padding-block: 72px;
 }
@@ -516,8 +518,6 @@ const DETAIL_STYLES = String.raw`
 }
 
 @media (max-width: 640px) {
-  .tet-detail__shell,
-  .tet-detail__hero-content { width: min(100% - 34px, 1180px); }
   .tet-detail__hero { min-height: 560px; align-items: end; }
   .tet-detail__hero::before { background: linear-gradient(0deg, rgba(2, 39, 73, .97) 0%, rgba(2, 39, 73, .78) 46%, rgba(2, 39, 73, .12) 100%); }
   .tet-detail__hero-content { padding: 160px 0 56px; }
@@ -755,7 +755,7 @@ export default function ExcursionDetailPage() {
 
       <section className="tet-detail__hero" aria-labelledby="tet-excursion-title">
         <Image className="tet-detail__hero-image" src={image} alt="" />
-        <div className="tet-detail__hero-content">
+        <div className="tet-detail__hero-content shell">
           <nav className="tet-detail__crumbs" aria-label="Breadcrumb">
             <Link to="/">Home</Link><span>•</span><Link to="/excursions">Excursions</Link><span>•</span><span>{title}</span>
           </nav>
