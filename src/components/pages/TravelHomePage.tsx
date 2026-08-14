@@ -610,6 +610,8 @@ const HOME_STYLES = String.raw`
 }
 
 .tet-bridge__item {
+  justify-content: center;
+  text-align: center; ; /^.tet-bridge__copy {$/a  text-align: center;
   min-width: 0;
   display: flex;
   align-items: center;
@@ -2047,6 +2049,8 @@ const HOME_STYLES = String.raw`
 }
 
 .tet-bridge__item {
+  justify-content: center;
+  text-align: center; ; /^.tet-bridge__copy {$/a  text-align: center;
   padding: 18px clamp(16px, 1.55vw, 26px);
   border-left-color: var(--tet-gold);
 }
@@ -3504,7 +3508,6 @@ export default function TravelHomePage() {
           <span className="tet-bridge__copy">
             <small>Kos</small>
             <strong>Authentic Escape</strong>
-            <span>Relaxed, tailor-made programmes</span>
           </span>
           <ArrowRight className="tet-bridge__arrow" aria-hidden="true" />
         </Link>
