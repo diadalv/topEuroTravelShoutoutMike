@@ -1,6 +1,5 @@
 // TOP EURO TRAVEL — APPROVED DESIGN 1 — BALANCED DETAILS — FULL REPLACE
 // One self-contained file: header + homepage + flat footer + responsive styles + motion.
-import Footer from '@/components/Footer';
 import { PageSeo } from '@/components/travel/Shared';
 import { Image } from '@/components/ui/image';
 import {
@@ -127,10 +126,6 @@ const HOME_STYLES = String.raw`
   --tet-shadow: 0 18px 48px rgba(6, 31, 56, 0.14);
 }
 
-
-.site-footer {
-  display: none !important;
-}
 
 .tet-d1,
 .tet-d1 * {
@@ -3746,7 +3741,6 @@ export default function TravelHomePage() {
         </section>
       </div>
 
-      <Footer />
     </div>
   );
 }
