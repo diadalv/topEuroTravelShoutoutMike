@@ -33,6 +33,7 @@ const navigation: NavigationItem[] = [
   { label: 'SERVICES', to: '/services' },
   { label: 'MICE & GROUPS', to: '/mice-groups' },
   { label: 'EXCURSIONS', to: '/excursions' },
+  { label: 'BLOG', to: '/blog' },
   { label: 'FAQ', to: '/faq' },
 ];
 
