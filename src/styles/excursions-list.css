@@ -450,3 +450,80 @@
 .excursions-list-page .excursion-list-card__eyebrow svg {
   color: var(--gold-deep);
 }
+
+
+
+/* Cinematic excursion cards: image-to-content fade, without a footer accent line. */
+.excursions-list-page .excursion-list-card {
+  overflow: hidden;
+  border-color: rgba(8, 52, 95, 0.11);
+  background: linear-gradient(180deg, #ffffff 0%, #fffdf9 100%);
+  box-shadow: 0 17px 44px rgba(0, 48, 86, 0.1);
+}
+
+.excursions-list-page .excursion-list-card:hover {
+  border-color: rgba(8, 52, 95, 0.18);
+  box-shadow: 0 24px 56px rgba(0, 48, 86, 0.15);
+  transform: translateY(-4px);
+}
+
+.excursions-list-page .excursion-list-card__image {
+  position: relative;
+  isolation: isolate;
+  aspect-ratio: 1.72 / 1;
+  overflow: hidden;
+  border-radius: 14px 14px 0 0 !important;
+}
+
+.excursions-list-page .excursion-list-card__image > img,
+.excursions-list-page .excursion-list-card__image .travel-photo,
+.excursions-list-page .excursion-list-card__image .travel-photo > img {
+  border-radius: 14px 14px 0 0 !important;
+}
+
+.excursions-list-page .excursion-list-card__image::after {
+  position: absolute;
+  z-index: 5;
+  right: 0;
+  bottom: -1px;
+  left: 0;
+  height: 45%;
+  content: "";
+  pointer-events: none;
+  background: linear-gradient(
+    180deg,
+    rgba(255, 255, 255, 0) 0%,
+    rgba(255, 255, 255, 0.22) 28%,
+    rgba(255, 254, 251, 0.76) 68%,
+    #ffffff 100%
+  );
+}
+
+.excursions-list-page .excursion-list-card__body {
+  position: relative;
+  z-index: 6;
+  margin-top: -34px;
+  padding-top: 5px;
+  background: transparent;
+}
+
+.excursions-list-page .excursion-list-card__footer {
+  border-top: 0 !important;
+}
+
+.excursions-list-page .excursion-list-card__footer::before,
+.excursions-list-page .excursion-list-card__footer::after {
+  display: none !important;
+  content: none !important;
+}
+
+@media (max-width: 680px) {
+  .excursions-list-page .excursion-list-card__image {
+    aspect-ratio: 1.58 / 1;
+  }
+
+  .excursions-list-page .excursion-list-card__body {
+    margin-top: -30px;
+    padding-top: 4px;
+  }
+}
