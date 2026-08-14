@@ -1,4 +1,4 @@
-import { Gold, PageHero, PageSeo, travelMedia } from '@/components/travel/Shared';
+import { Gold, PageHero, PageSeo, Photo, travelMedia } from '@/components/travel/Shared';
 import { normalizeWixMediaImage } from '@/config/wix-media';
 import { quickStartViewerPlugins, RicosViewer } from '@wix/ricos';
 import '@wix/ricos/css/all-plugins-viewer.css';
@@ -130,7 +130,7 @@ export default function BlogPage() {
           <>
             <article className="blog-featured">
               <Link className="blog-featured__media" to={`/blog/${featured.slug}`} aria-label={`Read ${featured.title}`}>
-                <img src={postCover(featured)} alt={featured.media?.altText || featured.title || ''} />
+                <Photo src={postCover(featured)} alt={featured.media?.altText || featured.title || ''} loading="eager" />
               </Link>
               <div className="blog-featured__content">
                 <span className="blog-label">FEATURED STORY</span>
@@ -148,7 +148,7 @@ export default function BlogPage() {
                 {remaining.map((post) => (
                   <article className="blog-card" key={post._id || post.slug}>
                     <Link className="blog-card__media" to={`/blog/${post.slug}`} aria-label={`Read ${post.title}`}>
-                      <img src={postCover(post)} alt={post.media?.altText || post.title || ''} loading="lazy" />
+                      <Photo src={postCover(post)} alt={post.media?.altText || post.title || ''} />
                     </Link>
                     <div className="blog-card__content">
                       <PostMeta post={post} />
