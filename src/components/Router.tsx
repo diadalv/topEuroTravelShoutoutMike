@@ -9,6 +9,7 @@ import ServicesPage from '@/components/pages/ServicesPage';
 import MiceGroupsPage from '@/components/pages/MiceGroupsPage';
 import ExcursionsPage from '@/components/pages/ExcursionsPage';
 import ExcursionDetailPage from '@/components/pages/ExcursionDetailPage';
+import BlogPage, { BlogPostPage } from '@/components/pages/BlogPage';
 import BookingCalendarPage from '@/components/pages/BookingCalendarPage';
 import BookingFormPage from '@/components/pages/BookingFormPage';
 import BookingConfirmationPage from '@/components/pages/BookingConfirmationPage';
@@ -64,6 +65,8 @@ const router = createBrowserRouter(
           element: <BookingConfirmationPage />,
           routeMetadata: { pageIdentifier: 'booking-confirmation' },
         },
+        { path: 'blog', element: <BlogPage />, routeMetadata: { pageIdentifier: 'blog' } },
+        { path: 'blog/:slug', element: <BlogPostPage />, routeMetadata: { pageIdentifier: 'blog-post' } },
         { path: 'faq', element: <FaqPage />, routeMetadata: { pageIdentifier: 'faq' } },
         { path: 'contact', element: <ContactPage />, routeMetadata: { pageIdentifier: 'contact' } },
         { path: 'privacy', element: <PrivacyPage />, routeMetadata: { pageIdentifier: 'privacy' } },
