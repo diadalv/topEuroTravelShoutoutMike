@@ -1,24 +1,16 @@
-import { useEffect, useMemo, useState } from 'react';
-import { Link, useParams } from 'react-router-dom';
-import { services } from '@wix/bookings';
+import { travelMedia } from '@/components/travel/Shared';
 import { normalizeWixMediaImage } from '@/config/wix-media';
+import { services } from '@wix/bookings';
 import {
-  BusFront,
+  ArrowRight,
   CalendarDays,
-  Camera,
   CircleCheck,
   CircleX,
-  Clock3,
-  Info,
-  Languages,
   MapPin,
   ShieldCheck,
-  Sparkles,
-  Utensils,
-  Waves,
-  type LucideIcon,
 } from 'lucide-react';
-import { PageHero, Photo, PlanePath, RequestBanner, travelMedia } from '@/components/travel/Shared';
+import { useEffect, useMemo, useState } from 'react';
+import { Link, useParams } from 'react-router-dom';
 
 type Money = {
   value?: string;
@@ -40,7 +32,6 @@ type BookingServiceRecord = {
   tagLine?: string | null;
   hidden?: boolean | null;
   category?: { name?: string | null };
-  defaultCapacity?: number | null;
   onlineBooking?: { enabled?: boolean | null };
   payment?: {
     rateType?: string;
@@ -57,16 +48,12 @@ type BookingServiceRecord = {
   supportedSlugs?: Array<{ name?: string | null }>;
 };
 
-type QuickFact = { label: string; value: string; icon: LucideIcon };
-
 type ParsedDescription = {
-  quickFacts: QuickFact[];
   intro: string[];
   tourDescription: string[];
   highlights: string[];
   included: string[];
   notIncluded: string[];
-  goodToKnow: string[];
 };
 
 const SECTION_HEADINGS = [
@@ -79,117 +66,486 @@ const SECTION_HEADINGS = [
 ] as const;
 
 const DETAIL_STYLES = String.raw`
-.excursion-master-subtitle {
-  max-width: 850px;
-  margin: -8px auto 0;
-  color: #4d6072;
-  font-size: clamp(17px, 1.25vw, 21px);
-  line-height: 1.6;
-  text-align: center;
+.tet-detail {
+  --tet-navy: #063b68;
+  --tet-navy-deep: #032f55;
+  --tet-gold: #dd9718;
+  --tet-cream: #fbf9f5;
+  --tet-ink: #123f68;
+  --tet-muted: #526b80;
+  --tet-line: rgba(221, 151, 24, .28);
+  color: var(--tet-ink);
+  background: var(--tet-cream);
+  overflow: hidden;
 }
 
-.excursion-master-lead {
-  padding-left: clamp(22px, 2.2vw, 36px);
-  border-left: 3px solid #c8922d;
-  color: #1f3a5f;
-  font-family: "Cormorant Garamond", Georgia, serif;
-  font-size: clamp(25px, 2vw, 36px);
-  line-height: 1.24;
+.tet-detail * { box-sizing: border-box; }
+
+.tet-detail__shell {
+  width: min(1180px, calc(100% - 48px));
+  margin-inline: auto;
 }
 
-.excursion-master-lead p { margin: 0 0 16px; }
-.excursion-master-lead p:last-child { margin-bottom: 0; }
-
-.excursion-master-story {
+.tet-detail__hero {
+  position: relative;
+  min-height: clamp(480px, 58vw, 690px);
   display: grid;
-  grid-template-columns: minmax(190px, .34fr) minmax(0, .66fr);
-  gap: clamp(38px, 6vw, 100px);
-  padding-top: clamp(68px, 7vw, 112px);
-  padding-bottom: clamp(58px, 6vw, 96px);
+  align-items: center;
+  isolation: isolate;
+  overflow: hidden;
+  background: var(--tet-navy-deep);
 }
 
-.excursion-master-story h2,
-.excursion-master-good h2 {
+.tet-detail__hero-image {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  z-index: -3;
+}
+
+.tet-detail__hero::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: -2;
+  background: linear-gradient(90deg, rgba(2, 39, 73, .98) 0%, rgba(2, 44, 79, .9) 31%, rgba(2, 44, 79, .36) 55%, rgba(2, 44, 79, .04) 78%);
+}
+
+.tet-detail__hero::after {
+  content: '';
+  position: absolute;
+  inset: auto 0 0;
+  height: 84px;
+  z-index: -1;
+  background: linear-gradient(180deg, transparent, rgba(2, 35, 64, .18));
+}
+
+.tet-detail__hero-content {
+  width: min(1180px, calc(100% - 48px));
+  margin-inline: auto;
+  padding-block: 72px;
+}
+
+.tet-detail__crumbs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 9px;
+  margin: 0 0 22px;
+  color: rgba(255, 255, 255, .8);
+  font-size: 13px;
+  line-height: 1.4;
+}
+
+.tet-detail__crumbs a { color: inherit; text-decoration: none; }
+.tet-detail__crumbs span { color: var(--tet-gold); }
+
+.tet-detail__hero-copy { max-width: 520px; }
+
+.tet-detail__hero h1 {
+  max-width: 700px;
   margin: 0;
-  color: #1f3a5f;
+  color: #fff;
   font-family: "Cormorant Garamond", Georgia, serif;
-  font-size: clamp(42px, 4vw, 68px);
+  font-size: clamp(48px, 6vw, 82px);
   font-weight: 500;
-  letter-spacing: -.035em;
-  line-height: .98;
+  letter-spacing: -.045em;
+  line-height: .94;
+  text-wrap: balance;
 }
 
-.excursion-master-story__copy p {
-  margin: 0 0 20px;
-  color: #4d6072;
-  font-size: clamp(16px, 1.05vw, 18px);
-  line-height: 1.82;
+.tet-detail__hero-description {
+  max-width: 470px;
+  margin: 24px 0 0;
+  color: rgba(255, 255, 255, .91);
+  font-size: clamp(15px, 1.15vw, 18px);
+  line-height: 1.65;
 }
 
-.excursion-master-story__copy p:last-child { margin-bottom: 0; }
+.tet-detail__button {
+  display: inline-flex;
+  min-height: 46px;
+  align-items: center;
+  justify-content: center;
+  gap: 11px;
+  margin-top: 28px;
+  padding: 0 24px;
+  border: 0;
+  border-radius: 7px;
+  color: #fff;
+  background: var(--tet-gold);
+  box-shadow: 0 12px 28px rgba(221, 151, 24, .24);
+  font-size: 13px;
+  font-weight: 800;
+  letter-spacing: .025em;
+  text-decoration: none;
+  transition: transform .25s ease, box-shadow .25s ease, background-color .25s ease;
+}
 
-.excursion-master-lists {
+.tet-detail__button:hover {
+  transform: translateY(-2px);
+  background: #c9860e;
+  box-shadow: 0 15px 34px rgba(221, 151, 24, .3);
+}
+
+.tet-detail__overview {
+  display: grid;
+  grid-template-columns: minmax(0, 1.08fr) minmax(340px, .92fr);
+  gap: clamp(54px, 8vw, 116px);
+  padding-block: clamp(74px, 8vw, 118px);
+}
+
+.tet-detail__eyebrow,
+.tet-detail__section-label {
+  margin: 0 0 16px;
+  color: var(--tet-gold);
+  font-size: 13px;
+  font-weight: 800;
+  letter-spacing: .13em;
+  text-transform: uppercase;
+}
+
+.tet-detail__overview-copy p {
+  margin: 0 0 21px;
+  color: var(--tet-muted);
+  font-size: clamp(15px, 1.05vw, 17px);
+  line-height: 1.78;
+}
+
+.tet-detail__overview-copy p:last-child { margin-bottom: 0; }
+
+.tet-detail__highlights {
+  padding-left: clamp(28px, 4vw, 56px);
+  border-left: 1px solid var(--tet-line);
+}
+
+.tet-detail__highlights ol {
+  display: grid;
+  gap: 17px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  counter-reset: highlight;
+}
+
+.tet-detail__highlights li {
+  display: grid;
+  grid-template-columns: 34px minmax(0, 1fr);
+  gap: 12px;
+  align-items: start;
+  color: var(--tet-muted);
+  font-size: 15px;
+  line-height: 1.56;
+  counter-increment: highlight;
+}
+
+.tet-detail__highlights li::before {
+  content: counter(highlight, decimal-leading-zero);
+  color: var(--tet-gold);
+  font-family: "Cormorant Garamond", Georgia, serif;
+  font-size: 21px;
+  line-height: 1.05;
+}
+
+.tet-detail__itinerary {
+  padding-bottom: clamp(82px, 9vw, 132px);
+}
+
+.tet-detail__itinerary-heading,
+.tet-detail__gallery-heading {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+  margin-bottom: 34px;
+}
+
+.tet-detail__itinerary-heading h2,
+.tet-detail__gallery-heading h2 {
+  flex: 0 0 auto;
+  margin: 0;
+  color: var(--tet-navy);
+  font-family: "Cormorant Garamond", Georgia, serif;
+  font-size: clamp(34px, 3.5vw, 50px);
+  font-weight: 600;
+  letter-spacing: -.025em;
+}
+
+.tet-detail__itinerary-heading span,
+.tet-detail__gallery-heading span { height: 1px; flex: 1; background: var(--tet-line); }
+
+.tet-detail__timeline {
+  position: relative;
+  display: grid;
+  gap: clamp(24px, 3vw, 42px);
+  padding-left: 58px;
+}
+
+.tet-detail__timeline::before {
+  content: '';
+  position: absolute;
+  top: 16px;
+  bottom: 16px;
+  left: 19px;
+  width: 1px;
+  background: linear-gradient(var(--tet-gold), rgba(221, 151, 24, .18));
+}
+
+.tet-detail__step {
+  position: relative;
+  display: grid;
+  grid-template-columns: minmax(0, 1.45fr) minmax(260px, .75fr);
+  gap: clamp(28px, 5vw, 72px);
+  align-items: center;
+}
+
+.tet-detail__step--reverse { grid-template-columns: minmax(260px, .75fr) minmax(0, 1.45fr); }
+.tet-detail__step--reverse .tet-detail__step-media { order: 2; }
+.tet-detail__step--reverse .tet-detail__step-copy { order: 1; }
+
+.tet-detail__step-number {
+  position: absolute;
+  left: -58px;
+  top: 14px;
+  width: 38px;
+  color: var(--tet-gold);
+  background: var(--tet-cream);
+  font-size: 13px;
+  font-weight: 800;
+  text-align: left;
+}
+
+.tet-detail__step-number::after {
+  content: '';
+  position: absolute;
+  top: 4px;
+  right: -6px;
+  width: 9px;
+  height: 9px;
+  border: 2px solid var(--tet-cream);
+  border-radius: 50%;
+  background: var(--tet-gold);
+}
+
+.tet-detail__step-media {
+  overflow: hidden;
+  aspect-ratio: 16 / 6.7;
+  background: #e8e4dd;
+}
+
+.tet-detail__step-media img {
+  width: 100%;
+  height: 100%;
+  display: block;
+  object-fit: cover;
+  transition: transform .65s cubic-bezier(.2, .7, .2, 1);
+}
+
+.tet-detail__step:hover .tet-detail__step-media img { transform: scale(1.035); }
+
+.tet-detail__step-copy h3 {
+  margin: 0 0 10px;
+  color: var(--tet-navy);
+  font-family: "Cormorant Garamond", Georgia, serif;
+  font-size: clamp(25px, 2.2vw, 34px);
+  font-weight: 600;
+  letter-spacing: -.02em;
+  line-height: 1.08;
+}
+
+.tet-detail__step-copy p {
+  display: -webkit-box;
+  margin: 0;
+  overflow: hidden;
+  color: var(--tet-muted);
+  font-size: 14px;
+  line-height: 1.65;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 4;
+  line-clamp: 4;
+}
+
+.tet-detail__lists-wrap {
+  width: min(780px, calc(100% - 48px));
+  margin: 0 auto clamp(82px, 9vw, 126px);
+  padding: 28px 34px;
+  border: 1px solid rgba(221, 151, 24, .25);
+  background: rgba(255, 255, 255, .52);
+}
+
+.tet-detail__lists {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: clamp(24px, 3vw, 46px);
-  padding-bottom: clamp(64px, 7vw, 108px);
 }
 
-.excursion-master-lists .detail-info-list {
-  height: 100%;
-  margin: 0;
+.tet-detail__list {
+  min-width: 0;
+  padding: 0 34px;
 }
 
-.excursion-master-good {
+.tet-detail__list:first-child { border-right: 1px solid var(--tet-line); }
+
+.tet-detail__list h2 {
+  margin: 0 0 17px;
+  color: var(--tet-gold);
+  font-family: "Cormorant Garamond", Georgia, serif;
+  font-size: 27px;
+  font-weight: 600;
+  line-height: 1.1;
+}
+
+.tet-detail__list ul {
   display: grid;
-  grid-template-columns: minmax(190px, .34fr) minmax(0, .66fr);
-  gap: clamp(38px, 6vw, 100px);
-  margin-bottom: clamp(72px, 8vw, 126px);
-  padding: clamp(34px, 4vw, 64px);
-  border: 1px solid rgba(31, 58, 95, .12);
-  border-radius: 18px;
-  background: #faf7f1;
-}
-
-.excursion-master-good ul {
-  display: grid;
-  gap: 14px;
+  gap: 10px;
   margin: 0;
   padding: 0;
   list-style: none;
 }
 
-.excursion-master-good li {
+.tet-detail__list li {
   display: grid;
-  grid-template-columns: 22px minmax(0, 1fr);
-  gap: 12px;
-  color: #4d6072;
-  line-height: 1.65;
+  grid-template-columns: 18px minmax(0, 1fr);
+  gap: 9px;
+  align-items: start;
+  color: var(--tet-muted);
+  font-size: 14px;
+  line-height: 1.45;
 }
 
-.excursion-master-good svg { width: 20px; color: #c8922d; }
+.tet-detail__list svg {
+  width: 16px;
+  height: 16px;
+  margin-top: 2px;
+  color: var(--tet-gold);
+  stroke-width: 2;
+}
 
-.excursion-coming-soon {
+.tet-detail__gallery { padding-bottom: 32px; }
+
+.tet-detail__gallery-grid {
+  display: grid;
+  grid-template-columns: 1.55fr .72fr .72fr;
+  grid-template-rows: repeat(2, minmax(150px, 220px));
+  gap: 10px;
+}
+
+.tet-detail__gallery-item { overflow: hidden; background: #e8e4dd; }
+.tet-detail__gallery-item:first-child { grid-row: 1 / 3; }
+.tet-detail__gallery-item:only-child { grid-column: 1 / -1; grid-row: 1 / 3; }
+
+.tet-detail__gallery-item img {
+  width: 100%;
+  height: 100%;
+  display: block;
+  object-fit: cover;
+  transition: transform .65s cubic-bezier(.2, .7, .2, 1);
+}
+
+.tet-detail__gallery-item:hover img { transform: scale(1.035); }
+
+.tet-detail__booking-strip {
+  display: grid;
+  grid-template-columns: minmax(150px, .7fr) 1fr 1fr auto;
+  align-items: center;
+  margin-bottom: clamp(68px, 7vw, 100px);
+  border: 1px solid rgba(221, 151, 24, .28);
+  background: #fffaf1;
+}
+
+.tet-detail__booking-cell {
+  min-height: 84px;
   display: flex;
-  align-items: flex-start;
-  gap: 11px;
-  margin-top: 18px;
-  padding: 16px;
-  border: 1px solid rgba(200, 146, 45, .28);
-  border-radius: 10px;
-  color: #1f3a5f;
-  background: rgba(200, 146, 45, .08);
+  align-items: center;
+  gap: 12px;
+  padding: 18px 26px;
+  border-right: 1px solid rgba(221, 151, 24, .18);
 }
 
-.excursion-coming-soon svg { width: 20px; flex: 0 0 auto; color: #c8922d; }
-.excursion-coming-soon strong { display: block; }
-.excursion-coming-soon span { display: block; margin-top: 2px; color: #627282; font-size: 13px; }
+.tet-detail__price { display: grid; gap: 0; }
+.tet-detail__price small { color: var(--tet-muted); font-size: 12px; }
+.tet-detail__price strong { color: var(--tet-navy); font-family: "Cormorant Garamond", Georgia, serif; font-size: 38px; line-height: .9; }
+.tet-detail__price span { color: var(--tet-muted); font-size: 11px; }
 
-@media (max-width: 820px) {
-  .excursion-master-story,
-  .excursion-master-good { grid-template-columns: 1fr; gap: 26px; }
-  .excursion-master-lists { grid-template-columns: 1fr; }
-  .excursion-master-subtitle { text-align: left; }
+.tet-detail__booking-cell svg { width: 22px; color: var(--tet-navy); }
+.tet-detail__booking-cell div { display: grid; gap: 2px; }
+.tet-detail__booking-cell b { color: var(--tet-navy); font-size: 13px; }
+.tet-detail__booking-cell small { color: var(--tet-muted); font-size: 11px; }
+
+.tet-detail__booking-action { padding: 0 24px; }
+.tet-detail__booking-action .tet-detail__button { margin: 0; white-space: nowrap; }
+
+.tet-detail__state {
+  min-height: 62vh;
+  display: grid;
+  place-items: center;
+  padding: 100px 24px;
+  text-align: center;
+  background: var(--tet-cream);
+}
+
+.tet-detail__state svg { width: 40px; height: 40px; color: var(--tet-gold); }
+.tet-detail__state h1 { margin: 16px 0 8px; font-family: "Cormorant Garamond", Georgia, serif; font-size: 48px; color: var(--tet-navy); }
+.tet-detail__state p { margin: 0; color: var(--tet-muted); }
+
+.tet-detail__loader {
+  width: 44px;
+  height: 44px;
+  border: 3px solid rgba(221, 151, 24, .2);
+  border-top-color: var(--tet-gold);
+  border-radius: 50%;
+  animation: tet-spin .8s linear infinite;
+}
+
+@keyframes tet-spin { to { transform: rotate(360deg); } }
+
+@media (max-width: 900px) {
+  .tet-detail__overview { grid-template-columns: 1fr; gap: 42px; }
+  .tet-detail__highlights { padding: 0; border-left: 0; }
+  .tet-detail__step,
+  .tet-detail__step--reverse { grid-template-columns: 1fr; gap: 22px; }
+  .tet-detail__step--reverse .tet-detail__step-media,
+  .tet-detail__step--reverse .tet-detail__step-copy { order: initial; }
+  .tet-detail__step-copy { padding-bottom: 12px; }
+  .tet-detail__gallery-grid { grid-template-columns: 1.2fr .8fr; }
+  .tet-detail__gallery-item:nth-child(n+4) { display: none; }
+  .tet-detail__booking-strip { grid-template-columns: 1fr 1fr; }
+  .tet-detail__booking-cell:nth-child(2) { border-right: 0; }
+  .tet-detail__booking-action { min-height: 76px; display: flex; align-items: center; justify-content: flex-end; }
+}
+
+@media (max-width: 640px) {
+  .tet-detail__shell,
+  .tet-detail__hero-content { width: min(100% - 34px, 1180px); }
+  .tet-detail__hero { min-height: 560px; align-items: end; }
+  .tet-detail__hero::before { background: linear-gradient(0deg, rgba(2, 39, 73, .97) 0%, rgba(2, 39, 73, .78) 46%, rgba(2, 39, 73, .12) 100%); }
+  .tet-detail__hero-content { padding: 160px 0 56px; }
+  .tet-detail__hero h1 { font-size: clamp(45px, 14vw, 64px); }
+  .tet-detail__hero-description { font-size: 15px; }
+  .tet-detail__overview { padding-block: 64px; }
+  .tet-detail__timeline { padding-left: 42px; }
+  .tet-detail__timeline::before { left: 12px; }
+  .tet-detail__step-number { left: -42px; width: 28px; }
+  .tet-detail__step-number::after { right: -3px; }
+  .tet-detail__step-media { aspect-ratio: 16 / 9; }
+  .tet-detail__lists-wrap { width: min(100% - 34px, 780px); padding: 26px 22px; }
+  .tet-detail__lists { grid-template-columns: 1fr; gap: 30px; }
+  .tet-detail__list { padding: 0; }
+  .tet-detail__list:first-child { padding-bottom: 30px; border-right: 0; border-bottom: 1px solid var(--tet-line); }
+  .tet-detail__gallery-grid { grid-template-columns: 1fr 1fr; grid-template-rows: 250px 160px; }
+  .tet-detail__gallery-item:first-child { grid-column: 1 / -1; grid-row: auto; }
+  .tet-detail__gallery-item:only-child { grid-row: 1 / 3; }
+  .tet-detail__booking-strip { grid-template-columns: 1fr; }
+  .tet-detail__booking-cell { min-height: 70px; border-right: 0; border-bottom: 1px solid rgba(221, 151, 24, .18); }
+  .tet-detail__booking-action { justify-content: stretch; padding: 18px; }
+  .tet-detail__booking-action .tet-detail__button { width: 100%; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .tet-detail__button,
+  .tet-detail__step-media img,
+  .tet-detail__gallery-item img { transition: none; }
+  .tet-detail__loader { animation-duration: 1.5s; }
 }
 `;
 
@@ -213,25 +569,13 @@ function bulletList(value: string) {
     .filter(Boolean);
 }
 
-function iconForFact(label: string): LucideIcon {
-  const value = label.toLowerCase();
-  if (/duration|time|return/.test(value)) return Clock3;
-  if (/departure|pickup|meeting|destination/.test(value)) return MapPin;
-  if (/transport|transfer/.test(value)) return BusFront;
-  if (/stop|swim|bay/.test(value)) return Waves;
-  if (/lunch|meal|wine/.test(value)) return Utensils;
-  if (/guide|escort|language|assistance/.test(value)) return Languages;
-  if (/passport/.test(value)) return ShieldCheck;
-  if (/free time|availability/.test(value)) return CalendarDays;
-  return Sparkles;
-}
-
 function parseDescription(description?: string | null): ParsedDescription {
   const normalized = (description || '').replace(/\r/g, '').trim();
   const positions = new Map<string, number>();
 
   SECTION_HEADINGS.forEach((heading) => {
-    const match = new RegExp(`(?:^|\\n)${heading.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')}\\s*(?:\\n|$)`, 'i').exec(normalized);
+    const escaped = heading.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+    const match = new RegExp(`(?:^|\\n)${escaped}\\s*(?:\\n|$)`, 'i').exec(normalized);
     if (match) positions.set(heading, match.index + (match[0].startsWith('\n') ? 1 : 0));
   });
 
@@ -245,25 +589,14 @@ function parseDescription(description?: string | null): ParsedDescription {
   }
 
   const quickAndIntro = paragraphList(block('QUICK FACTS', 'TOUR DESCRIPTION'));
-  const quickText = quickAndIntro.shift() || '';
-  const quickFacts = quickText
-    .split(/\s*·\s*/)
-    .map((item) => {
-      const separator = item.indexOf(':');
-      const label = separator >= 0 ? item.slice(0, separator).trim() : 'Detail';
-      const value = separator >= 0 ? item.slice(separator + 1).trim() : item.trim();
-      return value ? { label, value, icon: iconForFact(label) } : null;
-    })
-    .filter((item): item is QuickFact => Boolean(item));
+  quickAndIntro.shift();
 
   return {
-    quickFacts,
     intro: quickAndIntro,
     tourDescription: paragraphList(block('TOUR DESCRIPTION', 'HIGHLIGHTS')),
     highlights: bulletList(block('HIGHLIGHTS', "WHAT'S INCLUDED")),
     included: bulletList(block("WHAT'S INCLUDED", "WHAT'S NOT INCLUDED")),
     notIncluded: bulletList(block("WHAT'S NOT INCLUDED", 'GOOD TO KNOW')),
-    goodToKnow: bulletList(block('GOOD TO KNOW')),
   };
 }
 
@@ -276,7 +609,8 @@ function displayPrice(service: BookingServiceRecord) {
   if (price?.formattedValue) return payment?.rateType === 'VARIED' ? `from ${price.formattedValue}` : price.formattedValue;
   const numeric = Number(String(price?.value || '').replace(',', '.'));
   if (Number.isFinite(numeric) && numeric > 0) return `${payment?.rateType === 'VARIED' ? 'from ' : ''}€${numeric.toFixed(0)}`;
-  return payment?.custom?.description?.trim() || 'Price on request';
+  const custom = payment?.custom?.description?.trim() || '';
+  return /confirm|schedule|request/i.test(custom) ? 'TBA' : custom || 'TBA';
 }
 
 function serviceImages(service: BookingServiceRecord) {
@@ -298,10 +632,26 @@ async function loadExcursion(slug: string) {
   ) || null;
 }
 
+function itineraryTitle(paragraph: string, highlight: string | undefined, index: number) {
+  const source = `${paragraph} ${highlight || ''}`.toLowerCase();
+  if (/return|back to|journey home|carries you back/.test(source)) return 'Return Journey';
+  if (/pick.?up|meet.*hotel|from your hotel|transfer from/.test(source)) return 'Hotel Pick-up & Transfer';
+  if (/board|set sail|crossing|harbour|port of/.test(source)) return 'Departure & Journey';
+  if (/swim|beach|bay|turquoise|crystal-clear water/.test(source)) return 'Beach & Swim Stop';
+  if (/free time|at your own pace|wander|browse|explore/.test(source)) return 'Free Time & Exploration';
+  if (/winery|wine tasting/.test(source)) return 'Winery Experience';
+  if (/butterfl/.test(source)) return 'Valley of the Butterflies';
+  if (/farma|farm|animals/.test(source)) return 'Farma of Rhodes';
+  if (/lindos/.test(source)) return 'Discover Lindos';
+  if (/symi/.test(source)) return 'Discover Symi';
+  if (/marmaris|turkey/.test(source)) return 'Discover Marmaris';
+  return `Experience ${String(index + 1).padStart(2, '0')}`;
+}
+
 function InfoList({ title, entries, negative = false }: { title: string; entries: string[]; negative?: boolean }) {
   if (!entries.length) return null;
   return (
-    <section className={`detail-info-list${negative ? ' detail-info-list--negative' : ''}`}>
+    <section className="tet-detail__list">
       <h2>{title}</h2>
       <ul>
         {entries.map((entry) => (
@@ -341,9 +691,7 @@ export default function ExcursionDetailPage() {
         if (active) setLoading(false);
       });
 
-    return () => {
-      active = false;
-    };
+    return () => { active = false; };
   }, [slug]);
 
   const parsed = useMemo(() => parseDescription(service?.description), [service?.description]);
@@ -370,128 +718,114 @@ export default function ExcursionDetailPage() {
 
   if (loading) {
     return (
-      <div className="excursion-detail-page excursion-detail-state" aria-live="polite">
-        <div className="excursion-loading shell"><span /><span /><span /><p>Loading excursion details…</p></div>
+      <div className="tet-detail tet-detail__state" aria-live="polite">
+        <div><div className="tet-detail__loader" /><p>Loading excursion details…</p></div>
       </div>
     );
   }
 
   if (!service || error) {
     return (
-      <div className="excursion-detail-page excursion-detail-state">
-        <section className="excursion-not-found shell">
+      <div className="tet-detail tet-detail__state">
+        <div>
           <MapPin aria-hidden="true" />
           <h1>Excursion not found</h1>
           <p>{error || 'This excursion is not currently available.'}</p>
-          <Link className="button button--navy" to="/excursions">EXPLORE EXCURSIONS</Link>
-        </section>
+          <Link className="tet-detail__button" to="/excursions">EXPLORE EXCURSIONS</Link>
+        </div>
       </div>
     );
   }
 
   const title = service.name?.trim() || 'Excursion';
-  const subtitle = service.tagLine?.trim() || parsed.intro[0] || '';
+  const heroDescription = service.tagLine?.trim() || parsed.intro[0] || '';
   const image = images[0] || travelMedia('excursions-hero.jpg');
   const currentSlug = serviceSlug(service);
   const bookingAvailable = service.onlineBooking?.enabled === true;
-  const bookingUrl = `/booking-calendar/${encodeURIComponent(currentSlug)}`;
+  const actionUrl = bookingAvailable ? `/booking-calendar/${encodeURIComponent(currentSlug)}` : '/contact';
+  const actionLabel = bookingAvailable ? 'BOOK / ENQUIRE NOW' : 'ENQUIRE NOW';
   const price = displayPrice(service);
+  const itinerarySource = (parsed.tourDescription.length ? parsed.tourDescription : parsed.intro).slice(0, 5);
+  const galleryImages = images.length ? images.slice(0, 5) : [image];
 
   return (
-    <div className="excursion-detail-page">
+    <div className="tet-detail">
       <style>{DETAIL_STYLES}</style>
-      <PageHero
-        className="excursion-detail-hero"
-        title={title}
-        breadcrumb={`Excursions  •  ${title}`}
-        image={image}
-      />
 
-      {subtitle && <p className="excursion-master-subtitle excursions-shell">{subtitle}</p>}
+      <section className="tet-detail__hero" aria-labelledby="tet-excursion-title">
+        <img className="tet-detail__hero-image" src={image} alt="" />
+        <div className="tet-detail__hero-content">
+          <nav className="tet-detail__crumbs" aria-label="Breadcrumb">
+            <Link to="/">Home</Link><span>•</span><Link to="/excursions">Excursions</Link><span>•</span><span>{title}</span>
+          </nav>
+          <div className="tet-detail__hero-copy">
+            <h1 id="tet-excursion-title">{title}</h1>
+            {heroDescription && <p className="tet-detail__hero-description">{heroDescription}</p>}
+            <Link className="tet-detail__button" to={actionUrl}>{actionLabel}<ArrowRight aria-hidden="true" size={16} /></Link>
+          </div>
+        </div>
+      </section>
 
-      <section className="excursion-summary excursions-shell">
-        {parsed.intro.length > 0 && (
-          <article className="excursion-summary__intro excursion-master-lead">
-            {parsed.intro.map((paragraph) => <p key={paragraph}>{paragraph}</p>)}
-            <PlanePath />
-          </article>
-        )}
-
-        {parsed.quickFacts.length > 0 && (
-          <section className="excursion-specs" aria-label="Excursion information">
-            {parsed.quickFacts.map(({ icon: Icon, label, value }) => (
-              <div className="excursion-spec" key={`${label}-${value}`}>
-                <Icon aria-hidden="true" />
-                <div><strong>{label}</strong><span>{value}</span></div>
-              </div>
-            ))}
-          </section>
-        )}
-
-        <aside className="excursion-price-card">
-          <span>{bookingAvailable ? 'from' : 'information'}</span>
-          <strong>{price}</strong>
-          {bookingAvailable ? (
-            <>
-              <p>per person</p>
-              <Link className="button button--gold" to={bookingUrl}>BOOK NOW</Link>
-            </>
-          ) : (
-            <div className="excursion-coming-soon">
-              <Info aria-hidden="true" />
-              <p><strong>Booking details coming soon</strong><span>The full experience information is available below.</span></p>
-            </div>
-          )}
+      <section className="tet-detail__overview tet-detail__shell">
+        <article className="tet-detail__overview-copy">
+          <p className="tet-detail__eyebrow">Tour Description</p>
+          {(parsed.tourDescription.length ? parsed.tourDescription : parsed.intro).map((paragraph) => <p key={paragraph}>{paragraph}</p>)}
+        </article>
+        <aside className="tet-detail__highlights">
+          <p className="tet-detail__eyebrow">Highlights</p>
+          <ol>{parsed.highlights.map((item) => <li key={item}>{item}</li>)}</ol>
         </aside>
       </section>
 
-      {parsed.tourDescription.length > 0 && (
-        <section className="excursion-master-story excursions-shell">
-          <h2>Tour Description</h2>
-          <div className="excursion-master-story__copy">
-            {parsed.tourDescription.map((paragraph) => <p key={paragraph}>{paragraph}</p>)}
+      {itinerarySource.length > 0 && (
+        <section className="tet-detail__itinerary tet-detail__shell" aria-labelledby="tet-itinerary-title">
+          <div className="tet-detail__itinerary-heading"><h2 id="tet-itinerary-title">Itinerary</h2><span aria-hidden="true" /></div>
+          <div className="tet-detail__timeline">
+            {itinerarySource.map((paragraph, index) => {
+              const stepImage = galleryImages[(index + 1) % galleryImages.length] || image;
+              return (
+                <article className={`tet-detail__step${index % 2 ? ' tet-detail__step--reverse' : ''}`} key={`${paragraph}-${index}`}>
+                  <span className="tet-detail__step-number">{String(index + 1).padStart(2, '0')}</span>
+                  <div className="tet-detail__step-media"><img src={stepImage} alt={`${title} itinerary ${index + 1}`} loading="lazy" /></div>
+                  <div className="tet-detail__step-copy">
+                    <h3>{itineraryTitle(paragraph, parsed.highlights[index], index)}</h3>
+                    <p>{paragraph}</p>
+                  </div>
+                </article>
+              );
+            })}
           </div>
-        </section>
-      )}
-
-      {parsed.highlights.length > 0 && (
-        <section className="excursion-highlights excursions-shell" aria-labelledby="excursion-highlights-title">
-          <h2 id="excursion-highlights-title">Highlights</h2>
-          <div className="excursion-highlights__grid">
-            {parsed.highlights.map((text) => <article key={text}><Camera aria-hidden="true" /><p>{text}</p></article>)}
-          </div>
-          <PlanePath />
         </section>
       )}
 
       {(parsed.included.length > 0 || parsed.notIncluded.length > 0) && (
-        <section className="excursion-master-lists excursions-shell">
-          <InfoList title="What’s Included" entries={parsed.included} />
-          <InfoList title="What’s Not Included" entries={parsed.notIncluded} negative />
-        </section>
-      )}
-
-      {parsed.goodToKnow.length > 0 && (
-        <section className="excursion-master-good excursions-shell">
-          <h2>Good to Know</h2>
-          <ul>
-            {parsed.goodToKnow.map((entry) => <li key={entry}><ShieldCheck aria-hidden="true" /><span>{entry}</span></li>)}
-          </ul>
-        </section>
-      )}
-
-      {images.length > 1 && (
-        <section className="excursion-gallery excursions-shell" aria-labelledby="excursion-gallery-title">
-          <div className="excursion-gallery__heading"><h2 id="excursion-gallery-title">Gallery</h2><span aria-hidden="true" /></div>
-          <div className="excursion-gallery__grid">
-            {images.slice(0, 5).map((galleryImage, index) => (
-              <div key={galleryImage}><Photo src={galleryImage} alt={`${title} gallery view ${index + 1}`} /></div>
-            ))}
+        <section className="tet-detail__lists-wrap" aria-label="Included and not included">
+          <div className="tet-detail__lists">
+            <InfoList title="Included" entries={parsed.included} />
+            <InfoList title="Not Included" entries={parsed.notIncluded} negative />
           </div>
         </section>
       )}
 
-      <RequestBanner />
+      <section className="tet-detail__gallery tet-detail__shell" aria-labelledby="tet-gallery-title">
+        <div className="tet-detail__gallery-heading"><h2 id="tet-gallery-title">Gallery</h2><span aria-hidden="true" /></div>
+        <div className="tet-detail__gallery-grid">
+          {galleryImages.map((galleryImage, index) => (
+            <div className="tet-detail__gallery-item" key={`${galleryImage}-${index}`}>
+              <img src={galleryImage} alt={`${title} gallery view ${index + 1}`} loading="lazy" />
+            </div>
+          ))}
+        </div>
+      </section>
+
+      <section className="tet-detail__booking-strip tet-detail__shell" aria-label="Excursion booking information">
+        <div className="tet-detail__booking-cell tet-detail__price">
+          <small>{price === 'TBA' ? 'Price' : 'from'}</small><strong>{price}</strong>{price !== 'TBA' && <span>per person</span>}
+        </div>
+        <div className="tet-detail__booking-cell"><ShieldCheck aria-hidden="true" /><div><b>Local support</b><small>From our Rhodes team</small></div></div>
+        <div className="tet-detail__booking-cell"><CalendarDays aria-hidden="true" /><div><b>{bookingAvailable ? 'Reserve now' : 'Enquire now'}</b><small>{bookingAvailable ? 'Check available dates' : 'Schedule on request'}</small></div></div>
+        <div className="tet-detail__booking-action"><Link className="tet-detail__button" to={actionUrl}>{actionLabel}<ArrowRight aria-hidden="true" size={16} /></Link></div>
+      </section>
     </div>
   );
 }
