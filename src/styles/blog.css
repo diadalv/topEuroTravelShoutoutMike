@@ -4,11 +4,6 @@
   color: #113b67;
 }
 
-.blog-hero .page-hero__content,
-.blog-post-hero .page-hero__content {
-  max-width: 1240px;
-}
-
 .blog-hero .page-hero__description,
 .blog-post-hero .page-hero__description {
   max-width: 660px;
