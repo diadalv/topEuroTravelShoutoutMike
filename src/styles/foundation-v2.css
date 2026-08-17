@@ -1785,7 +1785,7 @@ textarea:focus-visible {
    UNIFIED SCROLLED GLASS HEADER
    ========================================================= */
 #site-header.site-header.is-scrolled {
-  background: rgba(255, 255, 255, 0.78) !important;
+  background: rgba(255, 255, 255, 0.66) !important;
   border-bottom: 1px solid rgba(31, 58, 95, 0.12) !important;
   box-shadow: 0 10px 30px rgba(31, 58, 95, 0.10) !important;
   backdrop-filter: blur(18px) saturate(1.2) !important;
