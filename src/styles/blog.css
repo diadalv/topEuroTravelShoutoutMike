@@ -403,4 +403,34 @@
     line-clamp: 3;
     -webkit-line-clamp: 3;
   }
+
+  .blog-grid {
+    grid-template-columns: repeat(3, minmax(0, 380px));
+    gap: 24px;
+    max-width: 1188px;
+  }
+
+  .blog-card {
+    min-height: 0;
+  }
+
+  .blog-card__media {
+    aspect-ratio: 16 / 9;
+    min-height: 0;
+  }
+
+  .blog-card__content {
+    padding: 24px 24px 28px;
+  }
+
+  .blog-card h3 {
+    margin: 14px 0 10px;
+    font-size: clamp(1.3rem, 1.5vw, 1.6rem);
+  }
+
+  .blog-card__content > p {
+    margin-bottom: 22px;
+    line-clamp: 3;
+    -webkit-line-clamp: 3;
+  }
 }
