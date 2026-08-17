@@ -174,7 +174,7 @@
   .blog-featured {
     grid-template-columns: minmax(0, 1.35fr) minmax(340px, 0.65fr);
     min-height: 0;
-    height: clamp(420px, 31vw, 500px);
+    height: clamp(390px, 28vw, 460px);
     max-width: 1360px;
     margin-bottom: clamp(48px, 5.5vw, 72px);
   }
