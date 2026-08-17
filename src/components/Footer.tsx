@@ -6,13 +6,11 @@ import { Link } from 'react-router-dom';
 export default function Footer() {
   return (
     <footer className="site-footer site-footer--editorial">
-      <div className="site-footer__accent" aria-hidden="true">
-        <span className="site-footer__accent-line site-footer__accent-line--gold" />
-        <span className="site-footer__accent-dot" />
-        <span className="site-footer__accent-index">05</span>
-        <span className="site-footer__accent-label">Get in touch</span>
-        <span className="site-footer__accent-line" />
-      </div>
+      <div
+        className="site-footer__accent"
+        aria-hidden="true"
+        style={{ display: 'block', width: '100%', height: 1, background: 'rgba(221, 160, 45, 0.9)' }}
+      />
 
       <div className="site-footer__layout">
         <section className="footer-editorial" aria-labelledby="footer-heading">
