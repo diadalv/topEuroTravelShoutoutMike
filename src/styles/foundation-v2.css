@@ -1785,26 +1785,26 @@ textarea:focus-visible {
    UNIFIED SCROLLED GLASS HEADER
    ========================================================= */
 #site-header.site-header.is-scrolled {
-  background: rgba(255, 255, 255, 0.66) !important;
-  border-bottom: 1px solid rgba(31, 58, 95, 0.12) !important;
-  box-shadow: 0 10px 30px rgba(31, 58, 95, 0.10) !important;
-  backdrop-filter: blur(18px) saturate(1.2) !important;
-  -webkit-backdrop-filter: blur(18px) saturate(1.2) !important;
+  background: rgba(6, 30, 56, 0.58) !important;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.16) !important;
+  box-shadow: 0 10px 30px rgba(0, 20, 40, 0.18) !important;
+  backdrop-filter: blur(18px) saturate(1.25) !important;
+  -webkit-backdrop-filter: blur(18px) saturate(1.25) !important;
 }
 
 #site-header.site-header.is-scrolled .main-nav__link {
-  color: #1f3a5f !important;
-  text-shadow: none !important;
+  color: rgba(255, 255, 255, 0.94) !important;
+  text-shadow: 0 1px 8px rgba(0, 20, 40, 0.28) !important;
 }
 
 #site-header.site-header.is-scrolled .main-nav__link:hover,
 #site-header.site-header.is-scrolled .main-nav__link:focus-visible,
 #site-header.site-header.is-scrolled .main-nav__link.is-active {
-  color: #c8922d !important;
+  color: #ffc257 !important;
 }
 
 #site-header.site-header.is-scrolled .main-nav__link.is-active::after {
-  background: #c8922d !important;
+  background: #e39a20 !important;
   box-shadow: none !important;
   opacity: 1 !important;
   visibility: visible !important;
@@ -1812,5 +1812,5 @@ textarea:focus-visible {
 }
 
 #site-header.site-header.is-scrolled .mobile-menu-button {
-  color: #1f3a5f !important;
+  color: rgba(255, 255, 255, 0.94) !important;
 }
