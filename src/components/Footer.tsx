@@ -81,7 +81,12 @@ const footerFineTune = `
 }
 
 .site-footer--editorial .footer-social .footer-cta {
+  gap: 16px !important;
   border-radius: 6px !important;
+}
+
+.site-footer--editorial .footer-social .footer-cta span {
+  white-space: nowrap;
 }
 
 @media (max-width: 680px) {
