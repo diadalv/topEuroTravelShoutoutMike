@@ -1788,8 +1788,8 @@ textarea:focus-visible {
   background: rgba(255, 255, 255, 0.15) !important;
   border-bottom: 1px solid rgba(31, 58, 95, 0.10) !important;
   box-shadow: 0 8px 24px rgba(31, 58, 95, 0.08) !important;
-  backdrop-filter: blur(20px) saturate(1.2) !important;
-  -webkit-backdrop-filter: blur(20px) saturate(1.2) !important;
+  backdrop-filter: blur(10px) saturate(1.2) !important;
+  -webkit-backdrop-filter: blur(10px) saturate(1.2) !important;
 }
 
 #site-header.site-header.is-scrolled .main-nav__link {
