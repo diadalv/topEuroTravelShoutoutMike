@@ -8,7 +8,7 @@ export default function Footer() {
     <footer className="site-footer site-footer--editorial" style={{ marginTop: 0, padding: '20px clamp(24px, 4.2vw, 76px) 0', borderRadius: 0 }}>
       <div className="site-footer__layout" style={{ alignItems: 'start' }}>
         <section className="footer-editorial" aria-labelledby="footer-heading" style={{ padding: 0 }}>
-          <Image src={travelMedia('logo.png')} alt="Top Euro Travel" className="footer-logo" style={{ width: 92, marginBottom: 14 }} />
+          <Image src={travelMedia('logo.png')} alt="Top Euro Travel" className="footer-logo" style={{ display: 'block', width: 124, height: 'auto', marginBottom: 14 }} />
           <h2 id="footer-heading" style={{ maxWidth: 460, fontSize: 'clamp(1.75rem, 1.75vw, 2.15rem)', lineHeight: 1 }}>
             Local expertise.
             <span>International standards.</span>
