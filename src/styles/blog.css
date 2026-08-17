@@ -154,46 +154,7 @@
   text-decoration: none;
 }
 
-.blog-featured__content .blog-rea
-
-/* Balanced desktop scale for the Blog index */
-@media (min-width: 981px) {
-  .blog-index {
-    padding-top: clamp(56px, 6vw, 84px);
-    padding-bottom: clamp(72px, 8vw, 112px);
-  }
-
-  .blog-index__intro {
-    margin-bottom: clamp(32px, 4vw, 48px);
-  }
-
-  .blog-index__intro h2 {
-    font-size: clamp(2.1rem, 3.2vw, 3.25rem);
-  }
-
-  .blog-featured {
-    grid-template-columns: minmax(0, 1.35fr) minmax(340px, 0.65fr);
-    min-height: 0;
-    height: clamp(390px, 28vw, 460px);
-    max-width: 1360px;
-    margin-bottom: clamp(48px, 5.5vw, 72px);
-  }
-
-  .blog-featured__content {
-    padding: clamp(30px, 3vw, 48px);
-  }
-
-  .blog-featured h3 {
-    margin: 14px 0 12px;
-    font-size: clamp(1.85rem, 2.2vw, 2.45rem);
-  }
-
-  .blog-featured__content > p {
-    line-clamp: 3;
-    -webkit-line-clamp: 3;
-  }
-}
-d-link {
+.blog-featured__content .blog-read-link {
   margin-top: auto;
 }
 
