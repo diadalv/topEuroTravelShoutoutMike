@@ -1,7 +1,7 @@
+import { PartnerMark, travelMedia } from '@/components/travel/Shared';
+import { Image } from '@/components/ui/image';
 import { ArrowRight, Facebook, Instagram, Linkedin, Mail, MapPin, Phone } from 'lucide-react';
 import { Link } from 'react-router-dom';
-import { Image } from '@/components/ui/image';
-import { PartnerMark, travelMedia } from '@/components/travel/Shared';
 
 export default function Footer() {
   return (
