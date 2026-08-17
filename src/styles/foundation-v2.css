@@ -1119,9 +1119,9 @@ textarea:focus-visible {
 
 .site-footer--editorial .site-footer__layout {
   display: grid;
-  grid-template-columns: minmax(280px, 0.78fr) minmax(720px, 2.22fr);
-  gap: clamp(38px, 4vw, 72px);
-  align-items: stretch;
+  grid-template-columns: minmax(300px, 0.68fr) minmax(720px, 2.32fr);
+  gap: clamp(34px, 3.5vw, 56px);
+  align-items: start;
 }
 
 .site-footer--editorial .footer-editorial {
