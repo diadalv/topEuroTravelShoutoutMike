@@ -431,8 +431,9 @@
   }
 
   .blog-card__media {
-    aspect-ratio: 16 / 9;
+    height: 250px;
     min-height: 0;
+    aspect-ratio: auto;
   }
 
   .blog-card__content {
