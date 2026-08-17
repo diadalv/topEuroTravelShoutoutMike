@@ -1,12 +1,12 @@
-import { Gold, PageHero, PageSeo, Photo, travelMedia } from '@/components/travel/Shared';
+import { Gold, PageHero, PageSeo, Photo } from '@/components/travel/Shared';
 import { normalizeWixMediaImage } from '@/config/wix-media';
+import '@/styles/blog.css';
+import { posts } from '@wix/blog';
 import { quickStartViewerPlugins, RicosViewer } from '@wix/ricos';
 import '@wix/ricos/css/all-plugins-viewer.css';
-import { posts } from '@wix/blog';
 import { ArrowLeft, ArrowRight, CalendarDays, Clock3 } from 'lucide-react';
 import { useEffect, useMemo, useState } from 'react';
 import { Link, useParams } from 'react-router-dom';
-import '@/styles/blog.css';
 
 type BlogPostRecord = {
   _id?: string | null;
@@ -33,7 +33,7 @@ type BlogPostRecord = {
 };
 
 const viewerPlugins = quickStartViewerPlugins();
-const fallbackImage = 'https://static.wixstatic.com/media/5a118b_9aa0b1dd453d46d8a50c76e5b6ea233f~mv2.jpg';
+const fallbackImage = 'https://static.wixstatic.com/media/5a118b_4a49e355f2b84cf6b80f3648ecbb0774~mv2.jpg';
 
 function postCover(post?: BlogPostRecord | null) {
   const source = post?.media?.wixMedia?.image || post?.heroImage;
@@ -114,7 +114,7 @@ export default function BlogPage() {
         className="blog-hero"
         title={<>Our <Gold>Travel Journal</Gold></>}
         breadcrumb="Blog"
-        image={postCover(featured)}
+        image={fallbackImage}
         description="Local knowledge, island stories and thoughtful travel inspiration from Rhodes, Kos and beyond."
       />
 
