@@ -71,7 +71,7 @@ export function SiteHeader() {
   }, [open]);
 
   return (
-    <header className={`site-header ${scrolled ? 'is-scrolled' : ''}`}>
+    <header id="site-header" className={`site-header ${scrolled ? 'is-scrolled' : ''}`}>
       <a className="skip-link" href="#main-content">Skip to main content</a>
       <div className="site-header__inner">
         <Link to="/" className="brand-link" aria-label="Top Euro Travel home" onClick={closeNavigation}>
