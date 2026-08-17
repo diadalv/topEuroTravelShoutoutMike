@@ -412,6 +412,22 @@
 
   .blog-card {
     min-height: 0;
+    border-color: rgba(229, 157, 20, 0.72);
+    box-shadow: 0 16px 38px rgba(9, 48, 82, 0.08);
+  }
+
+  .blog-card:hover {
+    transform: translateY(-7px);
+    border-color: #e59d14;
+    box-shadow: 0 24px 54px rgba(9, 48, 82, 0.16);
+  }
+
+  .blog-card:hover .blog-card__media img {
+    transform: scale(1.045);
+  }
+
+  .blog-card:hover .blog-read-link svg {
+    transform: translateX(5px);
   }
 
   .blog-card__media {
