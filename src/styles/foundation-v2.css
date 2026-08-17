@@ -1780,3 +1780,37 @@ textarea:focus-visible {
   transform: scaleX(1) !important;
   pointer-events: none;
 }
+
+/* =========================================================
+   UNIFIED SCROLLED GLASS HEADER
+   ========================================================= */
+#site-header.site-header.is-scrolled {
+  background: rgba(255, 255, 255, 0.78) !important;
+  border-bottom: 1px solid rgba(31, 58, 95, 0.12) !important;
+  box-shadow: 0 10px 30px rgba(31, 58, 95, 0.10) !important;
+  backdrop-filter: blur(18px) saturate(1.2) !important;
+  -webkit-backdrop-filter: blur(18px) saturate(1.2) !important;
+}
+
+#site-header.site-header.is-scrolled .main-nav__link {
+  color: #1f3a5f !important;
+  text-shadow: none !important;
+}
+
+#site-header.site-header.is-scrolled .main-nav__link:hover,
+#site-header.site-header.is-scrolled .main-nav__link:focus-visible,
+#site-header.site-header.is-scrolled .main-nav__link.is-active {
+  color: #c8922d !important;
+}
+
+#site-header.site-header.is-scrolled .main-nav__link.is-active::after {
+  background: #c8922d !important;
+  box-shadow: none !important;
+  opacity: 1 !important;
+  visibility: visible !important;
+  transform: scaleX(1) !important;
+}
+
+#site-header.site-header.is-scrolled .mobile-menu-button {
+  color: #1f3a5f !important;
+}
