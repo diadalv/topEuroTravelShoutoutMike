@@ -51,7 +51,7 @@ const footerFineTune = `
 
 .site-footer--editorial .footer-menu-grid {
   display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
+  grid-template-columns: minmax(0, 0.72fr) minmax(0, 1.28fr);
   width: 100%;
   column-gap: 32px;
   row-gap: 12px;
