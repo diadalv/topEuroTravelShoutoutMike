@@ -5,31 +5,31 @@ import { Link } from 'react-router-dom';
 
 export default function Footer() {
   return (
-    <footer className="site-footer site-footer--editorial">
+    <footer className="site-footer site-footer--editorial" style={{ marginTop: 0, padding: '20px clamp(24px, 4.2vw, 76px) 0', borderRadius: 0 }}>
       <div
         className="site-footer__accent"
         aria-hidden="true"
-        style={{ display: 'block', width: '100%', height: 1, background: 'rgba(221, 160, 45, 0.9)' }}
+        style={{ display: 'block', width: '100%', height: 1, marginBottom: 18, background: 'rgba(221, 160, 45, 0.9)' }}
       />
 
-      <div className="site-footer__layout">
-        <section className="footer-editorial" aria-labelledby="footer-heading">
-          <Image src={travelMedia('logo.png')} alt="Top Euro Travel" className="footer-logo" />
-          <h2 id="footer-heading">
+      <div className="site-footer__layout" style={{ alignItems: 'start' }}>
+        <section className="footer-editorial" aria-labelledby="footer-heading" style={{ padding: 0 }}>
+          <Image src={travelMedia('logo.png')} alt="Top Euro Travel" className="footer-logo" style={{ width: 68, marginBottom: 12 }} />
+          <h2 id="footer-heading" style={{ maxWidth: 460, fontSize: 'clamp(1.75rem, 1.75vw, 2.15rem)', lineHeight: 1 }}>
             Local expertise.
             <span>International standards.</span>
           </h2>
-          <div className="footer-editorial__rule" aria-hidden="true" />
-          <p className="footer-editorial__eyebrow">Rhodes · Kos · Est. 1989</p>
-          <p>Destination management and ground handling in Rhodes &amp; Kos.</p>
-          <p>Supporting travel partners since 1989.</p>
-          <Link className="footer-cta" to="/contact">
+          <div className="footer-editorial__rule" aria-hidden="true" style={{ width: 48, margin: '12px 0 10px' }} />
+          <p className="footer-editorial__eyebrow" style={{ marginBottom: 8 }}>Rhodes · Kos · Est. 1989</p>
+          <p style={{ marginBottom: 2, fontSize: '.82rem', lineHeight: 1.35 }}>Destination management and ground handling in Rhodes &amp; Kos.</p>
+          <p style={{ marginBottom: 0, fontSize: '.82rem', lineHeight: 1.35 }}>Supporting travel partners since 1989.</p>
+          <Link className="footer-cta" to="/contact" style={{ minWidth: 172, marginTop: 14, padding: '10px 14px' }}>
             <span>Contact us</span>
             <ArrowRight aria-hidden="true" />
           </Link>
         </section>
 
-        <div className="site-footer__glass">
+        <div className="site-footer__glass" style={{ alignSelf: 'start', minHeight: 0, height: 'auto', padding: '24px 28px' }}>
           <div className="footer-column footer-contact">
             <h3>Contact Us</h3>
             <a
@@ -77,7 +77,7 @@ export default function Footer() {
         </div>
       </div>
 
-      <div className="site-footer__bottom">
+      <div className="site-footer__bottom" style={{ marginTop: 22, padding: '14px 0 15px' }}>
         <span>© 2026 Top Euro Travel. All Rights Reserved.</span>
         <div><Link to="/privacy">Privacy Policy</Link><i /><Link to="/terms">Terms &amp; Conditions</Link></div>
       </div>
