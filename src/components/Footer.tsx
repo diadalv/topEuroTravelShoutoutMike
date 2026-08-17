@@ -6,15 +6,9 @@ import { Link } from 'react-router-dom';
 export default function Footer() {
   return (
     <footer className="site-footer site-footer--editorial" style={{ marginTop: 0, padding: '20px clamp(24px, 4.2vw, 76px) 0', borderRadius: 0 }}>
-      <div
-        className="site-footer__accent"
-        aria-hidden="true"
-        style={{ display: 'block', width: '100%', height: 1, marginBottom: 18, background: 'rgba(221, 160, 45, 0.9)' }}
-      />
-
       <div className="site-footer__layout" style={{ alignItems: 'start' }}>
         <section className="footer-editorial" aria-labelledby="footer-heading" style={{ padding: 0 }}>
-          <Image src={travelMedia('logo.png')} alt="Top Euro Travel" className="footer-logo" style={{ width: 68, marginBottom: 12 }} />
+          <Image src={travelMedia('logo.png')} alt="Top Euro Travel" className="footer-logo" style={{ width: 92, marginBottom: 14 }} />
           <h2 id="footer-heading" style={{ maxWidth: 460, fontSize: 'clamp(1.75rem, 1.75vw, 2.15rem)', lineHeight: 1 }}>
             Local expertise.
             <span>International standards.</span>
@@ -23,10 +17,6 @@ export default function Footer() {
           <p className="footer-editorial__eyebrow" style={{ marginBottom: 8 }}>Rhodes · Kos · Est. 1989</p>
           <p style={{ marginBottom: 2, fontSize: '.82rem', lineHeight: 1.35 }}>Destination management and ground handling in Rhodes &amp; Kos.</p>
           <p style={{ marginBottom: 0, fontSize: '.82rem', lineHeight: 1.35 }}>Supporting travel partners since 1989.</p>
-          <Link className="footer-cta" to="/contact" style={{ minWidth: 172, marginTop: 14, padding: '10px 14px' }}>
-            <span>Contact us</span>
-            <ArrowRight aria-hidden="true" />
-          </Link>
         </section>
 
         <div className="site-footer__glass" style={{ alignSelf: 'start', minHeight: 0, height: 'auto', padding: '24px 28px' }}>
@@ -45,7 +35,7 @@ export default function Footer() {
           </div>
 
           <div className="footer-column">
-            <h3>Quick Links</h3>
+            <h3>Menu</h3>
             <div className="footer-links footer-links--two">
               <Link to="/about">About</Link>
               <Link to="/destinations">Destinations</Link>
@@ -59,9 +49,13 @@ export default function Footer() {
 
           <div className="footer-column">
             <h3>Members of</h3>
-            <div className="footer-members">
-              <PartnerMark kind="hatta" compact />
-              <PartnerMark kind="dmc" compact />
+            <div className="footer-members" style={{ gap: 8 }}>
+              <div style={{ height: 38, display: 'flex', alignItems: 'center', overflow: 'visible' }}>
+                <div style={{ transform: 'scale(.76)', transformOrigin: 'left center', width: '132%' }}><PartnerMark kind="hatta" compact /></div>
+              </div>
+              <div style={{ height: 38, display: 'flex', alignItems: 'center', overflow: 'visible' }}>
+                <div style={{ transform: 'scale(.76)', transformOrigin: 'left center', width: '132%' }}><PartnerMark kind="dmc" compact /></div>
+              </div>
             </div>
           </div>
 
@@ -73,6 +67,14 @@ export default function Footer() {
               <a href="https://www.instagram.com/topeurotravel_" target="_blank" rel="noreferrer" aria-label="Top Euro Travel on Instagram"><Instagram /></a>
               <a href="https://share.google/ToaSglTwqTdfUG8Gf" target="_blank" rel="noreferrer" aria-label="Top Euro Travel on Google"><MapPin /></a>
             </div>
+            <Link
+              className="footer-cta"
+              to="/contact"
+              style={{ display: 'inline-flex', width: '100%', maxWidth: 184, minWidth: 0, height: 'auto', marginTop: 16, padding: '10px 14px', borderRadius: 2, justifyContent: 'space-between' }}
+            >
+              <span>Contact us</span>
+              <ArrowRight aria-hidden="true" />
+            </Link>
           </div>
         </div>
       </div>
