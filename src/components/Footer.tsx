@@ -53,7 +53,7 @@ const footerFineTune = `
   display: grid;
   grid-template-columns: minmax(0, 0.72fr) minmax(0, 1.28fr);
   width: 100%;
-  column-gap: 32px;
+  column-gap: 16px;
   row-gap: 12px;
 }
 
