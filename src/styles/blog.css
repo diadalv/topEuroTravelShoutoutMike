@@ -407,7 +407,7 @@
   .blog-grid {
     grid-template-columns: repeat(3, minmax(0, 430px));
     gap: 24px;
-    max-width: 1188px;
+    max-width: 1346px;
   }
 
   .blog-card {
