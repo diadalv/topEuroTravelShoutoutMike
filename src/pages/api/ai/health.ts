@@ -18,7 +18,7 @@ export const GET: APIRoute = async () => {
     }
 
     // Step 2: Make minimal test request to OpenAI
-    const response = await fetch('https://api.openai.com/v1/chat/completions', {
+    const response = await fetch('https://api.openai.com/v1/responses', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -26,13 +26,8 @@ export const GET: APIRoute = async () => {
       },
       body: JSON.stringify({
         model: 'gpt-5.6-luna',
-        messages: [
-          {
-            role: 'user',
-            content: 'Reply exactly with OK',
-          },
-        ],
-        max_tokens: 10,
+        input: 'Reply exactly with OK',
+        max_output_tokens: 20,
         store: false,
       }),
     });
