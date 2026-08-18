@@ -27,6 +27,7 @@ type AssistantMessage = {
   reply: string;
   recommendations: Recommendation[];
   error?: string;
+  errorCode?: string;
 };
 
 export default function AIExcursionAssistant() {
@@ -85,12 +86,15 @@ export default function AIExcursionAssistant() {
       });
 
       if (!response.ok) {
-        throw new Error('Failed to get response from AI assistant');
+        const errorData = (await response.json()) as AssistantMessage;
+        const errorMessage = errorData.error || 'Failed to get response from AI assistant';
+        throw new Error(errorMessage);
       }
 
       const data = (await response.json()) as AssistantMessage;
 
       if (data.error) {
+        // Display safe error message from backend
         setError(data.error);
         return;
       }

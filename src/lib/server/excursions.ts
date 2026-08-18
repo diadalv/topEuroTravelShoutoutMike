@@ -72,6 +72,7 @@ function localDateTime(date: Date): string {
 /**
  * Search for excursions by keywords or interests
  * Returns up to 3 matches for AI recommendations
+ * Intelligently matches keywords against service name, tagline, and description
  */
 export async function searchExcursions(query: string): Promise<ExcursionMatch[]> {
   try {
@@ -83,15 +84,38 @@ export async function searchExcursions(query: string): Promise<ExcursionMatch[]>
     });
 
     const queryLower = query.toLowerCase();
-    const matches = allServices
-      .filter((service) => {
-        const name = (service.name || '').toLowerCase();
-        const desc = (service.description || '').toLowerCase();
-        const tagline = (service.tagLine || '').toLowerCase();
-        return name.includes(queryLower) || desc.includes(queryLower) || tagline.includes(queryLower);
-      })
+    const queryKeywords = queryLower.split(/\s+/).filter((k) => k.length > 0);
+
+    // Score each service based on keyword matches
+    const scoredServices = allServices.map((service) => {
+      const name = (service.name || '').toLowerCase();
+      const desc = (service.description || '').toLowerCase();
+      const tagline = (service.tagLine || '').toLowerCase();
+      const combined = `${name} ${tagline} ${desc}`;
+
+      let score = 0;
+
+      // Exact phrase match (highest priority)
+      if (combined.includes(queryLower)) {
+        score += 100;
+      }
+
+      // Individual keyword matches
+      queryKeywords.forEach((keyword) => {
+        if (name.includes(keyword)) score += 30;
+        if (tagline.includes(keyword)) score += 20;
+        if (desc.includes(keyword)) score += 10;
+      });
+
+      return { service, score };
+    });
+
+    // Sort by score and take top 3
+    const matches = scoredServices
+      .filter((item) => item.score > 0)
+      .sort((a, b) => b.score - a.score)
       .slice(0, 3)
-      .map((service) => ({
+      .map(({ service }) => ({
         id: service._id || '',
         slug: serviceSlug(service),
         name: service.name || 'Excursion',
@@ -100,6 +124,21 @@ export async function searchExcursions(query: string): Promise<ExcursionMatch[]>
           || bookingImageUrl(service.media?.mainMedia?.image),
         bookingUrl: `/booking-calendar/${serviceSlug(service)}`,
       }));
+
+    // If no matches found, return all available excursions as fallback
+    if (matches.length === 0) {
+      return allServices
+        .slice(0, 3)
+        .map((service) => ({
+          id: service._id || '',
+          slug: serviceSlug(service),
+          name: service.name || 'Excursion',
+          description: service.tagLine || service.description || '',
+          image: bookingImageUrl(service.media?.coverMedia?.image)
+            || bookingImageUrl(service.media?.mainMedia?.image),
+          bookingUrl: `/booking-calendar/${serviceSlug(service)}`,
+        }));
+    }
 
     return matches;
   } catch (error) {

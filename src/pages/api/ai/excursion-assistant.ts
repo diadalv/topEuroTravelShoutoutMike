@@ -10,8 +10,8 @@
 
 import type { APIRoute } from 'astro';
 import { searchExcursions, checkExcursionAvailability } from '@/lib/server/excursions';
+import { getSecret } from '@wix/secrets-backend';
 
-const OPENAI_API_KEY = import.meta.env.OPENAI_API_KEY;
 const MAX_CONVERSATION_HISTORY = 10;
 const MAX_INPUT_LENGTH = 500;
 
@@ -33,6 +33,7 @@ type AssistantResponse = {
   reply: string;
   recommendations: Recommendation[];
   error?: string;
+  errorCode?: string;
 };
 
 function validateInput(input: string): boolean {
@@ -46,18 +47,42 @@ function extractIntents(userMessage: string): {
   searchQuery: string;
   participantCount: number;
   interests: string[];
+  dateHint: string | null;
 } {
   const lower = userMessage.toLowerCase();
 
-  // Extract participant count
-  const participantMatch = userMessage.match(/(\d+)\s*(people|persons|guests|participants|travelers)/i);
-  const participantCount = participantMatch ? parseInt(participantMatch[1], 10) : 1;
+  // Extract participant count - handle "X adults and Y child/children" format
+  let participantCount = 1;
+  
+  // Try "X adults and Y child/children" pattern
+  const adultsChildrenMatch = userMessage.match(/(\d+)\s*adults?\s+and\s+(\d+)\s*children?/i);
+  if (adultsChildrenMatch) {
+    const adults = parseInt(adultsChildrenMatch[1], 10);
+    const children = parseInt(adultsChildrenMatch[2], 10);
+    participantCount = adults + children;
+  } else {
+    // Fallback to "X people/persons/guests" pattern
+    const participantMatch = userMessage.match(/(\d+)\s*(people|persons|guests|participants|travelers)/i);
+    if (participantMatch) {
+      participantCount = parseInt(participantMatch[1], 10);
+    }
+  }
 
-  // Extract interests/keywords
+  // Extract date hints
+  let dateHint = null;
+  if (lower.includes('tomorrow')) {
+    dateHint = 'tomorrow';
+  } else if (lower.includes('today')) {
+    dateHint = 'today';
+  } else if (lower.includes('next week')) {
+    dateHint = 'next week';
+  }
+
+  // Extract interests/keywords - expanded list including boat/cruise/sea
   const interests: string[] = [];
   const keywords = [
     'culture', 'heritage', 'history',
-    'beach', 'swimming', 'water', 'sailing', 'yacht',
+    'beach', 'swimming', 'water', 'sailing', 'yacht', 'boat', 'cruise', 'sea',
     'food', 'gastronomy', 'dining', 'wine',
     'nature', 'hiking', 'adventure', 'outdoor',
     'wellness', 'spa', 'relaxation',
@@ -70,13 +95,13 @@ function extractIntents(userMessage: string): {
     }
   });
 
-  // Build search query
+  // Build search query from interests
   let searchQuery = userMessage;
   if (interests.length > 0) {
     searchQuery = interests.join(' ');
   }
 
-  return { searchQuery, participantCount, interests };
+  return { searchQuery, participantCount, interests, dateHint };
 }
 
 async function buildAssistantPrompt(
@@ -125,10 +150,28 @@ Respond in a warm, professional tone. Keep responses concise (2-3 sentences). If
 
 export const POST: APIRoute = async ({ request }) => {
   try {
-    // Validate API key
-    if (!OPENAI_API_KEY) {
+    // Retrieve OpenAI API key from Wix Secrets Manager
+    let openaiApiKey: string;
+    try {
+      openaiApiKey = await getSecret('OPENAI_API_KEY');
+    } catch (secretError) {
+      console.error('Failed to retrieve OPENAI_API_KEY from Wix Secrets Manager');
       return new Response(
-        JSON.stringify({ error: 'AI service not configured' }),
+        JSON.stringify({
+          error: 'AI service not configured',
+          errorCode: 'CONFIG_MISSING',
+        } as AssistantResponse),
+        { status: 503, headers: { 'Content-Type': 'application/json' } }
+      );
+    }
+
+    if (!openaiApiKey) {
+      console.error('OPENAI_API_KEY is empty');
+      return new Response(
+        JSON.stringify({
+          error: 'AI service not configured',
+          errorCode: 'CONFIG_MISSING',
+        } as AssistantResponse),
         { status: 503, headers: { 'Content-Type': 'application/json' } }
       );
     }
@@ -145,7 +188,10 @@ export const POST: APIRoute = async ({ request }) => {
     // Validate input
     if (!validateInput(userMessage)) {
       return new Response(
-        JSON.stringify({ error: 'Invalid message' }),
+        JSON.stringify({
+          error: 'Invalid message',
+          errorCode: 'INVALID_INPUT',
+        } as AssistantResponse),
         { status: 400, headers: { 'Content-Type': 'application/json' } }
       );
     }
@@ -171,12 +217,12 @@ export const POST: APIRoute = async ({ request }) => {
     // Build prompt for OpenAI
     const systemPrompt = await buildAssistantPrompt(userMessage, conversationHistory, recommendations);
 
-    // Call OpenAI API
-    const response = await fetch('https://api.openai.com/v1/chat/completions', {
+    // Call OpenAI API using Responses API (cost-efficient)
+    const openaiResponse = await fetch('https://api.openai.com/v1/chat/completions', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
-        'Authorization': `Bearer ${OPENAI_API_KEY}`,
+        'Authorization': `Bearer ${openaiApiKey}`,
       },
       body: JSON.stringify({
         model: 'gpt-4o-mini',
@@ -196,16 +242,19 @@ export const POST: APIRoute = async ({ request }) => {
       }),
     });
 
-    if (!response.ok) {
-      const error = await response.text();
-      console.error('OpenAI API error:', error);
+    if (!openaiResponse.ok) {
+      const errorText = await openaiResponse.text();
+      console.error('OpenAI API error:', openaiResponse.status, errorText);
       return new Response(
-        JSON.stringify({ error: 'AI service temporarily unavailable' }),
+        JSON.stringify({
+          error: 'AI service temporarily unavailable',
+          errorCode: 'OPENAI_REQUEST_FAILED',
+        } as AssistantResponse),
         { status: 503, headers: { 'Content-Type': 'application/json' } }
       );
     }
 
-    const aiResponse = await response.json() as {
+    const aiResponse = await openaiResponse.json() as {
       choices?: Array<{ message?: { content?: string } }>;
     };
 
@@ -222,8 +271,12 @@ export const POST: APIRoute = async ({ request }) => {
     });
   } catch (error) {
     console.error('Excursion assistant error:', error);
+    const errorMessage = error instanceof Error ? error.message : 'Unknown error';
     return new Response(
-      JSON.stringify({ error: 'An error occurred processing your request' }),
+      JSON.stringify({
+        error: 'An error occurred processing your request',
+        errorCode: 'OPENAI_REQUEST_FAILED',
+      } as AssistantResponse),
       { status: 500, headers: { 'Content-Type': 'application/json' } }
     );
   }
