@@ -10,7 +10,6 @@
 
 import type { APIRoute } from 'astro';
 import { searchExcursions, checkExcursionAvailability } from '@/lib/server/excursions';
-import { getSecret } from '@wix/secrets-backend';
 
 const MAX_CONVERSATION_HISTORY = 10;
 const MAX_INPUT_LENGTH = 500;
@@ -150,23 +149,11 @@ Respond in a warm, professional tone. Keep responses concise (2-3 sentences). If
 
 export const POST: APIRoute = async ({ request }) => {
   try {
-    // Retrieve OpenAI API key from Wix Secrets Manager
-    let openaiApiKey: string;
-    try {
-      openaiApiKey = await getSecret('OPENAI_API_KEY');
-    } catch (secretError) {
-      console.error('Failed to retrieve OPENAI_API_KEY from Wix Secrets Manager');
-      return new Response(
-        JSON.stringify({
-          error: 'AI service not configured',
-          errorCode: 'CONFIG_MISSING',
-        } as AssistantResponse),
-        { status: 503, headers: { 'Content-Type': 'application/json' } }
-      );
-    }
+    // Retrieve OpenAI API key from server-side environment variable
+    const openaiApiKey = import.meta.env.OPENAI_API_KEY;
 
     if (!openaiApiKey) {
-      console.error('OPENAI_API_KEY is empty');
+      console.error('OPENAI_API_KEY is not configured');
       return new Response(
         JSON.stringify({
           error: 'AI service not configured',
