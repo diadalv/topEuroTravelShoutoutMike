@@ -2,6 +2,7 @@
 // One self-contained file: header + homepage + flat footer + responsive styles + motion.
 import { PageSeo } from '@/components/travel/Shared';
 import { Image } from '@/components/ui/image';
+import AIExcursionAssistant from '@/components/travel/AIExcursionAssistant';
 import {
   ArrowDown,
   ArrowRight,
@@ -3739,6 +3740,8 @@ export default function TravelHomePage() {
             </div>
           </div>
         </section>
+
+        <AIExcursionAssistant />
       </div>
 
     </div>
