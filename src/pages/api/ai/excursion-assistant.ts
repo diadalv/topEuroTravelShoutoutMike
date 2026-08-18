@@ -9,6 +9,7 @@
  */
 
 import type { APIRoute } from 'astro';
+import { OPENAI_API_KEY } from 'astro:env/server';
 import { searchExcursions, checkExcursionAvailability } from '@/lib/server/excursions';
 
 const MAX_CONVERSATION_HISTORY = 10;
@@ -150,9 +151,7 @@ Respond in a warm, professional tone. Keep responses concise (2-3 sentences). If
 export const POST: APIRoute = async ({ request }) => {
   try {
     // Retrieve OpenAI API key from server-side environment variable
-    const openaiApiKey = import.meta.env.OPENAI_API_KEY;
-
-    if (!openaiApiKey) {
+    if (!OPENAI_API_KEY) {
       console.error('OPENAI_API_KEY is not configured');
       return new Response(
         JSON.stringify({
@@ -209,7 +208,7 @@ export const POST: APIRoute = async ({ request }) => {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
-        'Authorization': `Bearer ${openaiApiKey}`,
+        'Authorization': `Bearer ${OPENAI_API_KEY}`,
       },
       body: JSON.stringify({
         model: 'gpt-4o-mini',

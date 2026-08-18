@@ -35,7 +35,8 @@ export default function AIExcursionAssistant() {
   const [input, setInput] = useState('');
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
-  const messagesEndRef = useRef<HTMLDivElement>(null);
+  const messagesContainerRef = useRef<HTMLDivElement>(null);
+  const isInitialMount = useRef(true);
 
   // Initial greeting
   useEffect(() => {
@@ -45,11 +46,22 @@ export default function AIExcursionAssistant() {
       content: 'Welcome! I\'m your Top Euro Travel concierge. Tell me about your interests, group size, or what kind of experience you\'re looking for, and I\'ll recommend the perfect excursion for you.',
     };
     setMessages([greeting]);
+    isInitialMount.current = true;
   }, []);
 
-  // Auto-scroll to latest message
+  // Auto-scroll internal messages container ONLY after user/assistant messages during active conversation
   useEffect(() => {
-    messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
+    // Skip scrolling on initial mount (greeting only)
+    if (isInitialMount.current && messages.length === 1) {
+      isInitialMount.current = false;
+      return;
+    }
+
+    // Only scroll if we have more than just the greeting and container exists
+    if (messages.length > 1 && messagesContainerRef.current) {
+      // Scroll the internal container, not the page
+      messagesContainerRef.current.scrollTop = messagesContainerRef.current.scrollHeight;
+    }
   }, [messages]);
 
   const handleSendMessage = async (e: React.FormEvent) => {
@@ -143,7 +155,7 @@ export default function AIExcursionAssistant() {
         </div>
 
         <div className="ai-assistant__chat">
-          <div className="ai-assistant__messages">
+          <div className="ai-assistant__messages" ref={messagesContainerRef}>
             {messages.length === 0 ? (
               <div className="ai-assistant__empty">
                 <Sparkles className="ai-assistant__empty-icon" aria-hidden="true" />
@@ -173,7 +185,6 @@ export default function AIExcursionAssistant() {
                     </div>
                   </div>
                 )}
-                <div ref={messagesEndRef} />
               </>
             )}
           </div>
