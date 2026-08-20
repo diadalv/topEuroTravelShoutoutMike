@@ -77,6 +77,7 @@ const DETAIL_STYLES = String.raw`
   --tet-line: rgba(221, 151, 24, .28);
   --tet-content-gutter: clamp(20px, 4.2vw, 72px);
   --tet-content-max-width: 1460px;
+  --tet-image-radius: 14px;
   color: var(--tet-ink);
   background: var(--tet-cream);
   overflow: hidden;
@@ -97,6 +98,7 @@ const DETAIL_STYLES = String.raw`
   align-items: center;
   isolation: isolate;
   overflow: hidden;
+  border-radius: 0 0 var(--tet-image-radius) var(--tet-image-radius);
   background: var(--tet-navy-deep);
 }
 
@@ -108,6 +110,7 @@ const DETAIL_STYLES = String.raw`
   object-fit: cover;
   object-position: center;
   z-index: -3;
+  border-radius: inherit;
 }
 
 .tet-detail__hero::before {
@@ -338,6 +341,7 @@ const DETAIL_STYLES = String.raw`
 .tet-detail__step-media {
   overflow: hidden;
   aspect-ratio: 16 / 6.7;
+  border-radius: var(--tet-image-radius);
   background: #e8e4dd;
 }
 
@@ -437,7 +441,11 @@ const DETAIL_STYLES = String.raw`
   gap: 10px;
 }
 
-.tet-detail__gallery-item { overflow: hidden; background: #e8e4dd; }
+.tet-detail__gallery-item {
+  overflow: hidden;
+  border-radius: var(--tet-image-radius);
+  background: #e8e4dd;
+}
 .tet-detail__gallery-item:first-child { grid-row: 1 / 3; }
 .tet-detail__gallery-item:only-child { grid-column: 1 / -1; grid-row: 1 / 3; }
 
