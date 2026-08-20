@@ -25,7 +25,7 @@ import {
   X,
   type LucideIcon,
 } from 'lucide-react';
-import { useEffect, useState } from 'react';
+import { useEffect, useLayoutEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 
 const MEDIA = {
@@ -1439,6 +1439,7 @@ const HOME_STYLES = String.raw`
 }
 
 .tet-motion-ready {
+  opacity: 0;
   will-change: transform, opacity;
 }
 
@@ -2545,6 +2546,22 @@ const HOME_STYLES = String.raw`
   pointer-events: none;
 }
 
+.tet-testimonials__slides {
+  display: grid;
+}
+
+.tet-testimonials__slide {
+  grid-area: 1 / 1;
+  min-width: 0;
+  visibility: hidden;
+  pointer-events: none;
+}
+
+.tet-testimonials__slide.is-active {
+  visibility: visible;
+  pointer-events: auto;
+}
+
 .tet-testimonials__quote {
   position: relative;
   min-height: 92px;
@@ -2554,6 +2571,9 @@ const HOME_STYLES = String.raw`
   font-size: clamp(30px, 2.35vw, 40px);
   font-weight: 500;
   line-height: 1.2;
+}
+
+.tet-testimonials__slide.is-active .tet-testimonials__quote {
   animation: tet-testimonial-in 520ms cubic-bezier(.2,.72,.2,1) both;
 }
 
@@ -3302,25 +3322,52 @@ export default function TravelHomePage() {
     return () => window.clearInterval(timer);
   }, [testimonialPaused]);
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     const root = document.querySelector<HTMLElement>('.tet-d1');
     if (!root || window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
 
-    root.querySelector<HTMLElement>('.tet-hero__copy')?.animate(
-      [
-        { opacity: 0, transform: 'translateY(20px)' },
-        { opacity: 1, transform: 'translateY(0)' },
-      ],
-      { duration: 820, easing: 'cubic-bezier(.2,.72,.2,1)', fill: 'both' },
-    );
+    const animations = new Set<Animation>();
+    const runAnimation = (
+      element: HTMLElement,
+      keyframes: Keyframe[],
+      options: KeyframeAnimationOptions,
+      onFinish?: () => void,
+    ) => {
+      const animation = element.animate(keyframes, options);
+      animations.add(animation);
+      animation.finished
+        .then(() => {
+          onFinish?.();
+          animation.cancel();
+          animations.delete(animation);
+        })
+        .catch(() => undefined);
+      return animation;
+    };
 
-    root.querySelector<HTMLElement>('.tet-bridge')?.animate(
-      [
-        { opacity: 0, transform: 'translateY(18px)' },
-        { opacity: 1, transform: 'translateY(0)' },
-      ],
-      { duration: 720, delay: 160, easing: 'cubic-bezier(.2,.72,.2,1)', fill: 'both' },
-    );
+    const heroCopy = root.querySelector<HTMLElement>('.tet-hero__copy');
+    if (heroCopy) {
+      runAnimation(
+        heroCopy,
+        [
+          { opacity: 0, transform: 'translateY(20px)' },
+          { opacity: 1, transform: 'translateY(0)' },
+        ],
+        { duration: 820, easing: 'cubic-bezier(.2,.72,.2,1)', fill: 'both' },
+      );
+    }
+
+    const bridge = root.querySelector<HTMLElement>('.tet-bridge');
+    if (bridge) {
+      runAnimation(
+        bridge,
+        [
+          { opacity: 0, transform: 'translateY(18px)' },
+          { opacity: 1, transform: 'translateY(0)' },
+        ],
+        { duration: 720, delay: 160, easing: 'cubic-bezier(.2,.72,.2,1)', fill: 'both' },
+      );
+    }
 
     const observer = new IntersectionObserver(
       (entries) => {
@@ -3337,17 +3384,20 @@ export default function TravelHomePage() {
                   ? 'scale(.975)'
                   : 'translateY(18px)';
 
-          element.animate(
+          runAnimation(
+            element,
             [
               { opacity: 0.01, transform: from },
               { opacity: 1, transform: 'none' },
             ],
             { duration: 650, easing: 'cubic-bezier(.2,.72,.2,1)', fill: 'both' },
+            () => element.classList.remove('tet-motion-ready'),
           );
 
           if (element.dataset.stagger === 'true') {
             Array.from(element.children).forEach((child, index) => {
-              (child as HTMLElement).animate(
+              runAnimation(
+                child as HTMLElement,
                 [
                   { opacity: 0.01, transform: 'translateY(10px)' },
                   { opacity: 1, transform: 'translateY(0)' },
@@ -3369,19 +3419,18 @@ export default function TravelHomePage() {
       observer.observe(element);
     });
 
-    let ticking = false;
+    let frameId: number | null = null;
     const updateParallax = () => {
       const hero = root.querySelector<HTMLElement>('.tet-hero');
       if (!hero) return;
       const rect = hero.getBoundingClientRect();
       const progress = Math.min(1, Math.max(0, -rect.top / Math.max(rect.height, 1)));
-      root.style.setProperty('--tet-parallax', `${Math.round(progress * 20)}px`);
-      ticking = false;
+      root.style.setProperty('--tet-parallax', String(Math.round(progress * 20)) + 'px');
+      frameId = null;
     };
     const onScroll = () => {
-      if (ticking) return;
-      ticking = true;
-      window.requestAnimationFrame(updateParallax);
+      if (frameId !== null) return;
+      frameId = window.requestAnimationFrame(updateParallax);
     };
     window.addEventListener('scroll', onScroll, { passive: true });
     updateParallax();
@@ -3389,6 +3438,10 @@ export default function TravelHomePage() {
     return () => {
       observer.disconnect();
       window.removeEventListener('scroll', onScroll);
+      if (frameId !== null) window.cancelAnimationFrame(frameId);
+      motionElements.forEach((element) => element.classList.remove('tet-motion-ready'));
+      animations.forEach((animation) => animation.cancel());
+      animations.clear();
     };
   }, []);
 
@@ -3681,20 +3734,31 @@ export default function TravelHomePage() {
 
           <div className="tet-testimonials__stage" aria-live="polite">
             <span className="tet-testimonials__mark" aria-hidden="true">“</span>
-            <blockquote className="tet-testimonials__quote" key={`quote-${activeTestimonial}`}>
-              {testimonials[activeTestimonial].quote}
-            </blockquote>
-            <div className="tet-testimonials__credit">
-              <strong>{testimonials[activeTestimonial].name}</strong>
-              <span>· {testimonials[activeTestimonial].location} · {testimonials[activeTestimonial].experience}</span>
-              <a
-                className="tet-testimonials__source"
-                href={testimonials[activeTestimonial].sourceUrl}
-                target="_blank"
-                rel="noreferrer"
-              >
-                {testimonials[activeTestimonial].source}
-              </a>
+            <div className="tet-testimonials__slides">
+              {testimonials.map((testimonial, index) => (
+                <div
+                  className={`tet-testimonials__slide${index === activeTestimonial ? ' is-active' : ''}`}
+                  key={testimonial.name}
+                  aria-hidden={index !== activeTestimonial}
+                >
+                  <blockquote className="tet-testimonials__quote">
+                    {testimonial.quote}
+                  </blockquote>
+                  <div className="tet-testimonials__credit">
+                    <strong>{testimonial.name}</strong>
+                    <span>· {testimonial.location} · {testimonial.experience}</span>
+                    <a
+                      className="tet-testimonials__source"
+                      href={testimonial.sourceUrl}
+                      target="_blank"
+                      rel="noreferrer"
+                      tabIndex={index === activeTestimonial ? 0 : -1}
+                    >
+                      {testimonial.source}
+                    </a>
+                  </div>
+                </div>
+              ))}
             </div>
             <div className="tet-testimonials__controls">
               <div className="tet-testimonials__progress" aria-hidden="true">
