@@ -221,34 +221,7 @@ const DETAIL_STYLES = String.raw`
 
 .tet-detail__overview-copy {
   position: relative;
-  isolation: isolate;
   padding-left: clamp(0px, 1vw, 16px);
-}
-
-.tet-detail__overview-copy::before {
-  content: '“';
-  position: absolute;
-  z-index: -1;
-  top: 28px;
-  left: clamp(-154px, -9vw, -112px);
-  color: rgba(221, 151, 24, .075);
-  font-family: "Cormorant Garamond", Georgia, serif;
-  font-size: clamp(150px, 13vw, 224px);
-  font-weight: 600;
-  line-height: .8;
-}
-
-.tet-detail__overview-copy::after {
-  content: '';
-  position: absolute;
-  z-index: -1;
-  top: -42px;
-  bottom: 4px;
-  left: clamp(-92px, -5vw, -58px);
-  width: 1px;
-  background: repeating-linear-gradient(to bottom, rgba(221, 151, 24, .34) 0 5px, transparent 5px 12px);
-  transform: rotate(-1.5deg);
-  transform-origin: center;
 }
 
 .tet-detail__editorial-title {
@@ -506,23 +479,6 @@ const DETAIL_STYLES = String.raw`
   filter: drop-shadow(0 18px 34px rgba(3, 47, 85, .055));
 }
 
-.tet-detail__lists::before,
-.tet-detail__lists::after {
-  content: '';
-  position: absolute;
-  z-index: 3;
-  left: 50%;
-  width: 28px;
-  height: 28px;
-  transform: translateX(-50%);
-  border: 1px solid rgba(221, 151, 24, .28);
-  border-radius: 50%;
-  background: var(--tet-cream);
-}
-
-.tet-detail__lists::before { top: -14px; }
-.tet-detail__lists::after { bottom: -14px; }
-
 .tet-detail__list {
   position: relative;
   min-width: 0;
@@ -537,7 +493,7 @@ const DETAIL_STYLES = String.raw`
 }
 
 .tet-detail__list:last-child {
-  border-left-style: dashed;
+  border-left-style: solid;
   border-radius: 0 20px 20px 0;
 }
 
@@ -563,15 +519,6 @@ const DETAIL_STYLES = String.raw`
   height: 26px;
   margin: 0;
   stroke-width: 2.2;
-}
-
-.tet-detail__list-top-rule {
-  position: absolute;
-  top: 14px;
-  right: 22px;
-  left: 22px;
-  height: 1px;
-  background: repeating-linear-gradient(90deg, rgba(221, 151, 24, .5) 0 6px, transparent 6px 10px);
 }
 
 .tet-detail__list h2 {
@@ -703,8 +650,6 @@ const DETAIL_STYLES = String.raw`
 
 @media (max-width: 900px) {
   .tet-detail__overview { grid-template-columns: 1fr; gap: 54px; }
-  .tet-detail__overview-copy::before { left: -58px; }
-  .tet-detail__overview-copy::after { left: -24px; }
   .tet-detail__highlights { padding: 0; }
   .tet-detail__step,
   .tet-detail__step--reverse { grid-template-columns: 1fr; gap: 22px; }
@@ -727,8 +672,6 @@ const DETAIL_STYLES = String.raw`
   .tet-detail__hero-description { font-size: 15px; }
   .tet-detail__overview { padding: 64px 0 40px; }
   .tet-detail__overview-copy { padding-left: 0; }
-  .tet-detail__overview-copy::before,
-  .tet-detail__overview-copy::after { display: none; }
   .tet-detail__editorial-title { font-size: clamp(29px, 8.5vw, 38px); }
   .tet-detail__highlights ol { gap: 18px; padding-left: 66px; }
   .tet-detail__highlights ol::before { left: 23px; }
@@ -747,10 +690,7 @@ const DETAIL_STYLES = String.raw`
   .tet-detail__step-media { aspect-ratio: 16 / 9; }
   .tet-detail__lists-wrap { width: calc(100% - (var(--tet-content-gutter) * 2)); padding: 0; }
   .tet-detail__lists { grid-template-columns: 1fr; gap: 54px; filter: none; }
-  .tet-detail__lists::before,
-  .tet-detail__lists::after { display: none; }
   .tet-detail__list { padding: 50px 22px 30px; border: 1px solid rgba(221, 151, 24, .3); border-radius: 18px !important; }
-  .tet-detail__list:last-child { border-left-style: solid; }
   .tet-detail__list ul { grid-template-columns: 1fr; }
   .tet-detail__gallery-grid { grid-template-columns: 1fr 1fr; grid-template-rows: 250px 160px; }
   .tet-detail__gallery-item:first-child { grid-column: 1 / -1; grid-row: auto; }
@@ -872,7 +812,6 @@ function InfoList({ title, entries, negative = false }: { title: string; entries
   if (!entries.length) return null;
   return (
     <section className={`tet-detail__list tet-detail__list--${negative ? 'negative' : 'positive'}`}>
-      <span className="tet-detail__list-top-rule" aria-hidden="true" />
       <span className="tet-detail__list-badge" aria-hidden="true">
         {negative ? <CircleX /> : <CircleCheck />}
       </span>
