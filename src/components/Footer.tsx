@@ -696,6 +696,99 @@ a.tet-hq-item:hover svg {
   }
 
 }
+/* Footer navigation grouping: accreditation cards sit directly below menu links */
+.tet-footer-grid {
+  grid-template-columns: 1.35fr minmax(0, 2.75fr) 1.25fr;
+}
+
+.tet-footer-nav-area {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+
+.tet-footer-menu-grid {
+  display: grid;
+  grid-template-columns: 0.95fr 0.95fr 0.85fr;
+  gap: clamp(24px, 2.8vw, 44px);
+  align-items: start;
+}
+
+.tet-accreditations--footer-row {
+  grid-column: auto;
+  margin-top: 18px;
+  padding-top: 18px;
+}
+
+.tet-accreditations--footer-row .tet-accreditation-cards {
+  grid-template-columns: 0.95fr 0.95fr 0.85fr;
+}
+
+.tet-hq-contact-cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 6px;
+  color: #f0b344;
+  font-size: 0.8rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  text-decoration: none;
+  transition: color 200ms ease, transform 200ms ease;
+}
+
+.tet-hq-contact-cta:hover {
+  color: #ffffff;
+  transform: translateX(3px);
+}
+
+@media (max-width: 1200px) {
+  .tet-footer-grid {
+    grid-template-columns: 1.3fr minmax(0, 3fr);
+  }
+
+  .tet-footer-col--brand {
+    grid-column: 1;
+  }
+
+  .tet-footer-col--hq {
+    grid-column: 1 / -1;
+    display: block;
+  }
+
+  .tet-accreditations--footer-row {
+    grid-column: auto;
+  }
+}
+
+@media (max-width: 900px) {
+  .tet-footer-grid {
+    grid-template-columns: 1fr;
+    gap: 36px;
+  }
+
+  .tet-footer-col--brand,
+  .tet-footer-col--hq {
+    grid-column: 1;
+  }
+
+  .tet-footer-menu-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 32px 24px;
+  }
+}
+
+@media (max-width: 600px) {
+  .tet-footer-menu-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .tet-accreditations--footer-row .tet-accreditation-cards {
+    grid-template-columns: 1fr;
+  }
+}
+
 `;
 
 export default function Footer() {
@@ -777,134 +870,110 @@ export default function Footer() {
               </div>
             </div>
 
-            {/* COLUMN 2: Destinations & Excursions */}
-            <div className="tet-footer-col">
-              <h3 className="tet-col-heading">Destinations</h3>
-              <ul className="tet-links-list">
-                <li>
-                  <Link to="/rhodes">
-                    Rhodes Island <span className="tet-link-pill">HQ</span>
-                  </Link>
-                </li>
-                <li>
-                  <Link to="/kos">Kos Island</Link>
-                </li>
-                <li>
-                  <Link to="/destinations">All Destinations</Link>
-                </li>
-                <li>
-                  <Link to="/excursions">Curated Excursions</Link>
-                </li>
-                <li>
-                  <Link to="/destinations">Island Experiences</Link>
-                </li>
-              </ul>
+            <div className="tet-footer-nav-area">
+              <div className="tet-footer-menu-grid">
+                {/* COLUMN 2: Destinations */}
+                <div className="tet-footer-col">
+                  <h3 className="tet-col-heading">Destinations</h3>
+                  <ul className="tet-links-list">
+                    <li><Link to="/rhodes">Rhodes</Link></li>
+                    <li><Link to="/kos">Kos</Link></li>
+                    <li><Link to="/destinations">All Destinations</Link></li>
+                    <li><Link to="/excursions">Excursions</Link></li>
+                  </ul>
+                </div>
+
+                {/* COLUMN 3: Services & MICE */}
+                <div className="tet-footer-col">
+                  <h3 className="tet-col-heading">Services &amp; MICE</h3>
+                  <ul className="tet-links-list">
+                    <li><Link to="/services">Services</Link></li>
+                    <li><Link to="/mice-groups">MICE &amp; Groups</Link></li>
+                  </ul>
+                </div>
+
+                {/* COLUMN 4: Menu */}
+                <div className="tet-footer-col">
+                  <h3 className="tet-col-heading">Menu</h3>
+                  <ul className="tet-links-list">
+                    <li><Link to="/">Home</Link></li>
+                    <li><Link to="/about">About</Link></li>
+                    <li><Link to="/blog">Blog</Link></li>
+                    <li><Link to="/faq">FAQ</Link></li>
+                  </ul>
+                </div>
+              </div>
+
+              {/* Accreditations Trust Badges */}
+              <div className="tet-accreditations tet-accreditations--footer-row">
+                <div className="tet-accreditation-label">Official Accreditations</div>
+                <div className="tet-accreditation-cards">
+                  <div className="tet-accreditation-card">
+                    <ShieldCheck aria-hidden="true" />
+                    <div className="tet-accreditation-text">
+                      <strong>HATTA</strong>
+                      <span>Hellenic Assoc. of Travel Agencies</span>
+                    </div>
+                  </div>
+
+                  <div className="tet-accreditation-card">
+                    <Globe2 aria-hidden="true" />
+                    <div className="tet-accreditation-text">
+                      <strong>IATA</strong>
+                      <span>Accredited Passenger Agent</span>
+                    </div>
+                  </div>
+
+                  <div className="tet-accreditation-card">
+                    <Building2 aria-hidden="true" />
+                    <div className="tet-accreditation-text">
+                      <strong>GREECE DMCs</strong>
+                      <span>Official Network Member</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
             </div>
 
-            {/* COLUMN 3: Services & MICE */}
-            <div className="tet-footer-col">
-              <h3 className="tet-col-heading">Services &amp; MICE</h3>
-              <ul className="tet-links-list">
-                <li>
-                  <Link to="/services">Ground Handling</Link>
-                </li>
-                <li>
-                  <Link to="/mice-groups">MICE &amp; Corporate</Link>
-                </li>
-                <li>
-                  <Link to="/services">VIP Transfers</Link>
-                </li>
-                <li>
-                  <Link to="/services">Hotel Contracting</Link>
-                </li>
-                <li>
-                  <Link to="/services">Airport &amp; Port Ops</Link>
-                </li>
-              </ul>
-            </div>
-
-            {/* COLUMN 4: Company & Insights */}
-            <div className="tet-footer-col">
-              <h3 className="tet-col-heading">Company</h3>
-              <ul className="tet-links-list">
-                <li>
-                  <Link to="/about">About Top Euro Travel</Link>
-                </li>
-                <li>
-                  <Link to="/blog">Travel Blog &amp; Insights</Link>
-                </li>
-                <li>
-                  <Link to="/faq">Partner FAQ</Link>
-                </li>
-                <li>
-                  <Link to="/contact">Contact &amp; Support</Link>
-                </li>
-              </ul>
-            </div>
-
-            {/* COLUMN 5: Headquarters */}
+            {/* COLUMN 5: Contact Us */}
             <div className="tet-footer-col tet-footer-col--hq">
               <div>
-                <h3 className="tet-col-heading">Headquarters</h3>
+                <h3 className="tet-col-heading">Contact Us</h3>
                 <div className="tet-hq-contact-list">
                   <a
                     href="https://www.google.com/maps/search/?api=1&query=5th+Km+Rhodes-Lindos+Avenue%2C+Rhodes+851+00%2C+Greece"
                     target="_blank"
                     rel="noreferrer"
                     className="tet-hq-item"
+                    aria-label="Address: 5th Km Rhodes-Lindos Avenue, Rhodes 851 00, Greece"
                   >
                     <MapPin aria-hidden="true" />
-                    <span>5th Km Rhodes-Lindos Ave,<br />Rhodes 851 00, Greece</span>
+                    <span>Address</span>
                   </a>
 
-                  <a href="tel:+302241045506" className="tet-hq-item">
+                  <a href="tel:+302241045506" className="tet-hq-item" aria-label="Telephone: +30 22410 45506">
                     <Phone aria-hidden="true" />
-                    <span>+30 22410 45506</span>
+                    <span>Telephone</span>
                   </a>
 
-                  <a href="mailto:info@topeurotravel.gr" className="tet-hq-item">
+                  <a href="mailto:info@topeurotravel.gr" className="tet-hq-item" aria-label="Email: info@topeurotravel.gr">
                     <Mail aria-hidden="true" />
-                    <span>info@topeurotravel.gr</span>
+                    <span>Email</span>
                   </a>
 
                   <div className="tet-hq-item">
                     <Clock aria-hidden="true" />
                     <span>24/7 Operations Support</span>
                   </div>
+
+                  <Link to="/contact" className="tet-hq-contact-cta">
+                    <span>Contact Us</span>
+                    <span aria-hidden="true">→</span>
+                  </Link>
                 </div>
               </div>
             </div>
-
-            {/* Accreditations Trust Badges */}
-            <div className="tet-accreditations tet-accreditations--footer-row">
-              <div className="tet-accreditation-label">Official Accreditations</div>
-              <div className="tet-accreditation-cards">
-                <div className="tet-accreditation-card">
-                  <ShieldCheck aria-hidden="true" />
-                  <div className="tet-accreditation-text">
-                    <strong>HATTA</strong>
-                    <span>Hellenic Assoc. of Travel Agencies</span>
-                  </div>
-                </div>
-
-                <div className="tet-accreditation-card">
-                  <Globe2 aria-hidden="true" />
-                  <div className="tet-accreditation-text">
-                    <strong>IATA</strong>
-                    <span>Accredited Passenger Agent</span>
-                  </div>
-                </div>
-
-                <div className="tet-accreditation-card">
-                  <Building2 aria-hidden="true" />
-                  <div className="tet-accreditation-text">
-                    <strong>GREECE DMCs</strong>
-                    <span>Official Network Member</span>
-                  </div>
-                </div>
-              </div>
-            </div>
-
           </div>
         </div>
       </div>
