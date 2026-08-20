@@ -200,7 +200,7 @@ const DETAIL_STYLES = String.raw`
   display: grid;
   grid-template-columns: minmax(0, 1.08fr) minmax(340px, .92fr);
   gap: clamp(54px, 8vw, 116px);
-  padding-block: clamp(74px, 8vw, 118px);
+  padding: clamp(74px, 8vw, 118px) 0 clamp(42px, 4vw, 60px);
 }
 
 .tet-detail__eyebrow,
@@ -544,7 +544,7 @@ const DETAIL_STYLES = String.raw`
   .tet-detail__hero-copy { max-width: 100%; }
   .tet-detail__hero h1 { font-size: clamp(45px, 14vw, 64px); }
   .tet-detail__hero-description { font-size: 15px; }
-  .tet-detail__overview { padding-block: 64px; }
+  .tet-detail__overview { padding: 64px 0 40px; }
   .tet-detail__timeline { padding-left: 42px; }
   .tet-detail__timeline::before { left: 12px; }
   .tet-detail__step-number { left: -42px; width: 28px; }
@@ -799,6 +799,15 @@ export default function ExcursionDetailPage() {
         </aside>
       </section>
 
+      {(parsed.included.length > 0 || parsed.notIncluded.length > 0) && (
+        <section className="tet-detail__lists-wrap" aria-label="Included and not included">
+          <div className="tet-detail__lists">
+            <InfoList title="Included" entries={parsed.included} />
+            <InfoList title="Not Included" entries={parsed.notIncluded} negative />
+          </div>
+        </section>
+      )}
+
       {itinerarySource.length > 0 && (
         <section className="tet-detail__itinerary tet-detail__shell" aria-labelledby="tet-itinerary-title">
           <div className="tet-detail__itinerary-heading"><h2 id="tet-itinerary-title">Itinerary</h2><span aria-hidden="true" /></div>
@@ -816,15 +825,6 @@ export default function ExcursionDetailPage() {
                 </article>
               );
             })}
-          </div>
-        </section>
-      )}
-
-      {(parsed.included.length > 0 || parsed.notIncluded.length > 0) && (
-        <section className="tet-detail__lists-wrap" aria-label="Included and not included">
-          <div className="tet-detail__lists">
-            <InfoList title="Included" entries={parsed.included} />
-            <InfoList title="Not Included" entries={parsed.notIncluded} negative />
           </div>
         </section>
       )}
