@@ -963,7 +963,7 @@ a.tet-hq-item:hover svg {
 .footer-agency-credit {
   box-sizing: border-box;
   width: 100%;
-  min-height: 52px;
+  min-height: 60px;
   justify-content: space-between;
   gap: 10px;
   padding: 8px 10px;
