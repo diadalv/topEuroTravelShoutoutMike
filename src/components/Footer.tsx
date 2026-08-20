@@ -262,52 +262,61 @@ const luxuryFooterStyles = `
 }
 
 .tet-brand-quote {
-  font-family: "Cormorant Garamond", Georgia, serif;
-  font-size: clamp(1.4rem, 1.6vw, 1.75rem);
+  font-family: "Cormorant Garamond", Georgia, "Times New Roman", serif;
+  font-size: clamp(0.96rem, 1vw, 1.08rem);
   font-weight: 600;
-  line-height: 1.2;
+  line-height: 1.4;
   color: #ffffff;
   margin: 0 0 12px;
-  letter-spacing: -0.01em;
+  padding-bottom: 14px;
+  letter-spacing: 0;
+  position: relative;
+}
+
+.tet-brand-quote::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 38px;
+  height: 2px;
+  background: #dda02d;
+  border-radius: 2px;
 }
 
 .tet-brand-quote span {
   display: block;
-  color: #f0b344;
-  font-style: italic;
-  font-weight: 500;
-  font-size: 0.92em;
+  color: #ffffff;
+  font-style: normal;
+  font-weight: 600;
+  font-size: 1em;
 }
 
 .tet-brand-badge {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  font-size: 0.74rem;
+  display: block;
+  font-size: 0.78rem;
   font-weight: 700;
-  letter-spacing: 0.12em;
+  letter-spacing: 0.16em;
+  line-height: 1.4;
   text-transform: uppercase;
-  color: #dda02d;
-  background: rgba(221, 160, 45, 0.1);
-  padding: 5px 12px;
-  border-radius: 999px;
-  border: 1px solid rgba(221, 160, 45, 0.25);
-  margin-bottom: 14px;
-}
-
-.tet-brand-badge-dot {
-  width: 6px;
-  height: 6px;
-  border-radius: 999px;
-  background: #dda02d;
-  box-shadow: 0 0 8px rgba(221, 160, 45, 0.8);
+  color: #f0b344;
+  margin: 0 0 10px;
 }
 
 .tet-brand-desc {
+  max-width: 430px;
   margin: 0 0 24px;
-  color: rgba(255, 255, 255, 0.74);
+  color: rgba(255, 255, 255, 0.86);
   font-size: 0.88rem;
-  line-height: 1.6;
+  line-height: 1.48;
+}
+
+.tet-brand-desc span {
+  display: block;
+}
+
+.tet-brand-desc span + span {
+  margin-top: 3px;
 }
 
 /* Social Media Hub */
@@ -821,12 +830,12 @@ export default function Footer() {
                 </p>
 
                 <div className="tet-brand-badge">
-                  <span className="tet-brand-badge-dot" aria-hidden="true" />
-                  <span>Rhodes · Kos · Est. 1989</span>
+                  Rhodes · Kos · Est. 1989
                 </div>
 
                 <p className="tet-brand-desc">
-                  Providing full-spectrum Destination Management and ground handling services across Rhodes and Kos for over 35 years.
+                  <span>Destination management and ground handling in Rhodes &amp; Kos.</span>
+                  <span>Supporting travel partners since 1989.</span>
                 </p>
 
                 {/* Social Hub */}
