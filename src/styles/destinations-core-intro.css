@@ -274,8 +274,6 @@ body.tet-destinations-page-active .site-header.is-scrolled .header-contact-btn {
   grid-template-columns: minmax(0, 1.08fr) minmax(380px, 0.92fr);
   min-height: clamp(380px, 27vw, 425px);
   align-items: stretch;
-  border-top: 1px solid var(--dest-line);
-  border-bottom: 1px solid var(--dest-line);
 }
 
 .tet-dest-chapter--reverse {
