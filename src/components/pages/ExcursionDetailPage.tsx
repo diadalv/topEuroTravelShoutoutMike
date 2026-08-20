@@ -349,7 +349,7 @@ const DETAIL_STYLES = String.raw`
 .tet-detail__highlights li:nth-child(4) { min-width: min(82%, 610px); }
 
 .tet-detail__itinerary {
-  padding-bottom: clamp(82px, 9vw, 132px);
+  padding-bottom: clamp(64px, 7vw, 96px);
 }
 
 .tet-detail__itinerary-heading,
@@ -357,7 +357,7 @@ const DETAIL_STYLES = String.raw`
   display: flex;
   align-items: center;
   gap: 24px;
-  margin-bottom: 34px;
+  margin-bottom: 28px;
 }
 
 .tet-detail__itinerary-heading h2,
@@ -377,7 +377,7 @@ const DETAIL_STYLES = String.raw`
 .tet-detail__timeline {
   position: relative;
   display: grid;
-  gap: clamp(24px, 3vw, 42px);
+  gap: clamp(18px, 2.2vw, 30px);
   padding-left: 58px;
 }
 
@@ -395,7 +395,7 @@ const DETAIL_STYLES = String.raw`
   position: relative;
   display: grid;
   grid-template-columns: minmax(0, 1.45fr) minmax(260px, .75fr);
-  gap: clamp(28px, 5vw, 72px);
+  gap: clamp(18px, 2.8vw, 40px);
   align-items: center;
 }
 
@@ -429,7 +429,7 @@ const DETAIL_STYLES = String.raw`
 
 .tet-detail__step-media {
   overflow: hidden;
-  aspect-ratio: 16 / 6.7;
+  aspect-ratio: 16 / 5.6;
   border-radius: var(--tet-image-radius);
   background: #e8e4dd;
 }
@@ -669,7 +669,7 @@ const DETAIL_STYLES = String.raw`
   .tet-detail__overview { grid-template-columns: 1fr; gap: 54px; }
   .tet-detail__highlights { padding: 0; }
   .tet-detail__step,
-  .tet-detail__step--reverse { grid-template-columns: 1fr; gap: 22px; }
+  .tet-detail__step--reverse { grid-template-columns: 1fr; gap: 16px; }
   .tet-detail__step--reverse .tet-detail__step-media,
   .tet-detail__step--reverse .tet-detail__step-copy { order: initial; }
   .tet-detail__step-copy { padding-bottom: 12px; }
@@ -704,7 +704,7 @@ const DETAIL_STYLES = String.raw`
   .tet-detail__timeline::before { left: 12px; }
   .tet-detail__step-number { left: -42px; width: 28px; }
   .tet-detail__step-number::after { right: -3px; }
-  .tet-detail__step-media { aspect-ratio: 16 / 9; }
+  .tet-detail__step-media { aspect-ratio: 16 / 7; }
   .tet-detail__lists-wrap { width: calc(100% - (var(--tet-content-gutter) * 2)); padding: 0; }
   .tet-detail__lists { gap: 42px; }
   .tet-detail__list { padding: 42px 22px 26px; }
