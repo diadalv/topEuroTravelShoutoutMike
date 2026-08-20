@@ -468,7 +468,7 @@ const DETAIL_STYLES = String.raw`
 
 .tet-detail__lists-wrap {
   width: calc(100% - (var(--tet-content-gutter) * 2));
-  max-width: 1340px;
+  max-width: 1400px;
   margin: 0 auto clamp(82px, 9vw, 126px);
 }
 
@@ -533,7 +533,7 @@ const DETAIL_STYLES = String.raw`
 
 .tet-detail__list ul {
   display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
+  grid-template-columns: 1fr;
   gap: 13px clamp(20px, 2.5vw, 34px);
   margin: 0;
   padding: 0;
