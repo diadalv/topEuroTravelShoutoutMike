@@ -625,14 +625,14 @@ const DETAIL_STYLES = String.raw`
 }
 
 .tet-detail__price { display: grid; justify-items: center; gap: 0; }
-.tet-detail__price small { color: var(--tet-muted); font-size: 12px; }
-.tet-detail__price strong { color: var(--tet-navy); font-family: "Cormorant Garamond", Georgia, serif; font-size: 38px; line-height: .9; }
-.tet-detail__price span { color: var(--tet-muted); font-size: 11px; }
+.tet-detail__price small { color: var(--tet-muted); font-size: 13px; }
+.tet-detail__price strong { color: var(--tet-navy); font-family: "Cormorant Garamond", Georgia, serif; font-size: 40px; line-height: .9; }
+.tet-detail__price span { color: var(--tet-muted); font-size: 12px; }
 
 .tet-detail__booking-cell svg { width: 22px; color: var(--tet-navy); }
 .tet-detail__booking-cell div { display: grid; justify-items: center; gap: 2px; }
-.tet-detail__booking-cell b { color: var(--tet-navy); font-size: 13px; }
-.tet-detail__booking-cell small { color: var(--tet-muted); font-size: 11px; }
+.tet-detail__booking-cell b { color: var(--tet-navy); font-size: 14px; }
+.tet-detail__booking-cell small { color: var(--tet-muted); font-size: 12px; }
 
 .tet-detail__booking-action {
   min-height: 84px;
@@ -641,7 +641,7 @@ const DETAIL_STYLES = String.raw`
   justify-content: center;
   padding: 0 24px;
 }
-.tet-detail__booking-action .tet-detail__button { margin: 0; white-space: nowrap; }
+.tet-detail__booking-action .tet-detail__button { margin: 0; font-size: 14px; white-space: nowrap; }
 
 .tet-detail__state {
   min-height: 62vh;
