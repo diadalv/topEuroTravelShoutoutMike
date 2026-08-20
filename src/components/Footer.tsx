@@ -480,6 +480,19 @@ a.tet-hq-item:hover svg {
   gap: 10px;
 }
 
+.tet-accreditations--footer-row {
+  grid-column: 2 / -1;
+  margin-top: 4px;
+  padding-top: 24px;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.tet-accreditations--footer-row .tet-accreditation-cards {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 12px;
+}
+
 .tet-accreditation-label {
   font-size: 0.72rem;
   font-weight: 700;
@@ -612,6 +625,10 @@ a.tet-hq-item:hover svg {
     padding-top: 32px;
     border-top: 1px solid rgba(255, 255, 255, 0.08);
   }
+
+  .tet-accreditations--footer-row {
+    grid-column: 1 / -1;
+  }
 }
 
 @media (max-width: 900px) {
@@ -656,6 +673,10 @@ a.tet-hq-item:hover svg {
 
   .tet-footer-col--hq {
     grid-column: span 1;
+  }
+
+  .tet-accreditations--footer-row .tet-accreditation-cards {
+    grid-template-columns: 1fr;
   }
 
   .tet-prefooter-actions {
@@ -821,7 +842,7 @@ export default function Footer() {
               </ul>
             </div>
 
-            {/* COLUMN 5: Headquarters & Accreditations */}
+            {/* COLUMN 5: Headquarters */}
             <div className="tet-footer-col tet-footer-col--hq">
               <div>
                 <h3 className="tet-col-heading">Headquarters</h3>
@@ -852,33 +873,33 @@ export default function Footer() {
                   </div>
                 </div>
               </div>
+            </div>
 
-              {/* Accreditations Trust Badges */}
-              <div className="tet-accreditations">
-                <div className="tet-accreditation-label">Official Accreditations</div>
-                <div className="tet-accreditation-cards">
-                  <div className="tet-accreditation-card">
-                    <ShieldCheck aria-hidden="true" />
-                    <div className="tet-accreditation-text">
-                      <strong>HATTA</strong>
-                      <span>Hellenic Assoc. of Travel Agencies</span>
-                    </div>
+            {/* Accreditations Trust Badges */}
+            <div className="tet-accreditations tet-accreditations--footer-row">
+              <div className="tet-accreditation-label">Official Accreditations</div>
+              <div className="tet-accreditation-cards">
+                <div className="tet-accreditation-card">
+                  <ShieldCheck aria-hidden="true" />
+                  <div className="tet-accreditation-text">
+                    <strong>HATTA</strong>
+                    <span>Hellenic Assoc. of Travel Agencies</span>
                   </div>
+                </div>
 
-                  <div className="tet-accreditation-card">
-                    <Globe2 aria-hidden="true" />
-                    <div className="tet-accreditation-text">
-                      <strong>IATA</strong>
-                      <span>Accredited Passenger Agent</span>
-                    </div>
+                <div className="tet-accreditation-card">
+                  <Globe2 aria-hidden="true" />
+                  <div className="tet-accreditation-text">
+                    <strong>IATA</strong>
+                    <span>Accredited Passenger Agent</span>
                   </div>
+                </div>
 
-                  <div className="tet-accreditation-card">
-                    <Building2 aria-hidden="true" />
-                    <div className="tet-accreditation-text">
-                      <strong>GREECE DMCs</strong>
-                      <span>Official Network Member</span>
-                    </div>
+                <div className="tet-accreditation-card">
+                  <Building2 aria-hidden="true" />
+                  <div className="tet-accreditation-text">
+                    <strong>GREECE DMCs</strong>
+                    <span>Official Network Member</span>
                   </div>
                 </div>
               </div>
