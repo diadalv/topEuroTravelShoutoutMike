@@ -29,7 +29,6 @@ const media = {
 type DestinationChapter = {
   id: "rhodes" | "kos";
   number: string;
-  label: string;
   name: string;
   statement: string;
   description: string;
@@ -60,7 +59,6 @@ const destinations = [
   {
     id: "rhodes",
     number: "01",
-    label: "Core Destination",
     name: "Rhodes",
     statement: "History. Coastline. Timeless experiences.",
     description:
@@ -74,7 +72,6 @@ const destinations = [
   {
     id: "kos",
     number: "02",
-    label: "Core Destination",
     name: "Kos",
     statement: "Beaches. Culture. Effortless island living.",
     description:
@@ -296,10 +293,6 @@ export default function DestinationsPage() {
                     <span className="tet-dest-chapter__number">
                       {destination.number}
                     </span>
-
-                    <span className="tet-dest-chapter__label">
-                      {destination.label}
-                    </span>
                   </div>
 
                   <h2>{destination.name}</h2>
@@ -342,10 +335,7 @@ export default function DestinationsPage() {
                     aria-hidden="true"
                   />
 
-                  <div className="tet-dest-chapters__bridge-copy">
-                    <strong>From Rhodes to Kos</strong>
-                    <span>Two local teams · One operational standard</span>
-                  </div>
+                  <div className="tet-dest-chapters__bridge-copy" aria-hidden="true" />
 
                   <span
                     className="tet-dest-chapters__bridge-line"
