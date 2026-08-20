@@ -51,9 +51,9 @@ const luxuryFooterStyles = `
 
 .tet-footer-container {
   width: 100%;
-  max-width: 1600px;
+  max-width: 1760px;
   margin: 0 auto;
-  padding: 0 clamp(24px, 3vw, 56px);
+  padding: 0 clamp(20px, 2.5vw, 48px);
   position: relative;
   z-index: 1;
 }
