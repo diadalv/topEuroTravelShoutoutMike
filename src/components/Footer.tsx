@@ -1,20 +1,17 @@
-import { travelMedia } from '@/config/wix-media';
 import { Image } from '@/components/ui/image';
+import { travelMedia } from '@/config/wix-media';
 import {
-  ArrowRight,
   ArrowUp,
   Building2,
   Clock,
   Facebook,
   Globe2,
-  Headphones,
   Instagram,
   Linkedin,
   Mail,
   MapPin,
   Phone,
   ShieldCheck,
-  Sparkles,
 } from 'lucide-react';
 import { Link } from 'react-router-dom';
 
@@ -26,7 +23,7 @@ const luxuryFooterStyles = `
 .tet-luxury-footer {
   position: relative;
   isolation: isolate;
-  background: 
+  background:
     radial-gradient(ellipse 80% 50% at 50% -20%, rgba(221, 160, 45, 0.12), transparent 70%),
     radial-gradient(circle at 10% 30%, rgba(14, 107, 156, 0.18), transparent 45%),
     radial-gradient(circle at 90% 70%, rgba(7, 59, 99, 0.25), transparent 50%),
@@ -45,7 +42,7 @@ const luxuryFooterStyles = `
   content: "";
   position: absolute;
   inset: 0;
-  background-image: 
+  background-image:
     linear-gradient(to right, rgba(255, 255, 255, 0.02) 1px, transparent 1px),
     linear-gradient(to bottom, rgba(255, 255, 255, 0.02) 1px, transparent 1px);
   background-size: 60px 60px;
@@ -82,7 +79,7 @@ const luxuryFooterStyles = `
   border-radius: 16px;
   backdrop-filter: blur(16px);
   -webkit-backdrop-filter: blur(16px);
-  box-shadow: 
+  box-shadow:
     0 20px 50px rgba(0, 16, 30, 0.35),
     inset 0 1px 0 rgba(255, 255, 255, 0.15);
   position: relative;
@@ -737,42 +734,11 @@ export default function Footer() {
     <footer className="tet-luxury-footer" aria-label="Site Footer">
       <style>{luxuryFooterStyles}</style>
 
-      {/* 1. PRE-FOOTER VIP ACTION BANNER */}
-      <div className="tet-prefooter-banner">
-        <div className="tet-footer-container">
-          <div className="tet-prefooter-card">
-            <div className="tet-prefooter-info">
-              <div className="tet-prefooter-tag">
-                <Sparkles aria-hidden="true" />
-                <span>Premier DMC &amp; Ground Operator</span>
-              </div>
-              <h2 className="tet-prefooter-title">
-                Ready to plan your next Dodecanese journey?
-              </h2>
-              <p className="tet-prefooter-desc">
-                Partner with Rhodes &amp; Kos leading destination specialists. From bespoke leisure groups to high-level corporate MICE and seamless VIP logistics.
-              </p>
-            </div>
-
-            <div className="tet-prefooter-actions">
-              <Link to="/contact" className="tet-btn-gold">
-                <span>Request a Proposal</span>
-                <ArrowRight aria-hidden="true" />
-              </Link>
-              <a href="tel:+302241045506" className="tet-btn-glass" aria-label="Direct 24/7 Operations Call">
-                <Headphones aria-hidden="true" />
-                <span>+30 22410 45506</span>
-              </a>
-            </div>
-          </div>
-        </div>
-      </div>
-
       {/* 2. MAIN 5-COLUMN FOOTER */}
       <div className="tet-footer-main">
         <div className="tet-footer-container">
           <div className="tet-footer-grid">
-            
+
             {/* COLUMN 1: Brand Heritage & Story */}
             <div className="tet-footer-col tet-footer-col--brand">
               <div className="tet-brand-block">
@@ -976,7 +942,7 @@ export default function Footer() {
       <div className="tet-subfooter">
         <div className="tet-footer-container">
           <div className="tet-subfooter-inner">
-            
+
             <div className="tet-copyright-info">
               <span className="tet-copyright-main">
                 &copy; {currentYear} Top Euro Travel. All Rights Reserved.
@@ -1008,4 +974,3 @@ export default function Footer() {
     </footer>
   );
 }
-
