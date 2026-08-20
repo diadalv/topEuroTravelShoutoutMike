@@ -619,14 +619,6 @@ a.tet-hq-item:hover svg {
   display: inline-block;
 }
 
-.tet-developer-credit-row {
-  display: flex;
-  justify-content: center;
-  margin-top: 20px;
-  padding-top: 20px;
-  border-top: 1px solid rgba(255, 255, 255, 0.06);
-}
-
 .footer-agency-credit {
   position: relative;
   display: inline-flex;
@@ -1124,15 +1116,6 @@ export default function Footer() {
               </span>
             </div>
 
-            <div className="tet-subfooter-links">
-              <Link to="/privacy">Privacy Policy</Link>
-              <span className="tet-subfooter-divider" aria-hidden="true" />
-              <Link to="/terms">Terms &amp; Conditions</Link>
-            </div>
-
-          </div>
-
-          <div className="tet-developer-credit-row">
             <a
               className="footer-agency-credit"
               href="https://www.log-in.gr/"
@@ -1166,6 +1149,13 @@ export default function Footer() {
                 </span>
               </span>
             </a>
+
+            <div className="tet-subfooter-links">
+              <Link to="/privacy">Privacy Policy</Link>
+              <span className="tet-subfooter-divider" aria-hidden="true" />
+              <Link to="/terms">Terms &amp; Conditions</Link>
+            </div>
+
           </div>
         </div>
       </div>
