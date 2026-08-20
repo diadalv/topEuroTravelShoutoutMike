@@ -468,7 +468,7 @@ const DETAIL_STYLES = String.raw`
 
 .tet-detail__lists-wrap {
   width: calc(100% - (var(--tet-content-gutter) * 2));
-  max-width: var(--tet-content-max-width);
+  max-width: 1340px;
   margin: 0 auto clamp(82px, 9vw, 126px);
 }
 
@@ -482,7 +482,7 @@ const DETAIL_STYLES = String.raw`
 .tet-detail__list {
   position: relative;
   min-width: 0;
-  padding: 54px clamp(28px, 3.2vw, 52px) 38px;
+  padding: 44px clamp(24px, 2.6vw, 40px) 30px;
   border: 1px solid rgba(221, 151, 24, .3);
   background: linear-gradient(145deg, rgba(255, 255, 255, .54), rgba(255, 250, 241, .44));
 }
@@ -500,10 +500,10 @@ const DETAIL_STYLES = String.raw`
 .tet-detail__list-badge {
   position: absolute;
   z-index: 2;
-  top: -28px;
+  top: -22px;
   left: 50%;
-  width: 56px;
-  height: 56px;
+  width: 44px;
+  height: 44px;
   display: grid;
   place-items: center;
   transform: translateX(-50%);
@@ -515,17 +515,17 @@ const DETAIL_STYLES = String.raw`
 }
 
 .tet-detail__list-badge svg {
-  width: 26px;
-  height: 26px;
+  width: 18px;
+  height: 18px;
   margin: 0;
-  stroke-width: 2.2;
+  stroke-width: 2;
 }
 
 .tet-detail__list h2 {
-  margin: 0 0 26px;
+  margin: 0 0 20px;
   color: var(--tet-navy-deep);
   font-family: "Cormorant Garamond", Georgia, serif;
-  font-size: clamp(26px, 2.1vw, 32px);
+  font-size: clamp(25px, 1.8vw, 29px);
   font-weight: 600;
   line-height: 1.1;
   text-align: center;
@@ -534,7 +534,7 @@ const DETAIL_STYLES = String.raw`
 .tet-detail__list ul {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 17px clamp(22px, 3vw, 46px);
+  gap: 13px clamp(20px, 2.5vw, 34px);
   margin: 0;
   padding: 0;
   list-style: none;
@@ -542,20 +542,37 @@ const DETAIL_STYLES = String.raw`
 
 .tet-detail__list li {
   display: grid;
-  grid-template-columns: 18px minmax(0, 1fr);
-  gap: 12px;
+  grid-template-columns: 16px minmax(0, 1fr);
+  gap: 10px;
   align-items: start;
   color: var(--tet-muted);
-  font-size: 14px;
-  line-height: 1.55;
+  font-size: 13.5px;
+  line-height: 1.5;
 }
 
 .tet-detail__list svg {
-  width: 17px;
-  height: 17px;
+  width: 15px;
+  height: 15px;
   margin-top: 2px;
   color: var(--tet-gold);
   stroke-width: 2;
+}
+
+@media (max-width: 1100px) {
+  .tet-detail__lists-wrap { max-width: 920px; }
+  .tet-detail__list { padding-inline: clamp(24px, 3.2vw, 34px); }
+  .tet-detail__list ul { grid-template-columns: 1fr; }
+}
+
+@media (max-width: 760px) {
+  .tet-detail__lists { grid-template-columns: 1fr; gap: 42px; filter: none; }
+  .tet-detail__list {
+    padding: 42px 22px 26px;
+    border: 1px solid rgba(221, 151, 24, .3);
+    border-radius: 16px !important;
+  }
+  .tet-detail__list:first-child { border-right: 1px solid rgba(221, 151, 24, .3); }
+  .tet-detail__list:last-child { border-left: 1px solid rgba(221, 151, 24, .3); }
 }
 
 .tet-detail__gallery { padding-bottom: 32px; }
@@ -689,8 +706,8 @@ const DETAIL_STYLES = String.raw`
   .tet-detail__step-number::after { right: -3px; }
   .tet-detail__step-media { aspect-ratio: 16 / 9; }
   .tet-detail__lists-wrap { width: calc(100% - (var(--tet-content-gutter) * 2)); padding: 0; }
-  .tet-detail__lists { grid-template-columns: 1fr; gap: 54px; filter: none; }
-  .tet-detail__list { padding: 50px 22px 30px; border: 1px solid rgba(221, 151, 24, .3); border-radius: 18px !important; }
+  .tet-detail__lists { gap: 42px; }
+  .tet-detail__list { padding: 42px 22px 26px; }
   .tet-detail__list ul { grid-template-columns: 1fr; }
   .tet-detail__gallery-grid { grid-template-columns: 1fr 1fr; grid-template-rows: 250px 160px; }
   .tet-detail__gallery-item:first-child { grid-column: 1 / -1; grid-row: auto; }
