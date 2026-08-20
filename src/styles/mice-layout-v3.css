@@ -1919,7 +1919,7 @@
   padding-bottom: clamp(28px, 3vw, 38px);
 }
 
-.mice-page__organizer-capabilities-eyebrow {
+.mice-page .mice-page__organizer-capabilities-eyebrow {
   margin: 0 0 11px;
   color: #dfa018;
   font-family: "Manrope", Inter, "Segoe UI", Arial, sans-serif;
@@ -1940,7 +1940,7 @@
   letter-spacing: -0.025em;
 }
 
-.mice-page__organizer-capabilities-intro {
+.mice-page .mice-page__organizer-capabilities-intro {
   max-width: 50ch;
   margin: 0;
   color: rgba(31, 57, 82, 0.86);
@@ -1995,7 +1995,7 @@
   letter-spacing: -0.01em;
 }
 
-.mice-page__organizer-capability p {
+.mice-page .mice-page__organizer-capability p {
   margin: 0;
   color: rgba(31, 57, 82, 0.84);
   font-family: "Manrope", Inter, "Segoe UI", Arial, sans-serif;
@@ -2071,7 +2071,7 @@
     padding-bottom: 20px;
   }
 
-  .mice-page__organizer-capabilities-intro {
+  .mice-page .mice-page__organizer-capabilities-intro {
     max-width: 58ch;
   }
 
