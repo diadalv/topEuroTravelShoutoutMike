@@ -28,7 +28,7 @@ const luxuryFooterStyles = `
     radial-gradient(circle at 90% 70%, rgba(7, 59, 99, 0.25), transparent 50%),
     linear-gradient(180deg, #072a45 0%, #051d32 40%, #031422 100%);
   color: #f1f5f9;
-  font-family: inherit;
+  font-family: Manrope, Inter, "Segoe UI", Arial, sans-serif;
   margin-top: 0;
   padding: 0;
   border-top: 1px solid rgba(221, 160, 45, 0.35);
@@ -352,6 +352,7 @@ const luxuryFooterStyles = `
 
 /* Column Headings */
 .tet-col-heading {
+  font-family: "Cormorant Garamond", Georgia, "Times New Roman", serif;
   font-size: 0.86rem;
   font-weight: 700;
   letter-spacing: 0.12em;
