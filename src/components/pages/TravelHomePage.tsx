@@ -3540,13 +3540,6 @@ export default function TravelHomePage() {
               Our local teams combine strong partnerships, responsive coordination and tailor-made delivery across
               hotels, transfers, excursions, MICE and special programmes.
             </p>
-            <span className="tet-intro__signature" aria-label="Top Euro Team">
-              <span>Top Euro Team</span>
-              <svg viewBox="0 0 210 18" aria-hidden="true">
-                <path d="M4 10 C34 3 63 15 94 8 C124 2 148 15 180 8 C191 6 199 7 206 5" />
-                <path d="M26 14 C63 10 105 17 151 12" opacity="0.5" />
-              </svg>
-            </span>
             <Link className="tet-text-link" to="/about">
               Learn more about us <ArrowRight aria-hidden="true" />
             </Link>
