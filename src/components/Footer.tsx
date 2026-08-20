@@ -988,7 +988,10 @@ export default function Footer() {
                 &copy; {currentYear} Top Euro Travel. All Rights Reserved.
               </span>
               <span className="tet-copyright-license">
-                GNTO License (MHTE): 1476E60000000000 · General Commercial Registry (G.E.MI.) Member.
+                GNTO Licence: 1476E60000156801
+              </span>
+              <span className="tet-copyright-license">
+                Tax Number: EL800892257
               </span>
             </div>
 
