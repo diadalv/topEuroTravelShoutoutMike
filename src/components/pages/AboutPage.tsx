@@ -301,14 +301,6 @@ export default function AboutPage() {
           breadcrumb="About"
           image={images.hero}
         />
-
-        <div
-          className="tet-about__hero-positioning"
-          aria-label="Top Euro Travel positioning"
-        >
-          <span>Rhodes · Kos · Est. 1989</span>
-          <strong>Local expertise. International standards.</strong>
-        </div>
       </section>
 
       <section className="tet-about__story" aria-labelledby="about-story-title">
