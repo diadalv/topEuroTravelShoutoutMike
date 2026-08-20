@@ -216,6 +216,7 @@ const DETAIL_STYLES = String.raw`
 
 .tet-detail__overview-copy > .tet-detail__eyebrow {
   color: var(--tet-gold);
+  font-size: 12px;
 }
 
 .tet-detail__overview-copy {
@@ -255,7 +256,7 @@ const DETAIL_STYLES = String.raw`
   margin: 0;
   color: var(--tet-navy-deep);
   font-family: "Cormorant Garamond", Georgia, serif;
-  font-size: clamp(38px, 4vw, 61px);
+  font-size: clamp(29px, 3vw, 43px);
   font-weight: 500;
   letter-spacing: -.035em;
   line-height: 1.02;
@@ -285,7 +286,7 @@ const DETAIL_STYLES = String.raw`
 .tet-detail__overview-copy > p:not(.tet-detail__eyebrow) {
   margin: 0 0 21px;
   color: var(--tet-muted);
-  font-size: clamp(15px, 1.05vw, 17px);
+  font-size: clamp(14px, .95vw, 16px);
   line-height: 1.78;
 }
 
@@ -295,6 +296,8 @@ const DETAIL_STYLES = String.raw`
   min-width: 0;
   padding-left: 0;
 }
+
+.tet-detail__highlights > .tet-detail__eyebrow { font-size: 12px; }
 
 .tet-detail__highlights ol {
   position: relative;
@@ -330,7 +333,7 @@ const DETAIL_STYLES = String.raw`
   color: var(--tet-muted);
   background: rgba(255, 255, 255, .42);
   box-shadow: 0 9px 24px rgba(3, 47, 85, .055);
-  font-size: 15px;
+  font-size: 14px;
   line-height: 1.56;
   counter-increment: highlight;
 }
@@ -350,7 +353,7 @@ const DETAIL_STYLES = String.raw`
   color: var(--tet-gold);
   background: var(--tet-cream);
   font-family: "Cormorant Garamond", Georgia, serif;
-  font-size: 20px;
+  font-size: 18px;
   font-weight: 700;
   line-height: 1.05;
 }
@@ -575,7 +578,7 @@ const DETAIL_STYLES = String.raw`
   margin: 0 0 26px;
   color: var(--tet-navy-deep);
   font-family: "Cormorant Garamond", Georgia, serif;
-  font-size: clamp(30px, 2.8vw, 39px);
+  font-size: clamp(26px, 2.1vw, 32px);
   font-weight: 600;
   line-height: 1.1;
   text-align: center;
@@ -596,8 +599,8 @@ const DETAIL_STYLES = String.raw`
   gap: 12px;
   align-items: start;
   color: var(--tet-muted);
-  font-size: 15px;
-  line-height: 1.6;
+  font-size: 14px;
+  line-height: 1.55;
 }
 
 .tet-detail__list svg {
@@ -726,7 +729,7 @@ const DETAIL_STYLES = String.raw`
   .tet-detail__overview-copy { padding-left: 0; }
   .tet-detail__overview-copy::before,
   .tet-detail__overview-copy::after { display: none; }
-  .tet-detail__editorial-title { font-size: clamp(36px, 11vw, 48px); }
+  .tet-detail__editorial-title { font-size: clamp(29px, 8.5vw, 38px); }
   .tet-detail__highlights ol { gap: 18px; padding-left: 66px; }
   .tet-detail__highlights ol::before { left: 23px; }
   .tet-detail__highlights li {
