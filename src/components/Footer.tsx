@@ -1,7 +1,6 @@
 import { Image } from '@/components/ui/image';
 import { travelMedia } from '@/config/wix-media';
 import {
-  ArrowUp,
   Building2,
   Clock,
   Facebook,
@@ -597,44 +596,6 @@ a.tet-hq-item:hover svg {
   display: inline-block;
 }
 
-/* Back to Top Button */
-.tet-back-to-top {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  background: rgba(255, 255, 255, 0.05);
-  color: rgba(255, 255, 255, 0.85);
-  border: 1px solid rgba(221, 160, 45, 0.4);
-  padding: 8px 14px;
-  border-radius: 999px;
-  font-size: 0.76rem;
-  font-weight: 600;
-  letter-spacing: 0.04em;
-  text-transform: uppercase;
-  cursor: pointer;
-  transition: all 240ms cubic-bezier(0.16, 1, 0.3, 1);
-}
-
-.tet-back-to-top svg {
-  width: 14px;
-  height: 14px;
-  color: #dda02d;
-  transition: transform 220ms ease;
-}
-
-.tet-back-to-top:hover {
-  background: #dda02d;
-  color: #031422;
-  border-color: #dda02d;
-  transform: translateY(-2px);
-  box-shadow: 0 6px 18px rgba(221, 160, 45, 0.3);
-}
-
-.tet-back-to-top:hover svg {
-  color: #031422;
-  transform: translateY(-2px);
-}
-
 /* --------------------------------------------------------------------------
    RESPONSIVE BREAKPOINTS
    -------------------------------------------------------------------------- */
@@ -713,22 +674,11 @@ a.tet-hq-item:hover svg {
     gap: 16px;
   }
 
-  .tet-back-to-top {
-    align-self: flex-start;
-    margin-top: 8px;
-  }
 }
 `;
 
 export default function Footer() {
   const currentYear = new Date().getFullYear();
-
-  const scrollToTop = () => {
-    window.scrollTo({
-      top: 0,
-      behavior: 'smooth',
-    });
-  };
 
   return (
     <footer className="tet-luxury-footer" aria-label="Site Footer">
@@ -957,16 +907,6 @@ export default function Footer() {
               <span className="tet-subfooter-divider" aria-hidden="true" />
               <Link to="/terms">Terms &amp; Conditions</Link>
             </div>
-
-            <button
-              type="button"
-              className="tet-back-to-top"
-              onClick={scrollToTop}
-              aria-label="Scroll back to top of the page"
-            >
-              <span>Back to Top</span>
-              <ArrowUp aria-hidden="true" />
-            </button>
 
           </div>
         </div>

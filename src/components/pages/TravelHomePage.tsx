@@ -802,6 +802,7 @@ const HOME_STYLES = String.raw`
   gap: 8px;
   padding: 8px 0;
   border-bottom: 1px solid var(--tet-line);
+  align-items: center;
 }
 
 .tet-intro__fact:last-child {
