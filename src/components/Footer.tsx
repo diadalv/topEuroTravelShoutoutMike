@@ -1040,6 +1040,7 @@ a.tet-hq-item:hover svg {
   .tet-footer-col--hq {
     display: flex;
     flex-direction: column;
+    align-items: stretch;
     gap: 0;
     padding-top: 18px;
   }
