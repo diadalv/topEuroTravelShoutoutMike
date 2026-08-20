@@ -910,11 +910,166 @@ a.tet-hq-item:hover svg {
   }
 }
 
+/* Compact footer: aligned accreditation and agency cards */
+.tet-footer-main {
+  padding: clamp(32px, 3.5vw, 46px) 0 clamp(24px, 2.8vw, 36px);
+}
+
+.tet-footer-grid {
+  align-items: stretch;
+  gap: clamp(22px, 2.3vw, 36px);
+}
+
+.tet-footer-nav-area,
+.tet-footer-col--hq {
+  min-height: 100%;
+}
+
+.tet-footer-brand-link {
+  margin-bottom: 14px;
+}
+
+.tet-brand-desc {
+  margin-bottom: 18px;
+}
+
+.tet-col-heading {
+  margin-bottom: 14px;
+}
+
+.tet-links-list {
+  gap: 8px;
+}
+
+.tet-hq-contact-list {
+  gap: 9px;
+  margin-bottom: 0;
+}
+
+.tet-accreditations--footer-row {
+  margin-top: auto;
+  padding-top: 14px;
+}
+
+.tet-agency-credit-slot {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  margin-top: auto;
+  padding-top: 38px;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.footer-agency-credit {
+  box-sizing: border-box;
+  width: 100%;
+  min-height: 52px;
+  justify-content: space-between;
+  gap: 10px;
+  padding: 8px 10px;
+  border-radius: 8px;
+}
+
+.tet-subfooter {
+  padding: 12px 0 14px;
+}
+
+.tet-subfooter-inner {
+  gap: 18px;
+  flex-wrap: nowrap;
+}
+
+.tet-copyright-info {
+  flex-direction: row;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 6px 0;
+}
+
+.tet-copyright-info > span + span {
+  margin-left: 10px;
+  padding-left: 10px;
+  border-left: 1px solid rgba(221, 160, 45, 0.45);
+}
+
+@media (max-width: 1200px) {
+  .tet-footer-col--hq {
+    grid-column: 1 / -1;
+    display: grid;
+    grid-template-columns: minmax(0, 1.2fr) minmax(300px, 0.8fr);
+    gap: 28px;
+    align-items: end;
+    margin-top: 0;
+    padding-top: 20px;
+    border-top: 1px solid rgba(255, 255, 255, 0.08);
+  }
+
+  .tet-agency-credit-slot {
+    margin-top: 0;
+    padding-top: 0;
+    border-top: 0;
+  }
+}
+
+@media (max-width: 900px) {
+  .tet-footer-main {
+    padding: 30px 0 24px;
+  }
+
+  .tet-footer-grid {
+    gap: 28px;
+  }
+
+  .tet-footer-col--hq {
+    grid-column: 1;
+    grid-template-columns: minmax(0, 1fr) minmax(260px, 0.8fr);
+    gap: 24px;
+  }
+
+  .tet-subfooter-inner {
+    align-items: flex-start;
+    flex-wrap: wrap;
+  }
+
+  .tet-copyright-info {
+    width: 100%;
+  }
+}
+
+@media (max-width: 600px) {
+  .tet-footer-col--hq {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+    padding-top: 18px;
+  }
+
+  .tet-agency-credit-slot {
+    width: 100%;
+    margin-top: 18px;
+    padding-top: 14px;
+    border-top: 1px solid rgba(255, 255, 255, 0.08);
+  }
+
+  .tet-copyright-info {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 4px;
+  }
+
+  .tet-copyright-info > span + span {
+    margin-left: 0;
+    padding-left: 0;
+    border-left: 0;
+  }
+
+  .tet-subfooter {
+    padding: 12px 0 16px;
+  }
+}
 `;
 
 export default function Footer() {
-  const currentYear = new Date().getFullYear();
-
   return (
     <footer className="tet-luxury-footer" aria-label="Site Footer">
       <style>{luxuryFooterStyles}</style>
@@ -1094,6 +1249,42 @@ export default function Footer() {
                   </Link>
                 </div>
               </div>
+
+              <div className="tet-agency-credit-slot">
+                <a
+                  className="footer-agency-credit"
+                  href="https://www.log-in.gr/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label="Design and development by Log-In Digital Agency — opens in a new tab"
+                >
+                  <span className="footer-agency-label">
+                    DESIGN &amp; DEVELOPMENT BY
+                  </span>
+
+                  <span
+                    className="login-agency-logo"
+                    role="img"
+                    aria-label="Log-In Digital Agency"
+                  >
+                    <svg viewBox="0 0 40 48" aria-hidden="true" focusable="false">
+                      <path
+                        className="login-agency-logo__blue"
+                        d="M13 2 1 24l12 22 7-8-8-14 8-14-7-8Z"
+                      />
+                      <path
+                        className="login-agency-logo__orange"
+                        d="m26 2 13 22-13 22-7-8 9-14-9-14 7-8Z"
+                      />
+                    </svg>
+
+                    <span className="login-agency-logo__copy">
+                      <strong>Log-In</strong>
+                      <small>DIGITAL AGENCY</small>
+                    </span>
+                  </span>
+                </a>
+              </div>
             </div>
           </div>
         </div>
@@ -1106,7 +1297,7 @@ export default function Footer() {
 
             <div className="tet-copyright-info">
               <span className="tet-copyright-main">
-                &copy; {currentYear} Top Euro Travel. All Rights Reserved.
+                &copy; 2026 Top Euro Travel. All Rights Reserved.
               </span>
               <span className="tet-copyright-license">
                 GNTO Licence: 1476E60000156801
@@ -1116,39 +1307,7 @@ export default function Footer() {
               </span>
             </div>
 
-            <a
-              className="footer-agency-credit"
-              href="https://www.log-in.gr/"
-              target="_blank"
-              rel="noopener noreferrer"
-              aria-label="Design and development by Log-In Digital Agency — opens in a new tab"
-            >
-              <span className="footer-agency-label">
-                DESIGN &amp; DEVELOPMENT BY
-              </span>
 
-              <span
-                className="login-agency-logo"
-                role="img"
-                aria-label="Log-In Digital Agency"
-              >
-                <svg viewBox="0 0 40 48" aria-hidden="true" focusable="false">
-                  <path
-                    className="login-agency-logo__blue"
-                    d="M13 2 1 24l12 22 7-8-8-14 8-14-7-8Z"
-                  />
-                  <path
-                    className="login-agency-logo__orange"
-                    d="m26 2 13 22-13 22-7-8 9-14-9-14 7-8Z"
-                  />
-                </svg>
-
-                <span className="login-agency-logo__copy">
-                  <strong>Log-In</strong>
-                  <small>DIGITAL AGENCY</small>
-                </span>
-              </span>
-            </a>
 
             <div className="tet-subfooter-links">
               <Link to="/privacy">Privacy Policy</Link>
