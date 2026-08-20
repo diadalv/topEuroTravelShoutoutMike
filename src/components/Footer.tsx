@@ -619,6 +619,125 @@ a.tet-hq-item:hover svg {
   display: inline-block;
 }
 
+.tet-developer-credit-row {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+  padding-top: 20px;
+  border-top: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.footer-agency-credit {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  gap: clamp(1.25rem, 1.6vw, 1.75rem);
+  width: fit-content;
+  max-width: 100%;
+  padding: 0.4rem 0.65rem;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  background: rgba(255, 255, 255, 0.018);
+  overflow: hidden;
+  color: inherit;
+  text-decoration: none;
+  --login-agency-blue-x: 0px;
+  --login-agency-orange-x: 0px;
+  transition:
+    border-color 180ms ease,
+    background-color 180ms ease;
+}
+
+.footer-agency-label {
+  color: rgba(255, 255, 255, 0.42);
+  font-size: 0.52rem;
+  font-weight: 600;
+  letter-spacing: 0.11em;
+  line-height: 1.35;
+  text-transform: uppercase;
+  transition: color 180ms ease;
+}
+
+.login-agency-logo {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.55rem;
+  color: #ffffff;
+  line-height: 1;
+  white-space: nowrap;
+}
+
+.login-agency-logo svg {
+  width: 1.65rem;
+  height: 2rem;
+  flex: 0 0 auto;
+  overflow: visible;
+}
+
+.login-agency-logo__blue {
+  fill: #4388ff;
+  transform: translateX(var(--login-agency-blue-x, 0px));
+}
+
+.login-agency-logo__orange {
+  fill: #ff8a24;
+  transform: translateX(var(--login-agency-orange-x, 0px));
+}
+
+.login-agency-logo__blue,
+.login-agency-logo__orange {
+  transform-box: fill-box;
+  transform-origin: center;
+  transition: transform 240ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.login-agency-logo__copy {
+  display: flex;
+  flex-direction: column;
+  gap: 0.18rem;
+}
+
+.login-agency-logo strong {
+  font-size: 0.9rem;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+}
+
+.login-agency-logo small {
+  color: rgba(255, 255, 255, 0.58);
+  font-size: 0.48rem;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+}
+
+.footer-agency-credit:focus-visible {
+  outline: 2px solid #ffffff;
+  outline-offset: 4px;
+  border-color: rgba(255, 255, 255, 0.2);
+  background: rgba(255, 255, 255, 0.034);
+  --login-agency-blue-x: -1.5px;
+  --login-agency-orange-x: 1.5px;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .footer-agency-credit:hover {
+    border-color: rgba(255, 255, 255, 0.2);
+    background: rgba(255, 255, 255, 0.034);
+    --login-agency-blue-x: -1.5px;
+    --login-agency-orange-x: 1.5px;
+  }
+
+  .footer-agency-credit:hover .footer-agency-label {
+    color: rgba(255, 255, 255, 0.58);
+  }
+}
+
+@media (max-width: 640px) {
+  .footer-agency-credit {
+    flex-wrap: wrap;
+    gap: 0.85rem 1.25rem;
+  }
+}
+
 /* --------------------------------------------------------------------------
    RESPONSIVE BREAKPOINTS
    -------------------------------------------------------------------------- */
@@ -1011,6 +1130,42 @@ export default function Footer() {
               <Link to="/terms">Terms &amp; Conditions</Link>
             </div>
 
+          </div>
+
+          <div className="tet-developer-credit-row">
+            <a
+              className="footer-agency-credit"
+              href="https://www.log-in.gr/"
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="Design and development by Log-In Digital Agency — opens in a new tab"
+            >
+              <span className="footer-agency-label">
+                DESIGN &amp; DEVELOPMENT BY
+              </span>
+
+              <span
+                className="login-agency-logo"
+                role="img"
+                aria-label="Log-In Digital Agency"
+              >
+                <svg viewBox="0 0 40 48" aria-hidden="true" focusable="false">
+                  <path
+                    className="login-agency-logo__blue"
+                    d="M13 2 1 24l12 22 7-8-8-14 8-14-7-8Z"
+                  />
+                  <path
+                    className="login-agency-logo__orange"
+                    d="m26 2 13 22-13 22-7-8 9-14-9-14 7-8Z"
+                  />
+                </svg>
+
+                <span className="login-agency-logo__copy">
+                  <strong>Log-In</strong>
+                  <small>DIGITAL AGENCY</small>
+                </span>
+              </span>
+            </a>
           </div>
         </div>
       </div>
