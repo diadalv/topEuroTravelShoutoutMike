@@ -8,22 +8,17 @@ import {
 import '@/styles/mice-layout-v3.css';
 import '@/styles/services-register.css';
 import {
-  BedDouble,
   Binoculars,
   BriefcaseBusiness,
   Building2,
-  Bus,
   GraduationCap,
-  Landmark,
   Luggage,
-  MapPin,
   Medal,
   Rocket,
   Users,
   type LucideIcon,
 } from 'lucide-react';
-import { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
+import { useEffect } from 'react';
 
 type ProgramCard = {
   icon: LucideIcon;
@@ -95,12 +90,30 @@ const groupPrograms: ProgramCard[] = [
 ];
 
 const organizerFeatures = [
-  { icon: Landmark, title: 'Venue Sourcing', copy: 'Access to the best venues across Rhodes & Kos.' },
-  { icon: BedDouble, title: 'Accommodation', copy: 'Carefully selected hotels & resorts for maximum comfort.' },
-  { icon: Bus, title: 'Logistics & Planning', copy: 'End-to-end planning with attention to every detail.' },
-  { icon: Bus, title: 'Transfers', copy: 'Reliable, comfortable and on-time ground transport.' },
-  { icon: Users, title: 'On-site Coordination', copy: 'Dedicated support team throughout your event.' },
-  { icon: MapPin, title: 'Local Expertise', copy: 'Deep destination knowledge and trusted local partnerships.' },
+  {
+    title: 'Venue Sourcing',
+    copy: 'Access to the best venues across Rhodes & Kos.',
+  },
+  {
+    title: 'Accommodation',
+    copy: 'Carefully selected hotels & resorts for maximum comfort.',
+  },
+  {
+    title: 'Logistics & Planning',
+    copy: 'End-to-end planning with attention to every detail.',
+  },
+  {
+    title: 'Transfers',
+    copy: 'Reliable, comfortable and on-time ground transport.',
+  },
+  {
+    title: 'On-site Coordination',
+    copy: 'Dedicated support team throughout your event.',
+  },
+  {
+    title: 'Local Expertise',
+    copy: 'Deep destination knowledge and trusted local partnerships.',
+  },
 ];
 
 function ProgramCardComponent({ icon: Icon, title, copy, image, position, eyebrow }: ProgramCard) {
@@ -123,88 +136,38 @@ function ProgramCardComponent({ icon: Icon, title, copy, image, position, eyebro
   );
 }
 
-function OrganizerServiceIndex() {
-  const [activeIndex, setActiveIndex] = useState(0);
-
-  const handleKeyDown = (e: React.KeyboardEvent<HTMLButtonElement>, index: number) => {
-    let newIndex = index;
-    if (e.key === 'ArrowUp' || e.key === 'ArrowLeft') {
-      e.preventDefault();
-      newIndex = index === 0 ? organizerFeatures.length - 1 : index - 1;
-    } else if (e.key === 'ArrowDown' || e.key === 'ArrowRight') {
-      e.preventDefault();
-      newIndex = index === organizerFeatures.length - 1 ? 0 : index + 1;
-    } else if (e.key === 'Home') {
-      e.preventDefault();
-      newIndex = 0;
-    } else if (e.key === 'End') {
-      e.preventDefault();
-      newIndex = organizerFeatures.length - 1;
-    } else {
-      return;
-    }
-
-    setActiveIndex(newIndex);
-    requestAnimationFrame(() => {
-      const button = document.getElementById('organizer-tab-' + newIndex);
-      if (button) {
-        button.focus();
-      }
-    });
-  };
-
+function OrganizerCapabilities() {
   return (
-    <div className="mice-page__organizer-split">
-      <div className="mice-page__organizer-split-panel">
-        <div>
-          <p className="mice-page__organizer-split-eyebrow">FOR ORGANIZERS</p>
-          <h2 id="organizers-why-title" className="mice-page__organizer-split-title">
-            Why Organizers<br />Choose Us
-          </h2>
+    <div className="mice-page__organizer-capabilities">
+      <div className="mice-page__organizer-capabilities-header">
+        <div className="mice-page__organizer-capabilities-heading">
+          <p className="mice-page__organizer-capabilities-eyebrow">
+            FOR ORGANIZERS
+          </p>
+          <h2 id="organizers-title">Why Organizers Choose Us</h2>
         </div>
 
-        <div
-          className="mice-page__organizer-split-active"
-          role="tabpanel"
-          id="organizer-detail-panel"
-          aria-labelledby="organizers-why-title"
-        >
-          {organizerFeatures[activeIndex] && (() => {
-            return (
-              <div className="mice-page__organizer-split-active-content" key={`detail-${activeIndex}`}>
-                <div className="mice-page__organizer-split-active-heading">
-                  <span>{String(activeIndex + 1).padStart(2, '0')}</span>
-                  <h3>{organizerFeatures[activeIndex].title}</h3>
-                </div>
-                <p>{organizerFeatures[activeIndex].copy}</p>
-              </div>
-            );
-          })()}
-        </div>
+        <p className="mice-page__organizer-capabilities-intro">
+          From venue sourcing to on-site coordination, our local team
+          manages every detail across Rhodes &amp; Kos.
+        </p>
       </div>
 
-      <div className="mice-page__organizer-split-list" role="tablist" aria-label="Why organizers choose us">
-        {organizerFeatures.map(({ title }, index) => (
-          <button
-            key={`tab-${index}`}
-            id={`organizer-tab-${index}`}
-            role="tab"
-            className="mice-page__organizer-split-row"
-            aria-selected={activeIndex === index}
-            aria-controls="organizer-detail-panel"
-            type="button"
-            onClick={() => setActiveIndex(index)}
-            onMouseEnter={() => setActiveIndex(index)}
-            onFocus={() => setActiveIndex(index)}
-            onKeyDown={(e) => handleKeyDown(e, index)}
-            tabIndex={activeIndex === index ? 0 : -1}
-          >
-            <span className="mice-page__organizer-split-row-number">
+      <div className="mice-page__organizer-capabilities-grid">
+        {organizerFeatures.map(({ title, copy }, index) => (
+          <article className="mice-page__organizer-capability" key={title}>
+            <span
+              className="mice-page__organizer-capability-number"
+              aria-hidden="true"
+            >
               {String(index + 1).padStart(2, '0')}
             </span>
-            <span className="mice-page__organizer-split-row-title">{title}</span>
-            <span className="mice-page__organizer-split-row-line" aria-hidden="true" />
-          </button>
+
+            <div>
+              <h3>{title}</h3>
+              <p>{copy}</p>
+            </div>
+          </article>
         ))}
       </div>
     </div>
@@ -270,34 +233,9 @@ export default function MiceGroupsPage() {
           </section>
 
           <section className="mice-page__organizers mice-reveal" aria-labelledby="organizers-title" data-mice-reveal>
-            <OrganizerServiceIndex />
+            <OrganizerCapabilities />
           </section>
         </div>
-
-        <section className="tet-partner-contact mice-reveal" aria-label="Partners and contact" data-mice-reveal>
-          <div className="tet-partner-contact__inner shell">
-
-
-            <div className="tet-partner-contact__cta">
-              <div className="tet-partner-contact__copy">
-                <p className="tet-partner-contact__eyebrow">Get in touch</p>
-                <h2>Let&apos;s start<br />a conversation.</h2>
-                <p className="tet-partner-contact__description">
-                  Whether you are looking for a trusted DMC partner, planning a group programme, organising an event or exploring new business opportunities in Greece, our team is ready to assist.
-                </p>
-              </div>
-              <Link className="tet-partner-contact__button" to="/contact">
-                <span>Start a partnership</span>
-                <span aria-hidden="true">→</span>
-              </Link>
-              <div className="tet-partner-contact__features" aria-label="Partnership benefits">
-                <span>Rhodes &amp; Kos</span>
-                <span>24/7 Support</span>
-                <span>Tailored DMC Solutions</span>
-              </div>
-            </div>
-          </div>
-        </section>
 
     </div>
   );
