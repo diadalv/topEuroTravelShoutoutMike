@@ -386,7 +386,9 @@
     grid-template-columns: minmax(0, 1.35fr) minmax(340px, 0.65fr);
     min-height: 0;
     height: clamp(390px, 28vw, 460px);
-    max-width: 1280px;
+    width: 100%;
+    max-width: none;
+    margin-inline: auto;
     margin-bottom: clamp(44px, 5vw, 64px);
   }
 
@@ -407,7 +409,9 @@
   .blog-grid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
     gap: 24px;
-    max-width: 1280px;
+    width: 100%;
+    max-width: none;
+    margin-inline: auto;
   }
 
   .blog-card {
