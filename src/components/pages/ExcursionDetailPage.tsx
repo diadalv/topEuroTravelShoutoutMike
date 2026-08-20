@@ -225,11 +225,11 @@ const DETAIL_STYLES = String.raw`
 }
 
 .tet-detail__editorial-title {
-  max-width: 690px;
+  max-width: 660px;
   margin: 0;
   color: var(--tet-navy-deep);
   font-family: "Cormorant Garamond", Georgia, serif;
-  font-size: clamp(29px, 3vw, 43px);
+  font-size: clamp(27px, 2.5vw, 36px);
   font-weight: 500;
   letter-spacing: -.035em;
   line-height: 1.02;
@@ -237,20 +237,13 @@ const DETAIL_STYLES = String.raw`
 }
 
 .tet-detail__editorial-rule {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  margin: 23px 0 28px;
+  display: block;
+  margin: 20px 0 27px;
   color: var(--tet-gold);
 }
 
-.tet-detail__editorial-rule b {
-  font-size: 23px;
-  font-weight: 400;
-  line-height: 1;
-}
-
 .tet-detail__editorial-rule span {
+  display: block;
   width: min(100%, 600px);
   height: 1px;
   background: linear-gradient(90deg, rgba(221, 151, 24, .62), rgba(221, 151, 24, .18));
@@ -275,7 +268,7 @@ const DETAIL_STYLES = String.raw`
 .tet-detail__highlights ol {
   position: relative;
   display: grid;
-  gap: 22px;
+  gap: 18px;
   margin: 0;
   padding: 8px 0 8px 88px;
   list-style: none;
@@ -294,20 +287,20 @@ const DETAIL_STYLES = String.raw`
 
 .tet-detail__highlights li {
   position: relative;
-  width: fit-content;
-  min-width: min(72%, 520px);
-  max-width: 100%;
-  min-height: 66px;
+  width: 100%;
+  min-width: 0;
+  max-width: none;
+  min-height: 56px;
   display: flex;
   align-items: center;
-  padding: 16px 22px;
+  padding: 10px 20px;
   border: 1px solid rgba(221, 151, 24, .2);
   border-radius: 12px;
   color: var(--tet-muted);
   background: rgba(255, 255, 255, .42);
   box-shadow: 0 9px 24px rgba(3, 47, 85, .055);
   font-size: 14px;
-  line-height: 1.56;
+  line-height: 1.48;
   counter-increment: highlight;
 }
 
@@ -342,11 +335,6 @@ const DETAIL_STYLES = String.raw`
   border-right: 1px solid rgba(221, 151, 24, .48);
   border-radius: 0 8px 0 0;
 }
-
-.tet-detail__highlights li:nth-child(2),
-.tet-detail__highlights li:nth-child(3) { min-width: min(88%, 650px); }
-
-.tet-detail__highlights li:nth-child(4) { min-width: min(82%, 610px); }
 
 .tet-detail__itinerary {
   padding-bottom: clamp(82px, 9vw, 132px);
@@ -691,13 +679,14 @@ const DETAIL_STYLES = String.raw`
   .tet-detail__hero-description { font-size: 15px; }
   .tet-detail__overview { padding: 64px 0 40px; }
   .tet-detail__overview-copy { padding-left: 0; }
-  .tet-detail__editorial-title { font-size: clamp(29px, 8.5vw, 38px); }
+  .tet-detail__editorial-title { font-size: clamp(27px, 7vw, 33px); }
   .tet-detail__highlights ol { gap: 18px; padding-left: 66px; }
   .tet-detail__highlights ol::before { left: 23px; }
   .tet-detail__highlights li {
     width: 100%;
     min-width: 0 !important;
-    padding: 15px 17px;
+    min-height: 52px;
+    padding: 11px 16px;
     font-size: 14px;
   }
   .tet-detail__highlights li::before { left: -66px; width: 48px; height: 48px; font-size: 18px; }
@@ -952,7 +941,7 @@ export default function ExcursionDetailPage() {
         <article className="tet-detail__overview-copy">
           <p className="tet-detail__eyebrow">Tour Description</p>
           <h2 className="tet-detail__editorial-title">{heroDescription || title}</h2>
-          <div className="tet-detail__editorial-rule" aria-hidden="true"><b>✦</b><span /></div>
+          <div className="tet-detail__editorial-rule" aria-hidden="true"><span /></div>
           {(parsed.tourDescription.length ? parsed.tourDescription : parsed.intro).map((paragraph) => <p key={paragraph}>{paragraph}</p>)}
         </article>
         <aside className="tet-detail__highlights">
