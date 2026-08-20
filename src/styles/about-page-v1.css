@@ -346,30 +346,6 @@ body.tet-about-page-active
   object-position: center;
 }
 
-.tet-about__story-media::after {
-  content: "RHODES · LOCAL DESTINATION EXPERIENCE";
-
-  position: absolute;
-  right: 18px;
-  bottom: 16px;
-
-  max-width: calc(100% - 36px);
-  padding: 8px 10px;
-
-  border-radius: 4px;
-
-  background: rgba(31, 58, 95, 0.76);
-  color: var(--about-white);
-
-  font-size: 0.62rem;
-  font-weight: 800;
-  letter-spacing: 0.13em;
-  text-transform: uppercase;
-
-  backdrop-filter: blur(8px);
-  -webkit-backdrop-filter: blur(8px);
-}
-
 /* =========================================================
    OUR VALUES
    ========================================================= */
@@ -1493,15 +1469,6 @@ body.tet-about-page-active
   .tet-about__story-media {
     aspect-ratio: 4 / 3;
     border-radius: 11px;
-  }
-
-  .tet-about__story-media::after {
-    right: 12px;
-    bottom: 12px;
-
-    max-width: calc(100% - 24px);
-
-    font-size: 0.55rem;
   }
 
   .tet-about__values {
