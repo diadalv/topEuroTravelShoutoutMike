@@ -2235,7 +2235,7 @@
     grid-row: auto !important;
     width: 100%;
     min-height: 154px !important;
-    grid-template-columns: 34% minmax(0, 66%) !important;
+    grid-template-columns: 32% minmax(0, 68%) !important;
     grid-template-rows: minmax(154px, auto) !important;
     border-radius: 12px;
     scroll-snap-align: none;
@@ -2255,7 +2255,7 @@
   .mice-page__program-section--mice .mice-page__program-grid--five .mice-page__program-card:nth-child(5) .mice-page__program-icon,
   .mice-page__program-section--groups .mice-page__program-grid--four .mice-page__program-card .mice-page__program-icon {
     top: 50%;
-    left: 34%;
+    left: 32%;
     width: 38px;
     height: 38px;
   }
@@ -2263,13 +2263,13 @@
   .mice-page__program-section--mice .mice-page__program-card::after,
   .mice-page__program-section--mice .mice-page__program-card:nth-child(5)::after,
   .mice-page__program-section--groups .mice-page__program-card::after {
-    left: 34%;
+    left: 32%;
   }
 
   .mice-page__program-section--mice .mice-page__program-copy,
   .mice-page__program-section--groups .mice-page__program-copy,
   .mice-page__program-section--groups .mice-page__program-grid--four .mice-page__program-copy {
-    padding: 15px 13px 15px 22px;
+    padding: 15px 12px 15px 28px;
   }
 
   .mice-page__program-section--mice .mice-page__program-eyebrow,
@@ -2332,7 +2332,7 @@
   .mice-page__program-section--mice .mice-page__program-grid--five > .mice-page__program-card,
   .mice-page__program-section--groups .mice-page__program-grid--four > .mice-page__program-card {
     min-height: 150px !important;
-    grid-template-columns: 32% minmax(0, 68%) !important;
+    grid-template-columns: 30% minmax(0, 70%) !important;
     grid-template-rows: minmax(150px, auto) !important;
   }
 
@@ -2349,6 +2349,6 @@
   .mice-page__program-section--mice .mice-page__program-card::after,
   .mice-page__program-section--mice .mice-page__program-card:nth-child(5)::after,
   .mice-page__program-section--groups .mice-page__program-card::after {
-    left: 32%;
+    left: 30%;
   }
 }
