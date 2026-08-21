@@ -3782,6 +3782,268 @@ const HOME_STYLES = String.raw`
   }
 }
 
+/* Mobile homepage cohesion pass — one editorial system from intro to testimonials. */
+@media (max-width: 520px) {
+  .tet-d1 {
+    background:
+      radial-gradient(circle at 100% 24%, rgba(200, 146, 45, 0.055), transparent 24%),
+      linear-gradient(180deg, #fbf9f5 0%, #f8f5ef 100%);
+  }
+
+  .tet-eyebrow {
+    margin-bottom: 13px;
+    font-size: 11px;
+    line-height: 1.2;
+    letter-spacing: 0.14em;
+  }
+
+  .tet-section-heading {
+    margin-bottom: 22px;
+  }
+
+  .tet-section-heading h2,
+  .tet-services > h2,
+  .tet-intro__copy h2 {
+    font-size: clamp(36px, 9.7vw, 40px);
+    line-height: 1.01;
+    letter-spacing: -0.025em;
+  }
+
+  .tet-intro {
+    gap: 24px;
+    margin-top: 52px;
+    margin-bottom: 58px;
+    padding: 30px 18px 20px;
+    border: 1px solid rgba(200, 146, 45, 0.2);
+    border-radius: 16px;
+    background:
+      radial-gradient(circle at 100% 0%, rgba(200, 146, 45, 0.09), transparent 35%),
+      rgba(255, 255, 255, 0.62);
+    box-shadow: 0 18px 42px rgba(31, 58, 95, 0.07);
+  }
+
+  .tet-intro__copy h2 {
+    margin-bottom: 21px;
+  }
+
+  .tet-intro__copy > p:not(.tet-eyebrow) {
+    margin-bottom: 15px;
+    font-size: 15px;
+    line-height: 1.62;
+  }
+
+  .tet-intro__copy .tet-text-link {
+    margin-top: 4px;
+  }
+
+  .tet-intro__facts {
+    overflow: hidden;
+    border: 1px solid rgba(31, 58, 95, 0.12);
+    border-radius: 12px;
+    background: rgba(248, 246, 242, 0.72);
+  }
+
+  .tet-intro__fact,
+  .tet-intro__fact:nth-child(even) {
+    min-height: 78px;
+    padding: 14px 11px;
+  }
+
+  .tet-intro__fact strong {
+    font-size: 25px;
+  }
+
+  .tet-intro__fact > span > span {
+    font-size: 9px;
+    letter-spacing: 0.075em;
+  }
+
+  .tet-intro__visual {
+    display: none;
+  }
+
+  .tet-destinations {
+    padding-top: 0;
+    padding-bottom: 58px;
+  }
+
+  .tet-destinations__rail {
+    gap: 12px;
+    padding-bottom: 4px;
+  }
+
+  .tet-destination {
+    min-width: calc(100% - 18px);
+    height: 252px;
+    flex-basis: calc(100% - 18px);
+    border: 1px solid rgba(255, 255, 255, 0.28);
+    border-radius: 14px;
+    box-shadow: 0 18px 38px rgba(31, 58, 95, 0.13);
+  }
+
+  .tet-destination__copy {
+    padding: 22px;
+  }
+
+  .tet-destination h3 {
+    font-size: 30px;
+  }
+
+  .tet-destination p {
+    margin-bottom: 12px;
+    font-size: 14px;
+  }
+
+  .tet-services {
+    margin-bottom: 58px;
+    padding: 30px 18px 24px;
+    border: 1px solid rgba(200, 146, 45, 0.2);
+    border-radius: 16px;
+    background:
+      linear-gradient(145deg, rgba(255, 255, 255, 0.72), rgba(248, 244, 236, 0.78));
+    box-shadow: 0 18px 42px rgba(31, 58, 95, 0.065);
+  }
+
+  .tet-services > h2 {
+    max-width: 330px;
+    margin-bottom: 22px;
+  }
+
+  .tet-services__viewport {
+    border: 1px solid rgba(200, 146, 45, 0.24);
+    border-radius: 13px;
+    background: rgba(255, 255, 255, 0.58);
+    box-shadow: 0 10px 26px rgba(31, 58, 95, 0.055);
+  }
+
+  .tet-services__slide {
+    min-height: 148px;
+  }
+
+  .tet-services__slide .tet-service {
+    max-width: none;
+    min-height: 0;
+    grid-template-columns: 42px minmax(0, 1fr);
+    column-gap: 13px;
+    padding: 20px 16px;
+  }
+
+  .tet-services__slide .tet-service__icon {
+    width: 40px;
+    height: 40px;
+  }
+
+  .tet-services__slide .tet-service__icon svg {
+    width: 20px;
+    height: 20px;
+  }
+
+  .tet-services__slide .tet-service h3 {
+    font-size: 14px;
+  }
+
+  .tet-services__slide .tet-service p {
+    font-size: 13px;
+    line-height: 1.45;
+  }
+
+  .tet-services__dots {
+    margin-top: 8px;
+  }
+
+  .tet-mice {
+    grid-template-rows: auto 175px;
+    margin-bottom: 58px;
+    border: 1px solid rgba(200, 146, 45, 0.28);
+    border-radius: 16px;
+    box-shadow: 0 20px 42px rgba(7, 31, 55, 0.18);
+  }
+
+  .tet-mice__copy {
+    padding: 28px 20px 26px;
+  }
+
+  .tet-mice__copy h2 {
+    max-width: 300px;
+    margin-bottom: 12px;
+    font-size: 34px;
+    line-height: 1;
+  }
+
+  .tet-mice__copy p:not(.tet-eyebrow) {
+    max-width: 310px;
+    margin-bottom: 20px;
+    font-size: 14px;
+    line-height: 1.55;
+  }
+
+  .tet-mice__copy .tet-button {
+    min-height: 44px;
+    padding-inline: 22px;
+  }
+
+  .tet-mice__media--left {
+    min-height: 0;
+  }
+
+  .tet-experiences {
+    padding-top: 0;
+    padding-bottom: 52px;
+  }
+
+  .tet-experiences .tet-section-heading {
+    margin-bottom: 20px;
+  }
+
+  .tet-experiences .tet-section-heading h2 {
+    font-size: 36px;
+  }
+
+  .tet-experience {
+    height: 224px;
+    border-radius: 14px;
+    box-shadow: 0 16px 34px rgba(31, 58, 95, 0.12);
+  }
+
+  .tet-experiences__dots {
+    margin-top: 10px;
+  }
+
+  .tet-experiences__all-mobile {
+    margin-top: 2px;
+  }
+
+  .tet-testimonials {
+    min-height: 0;
+    margin: 0 auto 48px;
+    padding: 0 18px 22px;
+    border: 1px solid rgba(200, 146, 45, 0.2);
+    border-radius: 16px;
+    background:
+      radial-gradient(circle at 0% 100%, rgba(200, 146, 45, 0.08), transparent 32%),
+      rgba(255, 255, 255, 0.62);
+    box-shadow: 0 18px 42px rgba(31, 58, 95, 0.065);
+  }
+
+  .tet-testimonials__intro {
+    padding: 23px 0 17px;
+  }
+
+  .tet-testimonials__intro h2 {
+    font-size: 31px;
+  }
+
+  .tet-testimonials__stage {
+    padding: 18px 0 18px 27px;
+  }
+
+  .tet-testimonials__quote {
+    font-size: 23px;
+  }
+}
+
+
+
 `;
 
 function Eyebrow({ children }: { children: string }) {
