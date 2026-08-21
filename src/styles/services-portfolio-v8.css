@@ -723,3 +723,156 @@
     transform: none;
   }
 }
+
+/* Services promise — editorial split */
+
+.services-page--portfolio .services-page__promise {
+  margin-top: 0;
+  padding: clamp(48px, 5.6vw, 76px) 0;
+  color: #073b68;
+  background: #fbf8f2;
+}
+
+.services-page--portfolio .services-page__promise-inner {
+  display: grid;
+  grid-template-columns: minmax(0, 0.88fr) minmax(520px, 1.12fr);
+  align-items: stretch;
+  gap: clamp(44px, 6vw, 96px);
+}
+
+.services-page--portfolio .services-page__promise-heading {
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 12px clamp(40px, 4.5vw, 72px) 12px 0;
+  border-right: 1px solid rgba(211, 151, 28, 0.46);
+}
+
+.services-page--portfolio .services-page__promise-eyebrow {
+  margin: 0 0 20px;
+  color: #d3971c;
+  font-family: var(--te-body-font, "Manrope", Inter, "Segoe UI", Arial, sans-serif);
+  font-size: clamp(10px, 0.72vw, 12px);
+  font-weight: 800;
+  line-height: 1.25;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+}
+
+.services-page--portfolio .services-page__promise-inner > .services-page__promise-heading > h2 {
+  margin: 0;
+  max-width: 13ch;
+  color: #073b68;
+  font-family: var(--te-display-font, "Cormorant Garamond", Georgia, "Times New Roman", serif);
+  font-size: clamp(36px, 3.15vw, 54px);
+  font-weight: 600;
+  line-height: 1.04;
+  letter-spacing: -0.025em;
+  text-align: left;
+}
+
+.services-page--portfolio .services-page__promise-list {
+  margin: 0;
+  padding: 0;
+  display: grid;
+  align-content: center;
+  list-style: none;
+}
+
+.services-page--portfolio .services-page__promise-list li {
+  min-width: 0;
+  display: grid;
+  grid-template-columns: 52px minmax(0, 1fr);
+  align-items: start;
+  gap: 18px;
+  padding: clamp(16px, 1.8vw, 22px) 0;
+  border-left: 0;
+}
+
+.services-page--portfolio .services-page__promise-list li + li {
+  margin-top: 0;
+  border-top: 1px solid rgba(211, 151, 28, 0.42);
+  border-left: 0;
+}
+
+.services-page--portfolio .services-page__promise-number {
+  padding-top: 3px;
+  color: #d3971c;
+  font-family: var(--te-body-font, "Manrope", Inter, "Segoe UI", Arial, sans-serif);
+  font-size: clamp(16px, 1.15vw, 19px);
+  font-weight: 800;
+  line-height: 1;
+}
+
+.services-page--portfolio .services-page__promise-list h3 {
+  margin: 0 0 5px;
+  color: #073b68;
+  font-family: var(--te-display-font, "Cormorant Garamond", Georgia, "Times New Roman", serif);
+  font-size: clamp(19px, 1.35vw, 23px);
+  font-weight: 650;
+  line-height: 1.14;
+  letter-spacing: -0.01em;
+}
+
+.services-page--portfolio .services-page__promise-list p {
+  margin: 0;
+  color: rgba(31, 57, 82, 0.82);
+  font-family: var(--te-body-font, "Manrope", Inter, "Segoe UI", Arial, sans-serif);
+  font-size: clamp(13px, 0.92vw, 15px);
+  font-weight: 500;
+  line-height: 1.5;
+}
+
+@media (max-width: 900px) {
+  .services-page--portfolio .services-page__promise-inner {
+    grid-template-columns: 1fr;
+    gap: 4px;
+  }
+
+  .services-page--portfolio .services-page__promise-heading {
+    padding: 0 0 30px;
+    border-right: 0;
+    border-bottom: 1px solid rgba(211, 151, 28, 0.46);
+  }
+
+  .services-page--portfolio .services-page__promise-inner > .services-page__promise-heading > h2 {
+    max-width: 17ch;
+  }
+
+  .services-page--portfolio .services-page__promise-list li {
+    padding-block: 20px;
+  }
+}
+
+@media (max-width: 700px) {
+  .services-page--portfolio .services-page__promise {
+    padding: 42px 0;
+  }
+
+  .services-page--portfolio .services-page__promise-eyebrow {
+    margin-bottom: 14px;
+  }
+
+  .services-page--portfolio .services-page__promise-inner > .services-page__promise-heading > h2 {
+    font-size: clamp(32px, 9.2vw, 40px);
+  }
+
+  .services-page--portfolio .services-page__promise-list li {
+    grid-template-columns: 38px minmax(0, 1fr);
+    gap: 12px;
+    padding-block: 18px;
+  }
+
+  .services-page--portfolio .services-page__promise-number {
+    font-size: 15px;
+  }
+
+  .services-page--portfolio .services-page__promise-list h3 {
+    font-size: 20px;
+  }
+
+  .services-page--portfolio .services-page__promise-list p {
+    font-size: 14px;
+  }
+}
