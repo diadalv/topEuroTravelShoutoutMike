@@ -1991,6 +1991,9 @@ body.tet-about-page-active
   .tet-about__strengths-dots button {
     width: 7px;
     height: 7px;
+    min-width: 7px;
+    min-height: 7px;
+    flex: 0 0 auto;
     padding: 0;
     border: 1px solid rgba(31, 58, 95, 0.34);
     border-radius: 999px;
@@ -2004,6 +2007,7 @@ body.tet-about-page-active
 
   .tet-about__strengths-dots button.is-active {
     width: 22px;
+    min-width: 22px;
     border-color: var(--about-gold);
     background: var(--about-gold);
   }
