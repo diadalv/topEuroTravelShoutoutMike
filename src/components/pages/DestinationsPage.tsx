@@ -12,8 +12,9 @@ import {
   Mountain,
   UtensilsCrossed,
   Waves,
+  type LucideIcon,
 } from "lucide-react";
-import { useEffect, useRef, type CSSProperties, type LucideIcon } from "react";
+import { useEffect, useRef, type CSSProperties } from "react";
 import { Link } from "react-router-dom";
 
 const media = {
