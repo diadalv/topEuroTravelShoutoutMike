@@ -11,12 +11,12 @@ import {
   Globe2,
   Handshake,
   Headphones,
+  type LucideIcon,
 } from 'lucide-react';
 import {
   useEffect,
   useRef,
   useState,
-  type LucideIcon,
 } from 'react';
 import { Link } from 'react-router-dom';
 
