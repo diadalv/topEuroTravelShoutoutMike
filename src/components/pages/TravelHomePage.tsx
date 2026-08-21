@@ -65,11 +65,6 @@ const services: Service[] = [
   { icon: Globe2, title: 'XML API & Agent Portal', description: 'Connected technology for partner operations.' },
 ];
 
-const serviceSlides: Service[][] = [
-  services.slice(0, 3),
-  services.slice(3, 6),
-  services.slice(6),
-];
 
 const experiences = [
   { icon: Landmark, title: 'Culture & Heritage', image: MEDIA.culture },
@@ -3373,23 +3368,24 @@ const HOME_STYLES = String.raw`
 
   .tet-services__slide {
     min-width: 100%;
-    min-height: 390px;
+    min-height: 230px;
     flex: 0 0 100%;
     display: grid;
-    align-content: center;
+    place-items: center;
   }
 
   .tet-services__slide .tet-service {
     width: 100%;
+    max-width: 340px;
     min-width: 0;
+    min-height: 156px;
     display: grid;
     grid-template-columns: 46px minmax(0, 1fr);
     grid-template-rows: auto auto;
     column-gap: 15px;
     align-items: center;
-    padding: 21px 18px;
+    padding: 28px 20px;
     border: 0;
-    border-top: 1px solid var(--tet-line);
     text-align: left;
   }
 
@@ -3507,7 +3503,7 @@ export default function TravelHomePage() {
   const [serviceTouchStart, setServiceTouchStart] = useState<number | null>(null);
 
   const showServiceSlide = (index: number) => {
-    setActiveServiceSlide((index + serviceSlides.length) % serviceSlides.length);
+    setActiveServiceSlide((index + services.length) % services.length);
   };
 
   const showTestimonial = (index: number) => {
@@ -3537,7 +3533,7 @@ export default function TravelHomePage() {
   useEffect(() => {
     if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
     const timer = window.setInterval(() => {
-      setActiveServiceSlide((current) => (current + 1) % serviceSlides.length);
+      setActiveServiceSlide((current) => (current + 1) % services.length);
     }, 3000);
     return () => window.clearInterval(timer);
   }, [activeServiceSlide]);
@@ -3907,40 +3903,40 @@ export default function TravelHomePage() {
                 className="tet-services__track"
                 style={{ transform: `translate3d(-${activeServiceSlide * 100}%, 0, 0)` }}
               >
-                {serviceSlides.map((slide, slideIndex) => (
+                {services.map(({ icon: Icon, title, description }, serviceIndex) => (
                   <div
                     className="tet-services__slide"
-                    key={`service-slide-${slideIndex}`}
-                    aria-hidden={slideIndex !== activeServiceSlide}
+                    key={title}
+                    aria-hidden={serviceIndex !== activeServiceSlide}
                   >
-                    {slide.map(({ icon: Icon, title, description }) => (
-                      <Link
-                        className="tet-service"
-                        to="/services"
-                        key={title}
-                        tabIndex={slideIndex === activeServiceSlide ? 0 : -1}
-                      >
-                        <span className="tet-service__icon"><Icon aria-hidden="true" /></span>
-                        <h3>{title}</h3>
-                        <p>{description}</p>
-                      </Link>
-                    ))}
+                    <Link
+                      className="tet-service"
+                      to="/services"
+                      tabIndex={serviceIndex === activeServiceSlide ? 0 : -1}
+                    >
+                      <span className="tet-service__icon"><Icon aria-hidden="true" /></span>
+                      <h3>{title}</h3>
+                      <p>{description}</p>
+                    </Link>
                   </div>
                 ))}
               </div>
             </div>
 
-            <div className="tet-services__dots" aria-label="Select services slide">
-              {serviceSlides.map((_, slideIndex) => (
-                <button
-                  type="button"
-                  className={`tet-services__dot${slideIndex === activeServiceSlide ? ' is-active' : ''}`}
-                  aria-label={`Show services slide ${slideIndex + 1}`}
-                  aria-current={slideIndex === activeServiceSlide ? 'true' : undefined}
-                  onClick={() => showServiceSlide(slideIndex)}
-                  key={`service-dot-${slideIndex}`}
-                />
-              ))}
+            <div className="tet-services__dots" aria-label="Browse services">
+              <button
+                type="button"
+                className="tet-services__dot"
+                aria-label="Previous service"
+                onClick={() => showServiceSlide(activeServiceSlide - 1)}
+              />
+              <span className="tet-services__dot is-active" aria-hidden="true" />
+              <button
+                type="button"
+                className="tet-services__dot"
+                aria-label="Next service"
+                onClick={() => showServiceSlide(activeServiceSlide + 1)}
+              />
             </div>
           </div>
         </section>
