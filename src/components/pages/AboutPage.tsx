@@ -190,6 +190,7 @@ export default function AboutPage() {
   const pageRef = useRef<HTMLElement | null>(null);
   const manualPauseTimer = useRef<number | null>(null);
   const [activeValue, setActiveValue] = useState(0);
+  const [activeStrength, setActiveStrength] = useState(0);
   const [isValuesHovered, setIsValuesHovered] = useState(false);
   const [isValuesFocused, setIsValuesFocused] = useState(false);
   const [isValuesManuallyPaused, setIsValuesManuallyPaused] = useState(false);
@@ -216,6 +217,43 @@ export default function AboutPage() {
 
     return () => window.clearInterval(interval);
   }, [valuesPaused]);
+
+  useEffect(() => {
+    const mobileQuery = window.matchMedia('(max-width: 720px)');
+    const reducedMotionQuery = window.matchMedia(
+      '(prefers-reduced-motion: reduce)',
+    );
+    let intervalId: number | null = null;
+
+    const stopCarousel = () => {
+      if (intervalId !== null) {
+        window.clearInterval(intervalId);
+        intervalId = null;
+      }
+    };
+
+    const syncCarousel = () => {
+      stopCarousel();
+
+      if (!mobileQuery.matches || reducedMotionQuery.matches) {
+        return;
+      }
+
+      intervalId = window.setInterval(() => {
+        setActiveStrength((current) => (current + 1) % strengths.length);
+      }, 3000);
+    };
+
+    syncCarousel();
+    mobileQuery.addEventListener('change', syncCarousel);
+    reducedMotionQuery.addEventListener('change', syncCarousel);
+
+    return () => {
+      stopCarousel();
+      mobileQuery.removeEventListener('change', syncCarousel);
+      reducedMotionQuery.removeEventListener('change', syncCarousel);
+    };
+  }, []);
 
   useEffect(() => {
     const root = pageRef.current;
@@ -334,6 +372,13 @@ export default function AboutPage() {
               and long-term partnerships.
             </p>
 
+            <div className="tet-about__story-media tet-about__story-media--mobile">
+              <Photo
+                src={images.story}
+                alt="Evening atmosphere in the Medieval City of Rhodes"
+              />
+            </div>
+
             <p>
               Combining local expertise with international standards, we provide tailored destination
               management services designed to help our partners grow and succeed.
@@ -345,7 +390,7 @@ export default function AboutPage() {
             </Link>
           </div>
 
-          <div className="tet-about__story-media">
+          <div className="tet-about__story-media tet-about__story-media--desktop">
             <Photo
               src={images.story}
               alt="Evening atmosphere in the Medieval City of Rhodes"
@@ -459,23 +504,38 @@ export default function AboutPage() {
             </p>
           </div>
 
-          <div className="tet-about__strengths-grid">
-            {strengths.map(({ icon: Icon, title, copy }, index) => (
-              <article
-                className="tet-about__strength"
-                data-about-reveal
-                key={title}
-              >
-                <span className="tet-about__strength-icon" aria-hidden="true">
-                  <Icon size={32} strokeWidth={1.7} />
-                </span>
-                <span className="tet-about__strength-number">
-                  {String(index + 1).padStart(2, '0')}
-                </span>
-                <h3>{title}</h3>
-                <p>{copy}</p>
-              </article>
-            ))}
+          <div className="tet-about__strengths-carousel">
+            <div className="tet-about__strengths-grid">
+              {strengths.map(({ icon: Icon, title, copy }, index) => (
+                <article
+                  className={`tet-about__strength${activeStrength === index ? ' is-active' : ''}`}
+                  data-about-reveal
+                  key={title}
+                >
+                  <span className="tet-about__strength-icon" aria-hidden="true">
+                    <Icon size={32} strokeWidth={1.7} />
+                  </span>
+                  <span className="tet-about__strength-number">
+                    {String(index + 1).padStart(2, '0')}
+                  </span>
+                  <h3>{title}</h3>
+                  <p>{copy}</p>
+                </article>
+              ))}
+            </div>
+
+            <div className="tet-about__strengths-dots" aria-label="Our strengths">
+              {strengths.map(({ title }, index) => (
+                <button
+                  className={activeStrength === index ? 'is-active' : ''}
+                  type="button"
+                  aria-label={`Show ${title}`}
+                  aria-pressed={activeStrength === index}
+                  onClick={() => setActiveStrength(index)}
+                  key={title}
+                />
+              ))}
+            </div>
           </div>
         </div>
       </section>
