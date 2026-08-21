@@ -3731,6 +3731,27 @@ const HOME_STYLES = String.raw`
   }
 }
 
+
+/* Keep testimonial pagination as true dots despite global mobile button sizing. */
+@media (max-width: 520px) {
+  .tet-testimonials__dots {
+    min-width: 49px;
+    min-height: 7px;
+    justify-content: flex-end;
+  }
+
+  .tet-testimonials__dot {
+    width: 7px !important;
+    min-width: 7px !important;
+    height: 7px !important;
+    min-height: 7px !important;
+    flex: 0 0 7px;
+    padding: 0 !important;
+    border: 0 !important;
+    box-shadow: none !important;
+  }
+}
+
 `;
 
 function Eyebrow({ children }: { children: string }) {
