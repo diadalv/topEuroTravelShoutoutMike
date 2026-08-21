@@ -1068,6 +1068,238 @@ a.tet-hq-item:hover svg {
     padding: 12px 0 16px;
   }
 }
+
+/* Compact mobile footer — preserve every item while reducing total scroll height. */
+@media (max-width: 600px) {
+  .tet-footer-main {
+    padding: 24px 0 18px;
+  }
+
+  .tet-footer-grid {
+    grid-template-columns: 1fr;
+    gap: 18px;
+  }
+
+  .tet-brand-block {
+    padding-right: 0;
+  }
+
+  .tet-footer-brand-link {
+    margin-bottom: 10px;
+  }
+
+  .tet-footer-brand-logo {
+    width: 110px;
+    max-height: 60px;
+  }
+
+  .tet-brand-quote {
+    margin-bottom: 8px;
+    padding-bottom: 10px;
+    font-size: 0.94rem;
+    line-height: 1.32;
+  }
+
+  .tet-brand-badge {
+    margin-bottom: 6px;
+    font-size: 0.7rem;
+  }
+
+  .tet-brand-desc {
+    margin-bottom: 13px;
+    font-size: 0.8rem;
+    line-height: 1.42;
+  }
+
+  .tet-social-hub {
+    gap: 8px;
+  }
+
+  .tet-social-icon {
+    width: 34px;
+    height: 34px;
+  }
+
+  .tet-social-icon svg {
+    width: 15px;
+    height: 15px;
+  }
+
+  .tet-footer-menu-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 16px 18px;
+    align-items: start;
+  }
+
+  .tet-footer-menu-grid > .tet-footer-col:nth-child(1) {
+    grid-column: 1;
+    grid-row: 1 / span 2;
+  }
+
+  .tet-footer-menu-grid > .tet-footer-col:nth-child(2) {
+    grid-column: 2;
+    grid-row: 1;
+  }
+
+  .tet-footer-menu-grid > .tet-footer-col:nth-child(3) {
+    grid-column: 2;
+    grid-row: 2;
+  }
+
+  .tet-col-heading {
+    margin-bottom: 10px;
+    padding-bottom: 6px;
+    font-size: 0.78rem;
+  }
+
+  .tet-links-list {
+    gap: 6px;
+  }
+
+  .tet-links-list a {
+    font-size: 0.8rem;
+    line-height: 1.35;
+  }
+
+  .tet-accreditations--footer-row {
+    margin-top: 14px;
+    padding-top: 12px;
+  }
+
+  .tet-accreditation-label {
+    margin-bottom: 0;
+    font-size: 0.65rem;
+  }
+
+  .tet-accreditations--footer-row .tet-accreditation-cards {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 8px;
+  }
+
+  .tet-accreditations--footer-row .tet-accreditation-card:nth-child(3) {
+    grid-column: 1 / -1;
+  }
+
+  .tet-accreditation-card {
+    min-height: 46px;
+    gap: 8px;
+    padding: 6px 8px;
+  }
+
+  .tet-accreditation-card svg {
+    width: 16px;
+    height: 16px;
+  }
+
+  .tet-accreditation-text strong {
+    font-size: 0.75rem;
+  }
+
+  .tet-accreditation-text span {
+    font-size: 0.58rem;
+  }
+
+  .tet-footer-col--hq {
+    gap: 0;
+    padding-top: 14px;
+  }
+
+  .tet-hq-contact-list {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 9px 14px;
+  }
+
+  .tet-hq-item {
+    gap: 8px;
+    font-size: 0.78rem;
+    line-height: 1.35;
+  }
+
+  .tet-hq-item svg {
+    width: 15px;
+    height: 15px;
+    margin-top: 1px;
+  }
+
+  .tet-hq-contact-cta {
+    grid-column: 1 / -1;
+    margin-top: 2px;
+    font-size: 0.73rem;
+  }
+
+  .tet-agency-credit-slot {
+    margin-top: 14px;
+    padding-top: 12px;
+  }
+
+  .footer-agency-credit {
+    min-height: 52px;
+    flex-wrap: nowrap;
+    gap: 8px;
+    padding: 6px 8px;
+  }
+
+  .footer-agency-label {
+    font-size: 0.46rem;
+  }
+
+  .login-agency-logo {
+    gap: 0.42rem;
+  }
+
+  .login-agency-logo svg {
+    width: 1.4rem;
+    height: 1.7rem;
+  }
+
+  .login-agency-logo strong {
+    font-size: 0.8rem;
+  }
+
+  .login-agency-logo small {
+    font-size: 0.42rem;
+  }
+
+  .tet-subfooter {
+    padding: 10px 0 12px;
+  }
+
+  .tet-subfooter-inner {
+    gap: 8px;
+  }
+
+  .tet-copyright-info {
+    flex-direction: row;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 3px 10px;
+  }
+
+  .tet-copyright-main {
+    width: 100%;
+    font-size: 0.75rem;
+  }
+
+  .tet-copyright-license {
+    font-size: 0.66rem;
+  }
+
+  .tet-copyright-info > span + span {
+    margin-left: 0;
+    padding-left: 0;
+    border-left: 0;
+  }
+
+  .tet-subfooter-links {
+    gap: 10px;
+  }
+
+  .tet-subfooter-links a {
+    font-size: 0.72rem;
+  }
+}
+
 `;
 
 export default function Footer() {
