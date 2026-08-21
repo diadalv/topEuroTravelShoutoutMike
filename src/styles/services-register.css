@@ -502,7 +502,7 @@
   }
 
   .services-page--portfolio .services-page__promise-heading h2 {
-    font-size: 34px;
+    font-size: 34px !important;
     line-height: 1.03;
     letter-spacing: -0.02em;
   }
