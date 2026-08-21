@@ -3627,6 +3627,110 @@ const HOME_STYLES = String.raw`
   }
 }
 
+
+/* Mobile testimonials — compact editorial layout with dots instead of oversized arrows. */
+@media (max-width: 520px) {
+  .tet-testimonials {
+    min-height: 0;
+    margin-top: 24px;
+  }
+
+  .tet-testimonials__intro {
+    padding: 26px 0 22px;
+  }
+
+  .tet-testimonials__eyebrow {
+    margin-bottom: 9px;
+    font-size: 10px;
+  }
+
+  .tet-testimonials__intro h2 {
+    max-width: 320px;
+    margin-bottom: 14px;
+    font-size: 32px;
+    line-height: 1;
+  }
+
+  .tet-testimonials__rule {
+    width: 58%;
+    margin-bottom: 14px;
+  }
+
+  .tet-testimonials__network {
+    gap: 5px 0;
+    font-size: 9px;
+    line-height: 1.55;
+    letter-spacing: 0.08em;
+  }
+
+  .tet-testimonials__network span + span::before {
+    margin-inline: 7px;
+  }
+
+  .tet-testimonials__stage {
+    min-height: 0;
+    padding: 24px 0 26px 28px;
+  }
+
+  .tet-testimonials__mark {
+    top: 19px;
+    left: 0;
+    font-size: 44px;
+  }
+
+  .tet-testimonials__slides {
+    display: block;
+  }
+
+  .tet-testimonials__slide {
+    display: none;
+  }
+
+  .tet-testimonials__slide.is-active {
+    display: block;
+  }
+
+  .tet-testimonials__quote {
+    min-height: 0;
+    margin-bottom: 15px;
+    font-size: 24px;
+    line-height: 1.18;
+  }
+
+  .tet-testimonials__credit {
+    gap: 3px 6px;
+    margin-bottom: 18px;
+  }
+
+  .tet-testimonials__credit strong {
+    font-size: 12px;
+  }
+
+  .tet-testimonials__credit span,
+  .tet-testimonials__source {
+    font-size: 10.5px;
+  }
+
+  .tet-testimonials__controls {
+    grid-template-columns: minmax(0, 1fr) auto;
+    gap: 14px;
+  }
+
+  .tet-testimonials__dots {
+    display: flex;
+    gap: 10px;
+  }
+
+  .tet-testimonials__dot {
+    width: 7px;
+    height: 7px;
+  }
+
+  .tet-testimonials__arrows {
+    display: none;
+  }
+}
+
 `;
 
 function Eyebrow({ children }: { children: string }) {
