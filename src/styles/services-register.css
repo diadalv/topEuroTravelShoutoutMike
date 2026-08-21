@@ -403,7 +403,7 @@
   }
 
   .services-page--portfolio .services-page__hero h1 {
-    max-width: 8.6ch;
+    max-width: none;
     font-size: 47px;
     line-height: 1.01;
     letter-spacing: -0.025em;
@@ -419,7 +419,7 @@
   }
 
   .services-page--portfolio .services-portfolio__intro h2 {
-    max-width: 12ch;
+    max-width: none;
     margin-top: 12px;
     font-size: 35px;
     line-height: 1.055;
@@ -448,7 +448,7 @@
   }
 
   .services-page--portfolio .tet-services-stage__heading h2 {
-    max-width: 13ch;
+    max-width: none;
     font-size: 30px;
     line-height: 1.05;
     letter-spacing: -0.018em;
