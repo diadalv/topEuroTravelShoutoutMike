@@ -3323,7 +3323,16 @@ const HOME_STYLES = String.raw`
 
   .tet-bridge__metric {
     justify-content: center;
-    gap: 8px;
+    gap: 0;
+  }
+
+  .tet-bridge__metric > svg {
+    display: none;
+  }
+
+  .tet-bridge__metric > span {
+    width: 100%;
+    text-align: center;
   }
 }
 `;
