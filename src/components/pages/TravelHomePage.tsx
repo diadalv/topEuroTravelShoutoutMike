@@ -4044,6 +4044,45 @@ const HOME_STYLES = String.raw`
 
 
 
+
+
+/* Mobile UI refinement — icon-only menu trigger and content-stable testimonials. */
+@media (max-width: 900px) {
+  .tet-menu-button,
+  .tet-menu-button:hover,
+  .tet-menu-button:active {
+    appearance: none !important;
+    border: 0 !important;
+    border-radius: 0 !important;
+    color: #ffffff !important;
+    background: transparent !important;
+    box-shadow: none !important;
+    filter: drop-shadow(0 1px 3px rgba(0, 24, 48, 0.68)) !important;
+  }
+}
+
+@media (max-width: 520px) {
+  .tet-testimonials__slides {
+    display: grid;
+  }
+
+  .tet-testimonials__slide,
+  .tet-testimonials__slide.is-active {
+    grid-area: 1 / 1;
+    display: block;
+  }
+
+  .tet-testimonials__slide {
+    visibility: hidden;
+    pointer-events: none;
+  }
+
+  .tet-testimonials__slide.is-active {
+    visibility: visible;
+    pointer-events: auto;
+  }
+}
+
 `;
 
 function Eyebrow({ children }: { children: string }) {
