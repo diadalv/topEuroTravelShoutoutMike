@@ -1665,7 +1665,7 @@ a.tet-hq-item:hover svg {
 
   .tet-hq-contact-cta {
     min-height: 44px;
-    margin-top: 5px;
+    margin-top: 10px;
   }
 
   .tet-agency-credit-slot {
