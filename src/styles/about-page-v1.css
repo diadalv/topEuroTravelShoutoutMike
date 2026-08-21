@@ -1720,3 +1720,350 @@ body.tet-about-page-active
     transform: translateY(0);
   }
 }
+
+/* =========================================================
+   MOBILE ABOUT — COHESIVE HOMEPAGE RHYTHM
+   Compact editorial flow, fixed-strength carousel and no
+   duplicate accreditation strip. Desktop remains unchanged.
+   ========================================================= */
+
+.tet-about__story-media--mobile,
+.tet-about__strengths-dots {
+  display: none;
+}
+
+@media (max-width: 720px) {
+  .tet-about__hero,
+  .tet-about__hero .page-hero {
+    height: clamp(560px, 78svh, 620px);
+    min-height: clamp(560px, 78svh, 620px);
+  }
+
+  .tet-about__hero h1 {
+    max-width: 350px;
+    font-size: clamp(2.7rem, 11.4vw, 3rem);
+    line-height: 0.98;
+    letter-spacing: -0.035em;
+  }
+
+  .tet-about__hero .breadcrumbs {
+    margin-top: 16px;
+    font-size: 0.9rem;
+  }
+
+  .tet-about__story {
+    border-top-width: 4px;
+  }
+
+  .tet-about__story-inner {
+    gap: 0;
+    padding-block: 62px 66px;
+  }
+
+  .tet-about__kicker {
+    gap: 10px;
+    margin-bottom: 20px;
+  }
+
+  .tet-about__kicker-number {
+    font-size: 1.08rem;
+  }
+
+  .tet-about__kicker-line {
+    width: 34px;
+  }
+
+  .tet-about__story-copy h2 {
+    margin-bottom: 20px;
+    font-size: clamp(2.35rem, 9.8vw, 2.55rem);
+    line-height: 0.99;
+  }
+
+  .tet-about__story-copy h2 span {
+    margin-top: 5px;
+  }
+
+  .tet-about__story-copy > p {
+    margin-bottom: 14px;
+    font-size: 1rem;
+    line-height: 1.64;
+  }
+
+  .tet-about__story-copy strong {
+    color: var(--about-blue);
+    background:
+      linear-gradient(
+        transparent 62%,
+        rgba(200, 146, 45, 0.24) 62%
+      );
+  }
+
+  .tet-about__story-media--desktop {
+    display: none;
+  }
+
+  .tet-about__story-media--mobile {
+    display: block;
+    height: auto;
+    margin: 25px 0 24px;
+    aspect-ratio: 4 / 3;
+    border-radius: 12px;
+  }
+
+  .tet-about__story-copy .tet-about__button {
+    min-height: 52px;
+    margin-top: 8px;
+  }
+
+  .tet-about__values {
+    width: calc(100% - 40px);
+    padding: 54px 18px 34px;
+  }
+
+  .tet-about__values-heading {
+    margin-bottom: 22px;
+  }
+
+  .tet-about__values-heading .tet-about__eyebrow {
+    margin-bottom: 10px;
+  }
+
+  .tet-about__values-heading h2 {
+    font-size: clamp(2.25rem, 9.5vw, 2.5rem);
+    line-height: 1;
+  }
+
+  .tet-about__values-body {
+    gap: 24px;
+  }
+
+  .tet-about__values-list {
+    gap: 1px;
+  }
+
+  .tet-about__value {
+    grid-template-columns: 36px minmax(0, 1fr);
+    gap: 7px;
+    min-height: 48px;
+    padding-block: 6px;
+  }
+
+  .tet-about__value.is-active {
+    padding-block: 8px 10px;
+  }
+
+  .tet-about__value-number {
+    font-size: 1.08rem;
+  }
+
+  .tet-about__value-content {
+    min-height: 30px;
+    gap: 4px;
+    padding-left: 14px;
+  }
+
+  .tet-about__value-content strong {
+    font-size: 1.16rem;
+  }
+
+  .tet-about__value-copy {
+    font-size: 0.89rem;
+    line-height: 1.48;
+  }
+
+  .tet-about__values-frame {
+    aspect-ratio: 16 / 9;
+    border-radius: 12px;
+    box-shadow: 0 16px 38px rgba(31, 58, 95, 0.12);
+  }
+
+  .tet-about__values-media {
+    gap: 9px;
+  }
+
+  .tet-about__values-meta {
+    gap: 10px;
+    font-size: 0.64rem;
+  }
+
+  .tet-about__strengths-inner {
+    gap: 26px;
+    padding-block: 62px 56px;
+  }
+
+  .tet-about__strengths-intro {
+    padding: 0 0 23px;
+  }
+
+  .tet-about__strengths-intro .tet-about__eyebrow {
+    margin-bottom: 10px;
+  }
+
+  .tet-about__strengths-intro h2 {
+    margin-bottom: 14px;
+    font-size: clamp(2.3rem, 9.5vw, 2.5rem);
+    line-height: 1;
+  }
+
+  .tet-about__strengths-intro > p:last-child {
+    font-size: 0.98rem;
+    line-height: 1.58;
+  }
+
+  .tet-about__strengths-carousel {
+    min-width: 0;
+    padding: 25px 0 20px;
+    border-top: 1px solid var(--about-line);
+    border-bottom: 1px solid var(--about-line);
+  }
+
+  .tet-about__strengths-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-areas: "strength";
+    min-height: 218px;
+  }
+
+  body.tet-about-page-active
+    .tet-about__strengths-grid
+    .tet-about__strength[data-about-reveal] {
+    grid-area: strength;
+    min-height: 218px;
+    padding: 0 18px !important;
+    border: 0 !important;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateX(14px);
+    pointer-events: none;
+    transition:
+      opacity 280ms ease,
+      transform 360ms cubic-bezier(0.22, 1, 0.36, 1),
+      visibility 0s linear 280ms;
+  }
+
+  body.tet-about-page-active
+    .tet-about__strengths-grid
+    .tet-about__strength.is-active[data-about-reveal] {
+    opacity: 1;
+    visibility: visible;
+    transform: translateX(0);
+    pointer-events: auto;
+    transition-delay: 0ms;
+  }
+
+  .tet-about__strength {
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+  }
+
+  .tet-about__strength-icon {
+    width: 50px;
+    height: 50px;
+  }
+
+  .tet-about__strength-number {
+    margin: 11px 0 5px;
+    font-size: 1.45rem;
+  }
+
+  .tet-about__strength h3 {
+    margin-bottom: 8px;
+    font-size: 1.18rem;
+  }
+
+  .tet-about__strength p {
+    max-width: 30ch;
+    margin-inline: auto;
+    font-size: 0.97rem;
+    line-height: 1.55;
+  }
+
+  .tet-about__strengths-dots {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 13px;
+    min-height: 18px;
+    margin-top: 15px;
+  }
+
+  .tet-about__strengths-dots button {
+    width: 7px;
+    height: 7px;
+    padding: 0;
+    border: 1px solid rgba(31, 58, 95, 0.34);
+    border-radius: 999px;
+    background: transparent;
+    cursor: pointer;
+    transition:
+      width 220ms ease,
+      border-color 220ms ease,
+      background-color 220ms ease;
+  }
+
+  .tet-about__strengths-dots button.is-active {
+    width: 22px;
+    border-color: var(--about-gold);
+    background: var(--about-gold);
+  }
+
+  .tet-about__strengths-dots button:focus-visible {
+    outline: 2px solid var(--about-blue);
+    outline-offset: 4px;
+  }
+
+  .tet-about__stats {
+    padding-block: 28px 30px;
+  }
+
+  .tet-about__stats-heading h2 {
+    font-size: 2.45rem;
+  }
+
+  .tet-about__stat {
+    min-height: 96px;
+    padding-block: 12px;
+  }
+
+  .tet-about .tet-about__trust {
+    display: none;
+  }
+
+  .tet-about__contact {
+    padding-block: 50px 40px;
+  }
+
+  .tet-about__contact-top {
+    gap: 18px;
+  }
+
+  .tet-about__contact-copy .tet-about__eyebrow {
+    margin-bottom: 9px;
+  }
+
+  .tet-about__contact-copy h2 {
+    margin-bottom: 12px;
+    font-size: clamp(2.3rem, 9.5vw, 2.5rem);
+    line-height: 1;
+  }
+
+  .tet-about__contact-copy > p:last-child {
+    font-size: 0.97rem;
+    line-height: 1.55;
+  }
+
+  .tet-about__contact-button {
+    min-height: 52px;
+  }
+
+  .tet-about__contact-signals {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px 18px;
+    margin-top: 18px;
+    padding-top: 15px;
+    font-size: 0.71rem;
+  }
+}
+
