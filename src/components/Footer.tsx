@@ -1,17 +1,17 @@
 import { Image } from '@/components/ui/image';
 import { travelMedia } from '@/config/wix-media';
 import {
-  Building2,
-  ChevronDown,
-  Clock,
-  Facebook,
-  Globe2,
-  Instagram,
-  Linkedin,
-  Mail,
-  MapPin,
-  Phone,
-  ShieldCheck,
+    Building2,
+    ChevronDown,
+    Clock,
+    Facebook,
+    Globe2,
+    Instagram,
+    Linkedin,
+    Mail,
+    MapPin,
+    Phone,
+    ShieldCheck,
 } from 'lucide-react';
 import { Link } from 'react-router-dom';
 
@@ -1335,7 +1335,7 @@ a.tet-hq-item:hover svg {
 
   .tet-footer-brand-logo {
     width: 96px;
-    max-height: 54px;
+    max-height: 60px;
   }
 
   .tet-social-hub {
