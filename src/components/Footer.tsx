@@ -1341,7 +1341,7 @@ a.tet-hq-item:hover svg {
   .tet-social-hub {
     grid-column: 2;
     grid-row: 1;
-    gap: 6px;
+    gap: 10px;
   }
 
   .tet-social-icon {
