@@ -1598,6 +1598,96 @@ a.tet-hq-item:hover svg {
 
 
 
+/* Mobile footer — measured breathing room */
+@media (max-width: 600px) {
+  .tet-footer-main {
+    padding: 25px 0 19px;
+  }
+
+  .tet-footer-grid {
+    gap: 17px;
+  }
+
+  .tet-brand-quote {
+    margin: 12px 0 7px;
+    padding-bottom: 8px;
+  }
+
+  .tet-brand-badge {
+    margin-bottom: 7px;
+  }
+
+  .tet-brand-desc {
+    line-height: 1.48;
+  }
+
+  .tet-footer-nav-area {
+    margin-top: 2px;
+  }
+
+  .tet-mobile-nav-group summary {
+    min-height: 46px;
+  }
+
+  .tet-mobile-nav-links {
+    gap: 10px 16px;
+    padding-bottom: 15px;
+  }
+
+  .tet-accreditations--footer-row {
+    margin-top: 4px;
+    padding-top: 3px;
+  }
+
+  .tet-accreditation-label {
+    margin-bottom: 9px;
+  }
+
+  .tet-accreditations--footer-row .tet-accreditation-cards {
+    gap: 7px;
+  }
+
+  .tet-accreditation-card {
+    min-height: 46px;
+  }
+
+  .tet-footer-col--hq {
+    padding-top: 16px;
+  }
+
+  .tet-footer-col--hq .tet-col-heading {
+    margin-bottom: 11px;
+  }
+
+  .tet-hq-contact-list {
+    gap: 10px 14px;
+  }
+
+  .tet-hq-contact-cta {
+    min-height: 38px;
+    margin-top: 5px;
+  }
+
+  .tet-agency-credit-slot {
+    margin-top: 14px;
+    padding-top: 13px;
+  }
+
+  .footer-agency-credit {
+    min-height: 46px;
+  }
+
+  .tet-subfooter {
+    padding: 12px 0 14px;
+  }
+
+  .tet-subfooter-inner {
+    gap: 9px;
+  }
+}
+
+
+
 `;
 
 export default function Footer() {
