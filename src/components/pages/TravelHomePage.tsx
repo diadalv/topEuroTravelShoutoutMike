@@ -65,6 +65,12 @@ const services: Service[] = [
   { icon: Globe2, title: 'XML API & Agent Portal', description: 'Connected technology for partner operations.' },
 ];
 
+const serviceSlides: Service[][] = [
+  services.slice(0, 3),
+  services.slice(3, 6),
+  services.slice(6),
+];
+
 const experiences = [
   { icon: Landmark, title: 'Culture & Heritage', image: MEDIA.culture },
   { icon: Utensils, title: 'Gastronomy', image: MEDIA.gastronomy },
@@ -3335,6 +3341,144 @@ const HOME_STYLES = String.raw`
     text-align: center;
   }
 }
+
+/* Mobile services carousel — three compact pages with autoplay and direct navigation. */
+.tet-services__carousel {
+  display: none;
+}
+
+@media (max-width: 760px) {
+  .tet-services__grid--desktop {
+    display: none;
+  }
+
+  .tet-services__carousel {
+    width: 100%;
+    display: block;
+  }
+
+  .tet-services__viewport {
+    overflow: hidden;
+    border-top: 1px solid rgba(200, 146, 45, 0.5);
+    border-bottom: 1px solid var(--tet-line);
+    touch-action: pan-y;
+  }
+
+  .tet-services__track {
+    display: flex;
+    align-items: stretch;
+    will-change: transform;
+    transition: transform 520ms cubic-bezier(0.22, 1, 0.36, 1);
+  }
+
+  .tet-services__slide {
+    min-width: 100%;
+    min-height: 390px;
+    flex: 0 0 100%;
+    display: grid;
+    align-content: center;
+  }
+
+  .tet-services__slide .tet-service {
+    width: 100%;
+    min-width: 0;
+    display: grid;
+    grid-template-columns: 46px minmax(0, 1fr);
+    grid-template-rows: auto auto;
+    column-gap: 15px;
+    align-items: center;
+    padding: 21px 18px;
+    border: 0;
+    border-top: 1px solid var(--tet-line);
+    text-align: left;
+  }
+
+  .tet-services__slide .tet-service:first-child {
+    border-top: 0;
+  }
+
+  .tet-services__slide .tet-service__icon {
+    width: 44px;
+    height: 44px;
+    grid-column: 1;
+    grid-row: 1 / span 2;
+    margin: 0;
+  }
+
+  .tet-services__slide .tet-service__icon svg {
+    width: 22px;
+    height: 22px;
+  }
+
+  .tet-services__slide .tet-service h3 {
+    min-height: 0;
+    display: block;
+    grid-column: 2;
+    grid-row: 1;
+    margin: 0 0 4px;
+    font-size: 15px;
+    line-height: 1.35;
+  }
+
+  .tet-services__slide .tet-service p {
+    max-width: none;
+    grid-column: 2;
+    grid-row: 2;
+    margin: 0;
+    font-size: 14px;
+    line-height: 1.5;
+  }
+
+  .tet-services__dots {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 2px;
+    margin-top: 16px;
+  }
+
+  .tet-services__dot {
+    width: 30px;
+    height: 30px;
+    position: relative;
+    padding: 0;
+    border: 0;
+    background: transparent;
+    cursor: pointer;
+  }
+
+  .tet-services__dot::before {
+    width: 7px;
+    height: 7px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    border: 1px solid rgba(8, 47, 83, 0.34);
+    border-radius: 50%;
+    background: transparent;
+    content: '';
+    transform: translate(-50%, -50%);
+    transition: transform 180ms ease, background-color 180ms ease, border-color 180ms ease;
+  }
+
+  .tet-services__dot.is-active::before {
+    border-color: var(--tet-gold);
+    background: var(--tet-gold);
+    transform: translate(-50%, -50%) scale(1.25);
+  }
+
+  .tet-services__dot:focus-visible {
+    outline: 2px solid var(--tet-gold);
+    outline-offset: -4px;
+    border-radius: 50%;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .tet-services__track {
+    transition: none;
+  }
+}
 `;
 
 function Eyebrow({ children }: { children: string }) {
@@ -3359,6 +3503,12 @@ export default function TravelHomePage() {
   const [activeTestimonial, setActiveTestimonial] = useState(0);
   const [testimonialPaused, setTestimonialPaused] = useState(false);
   const [testimonialTouchStart, setTestimonialTouchStart] = useState<number | null>(null);
+  const [activeServiceSlide, setActiveServiceSlide] = useState(0);
+  const [serviceTouchStart, setServiceTouchStart] = useState<number | null>(null);
+
+  const showServiceSlide = (index: number) => {
+    setActiveServiceSlide((index + serviceSlides.length) % serviceSlides.length);
+  };
 
   const showTestimonial = (index: number) => {
     setActiveTestimonial((index + testimonials.length) % testimonials.length);
@@ -3383,6 +3533,14 @@ export default function TravelHomePage() {
     window.addEventListener('keydown', onKeyDown);
     return () => window.removeEventListener('keydown', onKeyDown);
   }, [menuOpen]);
+
+  useEffect(() => {
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+    const timer = window.setInterval(() => {
+      setActiveServiceSlide((current) => (current + 1) % serviceSlides.length);
+    }, 3000);
+    return () => window.clearInterval(timer);
+  }, [activeServiceSlide]);
 
   useEffect(() => {
     if (testimonialPaused || window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
@@ -3716,7 +3874,7 @@ export default function TravelHomePage() {
         <section className="tet-services tet-shell" aria-labelledby="tet-services-title">
           <Eyebrow>Our services</Eyebrow>
           <h2 id="tet-services-title">We Handle Everything. You Enjoy the Experience.</h2>
-          <div className="tet-services__grid" data-motion="up" data-stagger="true">
+          <div className="tet-services__grid tet-services__grid--desktop" data-motion="up" data-stagger="true">
             {services.map(({ icon: Icon, title, description }) => (
               <Link className="tet-service" to="/services" key={title}>
                 <span className="tet-service__icon"><Icon aria-hidden="true" /></span>
@@ -3724,6 +3882,66 @@ export default function TravelHomePage() {
                 <p>{description}</p>
               </Link>
             ))}
+          </div>
+
+          <div
+            className="tet-services__carousel"
+            data-motion="up"
+            role="region"
+            aria-roledescription="carousel"
+            aria-label="Services"
+            onTouchStart={(event) => setServiceTouchStart(event.touches[0]?.clientX ?? null)}
+            onTouchCancel={() => setServiceTouchStart(null)}
+            onTouchEnd={(event) => {
+              const endX = event.changedTouches[0]?.clientX;
+              if (serviceTouchStart === null || endX === undefined) return;
+              const distance = endX - serviceTouchStart;
+              if (Math.abs(distance) > 45) {
+                showServiceSlide(activeServiceSlide + (distance < 0 ? 1 : -1));
+              }
+              setServiceTouchStart(null);
+            }}
+          >
+            <div className="tet-services__viewport">
+              <div
+                className="tet-services__track"
+                style={{ transform: `translate3d(-${activeServiceSlide * 100}%, 0, 0)` }}
+              >
+                {serviceSlides.map((slide, slideIndex) => (
+                  <div
+                    className="tet-services__slide"
+                    key={`service-slide-${slideIndex}`}
+                    aria-hidden={slideIndex !== activeServiceSlide}
+                  >
+                    {slide.map(({ icon: Icon, title, description }) => (
+                      <Link
+                        className="tet-service"
+                        to="/services"
+                        key={title}
+                        tabIndex={slideIndex === activeServiceSlide ? 0 : -1}
+                      >
+                        <span className="tet-service__icon"><Icon aria-hidden="true" /></span>
+                        <h3>{title}</h3>
+                        <p>{description}</p>
+                      </Link>
+                    ))}
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            <div className="tet-services__dots" aria-label="Select services slide">
+              {serviceSlides.map((_, slideIndex) => (
+                <button
+                  type="button"
+                  className={`tet-services__dot${slideIndex === activeServiceSlide ? ' is-active' : ''}`}
+                  aria-label={`Show services slide ${slideIndex + 1}`}
+                  aria-current={slideIndex === activeServiceSlide ? 'true' : undefined}
+                  onClick={() => showServiceSlide(slideIndex)}
+                  key={`service-dot-${slideIndex}`}
+                />
+              ))}
+            </div>
           </div>
         </section>
 
