@@ -1279,3 +1279,285 @@ body.tet-destinations-page-active [data-dest-reveal].is-visible {
     transform: none;
   }
 }
+
+
+/* =========================================================
+   MOBILE DESTINATIONS — COHESIVE HOMEPAGE RHYTHM
+   ========================================================= */
+
+.tet-dest-experiences__dots {
+  display: none;
+}
+
+@media (max-width: 640px) {
+  body.tet-destinations-page-active
+  .tet-destinations-page > .page-hero {
+    height: 620px !important;
+    min-height: 620px !important;
+  }
+
+  body.tet-destinations-page-active
+  .tet-destinations-page > .page-hero
+  .page-hero__content {
+    padding-bottom: 44px;
+  }
+
+  body.tet-destinations-page-active
+  .tet-destinations-page > .page-hero h1 {
+    max-width: 360px;
+    margin-bottom: 14px;
+    font-size: 48px;
+    line-height: 0.99;
+  }
+
+  body.tet-destinations-page-active
+  .tet-destinations-page > .page-hero
+  .page-hero__description {
+    max-width: 350px;
+    font-size: 16px;
+    line-height: 1.55;
+  }
+
+  .tet-dest-core {
+    padding-block: 34px 36px;
+  }
+
+  .tet-dest-core__inner {
+    gap: 22px;
+  }
+
+  .tet-dest-core__headline {
+    padding-left: 18px;
+  }
+
+  .tet-destinations-page .tet-dest-core__eyebrow,
+  .tet-destinations-page .tet-dest-benefits__heading > p,
+  .tet-destinations-page .tet-dest-experiences__heading p,
+  .tet-destinations-page .tet-dest-cta__inner > div > p {
+    font-size: 12px;
+    line-height: 1.35;
+    letter-spacing: 0.16em;
+  }
+
+  .tet-dest-core__eyebrow {
+    margin-bottom: 12px;
+  }
+
+  .tet-dest-core__title {
+    font-size: 36px;
+    line-height: 1;
+  }
+
+  .tet-dest-core__route {
+    margin-top: 18px;
+  }
+
+  .tet-dest-core__copy p {
+    margin-bottom: 14px;
+    font-size: 16px;
+    line-height: 1.62;
+  }
+
+  .tet-dest-core__copy p:last-child {
+    margin-bottom: 0;
+  }
+
+  .tet-dest-chapters {
+    padding-bottom: 40px;
+  }
+
+  .tet-dest-chapter__content,
+  .tet-dest-chapter--reverse .tet-dest-chapter__content {
+    padding: 24px 2px 30px;
+  }
+
+  .tet-dest-chapter__content h2 {
+    font-size: 34px;
+    line-height: 1;
+  }
+
+  .tet-dest-chapter__statement {
+    margin-bottom: 14px;
+    font-size: 16px;
+    line-height: 1.5;
+  }
+
+  .tet-dest-chapter__description {
+    font-size: 16px;
+    line-height: 1.62;
+  }
+
+  .tet-dest-chapters__bridge {
+    display: none;
+  }
+
+  .tet-dest-chapters__container > div + div {
+    margin-top: 24px;
+  }
+
+  .tet-dest-benefits {
+    padding-block: 32px 36px;
+  }
+
+  .tet-dest-benefits__heading {
+    margin-bottom: 24px;
+  }
+
+  .tet-dest-benefits__heading h2 {
+    font-size: 30px;
+    line-height: 1.02;
+  }
+
+  .tet-dest-benefits__grid {
+    gap: 20px 8px;
+  }
+
+  .tet-dest-benefit {
+    padding-inline: 4px;
+  }
+
+  .tet-dest-benefit:last-child {
+    max-width: 280px;
+  }
+
+  .tet-dest-benefit__icon {
+    width: 46px;
+    height: 46px;
+  }
+
+  .tet-dest-benefit__icon svg {
+    width: 21px;
+    height: 21px;
+  }
+
+  .tet-dest-benefit h3 {
+    margin: 10px 0 5px;
+    font-size: 16px;
+    line-height: 1.12;
+  }
+
+  .tet-dest-benefit p {
+    color: rgba(255, 255, 255, 0.88);
+    font-size: 15px;
+    line-height: 1.48;
+  }
+
+  .tet-dest-experiences {
+    padding-block: 38px 44px;
+  }
+
+  .tet-dest-experiences__heading {
+    gap: 16px;
+    margin-bottom: 24px;
+  }
+
+  .tet-dest-experiences__heading p {
+    margin-bottom: 8px;
+  }
+
+  .tet-dest-experiences__heading h2 {
+    font-size: 31px;
+    line-height: 1.02;
+  }
+
+  .tet-dest-experiences__grid {
+    position: relative;
+    display: grid;
+    min-height: 300px;
+    grid-template-columns: 1fr;
+    grid-template-rows: 300px;
+    gap: 0;
+    overflow: hidden;
+    border-radius: 10px;
+    touch-action: pan-y;
+  }
+
+  .tet-dest-experience,
+  .tet-dest-experience--large,
+  .tet-dest-experience--wide,
+  .tet-dest-experience:last-child {
+    grid-column: 1;
+    grid-row: 1;
+    width: 100%;
+    height: 300px;
+    min-height: 300px;
+    border-radius: 10px;
+    opacity: 0 !important;
+    visibility: hidden;
+    pointer-events: none;
+    transform: translateX(20px) !important;
+    transition:
+      opacity 280ms ease,
+      transform 360ms cubic-bezier(0.22, 1, 0.36, 1),
+      visibility 280ms ease;
+  }
+
+  .tet-dest-experience.is-active {
+    z-index: 2;
+    opacity: 1 !important;
+    visibility: visible;
+    pointer-events: auto;
+    transform: translateX(0) !important;
+  }
+
+  .tet-dest-experience__content {
+    right: 18px;
+    bottom: 18px;
+    left: 18px;
+  }
+
+  .tet-dest-experience__content strong {
+    font-size: 26px;
+  }
+
+  .tet-dest-experience__content > span {
+    font-size: 14px;
+    line-height: 1.45;
+  }
+
+  .tet-dest-experiences__dots {
+    display: flex;
+    min-height: 22px;
+    align-items: center;
+    justify-content: center;
+    gap: 9px;
+    margin-top: 16px;
+  }
+
+  .tet-dest-experiences__dots > button {
+    width: 7px !important;
+    height: 7px !important;
+    min-width: 7px !important;
+    min-height: 7px !important;
+    padding: 0 !important;
+    border: 1px solid rgba(31, 58, 95, 0.45);
+    border-radius: 999px;
+    background: transparent;
+    box-shadow: none;
+    line-height: 0 !important;
+    transition:
+      width 180ms ease,
+      background-color 180ms ease,
+      border-color 180ms ease;
+  }
+
+  .tet-dest-experiences__dots > button.is-active {
+    width: 22px !important;
+    min-width: 22px !important;
+    border-color: var(--dest-gold);
+    background: var(--dest-gold);
+  }
+
+  .tet-dest-cta__inner {
+    border-radius: 10px;
+  }
+}
+
+@media (max-width: 640px) and (prefers-reduced-motion: reduce) {
+  .tet-dest-experience,
+  .tet-dest-experience--large,
+  .tet-dest-experience--wide,
+  .tet-dest-experience:last-child {
+    transition: none;
+  }
+}
