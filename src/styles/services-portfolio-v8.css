@@ -749,7 +749,7 @@
   border-right: 1px solid rgba(211, 151, 28, 0.46);
 }
 
-.services-page--portfolio .services-page__promise-eyebrow {
+.services-page--portfolio .services-page__promise p.services-page__promise-eyebrow {
   margin: 0 0 20px;
   color: #d3971c;
   font-family: var(--te-body-font, "Manrope", Inter, "Segoe UI", Arial, sans-serif);
@@ -824,7 +824,7 @@
   line-height: 1.5;
 }
 
-@media (max-width: 900px) {
+@media (max-width: 1080px) {
   .services-page--portfolio .services-page__promise-inner {
     grid-template-columns: 1fr;
     gap: 4px;
@@ -837,7 +837,8 @@
   }
 
   .services-page--portfolio .services-page__promise-inner > .services-page__promise-heading > h2 {
-    max-width: 17ch;
+    max-width: none;
+    font-size: clamp(34px, 5vw, 46px);
   }
 
   .services-page--portfolio .services-page__promise-list li {
@@ -850,7 +851,7 @@
     padding: 42px 0;
   }
 
-  .services-page--portfolio .services-page__promise-eyebrow {
+  .services-page--portfolio .services-page__promise p.services-page__promise-eyebrow {
     margin-bottom: 14px;
   }
 
