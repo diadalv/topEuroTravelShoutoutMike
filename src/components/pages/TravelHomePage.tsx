@@ -3752,6 +3752,36 @@ const HOME_STYLES = String.raw`
   }
 }
 
+
+/* Mobile testimonials — one separator, static content, manual navigation only. */
+@media (max-width: 520px) {
+  .tet-testimonials {
+    border-bottom: 0;
+  }
+
+  .tet-testimonials__rule,
+  .tet-testimonials__progress {
+    display: none;
+  }
+
+  .tet-testimonials__stage {
+    padding-top: 18px;
+    border-top: 0;
+  }
+
+  .tet-testimonials__slide.is-active .tet-testimonials__quote {
+    animation: none !important;
+    transform: none !important;
+  }
+
+  .tet-testimonials__controls {
+    display: flex;
+    justify-content: center;
+    gap: 0;
+    margin-top: 5px;
+  }
+}
+
 `;
 
 function Eyebrow({ children }: { children: string }) {
@@ -3822,7 +3852,9 @@ export default function TravelHomePage() {
   }, [activeServiceSlide]);
 
   useEffect(() => {
-    if (testimonialPaused || window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+    const isMobile = window.matchMedia('(max-width: 520px)').matches;
+    const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if (testimonialPaused || isMobile || reduceMotion) return;
     const timer = window.setInterval(() => {
       setActiveTestimonial((current) => (current + 1) % testimonials.length);
     }, 6000);
