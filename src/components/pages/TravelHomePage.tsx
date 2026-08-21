@@ -3475,6 +3475,29 @@ const HOME_STYLES = String.raw`
     transition: none;
   }
 }
+
+/* Mobile MICE copy — centered hierarchy inside the navy panel. */
+@media (max-width: 760px) {
+  .tet-mice__copy {
+    align-items: center;
+    text-align: center;
+  }
+
+  .tet-mice__copy .tet-eyebrow {
+    width: 100%;
+    justify-content: center;
+  }
+
+  .tet-mice__copy h2,
+  .tet-mice__copy p:not(.tet-eyebrow) {
+    width: 100%;
+    margin-inline: auto;
+  }
+
+  .tet-mice__copy .tet-button {
+    align-self: center;
+  }
+}
 `;
 
 function Eyebrow({ children }: { children: string }) {
