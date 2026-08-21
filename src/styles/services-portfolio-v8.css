@@ -876,3 +876,11 @@
     font-size: 14px;
   }
 }
+
+/* Services page — unified section background */
+.services-page--portfolio,
+.services-page--portfolio .services-portfolio,
+.services-page--portfolio .services-page__promise,
+.services-page--portfolio .tet-partner-contact {
+  background: #fbf8f2;
+}
