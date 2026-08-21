@@ -2,6 +2,7 @@ import { Image } from '@/components/ui/image';
 import { travelMedia } from '@/config/wix-media';
 import {
   Building2,
+  ChevronDown,
   Clock,
   Facebook,
   Globe2,
@@ -1300,6 +1301,303 @@ a.tet-hq-item:hover svg {
   }
 }
 
+/* Mobile footer — compact, accessible information architecture */
+.tet-mobile-footer-nav {
+  display: none;
+}
+
+@media (max-width: 600px) {
+  .tet-footer-container {
+    padding-right: 16px;
+    padding-left: 16px;
+  }
+
+  .tet-footer-main {
+    padding: 20px 0 14px;
+  }
+
+  .tet-footer-grid {
+    gap: 13px;
+  }
+
+  .tet-brand-block {
+    display: grid;
+    grid-template-columns: minmax(92px, 1fr) auto;
+    align-items: center;
+    gap: 0 12px;
+  }
+
+  .tet-footer-brand-link {
+    grid-column: 1;
+    grid-row: 1;
+    margin-bottom: 0;
+  }
+
+  .tet-footer-brand-logo {
+    width: 96px;
+    max-height: 54px;
+  }
+
+  .tet-social-hub {
+    grid-column: 2;
+    grid-row: 1;
+    gap: 6px;
+  }
+
+  .tet-social-icon {
+    width: 30px;
+    height: 30px;
+  }
+
+  .tet-social-icon svg {
+    width: 14px;
+    height: 14px;
+  }
+
+  .tet-brand-quote,
+  .tet-brand-badge,
+  .tet-brand-desc {
+    grid-column: 1 / -1;
+  }
+
+  .tet-brand-quote {
+    grid-row: 2;
+    margin: 10px 0 6px;
+    padding-bottom: 7px;
+    font-size: 0.86rem;
+    line-height: 1.25;
+  }
+
+  .tet-brand-quote span {
+    display: inline;
+    margin-left: 0.28em;
+  }
+
+  .tet-brand-badge {
+    grid-row: 3;
+    margin-bottom: 5px;
+    font-size: 0.64rem;
+    letter-spacing: 0.13em;
+  }
+
+  .tet-brand-desc {
+    grid-row: 4;
+    margin-bottom: 0;
+    font-size: 0.73rem;
+    line-height: 1.4;
+  }
+
+  .tet-brand-desc span {
+    display: inline;
+  }
+
+  .tet-brand-desc span + span::before {
+    content: " ";
+  }
+
+  .tet-footer-menu-grid {
+    display: none;
+  }
+
+  .tet-mobile-footer-nav {
+    display: grid;
+    border-top: 1px solid rgba(255, 255, 255, 0.11);
+  }
+
+  .tet-mobile-nav-group {
+    border-bottom: 1px solid rgba(255, 255, 255, 0.11);
+  }
+
+  .tet-mobile-nav-group summary {
+    min-height: 43px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 14px;
+    color: #f8fafc;
+    cursor: pointer;
+    list-style: none;
+    font-family: "Cormorant Garamond", Georgia, serif;
+    font-size: 0.82rem;
+    font-weight: 700;
+    letter-spacing: 0.075em;
+    text-transform: uppercase;
+  }
+
+  .tet-mobile-nav-group summary::-webkit-details-marker {
+    display: none;
+  }
+
+  .tet-mobile-nav-group summary::after {
+    content: "";
+    position: absolute;
+  }
+
+  .tet-mobile-nav-group summary svg {
+    width: 15px;
+    height: 15px;
+    flex: 0 0 auto;
+    color: #dda02d;
+    transition: transform 180ms ease;
+  }
+
+  .tet-mobile-nav-group[open] summary svg {
+    transform: rotate(180deg);
+  }
+
+  .tet-mobile-nav-links {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 8px 16px;
+    margin: 0;
+    padding: 0 0 13px;
+    list-style: none;
+  }
+
+  .tet-mobile-nav-links a {
+    color: rgba(241, 245, 249, 0.84);
+    font-size: 0.76rem;
+    line-height: 1.35;
+    text-decoration: none;
+  }
+
+  .tet-mobile-nav-links a:focus-visible {
+    outline: 2px solid #dda02d;
+    outline-offset: 3px;
+  }
+
+  .tet-accreditations--footer-row {
+    margin-top: 0;
+    padding-top: 0;
+    border-top: 0;
+  }
+
+  .tet-accreditation-label {
+    margin-bottom: 7px;
+    font-size: 0.58rem;
+    letter-spacing: 0.12em;
+  }
+
+  .tet-accreditations--footer-row .tet-accreditation-cards {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 6px;
+  }
+
+  .tet-accreditations--footer-row .tet-accreditation-card:nth-child(3) {
+    grid-column: auto;
+  }
+
+  .tet-accreditation-card {
+    min-height: 43px;
+    justify-content: center;
+    gap: 5px;
+    padding: 6px 4px;
+  }
+
+  .tet-accreditation-card svg {
+    width: 14px;
+    height: 14px;
+  }
+
+  .tet-accreditation-text strong {
+    font-size: 0.64rem;
+    line-height: 1.15;
+  }
+
+  .tet-accreditation-text span {
+    display: none;
+  }
+
+  .tet-footer-col--hq {
+    padding-top: 11px;
+  }
+
+  .tet-footer-col--hq .tet-col-heading {
+    margin-bottom: 9px;
+    padding-bottom: 5px;
+  }
+
+  .tet-hq-contact-list {
+    gap: 8px 12px;
+  }
+
+  .tet-hq-item {
+    font-size: 0.73rem;
+  }
+
+  .tet-hq-contact-cta {
+    min-height: 36px;
+    margin-top: 3px;
+    justify-content: center;
+    border: 1px solid rgba(221, 160, 45, 0.58);
+    border-radius: 6px;
+    background: rgba(221, 160, 45, 0.06);
+  }
+
+  .tet-agency-credit-slot {
+    margin-top: 10px;
+    padding-top: 10px;
+  }
+
+  .footer-agency-credit {
+    min-height: 44px;
+    padding: 5px 8px;
+  }
+
+  .footer-agency-label {
+    font-size: 0.43rem;
+  }
+
+  .login-agency-logo svg {
+    width: 1.2rem;
+    height: 1.45rem;
+  }
+
+  .login-agency-logo strong {
+    font-size: 0.73rem;
+  }
+
+  .login-agency-logo small {
+    font-size: 0.39rem;
+  }
+
+  .tet-subfooter {
+    padding: 9px 0 10px;
+  }
+
+  .tet-subfooter-inner {
+    gap: 7px;
+  }
+
+  .tet-copyright-info {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 3px 10px;
+  }
+
+  .tet-copyright-main {
+    grid-column: 1 / -1;
+    width: auto;
+    font-size: 0.68rem;
+  }
+
+  .tet-copyright-license {
+    font-size: 0.57rem;
+    line-height: 1.35;
+  }
+
+  .tet-subfooter-links {
+    justify-content: flex-start;
+    gap: 9px;
+  }
+
+  .tet-subfooter-links a {
+    font-size: 0.65rem;
+  }
+}
+
+
+
 `;
 
 export default function Footer() {
@@ -1412,6 +1710,46 @@ export default function Footer() {
                   </ul>
                 </div>
               </div>
+
+
+              <nav className="tet-mobile-footer-nav" aria-label="Footer navigation">
+                <details className="tet-mobile-nav-group">
+                  <summary>
+                    <span>Destinations</span>
+                    <ChevronDown aria-hidden="true" />
+                  </summary>
+                  <ul className="tet-mobile-nav-links">
+                    <li><Link to="/rhodes">Rhodes</Link></li>
+                    <li><Link to="/kos">Kos</Link></li>
+                    <li><Link to="/destinations">All Destinations</Link></li>
+                    <li><Link to="/excursions">Excursions</Link></li>
+                  </ul>
+                </details>
+
+                <details className="tet-mobile-nav-group">
+                  <summary>
+                    <span>Services &amp; MICE</span>
+                    <ChevronDown aria-hidden="true" />
+                  </summary>
+                  <ul className="tet-mobile-nav-links">
+                    <li><Link to="/services">Services</Link></li>
+                    <li><Link to="/mice-groups">MICE &amp; Groups</Link></li>
+                  </ul>
+                </details>
+
+                <details className="tet-mobile-nav-group">
+                  <summary>
+                    <span>Menu</span>
+                    <ChevronDown aria-hidden="true" />
+                  </summary>
+                  <ul className="tet-mobile-nav-links">
+                    <li><Link to="/">Home</Link></li>
+                    <li><Link to="/about">About</Link></li>
+                    <li><Link to="/blog">Blog</Link></li>
+                    <li><Link to="/faq">FAQ</Link></li>
+                  </ul>
+                </details>
+              </nav>
 
               {/* Accreditations Trust Badges */}
               <div className="tet-accreditations tet-accreditations--footer-row">
