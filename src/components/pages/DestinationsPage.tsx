@@ -14,16 +14,16 @@ import {
   Waves,
   type LucideIcon,
 } from "lucide-react";
-import { useEffect, useRef, type CSSProperties } from "react";
+import { useEffect, useRef, useState, type CSSProperties } from "react";
 import { Link } from "react-router-dom";
 
 const media = {
   hero: travelMedia("destinations-hero-v2.jpg"),
   rhodes: travelMedia("destinations-rhodes-v2.jpg"),
-  kos: travelMedia("destinations-kos-v2.jpg"),
+  kos: travelMedia("flower.jpg"),
   medievalCity: travelMedia("old-town.jpg"),
   lindos: travelMedia("home-welcome-v2.jpg"),
-  culture: travelMedia("destinations-culture-v2.jpg"),
+  culture: travelMedia("flower.jpg"),
   islandExperiences: travelMedia("sailing.jpg"),
 };
 
@@ -154,6 +154,9 @@ const experiences = [
 
 export default function DestinationsPage() {
   const pageRef = useRef<HTMLElement>(null);
+  const experienceTouchStart = useRef<number | null>(null);
+  const [activeExperience, setActiveExperience] = useState(0);
+  const [isMobileExperiences, setIsMobileExperiences] = useState(false);
 
   useEffect(() => {
     document.body.classList.add("tet-destinations-page-active");
@@ -200,6 +203,30 @@ export default function DestinationsPage() {
       document.body.classList.remove("tet-destinations-page-active");
     };
   }, []);
+
+  useEffect(() => {
+    const mobileQuery = window.matchMedia("(max-width: 640px)");
+    const syncMobileState = () => setIsMobileExperiences(mobileQuery.matches);
+
+    syncMobileState();
+    mobileQuery.addEventListener("change", syncMobileState);
+
+    return () => mobileQuery.removeEventListener("change", syncMobileState);
+  }, []);
+
+  useEffect(() => {
+    const prefersReducedMotion = window.matchMedia(
+      "(prefers-reduced-motion: reduce)",
+    ).matches;
+
+    if (!isMobileExperiences || prefersReducedMotion) return;
+
+    const intervalId = window.setInterval(() => {
+      setActiveExperience((current) => (current + 1) % experiences.length);
+    }, 3500);
+
+    return () => window.clearInterval(intervalId);
+  }, [isMobileExperiences]);
 
   return (
     <main className="tet-destinations-page" id="main-content" ref={pageRef}>
@@ -399,13 +426,47 @@ export default function DestinationsPage() {
             </Link>
           </div>
 
-          <div className="tet-dest-experiences__grid">
-            {experiences.map((experience) => (
+          <div
+            className="tet-dest-experiences__grid"
+            onTouchStart={(event) => {
+              experienceTouchStart.current =
+                event.touches[0]?.clientX ?? null;
+            }}
+            onTouchEnd={(event) => {
+              const startX = experienceTouchStart.current;
+              const endX = event.changedTouches[0]?.clientX;
+              experienceTouchStart.current = null;
+
+              if (startX === null || endX === undefined) return;
+
+              const distance = endX - startX;
+              if (Math.abs(distance) < 45) return;
+
+              setActiveExperience((current) =>
+                distance < 0
+                  ? (current + 1) % experiences.length
+                  : (current - 1 + experiences.length) % experiences.length,
+              );
+            }}
+          >
+            {experiences.map((experience, index) => (
               <Link
-                className={`tet-dest-experience tet-dest-experience--${experience.layout}`}
+                className={`tet-dest-experience tet-dest-experience--${experience.layout}${
+                  index === activeExperience ? " is-active" : ""
+                }`}
                 data-dest-reveal
                 to={experience.href}
                 key={`${experience.destination}-${experience.title}`}
+                aria-hidden={
+                  isMobileExperiences
+                    ? index !== activeExperience
+                    : undefined
+                }
+                tabIndex={
+                  isMobileExperiences && index !== activeExperience
+                    ? -1
+                    : undefined
+                }
               >
                 <Photo src={experience.image} alt={experience.imageAlt} />
 
@@ -424,6 +485,23 @@ export default function DestinationsPage() {
                   <ArrowRight size={19} />
                 </span>
               </Link>
+            ))}
+          </div>
+
+          <div
+            className="tet-dest-experiences__dots"
+            role="group"
+            aria-label="Choose a destination experience"
+          >
+            {experiences.map((experience, index) => (
+              <button
+                type="button"
+                className={index === activeExperience ? "is-active" : ""}
+                aria-label={`Show ${experience.title}`}
+                aria-pressed={index === activeExperience}
+                onClick={() => setActiveExperience(index)}
+                key={experience.title}
+              />
             ))}
           </div>
         </div>
