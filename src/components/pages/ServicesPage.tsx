@@ -7,11 +7,6 @@ import {
 } from '@/components/travel/Shared';
 import { Image } from '@/components/ui/image';
 import '@/styles/services-register.css';
-import {
-  BadgeCheck,
-  Sparkles,
-  Users,
-} from 'lucide-react';
 import { useEffect, useState, type KeyboardEvent } from 'react';
 import { Link } from 'react-router-dom';
 
@@ -244,12 +239,37 @@ export default function ServicesPage() {
 
       <section className="services-page__promise services-portfolio-reveal" aria-labelledby="services-promise-title" data-services-reveal>
         <div className="shell services-page__promise-inner">
-          <h2 id="services-promise-title">One local partner. Every operational detail.</h2>
-          <ul>
-            <li><Users aria-hidden="true" /><div><h3>Dedicated local team</h3><p>In-depth destination knowledge and responsive support.</p></div></li>
-            <li><BadgeCheck aria-hidden="true" /><div><h3>Trusted execution</h3><p>Reliable delivery through established local partnerships.</p></div></li>
-            <li><Sparkles aria-hidden="true" /><div><h3>Tailor-made solutions</h3><p>Flexible services shaped around every programme.</p></div></li>
-          </ul>
+          <header className="services-page__promise-heading">
+            <p className="services-page__promise-eyebrow">Why Top Euro Travel</p>
+            <h2 id="services-promise-title">
+              One local partner.<br />
+              Every operational detail.
+            </h2>
+          </header>
+
+          <ol className="services-page__promise-list">
+            <li>
+              <span className="services-page__promise-number" aria-hidden="true">01</span>
+              <div>
+                <h3>Dedicated local team</h3>
+                <p>In-depth destination knowledge and responsive support.</p>
+              </div>
+            </li>
+            <li>
+              <span className="services-page__promise-number" aria-hidden="true">02</span>
+              <div>
+                <h3>Trusted execution</h3>
+                <p>Reliable delivery through established local partnerships.</p>
+              </div>
+            </li>
+            <li>
+              <span className="services-page__promise-number" aria-hidden="true">03</span>
+              <div>
+                <h3>Tailor-made solutions</h3>
+                <p>Flexible services shaped around every programme.</p>
+              </div>
+            </li>
+          </ol>
         </div>
       </section>
 
