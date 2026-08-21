@@ -3265,6 +3265,67 @@ const HOME_STYLES = String.raw`
   }
 }
 
+
+/* Mobile homepage bridge — balanced 2×2 hierarchy */
+@media (max-width: 760px) {
+  .tet-bridge {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    grid-template-areas:
+      "year metric"
+      "rhodes kos";
+  }
+
+  .tet-bridge__item {
+    min-height: 82px;
+    padding: 13px 24px;
+    justify-content: center;
+    text-align: center;
+  }
+
+  .tet-bridge__item:nth-child(1) {
+    grid-area: year;
+    border-top: 0;
+    border-left: 0;
+  }
+
+  .tet-bridge__item:nth-child(2) {
+    display: none;
+  }
+
+  .tet-bridge__item:nth-child(3) {
+    grid-area: rhodes;
+    border-top: 1px solid var(--tet-line);
+    border-left: 0;
+  }
+
+  .tet-bridge__item:nth-child(4) {
+    grid-area: kos;
+    border-top: 1px solid var(--tet-line);
+    border-left: 1px solid var(--tet-gold);
+  }
+
+  .tet-bridge__item:nth-child(5) {
+    grid-area: metric;
+    grid-column: auto;
+    border-top: 0;
+    border-left: 1px solid var(--tet-gold);
+  }
+
+  .tet-bridge__thumb {
+    display: none;
+  }
+
+  .tet-bridge__copy {
+    width: 100%;
+    justify-items: center;
+    text-align: center;
+  }
+
+  .tet-bridge__metric {
+    justify-content: center;
+    gap: 8px;
+  }
+}
 `;
 
 function Eyebrow({ children }: { children: string }) {
