@@ -1,5 +1,5 @@
-import { PageSeo, Photo } from '@/components/travel/Shared';
-import { ArrowDown, ArrowRight } from 'lucide-react';
+import { PageHero, PageSeo, Photo } from '@/components/travel/Shared';
+import { ArrowRight } from 'lucide-react';
 import { useEffect, useRef, type CSSProperties } from 'react';
 import { Link } from 'react-router-dom';
 import '@/styles/experiences-layout-v3.css';
@@ -167,26 +167,11 @@ export default function ExperiencesPage() {
         canonicalPath="/experiences"
       />
 
-      <section
-        className="tet-exp-hero"
-        style={{ backgroundImage: `url("${heroImage}")` }}
-        aria-label="Curated experiences in Rhodes and Kos"
-      >
-        <div className="tet-exp-hero__shade" aria-hidden="true" />
-        <div className="shell tet-exp-hero__content">
-          <p className="tet-exp-eyebrow tet-exp-eyebrow--light">Experiences · Rhodes &amp; Kos</p>
-          <h1>Curated<br />Experiences.</h1>
-          <p className="tet-exp-hero__lead">
-            Culture, gastronomy, sailing and outdoor discovery — thoughtfully shaped around every traveller.
-          </p>
-          <a className="tet-exp-hero__scroll" href="#experience-collection">
-            Explore experiences <ArrowDown aria-hidden="true" />
-          </a>
-        </div>
-        <div className="shell tet-exp-hero__signature" aria-hidden="true">
-          <span>Culture</span><span>Gastronomy</span><span>Sea</span><span>Nature</span>
-        </div>
-      </section>
+      <PageHero
+        title={<>Curated Experiences</>}
+        breadcrumb="Experiences"
+        image={heroImage}
+      />
 
       <section className="tet-exp-intro">
         <div className="shell tet-exp-intro__grid" data-experience-reveal>
