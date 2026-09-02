@@ -113,7 +113,7 @@ const kos: IslandData = {
   heroLine: "A Destination of Authentic Island Experiences",
   introHeading: 'A Versatile Destination for Leisure, Groups and Incentives',
   hero: 'destinations-kos-v2.jpg',
-  image: 'flower.jpg',
+  image: 'wix:image://v1/5a118b_671a743bb82347ed99ddbfa8adec9566~mv2.jpg/kos%20town___.jpg#originWidth=1428&originHeight=784',
   eyebrow: 'About Kos',
   introduction: [
     "Located in the southeastern Aegean Sea, Kos is one of Greece's most attractive island destinations, renowned for its beautiful coastline, rich cultural heritage and relaxed atmosphere. As the birthplace of Hippocrates, the father of medicine, the island combines centuries of history with a modern tourism offering, creating a destination that appeals to travellers of all ages and interests.",
