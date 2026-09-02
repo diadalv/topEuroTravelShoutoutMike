@@ -236,7 +236,7 @@ export default function DestinationsPage() {
       />
 
       <PageHero
-        title={<>Explore Rhodes &amp; Kos</>}
+        title={<>Explore Our Destinations in Greece</>}
         breadcrumb="Destinations"
         image={media.hero}
         description={
