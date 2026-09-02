@@ -33,7 +33,7 @@ type IslandData = {
   hero: string;
   image: string;
   eyebrow: string;
-  introduction: string;
+  introduction: string | readonly string[];
   highlights: IslandFeature[];
   reasons: IslandFeature[];
   gallery: Array<[string, string, string]>;
@@ -41,23 +41,25 @@ type IslandData = {
 
 const rhodes: IslandData = {
   name: 'Rhodes',
-  heroLine: 'Where Heritage Meets the Aegean',
+  heroLine: "One of Greece's Leading Island Destinations",
   introHeading: 'A Complete Destination for Leisure, Groups and Events',
   hero: 'destinations-rhodes-v2.jpg',
   image: 'lindos-aerial.jpg',
   eyebrow: 'About Rhodes',
-  introduction:
-    'Set in the southeastern Aegean, Rhodes combines UNESCO-listed heritage, renowned coastal resorts and well-developed tourism infrastructure. The Medieval City, Lindos, traditional villages and a varied coastline create exceptional possibilities for leisure programmes, groups and incentives. Excellent air connectivity, a long operating season and dependable local services make Rhodes one of the Mediterranean’s most versatile destinations.',
+  introduction: [
+    "Located in the southeastern Aegean Sea, Rhodes is one of Greece's most renowned island destinations, welcoming millions of visitors each year. Rich in history, culture and natural beauty, the island seamlessly combines centuries-old heritage with modern tourism infrastructure, creating a destination that appeals to a wide variety of travellers.",
+    "From the UNESCO World Heritage-listed Medieval City and the iconic Acropolis of Lindos to picturesque villages, golden beaches and vibrant coastal resorts, Rhodes offers an exceptional blend of authenticity, relaxation and discovery. Its strategic location, excellent accessibility and long tourism season have established the island as a key destination in the Mediterranean.",
+  ],
   highlights: [
     [
       Landmark,
-      'Leisure & Group Programmes',
-      'Accommodation, transfers, guided visits, excursions and tailored island experiences coordinated through one experienced local team.',
+      'Tourism in Rhodes',
+      'Rhodes offers a diverse tourism product capable of meeting the needs of every market segment. The island features an extensive portfolio of accommodation options, from internationally recognised luxury resorts and family hotels to boutique properties and exclusive villas. Combined with a wide range of cultural attractions, outdoor activities, gastronomy, cruises, excursions and authentic local experiences, Rhodes provides outstanding opportunities for leisure travel, group programmes, tailor-made itineraries and premium travel experiences.',
     ],
     [
       BriefcaseBusiness,
-      'Meetings, Incentives & Events',
-      'Conference hotels, distinctive venues and incentive activities supported by dependable planning and on-island operations.',
+      'Rhodes as a MICE Destination',
+      "With excellent air connectivity, high-quality hospitality infrastructure and extensive experience in hosting international events, Rhodes has established itself as one of Greece's leading MICE destinations. The island offers modern conference facilities, exceptional event venues, luxury accommodation and a broad selection of incentive experiences, making it an ideal choice for meetings, conferences, incentive programmes and corporate events. Its unique combination of business capabilities and inspiring surroundings creates memorable experiences for delegates and organisers alike.",
     ],
   ],
   reasons: [
@@ -183,6 +185,10 @@ function IslandPage({ island }: { island: IslandData }) {
       typeof window !== 'undefined' &&
       window.matchMedia('(max-width: 640px)').matches,
   );
+  const introductionParagraphs =
+    typeof island.introduction === 'string'
+      ? [island.introduction]
+      : island.introduction;
 
   useEffect(() => {
     const mediaQuery = window.matchMedia('(max-width: 640px)');
@@ -258,7 +264,7 @@ function IslandPage({ island }: { island: IslandData }) {
         }
         description={
           island.name === 'Rhodes'
-            ? "Discover Rhodes, one of Greece's leading island destinations for leisure travel, groups, MICE and events with Top Euro Travel."
+            ? "Discover Rhodes, one of Greece's leading island destinations. Learn why Rhodes is ideal for leisure travel, groups, MICE and events with Top Euro Travel, a trusted DMC in Rhodes."
             : 'Discover Kos, an authentic island destination for leisure travel, groups, incentives and events with Top Euro Travel.'
         }
       />
@@ -282,7 +288,9 @@ function IslandPage({ island }: { island: IslandData }) {
         <div className="island-intro__copy">
           <span>{island.eyebrow}</span>
           <h2>{island.introHeading}</h2>
-          <p>{island.introduction}</p>
+          {introductionParagraphs.map((paragraph, index) => (
+            <p key={`island-introduction-${index}`}>{paragraph}</p>
+          ))}
 
           <Link className="button button--gold" to="/contact">
             DISCUSS YOUR {island.name.toUpperCase()} PROGRAMME
