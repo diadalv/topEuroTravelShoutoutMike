@@ -21,7 +21,7 @@ const media = {
   hero: travelMedia("destinations-hero-v2.jpg"),
   rhodes: travelMedia("destinations-rhodes-v2.jpg"),
   kos: travelMedia("flower.jpg"),
-  medievalCity: "wix:image://v1/5a118b_d11c47d9c948416fa37872253f2bb651~mv2.jpg/244%20Rhodes%20Medieval%20Town.jpg#originWidth=5877&originHeight=3918",
+  medievalCity: "wix:image://v1/5a118b_9702f6ad0c7843b6948bc4ebf2225c6e~mv2.jpg/36%20Medieval%20Castle%20Gate.jpg#originWidth=2832&originHeight=4256",
   lindos: travelMedia("home-welcome-v2.jpg"),
   culture: travelMedia("flower.jpg"),
   islandExperiences: travelMedia("sailing.jpg"),
