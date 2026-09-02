@@ -355,6 +355,7 @@ const HOME_STYLES = String.raw`
   font-weight: 700;
 }
 
+.tet-agent-pill,
 .tet-contact-pill {
   min-height: 38px;
   display: inline-flex;
@@ -367,6 +368,20 @@ const HOME_STYLES = String.raw`
   box-shadow: 0 9px 22px rgba(190, 129, 37, 0.2);
   font-size: 10px;
   font-weight: 750;
+}
+
+.tet-agent-pill {
+  color: #fff;
+  border: 1px solid rgba(255, 255, 255, 0.62);
+  background: rgba(5, 31, 55, 0.28);
+  box-shadow: none;
+}
+
+.tet-agent-pill:hover,
+.tet-agent-pill:focus-visible {
+  color: #17314a;
+  border-color: #efc16e;
+  background: #efc16e;
 }
 
 .tet-menu-button {
@@ -1580,6 +1595,7 @@ const HOME_STYLES = String.raw`
     color: var(--tet-navy-deep);
   }
 
+  .tet-agent-pill,
   .tet-contact-pill {
     justify-content: center;
   }
@@ -4321,6 +4337,9 @@ export default function TravelHomePage() {
             </nav>
             <div className="tet-topbar__actions">
               <span className="tet-language">EN⌄</span>
+              <Link className="tet-agent-pill" to="/contact#contact-form" onClick={closeMenu}>
+                Agents Portal <ArrowRight aria-hidden="true" />
+              </Link>
               <Link className="tet-contact-pill" to="/contact" onClick={closeMenu}>
                 Contact Us <ArrowRight aria-hidden="true" />
               </Link>
