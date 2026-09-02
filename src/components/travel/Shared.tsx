@@ -101,7 +101,7 @@ export function SiteHeader() {
                   to={item.to}
                   end={item.to === '/'}
                   onClick={(event) => {
-                    if (item.children && window.matchMedia('(max-width: 940px)').matches) {
+                    if (item.children && window.matchMedia('(max-width: 1180px)').matches) {
                       event.preventDefault();
                       setDestinationsOpen((value) => !value);
                       return;
