@@ -1,24 +1,24 @@
-import { createBrowserRouter, Navigate, Outlet, RouterProvider } from 'react-router-dom';
-import { ScrollToTop } from '@/lib/scroll-to-top';
-import ErrorPage from '@/integrations/errorHandlers/ErrorPage';
-import TravelHomePage from '@/components/pages/TravelHomePage';
+import Footer from '@/components/Footer';
 import AboutPage from '@/components/pages/AboutPage';
-import DestinationsPage from '@/components/pages/DestinationsPage';
-import { RhodesPage, KosPage } from '@/components/pages/IslandPages';
-import ServicesPage from '@/components/pages/ServicesPage';
-import MiceGroupsPage from '@/components/pages/MiceGroupsPage';
-import ExcursionsPage from '@/components/pages/ExcursionsPage';
-import ExperiencesPage from '@/components/pages/ExperiencesPage';
-import ExcursionDetailPage from '@/components/pages/ExcursionDetailPage';
 import BlogPage, { BlogPostPage } from '@/components/pages/BlogPage';
 import BookingCalendarPage from '@/components/pages/BookingCalendarPage';
-import BookingFormPage from '@/components/pages/BookingFormPage';
 import BookingConfirmationPage from '@/components/pages/BookingConfirmationPage';
-import FaqPage from '@/components/pages/FaqPage';
+import BookingFormPage from '@/components/pages/BookingFormPage';
 import ContactPage from '@/components/pages/ContactPage';
+import DestinationsPage from '@/components/pages/DestinationsPage';
+import ExcursionDetailPage from '@/components/pages/ExcursionDetailPage';
+import ExcursionsPage from '@/components/pages/ExcursionsPage';
+import ExperiencesPage from '@/components/pages/ExperiencesPage';
+import FaqPage from '@/components/pages/FaqPage';
+import { KosPage, RhodesPage } from '@/components/pages/IslandPages';
 import { PrivacyPage, TermsPage } from '@/components/pages/LegalPages';
-import Footer from '@/components/Footer';
-import { SiteHeader } from '@/components/travel/Shared';
+import MiceGroupsPage from '@/components/pages/MiceGroupsPage';
+import ServicesPage from '@/components/pages/ServicesPage';
+import TravelHomePage from '@/components/pages/TravelHomePage';
+import { QuickContactRail, SiteHeader } from '@/components/travel/Shared';
+import ErrorPage from '@/integrations/errorHandlers/ErrorPage';
+import { ScrollToTop } from '@/lib/scroll-to-top';
+import { createBrowserRouter, Navigate, Outlet, RouterProvider } from 'react-router-dom';
 
 function Layout() {
   return (
@@ -26,6 +26,7 @@ function Layout() {
       <ScrollToTop />
       <SiteHeader />
       <main id="main-content"><Outlet /></main>
+      <QuickContactRail />
       <Footer />
     </div>
   );
