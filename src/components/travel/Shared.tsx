@@ -33,9 +33,8 @@ const navigation: NavigationItem[] = [
   },
   { label: 'SERVICES', to: '/services' },
   { label: 'MICE & GROUPS', to: '/mice-groups' },
+  { label: 'EXPERIENCES', to: '/experiences' },
   { label: 'EXCURSIONS', to: '/excursions' },
-  { label: 'BLOG', to: '/blog' },
-  { label: 'FAQ', to: '/faq' },
 ];
 
 export function SiteHeader() {
