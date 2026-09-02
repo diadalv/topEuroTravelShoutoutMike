@@ -2,6 +2,7 @@ import { PageSeo, Photo } from '@/components/travel/Shared';
 import { ArrowDown, ArrowRight } from 'lucide-react';
 import { useEffect, useRef, type CSSProperties } from 'react';
 import { Link } from 'react-router-dom';
+import '@/styles/experiences-layout-v3.css';
 
 type Experience = {
   number: string;
