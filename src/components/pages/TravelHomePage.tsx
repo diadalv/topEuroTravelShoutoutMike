@@ -108,6 +108,7 @@ const navItems = [
   { label: 'Destinations', to: '/destinations' },
   { label: 'Services', to: '/services' },
   { label: 'MICE', to: '/mice-groups' },
+  { label: 'Experiences', to: '/experiences' },
   { label: 'Excursions', to: '/excursions' },
 ] as const;
 
