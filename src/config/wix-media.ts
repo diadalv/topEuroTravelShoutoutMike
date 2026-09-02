@@ -53,6 +53,14 @@ export const TRAVEL_MEDIA = {
 export type TravelMediaKey = keyof typeof TRAVEL_MEDIA;
 
 export function travelMedia(key: string) {
+  if (key.startsWith('wix:image://v1/')) {
+    const [mediaPath, metadata = ''] = key
+      .slice('wix:image://v1/'.length)
+      .split('#');
+    const [id] = mediaPath.split('/');
+    return WIX_MEDIA_BASE_URL + id + (metadata ? '?' + metadata : '');
+  }
+
   return TRAVEL_MEDIA[key as TravelMediaKey] ?? TRAVEL_MEDIA['home-hero-v2.jpg'];
 }
 
