@@ -1,8 +1,8 @@
 import { PageHero, PageSeo, Photo } from '@/components/travel/Shared';
-import { ArrowRight } from 'lucide-react';
-import { useEffect, useRef, type CSSProperties } from 'react';
-import { Link } from 'react-router-dom';
 import '@/styles/experiences-layout-v3.css';
+import { ArrowRight } from 'lucide-react';
+import { useEffect, useRef, useState, type CSSProperties } from 'react';
+import { Link } from 'react-router-dom';
 
 type Experience = {
   number: string;
@@ -129,6 +129,19 @@ const contactImage = 'https://static.wixstatic.com/media/5a118b_173c499638f844e8
 
 export default function ExperiencesPage() {
   const pageRef = useRef<HTMLDivElement | null>(null);
+  const [expandedExperienceNumbers, setExpandedExperienceNumbers] = useState<Set<string>>(() => new Set());
+
+  const toggleExperience = (number: string) => {
+    setExpandedExperienceNumbers((current) => {
+      const next = new Set(current);
+      if (next.has(number)) {
+        next.delete(number);
+      } else {
+        next.add(number);
+      }
+      return next;
+    });
+  };
 
   useEffect(() => {
     document.body.classList.add('tet-experiences-page-active');
@@ -203,24 +216,39 @@ export default function ExperiencesPage() {
           </div>
 
           <div className="tet-exp-grid">
-            {experiences.map((experience, index) => (
-              <article
-                key={experience.number}
-                className="tet-exp-card"
-                data-experience-reveal
-                style={{ '--tet-exp-delay': `${(index % 4) * 70}ms` } as CSSProperties}
-              >
-                <div className="tet-exp-card__image">
-                  <Photo src={experience.image} alt={experience.imageAlt} />
-                  <span className="tet-exp-card__number">{experience.number}</span>
-                </div>
-                <div className="tet-exp-card__body">
-                  <p className="tet-exp-card__meta">{experience.meta}</p>
-                  <h3>{experience.title}</h3>
-                  <p className="tet-exp-card__description">{experience.description}</p>
-                </div>
-              </article>
-            ))}
+            {experiences.map((experience, index) => {
+              const isExpanded = expandedExperienceNumbers.has(experience.number);
+              const descriptionId = 'experience-description-' + experience.number;
+
+              return (
+                <article
+                  key={experience.number}
+                  className={isExpanded ? 'tet-exp-card is-expanded' : 'tet-exp-card'}
+                  data-experience-reveal
+                  style={{ '--tet-exp-delay': `${(index % 4) * 70}ms` } as CSSProperties}
+                >
+                  <div className="tet-exp-card__image">
+                    <Photo src={experience.image} alt={experience.imageAlt} />
+                    <span className="tet-exp-card__number">{experience.number}</span>
+                  </div>
+                  <div className="tet-exp-card__body">
+                    <p className="tet-exp-card__meta">{experience.meta}</p>
+                    <h3>{experience.title}</h3>
+                    <p id={descriptionId} className="tet-exp-card__description">{experience.description}</p>
+                    <button
+                      type="button"
+                      className="tet-exp-card__more"
+                      aria-expanded={isExpanded}
+                      aria-controls={descriptionId}
+                      onClick={() => toggleExperience(experience.number)}
+                    >
+                      <span>{isExpanded ? 'Show less' : 'Read more'}</span>
+                      <span className="tet-exp-card__more-mark" aria-hidden="true">{isExpanded ? '−' : '+'}</span>
+                    </button>
+                  </div>
+                </article>
+              );
+            })}
           </div>
         </div>
       </section>
