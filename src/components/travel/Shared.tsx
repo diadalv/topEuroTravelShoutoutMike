@@ -5,7 +5,9 @@ import {
   Building2,
   ChevronDown,
   Globe2,
+  Mail,
   Menu,
+  Phone,
   Plane,
   ShieldCheck,
   Star,
@@ -133,11 +135,27 @@ export function SiteHeader() {
             ))}
           </nav>
           <div className="header-actions">
+            <Link className="button button--small header-agents-btn" to="/contact#contact-form" onClick={closeNavigation}>AGENTS PORTAL</Link>
             <Link className="button button--gold button--small header-contact-btn" to="/contact" onClick={closeNavigation}>CONTACT</Link>
           </div>
         </div>
       </div>
     </header>
+  );
+}
+
+export function QuickContactRail() {
+  return (
+    <aside className="quick-contact-rail" aria-label="Quick contact">
+      <a href="mailto:info@topeurotravel.gr" aria-label="Email Top Euro Travel">
+        <Mail aria-hidden="true" />
+        <span>EMAIL US</span>
+      </a>
+      <a href="tel:+302241045506" aria-label="Call Top Euro Travel at +30 22410 45506">
+        <Phone aria-hidden="true" />
+        <span>CALL US</span>
+      </a>
+    </aside>
   );
 }
 
