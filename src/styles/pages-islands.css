@@ -102,17 +102,6 @@
   }
 }
 
-.island-gallery img[alt='Kos Town & Heritage'] {
-  transform: scale(1.28);
-  transform-origin: center 78%;
-}
-
-@media (hover: hover) and (pointer: fine) {
-  .island-gallery article:hover img[alt='Kos Town & Heritage'] {
-    transform: scale(1.33);
-  }
-}
-
 .island-gallery h3 {
   margin: 0;
   padding: 20px 22px 22px;
@@ -759,18 +748,7 @@
     height: 246px;
   }
 
-  .island-page .island-gallery img[alt='Kos Town & Heritage'] {
-  transform: scale(1.28);
-  transform-origin: center 78%;
-}
-
-@media (hover: hover) and (pointer: fine) {
-  .island-gallery article:hover img[alt='Kos Town & Heritage'] {
-    transform: scale(1.33);
-  }
-}
-
-.island-gallery h3 {
+  .island-page .island-gallery h3 {
     display: flex;
     align-items: center;
     margin: 0;
