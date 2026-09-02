@@ -4570,8 +4570,9 @@ export default function TravelHomePage() {
             <Eyebrow>MICE &amp; events</Eyebrow>
             <h2 id="tet-mice-title">Inspire. Connect. Reward.</h2>
             <p>
-              From corporate events and incentive programmes to group itineraries, our local teams deliver tailored
-              solutions and seamless execution across Rhodes and Kos.
+              Whether planning a corporate event, incentive programme or group itinerary, our team delivers tailored
+              solutions and seamless execution across Rhodes and Kos, supported by extensive destination knowledge and
+              trusted local partnerships.
             </p>
             <Link className="tet-button tet-button--gold" to="/mice-groups">
               Discover MICE <ArrowRight aria-hidden="true" />
