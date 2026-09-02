@@ -104,7 +104,7 @@
 
   .island-gallery article:hover .travel-photo {
     filter: saturate(1.08);
-    transform: scale(1.045);
+    transform: scale(var(--island-photo-hover-scale, 1.045));
   }
 }
 
@@ -431,7 +431,7 @@
   .island-gallery__media
   > :first-child {
   filter: brightness(0.64) saturate(0.92);
-  transform: scale(1.045);
+  transform: scale(var(--island-photo-hover-scale, 1.045));
 }
 
 @media (hover: hover) and (pointer: fine) {
@@ -449,7 +449,7 @@
     .island-gallery__media
     > :first-child {
     filter: brightness(0.64) saturate(0.92);
-    transform: scale(1.045);
+    transform: scale(var(--island-photo-hover-scale, 1.045));
   }
 }
 
