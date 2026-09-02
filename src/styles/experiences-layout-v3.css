@@ -476,7 +476,7 @@ body.tet-experiences-page-active .site-header.is-scrolled .main-nav__link.is-act
 }
 
 .tet-exp-contact__image {
-  left: 38%;
+  left: 58%;
   background-position: center;
   background-size: cover;
 }
@@ -484,13 +484,13 @@ body.tet-experiences-page-active .site-header.is-scrolled .main-nav__link.is-act
 .tet-exp-contact__shade {
   z-index: -1;
   background:
-    linear-gradient(90deg, #082f53 0%, #082f53 38%, rgba(8, 47, 83, 0.93) 51%, rgba(8, 47, 83, 0.18) 100%),
+    linear-gradient(90deg, #082f53 0%, #082f53 46%, rgba(8, 47, 83, 0.96) 58%, rgba(8, 47, 83, 0.34) 76%, rgba(8, 47, 83, 0.14) 100%),
     linear-gradient(180deg, rgba(3, 22, 40, 0.1), rgba(3, 22, 40, 0.34));
 }
 
 .tet-exp-contact__content {
-  width: min(620px, 49%);
-  padding: clamp(46px, 5vw, 76px);
+  width: min(900px, 62%);
+  padding: clamp(44px, 4vw, 64px);
 }
 
 .tet-exp-contact h2 {
@@ -501,7 +501,7 @@ body.tet-experiences-page-active .site-header.is-scrolled .main-nav__link.is-act
 }
 
 .tet-exp-contact__content > p:not(.tet-exp-eyebrow) {
-  max-width: 560px;
+  max-width: 720px;
   margin: 0;
   color: rgba(255, 255, 255, 0.78);
   font-size: 14px;
@@ -572,7 +572,7 @@ body.tet-experiences-page-active .site-header.is-scrolled .main-nav__link.is-act
   }
 
   .tet-exp-contact__content {
-    width: 62%;
+    width: 72%;
   }
 }
 
