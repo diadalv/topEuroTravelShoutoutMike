@@ -4351,6 +4351,7 @@ export default function TravelHomePage() {
   const [activeServiceSlide, setActiveServiceSlide] = useState(0);
   const [serviceTouchStart, setServiceTouchStart] = useState<number | null>(null);
   const [activeExperienceSlide, setActiveExperienceSlide] = useState(0);
+  const [experienceTouchStart, setExperienceTouchStart] = useState<number | null>(null);
   const experiencesRailRef = useRef<HTMLDivElement>(null);
   const [activeDestinationSlide, setActiveDestinationSlide] = useState(0);
   const destinationsRailRef = useRef<HTMLDivElement>(null);
@@ -4403,19 +4404,7 @@ export default function TravelHomePage() {
     setActiveExperienceSlide(nextIndex);
   };
 
-  const syncExperienceSlide = () => {
-    const rail = experiencesRailRef.current;
-    if (!rail) return;
 
-    const visibleCount = getExperienceVisibleCount();
-    const maxIndex = Math.max(0, experiences.length - visibleCount);
-    const maxScrollLeft = Math.max(0, rail.scrollWidth - rail.clientWidth);
-    const nextIndex = maxScrollLeft > 0 && maxIndex > 0
-      ? Math.round((rail.scrollLeft / maxScrollLeft) * maxIndex)
-      : 0;
-
-    setActiveExperienceSlide((current) => current === nextIndex ? current : nextIndex);
-  };
 
   const showTestimonial = (index: number) => {
     setActiveTestimonial((index + testimonials.length) % testimonials.length);
@@ -4907,7 +4896,19 @@ export default function TravelHomePage() {
             </Link>
           </div>
 
-          <div className="tet-experiences__carousel">
+          <div
+            className="tet-experiences__carousel"
+            onTouchStart={(event) => setExperienceTouchStart(event.touches[0]?.clientX ?? null)}
+            onTouchEnd={(event) => {
+              if (experienceTouchStart === null) return;
+              const distance = (event.changedTouches[0]?.clientX ?? experienceTouchStart) - experienceTouchStart;
+              if (Math.abs(distance) > 28) {
+                showExperienceSlide(activeExperienceSlide + (distance < 0 ? 1 : -1));
+              }
+              setExperienceTouchStart(null);
+            }}
+            onTouchCancel={() => setExperienceTouchStart(null)}
+          >
             <div
               ref={experiencesRailRef}
               className="tet-experiences__rail"
@@ -4915,7 +4916,6 @@ export default function TravelHomePage() {
               data-stagger="true"
               aria-live="polite"
               aria-label={'Experience categories. Position ' + (activeExperienceSlide + 1) + ' of ' + experiences.length}
-              onScroll={syncExperienceSlide}
             >
               {experiences.map(({ icon: Icon, title, image }) => (
                 <Link className="tet-experience" to="/experiences" key={title} aria-label={'View ' + title + ' experiences'}>
