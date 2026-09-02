@@ -2086,3 +2086,118 @@ html::-webkit-scrollbar-thumb:hover {
     font-size: 13px;
   }
 }
+
+/* Global quick-contact rail */
+.quick-contact-rail {
+  position: fixed;
+  z-index: 110;
+  top: 56%;
+  right: 0;
+  display: flex;
+  align-items: flex-end;
+  flex-direction: column;
+  overflow: visible;
+  border-radius: 14px 0 0 14px;
+  box-shadow: 0 16px 34px rgba(5, 36, 63, 0.2);
+  transform: translateY(-50%);
+}
+
+.quick-contact-rail a {
+  width: 48px;
+  min-height: 52px;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  flex-direction: row-reverse;
+  gap: 0;
+  overflow: hidden;
+  padding: 0 14px;
+  color: #fff;
+  background: #d79622;
+  transition: width 220ms ease, background-color 180ms ease;
+}
+
+.quick-contact-rail a:first-child {
+  border-radius: 14px 0 0 0;
+}
+
+.quick-contact-rail a:last-child {
+  border-top: 1px solid rgba(255, 255, 255, 0.28);
+  border-radius: 0 0 0 14px;
+}
+
+.quick-contact-rail a:hover,
+.quick-contact-rail a:focus-visible {
+  width: 132px;
+  color: #fff;
+  background: #b97817;
+}
+
+.quick-contact-rail a:focus-visible {
+  outline: 3px solid rgba(8, 47, 83, 0.34);
+  outline-offset: 2px;
+}
+
+.quick-contact-rail svg {
+  width: 19px;
+  height: 19px;
+  flex: 0 0 19px;
+}
+
+.quick-contact-rail span {
+  max-width: 0;
+  overflow: hidden;
+  opacity: 0;
+  color: #fff;
+  font-size: 10px;
+  font-weight: 750;
+  letter-spacing: 0.08em;
+  line-height: 1;
+  white-space: nowrap;
+  transition: max-width 220ms ease, margin-right 220ms ease, opacity 150ms ease;
+}
+
+.quick-contact-rail a:hover span,
+.quick-contact-rail a:focus-visible span {
+  max-width: 76px;
+  margin-right: 9px;
+  opacity: 1;
+}
+
+@media (max-width: 767px) {
+  .quick-contact-rail {
+    top: auto;
+    right: 14px;
+    bottom: 16px;
+    align-items: stretch;
+    flex-direction: row;
+    overflow: hidden;
+    border: 1px solid rgba(255, 255, 255, 0.58);
+    border-radius: 999px;
+    box-shadow: 0 12px 28px rgba(5, 36, 63, 0.28);
+    transform: none;
+  }
+
+  .quick-contact-rail a,
+  .quick-contact-rail a:hover,
+  .quick-contact-rail a:focus-visible {
+    width: 46px;
+    min-height: 46px;
+    justify-content: center;
+    padding: 0;
+    border-radius: 0;
+  }
+
+  .quick-contact-rail a:last-child {
+    border-top: 0;
+    border-left: 1px solid rgba(255, 255, 255, 0.28);
+  }
+
+  .quick-contact-rail span {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    clip: rect(0 0 0 0);
+    clip-path: inset(50%);
+  }
+}
