@@ -4161,12 +4161,12 @@ export default function TravelHomePage() {
   const showDestinationSlide = (index: number) => {
     const rail = destinationsRailRef.current;
     const slides = rail ? Array.from(rail.querySelectorAll<HTMLElement>('.tet-destination')) : [];
-    const slide = slides[index];
-    if (!rail || !slide) return;
+    if (!rail || !slides[index]) return;
 
-    const left = slide.offsetLeft - (rail.clientWidth - slide.offsetWidth) / 2;
+    const maxScrollLeft = Math.max(0, rail.scrollWidth - rail.clientWidth);
+    const left = slides.length > 1 ? (maxScrollLeft * index) / (slides.length - 1) : 0;
     rail.scrollTo({
-      left: Math.max(0, left),
+      left,
       behavior: window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth',
     });
     setActiveDestinationSlide(index);
@@ -4176,13 +4176,11 @@ export default function TravelHomePage() {
     const rail = destinationsRailRef.current;
     if (!rail) return;
 
-    const slides = Array.from(rail.querySelectorAll<HTMLElement>('.tet-destination'));
-    const railCenter = rail.scrollLeft + rail.clientWidth / 2;
-    const nextIndex = slides.reduce((closest, slide, index) => {
-      const slideCenter = slide.offsetLeft + slide.offsetWidth / 2;
-      const closestCenter = slides[closest].offsetLeft + slides[closest].offsetWidth / 2;
-      return Math.abs(slideCenter - railCenter) < Math.abs(closestCenter - railCenter) ? index : closest;
-    }, 0);
+    const slideCount = rail.querySelectorAll('.tet-destination').length;
+    const maxScrollLeft = Math.max(0, rail.scrollWidth - rail.clientWidth);
+    const nextIndex = maxScrollLeft > 0 && slideCount > 1
+      ? Math.round((rail.scrollLeft / maxScrollLeft) * (slideCount - 1))
+      : 0;
 
     setActiveDestinationSlide((current) => current === nextIndex ? current : nextIndex);
   };
