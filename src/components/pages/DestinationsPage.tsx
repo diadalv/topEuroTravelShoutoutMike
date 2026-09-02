@@ -63,7 +63,7 @@ const destinations = [
     name: "Rhodes",
     statement: "History. Coastline. Timeless experiences.",
     description:
-      "Rhodes is one of Greece's leading tourism destinations, renowned for its rich history, diverse landscapes and exceptional hospitality infrastructure. From the UNESCO-listed Medieval City and picturesque villages to luxury resorts and a spectacular coastline, the island offers outstanding opportunities for leisure travel, groups, events and tailor-made programmes.",
+      "Rhodes is one of Greece's leading tourism destinations, renowned for its rich history, diverse landscapes and exceptional hospitality infrastructure. From the UNESCO-listed Medieval City and picturesque villages to luxury resorts and stunning coastline, the island offers outstanding opportunities for leisure travel, group programmes, events and tailor-made experiences.",
     highlights: ["Medieval City", "Lindos", "Coastline", "Events"],
     image: media.rhodes,
     imageAlt: "Aerial destination view of Rhodes and its coastline",
@@ -76,7 +76,7 @@ const destinations = [
     name: "Kos",
     statement: "Beaches. Culture. Effortless island living.",
     description:
-      "Kos combines beautiful beaches, rich cultural heritage and a relaxed island character. Its accessible landscape, strong hospitality infrastructure and authentic local experiences make it an ideal destination for leisure groups, incentives, events and carefully designed programmes.",
+      "Kos combines authentic island charm with excellent tourism infrastructure, making it a popular destination for travellers from around the world. Beautiful beaches, cultural landmarks, quality accommodation and a relaxed atmosphere create the ideal setting for holidays, group travel, incentive programmes and memorable local experiences.",
     highlights: ["Beaches", "Heritage", "Groups", "Incentives"],
     image: media.kos,
     imageAlt: "Destination view of Kos harbour and coastline",
