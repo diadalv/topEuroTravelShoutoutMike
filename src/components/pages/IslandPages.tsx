@@ -110,23 +110,25 @@ const rhodes: IslandData = {
 
 const kos: IslandData = {
   name: 'Kos',
-  heroLine: 'Where Heritage Meets Island Life',
+  heroLine: "A Destination of Authentic Island Experiences",
   introHeading: 'A Versatile Destination for Leisure, Groups and Incentives',
   hero: 'destinations-kos-v2.jpg',
   image: 'flower.jpg',
   eyebrow: 'About Kos',
-  introduction:
-    'Kos brings together Hippocratic heritage, an inviting coastline and a relaxed island character. Its compact scale, excellent accessibility and developed hospitality infrastructure make programme logistics especially efficient. From Kos Town and the Asklepieion to traditional villages, cycling routes and nearby-island cruises, Kos is well suited to leisure travel, groups and incentive programmes.',
+  introduction: [
+    "Located in the southeastern Aegean Sea, Kos is one of Greece's most attractive island destinations, renowned for its beautiful coastline, rich cultural heritage and relaxed atmosphere. As the birthplace of Hippocrates, the father of medicine, the island combines centuries of history with a modern tourism offering, creating a destination that appeals to travellers of all ages and interests.",
+    "From charming harbour towns and traditional villages to golden beaches and picturesque landscapes, Kos offers an authentic Greek island experience. Its excellent accessibility, extensive cycling network and welcoming atmosphere have established the island as a popular destination for leisure travel, groups and incentive programmes.",
+  ],
   highlights: [
     [
       Landmark,
-      'Leisure & Group Programmes',
-      'Resort stays, transfers, cultural visits, cycling, sailing and tailor-made excursions arranged around each group’s pace and needs.',
+      'Tourism in Kos',
+      "Kos offers a diverse tourism product supported by quality accommodation, modern hospitality infrastructure and a wide variety of experiences. Visitors can enjoy cultural landmarks, gastronomy, outdoor activities, cycling, sailing experiences, excursions and authentic local traditions. The island's combination of natural beauty, accessibility and high service standards makes it an ideal choice for leisure travel, tailor-made itineraries and group programmes.",
     ],
     [
       BriefcaseBusiness,
-      'Meetings, Incentives & Events',
-      'Modern hospitality, compact logistics and engaging team experiences create an effective balance of business and leisure.',
+      'Kos as a MICE Destination',
+      "Kos has emerged as an attractive destination for meetings, incentives and corporate events, offering an ideal balance between business and leisure. Modern hotels with conference facilities, high-quality hospitality services, excellent accessibility and a wide range of team-building and incentive experiences provide the perfect setting for successful events. The island's relaxed atmosphere and authentic character create memorable experiences for delegates while encouraging meaningful engagement and networking.",
     ],
   ],
   reasons: [
@@ -164,12 +166,12 @@ const kos: IslandData = {
     ],
     [
       'Villages, Nature & Gastronomy',
-      'flower.jpg',
-      'Travel inland for mountain villages, fertile landscapes and traditional flavours shaped by Kos’s farming heritage and unhurried island life.',
+      'wix:image://v1/5a118b_1170b7da96b34265af5173d04107d951~mv2.jpg/trygos_%20grape%20harvesting.jpg#originWidth=1333&originHeight=1667',
+      "Travel inland for mountain villages, fertile landscapes and traditional flavours shaped by Kos's farming heritage and unhurried island life.",
     ],
     [
       'Sailing & Nearby Islands',
-      'sailing.jpg',
+      'wix:image://v1/5a118b_7226d32bd3f0496cb045624dcf7441f6~mv2.jpg/sailing-.jpg#originWidth=1440&originHeight=1742',
       'Set out across clear Aegean waters for quiet coves, swimming stops and easy visits to neighbouring islands.',
     ],
   ],
