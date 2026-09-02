@@ -267,7 +267,7 @@ function IslandPage({ island }: { island: IslandData }) {
         description={
           island.name === 'Rhodes'
             ? "Discover Rhodes, one of Greece's leading island destinations. Learn why Rhodes is ideal for leisure travel, groups, MICE and events with Top Euro Travel, a trusted DMC in Rhodes."
-            : 'Discover Kos, an authentic island destination for leisure travel, groups, incentives and events with Top Euro Travel.'
+            : "Discover Kos, one of Greece's most popular island destinations. Learn why Kos is ideal for leisure travel, groups, incentives and events with Top Euro Travel, a trusted DMC in Kos."
         }
       />
 
