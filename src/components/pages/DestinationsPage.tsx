@@ -120,7 +120,7 @@ const experiences = [
     copy: "Step into living history inside one of Europe’s best-preserved medieval cities.",
     image: media.medievalCity,
     imageAlt: "Atmospheric street in the Medieval City of Rhodes",
-    href: "/rhodes",
+    href: "/experiences",
     layout: "large",
   },
   {
@@ -129,7 +129,7 @@ const experiences = [
     copy: "Iconic views, ancient heritage and unforgettable island character.",
     image: media.lindos,
     imageAlt: "Lindos and its Acropolis overlooking the Aegean Sea",
-    href: "/rhodes",
+    href: "/experiences",
     layout: "wide",
   },
   {
@@ -138,7 +138,7 @@ const experiences = [
     copy: "Ancient stories, local traditions and a destination shaped by history.",
     image: media.culture,
     imageAlt: "Cultural and historic destination experience in Kos",
-    href: "/kos",
+    href: "/experiences",
     layout: "standard",
   },
   {
@@ -147,7 +147,7 @@ const experiences = [
     copy: "Sea, landscape and carefully curated moments across the island.",
     image: media.islandExperiences,
     imageAlt: "Sailing experience near Kos in the Aegean Sea",
-    href: "/kos",
+    href: "/experiences",
     layout: "standard",
   },
 ] satisfies readonly DestinationExperience[];
@@ -420,7 +420,7 @@ export default function DestinationsPage() {
               </h2>
             </div>
 
-            <Link className="tet-dest-experiences__all" to="/excursions">
+            <Link className="tet-dest-experiences__all" to="/experiences">
               View all experiences
               <ArrowRight size={17} aria-hidden="true" />
             </Link>
