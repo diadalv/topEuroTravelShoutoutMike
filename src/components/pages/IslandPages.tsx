@@ -92,12 +92,12 @@ const rhodes: IslandData = {
   gallery: [
     [
       'Lindos & the Acropolis',
-      'acropolis.jpg',
+      'wix:image://v1/5a118b_94f2f66fb65a4cf5b54a9ac4575b7169~mv2.jpg/148%20Aerial%20Photo%20Lindos.JPG#originWidth=5472&originHeight=3648',
       'Whitewashed lanes lead to the ancient Acropolis, with panoramic Aegean views and layers of Rhodian history.',
     ],
     [
       'Medieval City & Heritage',
-      'old-town.jpg',
+      'wix:image://v1/5a118b_827b39ce5d5c4dff9fe3046ff1a84b07~mv2.jpg/240%20Rhodes%20Medieval%20Town%20Castle.jpg#originWidth=4000&originHeight=6000',
       'Walk through fortified gates into a living medieval city, where Gothic architecture, Ottoman traces and local life share the same streets.',
     ],
     [
