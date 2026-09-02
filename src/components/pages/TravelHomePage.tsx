@@ -370,20 +370,6 @@ const HOME_STYLES = String.raw`
   font-weight: 750;
 }
 
-.tet-agent-pill {
-  color: #fff;
-  border: 1px solid rgba(255, 255, 255, 0.62);
-  background: rgba(5, 31, 55, 0.28);
-  box-shadow: none;
-}
-
-.tet-agent-pill:hover,
-.tet-agent-pill:focus-visible {
-  color: #17314a;
-  border-color: #efc16e;
-  background: #efc16e;
-}
-
 .tet-menu-button {
   width: 42px;
   height: 42px;
