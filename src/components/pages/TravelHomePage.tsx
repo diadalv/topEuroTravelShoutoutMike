@@ -4095,35 +4095,56 @@ const HOME_STYLES = String.raw`
     display: flex;
     align-items: center;
     justify-content: center;
-    gap: 8px;
-    margin-top: 14px;
+    gap: 2px;
+    margin-top: 11px;
+    min-height: 24px;
   }
 
-  .tet-destinations__pagination .tet-destination-dot {
-    width: 8px !important;
-    min-width: 8px;
-    height: 8px;
-    min-height: 8px;
-    flex: 0 0 auto;
+  .tet-destinations__pagination .tet-destination-dot,
+  .site-page main .tet-destinations__pagination .tet-destination-dot {
+    display: grid !important;
+    place-items: center;
+    width: 22px !important;
+    min-width: 22px !important;
+    max-width: 22px !important;
+    height: 22px !important;
+    min-height: 22px !important;
+    max-height: 22px !important;
+    flex: 0 0 22px !important;
     padding: 0 !important;
-    border: 0;
-    border-radius: 999px;
-    background: rgba(8, 47, 83, 0.24);
-    box-shadow: none;
+    border: 0 !important;
+    border-radius: 50% !important;
+    appearance: none;
+    color: transparent;
+    background: transparent !important;
+    box-shadow: none !important;
     cursor: pointer;
-    transition: width 200ms ease, background-color 200ms ease, transform 200ms ease;
+    transform: none !important;
   }
 
-  .tet-destinations__pagination .tet-destination-dot.is-active {
-    width: 25px !important;
-    min-width: 25px;
+  .tet-destinations__pagination .tet-destination-dot::before {
+    content: "";
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: rgba(8, 47, 83, 0.28);
+    box-shadow: none;
+    transition: background-color 180ms ease, box-shadow 180ms ease, transform 180ms ease;
+  }
+
+  .tet-destinations__pagination .tet-destination-dot.is-active::before {
     background: var(--tet-gold-deep);
+    box-shadow: 0 0 0 3px rgba(184, 123, 37, 0.15);
   }
 
-  .tet-destinations__pagination .tet-destination-dot:hover,
+  .tet-destinations__pagination .tet-destination-dot:hover::before {
+    background: var(--tet-gold-deep);
+    transform: scale(1.08);
+  }
+
   .tet-destinations__pagination .tet-destination-dot:focus-visible {
-    background: var(--tet-gold-deep);
-    transform: scale(1.1);
+    outline: 1px solid rgba(8, 47, 83, 0.42);
+    outline-offset: 1px;
   }
 }
 
