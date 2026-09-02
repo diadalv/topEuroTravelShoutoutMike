@@ -24,7 +24,7 @@ import {
   X,
   type LucideIcon
 } from 'lucide-react';
-import { useEffect, useLayoutEffect, useState } from 'react';
+import { useEffect, useLayoutEffect, useRef, useState } from 'react';
 import { Link } from 'react-router-dom';
 
 const MEDIA = {
@@ -4085,6 +4085,48 @@ const HOME_STYLES = String.raw`
   }
 }
 
+/* Mobile destination carousel pagination. */
+.tet-destinations__pagination {
+  display: none;
+}
+
+@media (max-width: 900px) {
+  .tet-destinations__pagination {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    margin-top: 14px;
+  }
+
+  .tet-destinations__pagination .tet-destination-dot {
+    width: 8px !important;
+    min-width: 8px;
+    height: 8px;
+    min-height: 8px;
+    flex: 0 0 auto;
+    padding: 0 !important;
+    border: 0;
+    border-radius: 999px;
+    background: rgba(8, 47, 83, 0.24);
+    box-shadow: none;
+    cursor: pointer;
+    transition: width 200ms ease, background-color 200ms ease, transform 200ms ease;
+  }
+
+  .tet-destinations__pagination .tet-destination-dot.is-active {
+    width: 25px !important;
+    min-width: 25px;
+    background: var(--tet-gold-deep);
+  }
+
+  .tet-destinations__pagination .tet-destination-dot:hover,
+  .tet-destinations__pagination .tet-destination-dot:focus-visible {
+    background: var(--tet-gold-deep);
+    transform: scale(1.1);
+  }
+}
+
 `;
 
 function Eyebrow({ children }: { children: string }) {
@@ -4113,6 +4155,37 @@ export default function TravelHomePage() {
   const [serviceTouchStart, setServiceTouchStart] = useState<number | null>(null);
   const [activeExperienceSlide, setActiveExperienceSlide] = useState(0);
   const [experienceTouchStart, setExperienceTouchStart] = useState<number | null>(null);
+  const [activeDestinationSlide, setActiveDestinationSlide] = useState(0);
+  const destinationsRailRef = useRef<HTMLDivElement>(null);
+
+  const showDestinationSlide = (index: number) => {
+    const rail = destinationsRailRef.current;
+    const slides = rail ? Array.from(rail.querySelectorAll<HTMLElement>('.tet-destination')) : [];
+    const slide = slides[index];
+    if (!rail || !slide) return;
+
+    const left = slide.offsetLeft - (rail.clientWidth - slide.offsetWidth) / 2;
+    rail.scrollTo({
+      left: Math.max(0, left),
+      behavior: window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth',
+    });
+    setActiveDestinationSlide(index);
+  };
+
+  const syncDestinationSlide = () => {
+    const rail = destinationsRailRef.current;
+    if (!rail) return;
+
+    const slides = Array.from(rail.querySelectorAll<HTMLElement>('.tet-destination'));
+    const railCenter = rail.scrollLeft + rail.clientWidth / 2;
+    const nextIndex = slides.reduce((closest, slide, index) => {
+      const slideCenter = slide.offsetLeft + slide.offsetWidth / 2;
+      const closestCenter = slides[closest].offsetLeft + slides[closest].offsetWidth / 2;
+      return Math.abs(slideCenter - railCenter) < Math.abs(closestCenter - railCenter) ? index : closest;
+    }, 0);
+
+    setActiveDestinationSlide((current) => current === nextIndex ? current : nextIndex);
+  };
 
   const showServiceSlide = (index: number) => {
     setActiveServiceSlide((index + services.length) % services.length);
@@ -4462,7 +4535,13 @@ export default function TravelHomePage() {
             </div>
           </div>
 
-          <div className="tet-destinations__rail" data-motion="scale" data-stagger="true">
+          <div
+            ref={destinationsRailRef}
+            className="tet-destinations__rail"
+            data-motion="scale"
+            data-stagger="true"
+            onScroll={syncDestinationSlide}
+          >
             <article className="tet-destination">
               <Image src={MEDIA.rhodes} alt="Rhodes destination" loading="lazy" />
               <div className="tet-destination__copy">
@@ -4484,6 +4563,19 @@ export default function TravelHomePage() {
                 </Link>
               </div>
             </article>
+          </div>
+
+          <div className="tet-destinations__pagination" role="group" aria-label="Choose destination slide">
+            {['Rhodes', 'Kos'].map((destination, index) => (
+              <button
+                type="button"
+                key={destination}
+                className={`tet-destination-dot ${activeDestinationSlide === index ? 'is-active' : ''}`}
+                aria-label={`Show ${destination}`}
+                aria-current={activeDestinationSlide === index ? 'true' : undefined}
+                onClick={() => showDestinationSlide(index)}
+              />
+            ))}
           </div>
         </section>
 
