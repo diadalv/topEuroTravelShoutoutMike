@@ -4358,9 +4358,6 @@ export default function TravelHomePage() {
               <span>Your Trusted DMC Partner</span>
               <span>in Rhodes &amp; Kos</span>
             </h1>
-            <p className="tet-hero__lead">
-              Delivering destination management, ground handling and travel solutions since 1989.
-            </p>
             <div className="tet-hero__actions">
               <Link className="tet-button tet-button--gold" to="/services">
                 Our Services <ArrowRight aria-hidden="true" />
