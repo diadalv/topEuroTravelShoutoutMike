@@ -84,6 +84,12 @@
   overflow: hidden;
 }
 
+.island-gallery img[alt='Kos Town & Heritage'] {
+  --island-photo-hover-scale: 1.33;
+  transform: scale(1.28);
+  transform-origin: center 78%;
+}
+
 .island-gallery .travel-photo {
   transition:
     filter 500ms ease,
