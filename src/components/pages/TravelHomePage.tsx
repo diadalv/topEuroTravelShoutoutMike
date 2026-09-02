@@ -4261,6 +4261,62 @@ const HOME_STYLES = String.raw`
   }
 }
 
+/* Mobile testimonials — reliable swipe plus visible previous/next controls. */
+@media (max-width: 520px) {
+  .tet-testimonials {
+    touch-action: pan-y;
+  }
+
+  .tet-testimonials__controls {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px !important;
+    margin-top: 10px;
+  }
+
+  .tet-testimonials__dots {
+    min-width: 0;
+    display: flex !important;
+    justify-content: center;
+    order: 2;
+    gap: 9px;
+  }
+
+  .tet-testimonials__arrows {
+    display: contents !important;
+  }
+
+  .tet-testimonials__arrow {
+    width: 36px !important;
+    min-width: 36px !important;
+    max-width: 36px !important;
+    height: 36px !important;
+    min-height: 36px !important;
+    max-height: 36px !important;
+    flex: 0 0 36px !important;
+    padding: 0 !important;
+    border: 1px solid rgba(8, 47, 83, 0.2) !important;
+    border-radius: 50% !important;
+    background: rgba(255, 253, 249, 0.92) !important;
+    box-shadow: none !important;
+  }
+
+  .tet-testimonials__arrow--previous {
+    order: 1;
+  }
+
+  .tet-testimonials__arrow:not(.tet-testimonials__arrow--previous) {
+    order: 3;
+  }
+
+  .tet-testimonials__arrow:active {
+    border-color: var(--tet-gold-deep) !important;
+    color: #fff;
+    background: var(--tet-gold-deep) !important;
+  }
+}
+
 `;
 
 function Eyebrow({ children }: { children: string }) {
@@ -4909,7 +4965,7 @@ export default function TravelHomePage() {
           onTouchEnd={(event) => {
             if (testimonialTouchStart === null) return;
             const distance = (event.changedTouches[0]?.clientX ?? testimonialTouchStart) - testimonialTouchStart;
-            if (Math.abs(distance) > 42) moveTestimonial(distance < 0 ? 1 : -1);
+            if (Math.abs(distance) > 28) moveTestimonial(distance < 0 ? 1 : -1);
             setTestimonialTouchStart(null);
           }}
         >
