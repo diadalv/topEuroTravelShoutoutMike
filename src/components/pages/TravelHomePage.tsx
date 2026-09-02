@@ -9,7 +9,6 @@ import {
   Building2,
   Bus,
   CalendarCheck,
-  Clock3,
   Globe2,
   Headphones,
   Landmark,
@@ -23,7 +22,7 @@ import {
   Utensils,
   Waves,
   X,
-  type LucideIcon,
+  type LucideIcon
 } from 'lucide-react';
 import { useEffect, useLayoutEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
@@ -4429,12 +4428,14 @@ export default function TravelHomePage() {
             <Eyebrow>Who we are</Eyebrow>
             <h2>Your Trusted DMC<br />in Rhodes &amp; Kos</h2>
             <p>
-              Since 1989, Top Euro Travel has provided destination management and ground handling services in Rhodes
-              and Kos for tour operators, travel agencies, groups and event planners worldwide.
+              Since 1989, Top Euro Travel has been providing destination management and groundhandling services in
+              Rhodes and Kos, supporting tour operators, travel agencies, groups and event planners from across the world.
             </p>
             <p>
-              Our local teams combine strong partnerships, responsive coordination and tailor-made delivery across
-              hotels, transfers, excursions, MICE and special programmes.
+              With local teams in both destinations and a flexible, hands-on approach, we deliver reliable solutions
+              tailored to each partner's needs, from hotel contracting and transfers to MICE services, tailor-made
+              programmes and excursions. Our focus is simple: building long-term partnerships through expertise,
+              responsiveness and consistent service delivery
             </p>
             <Link className="tet-text-link" to="/about">
               Learn more about us <ArrowRight aria-hidden="true" />
@@ -4442,10 +4443,10 @@ export default function TravelHomePage() {
           </div>
 
           <div className="tet-intro__facts" data-motion="up" data-stagger="true" aria-label="Top Euro Travel facts">
-            <Fact icon={MapPinned} value="2" label="Unique destinations" />
-            <Fact icon={Building2} value="200+" label="Hotel partners" />
-            <Fact icon={Users} value="40+" label="Team members" />
-            <Fact icon={Clock3} value="24/7" label="Local support" />
+            <Fact icon={CalendarCheck} value="1989" label="Since" />
+            <Fact icon={Users} value="100,000+" label="Guests Annually" />
+            <Fact icon={Building2} value="200+" label="Hotel Partners" />
+            <Fact icon={Headphones} value="40+" label="Team Members" />
           </div>
 
           <div className="tet-intro__visual" data-motion="right">
