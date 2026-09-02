@@ -4,6 +4,7 @@ import { PageSeo } from '@/components/travel/Shared';
 import { Image } from '@/components/ui/image';
 import {
   ArrowDown,
+  ArrowLeft,
   ArrowRight,
   BedDouble,
   Building2,
@@ -4148,6 +4149,118 @@ const HOME_STYLES = String.raw`
   }
 }
 
+/* Experiences carousel — four visible cards on desktop with accessible arrow controls. */
+.tet-experiences__carousel {
+  width: 100% !important;
+  overflow: hidden;
+}
+
+.tet-experiences__rail,
+.tet-experiences__rail[data-active] {
+  width: 100%;
+  display: flex !important;
+  grid-template-columns: none !important;
+  gap: 16px;
+  margin-right: 0 !important;
+  overflow-x: auto;
+  overflow-y: hidden;
+  scroll-behavior: smooth;
+  scroll-snap-type: x mandatory;
+  scrollbar-width: none;
+  transform: none !important;
+  transition: none !important;
+  will-change: auto;
+}
+
+.tet-experiences__rail::-webkit-scrollbar {
+  display: none;
+}
+
+.tet-experiences__rail .tet-experience {
+  min-width: 0 !important;
+  flex: 0 0 calc((100% - 48px) / 4) !important;
+  height: clamp(235px, 18vw, 278px);
+  scroll-snap-align: start;
+}
+
+.tet-experiences__controls {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  margin-top: 24px;
+}
+
+.tet-experiences__controls .tet-experiences__arrow {
+  width: 42px !important;
+  min-width: 42px !important;
+  max-width: 42px !important;
+  height: 42px !important;
+  min-height: 42px !important;
+  max-height: 42px !important;
+  display: grid !important;
+  place-items: center;
+  flex: 0 0 42px !important;
+  padding: 0 !important;
+  border: 1px solid rgba(8, 47, 83, 0.22) !important;
+  border-radius: 50% !important;
+  color: var(--tet-navy);
+  background: var(--tet-paper) !important;
+  box-shadow: none !important;
+  cursor: pointer;
+  transform: none !important;
+  transition: color 180ms ease, background-color 180ms ease, border-color 180ms ease, transform 180ms ease;
+}
+
+.tet-experiences__controls .tet-experiences__arrow svg {
+  width: 17px;
+  height: 17px;
+  stroke-width: 1.8;
+}
+
+.tet-experiences__controls .tet-experiences__arrow:hover {
+  border-color: var(--tet-gold-deep) !important;
+  color: #fff;
+  background: var(--tet-gold-deep) !important;
+  transform: translateY(-1px) !important;
+}
+
+.tet-experiences__controls .tet-experiences__arrow:focus-visible {
+  outline: 2px solid var(--tet-gold);
+  outline-offset: 3px;
+}
+
+@media (max-width: 900px) {
+  .tet-experiences__rail .tet-experience {
+    flex-basis: calc((100% - 16px) / 2) !important;
+  }
+}
+
+@media (max-width: 520px) {
+  .tet-experiences__carousel {
+    width: 100% !important;
+  }
+
+  .tet-experiences__rail .tet-experience {
+    min-width: 100% !important;
+    flex-basis: 100% !important;
+  }
+
+  .tet-experiences__controls {
+    margin-top: 18px;
+  }
+
+  .tet-experiences__controls .tet-experiences__arrow {
+    width: 40px !important;
+    min-width: 40px !important;
+    max-width: 40px !important;
+    height: 40px !important;
+    min-height: 40px !important;
+    max-height: 40px !important;
+    flex-basis: 40px !important;
+  }
+}
+
 `;
 
 function Eyebrow({ children }: { children: string }) {
@@ -4166,6 +4279,13 @@ function Fact({ icon: Icon, value, label }: { icon: LucideIcon; value: string; l
   );
 }
 
+const getExperienceVisibleCount = () => {
+  if (typeof window === 'undefined') return 4;
+  if (window.matchMedia('(max-width: 520px)').matches) return 1;
+  if (window.matchMedia('(max-width: 900px)').matches) return 2;
+  return 4;
+};
+
 export default function TravelHomePage() {
   const [menuOpen, setMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
@@ -4175,7 +4295,7 @@ export default function TravelHomePage() {
   const [activeServiceSlide, setActiveServiceSlide] = useState(0);
   const [serviceTouchStart, setServiceTouchStart] = useState<number | null>(null);
   const [activeExperienceSlide, setActiveExperienceSlide] = useState(0);
-  const [experienceTouchStart, setExperienceTouchStart] = useState<number | null>(null);
+  const experiencesRailRef = useRef<HTMLDivElement>(null);
   const [activeDestinationSlide, setActiveDestinationSlide] = useState(0);
   const destinationsRailRef = useRef<HTMLDivElement>(null);
 
@@ -4211,7 +4331,34 @@ export default function TravelHomePage() {
   };
 
   const showExperienceSlide = (index: number) => {
-    setActiveExperienceSlide(Math.min(Math.max(index, 0), experiences.length - 1));
+    const rail = experiencesRailRef.current;
+    const visibleCount = getExperienceVisibleCount();
+    const maxIndex = Math.max(0, experiences.length - visibleCount);
+    const nextIndex = maxIndex > 0 ? ((index % (maxIndex + 1)) + maxIndex + 1) % (maxIndex + 1) : 0;
+
+    if (rail) {
+      const maxScrollLeft = Math.max(0, rail.scrollWidth - rail.clientWidth);
+      rail.scrollTo({
+        left: maxIndex > 0 ? (maxScrollLeft * nextIndex) / maxIndex : 0,
+        behavior: window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth',
+      });
+    }
+
+    setActiveExperienceSlide(nextIndex);
+  };
+
+  const syncExperienceSlide = () => {
+    const rail = experiencesRailRef.current;
+    if (!rail) return;
+
+    const visibleCount = getExperienceVisibleCount();
+    const maxIndex = Math.max(0, experiences.length - visibleCount);
+    const maxScrollLeft = Math.max(0, rail.scrollWidth - rail.clientWidth);
+    const nextIndex = maxScrollLeft > 0 && maxIndex > 0
+      ? Math.round((rail.scrollLeft / maxScrollLeft) * maxIndex)
+      : 0;
+
+    setActiveExperienceSlide((current) => current === nextIndex ? current : nextIndex);
   };
 
   const showTestimonial = (index: number) => {
@@ -4699,32 +4846,23 @@ export default function TravelHomePage() {
               <Eyebrow>Experiences</Eyebrow>
               <h2 id="tet-experiences-title">Live the Destination</h2>
             </div>
-            <Link className="tet-text-link tet-experiences__all-desktop" to="/excursions">
+            <Link className="tet-text-link tet-experiences__all-desktop" to="/experiences">
               View all experiences <ArrowRight aria-hidden="true" />
             </Link>
           </div>
 
-          <div
-            className="tet-experiences__carousel"
-            onTouchStart={(event) => setExperienceTouchStart(event.touches[0]?.clientX ?? null)}
-            onTouchEnd={(event) => {
-              if (experienceTouchStart === null) return;
-              const distance = (event.changedTouches[0]?.clientX ?? experienceTouchStart) - experienceTouchStart;
-              if (Math.abs(distance) > 42) {
-                showExperienceSlide(activeExperienceSlide + (distance < 0 ? 1 : -1));
-              }
-              setExperienceTouchStart(null);
-            }}
-          >
+          <div className="tet-experiences__carousel">
             <div
+              ref={experiencesRailRef}
               className="tet-experiences__rail"
-              data-active={activeExperienceSlide}
               data-motion="up"
               data-stagger="true"
-              aria-label={`Experience ${activeExperienceSlide + 1} of ${experiences.length}`}
+              aria-live="polite"
+              aria-label={'Experience categories. Position ' + (activeExperienceSlide + 1) + ' of ' + experiences.length}
+              onScroll={syncExperienceSlide}
             >
               {experiences.map(({ icon: Icon, title, image }) => (
-                <Link className="tet-experience" to="/excursions" key={title}>
+                <Link className="tet-experience" to="/experiences" key={title} aria-label={'View ' + title + ' experiences'}>
                   <Image src={image} alt={title} loading="lazy" />
                   <span className="tet-experience__icon"><Icon aria-hidden="true" /></span>
                   <strong>{title}</strong>
@@ -4732,25 +4870,26 @@ export default function TravelHomePage() {
               ))}
             </div>
 
-            <div className="tet-experiences__dots" aria-label="Browse experiences">
+            <div className="tet-experiences__controls" role="group" aria-label="Browse experience categories">
               <button
                 type="button"
-                className="tet-experiences__dot"
-                aria-label="Previous experience"
-                disabled={activeExperienceSlide === 0}
+                className="tet-experiences__arrow"
+                aria-label="Previous experiences"
                 onClick={() => showExperienceSlide(activeExperienceSlide - 1)}
-              />
-              <span className="tet-experiences__dot is-active" aria-hidden="true" />
+              >
+                <ArrowLeft aria-hidden="true" />
+              </button>
               <button
                 type="button"
-                className="tet-experiences__dot"
-                aria-label="Next experience"
-                disabled={activeExperienceSlide === experiences.length - 1}
+                className="tet-experiences__arrow"
+                aria-label="Next experiences"
                 onClick={() => showExperienceSlide(activeExperienceSlide + 1)}
-              />
+              >
+                <ArrowRight aria-hidden="true" />
+              </button>
             </div>
 
-            <Link className="tet-text-link tet-experiences__all-mobile" to="/excursions">
+            <Link className="tet-text-link tet-experiences__all-mobile" to="/experiences">
               View all experiences <ArrowRight aria-hidden="true" />
             </Link>
           </div>
