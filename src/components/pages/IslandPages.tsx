@@ -44,7 +44,7 @@ const rhodes: IslandData = {
   heroLine: "One of Greece's Leading Island Destinations",
   introHeading: 'A Complete Destination for Leisure, Groups and Events',
   hero: 'destinations-rhodes-v2.jpg',
-  image: 'lindos-aerial.jpg',
+  image: 'wix:image://v1/5a118b_36ba2e7cb31f4964a5432450d2f88391~mv2.jpg/163%20Rhodes%20Aerial%20View.JPG#originWidth=5472&originHeight=3648',
   eyebrow: 'About Rhodes',
   introduction: [
     "Located in the southeastern Aegean Sea, Rhodes is one of Greece's most renowned island destinations, welcoming millions of visitors each year. Rich in history, culture and natural beauty, the island seamlessly combines centuries-old heritage with modern tourism infrastructure, creating a destination that appeals to a wide variety of travellers.",
