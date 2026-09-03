@@ -1,3 +1,4 @@
+
 // TOP EURO TRAVEL — APPROVED DESIGN 1 — BALANCED DETAILS — FULL REPLACE
 // One self-contained file: header + homepage + flat footer + responsive styles + motion.
 import { PageSeo } from '@/components/travel/Shared';
