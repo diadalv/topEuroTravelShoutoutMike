@@ -4389,16 +4389,47 @@ export default function TravelHomePage() {
 
   const showExperienceSlide = (index: number) => {
     const rail = experiencesRailRef.current;
-    const visibleCount = getExperienceVisibleCount();
-    const maxIndex = Math.max(0, experiences.length - visibleCount);
-    const nextIndex = maxIndex > 0 ? ((index % (maxIndex + 1)) + maxIndex + 1) % (maxIndex + 1) : 0;
+    const nextIndex = ((index % experiences.length) + experiences.length) % experiences.length;
+
+    if (rail?.dataset.loopLocked === 'true') return;
 
     if (rail) {
-      const maxScrollLeft = Math.max(0, rail.scrollWidth - rail.clientWidth);
+      const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      const firstCard = rail.querySelector<HTMLElement>('.tet-experience');
+      const computedRailStyle = window.getComputedStyle(rail);
+      const gap = Number.parseFloat(computedRailStyle.columnGap || computedRailStyle.gap || '0') || 0;
+      const step = firstCard ? firstCard.getBoundingClientRect().width + gap : rail.clientWidth;
+      const direction = index > activeExperienceSlide ? 1 : -1;
+      let currentPhysicalIndex = Number(rail.dataset.physicalIndex || '0');
+
+      if (direction < 0 && currentPhysicalIndex <= 0) {
+        currentPhysicalIndex = experiences.length;
+        rail.scrollTo({ left: step * currentPhysicalIndex, behavior: 'auto' });
+      }
+
+      const nextPhysicalIndex = currentPhysicalIndex + direction;
+      rail.dataset.physicalIndex = String(nextPhysicalIndex);
       rail.scrollTo({
-        left: maxIndex > 0 ? (maxScrollLeft * nextIndex) / maxIndex : 0,
-        behavior: window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth',
+        left: step * nextPhysicalIndex,
+        behavior: reducedMotion ? 'auto' : 'smooth',
       });
+
+      if (direction > 0 && nextPhysicalIndex >= experiences.length) {
+        rail.dataset.loopLocked = 'true';
+        let resetDone = false;
+        const resetToStart = () => {
+          if (resetDone) return;
+          resetDone = true;
+          rail.scrollTo({ left: 0, behavior: 'auto' });
+          rail.dataset.physicalIndex = '0';
+          rail.dataset.loopLocked = 'false';
+        };
+
+        if ('onscrollend' in rail) {
+          rail.addEventListener('scrollend', resetToStart, { once: true });
+        }
+        window.setTimeout(resetToStart, reducedMotion ? 40 : 850);
+      }
     }
 
     setActiveExperienceSlide(nextIndex);
