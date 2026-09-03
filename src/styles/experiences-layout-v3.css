@@ -484,7 +484,7 @@ body.tet-experiences-page-active .site-header.is-scrolled .main-nav__link.is-act
 .tet-exp-contact__shade {
   z-index: -1;
   background:
-    linear-gradient(90deg, #082f53 0%, #082f53 58%, rgba(8, 47, 83, 0.98) 62%, rgba(8, 47, 83, 0.82) 70%, rgba(8, 47, 83, 0.48) 82%, rgba(8, 47, 83, 0.14) 100%),
+    linear-gradient(90deg, #082f53 0%, #082f53 48%, rgba(8, 47, 83, 0.94) 53%, rgba(8, 47, 83, 0.68) 61%, rgba(8, 47, 83, 0.36) 70%, rgba(8, 47, 83, 0.14) 82%, rgba(8, 47, 83, 0.04) 100%),
     linear-gradient(180deg, rgba(3, 22, 40, 0.1), rgba(3, 22, 40, 0.34));
 }
 
