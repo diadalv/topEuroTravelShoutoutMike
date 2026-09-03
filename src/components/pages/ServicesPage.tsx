@@ -47,7 +47,7 @@ const registerServices: RegisterService[] = [
     title: 'Resort Assistance',
     description: 'Multilingual meet-and-greet and on-site support throughout every guest journey.',
     image: 'https://static.wixstatic.com/media/7f70fae2af3e444d9ab8c3b7698a6c1a.jpg',
-    imageAlt: 'Coastal resort in Kos',
+    imageAlt: 'Travel support specialist assisting a guest by phone',
   },
   {
     number: '05',
@@ -61,21 +61,21 @@ const registerServices: RegisterService[] = [
     title: 'MICE & Groups',
     description: "We specialise in the planning and delivery of meetings, conferences, incentive programmes, special interest groups, product launches and corporate events. Combining destination expertise, trusted local partnerships and meticulous planning, we create successful programmes tailored to each client's objectives.",
     image: 'https://static.wixstatic.com/media/11062b_5da29bcc7ff84641b76e3c93f59e1150~mv2.jpg',
-    imageAlt: 'MICE and group travel programme in Greece',
+    imageAlt: 'Elegant dinner event arranged for groups and incentives',
   },
   {
     number: '07',
     title: 'Weddings',
     description: 'From intimate ceremonies to large-scale celebrations, our dedicated team designs and manages bespoke wedding experiences in some of Greece\'s most stunning locations. Every detail is carefully coordinated to ensure a seamless and memorable occasion.',
     image: 'https://static.wixstatic.com/media/11062b_1167cc57cadf42589674e99c6f9016b8~mv2.jpeg',
-    imageAlt: 'A destination wedding setting in Greece',
+    imageAlt: 'Beach wedding ceremony setup in Greece',
   },
   {
     number: '08',
     title: 'XML API Connectivity & Agent Portal',
     description: 'Technology plays a key role in modern destination management. Through our XML API connectivity and dedicated Agent Portal, travel professionals can access products, services and booking solutions efficiently, benefiting from streamlined processes and enhanced operational flexibility.',
     image: 'https://static.wixstatic.com/media/11062b_8bfaa3d6762740aebf1cfae47d905c3a~mv2.jpg',
-    imageAlt: 'Top Euro Travel connectivity and agent solutions',
+    imageAlt: 'Desk with laptop for agent portal and connectivity services',
   },
 ];
 
