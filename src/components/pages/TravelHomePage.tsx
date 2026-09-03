@@ -4917,7 +4917,7 @@ export default function TravelHomePage() {
               aria-live="polite"
               aria-label={'Experience categories. Position ' + (activeExperienceSlide + 1) + ' of ' + experiences.length}
             >
-              {experiences.map(({ icon: Icon, title, image }) => (
+              {[...experiences, ...experiences].map(({ icon: Icon, title, image }, experienceRenderIndex) => (
                 <Link className="tet-experience" to="/experiences" key={title} aria-label={'View ' + title + ' experiences'}>
                   <Image src={image} alt={title} loading="lazy" />
                   <span className="tet-experience__icon"><Icon aria-hidden="true" /></span>
