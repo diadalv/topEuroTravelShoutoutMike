@@ -137,6 +137,13 @@ async function loadVisibleExcursions() {
     .sort((a, b) => a.title.localeCompare(b.title));
 }
 
+function recordMatchesFilter(record: ExcursionCardRecord, filter: 'all' | 'rhodes' | 'kos' | 'boat') {
+  if (filter === 'boat') return record.byBoat;
+  if (filter === 'rhodes') return record.destination === 'Rhodes';
+  if (filter === 'kos') return record.destination === 'Kos';
+  return true;
+}
+
 export default function ExcursionsPage() {
   const [records, setRecords] = useState<ExcursionCardRecord[]>([]);
   const [activeFilter, setActiveFilter] = useState<'all' | 'rhodes' | 'kos' | 'boat'>('all');
