@@ -25,7 +25,7 @@ const registerServices: RegisterService[] = [
     number: '01',
     title: 'Hotel Contracting',
     description: 'Strategic negotiations, strong hotel relationships and market insight secure the right product mix for every programme.',
-    image: 'https://static.wixstatic.com/media/5a118b_3904ba3b49764d06b35840292a63bc65~mv2.jpg',
+    image: travelMedia('wix:image://v1/5a118b_e7c833209f704a4f8d1b6d7693862dbe~mv2.jpg/21%20Rhodes%20from%20Above%20Aerial%20Photo.jpg#originWidth=1152&originHeight=768'),
     imageAlt: 'Rhodes coastline and resort landscape',
   },
   {
