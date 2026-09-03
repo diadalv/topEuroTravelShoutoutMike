@@ -32,7 +32,7 @@ const registerServices: RegisterService[] = [
     number: '02',
     title: 'Management of Bookings',
     description: 'Coordinated management of accommodation, transfers, excursions and additional travel services.',
-    image: 'https://static.wixstatic.com/media/5a118b_de187b0b55984726b005d3b9069de3a2~mv2.jpg',
+    image: travelMedia('wix:image://v1/5a118b_b8241d9c0b0c415a9034d17a7206d87c~mv2.jpg/213%20Butterflies%20Valley%20entrance.jpg#originWidth=1200&originHeight=800'),
     imageAlt: 'Rhodes destination seen from above',
   },
   {
