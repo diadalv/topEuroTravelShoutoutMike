@@ -232,7 +232,7 @@ export default function ExcursionsPage() {
 
         {!loading && !error && records.length > 0 && (
           <div className="excursions-card-grid">
-            {records.map((record) => {
+            {records.filter((record) => recordMatchesFilter(record, activeFilter)).map((record) => {
               const detailUrl = `/excursions/${record.slug}`;
               return (
                 <article className="excursion-list-card" key={record.id}>
