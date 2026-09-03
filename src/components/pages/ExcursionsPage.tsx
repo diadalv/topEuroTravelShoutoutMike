@@ -191,6 +191,29 @@ export default function ExcursionsPage() {
       </section>
 
       <section className="shell excursions-list-content" aria-live="polite">
+        {!loading && !error && records.length > 0 && (
+          <div className="excursions-filter" role="group" aria-label="Filter excursions">
+            <span className="excursions-filter__label">FILTER EXCURSIONS</span>
+            <div className="excursions-filter__options">
+              {([
+                ['all', 'All'],
+                ['rhodes', 'Rhodes'],
+                ['kos', 'Kos'],
+                ['boat', 'By Boat'],
+              ] as const).map(([value, label]) => (
+                <button
+                  key={value}
+                  type="button"
+                  className={'excursions-filter__button' + (activeFilter === value ? ' is-active' : '')}
+                  aria-pressed={activeFilter === value}
+                  onClick={() => setActiveFilter(value)}
+                >
+                  {label}
+                </button>
+              ))}
+            </div>
+          </div>
+        )}
         {loading && (
           <div className="excursions-list-state">
             <span /><span /><span />
