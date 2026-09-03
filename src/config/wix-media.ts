@@ -40,6 +40,8 @@ export const TRAVEL_MEDIA = {
   'haraki.jpg': wixMedia('5a118b_0130ce49276e4b38bbb0d109eb829f3a~mv2.jpg', 1000, 667),
   'services-hero.jpg': wixMedia('5a118b_1e1e28691dab433b8075e66efd56ef2a~mv2.jpg', 5472, 3648),
   'mice-hero.jpg': wixMedia('5a118b_a2bfd34a850f4d7ea10d8b67231fde59~mv2.jpg', 5472, 3648),
+  'mice-hero-audience.jpg': wixMedia('2e25c415ea614536aa6eedda8e5d9b51.jpg', 1920, 1080),
+  'elegant-dinner-event.jpg': wixMedia('11062b_5da29bcc7ff84641b76e3c93f59e1150~mv2.jpg', 5000, 2791),
   'sunset.jpg': wixMedia('5a118b_5a78cc17999245259266239801ce7e59~mv2.jpg', 3642, 2438),
   'nightlife.jpg': wixMedia('5a118b_80919dff73954ed2af466817395f8406~mv2.jpg', 1151, 768),
   'local-life.jpg': wixMedia('5a118b_ce3862ed0f60432abcae031f2693cc7b~mv2.jpg', 1122, 741),
