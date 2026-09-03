@@ -53,7 +53,7 @@ const registerServices: RegisterService[] = [
     number: '05',
     title: 'Tours & Excursions',
     description: 'We offer a carefully curated portfolio of tours, excursions, cruises and authentic local experiences designed to showcase the very best of each destination. Led by experienced guides and supported by our operational expertise, our programmes cater to a wide variety of interests, from culture and gastronomy to nature, adventure and leisure.',
-    image: travelMedia('lindos-aerial.jpg'),
+    image: travelMedia('wix:image://v1/5a118b_e3d4d2982a7c4b93a38ddbbcc5b4087a~mv2.jpg/Water%20Sports%20Rhodes%20Faliraki%20Rings-01.jpg#originWidth=4090&originHeight=2722'),
     imageAlt: 'Tours and excursions around Lindos in Rhodes',
   },
   {
