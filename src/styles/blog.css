@@ -495,7 +495,7 @@
   }
 
   .blog-post__layout {
-    width: min(100% - 32px, 900px);
+    width: min(900px, calc(100% - 32px));
     padding-top: 30px;
     padding-bottom: 70px;
   }
