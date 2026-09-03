@@ -4162,14 +4162,11 @@ const HOME_STYLES = String.raw`
   grid-template-columns: none !important;
   gap: 16px;
   margin-right: 0 !important;
-  overflow-x: auto;
-  overflow-y: hidden;
-  scroll-behavior: smooth;
+  overflow: visible;
+  scroll-behavior: auto;
   scroll-snap-type: none;
   scrollbar-width: none;
-  transform: none !important;
-  transition: none !important;
-  will-change: auto;
+  will-change: transform;
 }
 
 .tet-experiences__rail::-webkit-scrollbar {
