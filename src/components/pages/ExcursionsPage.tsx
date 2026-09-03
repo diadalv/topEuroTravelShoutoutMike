@@ -102,7 +102,7 @@ function excursionDestination(service: BookingServiceRecord): 'Rhodes' | 'Kos' {
 }
 
 function excursionIsByBoat(service: BookingServiceRecord) {
-  return /\b(boat|cruise|sailing|yacht|catamaran|ferry|symi|marmaris)\b/i.test(excursionSearchText(service));
+  return /\b(boat|cruise|sailing|yacht|catamaran|ferry|symi|marmaris)\b/i.test([service.name, service.tagLine, service.mainSlug?.name].filter(Boolean).join(' '));
 }
 
 function toCard(service: BookingServiceRecord): ExcursionCardRecord | null {
