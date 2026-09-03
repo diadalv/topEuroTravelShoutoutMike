@@ -53,6 +53,8 @@ type ExcursionCardRecord = {
   image: string;
   price: string;
   bookingAvailable: boolean;
+  destination: 'Rhodes' | 'Kos';
+  byBoat: boolean;
 };
 
 function serviceSlug(service: BookingServiceRecord) {
