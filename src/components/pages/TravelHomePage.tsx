@@ -4165,7 +4165,7 @@ const HOME_STYLES = String.raw`
   overflow-x: auto;
   overflow-y: hidden;
   scroll-behavior: smooth;
-  scroll-snap-type: x mandatory;
+  scroll-snap-type: none;
   scrollbar-width: none;
   transform: none !important;
   transition: none !important;
