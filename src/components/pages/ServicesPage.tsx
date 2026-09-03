@@ -136,7 +136,7 @@ export default function ServicesPage() {
       <PageSeo title="Destination Management Services in Greece | Top Euro Travel" description="Explore destination management services in Greece, including hotel contracting, transfers, MICE, groups, excursions, weddings and XML API connectivity by Top Euro Travel." />
       <PageHero
         className="services-page__hero"
-        image={travelMedia('services-hero.jpg')}
+        image={travelMedia('wix:image://v1/5a118b_dfc38c26b47b49b0b819d70a4cc66840~mv2.jpg/24%20Medieval%20Town%20Tower.jpg#originWidth=4236&originHeight=2819')}
         breadcrumb="Services"
         title={<><Gold>Destination Management</Gold> Services</>}
       />
