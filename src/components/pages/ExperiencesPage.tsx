@@ -186,7 +186,6 @@ export default function ExperiencesPage() {
       <PageSeo
         title="Curated Experiences in Greece | Tailor-Made Travel Experiences | Top Euro Travel"
         description="Discover curated experiences in Greece, from cultural tours and gastronomy to sailing cruises, outdoor activities and tailor-made programmes designed by Top Euro Travel."
-        canonicalPath="/experiences"
       />
 
       <PageHero
