@@ -325,6 +325,55 @@
 }
 
 
+/* Compact, aligned excursion filters */
+.excursions-list-page .excursions-filter {
+  max-width: 720px;
+  margin: 0 auto;
+  padding: 6px 0 30px;
+  align-items: center;
+  justify-content: center;
+  gap: 14px;
+}
+
+.excursions-filter__label {
+  color: var(--gold-deep);
+  font-size: 0.72rem;
+  font-weight: 800;
+  letter-spacing: 0.13em;
+  line-height: 1;
+  white-space: nowrap;
+}
+
+.excursions-filter__options {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+
+.excursions-card-grid:empty::after {
+  content: "No excursions match this filter.";
+  grid-column: 1 / -1;
+  padding: 54px 20px;
+  text-align: center;
+  color: #456783;
+}
+
+@media (max-width: 680px) {
+  .excursions-list-page .excursions-filter {
+    overflow: visible;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 12px;
+    padding-bottom: 24px;
+  }
+
+  .excursions-filter__options {
+    justify-content: flex-start;
+  }
+}
+
 /* Compact excursion cards — aligned with the site typography */
 .excursions-list-page .excursion-list-card {
   border-radius: 14px;
