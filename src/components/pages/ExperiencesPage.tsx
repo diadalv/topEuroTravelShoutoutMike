@@ -223,7 +223,7 @@ export default function ExperiencesPage() {
               return (
                 <article
                   key={experience.number}
-                  className={isExpanded ? 'tet-exp-card is-expanded' : 'tet-exp-card'}
+                  className={isExpanded ? 'tet-exp-card is-expanded is-visible' : 'tet-exp-card is-visible'}
                   data-experience-reveal
                   style={{ '--tet-exp-delay': `${(index % 4) * 70}ms` } as CSSProperties}
                 >
