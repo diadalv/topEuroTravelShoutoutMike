@@ -39,7 +39,7 @@ const registerServices: RegisterService[] = [
     number: '03',
     title: 'Transfers',
     description: 'Comfortable, reliable transport for individual guests, groups, VIPs and accessible travel needs.',
-    image: 'https://static.wixstatic.com/media/5a118b_c6ed3df1d39e464d9c3e39fa3eaa315a~mv2.jpg',
+    image: 'https://static.wixstatic.com/media/11062b_fbe7eaa8c4594aa8a8f0bd5dbe505019~mv2.jpg',
     imageAlt: 'Kos coastline and destination transport setting',
   },
   {
