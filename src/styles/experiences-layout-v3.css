@@ -363,9 +363,8 @@ body.tet-experiences-page-active .site-header.is-scrolled .main-nav__link.is-act
   letter-spacing: 0.105em;
   line-height: 1.55;
   text-transform: uppercase;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
+  word-break: break-word;
+  overflow-wrap: break-word;
 }
 
 .tet-exp-card h3 {
@@ -392,14 +391,6 @@ body.tet-experiences-page-active .site-header.is-scrolled .main-nav__link.is-act
   overflow: hidden;
   -webkit-box-orient: vertical;
   -webkit-line-clamp: 2;
-}
-
-.tet-exp-card.is-expanded .tet-exp-card__description {
-  display: block;
-  overflow: visible;
-  min-height: 0;
-  -webkit-box-orient: initial;
-  -webkit-line-clamp: unset;
 }
 
 .tet-exp-card__more {
@@ -438,6 +429,117 @@ body.tet-experiences-page-active .site-header.is-scrolled .main-nav__link.is-act
   border-radius: 2px;
   outline: 2px solid rgba(200, 138, 40, 0.72);
   outline-offset: 3px;
+}
+
+/* Experience Detail Dialog */
+.tet-exp-dialog-backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  background: rgba(8, 47, 83, 0.65);
+  backdrop-filter: blur(3px);
+  -webkit-backdrop-filter: blur(3px);
+  animation: fadeIn 280ms ease;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.tet-exp-dialog {
+  position: relative;
+  max-width: 720px;
+  width: 100%;
+  max-height: 90vh;
+  background: #ffffff;
+  border-radius: 16px;
+  padding: clamp(32px, 5vw, 48px);
+  box-shadow: 0 25px 50px rgba(6, 31, 56, 0.25);
+  overflow-y: auto;
+  animation: slideUp 320ms cubic-bezier(0.2, 0.72, 0.2, 1);
+}
+
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.tet-exp-dialog__close {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  z-index: 10;
+  width: 44px;
+  height: 44px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: none;
+  border-radius: 8px;
+  background: rgba(8, 47, 83, 0.08);
+  color: var(--exp-navy);
+  cursor: pointer;
+  transition: background-color 200ms ease, color 200ms ease;
+}
+
+.tet-exp-dialog__close:hover,
+.tet-exp-dialog__close:focus-visible {
+  background: rgba(8, 47, 83, 0.15);
+  color: var(--exp-navy-deep);
+}
+
+.tet-exp-dialog__close:focus-visible {
+  outline: 2px solid rgba(200, 138, 40, 0.72);
+  outline-offset: 2px;
+}
+
+.tet-exp-dialog__content {
+  padding-top: 12px;
+}
+
+.tet-exp-dialog__meta {
+  margin: 0 0 16px;
+  color: var(--exp-gold);
+  font-family: "Trebuchet MS", "Avenir Next", "Segoe UI", sans-serif;
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 0.105em;
+  line-height: 1.55;
+  text-transform: uppercase;
+}
+
+.tet-exp-dialog__title {
+  margin: 0 0 20px;
+  color: var(--exp-navy);
+  font-family: Georgia, 'Times New Roman', serif;
+  font-size: clamp(28px, 4vw, 42px);
+  font-weight: 400;
+  letter-spacing: -0.03em;
+  line-height: 1.2;
+}
+
+.tet-exp-dialog__description {
+  margin: 0;
+  color: var(--exp-copy);
+  font-family: "Trebuchet MS", "Avenir Next", "Segoe UI", sans-serif;
+  font-size: 15px;
+  line-height: 1.7;
+  word-break: break-word;
 }
 
 [data-experience-reveal] {
@@ -684,6 +786,27 @@ body.tet-experiences-page-active .site-header.is-scrolled .main-nav__link.is-act
   .tet-exp-contact h2 {
     font-size: 39px;
   }
+
+  .tet-exp-dialog {
+    max-height: 85vh;
+    padding: clamp(24px, 4vw, 32px);
+  }
+
+  .tet-exp-dialog__close {
+    width: 40px;
+    height: 40px;
+    top: 16px;
+    right: 16px;
+  }
+
+  .tet-exp-dialog__title {
+    font-size: clamp(24px, 5vw, 32px);
+    margin-bottom: 16px;
+  }
+
+  .tet-exp-dialog__description {
+    font-size: 14px;
+  }
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -698,5 +821,10 @@ body.tet-experiences-page-active .site-header.is-scrolled .main-nav__link.is-act
   [data-experience-reveal] {
     opacity: 1;
     transform: none;
+  }
+
+  .tet-exp-dialog-backdrop,
+  .tet-exp-dialog {
+    animation: none !important;
   }
 }

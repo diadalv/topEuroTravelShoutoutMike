@@ -13,7 +13,7 @@ type Experience = {
   imageAlt: string;
 };
 
-const experiences = [
+const experiences: Experience[] = [
   {
     number: '01',
     title: 'Medieval City of Rhodes',
@@ -129,19 +129,8 @@ const contactImage = 'https://static.wixstatic.com/media/5a118b_173c499638f844e8
 
 export default function ExperiencesPage() {
   const pageRef = useRef<HTMLDivElement | null>(null);
-  const [expandedExperienceNumbers, setExpandedExperienceNumbers] = useState<Set<string>>(() => new Set());
-
-  const toggleExperience = (number: string) => {
-    setExpandedExperienceNumbers((current) => {
-      const next = new Set(current);
-      if (next.has(number)) {
-        next.delete(number);
-      } else {
-        next.add(number);
-      }
-      return next;
-    });
-  };
+  const [selectedExperience, setSelectedExperience] = useState<Experience | null>(null);
+  const closeButtonRef = useRef<HTMLButtonElement | null>(null);
 
   useEffect(() => {
     document.body.classList.add('tet-experiences-page-active');
@@ -171,6 +160,26 @@ export default function ExperiencesPage() {
       document.body.classList.remove('tet-experiences-page-active');
     };
   }, []);
+
+  useEffect(() => {
+    if (!selectedExperience) return undefined;
+
+    const previouslyFocused = document.activeElement as HTMLElement | null;
+    const previousOverflow = document.body.style.overflow;
+    const closeDialog = (event: KeyboardEvent) => {
+      if (event.key === 'Escape') setSelectedExperience(null);
+    };
+
+    document.body.style.overflow = 'hidden';
+    window.addEventListener('keydown', closeDialog);
+    window.requestAnimationFrame(() => closeButtonRef.current?.focus());
+
+    return () => {
+      document.body.style.overflow = previousOverflow;
+      window.removeEventListener('keydown', closeDialog);
+      previouslyFocused?.focus();
+    };
+  }, [selectedExperience]);
 
   return (
     <div ref={pageRef} className="tet-exp-page">
@@ -217,13 +226,10 @@ export default function ExperiencesPage() {
 
           <div className="tet-exp-grid">
             {experiences.map((experience, index) => {
-              const isExpanded = expandedExperienceNumbers.has(experience.number);
-              const descriptionId = 'experience-description-' + experience.number;
-
               return (
                 <article
                   key={experience.number}
-                  className={isExpanded ? 'tet-exp-card is-expanded is-visible' : 'tet-exp-card is-visible'}
+                  className="tet-exp-card is-visible"
                   data-experience-reveal
                   style={{ '--tet-exp-delay': `${(index % 4) * 70}ms` } as CSSProperties}
                 >
@@ -234,16 +240,15 @@ export default function ExperiencesPage() {
                   <div className="tet-exp-card__body">
                     <p className="tet-exp-card__meta">{experience.meta}</p>
                     <h3>{experience.title}</h3>
-                    <p id={descriptionId} className="tet-exp-card__description">{experience.description}</p>
+                    <p className="tet-exp-card__description">{experience.description}</p>
                     <button
                       type="button"
                       className="tet-exp-card__more"
-                      aria-expanded={isExpanded}
-                      aria-controls={descriptionId}
-                      onClick={() => toggleExperience(experience.number)}
+                      aria-haspopup="dialog"
+                      onClick={() => setSelectedExperience(experience)}
                     >
-                      <span>{isExpanded ? 'Show less' : 'Read more'}</span>
-                      <span className="tet-exp-card__more-mark" aria-hidden="true">{isExpanded ? '−' : '+'}</span>
+                      <span>Read more</span>
+                      <span className="tet-exp-card__more-mark" aria-hidden="true">+</span>
                     </button>
                   </div>
                 </article>
@@ -252,6 +257,41 @@ export default function ExperiencesPage() {
           </div>
         </div>
       </section>
+
+      {selectedExperience && (
+        <div
+          className="tet-exp-dialog-backdrop"
+          role="presentation"
+          onMouseDown={(event) => {
+            if (event.currentTarget === event.target) setSelectedExperience(null);
+          }}
+        >
+          <section
+            className="tet-exp-dialog"
+            role="dialog"
+            aria-modal="true"
+            aria-labelledby={'experience-dialog-title-' + selectedExperience.number}
+            aria-describedby={'experience-dialog-description-' + selectedExperience.number}
+          >
+            <button
+              ref={closeButtonRef}
+              type="button"
+              className="tet-exp-dialog__close"
+              aria-label="Close experience details"
+              onClick={() => setSelectedExperience(null)}
+            >
+              <span aria-hidden="true">×</span>
+            </button>
+            <span className="tet-exp-dialog__number">{selectedExperience.number}</span>
+            <p className="tet-exp-dialog__meta">{selectedExperience.meta}</p>
+            <h2 id={'experience-dialog-title-' + selectedExperience.number}>
+              {selectedExperience.title}
+            </h2>
+            <span className="tet-exp-dialog__rule" aria-hidden="true" />
+            <p id={'experience-dialog-description-' + selectedExperience.number} className="tet-exp-dialog__description">{selectedExperience.description}</p>
+          </section>
+        </div>
+      )}
 
       <section className="tet-exp-contact shell" data-experience-reveal>
         <div className="tet-exp-contact__image" style={{ backgroundImage: `url("${contactImage}")` }} aria-hidden="true" />
