@@ -124,6 +124,8 @@ function toCard(service: BookingServiceRecord): ExcursionCardRecord | null {
     image,
     price: displayPrice(service),
     bookingAvailable: service.onlineBooking?.enabled === true,
+    destination: excursionDestination(service),
+    byBoat: excursionIsByBoat(service),
   };
 }
 
