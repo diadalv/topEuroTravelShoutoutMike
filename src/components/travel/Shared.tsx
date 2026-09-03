@@ -94,7 +94,7 @@ export function SiteHeader() {
           {open ? <X /> : <Menu />}
         </button>
 
-        <div id="primary-navigation" className={`site-header__nav-wrap ${open ? 'is-open' : ''}`}>
+        <div key={open ? 'open' : 'closed'} id="primary-navigation" className={`site-header__nav-wrap ${open ? 'is-open' : ''}`}>
           <nav className="main-nav" aria-label="Main navigation">
             {navigation.map((item) => (
               <div className={`main-nav__item ${item.children && destinationsOpen ? 'is-submenu-open' : ''}`} key={item.to}>
