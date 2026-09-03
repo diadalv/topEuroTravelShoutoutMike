@@ -29,6 +29,7 @@ const navigation: NavigationItem[] = [
   { label: 'ABOUT', to: '/about' },
   {
     label: 'DESTINATIONS', to: '/destinations', children: [
+      { label: 'All Destinations', to: '/destinations' },
       { label: 'Rhodes', to: '/rhodes' },
       { label: 'Kos', to: '/kos' },
     ]
