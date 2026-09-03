@@ -4391,48 +4391,64 @@ export default function TravelHomePage() {
     const rail = experiencesRailRef.current;
     const nextIndex = ((index % experiences.length) + experiences.length) % experiences.length;
 
-    if (rail?.dataset.loopLocked === 'true') return;
+    if (!rail || rail.dataset.loopLocked === 'true') return;
 
-    if (rail) {
-      const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-      const firstCard = rail.querySelector<HTMLElement>('.tet-experience');
-      const computedRailStyle = window.getComputedStyle(rail);
-      const gap = Number.parseFloat(computedRailStyle.columnGap || computedRailStyle.gap || '0') || 0;
-      const step = firstCard ? firstCard.getBoundingClientRect().width + gap : rail.clientWidth;
-      const direction = index > activeExperienceSlide ? 1 : -1;
-      let currentPhysicalIndex = Number(rail.dataset.physicalIndex || '0');
+    const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const firstCard = rail.querySelector<HTMLElement>('.tet-experience');
+    if (!firstCard) return;
 
-      if (direction < 0 && currentPhysicalIndex <= 0) {
-        currentPhysicalIndex = experiences.length;
-        rail.scrollTo({ left: step * currentPhysicalIndex, behavior: 'auto' });
-      }
+    const computedRailStyle = window.getComputedStyle(rail);
+    const gap = Number.parseFloat(computedRailStyle.columnGap || computedRailStyle.gap || '0') || 0;
+    const step = firstCard.getBoundingClientRect().width + gap;
+    const direction = index > activeExperienceSlide ? 1 : -1;
+    let currentPhysicalIndex = Number(rail.dataset.physicalIndex || '0');
 
-      const nextPhysicalIndex = currentPhysicalIndex + direction;
-      rail.dataset.physicalIndex = String(nextPhysicalIndex);
-      rail.scrollTo({
-        left: step * nextPhysicalIndex,
-        behavior: reducedMotion ? 'auto' : 'smooth',
-      });
+    const setPhysicalPosition = (physicalIndex: number, animate: boolean) => {
+      rail.style.transition = animate && !reducedMotion
+        ? 'transform 520ms cubic-bezier(0.22, 1, 0.36, 1)'
+        : 'none';
+      rail.style.transform = `translate3d(-${step * physicalIndex}px, 0, 0)`;
+      rail.dataset.physicalIndex = String(physicalIndex);
+    };
 
-      if (direction > 0 && nextPhysicalIndex >= experiences.length) {
-        rail.dataset.loopLocked = 'true';
-        let resetDone = false;
-        const resetToStart = () => {
-          if (resetDone) return;
-          resetDone = true;
-          rail.scrollTo({ left: 0, behavior: 'auto' });
-          rail.dataset.physicalIndex = '0';
-          rail.dataset.loopLocked = 'false';
-        };
-
-        if ('onscrollend' in rail) {
-          rail.addEventListener('scrollend', resetToStart, { once: true });
-        }
-        window.setTimeout(resetToStart, reducedMotion ? 40 : 850);
-      }
+    if (direction < 0 && currentPhysicalIndex <= 0) {
+      currentPhysicalIndex = experiences.length;
+      setPhysicalPosition(currentPhysicalIndex, false);
+      void rail.offsetWidth;
     }
 
+    const nextPhysicalIndex = currentPhysicalIndex + direction;
+    setPhysicalPosition(nextPhysicalIndex, true);
     setActiveExperienceSlide(nextIndex);
+
+    if (direction > 0 && nextPhysicalIndex >= experiences.length) {
+      rail.dataset.loopLocked = 'true';
+      let resetDone = false;
+      let fallbackTimer: number | undefined;
+
+      function onTransitionEnd(event: TransitionEvent) {
+        if (event.target === rail && event.propertyName === 'transform') resetToStart();
+      }
+
+      function resetToStart() {
+        if (resetDone) return;
+        resetDone = true;
+        rail.removeEventListener('transitionend', onTransitionEnd);
+        if (fallbackTimer) window.clearTimeout(fallbackTimer);
+        setPhysicalPosition(0, false);
+        window.requestAnimationFrame(() => {
+          rail.style.transition = '';
+          rail.dataset.loopLocked = 'false';
+        });
+      }
+
+      if (reducedMotion) {
+        window.requestAnimationFrame(resetToStart);
+      } else {
+        rail.addEventListener('transitionend', onTransitionEnd);
+        fallbackTimer = window.setTimeout(resetToStart, 720);
+      }
+    }
   };
 
 
