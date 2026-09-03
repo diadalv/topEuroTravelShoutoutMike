@@ -242,7 +242,7 @@ export default function ExcursionsPage() {
                   <div className="excursion-list-card__body">
                     <div className="excursion-list-card__eyebrow">
                       <span><Languages aria-hidden="true" />English</span>
-                      <span><MapPin aria-hidden="true" />Rhodes</span>
+                      <span><MapPin aria-hidden="true" />{record.destination}</span>
                       <span><Clock3 aria-hidden="true" />{record.duration}</span>
                     </div>
                     <h3><Link to={detailUrl}>{record.title}</Link></h3>
