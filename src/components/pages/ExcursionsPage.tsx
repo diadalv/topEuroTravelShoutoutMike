@@ -139,6 +139,7 @@ async function loadVisibleExcursions() {
 
 export default function ExcursionsPage() {
   const [records, setRecords] = useState<ExcursionCardRecord[]>([]);
+  const [activeFilter, setActiveFilter] = useState<'all' | 'rhodes' | 'kos' | 'boat'>('all');
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
 
