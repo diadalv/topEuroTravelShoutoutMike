@@ -161,7 +161,7 @@ export default function ServicesPage() {
           <div className="tet-services-stage">
             <div className="tet-services-stage__navigation">
               <div className="tet-services-stage__heading">
-                <p className="tet-services-eyebrow">01 · Destination Services</p>
+                <p className="tet-services-eyebrow">Destination Services</p>
                 <h2 id="services-operations-title">One connected operation, from planning to delivery.</h2>
               </div>
 
