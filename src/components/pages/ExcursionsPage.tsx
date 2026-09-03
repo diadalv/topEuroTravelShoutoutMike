@@ -88,6 +88,23 @@ function durationFromDescription(description?: string | null) {
   return quickFacts.match(/(?:^|·)\s*Duration:\s*([^·\n]+)/i)?.[1]?.trim() || 'Tour duration on request';
 }
 
+function excursionSearchText(service: BookingServiceRecord) {
+  return [
+    service.name,
+    service.tagLine,
+    service.description,
+    service.mainSlug?.name,
+  ].filter(Boolean).join(' ');
+}
+
+function excursionDestination(service: BookingServiceRecord): 'Rhodes' | 'Kos' {
+  return /\bkos\b/i.test(excursionSearchText(service)) ? 'Kos' : 'Rhodes';
+}
+
+function excursionIsByBoat(service: BookingServiceRecord) {
+  return /\b(boat|cruise|sailing|yacht|catamaran|ferry|symi|marmaris)\b/i.test(excursionSearchText(service));
+}
+
 function toCard(service: BookingServiceRecord): ExcursionCardRecord | null {
   const id = service._id?.trim();
   const slug = serviceSlug(service);
