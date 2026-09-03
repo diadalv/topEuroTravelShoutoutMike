@@ -165,17 +165,14 @@ export default function ExperiencesPage() {
     if (!selectedExperience) return undefined;
 
     const previouslyFocused = document.activeElement as HTMLElement | null;
-    const previousOverflow = document.body.style.overflow;
     const closeDialog = (event: KeyboardEvent) => {
       if (event.key === 'Escape') setSelectedExperience(null);
     };
 
-    document.body.style.overflow = 'hidden';
     window.addEventListener('keydown', closeDialog);
-    window.requestAnimationFrame(() => closeButtonRef.current?.focus());
+    window.requestAnimationFrame(() => closeButtonRef.current?.focus({ preventScroll: true }));
 
     return () => {
-      document.body.style.overflow = previousOverflow;
       window.removeEventListener('keydown', closeDialog);
       previouslyFocused?.focus();
     };
