@@ -261,6 +261,7 @@ body.tet-experiences-page-active .site-header.is-scrolled .main-nav__link.is-act
 .tet-exp-grid {
   display: grid;
   grid-template-columns: repeat(4, minmax(0, 1fr));
+  grid-auto-rows: 1fr;
   align-items: stretch;
   gap: clamp(16px, 1.5vw, 24px);
 }
