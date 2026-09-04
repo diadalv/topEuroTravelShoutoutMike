@@ -143,6 +143,7 @@
 .tet-excursion-preview__quick-fact {
   display: flex;
   align-items: center;
+  justify-content: center;
   gap: 10px;
   min-height: 84px;
   padding: 12px 14px;
@@ -159,8 +160,9 @@
 }
 
 .tet-excursion-preview__quick-fact-content {
-  flex: 1;
+  flex: 0 1 auto;
   min-width: 0;
+  max-width: calc(100% - 32px);
   display: flex;
   flex-direction: column;
   gap: 4px;
