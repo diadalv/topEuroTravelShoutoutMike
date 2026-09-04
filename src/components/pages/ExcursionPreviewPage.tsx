@@ -159,8 +159,17 @@ async function loadExcursion(slug: string) {
   ) || null;
 }
 
-function CollapsibleSection({ title, content }: { title: string; content: string[] }) {
-  const [open, setOpen] = useState(false);
+function CollapsibleSection({
+  title,
+  content,
+  open,
+  onToggle,
+}: {
+  title: string;
+  content: string[];
+  open: boolean;
+  onToggle: () => void;
+}) {
 
   if (!content.length) return null;
 
@@ -169,7 +178,7 @@ function CollapsibleSection({ title, content }: { title: string; content: string
       <button
         className="tet-excursion-preview__collapsible-header"
         aria-expanded={open}
-        onClick={() => setOpen(!open)}
+        onClick={onToggle}
       >
         {title}
         <ChevronDown aria-hidden="true" />
@@ -195,6 +204,7 @@ export default function ExcursionPreviewPage() {
   const [service, setService] = useState<BookingServiceRecord | null>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
+  const [openDetail, setOpenDetail] = useState<string | null>(null);
 
   useEffect(() => {
     let active = true;
@@ -350,10 +360,30 @@ export default function ExcursionPreviewPage() {
             {/* Collapsible Sections */}
             <section className="tet-excursion-preview__section">
               <h2 className="tet-excursion-preview__section-title">Details</h2>
-              <CollapsibleSection title="Full Description" content={parsed.tourDescription} />
-              <CollapsibleSection title="What's Included" content={parsed.included} />
-              <CollapsibleSection title="What's Not Included" content={parsed.notIncluded} />
-              <CollapsibleSection title="Important Information" content={parsed.importantInfo} />
+              <CollapsibleSection
+                title="Full Description"
+                content={parsed.tourDescription}
+                open={openDetail === 'full-description'}
+                onToggle={() => setOpenDetail((current) => current === 'full-description' ? null : 'full-description')}
+              />
+              <CollapsibleSection
+                title="What's Included"
+                content={parsed.included}
+                open={openDetail === 'included'}
+                onToggle={() => setOpenDetail((current) => current === 'included' ? null : 'included')}
+              />
+              <CollapsibleSection
+                title="What's Not Included"
+                content={parsed.notIncluded}
+                open={openDetail === 'not-included'}
+                onToggle={() => setOpenDetail((current) => current === 'not-included' ? null : 'not-included')}
+              />
+              <CollapsibleSection
+                title="Important Information"
+                content={parsed.importantInfo}
+                open={openDetail === 'important-information'}
+                onToggle={() => setOpenDetail((current) => current === 'important-information' ? null : 'important-information')}
+              />
             </section>
 
             {/* Gallery */}
