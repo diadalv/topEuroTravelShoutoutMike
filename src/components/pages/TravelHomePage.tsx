@@ -4398,6 +4398,49 @@ const HOME_STYLES = String.raw`
   }
 }
 
+/* Desktop alignment refinement: Experiences + Testimonials. */
+@media (min-width: 901px) {
+  .tet-experiences {
+    padding-bottom: 34px;
+  }
+
+  .tet-experiences__controls {
+    margin-top: 22px;
+  }
+
+  .tet-testimonials {
+    min-height: 0;
+    grid-template-columns: minmax(0, 0.84fr) minmax(0, 1.16fr);
+    margin-top: 28px;
+    align-items: stretch;
+  }
+
+  .tet-testimonials__intro {
+    justify-content: flex-start;
+    padding-top: 40px;
+    padding-bottom: 36px;
+  }
+
+  .tet-testimonials__stage {
+    justify-content: flex-start;
+    padding-top: 40px;
+    padding-bottom: 36px;
+  }
+
+  .tet-testimonials__mark {
+    top: 28px;
+  }
+
+  .tet-testimonials__quote {
+    min-height: 0;
+    margin-bottom: 14px;
+  }
+
+  .tet-testimonials__credit {
+    margin-bottom: 20px;
+  }
+}
+
 `;
 
 function Eyebrow({ children }: { children: string }) {
