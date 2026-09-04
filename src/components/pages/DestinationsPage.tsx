@@ -19,7 +19,7 @@ import { Link } from "react-router-dom";
 
 const media = {
   hero: travelMedia("destinations-hero-v2.jpg"),
-  rhodes: 
+    rhodes: "wix:image://v1/5a118b_48dcf397f5ff4d10b6e254d8b49e88bc~mv2.jpg/177%20cruise%20MSC%20Virtuosa%202.jpg#originWidth=5464&originHeight=3640",
   kos: travelMedia("flower.jpg"),
   medievalCity: "wix:image://v1/5a118b_9702f6ad0c7843b6948bc4ebf2225c6e~mv2.jpg/36%20Medieval%20Castle%20Gate.jpg#originWidth=2832&originHeight=4256",
   lindos: travelMedia("home-welcome-v2.jpg"),
