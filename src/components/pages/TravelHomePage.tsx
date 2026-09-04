@@ -4682,7 +4682,6 @@ export default function TravelHomePage() {
 
         <div className="tet-hero__content tet-shell">
           <div className="tet-hero__copy">
-            <Eyebrow>Destination management since 1989</Eyebrow>
             <h1 id="tet-home-title">
               <span>Your Trusted DMC Partner</span>
               <span>in Rhodes &amp; Kos</span>
