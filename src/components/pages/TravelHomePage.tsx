@@ -4316,6 +4316,31 @@ const HOME_STYLES = String.raw`
   }
 }
 
+/* Mobile finger-swipe support for Destinations, Experiences and Testimonials. */
+@media (max-width: 760px) {
+  .tet-destinations__rail {
+    overflow-x: auto !important;
+    overflow-y: hidden;
+    -webkit-overflow-scrolling: touch;
+    overscroll-behavior-x: contain;
+    scroll-snap-type: x mandatory !important;
+    touch-action: pan-x pan-y;
+  }
+
+  .tet-destination {
+    scroll-snap-align: center;
+    scroll-snap-stop: always;
+  }
+
+  .tet-experiences__carousel,
+  .tet-testimonials {
+    touch-action: pan-y;
+    overscroll-behavior-x: contain;
+    -webkit-user-select: none;
+    user-select: none;
+  }
+}
+
 `;
 
 function Eyebrow({ children }: { children: string }) {
@@ -4346,11 +4371,13 @@ export default function TravelHomePage() {
   const [scrolled, setScrolled] = useState(false);
   const [activeTestimonial, setActiveTestimonial] = useState(0);
   const [testimonialPaused, setTestimonialPaused] = useState(false);
-  const [testimonialTouchStart, setTestimonialTouchStart] = useState<number | null>(null);
+  const testimonialSwipeStartRef = useRef<{ x: number; y: number } | null>(null);
+  const testimonialDidSwipeRef = useRef(false);
   const [activeServiceSlide, setActiveServiceSlide] = useState(0);
   const [serviceTouchStart, setServiceTouchStart] = useState<number | null>(null);
   const [activeExperienceSlide, setActiveExperienceSlide] = useState(0);
-  const [experienceTouchStart, setExperienceTouchStart] = useState<number | null>(null);
+  const experienceSwipeStartRef = useRef<{ x: number; y: number } | null>(null);
+  const experienceDidSwipeRef = useRef(false);
   const experiencesRailRef = useRef<HTMLDivElement>(null);
   const [activeDestinationSlide, setActiveDestinationSlide] = useState(0);
   const destinationsRailRef = useRef<HTMLDivElement>(null);
@@ -4942,16 +4969,39 @@ export default function TravelHomePage() {
 
           <div
             className="tet-experiences__carousel"
-            onTouchStart={(event) => setExperienceTouchStart(event.touches[0]?.clientX ?? null)}
-            onTouchEnd={(event) => {
-              if (experienceTouchStart === null) return;
-              const distance = (event.changedTouches[0]?.clientX ?? experienceTouchStart) - experienceTouchStart;
-              if (Math.abs(distance) > 28) {
-                showExperienceSlide(activeExperienceSlide + (distance < 0 ? 1 : -1));
-              }
-              setExperienceTouchStart(null);
+            onPointerDown={(event) => {
+              if (event.pointerType === 'mouse' && event.button !== 0) return;
+              experienceSwipeStartRef.current = { x: event.clientX, y: event.clientY };
+              experienceDidSwipeRef.current = false;
+              event.currentTarget.setPointerCapture(event.pointerId);
             }}
-            onTouchCancel={() => setExperienceTouchStart(null)}
+            onPointerUp={(event) => {
+              const start = experienceSwipeStartRef.current;
+              experienceSwipeStartRef.current = null;
+              if (event.currentTarget.hasPointerCapture(event.pointerId)) {
+                event.currentTarget.releasePointerCapture(event.pointerId);
+              }
+              if (!start) return;
+              const distanceX = event.clientX - start.x;
+              const distanceY = event.clientY - start.y;
+              if (Math.abs(distanceX) > 36 && Math.abs(distanceX) > Math.abs(distanceY) * 1.1) {
+                experienceDidSwipeRef.current = true;
+                showExperienceSlide(activeExperienceSlide + (distanceX < 0 ? 1 : -1));
+                window.setTimeout(() => {
+                  experienceDidSwipeRef.current = false;
+                }, 350);
+              }
+            }}
+            onPointerCancel={() => {
+              experienceSwipeStartRef.current = null;
+              experienceDidSwipeRef.current = false;
+            }}
+            onClickCapture={(event) => {
+              if (!experienceDidSwipeRef.current) return;
+              event.preventDefault();
+              event.stopPropagation();
+              experienceDidSwipeRef.current = false;
+            }}
           >
             <div
               ref={experiencesRailRef}
@@ -5005,12 +5055,38 @@ export default function TravelHomePage() {
           onBlurCapture={(event) => {
             if (!event.currentTarget.contains(event.relatedTarget as Node | null)) setTestimonialPaused(false);
           }}
-          onTouchStart={(event) => setTestimonialTouchStart(event.touches[0]?.clientX ?? null)}
-          onTouchEnd={(event) => {
-            if (testimonialTouchStart === null) return;
-            const distance = (event.changedTouches[0]?.clientX ?? testimonialTouchStart) - testimonialTouchStart;
-            if (Math.abs(distance) > 28) moveTestimonial(distance < 0 ? 1 : -1);
-            setTestimonialTouchStart(null);
+          onPointerDown={(event) => {
+            if (event.pointerType === 'mouse' && event.button !== 0) return;
+            testimonialSwipeStartRef.current = { x: event.clientX, y: event.clientY };
+            testimonialDidSwipeRef.current = false;
+            event.currentTarget.setPointerCapture(event.pointerId);
+          }}
+          onPointerUp={(event) => {
+            const start = testimonialSwipeStartRef.current;
+            testimonialSwipeStartRef.current = null;
+            if (event.currentTarget.hasPointerCapture(event.pointerId)) {
+              event.currentTarget.releasePointerCapture(event.pointerId);
+            }
+            if (!start) return;
+            const distanceX = event.clientX - start.x;
+            const distanceY = event.clientY - start.y;
+            if (Math.abs(distanceX) > 36 && Math.abs(distanceX) > Math.abs(distanceY) * 1.1) {
+              testimonialDidSwipeRef.current = true;
+              moveTestimonial(distanceX < 0 ? 1 : -1);
+              window.setTimeout(() => {
+                testimonialDidSwipeRef.current = false;
+              }, 350);
+            }
+          }}
+          onPointerCancel={() => {
+            testimonialSwipeStartRef.current = null;
+            testimonialDidSwipeRef.current = false;
+          }}
+          onClickCapture={(event) => {
+            if (!testimonialDidSwipeRef.current) return;
+            event.preventDefault();
+            event.stopPropagation();
+            testimonialDidSwipeRef.current = false;
           }}
         >
           <div className="tet-testimonials__intro">
