@@ -7,12 +7,14 @@ import {
   ArrowRight,
   Calendar,
   ChevronDown,
+  ChevronLeft,
+  ChevronRight,
   Clock,
   Euro,
   Globe,
   MapPin,
 } from 'lucide-react';
-import { useEffect, useMemo, useState } from 'react';
+import { useEffect, useMemo, useRef, useState } from 'react';
 import { Link } from 'react-router-dom';
 
 type Money = {
@@ -213,6 +215,7 @@ export default function ExcursionPreviewPage() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
   const [openDetail, setOpenDetail] = useState<string | null>(null);
+  const galleryRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     let active = true;
@@ -299,6 +302,18 @@ export default function ExcursionPreviewPage() {
     ...(images.length ? images.slice(0, 4) : [image]),
     ...MARMARIS_EXTRA_GALLERY_IMAGES,
   ].filter((galleryImage, index, gallery) => gallery.indexOf(galleryImage) === index);
+
+  const scrollGallery = (direction: -1 | 1) => {
+    const gallery = galleryRef.current;
+    const firstItem = gallery?.querySelector<HTMLElement>('.tet-excursion-preview__gallery-item');
+    if (!gallery || !firstItem) return;
+
+    const gap = Number.parseFloat(window.getComputedStyle(gallery).columnGap) || 0;
+    gallery.scrollBy({
+      left: direction * (firstItem.offsetWidth + gap),
+      behavior: 'smooth',
+    });
+  };
 
   // Extract quick facts from parsed data
   const quickFacts = [
@@ -400,8 +415,23 @@ export default function ExcursionPreviewPage() {
             {/* Gallery */}
             {galleryImages.length > 0 && (
               <section className="tet-excursion-preview__section">
-                <h2 className="tet-excursion-preview__section-title">Gallery</h2>
-                <div className={`tet-excursion-preview__gallery${galleryImages.length === 1 ? ' is-single' : ''}`}>
+                <div className="tet-excursion-preview__gallery-heading">
+                  <h2 className="tet-excursion-preview__section-title">Gallery</h2>
+                  {galleryImages.length > 1 && (
+                    <div className="tet-excursion-preview__gallery-controls" aria-label="Gallery navigation">
+                      <button type="button" aria-label="Previous gallery image" onClick={() => scrollGallery(-1)}>
+                        <ChevronLeft aria-hidden="true" />
+                      </button>
+                      <button type="button" aria-label="Next gallery image" onClick={() => scrollGallery(1)}>
+                        <ChevronRight aria-hidden="true" />
+                      </button>
+                    </div>
+                  )}
+                </div>
+                <div
+                  ref={galleryRef}
+                  className={`tet-excursion-preview__gallery${galleryImages.length === 1 ? ' is-single' : ''}`}
+                >
                   {galleryImages.map((galleryImage, index) => (
                     <div className="tet-excursion-preview__gallery-item" key={`${galleryImage}-${index}`}>
                       <div className="tet-excursion-preview__gallery-item-wrapper">
