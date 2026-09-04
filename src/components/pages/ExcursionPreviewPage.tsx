@@ -117,7 +117,7 @@ function parseDescription(description?: string | null): ParsedDescription {
     highlights: bulletList(block('HIGHLIGHTS', "WHAT'S INCLUDED")),
     included: bulletList(block("WHAT'S INCLUDED", "WHAT'S NOT INCLUDED")),
     notIncluded: bulletList(block("WHAT'S NOT INCLUDED", 'GOOD TO KNOW')),
-    importantInfo: bulletList(block('GOOD TO KNOW', '')),
+    importantInfo: bulletList(block('GOOD TO KNOW')),
   };
 }
 
