@@ -4476,13 +4476,11 @@ export default function TravelHomePage() {
 
     if (window.matchMedia('(max-width: 760px)').matches) {
       const slides = Array.from(rail.querySelectorAll<HTMLElement>('.tet-experience')).slice(0, experiences.length);
-      const targetSlide = slides[nextIndex];
-      if (!targetSlide) return;
+      const maxScrollLeft = Math.max(0, rail.scrollWidth - rail.clientWidth);
+      const left = slides.length > 1 ? (maxScrollLeft * nextIndex) / (slides.length - 1) : 0;
 
-      const railRect = rail.getBoundingClientRect();
-      const slideRect = targetSlide.getBoundingClientRect();
       rail.scrollTo({
-        left: rail.scrollLeft + slideRect.left - railRect.left,
+        left,
         behavior: window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth',
       });
       setActiveExperienceSlide(nextIndex);
@@ -4555,18 +4553,11 @@ export default function TravelHomePage() {
     const rail = experiencesRailRef.current;
     if (!rail || !window.matchMedia('(max-width: 760px)').matches) return;
 
-    const slides = Array.from(rail.querySelectorAll<HTMLElement>('.tet-experience')).slice(0, experiences.length);
-    const railLeft = rail.getBoundingClientRect().left;
-    let nextIndex = 0;
-    let closestDistance = Number.POSITIVE_INFINITY;
-
-    slides.forEach((slide, index) => {
-      const distance = Math.abs(slide.getBoundingClientRect().left - railLeft);
-      if (distance < closestDistance) {
-        closestDistance = distance;
-        nextIndex = index;
-      }
-    });
+    const slideCount = experiences.length;
+    const maxScrollLeft = Math.max(0, rail.scrollWidth - rail.clientWidth);
+    const nextIndex = maxScrollLeft > 0 && slideCount > 1
+      ? Math.round((rail.scrollLeft / maxScrollLeft) * (slideCount - 1))
+      : 0;
 
     setActiveExperienceSlide((current) => current === nextIndex ? current : nextIndex);
   };
@@ -4576,16 +4567,14 @@ export default function TravelHomePage() {
     const rail = testimonialsRailRef.current;
 
     if (rail && window.matchMedia('(max-width: 760px)').matches) {
-      const slides = Array.from(rail.querySelectorAll<HTMLElement>('.tet-testimonials__slide'));
-      const targetSlide = slides[nextIndex];
-      if (targetSlide) {
-        const railRect = rail.getBoundingClientRect();
-        const slideRect = targetSlide.getBoundingClientRect();
-        rail.scrollTo({
-          left: rail.scrollLeft + slideRect.left - railRect.left,
-          behavior: window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth',
-        });
-      }
+      const slideCount = rail.querySelectorAll('.tet-testimonials__slide').length;
+      const maxScrollLeft = Math.max(0, rail.scrollWidth - rail.clientWidth);
+      const left = slideCount > 1 ? (maxScrollLeft * nextIndex) / (slideCount - 1) : 0;
+
+      rail.scrollTo({
+        left,
+        behavior: window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth',
+      });
     }
 
     setActiveTestimonial(nextIndex);
@@ -4599,18 +4588,11 @@ export default function TravelHomePage() {
     const rail = testimonialsRailRef.current;
     if (!rail || !window.matchMedia('(max-width: 760px)').matches) return;
 
-    const slides = Array.from(rail.querySelectorAll<HTMLElement>('.tet-testimonials__slide'));
-    const railLeft = rail.getBoundingClientRect().left;
-    let nextIndex = 0;
-    let closestDistance = Number.POSITIVE_INFINITY;
-
-    slides.forEach((slide, index) => {
-      const distance = Math.abs(slide.getBoundingClientRect().left - railLeft);
-      if (distance < closestDistance) {
-        closestDistance = distance;
-        nextIndex = index;
-      }
-    });
+    const slideCount = rail.querySelectorAll('.tet-testimonials__slide').length;
+    const maxScrollLeft = Math.max(0, rail.scrollWidth - rail.clientWidth);
+    const nextIndex = maxScrollLeft > 0 && slideCount > 1
+      ? Math.round((rail.scrollLeft / maxScrollLeft) * (slideCount - 1))
+      : 0;
 
     setActiveTestimonial((current) => current === nextIndex ? current : nextIndex);
   };
