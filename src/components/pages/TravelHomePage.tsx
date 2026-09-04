@@ -4832,7 +4832,7 @@ export default function TravelHomePage() {
             </nav>
             <div className="tet-topbar__actions">
               <span className="tet-language">EN⌄</span>
-              <Link className="tet-agent-pill" to="/contact#contact-form" onClick={closeMenu}>
+              <Link className="tet-agent-pill" to="https://login.topeurotravel.gr/" onClick={closeMenu}>
                 Agents Portal <ArrowRight aria-hidden="true" />
               </Link>
               <Link className="tet-contact-pill" to="/contact" onClick={closeMenu}>
