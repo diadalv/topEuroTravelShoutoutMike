@@ -345,15 +345,69 @@
   margin-top: 16px;
 }
 
+.tet-excursion-preview__gallery-heading {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+  margin-bottom: 24px;
+}
+
+.tet-excursion-preview__gallery-heading .tet-excursion-preview__section-title {
+  margin-bottom: 0;
+}
+
+.tet-excursion-preview__gallery-controls {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.tet-excursion-preview__gallery-controls button {
+  width: 40px;
+  height: 40px;
+  display: grid;
+  place-items: center;
+  flex: 0 0 40px;
+  padding: 0;
+  border: 1px solid rgba(6, 59, 104, .2);
+  border-radius: 50%;
+  color: #08345f;
+  background: rgba(255, 255, 255, .66);
+  cursor: pointer;
+  transition: color .22s ease, border-color .22s ease, background-color .22s ease, transform .22s ease;
+}
+
+.tet-excursion-preview__gallery-controls button:hover {
+  border-color: #dd9718;
+  color: #fff;
+  background: #dd9718;
+  transform: translateY(-1px);
+}
+
+.tet-excursion-preview__gallery-controls svg {
+  width: 18px;
+  height: 18px;
+}
+
 .tet-excursion-preview__gallery {
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
+  grid-auto-flow: column;
+  grid-auto-columns: calc((100% - 12px) / 2);
   gap: 12px;
-  margin-top: 24px;
+  overflow-x: auto;
+  overscroll-behavior-inline: contain;
+  scroll-behavior: smooth;
+  scroll-snap-type: inline mandatory;
+  scrollbar-width: none;
+}
+
+.tet-excursion-preview__gallery::-webkit-scrollbar {
+  display: none;
 }
 
 .tet-excursion-preview__gallery.is-single {
-  grid-template-columns: minmax(0, 620px);
+  grid-auto-columns: minmax(0, 620px);
 }
 
 .tet-excursion-preview__gallery-item {
@@ -361,6 +415,8 @@
   aspect-ratio: 4 / 3;
   border-radius: 12px;
   background: #e8e4dd;
+  scroll-snap-align: start;
+  scroll-snap-stop: always;
 }
 
 .tet-excursion-preview__gallery-item-wrapper {
@@ -469,7 +525,7 @@
   }
 
   .tet-excursion-preview__gallery {
-    grid-template-columns: 1fr;
+    grid-auto-columns: 100%;
   }
 
   .tet-excursion-preview__collapsible-header {
@@ -478,6 +534,16 @@
 
   .tet-excursion-preview__collapsible-body {
     padding: 0 14px 14px;
+  }
+
+  .tet-excursion-preview__gallery-heading {
+    margin-bottom: 16px;
+  }
+
+  .tet-excursion-preview__gallery-controls button {
+    width: 38px;
+    height: 38px;
+    flex-basis: 38px;
   }
 
 }
