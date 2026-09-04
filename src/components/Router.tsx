@@ -7,6 +7,7 @@ import BookingFormPage from '@/components/pages/BookingFormPage';
 import ContactPage from '@/components/pages/ContactPage';
 import DestinationsPage from '@/components/pages/DestinationsPage';
 import ExcursionDetailPage from '@/components/pages/ExcursionDetailPage';
+import ExcursionPreviewPage from '@/components/pages/ExcursionPreviewPage';
 import ExcursionsPage from '@/components/pages/ExcursionsPage';
 import ExperiencesPage from '@/components/pages/ExperiencesPage';
 import FaqPage from '@/components/pages/FaqPage';
@@ -52,6 +53,11 @@ const router = createBrowserRouter(
           path: 'excursions/:slug',
           element: <ExcursionDetailPage />,
           routeMetadata: { pageIdentifier: 'excursion-detail' },
+        },
+        {
+          path: 'excursion-preview/marmaris',
+          element: <ExcursionPreviewPage />,
+          routeMetadata: { pageIdentifier: 'excursion-preview' },
         },
         {
           path: 'booking-calendar/:serviceSlug',
