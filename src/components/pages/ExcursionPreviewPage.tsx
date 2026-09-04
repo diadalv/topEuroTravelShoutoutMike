@@ -453,9 +453,9 @@ export default function ExcursionPreviewPage() {
           <aside className="tet-excursion-preview__booking-summary">
             <h3 className="tet-excursion-preview__booking-summary-title">Booking Summary</h3>
             <div className="tet-excursion-preview__booking-summary-price">
-              <span className="tet-excursion-preview__booking-summary-price-label">{price === 'TBA' ? 'Price' : 'From'}</span>
+              <span className="tet-excursion-preview__booking-summary-price-label">From</span>
               <span className="tet-excursion-preview__booking-summary-price-value">{price}</span>
-              {price !== 'TBA' && <span className="tet-excursion-preview__booking-summary-price-unit">per person</span>}
+              <span className="tet-excursion-preview__booking-summary-price-unit">per person</span>
             </div>
             <Link className="tet-excursion-preview__button tet-excursion-preview__booking-summary-button" to={actionUrl}>
               {bookingAvailable ? 'BOOK NOW' : 'ENQUIRE NOW'}
