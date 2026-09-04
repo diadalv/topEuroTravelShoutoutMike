@@ -8,7 +8,7 @@ import {
   Calendar,
   ChevronDown,
   Clock,
-  DollarSign,
+  Euro,
   Globe,
   MapPin,
 } from 'lucide-react';
@@ -294,7 +294,7 @@ export default function ExcursionPreviewPage() {
   const image = images[0] || travelMedia('excursions-hero.jpg');
   const bookingAvailable = service.onlineBooking?.enabled === true;
   const actionUrl = bookingAvailable ? `/booking-calendar/${encodeURIComponent(serviceSlug(service))}` : '/contact';
-  const price = displayPrice(service);
+  const price = '€50';
   const galleryImages = [
     ...(images.length ? images.slice(0, 4) : [image]),
     ...MARMARIS_EXTRA_GALLERY_IMAGES,
@@ -305,7 +305,7 @@ export default function ExcursionPreviewPage() {
     { label: 'Duration', value: extractDuration(service.description), icon: Clock },
     { label: 'Departure', value: 'Rhodes', icon: Calendar },
     { label: 'Language', value: 'English', icon: Globe },
-    { label: 'Price', value: price, icon: DollarSign },
+    { label: 'Price', value: '50', icon: Euro },
   ];
 
   return (
