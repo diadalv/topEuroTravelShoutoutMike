@@ -388,6 +388,13 @@
 .tet-excursion-preview__gallery-controls svg {
   width: 18px;
   height: 18px;
+  color: currentColor;
+  stroke: currentColor !important;
+  stroke-width: 2 !important;
+  fill: none !important;
+  opacity: 1;
+  visibility: visible;
+  pointer-events: none;
 }
 
 .tet-excursion-preview__gallery {
@@ -400,6 +407,13 @@
   scroll-behavior: smooth;
   scroll-snap-type: inline mandatory;
   scrollbar-width: none;
+  -webkit-overflow-scrolling: touch;
+  touch-action: pan-x;
+  cursor: grab;
+}
+
+.tet-excursion-preview__gallery:active {
+  cursor: grabbing;
 }
 
 .tet-excursion-preview__gallery::-webkit-scrollbar {
@@ -431,6 +445,8 @@
   height: 100% !important;
   display: block !important;
   aspect-ratio: auto !important;
+  user-select: none;
+  -webkit-user-drag: none;
 }
 
 .tet-excursion-preview__gallery-image img {
