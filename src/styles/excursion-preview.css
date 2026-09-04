@@ -386,8 +386,9 @@
 }
 
 .tet-excursion-preview__gallery-controls svg {
-  width: 18px;
-  height: 18px;
+  display: block !important;
+  width: 18px !important;
+  height: 18px !important;
   color: currentColor;
   stroke: currentColor !important;
   stroke-width: 2 !important;
