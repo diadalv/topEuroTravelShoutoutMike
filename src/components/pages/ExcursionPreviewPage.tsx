@@ -169,6 +169,20 @@ async function loadExcursion(slug: string) {
   ) || null;
 }
 
+function moveGallery(gallery: HTMLDivElement, direction: -1 | 1) {
+  const firstItem = gallery.querySelector<HTMLElement>('.tet-excursion-preview__gallery-item');
+  if (!firstItem) return;
+
+  const gap = Number.parseFloat(window.getComputedStyle(gallery).columnGap) || 0;
+  const step = firstItem.offsetWidth + gap;
+  const maxScroll = Math.max(0, gallery.scrollWidth - gallery.clientWidth);
+  const nextScroll = direction === 1
+    ? (gallery.scrollLeft + step >= maxScroll - 2 ? 0 : gallery.scrollLeft + step)
+    : (gallery.scrollLeft <= 2 ? maxScroll : gallery.scrollLeft - step);
+
+  gallery.scrollTo({ left: nextScroll, behavior: 'smooth' });
+}
+
 function CollapsibleSection({
   title,
   content,
@@ -268,6 +282,14 @@ export default function ExcursionPreviewPage() {
   const parsed = useMemo(() => parseDescription(service?.description), [service?.description]);
   const images = useMemo(() => service ? serviceImages(service) : [], [service]);
 
+  useEffect(() => {
+    const gallery = galleryRef.current;
+    if (!service || loading || error || !gallery || window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+
+    const rotation = window.setInterval(() => moveGallery(gallery, 1), 5000);
+    return () => window.clearInterval(rotation);
+  }, [service, loading, error]);
+
   if (loading) {
     return (
       <div className="tet-excursion-preview__state">
@@ -305,14 +327,7 @@ export default function ExcursionPreviewPage() {
 
   const scrollGallery = (direction: -1 | 1) => {
     const gallery = galleryRef.current;
-    const firstItem = gallery?.querySelector<HTMLElement>('.tet-excursion-preview__gallery-item');
-    if (!gallery || !firstItem) return;
-
-    const gap = Number.parseFloat(window.getComputedStyle(gallery).columnGap) || 0;
-    gallery.scrollBy({
-      left: direction * (firstItem.offsetWidth + gap),
-      behavior: 'smooth',
-    });
+    if (gallery) moveGallery(gallery, direction);
   };
 
   // Extract quick facts from parsed data
