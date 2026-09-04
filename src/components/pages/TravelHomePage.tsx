@@ -4316,28 +4316,85 @@ const HOME_STYLES = String.raw`
   }
 }
 
-/* Mobile finger-swipe support for Destinations, Experiences and Testimonials. */
+/* Native mobile swipe rails for Destinations, Experiences and Testimonials. */
 @media (max-width: 760px) {
-  .tet-destinations__rail {
+  .tet-destinations__rail,
+  .tet-experiences__rail,
+  .tet-testimonials__slides {
     overflow-x: auto !important;
-    overflow-y: hidden;
+    overflow-y: hidden !important;
     -webkit-overflow-scrolling: touch;
     overscroll-behavior-x: contain;
     scroll-snap-type: x mandatory !important;
+    scrollbar-width: none;
     touch-action: pan-x pan-y;
   }
 
-  .tet-destination {
-    scroll-snap-align: center;
+  .tet-destinations__rail::-webkit-scrollbar,
+  .tet-experiences__rail::-webkit-scrollbar,
+  .tet-testimonials__slides::-webkit-scrollbar {
+    display: none;
+  }
+
+  .tet-destination,
+  .tet-experiences__rail .tet-experience,
+  .tet-testimonials__slide {
+    scroll-snap-align: start;
     scroll-snap-stop: always;
   }
 
-  .tet-experiences__carousel,
+  .tet-experiences__carousel {
+    overflow: visible !important;
+    touch-action: auto;
+  }
+
+  .tet-experiences__rail,
+  .tet-experiences__rail[data-active] {
+    width: 100%;
+    display: flex !important;
+    gap: 14px;
+    margin-right: 0 !important;
+    padding-bottom: 4px;
+    transform: none !important;
+    transition: none !important;
+    will-change: auto;
+  }
+
+  .tet-experiences__rail .tet-experience {
+    min-width: 100% !important;
+    flex: 0 0 100% !important;
+  }
+
+  .tet-experiences__rail .tet-experience:nth-child(n + 7) {
+    display: none !important;
+  }
+
   .tet-testimonials {
-    touch-action: pan-y;
-    overscroll-behavior-x: contain;
-    -webkit-user-select: none;
-    user-select: none;
+    touch-action: auto;
+    -webkit-user-select: auto;
+    user-select: auto;
+  }
+
+  .tet-testimonials__slides {
+    width: 100%;
+    display: flex !important;
+    gap: 0;
+  }
+
+  .tet-testimonials__slide,
+  .tet-testimonials__slide.is-active {
+    min-width: 100% !important;
+    flex: 0 0 100%;
+    grid-area: auto;
+    display: block !important;
+    visibility: visible !important;
+    pointer-events: auto !important;
+  }
+
+  .tet-testimonials__slide .tet-testimonials__quote,
+  .tet-testimonials__slide.is-active .tet-testimonials__quote {
+    animation: none !important;
+    transform: none !important;
   }
 }
 
@@ -4371,13 +4428,11 @@ export default function TravelHomePage() {
   const [scrolled, setScrolled] = useState(false);
   const [activeTestimonial, setActiveTestimonial] = useState(0);
   const [testimonialPaused, setTestimonialPaused] = useState(false);
-  const testimonialSwipeStartRef = useRef<{ x: number; y: number } | null>(null);
-  const testimonialDidSwipeRef = useRef(false);
+  const testimonialsRailRef = useRef<HTMLDivElement>(null);
   const [activeServiceSlide, setActiveServiceSlide] = useState(0);
   const [serviceTouchStart, setServiceTouchStart] = useState<number | null>(null);
   const [activeExperienceSlide, setActiveExperienceSlide] = useState(0);
-  const experienceSwipeStartRef = useRef<{ x: number; y: number } | null>(null);
-  const experienceDidSwipeRef = useRef(false);
+
   const experiencesRailRef = useRef<HTMLDivElement>(null);
   const [activeDestinationSlide, setActiveDestinationSlide] = useState(0);
   const destinationsRailRef = useRef<HTMLDivElement>(null);
@@ -4417,7 +4472,24 @@ export default function TravelHomePage() {
     const rail = experiencesRailRef.current;
     const nextIndex = ((index % experiences.length) + experiences.length) % experiences.length;
 
-    if (!rail || rail.dataset.loopLocked === 'true') return;
+    if (!rail) return;
+
+    if (window.matchMedia('(max-width: 760px)').matches) {
+      const slides = Array.from(rail.querySelectorAll<HTMLElement>('.tet-experience')).slice(0, experiences.length);
+      const targetSlide = slides[nextIndex];
+      if (!targetSlide) return;
+
+      const railRect = rail.getBoundingClientRect();
+      const slideRect = targetSlide.getBoundingClientRect();
+      rail.scrollTo({
+        left: rail.scrollLeft + slideRect.left - railRect.left,
+        behavior: window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth',
+      });
+      setActiveExperienceSlide(nextIndex);
+      return;
+    }
+
+    if (rail.dataset.loopLocked === 'true') return;
 
     const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
     const firstCard = rail.querySelector<HTMLElement>('.tet-experience');
@@ -4479,12 +4551,68 @@ export default function TravelHomePage() {
 
 
 
+  const syncExperienceSlide = () => {
+    const rail = experiencesRailRef.current;
+    if (!rail || !window.matchMedia('(max-width: 760px)').matches) return;
+
+    const slides = Array.from(rail.querySelectorAll<HTMLElement>('.tet-experience')).slice(0, experiences.length);
+    const railLeft = rail.getBoundingClientRect().left;
+    let nextIndex = 0;
+    let closestDistance = Number.POSITIVE_INFINITY;
+
+    slides.forEach((slide, index) => {
+      const distance = Math.abs(slide.getBoundingClientRect().left - railLeft);
+      if (distance < closestDistance) {
+        closestDistance = distance;
+        nextIndex = index;
+      }
+    });
+
+    setActiveExperienceSlide((current) => current === nextIndex ? current : nextIndex);
+  };
+
   const showTestimonial = (index: number) => {
-    setActiveTestimonial((index + testimonials.length) % testimonials.length);
+    const nextIndex = ((index % testimonials.length) + testimonials.length) % testimonials.length;
+    const rail = testimonialsRailRef.current;
+
+    if (rail && window.matchMedia('(max-width: 760px)').matches) {
+      const slides = Array.from(rail.querySelectorAll<HTMLElement>('.tet-testimonials__slide'));
+      const targetSlide = slides[nextIndex];
+      if (targetSlide) {
+        const railRect = rail.getBoundingClientRect();
+        const slideRect = targetSlide.getBoundingClientRect();
+        rail.scrollTo({
+          left: rail.scrollLeft + slideRect.left - railRect.left,
+          behavior: window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth',
+        });
+      }
+    }
+
+    setActiveTestimonial(nextIndex);
   };
 
   const moveTestimonial = (direction: -1 | 1) => {
-    setActiveTestimonial((current) => (current + direction + testimonials.length) % testimonials.length);
+    showTestimonial(activeTestimonial + direction);
+  };
+
+  const syncTestimonialSlide = () => {
+    const rail = testimonialsRailRef.current;
+    if (!rail || !window.matchMedia('(max-width: 760px)').matches) return;
+
+    const slides = Array.from(rail.querySelectorAll<HTMLElement>('.tet-testimonials__slide'));
+    const railLeft = rail.getBoundingClientRect().left;
+    let nextIndex = 0;
+    let closestDistance = Number.POSITIVE_INFINITY;
+
+    slides.forEach((slide, index) => {
+      const distance = Math.abs(slide.getBoundingClientRect().left - railLeft);
+      if (distance < closestDistance) {
+        closestDistance = distance;
+        nextIndex = index;
+      }
+    });
+
+    setActiveTestimonial((current) => current === nextIndex ? current : nextIndex);
   };
 
   useEffect(() => {
@@ -4969,40 +5097,12 @@ export default function TravelHomePage() {
 
           <div
             className="tet-experiences__carousel"
-            onTouchStart={(event) => {
-              const touch = event.touches[0];
-              experienceSwipeStartRef.current = touch ? { x: touch.clientX, y: touch.clientY } : null;
-              experienceDidSwipeRef.current = false;
-            }}
-            onTouchEnd={(event) => {
-              const start = experienceSwipeStartRef.current;
-              const touch = event.changedTouches[0];
-              experienceSwipeStartRef.current = null;
-              if (!start || !touch) return;
-              const distanceX = touch.clientX - start.x;
-              const distanceY = touch.clientY - start.y;
-              if (Math.abs(distanceX) > 36 && Math.abs(distanceX) > Math.abs(distanceY) * 1.1) {
-                experienceDidSwipeRef.current = true;
-                showExperienceSlide(activeExperienceSlide + (distanceX < 0 ? 1 : -1));
-                window.setTimeout(() => {
-                  experienceDidSwipeRef.current = false;
-                }, 350);
-              }
-            }}
-            onTouchCancel={() => {
-              experienceSwipeStartRef.current = null;
-              experienceDidSwipeRef.current = false;
-            }}
-            onClickCapture={(event) => {
-              if (!experienceDidSwipeRef.current) return;
-              event.preventDefault();
-              event.stopPropagation();
-              experienceDidSwipeRef.current = false;
-            }}
+
           >
             <div
               ref={experiencesRailRef}
               className="tet-experiences__rail"
+              onScroll={syncExperienceSlide}
               data-motion="up"
               data-stagger="true"
               aria-live="polite"
@@ -5052,36 +5152,7 @@ export default function TravelHomePage() {
           onBlurCapture={(event) => {
             if (!event.currentTarget.contains(event.relatedTarget as Node | null)) setTestimonialPaused(false);
           }}
-          onTouchStart={(event) => {
-            const touch = event.touches[0];
-            testimonialSwipeStartRef.current = touch ? { x: touch.clientX, y: touch.clientY } : null;
-            testimonialDidSwipeRef.current = false;
-          }}
-          onTouchEnd={(event) => {
-            const start = testimonialSwipeStartRef.current;
-            const touch = event.changedTouches[0];
-            testimonialSwipeStartRef.current = null;
-            if (!start || !touch) return;
-            const distanceX = touch.clientX - start.x;
-            const distanceY = touch.clientY - start.y;
-            if (Math.abs(distanceX) > 36 && Math.abs(distanceX) > Math.abs(distanceY) * 1.1) {
-              testimonialDidSwipeRef.current = true;
-              moveTestimonial(distanceX < 0 ? 1 : -1);
-              window.setTimeout(() => {
-                testimonialDidSwipeRef.current = false;
-              }, 350);
-            }
-          }}
-          onTouchCancel={() => {
-            testimonialSwipeStartRef.current = null;
-            testimonialDidSwipeRef.current = false;
-          }}
-          onClickCapture={(event) => {
-            if (!testimonialDidSwipeRef.current) return;
-            event.preventDefault();
-            event.stopPropagation();
-            testimonialDidSwipeRef.current = false;
-          }}
+
         >
           <div className="tet-testimonials__intro">
             <span className="tet-testimonials__eyebrow">
@@ -5100,7 +5171,11 @@ export default function TravelHomePage() {
 
           <div className="tet-testimonials__stage" aria-live="polite">
             <span className="tet-testimonials__mark" aria-hidden="true">“</span>
-            <div className="tet-testimonials__slides">
+            <div
+              ref={testimonialsRailRef}
+              className="tet-testimonials__slides"
+              onScroll={syncTestimonialSlide}
+            >
               {testimonials.map((testimonial, index) => (
                 <div
                   className={`tet-testimonials__slide${index === activeTestimonial ? ' is-active' : ''}`}
