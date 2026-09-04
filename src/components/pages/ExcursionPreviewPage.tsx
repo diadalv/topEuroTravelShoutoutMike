@@ -69,6 +69,14 @@ const SECTION_HEADINGS = [
   'GOOD TO KNOW',
 ] as const;
 
+const MARMARIS_EXTRA_GALLERY_IMAGES = [
+  'wix:image://v1/5a118b_48dcf397f5ff4d10b6e254d8b49e88bc~mv2.jpg/177%20cruise%20MSC%20Virtuosa%202.jpg#originWidth=5464&originHeight=3640',
+  'wix:image://v1/5a118b_ab6b77b093504e47b692ca6b17818686~mv2.jpg/Sun%20View%20Psaropoula%20beach.jpg#originWidth=1145&originHeight=763',
+  'wix:image://v1/5a118b_759cc37f162746d482783692c4ab1f01~mv2.jpg/246%20Rhodes%20Medieval%20Town.jpg#originWidth=5761&originHeight=3841',
+  'wix:image://v1/5a118b_36ba2e7cb31f4964a5432450d2f88391~mv2.jpg/163%20Rhodes%20Aerial%20View.JPG#originWidth=5472&originHeight=3648',
+  'wix:image://v1/5a118b_9cf911f461bb45a68bd414669c62f16e~mv2.jpg/126%20Anthony%20Quinn%20Beach.jpg#originWidth=1152&originHeight=768',
+] as const;
+
 function extractDuration(description?: string | null): string {
   if (!description) return 'Full day';
   const match = description.match(/\b(Half day|Full day|\d+\s*(?:hour|hr)s?)\b/i);
@@ -287,7 +295,10 @@ export default function ExcursionPreviewPage() {
   const bookingAvailable = service.onlineBooking?.enabled === true;
   const actionUrl = bookingAvailable ? `/booking-calendar/${encodeURIComponent(serviceSlug(service))}` : '/contact';
   const price = displayPrice(service);
-  const galleryImages = images.length ? images.slice(0, 4) : [image];
+  const galleryImages = [
+    ...(images.length ? images.slice(0, 4) : [image]),
+    ...MARMARIS_EXTRA_GALLERY_IMAGES,
+  ].filter((galleryImage, index, gallery) => gallery.indexOf(galleryImage) === index);
 
   // Extract quick facts from parsed data
   const quickFacts = [
