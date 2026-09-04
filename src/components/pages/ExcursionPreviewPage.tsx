@@ -427,41 +427,6 @@ export default function ExcursionPreviewPage() {
               />
             </section>
 
-            {/* Gallery */}
-            {galleryImages.length > 0 && (
-              <section className="tet-excursion-preview__section">
-                <div className="tet-excursion-preview__gallery-heading">
-                  <h2 className="tet-excursion-preview__section-title">Gallery</h2>
-                  {galleryImages.length > 1 && (
-                    <div className="tet-excursion-preview__gallery-controls" aria-label="Gallery navigation">
-                      <button type="button" aria-label="Previous gallery image" onClick={() => scrollGallery(-1)}>
-                        <ChevronLeft aria-hidden="true" />
-                      </button>
-                      <button type="button" aria-label="Next gallery image" onClick={() => scrollGallery(1)}>
-                        <ChevronRight aria-hidden="true" />
-                      </button>
-                    </div>
-                  )}
-                </div>
-                <div
-                  ref={galleryRef}
-                  className={`tet-excursion-preview__gallery${galleryImages.length === 1 ? ' is-single' : ''}`}
-                >
-                  {galleryImages.map((galleryImage, index) => (
-                    <div className="tet-excursion-preview__gallery-item" key={`${galleryImage}-${index}`}>
-                      <div className="tet-excursion-preview__gallery-item-wrapper">
-                        <Image
-                          className="tet-excursion-preview__gallery-image"
-                          src={galleryImage}
-                          alt={`${title} gallery view ${index + 1}`}
-                          loading="lazy"
-                        />
-                      </div>
-                    </div>
-                  ))}
-                </div>
-              </section>
-            )}
           </div>
 
           {/* Booking Summary Card */}
@@ -477,6 +442,42 @@ export default function ExcursionPreviewPage() {
             </Link>
           </aside>
         </div>
+
+        {/* Full-width Gallery */}
+        {galleryImages.length > 0 && (
+          <section className="tet-excursion-preview__section tet-excursion-preview__gallery-section">
+            <div className="tet-excursion-preview__gallery-heading">
+              <h2 className="tet-excursion-preview__section-title">Gallery</h2>
+              {galleryImages.length > 1 && (
+                <div className="tet-excursion-preview__gallery-controls" aria-label="Gallery navigation">
+                  <button type="button" aria-label="Previous gallery image" onClick={() => scrollGallery(-1)}>
+                    <ChevronLeft aria-hidden="true" />
+                  </button>
+                  <button type="button" aria-label="Next gallery image" onClick={() => scrollGallery(1)}>
+                    <ChevronRight aria-hidden="true" />
+                  </button>
+                </div>
+              )}
+            </div>
+            <div
+              ref={galleryRef}
+              className={`tet-excursion-preview__gallery${galleryImages.length === 1 ? ' is-single' : ''}`}
+            >
+              {galleryImages.map((galleryImage, index) => (
+                <div className="tet-excursion-preview__gallery-item" key={`${galleryImage}-${index}`}>
+                  <div className="tet-excursion-preview__gallery-item-wrapper">
+                    <Image
+                      className="tet-excursion-preview__gallery-image"
+                      src={galleryImage}
+                      alt={`${title} gallery view ${index + 1}`}
+                      loading="lazy"
+                    />
+                  </div>
+                </div>
+              ))}
+            </div>
+          </section>
+        )}
       </div>
     </div>
   );
