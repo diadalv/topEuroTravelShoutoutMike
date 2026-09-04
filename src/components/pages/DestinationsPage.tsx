@@ -303,7 +303,8 @@ export default function DestinationsPage() {
                 id={destination.id}
                 data-dest-reveal
               >
-                <div className="tet-dest-chapter__media">
+                <div className="tet-dest-chapter__media"
+                  style={{ aspectRatio: "3 / 2", minHeight: 0, alignSelf: "center" }}>
                   <Photo src={destination.image} alt={destination.imageAlt} />
 
                   <div
