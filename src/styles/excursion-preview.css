@@ -537,7 +537,11 @@
   }
 
   .tet-excursion-preview__collapsible-body {
-    padding: 0 14px 14px;
+    padding: 0 14px;
+  }
+
+  .tet-excursion-preview__collapsible-content[data-open="true"] .tet-excursion-preview__collapsible-body {
+    padding-bottom: 14px;
   }
 
   .tet-excursion-preview__gallery-heading {
