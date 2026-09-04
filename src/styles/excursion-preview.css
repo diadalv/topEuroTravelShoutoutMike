@@ -125,11 +125,13 @@
 }
 
 .tet-excursion-preview__eyebrow {
-  margin: 0 0 12px;
+  max-width: 1000px;
+  margin: 0 auto 12px;
   color: #dd9718;
   font-size: 12px;
   font-weight: 800;
   letter-spacing: .13em;
+  text-align: center;
   text-transform: uppercase;
 }
 
@@ -137,7 +139,9 @@
   display: grid;
   grid-template-columns: repeat(4, minmax(0, 1fr));
   gap: 12px;
-  margin-bottom: 0;
+  width: 100%;
+  max-width: 1000px;
+  margin: 0 auto;
 }
 
 .tet-excursion-preview__quick-fact {
@@ -145,8 +149,8 @@
   align-items: center;
   justify-content: center;
   gap: 10px;
-  min-height: 84px;
-  padding: 12px 14px;
+  min-height: 72px;
+  padding: 10px 12px;
   border: 1px solid rgba(221, 151, 24, .2);
   border-radius: 12px;
   background: rgba(255, 255, 255, .5);
