@@ -79,7 +79,7 @@ const destinations = [
       "Kos combines authentic island charm with excellent tourism infrastructure, making it a popular destination for travellers from around the world. Beautiful beaches, cultural landmarks, quality accommodation and a relaxed atmosphere create the ideal setting for holidays, group travel, incentive programmes and memorable local experiences.",
     highlights: ["Beaches", "Heritage", "Groups", "Incentives"],
     image: media.kos,
-    imageAlt: "Destination view of Kos harbour and coastline",
+    imageAlt: "Traditional AntimachiimageAlt: "Destination view of Kos harbour and coastline",a village in Kos",
     imageCaption: "Kos · Dodecanese",
     href: "/kos",
   },
