@@ -15,7 +15,7 @@
   display: grid;
   align-items: center;
   overflow: hidden;
-  border-radius: 0 0 16px 16px;
+  border-radius: 0;
   background: #032f55;
   padding-top: 88px;
 }
