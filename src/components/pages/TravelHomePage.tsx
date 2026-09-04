@@ -4441,7 +4441,7 @@ const HOME_STYLES = String.raw`
   }
 }
 
-DestinationsPage.tsx`;
+`;
 
 function Eyebrow({ children }: { children: string }) {
   return <p className="tet-eyebrow">{children}</p>;
