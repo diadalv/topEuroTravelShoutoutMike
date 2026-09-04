@@ -66,7 +66,7 @@ const destinations = [
       "Rhodes is one of Greece's leading tourism destinations, renowned for its rich history, diverse landscapes and exceptional hospitality infrastructure. From the UNESCO-listed Medieval City and picturesque villages to luxury resorts and stunning coastline, the island offers outstanding opportunities for leisure travel, group programmes, events and tailor-made experiences.",
     highlights: ["Medieval City", "Lindos", "Coastline", "Events"],
     image: media.rhodes,
-    imageAlt: "Aerial destination view of Rhodes and its coastline",
+    imageAlt: "MSC Virtuosa cruise ship visiting Rhodes",
     imageCaption: "Rhodes · Dodecanese",
     href: "/rhodes",
   },
