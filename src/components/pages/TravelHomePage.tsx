@@ -4773,7 +4773,6 @@ export default function TravelHomePage() {
           </div>
 
           <div className="tet-intro__facts" data-motion="up" data-stagger="true" aria-label="Top Euro Travel facts">
-            <Fact icon={CalendarCheck} value="1989" label="Since" />
             <Fact icon={Users} value="100,000+" label="Guests Annually" />
             <Fact icon={Building2} value="200+" label="Hotel Partners" />
             <Fact icon={Headphones} value="40+" label="Team Members" />
