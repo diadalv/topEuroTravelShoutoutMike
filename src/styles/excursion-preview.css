@@ -51,6 +51,7 @@
   position: relative;
   z-index: 4;
   width: min(calc(100% - (var(--page-gutter) * 2)), var(--site-width));
+  max-width: none;
   margin-inline: auto;
   padding: 48px 0;
 }
@@ -100,6 +101,7 @@
 
 .tet-excursion-preview__container {
   width: min(calc(100% - (var(--page-gutter) * 2)), var(--site-width));
+  max-width: none;
   margin-inline: auto;
   padding: 0;
 }
@@ -133,26 +135,26 @@
 
 .tet-excursion-preview__quick-facts {
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
+  grid-template-columns: repeat(4, minmax(0, 1fr));
   gap: 12px;
-  margin-bottom: 24px;
+  margin-bottom: 0;
 }
 
 .tet-excursion-preview__quick-fact {
   display: flex;
   align-items: center;
-  gap: 12px;
-  padding: 12px;
+  gap: 10px;
+  min-height: 84px;
+  padding: 12px 14px;
   border: 1px solid rgba(221, 151, 24, .2);
   border-radius: 12px;
   background: rgba(255, 255, 255, .5);
-  min-height: 76px;
 }
 
 .tet-excursion-preview__quick-fact-icon {
-  flex: 0 0 20px;
-  width: 20px;
-  height: 20px;
+  flex: 0 0 22px;
+  width: 22px;
+  height: 22px;
   color: #dd9718;
 }
 
@@ -161,14 +163,14 @@
   min-width: 0;
   display: flex;
   flex-direction: column;
-  gap: 2px;
+  gap: 4px;
 }
 
 .tet-excursion-preview__quick-fact-label {
   display: block;
   margin: 0;
   color: #5d6e80;
-  font-size: 12px;
+  font-size: 11px;
   font-weight: 600;
   text-transform: uppercase;
   letter-spacing: .05em;
@@ -252,7 +254,6 @@
 .tet-excursion-preview__collapsible-content {
   display: grid;
   grid-template-rows: 0fr;
-  overflow: hidden;
   transition: grid-template-rows .3s ease;
 }
 
@@ -263,10 +264,15 @@
 .tet-excursion-preview__collapsible-body {
   min-height: 0;
   overflow: hidden;
-  padding: 0 16px 16px;
+  padding: 0 16px;
   color: #5d6e80;
   font-size: 14px;
   line-height: 1.7;
+  transition: padding-bottom .3s ease;
+}
+
+.tet-excursion-preview__collapsible-content[data-open="true"] .tet-excursion-preview__collapsible-body {
+  padding-bottom: 16px;
 }
 
 .tet-excursion-preview__collapsible-list {
@@ -340,6 +346,10 @@
   margin-top: 24px;
 }
 
+.tet-excursion-preview__gallery.is-single {
+  grid-template-columns: minmax(0, 620px);
+}
+
 .tet-excursion-preview__gallery-item {
   overflow: hidden;
   aspect-ratio: 4 / 3;
@@ -353,22 +363,20 @@
   display: block;
 }
 
-.tet-excursion-preview__gallery-image {
-  width: 100%;
-  height: 100%;
-  display: block;
-  aspect-ratio: auto;
-  object-fit: cover;
+.tet-excursion-preview__gallery-image,
+.tet-excursion-preview__gallery-image img {
+  width: 100% !important;
+  height: 100% !important;
+  display: block !important;
+  aspect-ratio: auto !important;
 }
 
-.tet-excursion-preview__gallery-item-wrapper img {
-  width: 100%;
-  height: 100%;
+.tet-excursion-preview__gallery-image img {
   object-fit: cover;
   transition: transform .4s ease;
 }
 
-.tet-excursion-preview__gallery-item:hover .tet-excursion-preview__gallery-item-wrapper img {
+.tet-excursion-preview__gallery-item:hover .tet-excursion-preview__gallery-image img {
   transform: scale(1.05);
 }
 
@@ -418,15 +426,13 @@
     grid-template-columns: 1fr;
   }
 
-  .tet-excursion-preview__grid-mobile-reorder {
-    display: flex;
-    flex-direction: column;
-  }
-
   .tet-excursion-preview__booking-summary {
     position: static;
-    order: -1;
-    margin-bottom: 24px;
+    grid-row: 1;
+  }
+
+  .tet-excursion-preview__main-content {
+    grid-row: 2;
   }
 
   .tet-excursion-preview__quick-facts {
@@ -452,10 +458,6 @@
     padding: clamp(32px, 4vw, 40px) 0;
   }
 
-  .tet-excursion-preview__quick-facts {
-    grid-template-columns: 1fr;
-  }
-
   .tet-excursion-preview__highlights-grid {
     grid-template-columns: 1fr;
   }
@@ -472,9 +474,6 @@
     padding: 0 14px 14px;
   }
 
-  .tet-excursion-preview__booking-summary {
-    margin-bottom: 24px;
-  }
 }
 
 @media (max-width: 350px) {
@@ -487,7 +486,8 @@
   .tet-excursion-preview__button,
   .tet-excursion-preview__gallery-item-wrapper img,
   .tet-excursion-preview__collapsible-header svg,
-  .tet-excursion-preview__collapsible-content {
+  .tet-excursion-preview__collapsible-content,
+  .tet-excursion-preview__collapsible-body {
     transition: none;
   }
 
