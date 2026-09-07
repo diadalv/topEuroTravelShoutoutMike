@@ -6,7 +6,6 @@ import BookingConfirmationPage from '@/components/pages/BookingConfirmationPage'
 import BookingFormPage from '@/components/pages/BookingFormPage';
 import ContactPage from '@/components/pages/ContactPage';
 import DestinationsPage from '@/components/pages/DestinationsPage';
-import ExcursionDetailPage from '@/components/pages/ExcursionDetailPage';
 import ExcursionPreviewPage from '@/components/pages/ExcursionPreviewPage';
 import ExcursionsPage from '@/components/pages/ExcursionsPage';
 import ExperiencesPage from '@/components/pages/ExperiencesPage';
@@ -51,7 +50,7 @@ const router = createBrowserRouter(
         { path: 'experiences', element: <ExperiencesPage />, routeMetadata: { pageIdentifier: 'experiences' } },
         {
           path: 'excursions/:slug',
-          element: <ExcursionDetailPage />,
+          element: <ExcursionPreviewPage />,
           routeMetadata: { pageIdentifier: 'excursion-detail' },
         },
         {
