@@ -55,7 +55,7 @@ const router = createBrowserRouter(
           routeMetadata: { pageIdentifier: 'excursion-detail' },
         },
         {
-          path: 'excursion-preview/marmaris',
+          path: 'excursion-preview/:slug',
           element: <ExcursionPreviewPage />,
           routeMetadata: { pageIdentifier: 'excursion-preview' },
         },
