@@ -537,6 +537,15 @@ export default function ExcursionPreviewPage() {
           </section>
         )}
       </div>
+
+      <Link
+        className="tet-excursion-preview__mobile-book-now"
+        to={actionUrl}
+        aria-label={`Book ${title}`}
+      >
+        BOOK NOW
+        <ArrowRight size={17} aria-hidden="true" />
+      </Link>
     </div>
   );
 }
