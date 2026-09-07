@@ -229,6 +229,7 @@ export default function ExcursionPreviewPage() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
   const [openDetail, setOpenDetail] = useState<string | null>(null);
+  const [animatedQuickFact, setAnimatedQuickFact] = useState<string | null>(null);
   const galleryRef = useRef<HTMLDivElement>(null);
   const quickFactsRef = useRef<HTMLElement>(null);
   const storyPanelRef = useRef<HTMLElement>(null);
@@ -395,13 +396,24 @@ export default function ExcursionPreviewPage() {
             {quickFacts.map((fact) => {
               const IconComponent = fact.icon;
               return (
-                <div className="tet-excursion-preview__quick-fact" key={fact.label}>
+                <button
+                  type="button"
+                  className={`tet-excursion-preview__quick-fact${animatedQuickFact === fact.label ? ' is-activated' : ''}`}
+                  key={fact.label}
+                  aria-label={`${fact.label}: ${fact.value}`}
+                  onClick={() => setAnimatedQuickFact(fact.label)}
+                  onAnimationEnd={(event) => {
+                    if (event.target === event.currentTarget) {
+                      setAnimatedQuickFact((current) => current === fact.label ? null : current);
+                    }
+                  }}
+                >
                   <IconComponent className="tet-excursion-preview__quick-fact-icon" aria-hidden="true" />
                   <div className="tet-excursion-preview__quick-fact-content">
                     <span className="tet-excursion-preview__quick-fact-label">{fact.label}</span>
                     <span className="tet-excursion-preview__quick-fact-value">{fact.value}</span>
                   </div>
-                </div>
+                </button>
               );
             })}
           </div>
