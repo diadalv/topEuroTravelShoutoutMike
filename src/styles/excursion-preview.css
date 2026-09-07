@@ -699,11 +699,11 @@
 }
 
 .tet-excursion-preview__gallery-control-arrow.is-previous {
-  transform: translateX(2px) rotate(-135deg);
+  transform: rotate(-135deg);
 }
 
 .tet-excursion-preview__gallery-control-arrow.is-next {
-  transform: translateX(-2px) rotate(45deg);
+  transform: rotate(45deg);
 }
 
 .tet-excursion-preview__gallery {
@@ -963,18 +963,22 @@
   }
 
   .tet-excursion-preview__gallery-controls button {
-    width: 38px !important;
-    height: 38px !important;
-    min-width: 38px;
-    min-height: 38px;
-    max-width: 38px;
-    max-height: 38px;
-    flex-basis: 38px;
+    width: 40px !important;
+    height: 40px !important;
+    min-width: 40px !important;
+    min-height: 40px !important;
+    max-width: 40px !important;
+    max-height: 40px !important;
+    flex: 0 0 40px !important;
+    aspect-ratio: 1 / 1 !important;
+    padding: 0 !important;
+    border-radius: 50% !important;
+    box-sizing: border-box !important;
   }
 
   .tet-excursion-preview__gallery-control-arrow {
-    width: 8px;
-    height: 8px;
+    width: 9px;
+    height: 9px;
   }
 
 }
