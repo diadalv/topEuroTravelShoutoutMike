@@ -7,8 +7,6 @@ import {
   ArrowRight,
   Calendar,
   ChevronDown,
-  ChevronLeft,
-  ChevronRight,
   Clock,
   Euro,
   Globe,
@@ -509,10 +507,10 @@ export default function ExcursionPreviewPage() {
               {galleryImages.length > 1 && (
                 <div className="tet-excursion-preview__gallery-controls" aria-label="Gallery navigation">
                   <button type="button" aria-label="Previous gallery image" onClick={() => scrollGallery(-1)}>
-                    <ChevronLeft aria-hidden="true" />
+                    <span className="tet-excursion-preview__gallery-control-arrow" aria-hidden="true">â</span>
                   </button>
                   <button type="button" aria-label="Next gallery image" onClick={() => scrollGallery(1)}>
-                    <ChevronRight aria-hidden="true" />
+                    <span className="tet-excursion-preview__gallery-control-arrow" aria-hidden="true">â</span>
                   </button>
                 </div>
               )}
