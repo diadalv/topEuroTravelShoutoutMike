@@ -571,6 +571,9 @@
 .tet-excursion-preview__booking-summary {
   position: sticky;
   top: 100px;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  align-content: start;
   padding: 24px;
   border: 1px solid rgba(221, 151, 24, .3);
   border-radius: 12px;
@@ -579,47 +582,60 @@
 }
 
 .tet-excursion-preview__booking-summary-title {
-  margin: 0 0 16px;
+  margin: 0 0 20px;
   color: #032f55;
   font-size: 16px;
   font-weight: 700;
+  line-height: 1.2;
   font-family: "Cormorant Garamond", Georgia, serif;
 }
 
 .tet-excursion-preview__booking-summary-price {
   display: grid;
-  grid-template-columns: auto 1fr;
-  gap: 8px;
+  grid-template-columns: 52px minmax(0, 1fr);
+  grid-template-areas:
+    "label value"
+    ". unit";
+  column-gap: 14px;
+  row-gap: 5px;
   align-items: baseline;
-  margin-bottom: 16px;
-  padding-bottom: 16px;
+  margin: 0;
+  padding-bottom: 20px;
   border-bottom: 1px solid rgba(221, 151, 24, .2);
 }
 
 .tet-excursion-preview__booking-summary-price-label {
+  grid-area: label;
+  align-self: center;
   color: #5d6e80;
   font-size: 12px;
   font-weight: 600;
+  line-height: 1;
   text-transform: uppercase;
   letter-spacing: .05em;
 }
 
 .tet-excursion-preview__booking-summary-price-value {
+  grid-area: value;
   color: #032f55;
   font-size: 24px;
   font-weight: 700;
+  line-height: 1;
   font-family: "Cormorant Garamond", Georgia, serif;
 }
 
 .tet-excursion-preview__booking-summary-price-unit {
+  grid-area: unit;
   color: #5d6e80;
   font-size: 12px;
   font-weight: 500;
+  line-height: 1.35;
 }
 
 .tet-excursion-preview__booking-summary-button {
   width: 100%;
-  margin-top: 16px;
+  min-height: 44px;
+  margin-top: 20px;
 }
 
 .tet-excursion-preview__mobile-book-now {
