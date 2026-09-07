@@ -231,6 +231,7 @@ export default function ExcursionPreviewPage() {
   const [openDetail, setOpenDetail] = useState<string | null>(null);
   const galleryRef = useRef<HTMLDivElement>(null);
   const quickFactsRef = useRef<HTMLElement>(null);
+  const storyPanelRef = useRef<HTMLElement>(null);
 
   useEffect(() => {
     let active = true;
@@ -292,20 +293,23 @@ export default function ExcursionPreviewPage() {
   }, [service, loading, error]);
 
   useEffect(() => {
-    const section = quickFactsRef.current;
-    if (!service || loading || error || !section) return;
+    const sections = [quickFactsRef.current, storyPanelRef.current]
+      .filter((section): section is HTMLElement => Boolean(section));
+    if (!service || loading || error || !sections.length) return;
 
     const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
     if (prefersReducedMotion || !('IntersectionObserver' in window)) {
-      section.classList.add('is-visible');
+      sections.forEach((section) => section.classList.add('is-visible'));
       return;
     }
 
     const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (!entry?.isIntersecting) return;
-        section.classList.add('is-visible');
-        observer.unobserve(section);
+      (entries) => {
+        entries.forEach((entry) => {
+          if (!entry.isIntersecting) return;
+          entry.target.classList.add('is-visible');
+          observer.unobserve(entry.target);
+        });
       },
       {
         threshold: 0.18,
@@ -313,7 +317,7 @@ export default function ExcursionPreviewPage() {
       },
     );
 
-    observer.observe(section);
+    sections.forEach((section) => observer.observe(section));
     return () => observer.disconnect();
   }, [service, loading, error]);
 
@@ -403,31 +407,43 @@ export default function ExcursionPreviewPage() {
           </div>
         </section>
 
-        {/* Main Content Grid */}
-        <div className="tet-excursion-preview__grid">
-          <div className="tet-excursion-preview__main-content">
-            {/* Overview */}
+        {/* Overview and Highlights */}
+        {(parsed.intro.length > 0 || parsed.highlights.length > 0) && (
+          <section
+            ref={storyPanelRef}
+            className="tet-excursion-preview__story-panel"
+            aria-label="Excursion overview and highlights"
+          >
             {parsed.intro.length > 0 && (
-              <section className="tet-excursion-preview__section">
+              <div className="tet-excursion-preview__story-overview">
                 <h2 className="tet-excursion-preview__section-title">Overview</h2>
                 {parsed.intro.map((paragraph) => (
                   <p key={paragraph} className="tet-excursion-preview__intro-text">{paragraph}</p>
                 ))}
-              </section>
+              </div>
             )}
 
-            {/* Highlights */}
             {parsed.highlights.length > 0 && (
-              <section className="tet-excursion-preview__section">
+              <div className="tet-excursion-preview__story-highlights">
                 <h2 className="tet-excursion-preview__section-title">Highlights</h2>
                 <div className="tet-excursion-preview__highlights-grid">
-                  {parsed.highlights.slice(0, 4).map((highlight) => (
-                    <div className="tet-excursion-preview__highlight-item" key={highlight}>{highlight}</div>
+                  {parsed.highlights.slice(0, 4).map((highlight, index) => (
+                    <article className="tet-excursion-preview__highlight-item" key={highlight}>
+                      <span className="tet-excursion-preview__highlight-number" aria-hidden="true">
+                        {String(index + 1).padStart(2, '0')}
+                      </span>
+                      <p>{highlight}</p>
+                    </article>
                   ))}
                 </div>
-              </section>
+              </div>
             )}
+          </section>
+        )}
 
+        {/* Main Content Grid */}
+        <div className="tet-excursion-preview__grid">
+          <div className="tet-excursion-preview__main-content">
             {/* Collapsible Sections */}
             <section className="tet-excursion-preview__section">
               <h2 className="tet-excursion-preview__section-title">Details</h2>
