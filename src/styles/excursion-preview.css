@@ -679,6 +679,19 @@
   pointer-events: none;
 }
 
+.tet-excursion-preview__gallery-control-arrow {
+  display: block !important;
+  color: currentColor !important;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 20px;
+  font-weight: 600;
+  line-height: 1;
+  opacity: 1 !important;
+  visibility: visible !important;
+  transform: translateY(-1px);
+  pointer-events: none;
+}
+
 .tet-excursion-preview__gallery {
   display: grid;
   grid-auto-flow: column;
@@ -939,6 +952,10 @@
     width: 38px;
     height: 38px;
     flex-basis: 38px;
+  }
+
+  .tet-excursion-preview__gallery-control-arrow {
+    font-size: 21px;
   }
 
 }
