@@ -230,6 +230,7 @@ export default function ExcursionPreviewPage() {
   const [error, setError] = useState('');
   const [openDetail, setOpenDetail] = useState<string | null>(null);
   const galleryRef = useRef<HTMLDivElement>(null);
+  const quickFactsRef = useRef<HTMLElement>(null);
 
   useEffect(() => {
     let active = true;
@@ -288,6 +289,32 @@ export default function ExcursionPreviewPage() {
 
     const rotation = window.setInterval(() => moveGallery(gallery, 1), 5000);
     return () => window.clearInterval(rotation);
+  }, [service, loading, error]);
+
+  useEffect(() => {
+    const section = quickFactsRef.current;
+    if (!service || loading || error || !section) return;
+
+    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if (prefersReducedMotion || !('IntersectionObserver' in window)) {
+      section.classList.add('is-visible');
+      return;
+    }
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (!entry?.isIntersecting) return;
+        section.classList.add('is-visible');
+        observer.unobserve(section);
+      },
+      {
+        threshold: 0.18,
+        rootMargin: '0px 0px -6% 0px',
+      },
+    );
+
+    observer.observe(section);
+    return () => observer.disconnect();
   }, [service, loading, error]);
 
   if (loading) {
@@ -355,7 +382,10 @@ export default function ExcursionPreviewPage() {
 
       <div className="tet-excursion-preview__container">
         {/* Quick Facts */}
-        <section className="tet-excursion-preview__section">
+        <section
+          ref={quickFactsRef}
+          className="tet-excursion-preview__section tet-excursion-preview__section--quick-facts"
+        >
           <p className="tet-excursion-preview__eyebrow">Quick Facts</p>
           <div className="tet-excursion-preview__quick-facts">
             {quickFacts.map((fact) => {
