@@ -318,7 +318,7 @@
 .tet-excursion-preview__intro-text {
   max-width: 52ch;
   margin: 0 0 16px;
-  color: #53697c;
+  color: rgba(255, 255, 255, .82);
   font-size: 15px;
   line-height: 1.68;
 }
@@ -334,12 +334,12 @@
   grid-template-columns: minmax(0, .78fr) minmax(0, 1.22fr);
   margin-top: clamp(32px, 4vw, 48px);
   overflow: hidden;
-  border: 1px solid rgba(3, 47, 85, .11);
+  border: 1px solid rgba(221, 151, 24, .32);
   border-radius: 14px;
   background:
-    radial-gradient(circle at 94% 4%, rgba(221, 151, 24, .075), transparent 32%),
-    linear-gradient(135deg, #f8f7f3 0%, #eef3f4 100%);
-  box-shadow: 0 14px 36px rgba(3, 47, 85, .075);
+    radial-gradient(circle at 94% 4%, rgba(221, 151, 24, .16), transparent 34%),
+    linear-gradient(135deg, #032f55 0%, #073b68 58%, #052b4c 100%);
+  box-shadow: 0 18px 44px rgba(3, 47, 85, .14);
   opacity: 0;
   transform: translateY(22px);
   transition:
@@ -354,7 +354,7 @@
   right: -80px;
   width: 330px;
   height: 330px;
-  border: 1px solid rgba(3, 47, 85, .055);
+  border: 1px solid rgba(255, 255, 255, .06);
   border-radius: 50%;
   content: '';
   pointer-events: none;
@@ -376,7 +376,7 @@
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
-  border-right: 1px solid rgba(3, 47, 85, .11);
+  border-right: 1px solid rgba(221, 151, 24, .3);
   opacity: 0;
   transform: translateX(-16px);
   transition:
@@ -399,7 +399,7 @@
 
 .tet-excursion-preview__story-panel .tet-excursion-preview__section-title {
   margin-bottom: 20px;
-  color: #032f55;
+  color: #fff;
   font-family: "Cormorant Garamond", Georgia, serif;
   font-size: clamp(27px, 2.5vw, 35px);
   font-weight: 600;
@@ -443,10 +443,10 @@
   align-items: start;
   gap: 10px;
   padding: 17px;
-  border: 1px solid rgba(3, 47, 85, .11);
+  border: 1px solid rgba(221, 151, 24, .3);
   border-radius: 10px;
-  background: rgba(255, 255, 255, .6);
-  color: #415d73;
+  background: rgba(255, 255, 255, .07);
+  color: rgba(255, 255, 255, .88);
   font-size: 13.5px;
   line-height: 1.55;
   opacity: 0;
@@ -476,13 +476,13 @@
 }
 
 .tet-excursion-preview__highlight-item:hover {
-  border-color: rgba(221, 151, 24, .4);
-  background: rgba(255, 255, 255, .88);
+  border-color: rgba(221, 151, 24, .56);
+  background: rgba(255, 255, 255, .11);
 }
 
 .tet-excursion-preview__highlight-number {
   padding-top: 2px;
-  color: #c98410;
+  color: #f0ad32;
   font-size: 10px;
   font-weight: 800;
   letter-spacing: .12em;
@@ -844,7 +844,7 @@
 
   .tet-excursion-preview__story-overview {
     border-right: 0;
-    border-bottom: 1px solid rgba(3, 47, 85, .11);
+    border-bottom: 1px solid rgba(221, 151, 24, .3);
   }
 }
 
