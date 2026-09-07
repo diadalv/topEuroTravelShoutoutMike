@@ -507,10 +507,10 @@ export default function ExcursionPreviewPage() {
               {galleryImages.length > 1 && (
                 <div className="tet-excursion-preview__gallery-controls" aria-label="Gallery navigation">
                   <button type="button" aria-label="Previous gallery image" onClick={() => scrollGallery(-1)}>
-                    <span className="tet-excursion-preview__gallery-control-arrow" aria-hidden="true">&larr;</span>
+                    <span className="tet-excursion-preview__gallery-control-arrow is-previous" aria-hidden="true" />
                   </button>
                   <button type="button" aria-label="Next gallery image" onClick={() => scrollGallery(1)}>
-                    <span className="tet-excursion-preview__gallery-control-arrow" aria-hidden="true">&rarr;</span>
+                    <span className="tet-excursion-preview__gallery-control-arrow is-next" aria-hidden="true" />
                   </button>
                 </div>
               )}
