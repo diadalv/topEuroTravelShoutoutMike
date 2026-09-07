@@ -13,7 +13,7 @@ import {
   MapPin,
 } from 'lucide-react';
 import { type ReactNode, useEffect, useMemo, useRef, useState } from 'react';
-import { Link, useParams } from 'react-router-dom';
+import { Link, useLocation, useParams } from 'react-router-dom';
 
 type CmsImage = string | {
   id?: string;
@@ -211,6 +211,7 @@ function CollapsibleSection({
 
 export default function ExcursionPreviewPage() {
   const { slug = 'marmaris' } = useParams<{ slug: string }>();
+  const { pathname } = useLocation();
   const [excursion, setExcursion] = useState<ExcursionPageContent | null>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
@@ -246,6 +247,8 @@ export default function ExcursionPreviewPage() {
   }, [slug]);
 
   useEffect(() => {
+    if (!pathname.startsWith('/excursion-preview/')) return;
+
     let robotsMeta = document.querySelector<HTMLMetaElement>('meta[name="robots"]');
     const createdRobotsMeta = !robotsMeta;
     const previousRobots = robotsMeta?.getAttribute('content') ?? null;
@@ -267,7 +270,7 @@ export default function ExcursionPreviewPage() {
         robotsMeta.content = previousRobots;
       }
     };
-  }, []);
+  }, [pathname]);
 
   useEffect(() => {
     if (!excursion?.title) return;
