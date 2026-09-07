@@ -2,7 +2,7 @@ import { travelMedia } from '@/components/travel/Shared';
 import { Image } from '@/components/ui/image';
 import { normalizeWixMediaImage } from '@/config/wix-media';
 import '@/styles/excursion-preview.css';
-import { services } from '@wix/bookings';
+import { items } from '@wix/data';
 import {
   ArrowRight,
   Calendar,
@@ -12,15 +12,10 @@ import {
   Globe,
   MapPin,
 } from 'lucide-react';
-import { useEffect, useMemo, useRef, useState } from 'react';
-import { Link } from 'react-router-dom';
+import { type ReactNode, useEffect, useMemo, useRef, useState } from 'react';
+import { Link, useParams } from 'react-router-dom';
 
-type Money = {
-  value?: string;
-  formattedValue?: string | null;
-};
-
-type BookingImage = string | {
+type CmsImage = string | {
   id?: string;
   url?: string;
   filename?: string;
@@ -28,143 +23,109 @@ type BookingImage = string | {
   height?: number;
 };
 
-type BookingServiceRecord = {
-  _id?: string | null;
-  name?: string | null;
-  description?: string | null;
-  tagLine?: string | null;
-  hidden?: boolean | null;
-  category?: { name?: string | null };
-  onlineBooking?: { enabled?: boolean | null };
-  payment?: {
-    rateType?: string;
-    fixed?: { price?: Money };
-    varied?: { defaultPrice?: Money; minPrice?: Money };
-    custom?: { description?: string | null };
-  };
-  media?: {
-    mainMedia?: { image?: BookingImage };
-    coverMedia?: { image?: BookingImage };
-    items?: Array<{ image?: BookingImage }>;
-  };
-  mainSlug?: { name?: string | null };
-  supportedSlugs?: Array<{ name?: string | null }>;
+type ExcursionPageContent = {
+  _id?: string;
+  title?: string;
+  slug?: string;
+  active?: boolean;
+  heroDescription?: string;
+  heroImage?: CmsImage;
+  heroImageAlt?: string;
+  quickFactsTitle?: string;
+  durationLabel?: string;
+  durationValue?: string;
+  departureLabel?: string;
+  departureValue?: string;
+  languageLabel?: string;
+  languageValue?: string;
+  priceLabel?: string;
+  price?: number | string;
+  currencySymbol?: string;
+  overviewTitle?: string;
+  overviewText?: string;
+  highlightsTitle?: string;
+  highlight1?: string;
+  highlight2?: string;
+  highlight3?: string;
+  highlight4?: string;
+  detailsTitle?: string;
+  fullDescriptionTitle?: string;
+  fullDescription?: string;
+  includedTitle?: string;
+  included?: string;
+  notIncludedTitle?: string;
+  notIncluded?: string;
+  importantInfoTitle?: string;
+  importantInfo?: string;
+  bookingSummaryTitle?: string;
+  pricePrefix?: string;
+  priceUnit?: string;
+  bookingButtonLabel?: string;
+  bookingLink?: string;
+  galleryTitle?: string;
+  galleryImage1?: CmsImage;
+  galleryImage1Alt?: string;
+  galleryImage2?: CmsImage;
+  galleryImage2Alt?: string;
+  galleryImage3?: CmsImage;
+  galleryImage3Alt?: string;
+  galleryImage4?: CmsImage;
+  galleryImage4Alt?: string;
+  galleryImage5?: CmsImage;
+  galleryImage5Alt?: string;
+  galleryImage6?: CmsImage;
+  galleryImage6Alt?: string;
 };
 
-type ParsedDescription = {
-  intro: string[];
-  tourDescription: string[];
-  highlights: string[];
-  included: string[];
-  notIncluded: string[];
-  importantInfo: string[];
+type GalleryImage = {
+  src: string;
+  alt: string;
 };
 
-const SECTION_HEADINGS = [
-  'QUICK FACTS',
-  'TOUR DESCRIPTION',
-  'HIGHLIGHTS',
-  "WHAT'S INCLUDED",
-  "WHAT'S NOT INCLUDED",
-  'GOOD TO KNOW',
-] as const;
+const COLLECTION_ID = 'ExcursionPageContent';
 
-const MARMARIS_EXTRA_GALLERY_IMAGES = [
-  'wix:image://v1/5a118b_48dcf397f5ff4d10b6e254d8b49e88bc~mv2.jpg/177%20cruise%20MSC%20Virtuosa%202.jpg#originWidth=5464&originHeight=3640',
-  'wix:image://v1/5a118b_ab6b77b093504e47b692ca6b17818686~mv2.jpg/Sun%20View%20Psaropoula%20beach.jpg#originWidth=1145&originHeight=763',
-  'wix:image://v1/5a118b_759cc37f162746d482783692c4ab1f01~mv2.jpg/246%20Rhodes%20Medieval%20Town.jpg#originWidth=5761&originHeight=3841',
-  'wix:image://v1/5a118b_36ba2e7cb31f4964a5432450d2f88391~mv2.jpg/163%20Rhodes%20Aerial%20View.JPG#originWidth=5472&originHeight=3648',
-  'wix:image://v1/5a118b_9cf911f461bb45a68bd414669c62f16e~mv2.jpg/126%20Anthony%20Quinn%20Beach.jpg#originWidth=1152&originHeight=768',
-] as const;
-
-function extractDuration(description?: string | null): string {
-  if (!description) return 'Full day';
-  const match = description.match(/\b(Half day|Full day|\d+\s*(?:hour|hr)s?)\b/i);
-  return match ? match[1] : 'Full day';
+function cleanText(value: unknown, fallback = '') {
+  return typeof value === 'string' && value.trim() ? value.trim() : fallback;
 }
 
-function paragraphList(value: string) {
-  return value
+function paragraphList(value?: string) {
+  return (value || '')
+    .replace(/\r/g, '')
     .split(/\n\s*\n/)
     .map((item) => item.replace(/\s*\n\s*/g, ' ').trim())
     .filter(Boolean);
 }
 
-function bulletList(value: string) {
-  return value
+function bulletList(value?: string) {
+  return (value || '')
+    .replace(/\r/g, '')
     .split(/\n+/)
     .map((item) => item.replace(/^[\u2022\-]\s*/, '').trim())
     .filter(Boolean);
 }
 
-function parseDescription(description?: string | null): ParsedDescription {
-  const normalized = (description || '').replace(/\r/g, '').trim();
-  const positions = new Map<string, number>();
+function formatPrice(value: number | string | undefined, currencySymbol?: string) {
+  const currency = cleanText(currencySymbol, '\u20AC');
+  const numeric = typeof value === 'number'
+    ? value
+    : Number(String(value ?? '').replace(',', '.'));
 
-  SECTION_HEADINGS.forEach((heading) => {
-    const escaped = heading.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
-    const match = new RegExp(`(?:^|\\n)${escaped}\\s*(?:\\n|$)`, 'i').exec(normalized);
-    if (match) positions.set(heading, match.index + (match[0].startsWith('\n') ? 1 : 0));
-  });
-
-  function block(heading: typeof SECTION_HEADINGS[number], next?: typeof SECTION_HEADINGS[number]) {
-    const start = positions.get(heading);
-    if (start === undefined) return '';
-    const contentStart = normalized.indexOf('\n', start);
-    if (contentStart < 0) return '';
-    const end = next && positions.get(next) !== undefined ? positions.get(next)! : normalized.length;
-    return normalized.slice(contentStart + 1, end).trim();
-  }
-
-  const quickAndIntro = paragraphList(block('QUICK FACTS', 'TOUR DESCRIPTION'));
-  quickAndIntro.shift();
-
-  return {
-    intro: quickAndIntro,
-    tourDescription: paragraphList(block('TOUR DESCRIPTION', 'HIGHLIGHTS')),
-    highlights: bulletList(block('HIGHLIGHTS', "WHAT'S INCLUDED")),
-    included: bulletList(block("WHAT'S INCLUDED", "WHAT'S NOT INCLUDED")),
-    notIncluded: bulletList(block("WHAT'S NOT INCLUDED", 'GOOD TO KNOW')),
-    importantInfo: bulletList(block('GOOD TO KNOW')),
-  };
-}
-
-function displayPrice(service: BookingServiceRecord) {
-  const payment = service.payment;
-  if (payment?.rateType === 'NO_FEE') return 'Free';
-  const price = payment?.rateType === 'FIXED'
-    ? payment.fixed?.price
-    : payment?.varied?.minPrice || payment?.varied?.defaultPrice;
-  if (price?.formattedValue) return payment?.rateType === 'VARIED' ? `from ${price.formattedValue}` : price.formattedValue;
-  const numeric = Number(String(price?.value || '').replace(',', '.'));
-  if (Number.isFinite(numeric) && numeric > 0) return `${payment?.rateType === 'VARIED' ? 'from ' : ''}\u20AC${numeric.toFixed(0)}`;
-  const custom = payment?.custom?.description?.trim() || '';
-  return /confirm|schedule|request/i.test(custom) ? 'TBA' : custom || 'TBA';
-}
-
-function serviceImages(service: BookingServiceRecord) {
-  return [
-    service.media?.coverMedia?.image,
-    service.media?.mainMedia?.image,
-    ...(service.media?.items || []).map((item) => item.image),
-  ]
-    .map((image) => normalizeWixMediaImage(image))
-    .filter((image, index, values): image is string => Boolean(image) && values.indexOf(image) === index);
-}
-
-function serviceSlug(service: BookingServiceRecord) {
-  return service.mainSlug?.name?.trim()
-    || service.supportedSlugs?.find((item) => item.name)?.name?.trim()
-    || '';
+  if (!Number.isFinite(numeric)) return '';
+  const formatted = Number.isInteger(numeric)
+    ? numeric.toFixed(0)
+    : numeric.toFixed(2).replace(/0+$/, '').replace(/\.$/, '');
+  return `${formatted}${currency}`;
 }
 
 async function loadExcursion(slug: string) {
-  const result = await services.queryServices().limit(100).find();
-  return ((result.items || []) as unknown as BookingServiceRecord[]).find((service) =>
-    service.hidden !== true
-    && service.category?.name?.trim().toLowerCase() === 'excursions'
-    && serviceSlug(service) === slug,
-  ) || null;
+  const result = await items
+    .query(COLLECTION_ID)
+    .eq('slug', slug)
+    .eq('active', true)
+    .limit(1)
+    .find();
+
+  return (result.items?.[0] as unknown as ExcursionPageContent | undefined) || null;
 }
 
 function moveGallery(gallery: HTMLDivElement, direction: -1 | 1) {
@@ -181,6 +142,32 @@ function moveGallery(gallery: HTMLDivElement, direction: -1 | 1) {
   gallery.scrollTo({ left: nextScroll, behavior: 'smooth' });
 }
 
+function BookingAction({
+  href,
+  className,
+  ariaLabel,
+  children,
+}: {
+  href: string;
+  className: string;
+  ariaLabel?: string;
+  children: ReactNode;
+}) {
+  if (/^(?:https?:\/\/|mailto:|tel:)/i.test(href)) {
+    return (
+      <a className={className} href={href} aria-label={ariaLabel}>
+        {children}
+      </a>
+    );
+  }
+
+  return (
+    <Link className={className} to={href} aria-label={ariaLabel}>
+      {children}
+    </Link>
+  );
+}
+
 function CollapsibleSection({
   title,
   content,
@@ -192,12 +179,12 @@ function CollapsibleSection({
   open: boolean;
   onToggle: () => void;
 }) {
-
   if (!content.length) return null;
 
   return (
     <div className="tet-excursion-preview__collapsible-section">
       <button
+        type="button"
         className="tet-excursion-preview__collapsible-header"
         aria-expanded={open}
         onClick={onToggle}
@@ -211,8 +198,8 @@ function CollapsibleSection({
             <p style={{ margin: 0 }}>{content[0]}</p>
           ) : (
             <ul className="tet-excursion-preview__collapsible-list">
-              {content.map((item) => (
-                <li key={item}>{item}</li>
+              {content.map((item, index) => (
+                <li key={`${item}-${index}`}>{item}</li>
               ))}
             </ul>
           )}
@@ -223,7 +210,8 @@ function CollapsibleSection({
 }
 
 export default function ExcursionPreviewPage() {
-  const [service, setService] = useState<BookingServiceRecord | null>(null);
+  const { slug = 'marmaris' } = useParams<{ slug: string }>();
+  const [excursion, setExcursion] = useState<ExcursionPageContent | null>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
   const [openDetail, setOpenDetail] = useState<string | null>(null);
@@ -236,16 +224,18 @@ export default function ExcursionPreviewPage() {
     let active = true;
     setLoading(true);
     setError('');
+    setExcursion(null);
+    setOpenDetail(null);
 
-    loadExcursion('day-trip-to-turkey-marmaris-by-boat')
+    loadExcursion(slug)
       .then((result) => {
         if (!active) return;
-        setService(result);
+        setExcursion(result);
         if (!result) setError('We could not find this excursion.');
       })
       .catch((reason) => {
         if (!active) return;
-        console.error('Unable to load excursion:', reason);
+        console.error('Unable to load excursion content from CMS:', reason);
         setError('This excursion is temporarily unavailable. Please try again shortly.');
       })
       .finally(() => {
@@ -253,9 +243,8 @@ export default function ExcursionPreviewPage() {
       });
 
     return () => { active = false; };
-  }, []);
+  }, [slug]);
 
-  // Set noindex, nofollow metadata
   useEffect(() => {
     let robotsMeta = document.querySelector<HTMLMetaElement>('meta[name="robots"]');
     const createdRobotsMeta = !robotsMeta;
@@ -280,21 +269,55 @@ export default function ExcursionPreviewPage() {
     };
   }, []);
 
-  const parsed = useMemo(() => parseDescription(service?.description), [service?.description]);
-  const images = useMemo(() => service ? serviceImages(service) : [], [service]);
+  useEffect(() => {
+    if (!excursion?.title) return;
+    const previousTitle = document.title;
+    document.title = excursion.title;
+    return () => { document.title = previousTitle; };
+  }, [excursion?.title]);
+
+  const overview = useMemo(() => paragraphList(excursion?.overviewText), [excursion?.overviewText]);
+  const fullDescription = useMemo(() => paragraphList(excursion?.fullDescription), [excursion?.fullDescription]);
+  const included = useMemo(() => bulletList(excursion?.included), [excursion?.included]);
+  const notIncluded = useMemo(() => bulletList(excursion?.notIncluded), [excursion?.notIncluded]);
+  const importantInfo = useMemo(() => bulletList(excursion?.importantInfo), [excursion?.importantInfo]);
+
+  const highlights = useMemo(() => [
+    excursion?.highlight1,
+    excursion?.highlight2,
+    excursion?.highlight3,
+    excursion?.highlight4,
+  ].map((value) => cleanText(value)).filter(Boolean), [excursion]);
+
+  const galleryImages = useMemo<GalleryImage[]>(() => {
+    if (!excursion) return [];
+
+    return [1, 2, 3, 4, 5, 6]
+      .map((index) => {
+        const imageValue = excursion[`galleryImage${index}` as keyof ExcursionPageContent] as CmsImage | undefined;
+        const src = normalizeWixMediaImage(imageValue);
+        const alt = cleanText(
+          excursion[`galleryImage${index}Alt` as keyof ExcursionPageContent],
+          `${cleanText(excursion.title, 'Excursion')} gallery view ${index}`,
+        );
+        return src ? { src, alt } : null;
+      })
+      .filter((image): image is GalleryImage => Boolean(image))
+      .filter((image, index, values) => values.findIndex((candidate) => candidate.src === image.src) === index);
+  }, [excursion]);
 
   useEffect(() => {
     const gallery = galleryRef.current;
-    if (!service || loading || error || !gallery || window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+    if (!excursion || loading || error || !gallery || window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
 
     const rotation = window.setInterval(() => moveGallery(gallery, 1), 5000);
     return () => window.clearInterval(rotation);
-  }, [service, loading, error]);
+  }, [excursion, loading, error, galleryImages.length]);
 
   useEffect(() => {
     const sections = [quickFactsRef.current, storyPanelRef.current]
       .filter((section): section is HTMLElement => Boolean(section));
-    if (!service || loading || error || !sections.length) return;
+    if (!excursion || loading || error || !sections.length) return;
 
     const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
     if (prefersReducedMotion || !('IntersectionObserver' in window)) {
@@ -310,15 +333,12 @@ export default function ExcursionPreviewPage() {
           observer.unobserve(entry.target);
         });
       },
-      {
-        threshold: 0.18,
-        rootMargin: '0px 0px -6% 0px',
-      },
+      { threshold: 0.18, rootMargin: '0px 0px -6% 0px' },
     );
 
     sections.forEach((section) => observer.observe(section));
     return () => observer.disconnect();
-  }, [service, loading, error]);
+  }, [excursion, loading, error]);
 
   if (loading) {
     return (
@@ -331,7 +351,7 @@ export default function ExcursionPreviewPage() {
     );
   }
 
-  if (!service || error) {
+  if (!excursion || error) {
     return (
       <div className="tet-excursion-preview__state">
         <div>
@@ -344,101 +364,101 @@ export default function ExcursionPreviewPage() {
     );
   }
 
-  const title = service.name?.trim() || 'Excursion';
-  const heroDescription = service.tagLine?.trim() || parsed.intro[0] || '';
-  const image = images[0] || travelMedia('excursions-hero.jpg');
-  const bookingAvailable = service.onlineBooking?.enabled === true;
-  const actionUrl = bookingAvailable ? `/booking-calendar/${encodeURIComponent(serviceSlug(service))}` : '/contact';
-  const price = '50\u20AC';
-  const galleryImages = [
-    ...(images.length ? images.slice(0, 4) : [image]),
-    ...MARMARIS_EXTRA_GALLERY_IMAGES,
-  ].filter((galleryImage, index, gallery) => gallery.indexOf(galleryImage) === index);
+  const title = cleanText(excursion.title, 'Excursion');
+  const heroDescription = cleanText(excursion.heroDescription);
+  const heroImage = normalizeWixMediaImage(excursion.heroImage) || travelMedia('excursions-hero.jpg');
+  const heroImageAlt = cleanText(excursion.heroImageAlt, title);
+  const price = formatPrice(excursion.price, excursion.currencySymbol);
+  const actionUrl = cleanText(excursion.bookingLink, '/contact');
+  const bookingButtonLabel = cleanText(excursion.bookingButtonLabel, 'Book Now');
+  const quickFacts = [
+    { label: cleanText(excursion.durationLabel, 'Duration'), value: cleanText(excursion.durationValue), icon: Clock },
+    { label: cleanText(excursion.departureLabel, 'Departure'), value: cleanText(excursion.departureValue), icon: Calendar },
+    { label: cleanText(excursion.languageLabel, 'Language'), value: cleanText(excursion.languageValue), icon: Globe },
+    { label: cleanText(excursion.priceLabel, 'Price'), value: price, icon: Euro },
+  ].filter((fact) => Boolean(fact.value));
 
   const scrollGallery = (direction: -1 | 1) => {
     const gallery = galleryRef.current;
     if (gallery) moveGallery(gallery, direction);
   };
 
-  // Extract quick facts from parsed data
-  const quickFacts = [
-    { label: 'Duration', value: extractDuration(service.description), icon: Clock },
-    { label: 'Departure', value: 'Rhodes', icon: Calendar },
-    { label: 'Language', value: 'English', icon: Globe },
-    { label: 'Price', value: '50', icon: Euro },
-  ];
-
   return (
     <div className="tet-excursion-preview">
-      {/* Hero Section */}
       <section className="tet-excursion-preview__hero" aria-labelledby="preview-title">
-        <Image className="tet-excursion-preview__hero-image" src={image} alt="" />
+        <Image className="tet-excursion-preview__hero-image" src={heroImage} alt={heroImageAlt} />
         <div className="tet-excursion-preview__hero-content">
           <h1 id="preview-title">{title}</h1>
           {heroDescription && <p className="tet-excursion-preview__hero-description">{heroDescription}</p>}
-          <Link className="tet-excursion-preview__button" to={actionUrl}>
-            BOOK NOW
+          <BookingAction className="tet-excursion-preview__button" href={actionUrl}>
+            {bookingButtonLabel}
             <ArrowRight size={16} aria-hidden="true" />
-          </Link>
+          </BookingAction>
         </div>
       </section>
 
       <div className="tet-excursion-preview__container">
-        {/* Quick Facts */}
-        <section
-          ref={quickFactsRef}
-          className="tet-excursion-preview__section tet-excursion-preview__section--quick-facts"
-        >
-          <p className="tet-excursion-preview__eyebrow">Quick Facts</p>
-          <div className="tet-excursion-preview__quick-facts">
-            {quickFacts.map((fact) => {
-              const IconComponent = fact.icon;
-              return (
-                <button
-                  type="button"
-                  className={`tet-excursion-preview__quick-fact${animatedQuickFact === fact.label ? ' is-activated' : ''}`}
-                  key={fact.label}
-                  aria-label={`${fact.label}: ${fact.value}`}
-                  onClick={() => setAnimatedQuickFact(fact.label)}
-                  onAnimationEnd={(event) => {
-                    if (event.target === event.currentTarget) {
-                      setAnimatedQuickFact((current) => current === fact.label ? null : current);
-                    }
-                  }}
-                >
-                  <IconComponent className="tet-excursion-preview__quick-fact-icon" aria-hidden="true" />
-                  <div className="tet-excursion-preview__quick-fact-content">
-                    <span className="tet-excursion-preview__quick-fact-label">{fact.label}</span>
-                    <span className="tet-excursion-preview__quick-fact-value">{fact.value}</span>
-                  </div>
-                </button>
-              );
-            })}
-          </div>
-        </section>
+        {quickFacts.length > 0 && (
+          <section
+            ref={quickFactsRef}
+            className="tet-excursion-preview__section tet-excursion-preview__section--quick-facts"
+          >
+            <p className="tet-excursion-preview__eyebrow">
+              {cleanText(excursion.quickFactsTitle, 'Quick Facts')}
+            </p>
+            <div className="tet-excursion-preview__quick-facts">
+              {quickFacts.map((fact) => {
+                const IconComponent = fact.icon;
+                return (
+                  <button
+                    type="button"
+                    className={`tet-excursion-preview__quick-fact${animatedQuickFact === fact.label ? ' is-activated' : ''}`}
+                    key={fact.label}
+                    aria-label={`${fact.label}: ${fact.value}`}
+                    onClick={() => setAnimatedQuickFact(fact.label)}
+                    onAnimationEnd={(event) => {
+                      if (event.target === event.currentTarget) {
+                        setAnimatedQuickFact((current) => current === fact.label ? null : current);
+                      }
+                    }}
+                  >
+                    <IconComponent className="tet-excursion-preview__quick-fact-icon" aria-hidden="true" />
+                    <div className="tet-excursion-preview__quick-fact-content">
+                      <span className="tet-excursion-preview__quick-fact-label">{fact.label}</span>
+                      <span className="tet-excursion-preview__quick-fact-value">{fact.value}</span>
+                    </div>
+                  </button>
+                );
+              })}
+            </div>
+          </section>
+        )}
 
-        {/* Overview and Highlights */}
-        {(parsed.intro.length > 0 || parsed.highlights.length > 0) && (
+        {(overview.length > 0 || highlights.length > 0) && (
           <section
             ref={storyPanelRef}
             className="tet-excursion-preview__story-panel"
             aria-label="Excursion overview and highlights"
           >
-            {parsed.intro.length > 0 && (
+            {overview.length > 0 && (
               <div className="tet-excursion-preview__story-overview">
-                <h2 className="tet-excursion-preview__section-title">Overview</h2>
-                {parsed.intro.map((paragraph) => (
-                  <p key={paragraph} className="tet-excursion-preview__intro-text">{paragraph}</p>
+                <h2 className="tet-excursion-preview__section-title">
+                  {cleanText(excursion.overviewTitle, 'Overview')}
+                </h2>
+                {overview.map((paragraph, index) => (
+                  <p key={`${paragraph}-${index}`} className="tet-excursion-preview__intro-text">{paragraph}</p>
                 ))}
               </div>
             )}
 
-            {parsed.highlights.length > 0 && (
+            {highlights.length > 0 && (
               <div className="tet-excursion-preview__story-highlights">
-                <h2 className="tet-excursion-preview__section-title">Highlights</h2>
+                <h2 className="tet-excursion-preview__section-title">
+                  {cleanText(excursion.highlightsTitle, 'Highlights')}
+                </h2>
                 <div className="tet-excursion-preview__highlights-grid">
-                  {parsed.highlights.slice(0, 4).map((highlight, index) => (
-                    <article className="tet-excursion-preview__highlight-item" key={highlight}>
+                  {highlights.map((highlight, index) => (
+                    <article className="tet-excursion-preview__highlight-item" key={`${highlight}-${index}`}>
                       <span className="tet-excursion-preview__highlight-number" aria-hidden="true">
                         {String(index + 1).padStart(2, '0')}
                       </span>
@@ -451,59 +471,71 @@ export default function ExcursionPreviewPage() {
           </section>
         )}
 
-        {/* Main Content Grid */}
         <div className="tet-excursion-preview__grid">
           <div className="tet-excursion-preview__main-content">
-            {/* Collapsible Sections */}
-            <section className="tet-excursion-preview__section">
-              <h2 className="tet-excursion-preview__section-title">Details</h2>
-              <CollapsibleSection
-                title="Full Description"
-                content={parsed.tourDescription}
-                open={openDetail === 'full-description'}
-                onToggle={() => setOpenDetail((current) => current === 'full-description' ? null : 'full-description')}
-              />
-              <CollapsibleSection
-                title="What's Included"
-                content={parsed.included}
-                open={openDetail === 'included'}
-                onToggle={() => setOpenDetail((current) => current === 'included' ? null : 'included')}
-              />
-              <CollapsibleSection
-                title="What's Not Included"
-                content={parsed.notIncluded}
-                open={openDetail === 'not-included'}
-                onToggle={() => setOpenDetail((current) => current === 'not-included' ? null : 'not-included')}
-              />
-              <CollapsibleSection
-                title="Important Information"
-                content={parsed.importantInfo}
-                open={openDetail === 'important-information'}
-                onToggle={() => setOpenDetail((current) => current === 'important-information' ? null : 'important-information')}
-              />
-            </section>
-
+            {(fullDescription.length > 0 || included.length > 0 || notIncluded.length > 0 || importantInfo.length > 0) && (
+              <section className="tet-excursion-preview__section">
+                <h2 className="tet-excursion-preview__section-title">
+                  {cleanText(excursion.detailsTitle, 'Details')}
+                </h2>
+                <CollapsibleSection
+                  title={cleanText(excursion.fullDescriptionTitle, 'Full Description')}
+                  content={fullDescription}
+                  open={openDetail === 'full-description'}
+                  onToggle={() => setOpenDetail((current) => current === 'full-description' ? null : 'full-description')}
+                />
+                <CollapsibleSection
+                  title={cleanText(excursion.includedTitle, "What's Included")}
+                  content={included}
+                  open={openDetail === 'included'}
+                  onToggle={() => setOpenDetail((current) => current === 'included' ? null : 'included')}
+                />
+                <CollapsibleSection
+                  title={cleanText(excursion.notIncludedTitle, "What's Not Included")}
+                  content={notIncluded}
+                  open={openDetail === 'not-included'}
+                  onToggle={() => setOpenDetail((current) => current === 'not-included' ? null : 'not-included')}
+                />
+                <CollapsibleSection
+                  title={cleanText(excursion.importantInfoTitle, 'Important Information')}
+                  content={importantInfo}
+                  open={openDetail === 'important-information'}
+                  onToggle={() => setOpenDetail((current) => current === 'important-information' ? null : 'important-information')}
+                />
+              </section>
+            )}
           </div>
 
-          {/* Booking Summary Card */}
           <aside className="tet-excursion-preview__booking-summary">
-            <h3 className="tet-excursion-preview__booking-summary-title">Booking Summary</h3>
-            <div className="tet-excursion-preview__booking-summary-price">
-              <span className="tet-excursion-preview__booking-summary-price-label">From</span>
-              <span className="tet-excursion-preview__booking-summary-price-value">{price}</span>
-              <span className="tet-excursion-preview__booking-summary-price-unit">per person</span>
-            </div>
-            <Link className="tet-excursion-preview__button tet-excursion-preview__booking-summary-button" to={actionUrl}>
-              BOOK NOW
-            </Link>
+            <h3 className="tet-excursion-preview__booking-summary-title">
+              {cleanText(excursion.bookingSummaryTitle, 'Booking Summary')}
+            </h3>
+            {price && (
+              <div className="tet-excursion-preview__booking-summary-price">
+                <span className="tet-excursion-preview__booking-summary-price-label">
+                  {cleanText(excursion.pricePrefix, 'From')}
+                </span>
+                <span className="tet-excursion-preview__booking-summary-price-value">{price}</span>
+                <span className="tet-excursion-preview__booking-summary-price-unit">
+                  {cleanText(excursion.priceUnit, 'per person')}
+                </span>
+              </div>
+            )}
+            <BookingAction
+              className="tet-excursion-preview__button tet-excursion-preview__booking-summary-button"
+              href={actionUrl}
+            >
+              {bookingButtonLabel}
+            </BookingAction>
           </aside>
         </div>
 
-        {/* Full-width Gallery */}
         {galleryImages.length > 0 && (
           <section className="tet-excursion-preview__section tet-excursion-preview__gallery-section">
             <div className="tet-excursion-preview__gallery-heading">
-              <h2 className="tet-excursion-preview__section-title">Gallery</h2>
+              <h2 className="tet-excursion-preview__section-title">
+                {cleanText(excursion.galleryTitle, 'Gallery')}
+              </h2>
               {galleryImages.length > 1 && (
                 <div className="tet-excursion-preview__gallery-controls" aria-label="Gallery navigation">
                   <button type="button" aria-label="Previous gallery image" onClick={() => scrollGallery(-1)}>
@@ -520,12 +552,12 @@ export default function ExcursionPreviewPage() {
               className={`tet-excursion-preview__gallery${galleryImages.length === 1 ? ' is-single' : ''}`}
             >
               {galleryImages.map((galleryImage, index) => (
-                <div className="tet-excursion-preview__gallery-item" key={`${galleryImage}-${index}`}>
+                <div className="tet-excursion-preview__gallery-item" key={`${galleryImage.src}-${index}`}>
                   <div className="tet-excursion-preview__gallery-item-wrapper">
                     <Image
                       className="tet-excursion-preview__gallery-image"
-                      src={galleryImage}
-                      alt={`${title} gallery view ${index + 1}`}
+                      src={galleryImage.src}
+                      alt={galleryImage.alt}
                       loading="lazy"
                     />
                   </div>
@@ -536,14 +568,14 @@ export default function ExcursionPreviewPage() {
         )}
       </div>
 
-      <Link
+      <BookingAction
         className="tet-excursion-preview__mobile-book-now"
-        to={actionUrl}
-        aria-label={`Book ${title}`}
+        href={actionUrl}
+        ariaLabel={`Book ${title}`}
       >
-        BOOK NOW
+        {bookingButtonLabel}
         <ArrowRight size={17} aria-hidden="true" />
-      </Link>
+      </BookingAction>
     </div>
   );
 }
