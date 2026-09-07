@@ -233,7 +233,10 @@ export default function ExcursionsPage() {
         {!loading && !error && records.length > 0 && (
           <div className="excursions-card-grid">
             {records.filter((record) => recordMatchesFilter(record, activeFilter)).map((record) => {
-              const detailUrl = `/excursions/${record.slug}`;
+              const cmsSlug = record.slug === 'day-trip-to-turkey-marmaris-by-boat'
+                ? 'marmaris'
+                : record.slug;
+              const detailUrl = `/excursion-preview/${cmsSlug}`;
               return (
                 <article className="excursion-list-card" key={record.id}>
                   <Link className="excursion-list-card__image" to={detailUrl} aria-label={`View ${record.title}`}>
