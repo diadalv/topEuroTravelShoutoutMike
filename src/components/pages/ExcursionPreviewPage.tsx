@@ -95,7 +95,7 @@ function paragraphList(value: string) {
 function bulletList(value: string) {
   return value
     .split(/\n+/)
-    .map((item) => item.replace(/^[•\-]\s*/, '').trim())
+    .map((item) => item.replace(/^[â¢\-]\s*/, '').trim())
     .filter(Boolean);
 }
 
@@ -139,7 +139,7 @@ function displayPrice(service: BookingServiceRecord) {
     : payment?.varied?.minPrice || payment?.varied?.defaultPrice;
   if (price?.formattedValue) return payment?.rateType === 'VARIED' ? `from ${price.formattedValue}` : price.formattedValue;
   const numeric = Number(String(price?.value || '').replace(',', '.'));
-  if (Number.isFinite(numeric) && numeric > 0) return `${payment?.rateType === 'VARIED' ? 'from ' : ''}€${numeric.toFixed(0)}`;
+  if (Number.isFinite(numeric) && numeric > 0) return `${payment?.rateType === 'VARIED' ? 'from ' : ''}â¬${numeric.toFixed(0)}`;
   const custom = payment?.custom?.description?.trim() || '';
   return /confirm|schedule|request/i.test(custom) ? 'TBA' : custom || 'TBA';
 }
@@ -295,7 +295,7 @@ export default function ExcursionPreviewPage() {
       <div className="tet-excursion-preview__state">
         <div>
           <div className="tet-excursion-preview__loader" />
-          <p>Loading excursion details…</p>
+          <p>Loading excursion detailsâ¦</p>
         </div>
       </div>
     );
@@ -319,7 +319,7 @@ export default function ExcursionPreviewPage() {
   const image = images[0] || travelMedia('excursions-hero.jpg');
   const bookingAvailable = service.onlineBooking?.enabled === true;
   const actionUrl = bookingAvailable ? `/booking-calendar/${encodeURIComponent(serviceSlug(service))}` : '/contact';
-  const price = '€50';
+  const price = 'â¬50';
   const galleryImages = [
     ...(images.length ? images.slice(0, 4) : [image]),
     ...MARMARIS_EXTRA_GALLERY_IMAGES,
@@ -347,7 +347,7 @@ export default function ExcursionPreviewPage() {
           <h1 id="preview-title">{title}</h1>
           {heroDescription && <p className="tet-excursion-preview__hero-description">{heroDescription}</p>}
           <Link className="tet-excursion-preview__button" to={actionUrl}>
-            {bookingAvailable ? 'BOOK NOW' : 'ENQUIRE NOW'}
+            BOOK NOW
             <ArrowRight size={16} aria-hidden="true" />
           </Link>
         </div>
@@ -438,7 +438,7 @@ export default function ExcursionPreviewPage() {
               <span className="tet-excursion-preview__booking-summary-price-unit">per person</span>
             </div>
             <Link className="tet-excursion-preview__button tet-excursion-preview__booking-summary-button" to={actionUrl}>
-              {bookingAvailable ? 'BOOK NOW' : 'ENQUIRE NOW'}
+              BOOK NOW
             </Link>
           </aside>
         </div>
