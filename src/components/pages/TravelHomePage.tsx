@@ -5121,7 +5121,7 @@ export default function TravelHomePage() {
           </div>
 
           <div className="tet-mice__copy">
-            <Eyebrow>MICE &amp; events</Eyebrow>
+            <Eyebrow>MICE &amp; GROUPS</Eyebrow>
             <h2 id="tet-mice-title">Inspire. Connect. Reward.</h2>
             <p>
               Whether planning a corporate event, incentive programme or group itinerary, our team delivers tailored
