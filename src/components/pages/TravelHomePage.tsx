@@ -5057,7 +5057,11 @@ export default function TravelHomePage() {
             aria-label="Services"
             data-native-swipe="true"
           >
-            <div className="tet-services__viewport">
+            <div
+              className="tet-services__viewport"
+              ref={servicesViewportRef}
+              onScroll={syncServiceSlide}
+            >
               <div
                 className="tet-services__track"
                 style={{ transform: `translate3d(-${activeServiceSlide * 100}%, 0, 0)` }}
