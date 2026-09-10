@@ -4692,7 +4692,7 @@ export default function TravelHomePage() {
   useEffect(() => {
     if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
     const timer = window.setInterval(() => {
-      setActiveServiceSlide((current) => (current + 1) % services.length);
+      showServiceSlide(activeServiceSlide + 1);
     }, 3000);
     return () => window.clearInterval(timer);
   }, [activeServiceSlide]);
