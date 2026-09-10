@@ -22,7 +22,7 @@ import { Link } from 'react-router-dom';
 
 const images = {
   hero: travelMedia('about-hero-v2.jpg'),
-  story: travelMedia('about-intro-v2.jpg'),
+  story: travelMedia('wix:image://v1/5a118b_48dcf397f5ff4d10b6e254d8b49e88bc~mv2.jpg/177%20cruise%20MSC%20Virtuosa%202.jpg#originWidth=5464&originHeight=3640'),
 };
 
 type ValueItem = {
