@@ -3381,8 +3381,11 @@ const HOME_STYLES = String.raw`
   }
 
   .tet-services__slide {
+    flex: 0 0 100%;
     min-width: 100%;
     min-height: 230px;
+    scroll-snap-align: start;
+    scroll-snap-stop: always;
     flex: 0 0 100%;
     display: grid;
     place-items: center;
