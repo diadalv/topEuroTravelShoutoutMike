@@ -5129,7 +5129,7 @@ export default function TravelHomePage() {
               trusted local partnerships.
             </p>
             <Link className="tet-button tet-button--gold" to="/mice-groups">
-              Discover MICE <ArrowRight aria-hidden="true" />
+              Discover <ArrowRight aria-hidden="true" />
             </Link>
           </div>
 
