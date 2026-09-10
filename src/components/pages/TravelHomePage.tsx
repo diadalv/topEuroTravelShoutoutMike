@@ -5035,16 +5035,39 @@ export default function TravelHomePage() {
             role="region"
             aria-roledescription="carousel"
             aria-label="Services"
-            onTouchStart={(event) => setServiceTouchStart(event.touches[0]?.clientX ?? null)}
-            onTouchCancel={() => setServiceTouchStart(null)}
-            onTouchEnd={(event) => {
-              const endX = event.changedTouches[0]?.clientX;
-              if (serviceTouchStart === null || endX === undefined) return;
-              const distance = endX - serviceTouchStart;
-              if (Math.abs(distance) > 45) {
-                showServiceSlide(activeServiceSlide + (distance < 0 ? 1 : -1));
+            onPointerDown={(event) => {
+              if (!event.isPrimary) return;
+              serviceSwipeStartRef.current = {
+                x: event.clientX,
+                y: event.clientY,
+                pointerId: event.pointerId,
+              };
+              event.currentTarget.setPointerCapture?.(event.pointerId);
+            }}
+            onPointerCancel={() => {
+              serviceSwipeStartRef.current = null;
+            }}
+            onPointerUp={(event) => {
+              const start = serviceSwipeStartRef.current;
+              serviceSwipeStartRef.current = null;
+              if (!start || start.pointerId !== event.pointerId) return;
+              const distanceX = event.clientX - start.x;
+              const distanceY = event.clientY - start.y;
+              if (
+                Math.abs(distanceX) >= 40 &&
+                Math.abs(distanceX) > Math.abs(distanceY)
+              ) {
+                serviceSwipeBlockUntilRef.current = Date.now() + 600;
+                showServiceSlide(
+                  activeServiceSlide + (distanceX < 0 ? 1 : -1),
+                );
               }
-              setServiceTouchStart(null);
+            }}
+            onClickCapture={(event) => {
+              if (Date.now() < serviceSwipeBlockUntilRef.current) {
+                event.preventDefault();
+                event.stopPropagation();
+              }
             }}
           >
             <div className="tet-services__viewport">
