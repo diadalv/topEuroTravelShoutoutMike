@@ -3359,10 +3359,18 @@ const HOME_STYLES = String.raw`
   }
 
   .tet-services__viewport {
-    overflow: hidden;
+    overflow-x: auto;
+    overflow-y: hidden;
+    scroll-snap-type: x mandatory;
+    overscroll-behavior-x: contain;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
     border-top: 1px solid rgba(200, 146, 45, 0.5);
     border-bottom: 1px solid var(--tet-line);
-    touch-action: pan-y;
+    touch-action: pan-x pan-y;
+  }
+  .tet-services__viewport::-webkit-scrollbar {
+    display: none;
   }
 
   .tet-services__track {
