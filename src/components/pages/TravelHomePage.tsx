@@ -4474,7 +4474,8 @@ export default function TravelHomePage() {
   const [testimonialPaused, setTestimonialPaused] = useState(false);
   const testimonialsRailRef = useRef<HTMLDivElement>(null);
   const [activeServiceSlide, setActiveServiceSlide] = useState(0);
-  const [serviceTouchStart, setServiceTouchStart] = useState<number | null>(null);
+  const serviceSwipeStartRef = useRef<{ x: number; y: number; pointerId: number } | null>(null);
+  const serviceSwipeBlockUntilRef = useRef(0);
   const [activeExperienceSlide, setActiveExperienceSlide] = useState(0);
 
   const experiencesRailRef = useRef<HTMLDivElement>(null);
