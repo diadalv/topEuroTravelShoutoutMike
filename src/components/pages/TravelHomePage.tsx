@@ -827,6 +827,7 @@ const HOME_STYLES = String.raw`
   font-size: clamp(19px, 1.42vw, 36px);
   font-weight: 500;
   line-height: 0.94;
+  white-space: nowrap;
 }
 
 .tet-intro__fact span span {
