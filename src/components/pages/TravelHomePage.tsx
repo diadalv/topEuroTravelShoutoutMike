@@ -4509,7 +4509,28 @@ export default function TravelHomePage() {
   };
 
   const showServiceSlide = (index: number) => {
-    setActiveServiceSlide((index + services.length) % services.length);
+    const nextIndex = ((index % services.length) + services.length) % services.length;
+    const viewport = servicesViewportRef.current;
+    if (viewport && window.matchMedia('(max-width: 760px)').matches) {
+      const maxScrollLeft = Math.max(0, viewport.scrollWidth - viewport.clientWidth);
+      const left = services.length > 1
+        ? (maxScrollLeft * nextIndex) / (services.length - 1)
+        : 0;
+      viewport.scrollTo({
+        left,
+        behavior: window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth',
+      });
+    }
+    setActiveServiceSlide(nextIndex);
+  };
+  const syncServiceSlide = () => {
+    const viewport = servicesViewportRef.current;
+    if (!viewport || !window.matchMedia('(max-width: 760px)').matches) return;
+    const maxScrollLeft = Math.max(0, viewport.scrollWidth - viewport.clientWidth);
+    const nextIndex = maxScrollLeft > 0 && services.length > 1
+      ? Math.round((viewport.scrollLeft / maxScrollLeft) * (services.length - 1))
+      : 0;
+    setActiveServiceSlide((current) => current === nextIndex ? current : nextIndex);
   };
 
   const showExperienceSlide = (index: number) => {
