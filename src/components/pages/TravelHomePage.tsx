@@ -5055,30 +5055,56 @@ export default function TravelHomePage() {
             role="region"
             aria-roledescription="carousel"
             aria-label="Services"
-  const showServiceSlide = (index: number) => {
-    const nextIndex = ((index % services.length) + services.length) % services.length;
-    const viewport = servicesViewportRef.current;
-    if (viewport && window.matchMedia('(max-width: 760px)').matches) {
-      const maxScrollLeft = Math.max(0, viewport.scrollWidth - viewport.clientWidth);
-      const left = services.length > 1
-        ? (maxScrollLeft * nextIndex) / (services.length - 1)
-        : 0;
-      viewport.scrollTo({
-        left,
-        behavior: window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth',
-      });
-    }
-    setActiveServiceSlide(nextIndex);
-  };
-  const syncServiceSlide = () => {
-    const viewport = servicesViewportRef.current;
-    if (!viewport || !window.matchMedia('(max-width: 760px)').matches) return;
-    const maxScrollLeft = Math.max(0, viewport.scrollWidth - viewport.clientWidth);
-    const nextIndex = maxScrollLeft > 0 && services.length > 1
-      ? Math.round((viewport.scrollLeft / maxScrollLeft) * (services.length - 1))
-      : 0;
-    setActiveServiceSlide((current) => current === nextIndex ? current : nextIndex);
-  };
+            onPointerDown={(event) => {
+              if (serviceSwipeStartRef.current) return;
+              serviceSwipeStartRef.current = {
+                x: event.clientX,
+                y: event.clientY,
+                pointerId: event.pointerId,
+              };
+              event.currentTarget.setPointerCapture?.(event.pointerId);
+            }}
+            onPointerMove={(event) => {
+              const start = serviceSwipeStartRef.current;
+              if (!start || start.pointerId !== event.pointerId) return;
+              const distanceX = event.clientX - start.x;
+              const distanceY = event.clientY - start.y;
+              if (
+                Math.abs(distanceX) >= 40 &&
+                Math.abs(distanceX) > Math.abs(distanceY)
+              ) {
+                serviceSwipeStartRef.current = null;
+                serviceSwipeBlockUntilRef.current = Date.now() + 600;
+                showServiceSlide(
+                  activeServiceSlide + (distanceX < 0 ? 1 : -1),
+                );
+              }
+            }}
+            onPointerCancel={() => {
+              serviceSwipeStartRef.current = null;
+            }}
+            onPointerUp={(event) => {
+              const start = serviceSwipeStartRef.current;
+              serviceSwipeStartRef.current = null;
+              if (!start || start.pointerId !== event.pointerId) return;
+              const distanceX = event.clientX - start.x;
+              const distanceY = event.clientY - start.y;
+              if (
+                Math.abs(distanceX) >= 40 &&
+                Math.abs(distanceX) > Math.abs(distanceY)
+              ) {
+                serviceSwipeBlockUntilRef.current = Date.now() + 600;
+                showServiceSlide(
+                  activeServiceSlide + (distanceX < 0 ? 1 : -1),
+                );
+              }
+            }}
+            onClickCapture={(event) => {
+              if (Date.now() < serviceSwipeBlockUntilRef.current) {
+                event.preventDefault();
+                event.stopPropagation();
+              }
+            }}
           >
             <div className="tet-services__viewport">
               <div
