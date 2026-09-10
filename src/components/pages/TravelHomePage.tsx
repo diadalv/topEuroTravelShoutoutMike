@@ -5036,13 +5036,29 @@ export default function TravelHomePage() {
             aria-roledescription="carousel"
             aria-label="Services"
             onPointerDown={(event) => {
-              if (!event.isPrimary) return;
+              if (serviceSwipeStartRef.current) return;
               serviceSwipeStartRef.current = {
                 x: event.clientX,
                 y: event.clientY,
                 pointerId: event.pointerId,
               };
               event.currentTarget.setPointerCapture?.(event.pointerId);
+            }}
+            onPointerMove={(event) => {
+              const start = serviceSwipeStartRef.current;
+              if (!start || start.pointerId !== event.pointerId) return;
+              const distanceX = event.clientX - start.x;
+              const distanceY = event.clientY - start.y;
+              if (
+                Math.abs(distanceX) >= 40 &&
+                Math.abs(distanceX) > Math.abs(distanceY)
+              ) {
+                serviceSwipeStartRef.current = null;
+                serviceSwipeBlockUntilRef.current = Date.now() + 600;
+                showServiceSlide(
+                  activeServiceSlide + (distanceX < 0 ? 1 : -1),
+                );
+              }
             }}
             onPointerCancel={() => {
               serviceSwipeStartRef.current = null;
