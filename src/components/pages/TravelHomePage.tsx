@@ -5055,56 +5055,7 @@ export default function TravelHomePage() {
             role="region"
             aria-roledescription="carousel"
             aria-label="Services"
-            onPointerDown={(event) => {
-              if (serviceSwipeStartRef.current) return;
-              serviceSwipeStartRef.current = {
-                x: event.clientX,
-                y: event.clientY,
-                pointerId: event.pointerId,
-              };
-              event.currentTarget.setPointerCapture?.(event.pointerId);
-            }}
-            onPointerMove={(event) => {
-              const start = serviceSwipeStartRef.current;
-              if (!start || start.pointerId !== event.pointerId) return;
-              const distanceX = event.clientX - start.x;
-              const distanceY = event.clientY - start.y;
-              if (
-                Math.abs(distanceX) >= 40 &&
-                Math.abs(distanceX) > Math.abs(distanceY)
-              ) {
-                serviceSwipeStartRef.current = null;
-                serviceSwipeBlockUntilRef.current = Date.now() + 600;
-                showServiceSlide(
-                  activeServiceSlide + (distanceX < 0 ? 1 : -1),
-                );
-              }
-            }}
-            onPointerCancel={() => {
-              serviceSwipeStartRef.current = null;
-            }}
-            onPointerUp={(event) => {
-              const start = serviceSwipeStartRef.current;
-              serviceSwipeStartRef.current = null;
-              if (!start || start.pointerId !== event.pointerId) return;
-              const distanceX = event.clientX - start.x;
-              const distanceY = event.clientY - start.y;
-              if (
-                Math.abs(distanceX) >= 40 &&
-                Math.abs(distanceX) > Math.abs(distanceY)
-              ) {
-                serviceSwipeBlockUntilRef.current = Date.now() + 600;
-                showServiceSlide(
-                  activeServiceSlide + (distanceX < 0 ? 1 : -1),
-                );
-              }
-            }}
-            onClickCapture={(event) => {
-              if (Date.now() < serviceSwipeBlockUntilRef.current) {
-                event.preventDefault();
-                event.stopPropagation();
-              }
-            }}
+            data-native-swipe="true"
           >
             <div className="tet-services__viewport">
               <div
