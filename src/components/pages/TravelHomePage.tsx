@@ -5064,7 +5064,7 @@ export default function TravelHomePage() {
             >
               <div
                 className="tet-services__track"
-                style={{ transform: `translate3d(-${activeServiceSlide * 100}%, 0, 0)` }}
+                data-native-track="true"
               >
                 {services.map(({ icon: Icon, title, description }, serviceIndex) => (
                   <div
