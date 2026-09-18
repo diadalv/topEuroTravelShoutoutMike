@@ -1,15 +1,15 @@
 ---
 import TravelSiteLayout from "@/layouts/TravelSiteLayout.astro";
-import { WIX_APPS } from "@wix/essentials";
 import { seoTags } from "@wix/seo";
 import { SEO } from "@wix/seo/components";
 import { loadSEOTagsServiceConfig } from "@wix/seo/services";
 
+// Wix application and item-page constants from @wix/essentials 1.0.10.
 export const wixMetadata = {
-  appDefId: WIX_APPS.blogs.id,
-  pageIdentifier: WIX_APPS.blogs.postPageMetadata.pageIdentifier,
+  appDefId: "14bcded7-0066-7c35-14d7-466cb3f09103",
+  pageIdentifier: "wix.blog.sub_pages.post",
   identifiers: {
-    slug: WIX_APPS.blogs.postPageMetadata.identifiers.slug,
+    slug: "BLOG.POST.SLUG",
   },
 };
 
@@ -24,7 +24,7 @@ const pageUrl =
 
 const seoTagsServiceConfig = await loadSEOTagsServiceConfig({
   pageUrl,
-  itemType: seoTags.ItemType.BLOG_POST,
+  itemType: "BLOG_POST" as seoTags.ItemType,
   itemData: { slug },
 });
 ---
