@@ -32,9 +32,9 @@ import { Link } from 'react-router-dom';
 
 const MEDIA = {
   logo: 'https://static.wixstatic.com/media/c3c625_668b8529b08249c48f9a8667135d56b1~mv2.png',
-  heroDesktop: 'https://video.wixstatic.com/video/5a118b_f3aada5a1ac547358ac6c8b35d60a2a7/1080p/mp4/file.mp4',
-  heroMobile: 'https://video.wixstatic.com/video/5a118b_ea5a16aef9d047ddb9126c2f00737d43/1080p/mp4/file.mp4',
-  heroPoster: 'https://static.wixstatic.com/media/5a118b_f3aada5a1ac547358ac6c8b35d60a2a7f000.jpg',
+  heroDesktop: 'https://video.wixstatic.com/video/5a118b_490d8ddabb2b4069a7c722d9227bec19/1080p/mp4/file.mp4',
+  heroMobile: 'https://video.wixstatic.com/video/5a118b_490d8ddabb2b4069a7c722d9227bec19/1080p/mp4/file.mp4',
+  heroPoster: 'https://static.wixstatic.com/media/5a118b_490d8ddabb2b4069a7c722d9227bec19f001.jpg',
   intro: 'https://static.wixstatic.com/media/5a118b_3904ba3b49764d06b35840292a63bc65~mv2.jpg',
   bridgeRhodes: 'https://static.wixstatic.com/media/5a118b_de187b0b55984726b005d3b9069de3a2~mv2.jpg',
   bridgeKos: 'https://static.wixstatic.com/media/5a118b_c6ed3df1d39e464d9c3e39fa3eaa315a~mv2.jpg',
