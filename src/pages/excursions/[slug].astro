@@ -1,15 +1,15 @@
 ---
 import TravelSiteLayout from "@/layouts/TravelSiteLayout.astro";
-import { WIX_APPS } from "@wix/essentials";
 import { seoTags } from "@wix/seo";
 import { SEO } from "@wix/seo/components";
 import { loadSEOTagsServiceConfig } from "@wix/seo/services";
 
+// Wix application and item-page constants from @wix/essentials 1.0.10.
 export const wixMetadata = {
-  appDefId: WIX_APPS.bookings.id,
-  pageIdentifier: WIX_APPS.bookings.servicePageMetadata.pageIdentifier,
+  appDefId: "13d21c63-b5ec-5912-8397-c3a5ddb27a97",
+  pageIdentifier: "wix.bookings.sub_pages.service_page",
   identifiers: {
-    slug: WIX_APPS.bookings.servicePageMetadata.identifiers.slug,
+    slug: "BOOKINGS.SERVICE.SLUG",
   },
 };
 
