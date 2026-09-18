@@ -15,7 +15,7 @@
   font-size: 16px;
 }
 
-.main-nav__link {
+.site-header .main-nav__link {
   font-size: 15px;
 }
 
@@ -258,11 +258,11 @@
 
 /* Wide desktop layout recovery */
 @media (min-width: 941px) {
-  .site-header {
+  .site-header.site-header {
     height: clamp(78px, 4.6vw, 90px);
   }
 
-  .site-header__inner {
+  .site-header .site-header__inner {
     width: min(calc(100% - clamp(32px, 5vw, 96px)), 1540px);
   }
 
