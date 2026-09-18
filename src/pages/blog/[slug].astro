@@ -27,6 +27,25 @@ const seoTagsServiceConfig = await loadSEOTagsServiceConfig({
   itemType: "BLOG_POST" as seoTags.ItemType,
   itemData: { slug },
 });
+
+seoTagsServiceConfig.tags = seoTagsServiceConfig.tags.map((tag) => {
+  const children =
+    typeof tag.children === "string"
+      ? tag.children.replaceAll("New TopEuroTravel", "Top Euro Travel")
+      : tag.children;
+  const props =
+    tag.props && typeof tag.props.content === "string"
+      ? {
+          ...tag.props,
+          content: tag.props.content.replaceAll(
+            "New TopEuroTravel",
+            "Top Euro Travel",
+          ),
+        }
+      : tag.props;
+
+  return { ...tag, children, props };
+});
 ---
 
 <TravelSiteLayout>
