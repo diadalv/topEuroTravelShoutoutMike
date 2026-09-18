@@ -187,20 +187,497 @@ export function PageHero({ title, breadcrumb, image, description, className = ''
   );
 }
 
-export function PageSeo({ title, description }: { title: string; description: string }) {
+type SeoPageType = 'website' | 'article';
+
+type PageSeoProps = {
+  title?: string;
+  description?: string;
+  image?: string;
+  type?: SeoPageType;
+  noIndex?: boolean;
+};
+
+type RouteSeoMetadata = {
+  label: string;
+  title: string;
+  description: string;
+  keywords: string[];
+  noIndex?: boolean;
+  type?: SeoPageType;
+  deriveTitleFromH1?: boolean;
+};
+
+const DEFAULT_SEO_IMAGE =
+  'https://static.wixstatic.com/media/5a118b_3904ba3b49764d06b35840292a63bc65~mv2.jpg';
+const DEFAULT_SEO_IMAGE_ALT = 'Top Euro Travel destination management in Greece';
+
+const ROUTE_SEO: Record<string, RouteSeoMetadata> = {
+  '/': {
+    label: 'Home',
+    title: 'DMC Greece | Rhodes & Kos | Top Euro Travel',
+    description:
+      'Top Euro Travel is a trusted destination management company in Greece, delivering DMC services, MICE, groups, transfers and excursions in Rhodes and Kos.',
+    keywords: [
+      'DMC Greece',
+      'destination management company Greece',
+      'Rhodes DMC',
+      'Kos DMC',
+      'MICE Greece',
+      'group travel Greece',
+    ],
+  },
+  '/about': {
+    label: 'About',
+    title: 'About Top Euro Travel | DMC Greece Since 1989',
+    description:
+      'Meet Top Euro Travel, a Greece destination management company based in Rhodes since 1989, serving tour operators, groups and travellers across Europe.',
+    keywords: [
+      'Top Euro Travel',
+      'DMC Greece since 1989',
+      'destination management company Rhodes',
+      'Greece travel partner',
+    ],
+  },
+  '/destinations': {
+    label: 'Destinations',
+    title: 'Rhodes & Kos Destinations | DMC Greece',
+    description:
+      'Discover Rhodes and Kos with a local Greece DMC offering accommodation, transfers, excursions, MICE services and tailor-made island experiences.',
+    keywords: [
+      'Rhodes destination',
+      'Kos destination',
+      'Greek islands DMC',
+      'Rhodes and Kos travel',
+    ],
+  },
+  '/rhodes': {
+    label: 'Rhodes',
+    title: 'Rhodes DMC & Destination Management | Top Euro Travel',
+    description:
+      'Local Rhodes DMC for hotels, transfers, excursions, groups, MICE and tailor-made destination management services across the island.',
+    keywords: [
+      'Rhodes DMC',
+      'destination management Rhodes',
+      'Rhodes transfers',
+      'Rhodes excursions',
+      'MICE Rhodes',
+    ],
+  },
+  '/kos': {
+    label: 'Kos',
+    title: 'Kos DMC & Destination Management | Top Euro Travel',
+    description:
+      'Local Kos DMC for hotels, transfers, excursions, groups, MICE and tailor-made destination management services across the island.',
+    keywords: [
+      'Kos DMC',
+      'destination management Kos',
+      'Kos transfers',
+      'Kos excursions',
+      'MICE Kos',
+    ],
+  },
+  '/services': {
+    label: 'Services',
+    title: 'Destination Management Services Greece | Top Euro Travel',
+    description:
+      'Destination management services in Greece for tour operators, agencies, groups and travellers: hotels, transfers, MICE, excursions and API connectivity.',
+    keywords: [
+      'destination management services Greece',
+      'ground handling Greece',
+      'hotel contracting Greece',
+      'travel API Greece',
+      'group travel services',
+    ],
+  },
+  '/mice-groups': {
+    label: 'MICE & Groups',
+    title: 'MICE & Group Travel Greece | Top Euro Travel',
+    description:
+      'Professional MICE and group travel in Greece for meetings, incentives, conferences, events and tailor-made programmes in Rhodes and Kos.',
+    keywords: [
+      'MICE Greece',
+      'group travel Greece',
+      'incentive travel Rhodes',
+      'conference services Greece',
+      'events Greece',
+    ],
+  },
+  '/experiences': {
+    label: 'Experiences',
+    title: 'Tailor-Made Greece Experiences | Top Euro Travel',
+    description:
+      'Curated local experiences in Rhodes and Kos, from culture and gastronomy to nature, wellness and tailor-made activities for groups and independent travellers.',
+    keywords: [
+      'Greece experiences',
+      'Rhodes experiences',
+      'Kos experiences',
+      'tailor-made Greece travel',
+      'local island activities',
+    ],
+  },
+  '/excursions': {
+    label: 'Excursions',
+    title: 'Rhodes Tours & Excursions | Top Euro Travel',
+    description:
+      'Book carefully selected Rhodes tours and excursions with local expertise, reliable operations and experiences for individuals, groups and travel partners.',
+    keywords: [
+      'Rhodes excursions',
+      'Rhodes tours',
+      'Rhodes day trips',
+      'things to do in Rhodes',
+      'group excursions Rhodes',
+    ],
+  },
+  '/blog': {
+    label: 'Blog',
+    title: 'Greece Travel Insights | Top Euro Travel Blog',
+    description:
+      'Greece travel insights, Rhodes and Kos destination guides, MICE trends and local expertise from the Top Euro Travel team.',
+    keywords: [
+      'Greece travel blog',
+      'Rhodes travel guide',
+      'Kos travel guide',
+      'MICE trends Greece',
+      'Greek island insights',
+    ],
+  },
+  '/faq': {
+    label: 'FAQ',
+    title: 'Greece DMC & Travel Services FAQ | Top Euro Travel',
+    description:
+      'Answers about Top Euro Travel DMC services, Rhodes and Kos destinations, transfers, excursions, groups, MICE and travel planning in Greece.',
+    keywords: [
+      'Greece DMC FAQ',
+      'Rhodes travel questions',
+      'Kos travel questions',
+      'MICE Greece FAQ',
+      'Top Euro Travel services',
+    ],
+  },
+  '/contact': {
+    label: 'Contact',
+    title: 'Contact Top Euro Travel | DMC Rhodes & Kos',
+    description:
+      'Contact Top Euro Travel for destination management, hotels, transfers, excursions, groups and MICE services in Rhodes, Kos and Greece.',
+    keywords: [
+      'contact DMC Greece',
+      'Top Euro Travel contact',
+      'Rhodes travel agency',
+      'Kos DMC contact',
+    ],
+  },
+  '/privacy': {
+    label: 'Privacy Policy',
+    title: 'Privacy Policy | Top Euro Travel',
+    description: 'Read the Top Euro Travel privacy policy.',
+    keywords: ['Top Euro Travel privacy policy'],
+    noIndex: true,
+  },
+  '/terms': {
+    label: 'Terms & Conditions',
+    title: 'Terms & Conditions | Top Euro Travel',
+    description: 'Read the Top Euro Travel website terms and conditions.',
+    keywords: ['Top Euro Travel terms and conditions'],
+    noIndex: true,
+  },
+  '/booking-confirmation': {
+    label: 'Booking Confirmation',
+    title: 'Booking Confirmation | Top Euro Travel',
+    description: 'Top Euro Travel booking confirmation.',
+    keywords: ['Top Euro Travel booking'],
+    noIndex: true,
+  },
+};
+
+function routeSeoFor(pathname: string): RouteSeoMetadata | undefined {
+  const exact = ROUTE_SEO[pathname];
+  if (exact) return exact;
+
+  if (/^\/excursions\/[^/]+$/.test(pathname)) {
+    return {
+      label: 'Excursion',
+      title: 'Rhodes Excursion & Tour | Top Euro Travel',
+      description:
+        'Explore a Rhodes excursion with Top Euro Travel, operated with local knowledge, reliable service and carefully planned island experiences.',
+      keywords: ['Rhodes excursion', 'Rhodes tour', 'Rhodes day trip', 'Top Euro Travel'],
+      deriveTitleFromH1: true,
+    };
+  }
+
+  if (/^\/excursion-preview\/[^/]+$/.test(pathname)) {
+    return {
+      label: 'Excursion Preview',
+      title: 'Excursion Preview | Top Euro Travel',
+      description: 'Preview a Top Euro Travel excursion.',
+      keywords: ['Top Euro Travel excursion preview'],
+      noIndex: true,
+      deriveTitleFromH1: true,
+    };
+  }
+
+  if (/^\/booking-calendar\/[^/]+$/.test(pathname)) {
+    return {
+      label: 'Booking Calendar',
+      title: 'Select a Booking Date | Top Euro Travel',
+      description: 'Choose an available date for your Top Euro Travel experience.',
+      keywords: ['Top Euro Travel booking calendar'],
+      noIndex: true,
+    };
+  }
+
+  if (/^\/booking-form\/[^/]+$/.test(pathname)) {
+    return {
+      label: 'Booking Form',
+      title: 'Complete Your Booking | Top Euro Travel',
+      description: 'Complete your Top Euro Travel experience booking.',
+      keywords: ['Top Euro Travel booking form'],
+      noIndex: true,
+    };
+  }
+
+  return undefined;
+}
+
+function upsertMeta(attribute: 'name' | 'property', key: string, content: string) {
+  const selector = 'meta[' + attribute + '="' + key + '"]';
+  const matches = Array.from(document.head.querySelectorAll<HTMLMetaElement>(selector));
+  const meta = matches[0] ?? document.createElement('meta');
+
+  meta.setAttribute(attribute, key);
+  meta.content = content;
+  if (!meta.parentNode) document.head.appendChild(meta);
+  matches.slice(1).forEach((duplicate) => duplicate.remove());
+}
+
+function upsertLink(rel: string, href: string, hrefLang?: string) {
+  const selector = hrefLang
+    ? 'link[rel="' + rel + '"][hreflang="' + hrefLang + '"]'
+    : 'link[rel="' + rel + '"]:not([hreflang])';
+  const matches = Array.from(document.head.querySelectorAll<HTMLLinkElement>(selector));
+  const link = matches[0] ?? document.createElement('link');
+
+  link.rel = rel;
+  link.href = href;
+  if (hrefLang) link.setAttribute('hreflang', hrefLang);
+  if (!link.parentNode) document.head.appendChild(link);
+  matches.slice(1).forEach((duplicate) => duplicate.remove());
+}
+
+function upsertStructuredData(id: string, data: Record<string, unknown>) {
+  let script = document.head.querySelector<HTMLScriptElement>('script#' + id);
+  if (!script) {
+    script = document.createElement('script');
+    script.id = id;
+    script.type = 'application/ld+json';
+    document.head.appendChild(script);
+  }
+  script.text = JSON.stringify(data);
+}
+
+function buildStructuredData({
+  canonicalUrl,
+  title,
+  description,
+  image,
+  keywords,
+  pageLabel,
+  normalizedPath,
+}: {
+  canonicalUrl: string;
+  title: string;
+  description: string;
+  image: string;
+  keywords: string[];
+  pageLabel: string;
+  normalizedPath: string;
+}): Record<string, unknown> {
+  const origin = new URL(canonicalUrl).origin;
+  const organizationId = origin + '/#organization';
+  const websiteId = origin + '/#website';
+  const webpageId = canonicalUrl + '#webpage';
+  const breadcrumbId = canonicalUrl + '#breadcrumb';
+
+  const graph: Array<Record<string, unknown>> = [
+    {
+      '@type': 'TravelAgency',
+      '@id': organizationId,
+      name: 'Top Euro Travel',
+      url: origin + '/',
+      image,
+      foundingDate: '1989',
+      telephone: '+302241045506',
+      email: 'info@topeurotravel.gr',
+      address: {
+        '@type': 'PostalAddress',
+        streetAddress: '5th Km Rhodes-Lindos Avenue',
+        addressLocality: 'Rhodes',
+        postalCode: '851 00',
+        addressCountry: 'GR',
+      },
+      areaServed: [
+        { '@type': 'Continent', name: 'Europe' },
+        { '@type': 'Country', name: 'Greece' },
+      ],
+      availableLanguage: {
+        '@type': 'Language',
+        name: 'English',
+        alternateName: 'en',
+      },
+      sameAs: [
+        'https://www.linkedin.com/company/topeurotravel',
+        'https://www.facebook.com/TopEuroTravel',
+        'https://www.instagram.com/topeurotravel_/',
+      ],
+    },
+  ];
+
+  if (normalizedPath === '/') {
+    graph.push({
+      '@type': 'WebSite',
+      '@id': websiteId,
+      url: origin + '/',
+      name: 'Top Euro Travel',
+      inLanguage: 'en',
+      publisher: { '@id': organizationId },
+    });
+  }
+
+  const webPage: Record<string, unknown> = {
+    '@type': 'WebPage',
+    '@id': webpageId,
+    url: canonicalUrl,
+    name: title,
+    description,
+    inLanguage: 'en',
+    isPartOf: { '@id': websiteId },
+    about: { '@id': organizationId },
+    primaryImageOfPage: {
+      '@type': 'ImageObject',
+      url: image,
+    },
+    keywords: keywords.join(', '),
+  };
+
+  if (normalizedPath !== '/') {
+    webPage.breadcrumb = { '@id': breadcrumbId };
+  }
+  graph.push(webPage);
+
+  if (normalizedPath !== '/') {
+    graph.push({
+      '@type': 'BreadcrumbList',
+      '@id': breadcrumbId,
+      itemListElement: [
+        {
+          '@type': 'ListItem',
+          position: 1,
+          name: 'Home',
+          item: origin + '/',
+        },
+        {
+          '@type': 'ListItem',
+          position: 2,
+          name: pageLabel,
+          item: canonicalUrl,
+        },
+      ],
+    });
+  }
+
+  return {
+    '@context': 'https://schema.org',
+    '@graph': graph,
+  };
+}
+
+export function PageSeo({
+  title,
+  description,
+  image,
+  type,
+  noIndex,
+}: PageSeoProps = {}) {
+  const { pathname } = useLocation();
+  const normalizedPath =
+    pathname !== '/' ? pathname.replace(/\/+$/, '') || '/' : '/';
+
   useEffect(() => {
-    document.title = title;
-    let meta = document.querySelector<HTMLMetaElement>('meta[name="description"]');
-    if (!meta) {
-      meta = document.createElement('meta');
-      meta.name = 'description';
-      document.head.appendChild(meta);
-    }
-    meta.content = description;
-  }, [title, description]);
+    const routeMetadata = routeSeoFor(normalizedPath);
+    if (!routeMetadata && !title && !description) return;
+
+    const heading = routeMetadata?.deriveTitleFromH1
+      ? document.querySelector('h1')?.textContent?.replace(/\s+/g, ' ').trim()
+      : undefined;
+    const existingDescription =
+      document.head.querySelector<HTMLMetaElement>('meta[name="description"]')?.content;
+    const effectiveTitle =
+      (heading ? heading + ' | Top Euro Travel' : routeMetadata?.title) ??
+      title ??
+      document.title;
+    const effectiveDescription =
+      routeMetadata?.description ?? description ?? existingDescription;
+
+    if (!effectiveTitle || !effectiveDescription) return;
+
+    const origin = window.location.origin;
+    const canonicalUrl = origin + (normalizedPath === '/' ? '/' : normalizedPath);
+    const effectiveImage = image ?? DEFAULT_SEO_IMAGE;
+    const effectiveType =
+      routeMetadata?.type ??
+      type ??
+      (normalizedPath.startsWith('/blog/') ? 'article' : 'website');
+    const effectiveNoIndex = routeMetadata?.noIndex ?? noIndex ?? false;
+    const robots = effectiveNoIndex
+      ? 'noindex, follow'
+      : 'index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1';
+    const keywords =
+      routeMetadata?.keywords ??
+      [effectiveTitle.split(' | ')[0], 'Top Euro Travel', 'Greece travel'];
+    const pageLabel =
+      routeMetadata?.label ?? heading ?? effectiveTitle.split(' | ')[0];
+
+    document.documentElement.lang = 'en';
+    document.title = effectiveTitle;
+
+    upsertMeta('name', 'description', effectiveDescription);
+    upsertMeta('name', 'robots', robots);
+    upsertMeta('name', 'googlebot', robots);
+
+    upsertMeta('property', 'og:title', effectiveTitle);
+    upsertMeta('property', 'og:description', effectiveDescription);
+    upsertMeta('property', 'og:type', effectiveType);
+    upsertMeta('property', 'og:url', canonicalUrl);
+    upsertMeta('property', 'og:site_name', 'Top Euro Travel');
+    upsertMeta('property', 'og:locale', 'en_GB');
+    upsertMeta('property', 'og:image', effectiveImage);
+    upsertMeta('property', 'og:image:alt', DEFAULT_SEO_IMAGE_ALT);
+
+    upsertMeta('name', 'twitter:card', 'summary_large_image');
+    upsertMeta('name', 'twitter:title', effectiveTitle);
+    upsertMeta('name', 'twitter:description', effectiveDescription);
+    upsertMeta('name', 'twitter:image', effectiveImage);
+
+    upsertLink('canonical', canonicalUrl);
+    upsertLink('alternate', canonicalUrl, 'en');
+    upsertLink('alternate', canonicalUrl, 'x-default');
+
+    upsertStructuredData(
+      'top-euro-travel-structured-data',
+      buildStructuredData({
+        canonicalUrl,
+        title: effectiveTitle,
+        description: effectiveDescription,
+        image: effectiveImage,
+        keywords,
+        pageLabel,
+        normalizedPath,
+      }),
+    );
+  }, [description, image, noIndex, normalizedPath, title, type]);
 
   return null;
 }
+
 export function Gold({ children }: { children: ReactNode }) {
   return <span className="text-gold">{children}</span>;
 }
