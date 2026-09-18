@@ -446,6 +446,10 @@
   --site-width: 1020px;
 }
 
+.site-page {
+  --site-width: 1440px;
+}
+
 * {
   box-sizing: border-box;
 }
