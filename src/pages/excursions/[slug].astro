@@ -1,0 +1,31 @@
+---
+import { SEO } from '@wix/seo/components';
+import { loadSEOTagsServiceConfig } from '@wix/seo/services';
+import { WIX_APPS } from '@wix/sdk';
+import TravelSiteLayout from "@/layouts/TravelSiteLayout.astro";
+
+const { slug } = Astro.params;
+
+const pageUrl = Astro.request.headers.get('x-wix-forwarded-url') && 
+  /^https?:\/\//.test(Astro.request.headers.get('x-wix-forwarded-url') || '') 
+  ? Astro.request.headers.get('x-wix-forwarded-url')
+  : Astro.url.href;
+
+const seoTagsServiceConfig = await loadSEOTagsServiceConfig({
+  pageUrl: pageUrl!,
+  itemData: { slug },
+  wixMetadata: {
+    pageMetadata: WIX_APPS.bookings.servicePageMetadata,
+    itemType: 'BOOKINGS_SERVICE',
+  },
+});
+
+export const wixMetadata = {
+  pageMetadata: WIX_APPS.bookings.servicePageMetadata,
+  itemType: 'BOOKINGS_SERVICE',
+};
+---
+
+<TravelSiteLayout>
+  <SEO.Tags seoTagsServiceConfig={seoTagsServiceConfig} slot="seo-tags" />
+</TravelSiteLayout>
