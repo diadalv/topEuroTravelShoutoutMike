@@ -255,3 +255,30 @@
     font-size: 18px;
   }
 }
+
+/* Wide desktop layout recovery */
+@media (min-width: 941px) {
+  .site-header {
+    height: clamp(78px, 4.6vw, 90px);
+  }
+
+  .site-header__inner {
+    width: min(calc(100% - clamp(32px, 5vw, 96px)), 1540px);
+  }
+
+  .site-header .header-actions .button {
+    padding: 11px 20px;
+    font-size: 13px;
+    line-height: 1.1;
+  }
+
+  .mice-page__program-shell {
+    margin-top: clamp(52px, 6vw, 82px);
+  }
+}
+
+@media (min-width: 1440px) {
+  .site-page {
+    --site-width: clamp(1080px, 75vw, 1440px);
+  }
+}
