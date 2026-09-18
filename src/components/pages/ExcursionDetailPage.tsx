@@ -924,7 +924,7 @@ export default function ExcursionDetailPage() {
       <style>{DETAIL_STYLES}</style>
 
       <section className="tet-detail__hero" aria-labelledby="tet-excursion-title">
-        <Image className="tet-detail__hero-image" src={image} alt="" />
+        <Image className="tet-detail__hero-image" src={image} alt={title + ' excursion in Rhodes with Top Euro Travel'} />
         <div className="tet-detail__hero-content shell">
           <nav className="tet-detail__crumbs" aria-label="Breadcrumb">
             <Link to="/">Home</Link><span>•</span><Link to="/excursions">Excursions</Link><span>•</span><span>{title}</span>
