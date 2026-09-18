@@ -15,7 +15,7 @@ import { PrivacyPage, TermsPage } from '@/components/pages/LegalPages';
 import MiceGroupsPage from '@/components/pages/MiceGroupsPage';
 import ServicesPage from '@/components/pages/ServicesPage';
 import TravelHomePage from '@/components/pages/TravelHomePage';
-import { QuickContactRail, SiteHeader } from '@/components/travel/Shared';
+import { PageSeo, QuickContactRail, SiteHeader } from '@/components/travel/Shared';
 import ErrorPage from '@/integrations/errorHandlers/ErrorPage';
 import { ScrollToTop } from '@/lib/scroll-to-top';
 import { createBrowserRouter, Navigate, Outlet, RouterProvider } from 'react-router-dom';
@@ -24,6 +24,7 @@ function Layout() {
   return (
     <div className="site-page">
       <ScrollToTop />
+      <PageSeo />
       <SiteHeader />
       <main id="main-content"><Outlet /></main>
       <QuickContactRail />
