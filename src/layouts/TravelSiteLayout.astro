@@ -505,7 +505,7 @@ function getSeoForPath(pathname: string, origin: string): SeoContext | null {
   return null;
 }
 
-const origin = Astro.url.origin;
+const origin = Astro.url.origin.replace(/^http:/, 'https:');
 const seoContext = getSeoForPath(requestPath, origin);
 ---
 
